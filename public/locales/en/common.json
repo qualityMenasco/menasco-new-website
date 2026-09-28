@@ -1,0 +1,74 @@
+{
+  "skipToContent": "Skip to content",
+  "languageSwitch": {
+    "label": "Language selection",
+    "en": "EN",
+    "ar": "AR"
+  },
+  "buttons": {
+    "exploreProjects": "Explore Our Projects",
+    "ourCapabilities": "Our Capabilities",
+    "downloadCompanyProfile": "Download Company Profile",
+    "requestQuote": "Get in contact",
+    "viewAllServices": "View All Services",
+    "meetTheTeam": "Meet the Team",
+    "learnMore": "Learn more",
+    "getDirections": "Get Directions",
+    "previousOffice": "Previous office",
+    "nextOffice": "Next office",
+    "backToHome": "Back to Home",
+    "sendAnotherEnquiry": "Send Another Enquiry",
+    "sendEnquiry": "Send Enquiry",
+    "explore": "Explore",
+    "backToTop": "Back to top",
+    "closeDialog": "Close dialog",
+    "readMore": "Read more",
+    "showLess": "Show less",
+    "exploreMore": "Explore More",
+    "viewProject": "View Project"
+  },
+  "states": {
+    "loading": "Loading…",
+    "error": "Something went wrong. Please try again.",
+    "empty": "Nothing to show yet.",
+    "comingSoon": "Coming soon"
+  },
+  "footer": {
+    "copyright": "© {{year}} MENASCO. All rights reserved.",
+    "description": "Established in the UAE in 1994, MENASCO delivers integrated mechanical, electrical, plumbing and fire-protection systems for complex, high-performance developments across the region.",
+    "company": "Company",
+    "services": "Services",
+    "projects": "Projects",
+    "follow": "Follow",
+    "headOffice": "Head Office"
+  },
+  "locations": {
+    "dubai": {
+      "label": "Dubai, Head Office",
+      "city": "Dubai",
+      "country": "United Arab Emirates"
+    },
+    "riyadh": {
+      "label": "Riyadh, MENASCO KSA",
+      "city": "Riyadh",
+      "country": "Saudi Arabia"
+    },
+    "cairo": {
+      "label": "Cairo, MENASCO Misr",
+      "city": "Cairo",
+      "country": "Egypt"
+    },
+    "london": {
+      "label": "London Office",
+      "city": "London",
+      "country": "United Kingdom"
+    }
+  },
+  "certifications": {
+    "qualityManagement": "Quality Management Systems",
+    "environmentalManagement": "Environmental Management Systems",
+    "occupationalHealthSafety": "Occupational Health & Safety Management Systems"
+  },
+  "client": "Client: {{name}}",
+  "viewItemLabel": "View {{name}}"
+}

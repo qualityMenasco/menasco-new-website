@@ -1,0 +1,14 @@
+{
+  "seo": {
+    "title": "Careers at MENASCO | Join Our Team",
+    "description": "Engineering careers at MENASCO, an integrated MEP contractor operating across the UAE, Saudi Arabia, Egypt and the United Kingdom."
+  },
+  "eyebrow": "Careers",
+  "heading": "Build your engineering career at MENASCO",
+  "description": "MENASCO's project teams deliver complex, high-performance MEP systems across the region.",
+  "emptyState": {
+    "title": "No current openings listed",
+    "description": "No verified job-listing source is connected yet.",
+    "cta": "Get in touch"
+  }
+}

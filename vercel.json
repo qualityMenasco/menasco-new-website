@@ -1,0 +1,44 @@
+{
+  "rewrites": [
+    { "source": "/api/newsroom-admin-proxy/:path*", "destination": "/api/newsroom-admin-proxy/[...path]?path=:path*" },
+    { "source": "/api/projects-admin-proxy/:path+", "destination": "/api/projects-admin-proxy/[...path]?path=:path*" },
+    { "source": "/api/newsroom/public/:path*", "destination": "https://wvojo9g543.execute-api.ap-south-1.amazonaws.com/api/newsroom/public/:path*" },
+    { "source": "/newsroom/:slug", "destination": "/api/newsroom-article-page?slug=:slug&locale=en" },
+    { "source": "/ar/newsroom/:slug", "destination": "/api/newsroom-article-page?slug=:slug&locale=ar" },
+    { "source": "/((?!api/).*)", "destination": "/404.html" }
+  ],
+  "functions": {
+    "api/**/*.ts": {
+      "includeFiles": "{api/_lib/certs/**,api/_generated/**}"
+    }
+  },
+  "headers": [
+    {
+      "source": "/assets/(.*)\\.(js|css)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/projects/vela/frames/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/assets/projects/vela/video-frames/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    }
+  ]
+}

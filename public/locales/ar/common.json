@@ -1,0 +1,74 @@
+{
+  "skipToContent": "تخطَّ إلى المحتوى",
+  "languageSwitch": {
+    "label": "اختيار اللغة",
+    "en": "EN",
+    "ar": "العربية"
+  },
+  "buttons": {
+    "exploreProjects": "استكشف مشاريعنا",
+    "ourCapabilities": "قدراتنا",
+    "downloadCompanyProfile": "تحميل الملف التعريفي للشركة",
+    "requestQuote": "تواصل معنا",
+    "viewAllServices": "عرض جميع الخدمات",
+    "meetTheTeam": "تعرّف على فريقنا",
+    "learnMore": "اعرف المزيد",
+    "getDirections": "احصل على الاتجاهات",
+    "previousOffice": "المكتب السابق",
+    "nextOffice": "المكتب التالي",
+    "backToHome": "العودة إلى الصفحة الرئيسية",
+    "sendAnotherEnquiry": "إرسال استفسار آخر",
+    "sendEnquiry": "إرسال الاستفسار",
+    "explore": "استكشف",
+    "backToTop": "العودة إلى الأعلى",
+    "closeDialog": "إغلاق النافذة",
+    "readMore": "قراءة المزيد",
+    "showLess": "عرض أقل",
+    "exploreMore": "اكتشف المزيد",
+    "viewProject": "عرض المشروع"
+  },
+  "states": {
+    "loading": "جارٍ التحميل…",
+    "error": "حدث خطأ ما. يُرجى المحاولة مرة أخرى.",
+    "empty": "لا يوجد محتوى لعرضه بعد.",
+    "comingSoon": "قريبًا"
+  },
+  "footer": {
+    "copyright": "© {{year}} ميناسكو. جميع الحقوق محفوظة.",
+    "description": "تأسست ميناسكو في دولة الإمارات العربية المتحدة عام 1994، وتقدّم أنظمة متكاملة للأعمال الميكانيكية والكهربائية والسباكة والحماية من الحرائق للمشاريع المعقّدة وعالية الأداء في أنحاء المنطقة.",
+    "company": "الشركة",
+    "services": "الخدمات",
+    "projects": "المشاريع",
+    "follow": "تابعنا",
+    "headOffice": "المكتب الرئيسي"
+  },
+  "locations": {
+    "dubai": {
+      "label": "دبي، المكتب الرئيسي",
+      "city": "دبي",
+      "country": "الإمارات العربية المتحدة"
+    },
+    "riyadh": {
+      "label": "الرياض، ميناسكو السعودية",
+      "city": "الرياض",
+      "country": "المملكة العربية السعودية"
+    },
+    "cairo": {
+      "label": "القاهرة، ميناسكو مصر",
+      "city": "القاهرة",
+      "country": "مصر"
+    },
+    "london": {
+      "label": "مكتب لندن",
+      "city": "لندن",
+      "country": "المملكة المتحدة"
+    }
+  },
+  "certifications": {
+    "qualityManagement": "إدارة الجودة",
+    "environmentalManagement": "الإدارة البيئية",
+    "occupationalHealthSafety": "إدارة الصحة والسلامة المهنية"
+  },
+  "client": "العميل: {{name}}",
+  "viewItemLabel": "عرض {{name}}"
+}

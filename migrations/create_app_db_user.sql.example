@@ -1,0 +1,30 @@
+-- Manual, one-time setup — run this yourself against menasco_newsroom using
+-- the newsroom_admin master account (e.g. via a MySQL client connected
+-- through the same TLS/IP-allowlisted path already verified to work).
+-- This is deliberately NOT part of the automated migration runner: it
+-- creates a credential, and db-migrate.ts's job is schema, not secrets.
+--
+-- Do not commit a copy of this file with a real password filled in — copy
+-- it to a local, gitignored file (or just run it by hand) and generate the
+-- password yourself, e.g.:
+--   openssl rand -base64 32
+--
+-- After running this, set DB_USER=newsroom_app and DB_PASSWORD=<the
+-- generated password> in the application's environment (local .env.local,
+-- and the equivalent secure Vercel environment variable for production)
+-- instead of the newsroom_admin master credentials — the application
+-- should never run as the master user day-to-day.
+
+CREATE USER IF NOT EXISTS 'newsroom_app'@'%' IDENTIFIED BY '__REPLACE_WITH_GENERATED_PASSWORD__';
+
+-- Only what the Phase 1 API actually needs on this one database — no
+-- global privileges, no access to other databases/schemas on the instance.
+GRANT SELECT, INSERT, UPDATE, DELETE ON menasco_newsroom.news_articles TO 'newsroom_app'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE ON menasco_newsroom.news_article_images TO 'newsroom_app'@'%';
+
+-- The migration runner itself should keep using newsroom_admin (or another
+-- account with DDL rights) — newsroom_app intentionally has no CREATE/
+-- ALTER/DROP/INDEX privileges, so it cannot modify schema even if the
+-- application were somehow compromised.
+
+FLUSH PRIVILEGES;

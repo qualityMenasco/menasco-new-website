@@ -1,0 +1,29 @@
+{
+  "eyebrow": "Legal",
+  "privacy": {
+    "seo": {
+      "title": "Privacy Policy",
+      "description": "How MENASCO collects, uses and protects personal data."
+    },
+    "heading": "Privacy Policy",
+    "body": "This page will set out how MENASCO collects, uses, stores and protects personal data submitted through this website, including enquiry forms. The full policy text is pending legal review and has not yet been published.",
+    "contactNote": "Questions about data handling in the meantime can be directed to {{email}}."
+  },
+  "terms": {
+    "seo": {
+      "title": "Terms of Use",
+      "description": "Terms of use for the MENASCO website."
+    },
+    "heading": "Terms of Use",
+    "body": "The full terms governing use of this website are pending legal review and have not yet been published."
+  },
+  "lynxqcPrivacy": {
+    "seo": {
+      "title": "LYNXqc Privacy Policy | MENASCO",
+      "description": "Privacy policy for LYNXqc, MENASCO's field quality management platform."
+    },
+    "heading": "LYNXqc Privacy Policy",
+    "lastUpdated": "Last Updated: {{date}}",
+    "englishOnlyNote": "This Privacy Policy is currently available in English only."
+  }
+}

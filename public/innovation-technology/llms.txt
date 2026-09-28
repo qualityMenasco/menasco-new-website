@@ -1,0 +1,60 @@
+# Innovation & Technology
+
+> MENASCO is investing in proprietary technologies, artificial intelligence, enterprise data systems, automation, and digital engineering platforms to improve project delivery, operational efficiency, compliance, quality, and decision-making across the organization.
+
+## Automatic Tendering Logic Assessment System (ATLAS)
+
+ATLAS is MENASCO's AI-powered compliance platform, evaluating engineering designs against applicable codes, standards, and regulatory frameworks to improve readiness for review before submission across technically demanding project types, from mission-critical facilities to hospitality and residential developments.
+
+- Regulatory Alignment
+- Project-Specific Assessment
+- AI-Powered Review
+- Cross-Sector Compliance
+
+## LYNXqc
+
+LYNXqc is MENASCO's intelligent field quality management platform, built to make identifying, assigning, and resolving construction issues faster and more transparent. Using photos, voice notes, and AI-assisted issue recognition, LYNXqc captures critical site information and routes it to the right teams for action. From initial observation through verification and closure, every issue is tracked in one auditable workflow, improving accountability, visibility, and quality across projects.
+
+- AI-Assisted Issue Recognition
+- Photo & Voice Capture
+- Automated Issue Routing
+- Auditable Quality Workflow
+
+- [Privacy Policy](https://menascogroup.com/lynxqc/privacy-policy/llms.txt)
+
+## Artificial Intelligence & Intelligent Automation
+
+MENASCO is integrating artificial intelligence across its operations, from predictive analytics to workflow automation, to support engineers and project teams with faster, more informed decisions, not replace them.
+
+- Predictive Analytics
+- Workflow Automation
+- Decision Support
+- Risk Detection
+
+## Enterprise Data Lake
+
+MENASCO is building a centralized data platform that consolidates information from every major operational system across the business, turning operational data into real-time visibility and better-informed decisions.
+
+- Live Dashboards
+- Predictive Planning
+- Cash Flow Visibility
+- Data-Driven Decisions
+
+## MENASCO Connect
+
+MENASCO Connect is our proprietary collaboration platform, unifying engineering, commercial, planning, QA/QC, and every other department into one digital workflow, accelerating administrative decisions to ensure consistent delivery across every project.
+
+- Workflow Automation
+- Cross-Functional Collaboration
+- Faster Decision-Making
+- Clear Accountability
+
+## Engineering Tomorrow
+
+MENASCO believes the future of engineering lies in combining decades of construction expertise with intelligent technologies that improve quality, efficiency, sustainability, compliance, and project certainty. Technology is not replacing engineering: it is empowering our engineers to deliver better outcomes for clients and projects.
+
+---
+
+## Related Pages
+
+- [About MENASCO](https://menascogroup.com/about/llms.txt)

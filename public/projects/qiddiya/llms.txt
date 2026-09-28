@@ -1,0 +1,37 @@
+# Qiddiya
+
+> Qiddiya City is one of Saudi Arabia's flagship giga-projects under Saudi Vision 2030, a 360 km² entertainment, sports, and residential destination near Riyadh built around the "Power of Play." MENASCO is delivering specialized MEP engineering solutions in support of the development.
+
+## Project Overview
+
+- Sector: Commercial, Sports, and Entertainment
+- Category: Landmark Entertainment
+- Location: Qiddiya City, Saudi Arabia
+- Status: On-Going
+- Year: 2027
+
+## MENASCO Scope
+
+Engineering, Supply, Installation, Testing & Commissioning Of MEP Systems (HVAC, Plumbing & Electrical)
+
+## Safety & Delivery
+
+- Workforce hours: 2,059,650 hours
+- Safety record: Zero LTI
+
+---
+
+## Related Services
+
+- [Mechanical](https://menascogroup.com/services/mechanical/llms.txt)
+- [Electrical](https://menascogroup.com/services/electrical/llms.txt)
+- [Plumbing](https://menascogroup.com/services/plumbing/llms.txt)
+- [Fire Protection](https://menascogroup.com/services/fire-protection/llms.txt)
+- [BIM & Digital Engineering](https://menascogroup.com/services/bim-digital-engineering/llms.txt)
+- [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt)
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

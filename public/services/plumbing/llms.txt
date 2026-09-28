@@ -1,0 +1,57 @@
+# Plumbing
+
+> Water supply, drainage and sanitary systems built for long-term reliability.
+
+## Overview
+
+MENASCO delivers integrated plumbing, water supply, drainage, and water-treatment solutions for residential, commercial, hospitality, industrial, infrastructure, and mission-critical projects. Our systems are engineered to ensure hygiene, water efficiency, operational reliability, and full compliance with local regulations and international standards. From engineering design and BIM coordination to installation, testing, commissioning, and handover, we provide efficient and sustainable plumbing solutions tailored to the technical and operational requirements of every project.
+
+## Capabilities
+
+- Domestic Cold & Hot Water Supply Systems
+- Water Storage & Distribution Systems
+- Water-Pressure Booster Pump Systems
+- Sanitary Drainage & Wastewater Systems
+- Soil, Waste & Vent Systems
+- Stormwater & Rainwater Drainage Systems
+- Sewage-Lifting & Transfer Pumping Stations
+- Sanitary Fixtures & Accessories Installation
+- PVC, PPR, HDPE, Copper & Stainless-Steel Pipework
+- Irrigation & Landscape Water Systems
+- Greywater & Blackwater Treatment Systems
+- Greywater Recycling & Reuse Systems
+- Reverse Osmosis (RO) Water-Treatment Systems
+- Water Filtration & Purification Systems
+- Sewage Treatment Plants (STP)
+- Grease, Oil & Sand Interceptor Systems
+- Hot-Water Generation & Circulation Systems
+- Solar Water-Heating Systems
+- Water Metering & Leak-Detection Systems
+- Swimming Pool, Fountain & Water-Feature Systems
+- Testing, Flushing, Disinfection & Commissioning
+
+## Related Sectors
+
+- Residential / Commercial
+- Hospitality
+- Landmark Entertainment
+- Advanced Technical Facilities
+
+---
+
+## Relevant Projects
+
+- [Casa Cavalli](https://menascogroup.com/projects/casa-cavalli/llms.txt): Dubai Marina, UAE
+- [DAMAC Bay](https://menascogroup.com/projects/damac-bay/llms.txt): Dubai Marina, UAE
+- [VELA by Omniyat](https://menascogroup.com/projects/vela-by-omniyat/llms.txt): Dubai, UAE
+- [Vanguard](https://menascogroup.com/projects/vanguard/llms.txt): Dubai, UAE
+- [Bloom Residences](https://menascogroup.com/projects/bloom-residences/llms.txt): Dubai Marina, UAE
+- [PCFC Headquarters Building](https://menascogroup.com/projects/pcfc-headquarters-building/llms.txt): Dubai Marina, UAE
+- [Sparkle Tower](https://menascogroup.com/projects/sparkle-tower/llms.txt): Dubai Marina, UAE
+- [Vida Hotel](https://menascogroup.com/projects/vida-hotel/llms.txt): Sharjah, UAE
+
+---
+
+## Related Pages
+
+- [All Services](https://menascogroup.com/services/llms.txt)

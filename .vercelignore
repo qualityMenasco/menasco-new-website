@@ -1,0 +1,42 @@
+# Phase 6C — the AWS Lambda migration made api/newsroom/** the ONLY
+# authoritative Newsroom backend (aws/newsroom-lambda.ts imports these exact
+# files as its business logic; the currently-deployed Lambda IS a bundled
+# copy of this code). These files are NOT obsolete — deleting them would
+# strand the Lambda's own build pipeline, since aws/router.ts's dynamic
+# imports and every scripts/newsroom-*.ts test script still need them as
+# real source. What they must NOT be is independently reachable as live
+# Vercel serverless functions — that would stand up a second, parallel
+# Newsroom backend (Browser -> Vercel -> RDS/S3 directly) alongside the
+# intended one (Browser -> API Gateway -> Lambda -> RDS/S3), each requiring
+# its own DB/AWS credentials and each capable of drifting from the other.
+#
+# This file excludes them from what `vercel deploy` uploads/routes, while
+# leaving them on disk for local tooling (esbuild bundling the Lambda,
+# `tsx` running the test scripts, `vercel dev` for local iteration) — all
+# of which read the working tree directly and are unaffected by this file.
+#
+# Deliberately NOT excluded: api/newsroom-admin-proxy/** (the thin relay —
+# the only Newsroom-related Vercel function meant to stay live) and
+# api/_lib/** (Vercel's own convention already never routes an
+# underscore-prefixed path as a function regardless of this file; excluding
+# it here too would break api/newsroom-admin-proxy/*.ts's own imports of
+# ../_lib/http and ../_lib/adminProxySession at Vercel's build time).
+api/newsroom/
+
+# Same reasoning as api/newsroom/ above, for the Phase 3 Projects backend:
+# api/projects/** is the menasco-projects-api Lambda's own business logic
+# (aws/projects-router.ts's dynamic imports point at these exact files) —
+# not independently reachable as a live Vercel serverless function, which
+# would stand up a second, parallel Projects backend with its own
+# DB/AWS credentials capable of drifting from the real one
+# (Browser -> API Gateway -> menasco-projects-api -> RDS/S3).
+api/projects/
+
+# *.test.ts files colocated under api/ (Vitest convention, e.g.
+# api/newsroom-article-page.test.ts) are source, not routes — Vercel's
+# zero-config function detection otherwise treats every api/**/*.ts file as
+# a deployable Serverless Function, which would stand up a live, pointless
+# /api/newsroom-article-page.test endpoint. Excluded from the deploy
+# entirely (tests still run locally via `npm test`, which reads the working
+# tree directly and is unaffected by this file).
+api/**/*.test.ts

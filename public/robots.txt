@@ -1,0 +1,44 @@
+# Robots.txt for menascogroup.com
+
+# General web crawling
+
+# Be Nice
+
+User-agent: *
+Allow: /
+
+# Sitemap
+
+Sitemap: https://menascogroup.com/sitemap.xml
+
+
+# AI-readable website information
+
+# Structured MENASCO information for AI/LLM systems. Every public page also
+# has its own AI-readable resource at PAGE_URL/llms.txt, e.g.:
+# https://menascogroup.com/llms.txt
+# https://menascogroup.com/about/llms.txt
+# https://menascogroup.com/services/mechanical/llms.txt
+
+# AI / LLM crawler access
+
+# OpenAI
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Google AI
+User-agent: Google-Extended
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /

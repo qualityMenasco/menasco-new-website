@@ -1,0 +1,567 @@
+{
+  "hero": {
+    "eyebrow": "Engineering Excellence Since {{year}}",
+    "title": "About MENASCO",
+    "description": "For more than three decades, MENASCO has delivered integrated mechanical, electrical, plumbing and fire-protection (MEP) engineering solutions that power some of the region's most demanding developments, from Dubai's skyline to mission-critical facilities across the UAE and GCC. Through technical expertise and disciplined project execution, we create reliable infrastructure that stands the test of time.",
+    "stats": {
+      "established": "Established",
+      "yearsOfExcellence": "Years of Engineering Excellence",
+      "regionalPresence": "Regional Locations",
+      "regionalPresenceDescription": "UAE, Egypt, Saudi Arabia & United Kingdom"
+    }
+  },
+  "whoWeAre": {
+    "eyebrow": "Company Overview",
+    "heading": "Who We Are",
+    "paragraph1": "MENASCO Mechanical Contracting LLC is one of the UAE's leading providers of integrated MEP engineering and contracting solutions, delivering high-performance building services across commercial, residential, industrial, hospitality, healthcare, infrastructure, and mission-critical developments.",
+    "paragraph2": "Founded in 1994, MENASCO has earned a reputation for engineering precision, technical excellence, and reliable project delivery. Today, our regional locations continue to grow through MENASCO Misr and MENASCO KSA, allowing us to support clients across the Middle East with consistent quality, innovation, and operational excellence.",
+    "paragraph3": "Our multidisciplinary teams combine engineering expertise, advanced technologies, and collaborative project management to deliver complete lifecycle MEP solutions, from design coordination and BIM integration through installation, commissioning, and project handover.",
+    "quote": "At MENASCO, we do more than install systems; we engineer environments that perform.",
+    "leadershipEyebrow": "Leadership",
+    "meetTheTeam": "Meet the Team"
+  },
+  "brandStatement": {
+    "heading1": "Engineering the Skyline,",
+    "heading2": "Shaping the Future.",
+    "tagline": "At MENASCO, every detail tells a story of",
+    "innovation": "Innovation",
+    "integrity": "Integrity",
+    "excellence": "Excellence"
+  },
+  "ourApproach": {
+    "eyebrow": "Our Approach",
+    "heading": "Engineering Built Around Performance",
+    "pillars": {
+      "earlyEngagement": {
+        "title": "Early Project Engagement",
+        "description": "We work closely with clients and stakeholders from the earliest stages to optimize constructability, reduce project risk, and maximize long-term value."
+      },
+      "bimCoordination": {
+        "title": "BIM-Driven Coordination",
+        "description": "Advanced Building Information Modeling enables precise multidisciplinary coordination, minimizing clashes and improving construction efficiency."
+      },
+      "disciplinedExecution": {
+        "title": "Disciplined Execution",
+        "description": "Our structured project management methodology ensures quality, safety, schedule adherence, and cost efficiency throughout every project lifecycle."
+      },
+      "reliableDelivery": {
+        "title": "Reliable Delivery",
+        "description": "Every solution is engineered to deliver long-term operational performance while meeting the highest international quality standards."
+      }
+    }
+  },
+  "visionMissionValues": {
+    "eyebrow": "Vision, Mission & Values",
+    "heading": "What Drives Us Forward",
+    "vision": {
+      "title": "Vision",
+      "description": "To lead the future of engineering and infrastructure by delivering innovative, sustainable, and reliable MEP solutions that shape smarter communities and lasting built environments."
+    },
+    "mission": {
+      "title": "Mission",
+      "description": "We transform engineering challenges into practical, high-performance solutions by combining innovation, technical expertise, and uncompromising quality. Through collaboration and continuous improvement, we create lasting value for our clients, partners, employees, and communities."
+    },
+    "ourValues": "Our Values",
+    "values": {
+      "innovation": {
+        "title": "Innovation",
+        "description": "Transforming visionary ideas into practical engineering solutions."
+      },
+      "reliability": {
+        "title": "Reliability",
+        "description": "Building lasting trust through consistency, accountability, and performance."
+      },
+      "sustainability": {
+        "title": "Sustainability",
+        "description": "Designing and delivering solutions that support future generations."
+      },
+      "integrity": {
+        "title": "Integrity",
+        "description": "Acting with honesty, transparency, and professionalism in everything we do."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Pursuing exceptional quality in every project, every system, and every detail."
+      },
+      "collaboration": {
+        "title": "Collaboration",
+        "description": "Achieving success through teamwork, partnership, and shared expertise."
+      }
+    }
+  },
+  "qualityStandards": {
+    "eyebrow": "Quality & Standards",
+    "heading": "Commitment to Quality",
+    "paragraph1": "Quality is embedded into every stage of our operations. MENASCO operates under an integrated Quality, Health, Safety, and Environmental (QHSE) management framework that promotes continuous improvement, proactive risk management, and operational excellence across every project.",
+    "paragraph2": "Our commitment extends beyond compliance. Through rigorous quality control, technical oversight, and performance monitoring, we consistently deliver engineering solutions that meet the highest standards expected throughout the construction industry. This commitment enables us to deliver projects that are safe, reliable, efficient, and built for long-term performance.",
+    "downloadPolicy": "Download full QHSE Policy",
+    "exploreMore": "Explore More",
+    "pillars": {
+      "qualityAssurance": {
+        "title": "Quality Assurance",
+        "description": "Comprehensive inspection and quality control throughout every project phase."
+      },
+      "healthSafety": {
+        "title": "Health & Safety",
+        "description": "Safety-first culture supported by robust HSE management systems."
+      },
+      "technicalExcellence": {
+        "title": "Technical Excellence",
+        "description": "Highly specialized engineers delivering precision-driven solutions."
+      },
+      "continuousImprovement": {
+        "title": "Continuous Improvement",
+        "description": "Constant refinement of processes, technology, and engineering standards."
+      }
+    }
+  },
+  "ourExperience": {
+    "eyebrow": "Our Experience",
+    "heading": "Engineering Expertise That Delivers",
+    "description": "Over three decades, MENASCO has successfully completed a diverse portfolio of complex MEP projects throughout the region. Every project reflects our commitment to engineering excellence, innovation, safety, and client satisfaction.",
+    "expertise": {
+      "hvac": "HVAC Systems",
+      "plumbing": "Plumbing Systems",
+      "fireProtection": "Fire Protection Systems",
+      "electrical": "Electrical Engineering",
+      "elv": "ELV & Emergency Systems",
+      "buildingServices": "Building Services",
+      "integratedMep": "Integrated MEP Solutions",
+      "commissioning": "Commissioning & Testing"
+    }
+  },
+  "ourPeople": {
+    "eyebrow": "Our People",
+    "heading": "Driven by Exceptional People",
+    "paragraph1": "Behind every successful MENASCO project is a team of highly experienced engineers, project managers, technical specialists, and construction professionals united by a shared commitment to excellence.",
+    "paragraph2": "Our people combine decades of technical expertise with collaborative problem-solving, enabling us to deliver turnkey engineering solutions for some of the region's most demanding developments.",
+    "paragraph3": "Through continuous professional development, advanced technologies, and a culture of accountability, our teams consistently exceed client expectations while maintaining the highest standards of quality, safety, and integrity."
+  },
+  "finalCta": {
+    "heading": "Building the Future Through Engineering Excellence",
+    "description": "Whether delivering mission-critical infrastructure or complex commercial developments, MENASCO remains committed to engineering innovative, sustainable, and reliable MEP solutions that create lasting value."
+  },
+  "clients": {
+    "heading": "Our Clients",
+    "description": "Established in 1994, MENASCO has earned a reputation as a trusted MEP partner for prominent developers, government authorities and utilities across the region."
+  },
+  "credentials": {
+    "heading1": "Menasco",
+    "heading2": "Credentials",
+    "companyProfile": {
+      "eyebrow": "Company Profile",
+      "title": "Who We Are, On Paper.",
+      "description": "Our full company profile, history, capabilities, certifications, key projects and leadership, in one downloadable PDF.",
+      "buttonLabel": "Download PDF ↓"
+    },
+    "guidelines": {
+      "eyebrow": "Guidelines",
+      "title": "MENASCO POLICIES",
+      "description": "Our internal engineering, QHSE & operational guidelines: the standards our team follows on every site.",
+      "buttonLabel": "View Guidelines"
+    },
+    "sustainability": {
+      "eyebrow": "Sustainability",
+      "title": "Driving A SUSTAINABLE FUTURE",
+      "description": "How MENASCO builds responsibly: energy-efficient systems, safer sites and reduced environmental impact.",
+      "buttonLabel": "View Report"
+    }
+  },
+  "mobile": {
+    "leadershipEyebrow": "Leadership",
+    "leadershipHeading": "Guided by Engineering Experience",
+    "leadershipDescription": "Meet the founder, executive leadership, and department heads driving MENASCO forward.",
+    "exploreEyebrow": "Explore MENASCO",
+    "exploreHeading": "Learn More",
+    "qhseTitle": "Quality, Health & Safety",
+    "qhseDescription": "Every process MENASCO runs is governed by an integrated management system certified to ISO 9001, ISO 14001:2015, and ISO 45001:2018.",
+    "qhseViewCertifications": "View Certifications & QHSE Approach",
+    "innovationTitle": "Innovation & Technology",
+    "innovationDescription": "Explore how MENASCO uses intelligent compliance, artificial intelligence, enterprise data, and connected workflows to improve engineering delivery.",
+    "innovationExplore": "Explore Innovation & Technology",
+    "newsroomTitle": "MENASCO Newsroom",
+    "newsroomDescription": "Explore and keep up with MENASCO's news and achievements.",
+    "newsroomExplore": "View Newsroom"
+  },
+  "seo": {
+    "title": "About MENASCO | MEP Engineering UAE",
+    "description": "MENASCO has delivered integrated MEP engineering solutions across the Middle East since 1994. Learn about our approach, vision, values and quality standards."
+  },
+  "team": {
+    "seo": {
+      "title": "Leadership Team",
+      "description": "MENASCO's leadership: founder, executive leadership and department heads."
+    },
+    "featured": {
+      "eyebrow": "Leadership",
+      "heading": "Leadership",
+      "description": "Guided by decades of engineering experience, MENASCO's leadership combines strategic vision, operational discipline, and a commitment to long-term value."
+    },
+    "executive": {
+      "eyebrow": "Leadership Team",
+      "heading": "Executive Leadership",
+      "description": "The executives directing MENASCO's operations, delivery and regional growth."
+    },
+    "engineeringSupport": {
+      "eyebrow": "Leadership Team",
+      "heading": "Engineering and Support Leads",
+      "description": "The specialists and department heads behind MENASCO's day-to-day project delivery."
+    },
+    "readFullProfile": "Read Full Profile",
+    "readFounderMessage": "Read Full Founder's Message",
+    "titles": {
+      "Chief Financial Officer": "Chief Financial Officer",
+      "Chief Operating Officer": "Chief Operating Officer",
+      "Manpower & Resourcing Division Manager": "Manpower & Resourcing Division Manager",
+      "Commercial Director": "Commercial Director",
+      "Engineering Head – Electrical": "Engineering Head – Electrical",
+      "Professional Services Manager": "Professional Services Manager",
+      "BIM Manager": "BIM Manager",
+      "Planning & Control Manager": "Planning & Control Manager",
+      "Estimation & Procurement Manager": "Estimation & Procurement Manager",
+      "HSE Manager": "HSE Manager",
+      "IT Manager": "IT Manager",
+      "HR Manager": "HR Manager",
+      "Design & Engineering Section Head": "Design & Engineering Section Head",
+      "Chief Executive Officer (KSA)": "Chief Executive Officer (KSA)",
+      "Chief Executive Officer": "Chief Executive Officer",
+      "Founder": "Founder",
+      "Founder & General Manager": "Founder & General Manager"
+    },
+    "bios": {
+      "Mr. Hani Badawiyeh": [
+        "Mr. Hani Badawiyeh is a seasoned financial leader with over 22 years of experience in financial management, accounting, and strategic analysis. He holds a Bachelor's Degree in Financial Management and Accounting from the University of Jordan and has been a cornerstone in MENASCO's administrative and financial framework.",
+        "Throughout his distinguished career, Mr. Badawiyeh has demonstrated exceptional expertise in budget planning, financial reporting, and contract oversight, ensuring fiscal discipline and sustainable growth across all business operations.",
+        "His analytical precision and strategic approach have been instrumental in implementing effective financial governance, enhancing transparency, and optimizing performance efficiency, key pillars that uphold MENASCO's values of Integrity, Innovation, and Excellence."
+      ],
+      "Eng. Refad Al-Dwairi": [
+        "Eng. Refad Al-Dwairi is a seasoned engineering and project management professional with over 20 years of experience delivering large-scale construction projects across regional and international markets. He holds a Bachelor of Science in Mechanical Engineering from the Jordan University of Science and Technology and an MBA from the University of Manchester, UK.",
+        "Recognized for blending technical precision with strategic leadership, Eng. Refad has successfully led numerous high-profile projects to completion, consistently achieving exceptional results in time, cost, and quality performance while ensuring full compliance with contractual, safety, and international standards.",
+        "As Chief Operating Officer of MENASCO, he plays a pivotal role in strengthening the company's operational capabilities and reinforcing its enduring commitment to Innovation, Integrity, and Excellence."
+      ],
+      "Eng. Ihab Saadi": [
+        "Eng. Ihab Saadi is a seasoned construction and workforce management leader with over 25 years of experience in large-scale project execution, resource planning, and operational leadership. He oversees strategic workforce initiatives, ensuring seamless coordination across diverse teams.",
+        "Renowned for balancing strategic planning with on-the-ground execution, Eng. Saadi has successfully managed numerous high-profile and complex projects, demonstrating exceptional skill in resource optimization, budget control, and performance enhancement.",
+        "His leadership philosophy centers on empowerment, precision, and teamwork, driving innovation and fostering collaboration across all departments."
+      ],
+      "Eng. Mohamed Youssef": [
+        "Eng. Mohamed Youssef brings over 15 years of extensive experience in contract management, commercial operations, and project administration across major construction and infrastructure developments. He holds a Bachelor's Degree in Mechanical Engineering from Alexandria University.",
+        "His credentials include membership of FIDIC (International Federation of Consulting Engineers), a Six Sigma certification in Leadership, Analysis & Project Management, and APC MRICS Certified Cost Specialist status.",
+        "With a rare blend of engineering expertise and commercial acumen, he has demonstrated exceptional capability in leading complex negotiations and maximizing project value."
+      ],
+      "Eng. Zakaria Motawe": [
+        "Eng. Zakaria Motawe is a seasoned Electrical Engineer with extensive experience in designing, managing, and executing large-scale electromechanical projects across commercial, residential, and industrial developments.",
+        "He possesses deep technical expertise in electrical power distribution, ELV systems, and sustainable energy solutions, ensuring compliance with the highest engineering and safety standards.",
+        "As Engineering Lead – Electrical at MENASCO, he oversees electrical engineering operations, mentors project teams, and drives technical excellence from design through commissioning."
+      ],
+      "Mr. Ed Smith": [
+        "With over two decades of international experience across the United States, India, and the Middle East, Ed Smith brings extensive leadership in quality assurance, infrastructure engineering, and project governance. Since joining MENASCO in 2017, he has led QA/QC operations across the UAE and KSA.",
+        "Ed is responsible for establishing and maintaining MENASCO's corporate Quality Management Systems (QMS), inspection protocols, and audit frameworks, ensuring full compliance with ISO 9001 standards.",
+        "A LEED Accredited Professional and Harvard Business School alumnus, Ed combines technical depth with strategic insight, fostering a culture of sustainability, accountability, and performance."
+      ],
+      "Eng. Rakan Abdullah": [
+        "With over a decade of experience managing large-scale construction projects, Eng. Rakan combines strong technical engineering expertise with advanced leadership in digital project management, dedicated to advancing Building Information Modelling (BIM).",
+        "Starting his career as an Electrical Site Engineer, he built a solid foundation in design, installation, and execution before progressing into BIM Management, leading cross-functional teams and standardizing digital processes.",
+        "He holds RICS-accredited certifications and ISO 19650 qualifications, reinforcing his pursuit of global best practices in BIM management and integrated engineering solutions."
+      ]
+    },
+    "portraitAlt": "Portrait of {{name}}, {{role}} of MENASCO",
+    "messageFromFounder": "A Message from Our Founder",
+    "regards": "Regards,",
+    "meetOurLeadership": "Meet Our Leadership",
+    "backToAbout": "Back to About MENASCO",
+    "profileCta": {
+      "heading": "Meet the People Behind MENASCO",
+      "description": "Discover the leadership, expertise, and shared values driving MENASCO's continued growth and engineering excellence.",
+      "meetTheTeam": "Meet the Team",
+      "exploreMenasco": "Explore MENASCO"
+    },
+    "readFullProfileShort": "Read Full Profile",
+    "closeDialog": "Close dialog",
+    "featuredLeadershipRegion": "Featured leadership",
+    "showLeader": "Show {{name}}",
+    "linkedinProfileFor": "{{name}}'s LinkedIn profile",
+    "readBio": "Read bio",
+    "readBioFor": "Read {{name}}'s bio",
+    "viewProfile": "View Profile",
+    "viewProfileFor": "View {{name}}'s profile",
+    "viewProfileLabel": "View profile: {{name}}, {{role}}"
+  },
+  "leadershipProfiles": {
+    "bahaa-badawiyeh": {
+      "fullRole": "Chief Executive Officer",
+      "messageEyebrow": "Executive Leadership",
+      "messageParagraphs": [
+        "Bahaa Badawiyeh is the Chief Executive Officer of MENASCO Group, leading the organization with a philosophy that combines engineering expertise, strategic vision, operational discipline & a deep understanding of people.",
+        "Throughout his journey with MENASCO, he has played a central role in transforming the company from a growing MEP contractor into MENASCO Group, an integrated engineering organization with expanding operations across the UAE, Saudi Arabia, Egypt, & the United Kingdom.",
+        "Under his leadership, MENASCO Group has strengthened its capabilities in integrated MEP solutions, digital engineering, prefabrication, infrastructure & complex mission-critical projects. He has driven innovation-led growth, enhanced operational performance & reinforced the Group's ability to deliver reliable, precise & high-value engineering solutions.",
+        "His leadership approach is founded on the belief that engineering excellence begins with people. He promotes collaboration, accountability, knowledge-sharing & continuous development across multidisciplinary teams, empowering the Group's engineers, specialists & project leaders to perform with a shared sense of purpose.",
+        "Bahaa places strong emphasis on sustainability, ethical business practices, transparency & social responsibility. He continues to support initiatives that improve environmental performance, promote an inclusive workplace & create lasting value for clients, communities, employees & partners.",
+        "Under his direction, MENASCO Group continues to expand its regional & international capabilities while remaining firmly guided by its core values of Innovation, Integrity, Excellence.",
+        "For Bahaa, leadership is not defined by individual achievement but by the ability to unite people behind a shared vision: to build with integrity, innovate with purpose & create a legacy of engineering excellence that endures for generations."
+      ],
+      "closingLine": "To build with integrity, innovate with purpose, and create a legacy of excellence that endures for generations.",
+      "seoTitle": "Eng. Bahaa H. Badawiyeh, CEO",
+      "seoDescription": "Meet Eng. Bahaa H. Badawiyeh, CEO of MENASCO, and explore his leadership approach to innovation, regional growth, sustainability, and engineering excellence.",
+      "pageTitle": "Building MENASCO's Legacy of Engineering Excellence",
+      "heroIntro": "Leading MENASCO through innovation-driven growth, operational excellence, and a people-first engineering culture.",
+      "pullQuote": "True engineering leadership is not only about building systems. It is about building innovation, integrity, sustainability, and a better tomorrow.",
+      "pillarsEyebrow": "Leadership Pillars",
+      "pillarsHeading": "What Guides His Leadership",
+      "pillars": [
+        {
+          "title": "Strategic Growth",
+          "description": "Guiding MENASCO's regional expansion and strengthening the company's position across key engineering markets."
+        },
+        {
+          "title": "Innovation & Integration",
+          "description": "Advancing technical capability, digital coordination, operational efficiency, and vertical integration through initiatives such as MACS."
+        },
+        {
+          "title": "People & Purpose",
+          "description": "Building a culture rooted in teamwork, ethics, transparency, inclusion, and shared responsibility."
+        }
+      ]
+    },
+    "helmi-badawiyeh": {
+      "fullRole": "Founder & General Manager",
+      "messageEyebrow": "Founder's Message",
+      "messageParagraphs": [
+        "Since founding MENASCO Mechanical Contracting L.L.C. in 1994, our ambition has remained clear: to build a trusted engineering company founded on technical excellence, integrity & unwavering commitment to our clients.",
+        "Drawing on more than five decades of experience in engineering & construction I have witnessed the industry evolve through periods of rapid growth, technological advancement & increasing project complexity. Throughout this journey MENASCO, has continued to adapt strengthen its capabilities & uphold the principles on which it was established.",
+        "Over more than three decades, MENASCO has grown into a respected name in the electromechanical contracting sector, delivering integrated MEP solutions across the UAE and key regional markets. Our expertise spans HVAC, electrical, plumbing & drainage, fire protection, BIM & digital engineering, prefabrication & specialized solutions for complex & mission-critical projects.",
+        "Our achievements have been made possible by the dedication of our people, the confidence of our clients & the enduring relationships we have built with consultants, developers, contractors, suppliers & strategic partners. Together, they have played an essential role in every milestone we have reached.",
+        "As we look to the future, we remain committed to sustainable growth, continuous improvement & the adoption of innovative engineering solutions that create lasting value, guided by our values of Innovation, Integrity, Excellence, we will continue to strengthen our capabilities, exceed our clients' expectations & contribute to building resilient communities & cities for future generations.",
+        "We look forward to creating new success stories, building enduring partnerships & continuing to transform innovation into reality."
+      ],
+      "seoTitle": "Eng. Helmi Badawiyeh, Founder",
+      "seoDescription": "Learn about Eng. Helmi Badawiyeh, Founder and General Manager of MENASCO, and his vision for quality, long-term value, and engineering excellence.",
+      "heroIntro": "A message from the founder of MENASCO on the company's journey, values, technical expertise, and commitment to long-term growth."
+    }
+  },
+  "esg": {
+    "seo": {
+      "title": "ESG & Sustainability",
+      "description": "MENASCO's ESG strategy reflects its commitment to sustainable construction, environmental responsibility and ethical governance as a leading UAE MEP contractor."
+    },
+    "hero": {
+      "eyebrow": "About MENASCO",
+      "heading": "Environmental, Social & Governance (ESG)",
+      "description": "MENASCO is committed to Environmental, Social, and Governance (ESG) principles that guide how we design, build, and operate as a leading Mechanical, Electrical, and Plumbing (MEP) contractor in the UAE. Our ESG philosophy centers on delivering sustainable engineering solutions that create long-term value for our clients, employees, communities, and the environment."
+    },
+    "pillars": [
+      {
+        "heading": "Environmental",
+        "paragraphs": [
+          "Sustainability is embedded into every stage of our project delivery, from planning and procurement through construction and facility handover. We prioritize energy-efficient engineering solutions, responsible material selection, and the efficient use of resources, while working continuously to reduce waste and environmental impact across our operations."
+        ]
+      },
+      {
+        "heading": "Social",
+        "paragraphs": [
+          "Our people are at the center of everything we do. MENASCO is committed to employee wellbeing, health and safety, and workforce development, supported by ongoing training and professional development. We foster a respectful, inclusive workplace culture that values diversity, and we extend that same commitment beyond our teams, engaging with the communities where we operate while building ethical, long-term partnerships with clients and suppliers alike."
+        ]
+      },
+      {
+        "heading": "Governance",
+        "paragraphs": [
+          "Responsible governance underpins how MENASCO conducts business. We hold ourselves to high standards of ethical conduct, transparency, and accountability, supported by robust compliance and risk management practices. This disciplined approach to corporate responsibility protects the long-term interests of our clients, employees, and partners, and helps ensure integrity is maintained across every project we deliver."
+        ]
+      },
+      {
+        "heading": "Continuous Improvement",
+        "paragraphs": [
+          "ESG is not a separate initiative at MENASCO; it is integrated into our long-term strategy. By embedding environmental, social, and governance principles into how we plan, build, and operate, we drive innovation, operational excellence, and sustainable growth, ensuring responsible project delivery across the UAE and the wider region."
+        ]
+      }
+    ],
+    "highlightsHeading": "ESG Highlights",
+    "highlights": [
+      {
+        "title": "Sustainable Engineering",
+        "description": "Energy-efficient systems designed for long-term performance."
+      },
+      {
+        "title": "Responsible Construction",
+        "description": "Reduced waste and responsible material selection on every project."
+      },
+      {
+        "title": "Employee Wellbeing",
+        "description": "A safe, supportive workplace for every member of our team."
+      },
+      {
+        "title": "Ethical Governance",
+        "description": "Transparent, accountable business conduct at every level."
+      },
+      {
+        "title": "Environmental Stewardship",
+        "description": "Protecting the environments where we build and operate."
+      },
+      {
+        "title": "Community Impact",
+        "description": "Meaningful engagement with the communities we serve."
+      }
+    ],
+    "closing": {
+      "heading": "Building a More Sustainable Future",
+      "description": "MENASCO remains committed to responsible engineering, environmental stewardship, and ethical business practices, delivering long-term value through sustainable MEP solutions across the UAE and the wider region."
+    }
+  },
+  "esgMobile": {
+    "seo": {
+      "title": "ESG & Sustainability",
+      "description": "MENASCO's approach to environmental, social and governance responsibility."
+    },
+    "eyebrow": "ESG",
+    "heading": "Environmental, Social & Governance",
+    "pillars": [
+      {
+        "paragraphs": [
+          "Sustainability is embedded into every stage of our project delivery, from planning and procurement through construction and facility handover. We prioritize energy-efficient engineering solutions, responsible material selection, and the efficient use of resources, while working continuously to reduce waste and environmental impact across our operations."
+        ]
+      },
+      {
+        "paragraphs": [
+          "Our people are at the center of everything we do. MENASCO is committed to employee wellbeing, health and safety, and workforce development, supported by ongoing training and professional development. We foster a respectful, inclusive workplace culture that values diversity, and we extend that same commitment beyond our teams by engaging with the communities where we operate and building ethical, long-term partnerships with clients and suppliers alike."
+        ]
+      },
+      {
+        "paragraphs": [
+          "Responsible governance underpins how MENASCO conducts business. We hold ourselves to high standards of ethical conduct, transparency, and accountability, supported by robust compliance and risk management practices."
+        ]
+      },
+      {
+        "paragraphs": [
+          "ESG is not a separate initiative at MENASCO; it is integrated into our long-term strategy, driving innovation, operational excellence, and sustainable growth across the UAE and the wider region."
+        ]
+      }
+    ]
+  },
+  "innovation": {
+    "seo": {
+      "title": "Innovation & Technology",
+      "description": "MENASCO advances construction technology through LYNXqc field quality management, an enterprise data platform, and intelligent automation across every project."
+    },
+    "hero": {
+      "eyebrow": "About MENASCO",
+      "heading": "Innovation & Technology",
+      "subheading": "Engineering the Future Through Intelligent Technology",
+      "description": "MENASCO is investing in proprietary technologies, artificial intelligence, enterprise data systems, automation, and digital engineering platforms to improve project delivery, operational efficiency, compliance, quality, and decision-making across the organization."
+    },
+    "sections": {
+      "atlas": {
+        "eyebrow": "Intelligent Compliance",
+        "heading": "Automatic Tendering Logic Assessment System (ATLAS)",
+        "paragraph": "ATLAS is MENASCO's AI-powered compliance platform, evaluating engineering designs against applicable codes, standards, and regulatory frameworks to improve readiness for review before submission across technically demanding project types, from mission-critical facilities to hospitality and residential developments.",
+        "highlights": [
+          "Regulatory Alignment",
+          "Project-Specific Assessment",
+          "AI-Powered Review",
+          "Cross-Sector Compliance"
+        ]
+      },
+      "lynxqc": {
+        "eyebrow": "Intelligent Field Quality Management",
+        "heading": "LYNXqc",
+        "paragraph": "LYNXqc is MENASCO's intelligent field quality management platform, built to make identifying, assigning, and resolving construction issues faster and more transparent. Using photos, voice notes, and AI-assisted issue recognition, LYNXqc captures critical site information and routes it to the right teams for action. From initial observation through verification and closure, every issue is tracked in one auditable workflow, improving accountability, visibility, and quality across projects.",
+        "highlights": [
+          "AI-Assisted Issue Recognition",
+          "Photo & Voice Capture",
+          "Automated Issue Routing",
+          "Auditable Quality Workflow"
+        ],
+        "privacyPolicyLink": "Privacy Policy"
+      },
+      "ai": {
+        "eyebrow": "Artificial Intelligence",
+        "heading": "Artificial Intelligence & Intelligent Automation",
+        "paragraph": "MENASCO is integrating artificial intelligence across its operations, from predictive analytics to workflow automation, to support engineers and project teams with faster, more informed decisions, not replace them.",
+        "highlights": [
+          "Predictive Analytics",
+          "Workflow Automation",
+          "Decision Support",
+          "Risk Detection"
+        ]
+      },
+      "dataLake": {
+        "eyebrow": "Data & Business Intelligence",
+        "heading": "Enterprise Data Lake",
+        "paragraph": "MENASCO is building a centralized data platform that consolidates information from every major operational system across the business, turning operational data into real-time visibility and better-informed decisions.",
+        "highlights": [
+          "Live Dashboards",
+          "Predictive Planning",
+          "Cash Flow Visibility",
+          "Data-Driven Decisions"
+        ]
+      },
+      "connect": {
+        "eyebrow": "Enterprise Collaboration",
+        "heading": "MENASCO Connect",
+        "paragraph": "MENASCO Connect is our proprietary collaboration platform, unifying engineering, commercial, planning, QA/QC, and every other department into one digital workflow, accelerating administrative decisions to ensure consistent delivery across every project.",
+        "highlights": [
+          "Workflow Automation",
+          "Cross-Functional Collaboration",
+          "Faster Decision-Making",
+          "Clear Accountability"
+        ]
+      }
+    },
+    "closing": {
+      "heading": "Engineering Tomorrow",
+      "description": "MENASCO believes the future of engineering lies in combining decades of construction expertise with intelligent technologies that improve quality, efficiency, sustainability, compliance, and project certainty. Technology is not replacing engineering: it is empowering our engineers to deliver better outcomes for clients and projects."
+    }
+  },
+  "innovationMobile": {
+    "hero": {
+      "eyebrow": "About MENASCO",
+      "heading": "Innovation & Technology",
+      "description": "MENASCO is investing in proprietary technologies, artificial intelligence, enterprise data systems, automation, and digital engineering platforms to improve project delivery, operational efficiency, compliance, quality, and decision-making."
+    },
+    "cards": {
+      "atlas": {
+        "eyebrow": "Intelligent Compliance",
+        "title": "Intelligent Compliance (ATLAS)",
+        "summary": "ATLAS, our Automatic Tendering Logic Assessment System, is an AI-powered compliance platform that evaluates engineering designs against applicable codes, standards, and regulatory frameworks to improve readiness for review before submission."
+      },
+      "lynxqc": {
+        "eyebrow": "Intelligent Field Quality Management",
+        "title": "LYNXqc",
+        "summary": "LYNXqc is MENASCO's intelligent field quality management platform, built to make identifying, assigning, and resolving construction issues faster and more transparent. Using photos, voice notes, and AI-assisted issue recognition, LYNXqc captures critical site information and routes it to the right teams for action. From initial observation through verification and closure, every issue is tracked in one auditable workflow, improving accountability, visibility, and quality across projects.",
+        "privacyPolicyLink": "Privacy Policy"
+      },
+      "ai": {
+        "eyebrow": "Artificial Intelligence",
+        "title": "Artificial Intelligence & Intelligent Automation",
+        "summary": "MENASCO is integrating artificial intelligence across its operations, from predictive analytics to workflow automation, to support engineers and project teams with faster, more informed decisions while not replacing them."
+      },
+      "dataLake": {
+        "eyebrow": "Data & Business Intelligence",
+        "title": "Enterprise Data Lake",
+        "summary": "MENASCO is building a centralized data platform that consolidates information from every major operational system across the business, turning operational data into real-time visibility and better-informed decisions."
+      },
+      "connect": {
+        "eyebrow": "Enterprise Collaboration",
+        "title": "MENASCO Connect",
+        "summary": "MENASCO Connect is our proprietary collaboration platform, unifying engineering, commercial, planning, QA/QC, and every other department into one digital workflow."
+      }
+    }
+  },
+  "qualitySafetyPage": {
+    "seo": {
+      "title": "Quality & Safety",
+      "description": "MENASCO is a leading MEP contractor in the UAE, delivering quality management, health, safety and environmental excellence through certified QHSE systems."
+    },
+    "eyebrow": "QHSE",
+    "heading": "Quality, Health & Safety",
+    "description": "MENASCO delivers electro-mechanical and MEP contracting services across the UAE, built on quality management, health and safety, and engineering excellence, governed by an integrated QHSE system certified to ISO 9001, ISO 14001:2015, and ISO 45001:2018.",
+    "paragraph1": "As a mechanical contracting and MEP engineering company operating across the UAE, MENASCO continually works to ensure our electro-mechanical services and the quality of our work meet the highest standards in the construction industry. Every process we run is governed by an integrated management system certified to ISO 9001, ISO 14001:2015, and ISO 45001:2018, internationally recognized standards for Quality, Health, Safety, and Environmental (QHSE) management.",
+    "paragraph2Prefix": "We are committed to protecting the health and wellbeing of our employees, partners, clients, and the communities where we work. Through proactive risk management,",
+    "continuousImprovement": "continuous improvement",
+    "paragraph2Suffix": ", and strict adherence to QHSE principles, we minimize health, safety, environmental, and operational risks across every activity, product, and service we deliver.",
+    "downloadPolicy": "Download full QHSE Policy"
+  },
+  "qualitySafetyPageMobile": {
+    "description": "Governed by an integrated QHSE system certified to ISO 9001, ISO 14001:2015, and ISO 45001:2018.",
+    "body": "We are committed to protecting the health and wellbeing of our employees, partners, clients, and the communities where we work, minimizing health, safety, environmental, and operational risks across every activity we deliver."
+  }
+}

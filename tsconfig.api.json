@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "strict": true,
+    "types": ["node"]
+  },
+  "include": ["api", "aws", "scripts/db-migrate.ts", "scripts/newsroom-e2e-test.ts", "scripts/newsroom-pdf-pipeline-test.ts", "scripts/newsroom-public-data.ts", "scripts/newsroom-migrate-static-articles.ts", "scripts/aws-lambda-adapter-test.ts", "scripts/aws-lambda-real-test.ts", "scripts/aws-build-time-fetch-test.ts", "scripts/newsroom-admin-proxy-test.ts"]
+}

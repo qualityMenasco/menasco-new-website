@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/omarelhajjchehade/Downloads/**)",
+      "Bash(ffprobe -v error -show_entries format=duration,size -show_entries stream=width,height,r_frame_rate,nb_frames -of default=noprint_wrappers=0 \"/Users/omarelhajjchehade/Downloads/Vela_building_disassembles_explo…_202607211553.mp4\")",
+      "Bash(unzip -l \"/Users/omarelhajjchehade/Downloads/ezgif-517979d920138652-jpg.zip\")"
+    ]
+  }
+}

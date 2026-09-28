@@ -1,0 +1,47 @@
+# Data Centre MEP Services
+
+> Building high-performance mission-critical environments designed to power the future of digital infrastructure with reliability, efficiency & operational continuity.
+
+## Overview
+
+MENASCO is a trusted MEP & infrastructure partner delivering end-to-end mission-critical data center solutions across the UAE. We specialize in the design coordination, engineering, installation, testing & commissioning of high-performance data centre environments built to support reliability, operational continuity & future scalability.
+
+With extensive experience in complex & mission-critical projects, MENASCO delivers integrated solutions covering critical power infrastructure, precision cooling systems, automation, fire protection, ELV & smart building technologies all engineered to meet the demanding requirements of modern digital infrastructure.
+
+Our expertise extends across the full project lifecycle, from early-stage coordination & value engineering to final commissioning & operational readiness, ensuring efficient execution, optimized performance & long-term reliability.
+
+At MENASCO, we are committed to delivering resilient, scalable & future-ready infrastructure that supports the evolving needs of data-driven industries & the growing digital economy.
+
+## Capabilities
+
+- Complete MEP & Infrastructure Solutions: MENASCO delivers integrated electromechanical & infrastructure solutions for mission-critical data centre environments, covering complete MEP systems coordination, installation, testing & commissioning.
+- Critical Power Infrastructure: Installation of Medium Voltage (MV), Low Voltage (LV), generators, UPS systems & backup power solutions designed to ensure operational continuity & maximum uptime.
+- Cooling & Precision HVAC Systems: Design and execution of advanced HVAC systems, chilled water networks, precision cooling solutions & containment systems tailored for air cooled and direct-to-chip liquid cooled datacentre operations.
+- Automation & Smart Control Systems: Integration of BMS, PLC, monitoring systems & smart infrastructure technologies to support efficient facility management and real-time operational monitoring.
+- Security & ELV Systems: Implementation of integrated security, access control, surveillance & ELV solutions aligned with mission-critical operational and cybersecurity requirements.
+- Testing, Commissioning & Performance Validation: Comprehensive testing and commissioning processes ensuring system reliability, operational readiness, efficiency & compliance with international data centre standards.
+- Scalable & Future-Ready Infrastructure: Engineering flexible and scalable infrastructure solutions designed to support future expansion, technology upgrades & evolving operational demands.
+
+## Prefabrication
+
+Menasco has the capability to develop and deliver fully coordinated prefabricated MEP solutions for data center projects, including modular pipe racks, corridor modules, plantroom skids, riser modules, valve assemblies, and support frames. These solutions are engineered through early BIM coordination, factory-controlled fabrication, pre-assembly, testing where applicable, and planned logistics to site.
+
+Powering the Future of Data Centres: MENASCO delivers integrated mission-critical infrastructure solutions designed for maximum reliability, operational continuity & scalable performance.
+
+---
+
+## Relevant Projects
+
+- [Data Centre I](https://menascogroup.com/projects/data-centre-i-12-mw-it/llms.txt): Abu Dhabi, UAE | 12 MW IT
+- [Data Centre II](https://menascogroup.com/projects/data-centre-ii-24-mw-it/llms.txt): Abu Dhabi, UAE | 24 MW IT
+- [Data Centre III](https://menascogroup.com/projects/data-centre-iii-2-4-mw-it/llms.txt): Dubai, UAE | 2.4 MW IT
+- [Data Centre IV](https://menascogroup.com/projects/data-centre-iv-6-mw-it/llms.txt): Abu Dhabi, UAE | 6 MW IT
+- [Data Centre V](https://menascogroup.com/projects/data-centre-v-800-kw-it/llms.txt): Dubai, UAE | 800 KW IT
+- [Data Centre VI](https://menascogroup.com/projects/data-centre-vi-12-mw-it/llms.txt): Abu Dhabi, UAE | 12 MW IT
+- [Data Centre VII](https://menascogroup.com/projects/data-centre-vii/llms.txt): Abu Dhabi, UAE
+
+---
+
+## Related Pages
+
+- [All Services](https://menascogroup.com/services/llms.txt)

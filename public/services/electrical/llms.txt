@@ -1,0 +1,60 @@
+# Electrical
+
+> Power distribution, building management and low-current systems, coordinated end to end.
+
+## Overview
+
+MENASCO delivers integrated electrical & Extra-Low Voltage (ELV) solutions for residential, commercial, hospitality, infrastructure, industrial & mission-critical developments, our capabilities cover medium- & low-voltage power distribution, substations, emergency & backup power, lighting, building management, security, communication & intelligent control systems. From engineering design & BIM coordination to installation, testing, commissioning & handover, we deliver safe, energy-efficient, code-compliant systems engineered for reliable long-term performance.
+
+## Capabilities
+
+- Medium-Voltage & Low-Voltage Electrical Systems
+- Electrical Substations & Transformer Systems
+- MV and LV Switchgear & Distribution Panels
+- Main & Sub-Main Distribution Boards
+- Power Distribution & Containment Systems
+- Busbar & Busduct Systems
+- Standby Generators & Emergency Power Systems
+- Uninterruptible Power Supply (UPS) Systems
+- Automatic Transfer Switch (ATS) Systems
+- Lighting & Lighting-Control Systems
+- Emergency & Specialist Lighting Systems
+- Earthing, Grounding & Lightning Protection Systems
+- Power-Factor Correction & Harmonic-Filtration Systems
+- Energy Metering, Monitoring & Management Systems
+- Building Management Systems (BMS)
+- Structured Cabling and ICT Infrastructure
+- CCTV and Video-Surveillance Systems
+- Access-Control & Intrusion-Detection Systems
+- Public Address & Voice-Alarm Systems (PAVA)
+- Voice-Evacuation Systems
+- Audio-Visual (AV) Systems
+- Intercom & Master-Clock Systems
+- Instrumentation & Control Systems
+- Testing, Commissioning & System Integration
+
+## Related Sectors
+
+- Residential / Commercial
+- Hospitality
+- Landmark Entertainment
+- Advanced Technical Facilities
+
+---
+
+## Relevant Projects
+
+- [Casa Cavalli](https://menascogroup.com/projects/casa-cavalli/llms.txt): Dubai Marina, UAE
+- [DAMAC Bay](https://menascogroup.com/projects/damac-bay/llms.txt): Dubai Marina, UAE
+- [VELA by Omniyat](https://menascogroup.com/projects/vela-by-omniyat/llms.txt): Dubai, UAE
+- [Vanguard](https://menascogroup.com/projects/vanguard/llms.txt): Dubai, UAE
+- [Bloom Residences](https://menascogroup.com/projects/bloom-residences/llms.txt): Dubai Marina, UAE
+- [PCFC Headquarters Building](https://menascogroup.com/projects/pcfc-headquarters-building/llms.txt): Dubai Marina, UAE
+- [Sparkle Tower](https://menascogroup.com/projects/sparkle-tower/llms.txt): Dubai Marina, UAE
+- [Vida Hotel](https://menascogroup.com/projects/vida-hotel/llms.txt): Sharjah, UAE
+
+---
+
+## Related Pages
+
+- [All Services](https://menascogroup.com/services/llms.txt)

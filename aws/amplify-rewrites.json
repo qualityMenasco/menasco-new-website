@@ -1,0 +1,14 @@
+[
+  {
+    "_comment": "API proxy — MUST be the first rule (Amplify evaluates in order, first match wins). Routes /api/newsroom/* transparently to the deployed API Gateway HTTP API, so the browser/admin UI keep calling relative /api/newsroom/... exactly as they do today — no frontend URL/CORS changes needed. Replace <api-id> with the real API Gateway HTTP API id once it's deployed (see aws/template.yaml's Outputs.ApiEndpoint).",
+    "source": "/api/newsroom/<*>",
+    "target": "https://<api-id>.execute-api.ap-south-1.amazonaws.com/api/newsroom/<*>",
+    "status": "200"
+  },
+  {
+    "_comment": "Amplify's own standard Single Page App rewrite (this is Amplify's documented default preset, not a custom regex invented for this project). Applies ONLY when no real file exists at the requested path — Amplify, like Vercel, serves an exact filesystem match first (this is what lets the prerendered dist/newsroom/<slug>/index.html shells keep working: a request for /newsroom/<slug> resolves to that real file before this rule is ever evaluated). Only truly unknown paths fall through to index.html for client-side React Router to handle.",
+    "source": "</^[^.]+$|\\.(?!(css|gif|ico|jpg|jpeg|js|json|png|txt|svg|woff|woff2|ttf|map|webp|avif|xml)$)([^.]+$)/>",
+    "target": "/index.html",
+    "status": "200"
+  }
+]

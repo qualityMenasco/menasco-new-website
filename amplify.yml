@@ -1,0 +1,36 @@
+# Phase 6A — proposed AWS Amplify Hosting build spec. NOT provisioned —
+# this file has no effect until an Amplify app is actually created and
+# configured to read it (Console: App settings -> Build settings), which
+# this phase deliberately does not do.
+#
+# Derived directly from package.json, not assumed: `npm run build` already
+# runs `prebuild` (generate:llms) and `postbuild` (generate-seo-html.ts) as
+# npm lifecycle hooks automatically — nothing extra needs to be listed
+# here. Artifact directory is `dist`, confirmed by vite.config.ts's default
+# and by every prior phase's real local `npm run build` output.
+#
+# NEWSROOM_PUBLIC_API_BASE_URL is the one new environment variable this
+# migration adds for the build phase — a non-secret HTTPS URL (the
+# deployed API Gateway endpoint, or the same relative /api/newsroom path
+# once the Amplify rewrite in front of it is live), set as a plain
+# Amplify build-environment variable, never a secret. With it set,
+# `scripts/newsroom-public-data.ts` fetches published articles over HTTPS
+# and needs NO DB_HOST/DB_USER/DB_PASSWORD/DB_NAME at build time at all —
+# verified for real in this phase's `aws-build-time-fetch-test.ts`.
+
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*

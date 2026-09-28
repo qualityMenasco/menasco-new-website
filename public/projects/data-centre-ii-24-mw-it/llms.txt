@@ -1,0 +1,37 @@
+# Data Centre II
+
+> Turnkey solution for a 24MW modular data center, including design, build & operational handover (RFS).
+
+## Project Overview
+
+- Category: Advanced Technical Facilities
+- Location: Abu Dhabi, UAE
+- Capacity: 24 MW IT
+
+---
+
+## Related Services
+
+- [Mechanical](https://menascogroup.com/services/mechanical/llms.txt)
+- [Electrical](https://menascogroup.com/services/electrical/llms.txt)
+- [Plumbing](https://menascogroup.com/services/plumbing/llms.txt)
+- [Fire Protection](https://menascogroup.com/services/fire-protection/llms.txt)
+- [BIM & Digital Engineering](https://menascogroup.com/services/bim-digital-engineering/llms.txt)
+- [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt)
+
+---
+
+## Related Projects
+
+- [Data Centre I](https://menascogroup.com/projects/data-centre-i-12-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre III](https://menascogroup.com/projects/data-centre-iii-2-4-mw-it/llms.txt): Dubai, UAE
+- [Data Centre IV](https://menascogroup.com/projects/data-centre-iv-6-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre V](https://menascogroup.com/projects/data-centre-v-800-kw-it/llms.txt): Dubai, UAE
+- [Data Centre VI](https://menascogroup.com/projects/data-centre-vi-12-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre VII](https://menascogroup.com/projects/data-centre-vii/llms.txt): Abu Dhabi, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

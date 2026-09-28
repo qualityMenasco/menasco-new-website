@@ -1,0 +1,44 @@
+# MENASCO Projects
+
+> Some of our feature projects. Select a category or location to bring it to the top of the portfolio.
+
+## Sectors
+
+- Residential / Commercial (13): Integrated engineering solutions for residential, commercial, office, and mixed-use developments.
+- Hospitality (2): High-performance MEP delivery for premium hospitality, resort, and hotel environments.
+- Landmark Entertainment (1): Complex engineering for destination, entertainment, cultural, and landmark developments.
+- Advanced Technical Facilities (7): Specialist engineering for data centres, mission-critical, healthcare, energy, and technically demanding facilities.
+
+---
+
+## All Projects
+
+- [Casa Cavalli](https://menascogroup.com/projects/casa-cavalli/llms.txt): Dubai Marina, UAE
+- [DAMAC Bay](https://menascogroup.com/projects/damac-bay/llms.txt): Dubai Marina, UAE
+- [VELA by Omniyat](https://menascogroup.com/projects/vela-by-omniyat/llms.txt): Dubai, UAE
+- [Vanguard](https://menascogroup.com/projects/vanguard/llms.txt): Dubai, UAE
+- [Bloom Residences](https://menascogroup.com/projects/bloom-residences/llms.txt): Dubai Marina, UAE
+- [PCFC Headquarters Building](https://menascogroup.com/projects/pcfc-headquarters-building/llms.txt): Dubai Marina, UAE
+- [Sparkle Tower](https://menascogroup.com/projects/sparkle-tower/llms.txt): Dubai Marina, UAE
+- [Vida Hotel](https://menascogroup.com/projects/vida-hotel/llms.txt): Sharjah, UAE
+- [DMCC Uptown Dubai T3–T4](https://menascogroup.com/projects/dmcc-uptown-dubai-t3-t4/llms.txt): Dubai, UAE
+- [Madinat Jumeirah Living Phase 3B](https://menascogroup.com/projects/madinat-jumeirah-living-phase-3b/llms.txt): Dubai, UAE
+- [Volante II Tower](https://menascogroup.com/projects/volante-ii-tower/llms.txt): Business Bay, Dubai, UAE
+- [ORLA Infinity Residential Development](https://menascogroup.com/projects/orla-infinity-residential-development/llms.txt): Palm Jumeirah, Dubai, UAE
+- [Seven Hotel](https://menascogroup.com/projects/seven-hotel/llms.txt): Palm Jumeirah, UAE
+- [Town Square Development](https://menascogroup.com/projects/town-square-development/llms.txt): Dubai, UAE
+- [Qiddiya](https://menascogroup.com/projects/qiddiya/llms.txt): Qiddiya City, Saudi Arabia
+- [Alamein Towers](https://menascogroup.com/projects/alamein-towers/llms.txt): New Alamein, Alamein Towers, Egypt
+- [Data Centre I](https://menascogroup.com/projects/data-centre-i-12-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre II](https://menascogroup.com/projects/data-centre-ii-24-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre III](https://menascogroup.com/projects/data-centre-iii-2-4-mw-it/llms.txt): Dubai, UAE
+- [Data Centre IV](https://menascogroup.com/projects/data-centre-iv-6-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre V](https://menascogroup.com/projects/data-centre-v-800-kw-it/llms.txt): Dubai, UAE
+- [Data Centre VI](https://menascogroup.com/projects/data-centre-vi-12-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre VII](https://menascogroup.com/projects/data-centre-vii/llms.txt): Abu Dhabi, UAE
+
+---
+
+## Related Pages
+
+- [All Services](https://menascogroup.com/services/llms.txt)

@@ -1,0 +1,40 @@
+# BIM & Digital Engineering
+
+> Federated coordination and clash detection that de-risk delivery before site works begin.
+
+## Overview
+
+MENASCO uses BIM-driven coordination to resolve multidisciplinary clashes, validate constructability, and keep delivery data-driven from design through handover.
+
+## Capabilities
+
+- BIM-driven coordination
+- Digital engineering
+- Clash detection
+- Constructability review
+- Multidisciplinary coordination
+- Data-driven project delivery
+
+## Related Sectors
+
+- Landmark Entertainment
+- Advanced Technical Facilities
+
+---
+
+## Relevant Projects
+
+- [Qiddiya](https://menascogroup.com/projects/qiddiya/llms.txt): Qiddiya City, Saudi Arabia
+- [Data Centre I](https://menascogroup.com/projects/data-centre-i-12-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre II](https://menascogroup.com/projects/data-centre-ii-24-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre III](https://menascogroup.com/projects/data-centre-iii-2-4-mw-it/llms.txt): Dubai, UAE
+- [Data Centre IV](https://menascogroup.com/projects/data-centre-iv-6-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre V](https://menascogroup.com/projects/data-centre-v-800-kw-it/llms.txt): Dubai, UAE
+- [Data Centre VI](https://menascogroup.com/projects/data-centre-vi-12-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre VII](https://menascogroup.com/projects/data-centre-vii/llms.txt): Abu Dhabi, UAE
+
+---
+
+## Related Pages
+
+- [All Services](https://menascogroup.com/services/llms.txt)

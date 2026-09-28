@@ -1,0 +1,100 @@
+{
+  "hero": {
+    "eyebrow": "Get in Contact",
+    "title": "Connect with MENASCO",
+    "description": "Whether you're looking to discuss a project, explore a career opportunity, or make a general enquiry, connect with the appropriate MENASCO team."
+  },
+  "selectOffice": "Regional Locations",
+  "getDirections": "Get Directions",
+  "requiredNote": "Fields marked * are required.",
+  "selectTypePrompt": "Please select an enquiry type above to enable the form.",
+  "tabs": {
+    "general": "General",
+    "career": "Career",
+    "project": "Project",
+    "descriptions": {
+      "general": "General enquiries",
+      "career": "Join our team",
+      "project": "Discuss a project"
+    }
+  },
+  "sections": {
+    "personalDetails": "Personal Details",
+    "contactDetails": "Contact Details",
+    "companyDetails": "Company Details",
+    "careerDetails": "Career Details",
+    "projectDetails": "Project Details",
+    "enquiry": "Enquiry"
+  },
+  "fields": {
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "country": "Country / Region",
+    "company": "Company / Organization",
+    "jobTitle": "Job Title / Position",
+    "subject": "Subject",
+    "message": "Message / Enquiry",
+    "jobCode": "Job Code",
+    "jobCodeHelper": "Enter the job code shown on the MENASCO Careers page.",
+    "cv": "CV / Résumé",
+    "cvHelper": "Accepted formats: PDF, DOC, DOCX. Maximum size 10 MB.",
+    "cvChoose": "Choose File",
+    "cvNone": "No file selected",
+    "cvBackendNote": "Files are validated here but not yet transmitted, while backend upload support is being connected.",
+    "cvRemove": "Remove",
+    "companyName": "Company Name",
+    "projectName": "Project Name",
+    "projectLocation": "Project Location",
+    "currency": "Currency",
+    "projectValue": "Expected Project Value",
+    "projectValueHelper": "Optional, leave blank if not yet confirmed.",
+    "projectType": "Project Type",
+    "projectTypePlaceholder": "Select project type",
+    "projectDescription": "Project Description / Scope",
+    "projectDescriptionHelper": "Briefly describe the development type, project stage, MENASCO involvement required, and expected timeline.",
+    "optional": "(optional)"
+  },
+  "validation": {
+    "fullName": "Please enter your full name.",
+    "email": "Please enter your email address.",
+    "emailInvalid": "Please enter a valid email address.",
+    "phone": "Please enter a valid phone number.",
+    "subject": "Please enter a subject.",
+    "message": "Please add a short message.",
+    "jobCode": "Please enter the job code from the Careers page.",
+    "cv": "Please attach your CV / résumé.",
+    "cvType": "Please upload a PDF, DOC, or DOCX file.",
+    "cvSize": "File is too large. Maximum size is 10 MB.",
+    "companyName": "Please enter your company name.",
+    "projectType": "Please select a project type.",
+    "projectDescription": "Please describe your project."
+  },
+  "submit": {
+    "general": "Send Enquiry",
+    "career": "Submit Career Enquiry",
+    "project": "Submit Project Enquiry",
+    "sending": "Sending…"
+  },
+  "submitError": "Something went wrong sending your enquiry. Please try again, or reach us directly via the office details below.",
+  "success": {
+    "general": {
+      "title": "Thank You",
+      "description": "Your enquiry has been received by MENASCO. The appropriate team will review your submission and contact you where required."
+    },
+    "career": {
+      "title": "Thank You",
+      "description": "Your career enquiry has been received."
+    },
+    "project": {
+      "title": "Thank You",
+      "description": "Your project enquiry has been received."
+    },
+    "sendAnother": "Send Another Enquiry",
+    "backToHome": "Back to Home"
+  },
+  "seo": {
+    "title": "Contact MENASCO | UAE & Regional Offices",
+    "description": "Get in touch with MENASCO for general enquiries, career opportunities, or project discussions, or select your regional office to reach the right team directly."
+  }
+}

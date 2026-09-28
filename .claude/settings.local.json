@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:menascouae.com)",
+      "Bash(mkdir -p public/assets/projects/vela/frames)",
+      "Bash(unzip -o -q \"/Users/omarelhajjchehade/Downloads/ezgif-517979d920138652-jpg.zip\" -d extracted)",
+      "Bash(sips -g pixelWidth -g pixelHeight extracted/ezgif-frame-001.jpg)",
+      "Bash(sips -g pixelWidth -g pixelHeight extracted/ezgif-frame-120.jpg)",
+      "Bash(npx playwright *)",
+      "Bash(node verify-vela.mjs)",
+      "Bash(node -e ' *)",
+      "Bash(node verify-vela-frames.mjs)",
+      "Bash(node verify-vela-responsive.mjs)",
+      "Bash(rm -rf dist *.tsbuildinfo)",
+      "Bash(pkill -f \"vite\")",
+      "Bash(cd /Users/omarelhajjchehade/Desktop/Menasco-Website *)",
+      "Bash(node verify-homepage-header-gap.mjs)"
+    ],
+    "additionalDirectories": [
+      "/Users/omarelhajjchehade/Desktop/Menasco-Website"
+    ]
+  }
+}

@@ -1,0 +1,476 @@
+import { placeholderImages } from './images';
+
+export interface NewsArticleSection {
+  heading: string;
+  paragraphs: string[];
+}
+
+/**
+ * A single topic/keyword associated with an article. Kept as a structured
+ * object (never a comma-separated string) since these are individually
+ * addressable — each links to /newsroom?tag=<slug> and, once a real backend
+ * exists, this shape is designed to map directly onto a `tags` table joined
+ * through `article_tags`, with `name`/`slug` arriving already resolved per
+ * article exactly as here. `slug` is the stable identifier; `name` is only
+ * the English display label — see `newsroom:tags.<slug>` in the locale
+ * files for the translated label shown in Arabic.
+ */
+export interface ArticleTag {
+  name: string;
+  slug: string;
+}
+
+/**
+ * A single article image. Order within `NewsArticle.images` is meaningful —
+ * `images[0]` is always the primary image (used for Newsroom cards, the
+ * featured carousel, SEO ogImage, and articleJsonLd) and the full array
+ * drives the article page's own gallery. This is designed to map directly
+ * onto a future API response where `images[]` arrives already ordered by
+ * the backend (or, later, an employee's own upload order) — the frontend
+ * never reorders it. `alt` is required, not optional: every image on the
+ * article page is content, not decoration, so it needs real alt text (see
+ * `newsroom:items.<slug>.images` in the locale files for the Arabic
+ * equivalent, following the same overlay pattern as every other field).
+ */
+export interface ArticleImage {
+  src: string;
+  alt: string;
+}
+
+export interface NewsArticle {
+  id: string;
+  slug: string;
+  title: string;
+  /** Short dek/excerpt shown on cards, archive rows, and as the article page's subheading. */
+  subtitle: string;
+  /**
+   * Free-form category slug (e.g. 'company-news', 'project-news', 'insights')
+   * rather than a closed union, so new categories can be added purely as
+   * data — see `newsCategoryKeys` in NewsroomPage.tsx for the label mapping.
+   */
+  category: string;
+  /** ISO date (yyyy-mm-dd). */
+  date: string;
+  /** At least one entry required — images[0] is the primary image. See ArticleImage above. */
+  images: ArticleImage[];
+  /** Up to 3 articles should be marked true — surfaced in the Featured section. */
+  featured: boolean;
+  /** Opening paragraph(s), rendered directly beneath the article's title/subtitle. */
+  body: string[];
+  /** Main editorial sections, each with its own H3 heading and 2–3 paragraphs. */
+  sections: NewsArticleSection[];
+  /** Optional in-column editorial pull quote, rendered between sections. Not attributed to any named individual. */
+  pullQuote?: string;
+  /** Optional second image, used as a visual break partway through the article body. */
+  secondaryImage?: string;
+  /** Closing paragraph(s). */
+  closing: string[];
+  /** Topics this article relates to — see ArticleTag above. */
+  tags: ArticleTag[];
+}
+
+/** Reused verbatim across articles so the same topic always carries the same slug/name pair. */
+const TAG = {
+  dataCenters: { name: 'Data Centers', slug: 'data-centers' },
+  missionCritical: { name: 'Mission Critical', slug: 'mission-critical' },
+  mep: { name: 'MEP', slug: 'mep' },
+  uae: { name: 'UAE', slug: 'uae' },
+  saudiArabia: { name: 'Saudi Arabia', slug: 'saudi-arabia' },
+  egypt: { name: 'Egypt', slug: 'egypt' },
+  unitedKingdom: { name: 'United Kingdom', slug: 'united-kingdom' },
+  digitalEngineering: { name: 'Digital Engineering', slug: 'digital-engineering' },
+  bim: { name: 'BIM', slug: 'bim' },
+  innovation: { name: 'Innovation', slug: 'innovation' },
+  quality: { name: 'Quality', slug: 'quality' },
+  healthSafety: { name: 'Health & Safety', slug: 'health-safety' },
+  prefabrication: { name: 'Prefabrication', slug: 'prefabrication' },
+  manufacturing: { name: 'Manufacturing', slug: 'manufacturing' },
+  commissioning: { name: 'Commissioning', slug: 'commissioning' },
+  sustainability: { name: 'Sustainability', slug: 'sustainability' },
+  energyEfficiency: { name: 'Energy Efficiency', slug: 'energy-efficiency' },
+  vision2030: { name: 'Vision 2030', slug: 'vision-2030' },
+} as const satisfies Record<string, ArticleTag>;
+
+/**
+ * MOCK NEWSROOM CONTENT — REPLACE BEFORE PRODUCTION.
+ *
+ * No real Newsroom content has been published yet. These are realistic,
+ * clearly-fictional MENASCO-style stories (no invented client names,
+ * contract values, completion dates, headcounts, awards, or certifications
+ * beyond what's verified elsewhere in this repository) written to exercise
+ * the full article template — hero, sections, pull quotes, related stories —
+ * until real articles replace them one-for-one by the same slug. Every field
+ * here has an EN/AR pair; see public/locales/{en,ar}/newsroom.json's
+ * `items.<slug>` overlay for the translated equivalent of everything below.
+ */
+export const newsArticles: NewsArticle[] = [
+  {
+    id: 'advanced-technical-facilities-portfolio',
+    slug: 'menasco-expands-advanced-technical-facilities-portfolio',
+    title: 'MENASCO Expands Advanced Technical Facilities Portfolio',
+    subtitle: 'Continued investment in mission-critical and data centre engineering capability across the region.',
+    category: 'company-news',
+    date: '2026-08-10',
+    images: [{ src: placeholderImages.controlRoom, alt: 'Engineer working at a data centre control room' }],
+    featured: true,
+    body: [
+      'MENASCO continues to grow its Advanced Technical Facilities capability, adding engineering resources dedicated to mission-critical and data centre projects across the UAE and the wider region.',
+      'The expansion reflects sustained regional demand for hyperscale and enterprise data infrastructure, where MEP delivery must meet uptime, resilience, and commissioning standards well beyond conventional commercial buildings.',
+      "MENASCO's Advanced Technical Facilities team works across design coordination, prefabrication, and commissioning, supporting clients from early planning through operational handover.",
+    ],
+    sections: [
+      {
+        heading: 'Meeting the Demands of Mission-Critical Environments',
+        paragraphs: [
+          'Data centres and other mission-critical facilities operate under a different standard than typical commercial developments. Cooling systems must hold tight temperature and humidity tolerances around the clock, power distribution has to remain resilient through planned maintenance and unplanned faults alike, and every system needs to be documented and tested to a level that supports formal commissioning sign-off.',
+          'For an MEP contractor, that shifts emphasis earlier in the programme. Coordination between mechanical, electrical, and controls disciplines has to happen well before equipment reaches site, and commissioning sequences need to be planned in parallel with design rather than treated as a final-stage activity once installation is complete.',
+        ],
+      },
+      {
+        heading: 'Building Capacity Ahead of Demand',
+        paragraphs: [
+          "Meeting that standard depends on having engineers who understand it. MENASCO's growth in this space draws on the same core mechanical, electrical, plumbing, and fire protection disciplines the company has built its regional practice on, applied to the tighter tolerances and heavier documentation load that mission-critical work requires.",
+          'In practice, that means structured coordination between design and site teams during the handover between project phases, and a delivery process that treats commissioning as a defined stage with its own planning and resourcing, rather than an afterthought once the last cable tray is in place.',
+        ],
+      },
+      {
+        heading: 'A Coordinated Approach Across the Region',
+        paragraphs: [
+          "MENASCO's operations span the UAE, Saudi Arabia (MENASCO KSA), Egypt (MENASCO Misr), and the United Kingdom, and that regional structure shapes how the company approaches Advanced Technical Facilities work. The same quality management framework, certified to ISO 9001:2015, applies across every market MENASCO operates in. That consistency matters when a client's mission-critical requirements need to be met the same way regardless of location.",
+          "It also means that lessons learned on one project can inform the next, rather than staying isolated within a single site team's experience.",
+        ],
+      },
+    ],
+    secondaryImage: placeholderImages.engineerAtWork,
+    closing: [
+      'As demand for hyperscale and enterprise data infrastructure continues across the region, Advanced Technical Facilities is expected to remain a growing part of MENASCO\'s project portfolio, supported by the same engineering disciplines and quality standards that underpin its wider MEP practice.',
+    ],
+    tags: [TAG.dataCenters, TAG.missionCritical, TAG.mep, TAG.uae],
+  },
+  {
+    id: 'saudi-project-milestone',
+    slug: 'major-project-milestone-reached-in-saudi-arabia',
+    title: 'Major Project Milestone Reached in Saudi Arabia',
+    subtitle: 'MENASCO continues delivery across technically demanding regional projects.',
+    category: 'project-news',
+    date: '2026-08-02',
+    images: [{ src: placeholderImages.constructionSite, alt: 'Construction site with structural reinforcement work underway' }],
+    featured: true,
+    body: [
+      "Teams on MENASCO's active Saudi Arabia projects have reached a significant construction milestone, marking continued progress across the company's regional delivery programme.",
+      "The milestone reflects the coordinated effort of MENASCO's engineering, procurement, and site teams working alongside project partners to maintain schedule and quality standards on technically demanding developments.",
+      "MENASCO's presence in Saudi Arabia continues to grow through MENASCO KSA, supporting the Kingdom's Vision 2030 development pipeline with integrated MEP engineering.",
+    ],
+    sections: [
+      {
+        heading: 'Engineering Scope',
+        paragraphs: [
+          "Large-scale regional developments typically call for the full range of MEP disciplines working in parallel: mechanical systems for climate control and ventilation, electrical and ELV infrastructure, plumbing, water and drainage networks, and fire protection and life safety systems, all installed against a single coordinated programme.",
+          'Reaching a construction milestone on a project like this depends less on any single trade finishing its scope and more on how well those disciplines are sequenced against each other: routing, access, and installation order all have to be agreed well in advance to avoid rework once systems are in place.',
+        ],
+      },
+      {
+        heading: 'Coordination & Delivery',
+        paragraphs: [
+          "Keeping a technically demanding programme on schedule depends on close coordination between design, procurement, and the site team. Long-lead equipment has to be ordered against a programme that may still be evolving, and design changes need to be resolved before they reach installation rather than after.",
+          "Digital coordination tools play a growing role here: federated models let mechanical, electrical, and structural disciplines check for clashes before fabrication, which reduces the number of issues that would otherwise only surface once trades are working on site.",
+        ],
+      },
+      {
+        heading: 'Project Outlook',
+        paragraphs: [
+          "MENASCO's presence in Saudi Arabia continues to grow through MENASCO KSA, supporting the Kingdom's Vision 2030 development pipeline with integrated MEP engineering across a range of project types.",
+          'The teams involved will continue working toward the next phase of the programme, applying the same coordination approach that carried the project to this point.',
+        ],
+      },
+    ],
+    pullQuote: 'Progress on complex regional projects comes from consistent coordination between design, procurement, and site execution, not from any single milestone.',
+    closing: [
+      "Further updates on MENASCO's Saudi Arabia projects will follow as the programme advances.",
+    ],
+    tags: [TAG.saudiArabia, TAG.mep, TAG.digitalEngineering, TAG.vision2030],
+  },
+  {
+    id: 'digital-engineering-mep-delivery',
+    slug: 'how-digital-engineering-is-transforming-mep-delivery',
+    title: 'How Digital Engineering Is Transforming MEP Delivery',
+    subtitle: 'BIM-driven coordination and data-informed workflows are reshaping how MEP projects are designed and delivered.',
+    category: 'insights',
+    date: '2026-07-24',
+    images: [{ src: placeholderImages.blueprintReview, alt: 'Engineers reviewing digital coordination drawings on screen' }],
+    featured: true,
+    body: [
+      'Digital engineering is changing how MEP contractors plan, coordinate, and deliver complex projects. Federated BIM models now let mechanical, electrical, plumbing, and structural disciplines resolve conflicts on screen long before fabrication begins.',
+      'For MENASCO, this shift means fewer on-site clashes, more predictable installation sequencing, and a clearer data trail from design through to as-built handover.',
+      'As digital workflows mature, the industry is moving toward data-driven delivery, where model information carries through procurement, prefabrication, and commissioning rather than living in disconnected drawings and spreadsheets.',
+    ],
+    sections: [
+      {
+        heading: 'From Drawings to Federated Models',
+        paragraphs: [
+          'For much of its history, MEP coordination happened on paper: overlaying drawings from different disciplines by hand, or in two-dimensional CAD, and relying on experienced engineers to spot conflicts before they became site problems. It worked, but it depended heavily on individual judgment and caught issues late.',
+          "Federated BIM models change that by combining every discipline's design into a single, navigable 3D environment. Mechanical ductwork, electrical containment, plumbing risers, and structural elements can all be checked against each other automatically, surfacing clashes while they still cost nothing more than a model update to fix.",
+        ],
+      },
+      {
+        heading: 'Data That Follows the Project',
+        paragraphs: [
+          "A model is only as useful as the information that stays attached to it. When design data carries through into procurement, prefabrication, and commissioning, rather than being redrawn or re-entered at each stage, the risk of something getting lost in translation between phases drops significantly.",
+          "That continuity is also what makes structured, model-based coordination possible at scale: teams can trust that what's shown in the model reflects what will actually be built, rather than treating it as a reference document that quietly falls out of date.",
+        ],
+      },
+      {
+        heading: 'What This Means for Project Teams',
+        paragraphs: [
+          'On the ground, the biggest difference is fewer surprises. When clashes are resolved on screen instead of on site, crews spend less time waiting on rework and more time installing against a sequence that has already been checked. That predictability compounds across a large project, where even small recurring delays add up.',
+          'It also changes what a clear handover looks like. Instead of a stack of as-built drawings assembled at the end of a project, a well-maintained federated model can carry accurate system information all the way through to facility operation.',
+        ],
+      },
+    ],
+    secondaryImage: placeholderImages.architecture,
+    closing: [
+      'Digital engineering does not replace the judgment of experienced MEP engineers. It gives them better information earlier, so that judgment gets applied before problems reach site rather than after.',
+    ],
+    tags: [TAG.digitalEngineering, TAG.bim, TAG.mep, TAG.innovation],
+  },
+  {
+    id: 'company-update-august',
+    slug: 'menasco-company-update',
+    title: 'MENASCO Company Update',
+    subtitle: 'The latest developments, milestones, and announcements from across MENASCO.',
+    category: 'company-news',
+    date: '2026-07-18',
+    images: [{ src: placeholderImages.towerFacade, alt: 'Facade of a modern high-rise tower' }],
+    featured: false,
+    body: [
+      'MENASCO continues to strengthen its regional operations, with ongoing investment in engineering talent, digital tools, and manufacturing capability across its UAE, Saudi Arabia, Egypt, and United Kingdom operations.',
+      "This update reflects the company's continued focus on engineering excellence and operational reliability across its active project portfolio.",
+    ],
+    sections: [
+      {
+        heading: 'Investing in Engineering Talent',
+        paragraphs: [
+          "MENASCO's engineering capability is built on its people, and continued investment in that team remains a consistent theme across the company's regional operations. That includes structured coordination between design, procurement, and site delivery teams, so that engineering judgment developed on one project carries forward to the next.",
+          "It also means maintaining a consistent standard of practice across every market MENASCO operates in (the UAE, Saudi Arabia, Egypt, and the United Kingdom) under the same quality management framework the company applies company-wide.",
+        ],
+      },
+      {
+        heading: 'Strengthening Digital Tools and Ways of Working',
+        paragraphs: [
+          "Digital tools continue to play a growing role in how MENASCO coordinates its projects. Internally developed platforms such as ATLAS, MENASCO's AI-powered compliance system, help evaluate engineering designs against applicable codes and standards earlier in the process, improving readiness for review before submission.",
+          'Alongside design-stage tools, site-facing platforms such as LYNXqc support construction reporting and quality management for project teams and stakeholders working across active sites. Together, these tools are part of a broader shift toward coordinating projects with better information at every stage, from design through to site delivery.',
+        ],
+      },
+      {
+        heading: 'Operational Reliability Across the Portfolio',
+        paragraphs: [
+          "None of this matters without consistent delivery on the projects already underway. MENASCO's regional structure (supported by MENASCO KSA and MENASCO Misr alongside its UAE and UK operations) is built to apply the same engineering standards and coordination approach regardless of where a project sits.",
+        ],
+      },
+    ],
+    pullQuote: 'Reliable delivery is less about any single project and more about applying the same standard, consistently, across every one of them.',
+    closing: [
+      "MENASCO will continue to share updates on its engineering capability, digital tools, and regional operations as they develop.",
+    ],
+    tags: [TAG.innovation, TAG.digitalEngineering, TAG.quality, TAG.uae, TAG.saudiArabia],
+  },
+  {
+    id: 'prefabrication-facility-update',
+    slug: 'off-site-manufacturing-capacity-update',
+    title: 'Off-Site Manufacturing Capacity Update',
+    subtitle: "MENASCO's manufacturing and prefabrication capability continues to support faster, higher-quality installation.",
+    category: 'company-news',
+    date: '2026-07-05',
+    images: [{ src: placeholderImages.factoryFloor, alt: 'Off-site manufacturing floor with fabrication equipment' }],
+    featured: false,
+    body: [
+      "MENASCO's manufacturing and prefabrication operations continue to support project teams with factory-built ductwork, piping assemblies, and modular MEP components.",
+      'Manufacturing components off-site in a controlled environment reduces on-site congestion and installation time while improving consistency across large-scale projects.',
+    ],
+    sections: [
+      {
+        heading: 'Why Off-Site Manufacturing Matters',
+        paragraphs: [
+          "Building MEP components in a factory rather than on site changes the conditions they're made under. A controlled environment means consistent tooling, consistent quality checks, and none of the weather, access, or sequencing constraints that come with working on an active construction site.",
+          'That consistency shows up directly in installation. Ductwork, piping assemblies, and modular components arrive at site already built and tested, ready to be positioned and connected rather than fabricated in place, which reduces the amount of on-site labour, waste, and rework a project depends on.',
+        ],
+      },
+      {
+        heading: 'Supporting Faster, More Predictable Installation',
+        paragraphs: [
+          'Prefabrication also changes how a site programme can be sequenced. Because components are manufactured in parallel with other site works rather than after them, project teams can compress the overall installation window without compressing the amount of coordination and quality checking that goes into each component.',
+          'That matters most on large-scale projects, where even small reductions in on-site congestion and installation time add up across dozens of risers, plant rooms, and service corridors.',
+        ],
+      },
+    ],
+    secondaryImage: placeholderImages.fabrication,
+    closing: [
+      "MENASCO's manufacturing and prefabrication capability continues to develop alongside its site delivery teams, supporting the same standard of quality from factory floor through to final installation.",
+    ],
+    tags: [TAG.prefabrication, TAG.manufacturing, TAG.mep, TAG.quality],
+  },
+  {
+    id: 'data-centre-commissioning',
+    slug: 'hyperscale-data-centre-commissioning-progress',
+    title: 'Hyperscale Data Centre Commissioning Progress',
+    subtitle: "MENASCO's Advanced Technical Facilities team advances commissioning on active data centre projects.",
+    category: 'project-news',
+    date: '2026-06-22',
+    images: [{ src: placeholderImages.controlRoom, alt: 'Technician monitoring systems in a data centre control room' }],
+    featured: false,
+    body: [
+      "MENASCO's Advanced Technical Facilities team continues to progress commissioning activities across its active data centre projects in the UAE, supporting clients toward operational readiness.",
+      'Commissioning on mission-critical facilities requires close coordination between mechanical, electrical, and controls disciplines to validate system performance against demanding uptime requirements.',
+    ],
+    sections: [
+      {
+        heading: 'What Commissioning Involves',
+        paragraphs: [
+          'Commissioning a hyperscale data centre is not a single event but a structured sequence of tests, each building on the last: component-level checks, then integrated systems testing, then full-load validation under conditions that simulate real operating demand as closely as possible before a facility goes live.',
+          'Every stage has to be documented to a standard that satisfies both the client and, in many cases, independent certification bodies, which means commissioning teams are producing a detailed evidence trail alongside the technical testing itself.',
+        ],
+      },
+      {
+        heading: 'Coordination & Delivery',
+        paragraphs: [
+          'Mechanical, electrical, and controls disciplines all have to work from the same test sequence, since a single system rarely fails in isolation on a mission-critical facility: a cooling issue can just as easily point back to a controls fault or a power quality issue upstream.',
+          "MENASCO's Advanced Technical Facilities team coordinates that sequencing directly with client and consultant teams, so that issues identified during testing are resolved and re-tested within the same structured process rather than treated as separate one-off fixes.",
+        ],
+      },
+      {
+        heading: 'Current Focus',
+        paragraphs: [
+          "Commissioning activity on these projects continues in parallel with final installation works, with the team's focus on validating system performance against the demanding uptime and resilience requirements that distinguish mission-critical facilities from conventional commercial developments.",
+        ],
+      },
+    ],
+    pullQuote: 'On a mission-critical facility, commissioning is not the last step before handover. It is the process that proves everything before it was done correctly.',
+    secondaryImage: placeholderImages.industrialPipes,
+    closing: [
+      "Further updates will follow as commissioning progresses toward operational readiness on these projects.",
+    ],
+    tags: [TAG.dataCenters, TAG.missionCritical, TAG.commissioning, TAG.uae],
+  },
+  {
+    id: 'bim-coordination-workflow',
+    slug: 'bim-driven-coordination-across-active-projects',
+    title: 'BIM-Driven Coordination Across Active Projects',
+    subtitle: "Federated modelling continues to reduce rework and improve constructability across MENASCO's project portfolio.",
+    category: 'insights',
+    date: '2026-06-09',
+    images: [{ src: placeholderImages.blueprintReview, alt: 'Engineers reviewing a coordinated digital model' }],
+    featured: false,
+    body: [
+      "MENASCO's in-house BIM team continues to apply federated, ISO 19650-aligned coordination workflows across active projects, helping resolve multidisciplinary clashes before they reach site.",
+      'This model-based approach supports more predictable installation sequencing and a clearer digital record from design through to facility handover.',
+    ],
+    sections: [
+      {
+        heading: 'A Common Framework Across Projects',
+        paragraphs: [
+          'Working to a common information management standard (ISO 19650) means that BIM workflows do not have to be reinvented on every new project. Model structure, naming conventions, and coordination cycles follow a consistent framework, so teams moving between projects are working from familiar processes rather than learning a new system each time.',
+          "That consistency also makes it easier to compare how a workflow is performing across MENASCO's portfolio, rather than treating each project's coordination process as a one-off exercise.",
+        ],
+      },
+      {
+        heading: 'Where Coordination Adds the Most Value',
+        paragraphs: [
+          'Federated coordination is most valuable at the boundaries between disciplines: where ductwork routes past structural beams, where electrical containment shares a ceiling void with plumbing and fire protection, where plant room layouts have to accommodate every service at once. These are exactly the areas where clashes are most likely, and most expensive to fix once construction has started.',
+          "By resolving these boundaries in a shared model before fabrication, MENASCO's BIM team reduces the volume of on-site rework that would otherwise fall to installation crews to work around in real time.",
+        ],
+      },
+      {
+        heading: 'From Design Through to Handover',
+        paragraphs: [
+          "A federated model doesn't stop being useful once construction starts. Carried through prefabrication, installation, and commissioning, it becomes the clearest available record of what was actually built, which is exactly the information a facility team needs once a project transitions into operation.",
+        ],
+      },
+    ],
+    pullQuote: 'Coordination that happens on screen costs a model update. Coordination that happens on site costs schedule.',
+    closing: [
+      "MENASCO's BIM team continues to refine these workflows across its active project portfolio, applying the same coordination framework from early design through to handover.",
+    ],
+    tags: [TAG.bim, TAG.digitalEngineering, TAG.mep, TAG.innovation],
+  },
+  {
+    id: 'sustainability-engineering-approach',
+    slug: 'engineering-for-long-term-sustainability',
+    title: 'Engineering for Long-Term Sustainability',
+    subtitle: 'How MENASCO approaches energy-efficient, resource-conscious MEP design across its project portfolio.',
+    category: 'insights',
+    date: '2026-05-28',
+    images: [{ src: placeholderImages.glassFacade, alt: 'Glass facade of a modern building' }],
+    featured: false,
+    body: [
+      'Sustainability considerations are increasingly central to MEP engineering decisions, from equipment selection to system layout and controls strategy.',
+      "MENASCO continues to apply energy-efficient design principles across its project portfolio, balancing performance, cost, and long-term operational efficiency for clients.",
+    ],
+    sections: [
+      {
+        heading: 'Where Sustainability Decisions Get Made',
+        paragraphs: [
+          'Long before a building opens, most of its long-term energy performance is already decided: in equipment selection, system layout, and controls strategy. A well-specified mechanical system sized correctly for its actual load will outperform an oversized one running inefficiently for decades, regardless of what happens after handover.',
+          'That makes early-stage MEP design one of the most consequential points in a project for long-term sustainability outcomes, well before finishes or operational policies come into play.',
+        ],
+      },
+      {
+        heading: 'Balancing Performance, Cost, and Operability',
+        paragraphs: [
+          'Energy-efficient design is rarely a single decision. It is a series of trade-offs between upfront cost, ongoing operating expense, and how easy a system is to maintain and operate correctly over its working life. A highly efficient system that is difficult to commission or maintain can underperform its own specification once it is in daily use.',
+          "MENASCO's approach treats these as connected decisions rather than separate boxes to check, applying the same environmental management framework (certified to ISO 14001:2015) across the projects it delivers.",
+        ],
+      },
+      {
+        heading: 'A Portfolio-Wide Discipline',
+        paragraphs: [
+          'Applying these principles consistently across a varied project portfolio (from residential and commercial developments to hospitality, landmark, and mission-critical facilities) means adapting the same underlying discipline to very different building types and operating requirements, rather than applying a single standard template.',
+        ],
+      },
+    ],
+    secondaryImage: placeholderImages.nightSkyline,
+    closing: [
+      'As client expectations around long-term operational efficiency continue to grow, sustainability-conscious MEP design is likely to remain a standard part of how projects are planned, not a separate consideration layered on afterward.',
+    ],
+    tags: [TAG.sustainability, TAG.energyEfficiency, TAG.mep],
+  },
+  {
+    id: 'regional-expansion-update',
+    slug: 'menasco-regional-operations-update',
+    title: 'MENASCO Regional Operations Update',
+    subtitle: "An update on MENASCO's continued presence across the UAE, Saudi Arabia, Egypt, and United Kingdom.",
+    category: 'company-news',
+    date: '2026-05-14',
+    images: [{ src: placeholderImages.dubaiSkylineWide, alt: 'Wide view of the Dubai skyline' }],
+    featured: false,
+    body: [
+      "MENASCO's regional footprint continues to support clients across the Middle East and beyond, with operations spanning the UAE, Saudi Arabia (MENASCO KSA), Egypt (MENASCO Misr), and the United Kingdom.",
+      'This coordinated regional structure allows MENASCO to apply consistent engineering standards and quality control across every market it operates in.',
+    ],
+    sections: [
+      {
+        heading: 'A Structure Built Around Consistency',
+        paragraphs: [
+          "Operating across four markets (the UAE, Saudi Arabia, Egypt, and the United Kingdom) only works if each operation is applying the same engineering standards and quality controls. MENASCO KSA and MENASCO Misr are structured to mirror the same quality management framework, certified to ISO 9001:2015, that governs the company's UAE operations, rather than running as independent practices.",
+          'That shared framework is what lets project teams, coordination processes, and engineering standards move between markets without needing to be rebuilt from scratch in each one.',
+        ],
+      },
+      {
+        heading: 'Supporting Clients Across Markets',
+        paragraphs: [
+          "For clients working across more than one of these markets, a consistent regional structure means the same standard of engineering and coordination, whether a project is based in Dubai, Riyadh, Cairo, or London. That consistency extends to health and safety practice as well, governed under the company's ISO 45001:2018 occupational health and safety management framework.",
+        ],
+      },
+      {
+        heading: 'Looking Ahead',
+        paragraphs: [
+          "MENASCO expects its regional footprint to continue supporting demand across the Middle East and beyond, with each operating market contributing to, and drawing on, the same body of engineering practice and quality standards.",
+        ],
+      },
+    ],
+    secondaryImage: placeholderImages.architecture,
+    closing: [
+      "Further updates on MENASCO's regional operations will follow as they develop.",
+    ],
+    tags: [TAG.uae, TAG.saudiArabia, TAG.egypt, TAG.unitedKingdom, TAG.healthSafety],
+  },
+];

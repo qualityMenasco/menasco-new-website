@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Browsers auto-adjust scrollTop to compensate when content is inserted
+       above the viewport (CSS scroll anchoring), which was fighting the
+       app's own route-change scroll reset (see RootLayout.tsx) right as a
+       route like the Vela project page inserts its large scroll-driven
+       hero — the page kept re-anchoring back toward the previous route's
+       scroll position instead of staying at the top. */
+    overflow-anchor: none;
+  }
+
+  body {
+    @apply bg-warmwhite text-ink font-sans antialiased;
+  }
+
+  [dir='rtl'] body {
+    @apply font-arabic;
+  }
+
+  ::selection {
+    @apply bg-brand-600 text-warmwhite;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.brand.600');
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  /* Hides the scrollbar on horizontal swipe scrollers while keeping them scrollable/swipeable. */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Subtle crossfade for ArticleImageGallery's image swap — a key change on
+     the <img> re-triggers this on every navigation. Respects
+     prefers-reduced-motion via the global override above. */
+  @keyframes gallery-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .animate-gallery-fade {
+    animation: gallery-fade 280ms ease-out;
+  }
+}

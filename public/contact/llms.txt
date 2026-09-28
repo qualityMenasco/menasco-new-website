@@ -1,0 +1,31 @@
+# Contact MENASCO
+
+> MENASCO's regional office locations, contact details, and enquiry form.
+
+## Enquiry Form
+
+The contact page offers a single enquiry form with three types, selected by the visitor:
+
+- General: personal details plus a subject and message.
+- Career: personal details plus a job code and CV upload.
+- Project: personal details, company name, and project details (optional project type and estimated value).
+
+## Offices
+
+Dubai, Head Office (United Arab Emirates) | MMC Building, Al Jaddaf, Dubai, United Arab Emirates | Phone: +971 4 261 1164 | Head Office
+
+Riyadh, MENASCO KSA (Saudi Arabia) | Tahliah St, As Sulimaniyah, Riyadh 12223, Saudi Arabia
+
+Cairo, MENASCO Misr (Egypt) | 78 Al Multaqa Al Arabi Street, Sayed Anbar, Sheraton Airport, Al Nozha District, Cairo Governorate, Egypt | Phone: +20 127 002 0272
+
+London Office (United Kingdom) | 16 Upper Woburn Place, London WC1H 0BS, United Kingdom | Phone: +44 20 7396 1000
+
+## General Contact
+
+Email: info@menascouae.com
+
+---
+
+## Related Pages
+
+- [About MENASCO](https://menascogroup.com/about/llms.txt)

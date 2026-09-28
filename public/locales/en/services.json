@@ -1,0 +1,651 @@
+{
+  "listing": {
+    "eyebrow": "What We Deliver",
+    "heading": "Integrated MEP services",
+    "description": "MENASCO delivers mechanical, electrical, plumbing, fire protection, BIM coordination and MEP prefabrication as one integrated contractor, coordinated from concept through commissioning, across the UAE and GCC.",
+    "exploreService": "Explore {{name}}",
+    "mobileHeading": "Integrated MEP Services",
+    "mobileCtaHeading": "Need a Specific Capability?",
+    "mobileCtaDescription": "Get in touch and our team will scope the right combination of services for your project."
+  },
+  "items": {
+    "mechanical": {
+      "name": "Mechanical",
+      "seoTitle": "Mechanical & HVAC Systems",
+      "seoDescription": "MENASCO delivers mechanical and HVAC systems for complex developments, including chilled-water, ventilation, air distribution and coordinated plant systems.",
+      "shortDescription": "HVAC, chilled-water and plant systems engineered for regional climate loads.",
+      "introduction": "MENASCO delivers mechanical systems from concept through commissioning, including HVAC, chilled-water plant, ducting, and specialist gas and treatment systems for demanding, mission-critical environments.",
+      "capabilities": [
+        "HVAC & Ventilation Systems",
+        "Chilled-Water & District Cooling Systems",
+        "Air-Cooled & Water-Cooled Chiller Systems",
+        "Mechanical Plant Rooms",
+        "Pumps, Heat Exchangers & Cooling Towers",
+        "Air Distribution & Ductwork Systems",
+        "Smoke Extraction & Staircase Pressurisation Systems",
+        "Building Management & HVAC Control Systems",
+        "Off-Site Prefabricated Modular MEP Solutions",
+        "Refrigeration & Cold-Room Systems",
+        "Compressed-Air Systems",
+        "Industrial, LPG & Medical Gas Systems",
+        "Cleanroom & Controlled-Environment Systems",
+        "Wastewater & Water-Treatment Systems",
+        "Steam & Boiler Systems",
+        "Testing, Adjusting & Balancing (TAB)",
+        "Testing and Commissioning"
+      ],
+      "sections": [
+        {
+          "heading": "Cooling & Air Distribution",
+          "paragraph": "Our mechanical scope begins with HVAC and ventilation design, supported by chilled-water and district cooling networks and air-cooled and water-cooled chiller plant sized to project load. We build the mechanical plant rooms that house this equipment, along with the pumps, heat exchangers and cooling towers that keep it running, and distribute conditioned air through complete air-distribution and ductwork systems."
+        },
+        {
+          "heading": "Controls & Life-Safety Integration",
+          "paragraph": "Life-safety and controls are engineered alongside the cooling plant itself: smoke extraction and staircase-pressurisation systems keep escape routes clear in an emergency, while building management and HVAC control systems give operators centralized oversight of the mechanical installation."
+        },
+        {
+          "heading": "Specialist & Process Systems",
+          "paragraph": "Beyond core HVAC, MENASCO delivers a range of specialist and process mechanical systems, including refrigeration and cold-room installations, compressed-air systems, and industrial, LPG and medical gas systems for facilities with specific process requirements. We also install cleanroom and controlled-environment systems, wastewater and water-treatment systems, and steam and boiler plant."
+        },
+        {
+          "heading": "Delivery, Testing & Commissioning",
+          "paragraph": "MENASCO complements its mechanical installations with flexible, off-site delivery options and a structured handover process that verifies every system before occupancy:",
+          "list": [
+            "Off-Site Prefabricated Modular MEP Solutions",
+            "Testing, Adjusting & Balancing (TAB)",
+            "Testing and Commissioning"
+          ]
+        }
+      ]
+    },
+    "electrical": {
+      "name": "Electrical",
+      "seoTitle": "Electrical & ELV Systems",
+      "seoDescription": "MENASCO provides integrated electrical and ELV systems for complex developments across the UAE and GCC, from power distribution to low-current systems.",
+      "shortDescription": "Power distribution, building management and low-current systems, coordinated end to end.",
+      "introduction": "From medium-voltage distribution to structured cabling and building management systems, MENASCO delivers electrical infrastructure engineered for reliability and future load growth.",
+      "capabilities": [
+        "Medium-Voltage & Low-Voltage Electrical Systems",
+        "Electrical Substations & Transformer Systems",
+        "MV and LV Switchgear & Distribution Panels",
+        "Main & Sub-Main Distribution Boards",
+        "Power Distribution & Containment Systems",
+        "Busbar & Busduct Systems",
+        "Standby Generators & Emergency Power Systems",
+        "Uninterruptible Power Supply (UPS) Systems",
+        "Automatic Transfer Switch (ATS) Systems",
+        "Lighting & Lighting-Control Systems",
+        "Emergency & Specialist Lighting Systems",
+        "Earthing, Grounding & Lightning Protection Systems",
+        "Power-Factor Correction & Harmonic-Filtration Systems",
+        "Energy Metering, Monitoring & Management Systems",
+        "Building Management Systems (BMS)",
+        "Structured Cabling and ICT Infrastructure",
+        "CCTV and Video-Surveillance Systems",
+        "Access-Control & Intrusion-Detection Systems",
+        "Public Address & Voice-Alarm Systems (PAVA)",
+        "Voice-Evacuation Systems",
+        "Audio-Visual (AV) Systems",
+        "Intercom & Master-Clock Systems",
+        "Instrumentation & Control Systems",
+        "Testing, Commissioning & System Integration"
+      ],
+      "sections": [
+        {
+          "heading": "Power Distribution & Switchgear",
+          "paragraph": "MENASCO's electrical scope covers medium- and low-voltage systems from the substation and transformer through to final distribution, including MV and LV switchgear and distribution panels, main and sub-main distribution boards, and power distribution and containment via busbar and busduct systems."
+        },
+        {
+          "heading": "Backup Power & Power Quality",
+          "paragraph": "Continuity of supply is engineered through standby generators and emergency power systems, uninterruptible power supply (UPS) systems and automatic transfer switch (ATS) systems, while earthing, grounding and lightning-protection systems and power-factor correction and harmonic-filtration systems protect the installation and improve efficiency. Energy metering, monitoring and management systems give operators visibility into consumption across the facility."
+        },
+        {
+          "heading": "Lighting & Building Management",
+          "paragraph": "Lighting and lighting-control systems, together with emergency and specialist lighting, are integrated with building management systems (BMS) for centralized monitoring and control across the electrical installation."
+        },
+        {
+          "heading": "Low-Current & Security Systems",
+          "paragraph": "Low-current infrastructure includes structured cabling and ICT infrastructure as the backbone for building systems, supported by CCTV and video-surveillance and access-control and intrusion-detection systems for site security.",
+          "list": [
+            "Public Address & Voice-Alarm Systems (PAVA)",
+            "Voice-Evacuation Systems",
+            "Audio-Visual (AV) Systems",
+            "Intercom & Master-Clock Systems"
+          ]
+        },
+        {
+          "heading": "Instrumentation, Testing & Commissioning",
+          "paragraph": "MENASCO integrates instrumentation and control systems into the wider electrical installation, with every project completed through testing, commissioning and full system integration."
+        }
+      ]
+    },
+    "plumbing": {
+      "name": "Plumbing",
+      "seoTitle": "Plumbing & Public Health Systems",
+      "seoDescription": "MENASCO designs and installs complete plumbing and public health systems, including water supply, drainage, sanitary fixtures and irrigation, across the UAE.",
+      "shortDescription": "Water supply, drainage and sanitary systems built for long-term reliability.",
+      "introduction": "MENASCO designs and installs complete plumbing systems (water supply, drainage, sanitary fixtures and irrigation), tested and commissioned to project specification.",
+      "capabilities": [
+        "Domestic Cold & Hot Water Supply Systems",
+        "Water Storage & Distribution Systems",
+        "Water-Pressure Booster Pump Systems",
+        "Sanitary Drainage & Wastewater Systems",
+        "Soil, Waste & Vent Systems",
+        "Stormwater & Rainwater Drainage Systems",
+        "Sewage-Lifting & Transfer Pumping Stations",
+        "Sanitary Fixtures & Accessories Installation",
+        "PVC, PPR, HDPE, Copper & Stainless-Steel Pipework",
+        "Irrigation & Landscape Water Systems",
+        "Greywater & Blackwater Treatment Systems",
+        "Greywater Recycling & Reuse Systems",
+        "Reverse Osmosis (RO) Water-Treatment Systems",
+        "Water Filtration & Purification Systems",
+        "Sewage Treatment Plants (STP)",
+        "Grease, Oil & Sand Interceptor Systems",
+        "Hot-Water Generation & Circulation Systems",
+        "Solar Water-Heating Systems",
+        "Water Metering & Leak-Detection Systems",
+        "Swimming Pool, Fountain & Water-Feature Systems",
+        "Testing, Flushing, Disinfection & Commissioning"
+      ],
+      "sections": [
+        {
+          "heading": "Water Supply & Distribution",
+          "paragraph": "MENASCO's plumbing scope covers domestic cold and hot water supply, water storage and distribution, and water-pressure booster pump systems, installed using PVC, PPR, HDPE, copper and stainless-steel pipework to suit each application. Hot-water generation and circulation systems and solar water-heating systems are integrated to meet project demand."
+        },
+        {
+          "heading": "Drainage & Sanitary Systems",
+          "paragraph": "Sanitary drainage and wastewater systems, soil, waste and vent systems, and stormwater and rainwater drainage are engineered alongside sewage-lifting and transfer pumping stations, with sanitary fixtures and accessories installed to complete each space."
+        },
+        {
+          "heading": "Water Treatment & Recycling",
+          "paragraph": "Water treatment capabilities include greywater and blackwater treatment and greywater recycling and reuse systems, reducing potable-water demand across a project.",
+          "list": [
+            "Reverse Osmosis (RO) Water-Treatment Systems",
+            "Water Filtration & Purification Systems",
+            "Sewage Treatment Plants (STP)",
+            "Grease, Oil & Sand Interceptor Systems"
+          ]
+        },
+        {
+          "heading": "Irrigation, Metering & Water Features",
+          "paragraph": "MENASCO also delivers irrigation and landscape water systems, water metering and leak-detection systems, and swimming pool, fountain and water-feature systems. Every plumbing installation is completed with testing, flushing, disinfection and commissioning before handover."
+        }
+      ]
+    },
+    "fireProtection": {
+      "name": "Fire Protection",
+      "seoTitle": "Fire Protection & Life Safety",
+      "seoDescription": "MENASCO delivers integrated fire protection and life safety systems, including firefighting, detection and suppression, for complex developments across the UAE.",
+      "shortDescription": "Detection, suppression and life-safety systems delivered to code.",
+      "introduction": "MENASCO delivers integrated fire protection, firefighting, fire detection, and life safety systems for residential, commercial, hospitality, industrial, infrastructure & mission-critical projects across the UAE and the region.",
+      "detailDescription": "",
+      "capabilitiesHeading": "Our Fire Protection and Life Safety Capabilities Include:",
+      "capabilities": [
+        "Automatic Fire Sprinkler Systems",
+        "Fire Hydrant & External Firefighting Systems",
+        "Fire Hose Reel & Landing-Valve Systems",
+        "Wet-Riser & Dry-Riser Systems",
+        "Firefighting Pump Rooms & Pump Sets",
+        "Fire-Water Storage & Distribution Systems",
+        "Fire Detection & Alarm Systems",
+        "Addressable and Conventional Fire Alarm Systems",
+        "Public Address & Voice-Alarm Systems (PAVA)",
+        "Emergency Voice-Evacuation Systems",
+        "Smoke Detection and Aspiration Systems",
+        "Gas and Flame Detection Systems",
+        "Clean-Agent Fire-Suppression Systems",
+        "CO₂ Fire-Suppression Systems",
+        "Foam & Water-Mist Fire-Suppression Systems",
+        "Kitchen-Hood & Wet-Chemical Suppression Systems",
+        "Fire Extinguishers & First-Aid Firefighting Equipment",
+        "Smoke-Control & Staircase-Pressurisation Systems",
+        "Fireman Intercom & Emergency Communication Systems",
+        "Fire Alarm Cause & Effect Programming",
+        "Testing, Commissioning, Integration & Handover"
+      ],
+      "sections": [
+        {
+          "heading": "Firefighting & Water-Based Suppression",
+          "paragraph": "MENASCO's fire protection scope covers automatic fire sprinkler systems, fire hydrant and external firefighting systems, and fire hose reel and landing-valve systems, supported by wet-riser and dry-riser systems, firefighting pump rooms and pump sets, and fire-water storage and distribution systems."
+        },
+        {
+          "heading": "Fire Detection & Alarm",
+          "paragraph": "Fire detection and alarm systems, in addressable and conventional configurations, are supported by smoke detection and aspiration systems and gas and flame detection systems, with fire alarm cause-and-effect programming coordinating the response of connected building systems."
+        },
+        {
+          "heading": "Life-Safety Communication & Evacuation",
+          "paragraph": "In an emergency, occupants and firefighting teams depend on dedicated communication and evacuation systems:",
+          "list": [
+            "Public Address & Voice-Alarm Systems (PAVA)",
+            "Emergency Voice-Evacuation Systems",
+            "Smoke-Control & Staircase-Pressurisation Systems",
+            "Fireman Intercom & Emergency Communication Systems"
+          ]
+        },
+        {
+          "heading": "Specialist Suppression & Handover",
+          "paragraph": "Beyond water-based suppression, MENASCO installs specialist systems suited to sensitive or high-value spaces, including clean-agent and CO₂ fire-suppression systems, foam and water-mist suppression, and kitchen-hood and wet-chemical suppression for commercial kitchens, together with fire extinguishers and first-aid firefighting equipment. Every system is tested, commissioned, integrated and handed over ready for use."
+        }
+      ]
+    },
+    "bimDigitalEngineering": {
+      "name": "BIM & Digital Engineering",
+      "shortDescription": "Federated coordination and clash detection that de-risk delivery before site works begin.",
+      "introduction": "MENASCO uses BIM-driven coordination to resolve multidisciplinary clashes, validate constructability, and keep delivery data-driven from design through handover.",
+      "capabilities": [
+        "BIM-driven coordination",
+        "Digital engineering",
+        "Clash detection",
+        "Constructability review",
+        "Multidisciplinary coordination",
+        "Data-driven project delivery"
+      ]
+    },
+    "manufacturingPrefabrication": {
+      "name": "Manufacturing & Prefabrication",
+      "shortDescription": "Off-site production for faster, more consistent on-site installation.",
+      "introduction": "Through established manufacturing partners, MENASCO integrates prefabricated MEP components into project delivery, reducing site congestion and installation time while improving consistency across large-scale projects.",
+      "capabilities": [
+        "Partner-led manufacturing capability",
+        "Off-site production",
+        "Quality inspection",
+        "Faster installation",
+        "Reduced site congestion",
+        "Improved consistency",
+        "Modular MEP solutions"
+      ]
+    }
+  },
+  "detail": {
+    "eyebrowLabel": "Service",
+    "downloadCompanyProfile": "Download Company Profile",
+    "discussRequirements": "Discuss Your {{name}} Requirements",
+    "requestQuote": "Get in contact",
+    "allServices": "All Services",
+    "sectionsRegionLabel": "{{name}} details",
+    "previousSection": "Previous",
+    "nextSection": "Next"
+  },
+  "seo": {
+    "title": "MEP Engineering Services",
+    "description": "Mechanical, electrical, plumbing, fire protection, BIM & digital engineering, and manufacturing & prefabrication services from MENASCO."
+  },
+  "dataCenter": {
+    "seo": {
+      "title": "Data Centre MEP Services",
+      "description": "MENASCO delivers mission-critical data centre MEP and infrastructure solutions for uptime, reliability and future-ready digital operations."
+    },
+    "hero": {
+      "eyebrow": "Data Centre Infrastructure",
+      "heading": "Engineering Reliable Data Center Infrastructure for the Digital Future",
+      "description": "Building high-performance mission-critical environments designed to power the future of digital infrastructure with reliability, efficiency & operational continuity."
+    },
+    "introHeading": {
+      "eyebrow": "Data Centres",
+      "heading": "Building the Backbone of the Digital Future"
+    },
+    "introParagraphs": [
+      "MENASCO is a trusted MEP & infrastructure partner delivering end-to-end mission-critical data center solutions across the UAE. We specialize in the design coordination, engineering, installation, testing & commissioning of high-performance data centre environments built to support reliability, operational continuity & future scalability.",
+      "With extensive experience in complex & mission-critical projects, MENASCO delivers integrated solutions covering critical power infrastructure, precision cooling systems, automation, fire protection, ELV & smart building technologies all engineered to meet the demanding requirements of modern digital infrastructure.",
+      "Our expertise extends across the full project lifecycle, from early-stage coordination & value engineering to final commissioning & operational readiness, ensuring efficient execution, optimized performance & long-term reliability.",
+      "At MENASCO, we are committed to delivering resilient, scalable & future-ready infrastructure that supports the evolving needs of data-driven industries & the growing digital economy."
+    ],
+    "exploreProjectsCta": "Explore Our Data Centre Projects",
+    "stats": {
+      "featuredDataCenters": "Featured Data Centers",
+      "megawatts": "MegaWatts",
+      "projectValue": "Project Value"
+    },
+    "capabilitiesHeading": {
+      "eyebrow": "Capabilities",
+      "heading": "Our Data Centre Capabilities"
+    },
+    "capabilities": [
+      {
+        "title": "Complete MEP & Infrastructure Solutions",
+        "description": "MENASCO delivers integrated electromechanical & infrastructure solutions for mission-critical data centre environments, covering complete MEP systems coordination, installation, testing & commissioning."
+      },
+      {
+        "title": "Critical Power Infrastructure",
+        "description": "Installation of Medium Voltage (MV), Low Voltage (LV), generators, UPS systems & backup power solutions designed to ensure operational continuity & maximum uptime."
+      },
+      {
+        "title": "Cooling & Precision HVAC Systems",
+        "description": "Design and execution of advanced HVAC systems, chilled water networks, precision cooling solutions & containment systems tailored for air cooled and direct-to-chip liquid cooled datacentre operations."
+      },
+      {
+        "title": "Automation & Smart Control Systems",
+        "description": "Integration of BMS, PLC, monitoring systems & smart infrastructure technologies to support efficient facility management and real-time operational monitoring."
+      },
+      {
+        "title": "Security & ELV Systems",
+        "description": "Implementation of integrated security, access control, surveillance & ELV solutions aligned with mission-critical operational and cybersecurity requirements."
+      },
+      {
+        "title": "Testing, Commissioning & Performance Validation",
+        "description": "Comprehensive testing and commissioning processes ensuring system reliability, operational readiness, efficiency & compliance with international data centre standards."
+      },
+      {
+        "title": "Scalable & Future-Ready Infrastructure",
+        "description": "Engineering flexible and scalable infrastructure solutions designed to support future expansion, technology upgrades & evolving operational demands."
+      }
+    ],
+    "prefab": {
+      "eyebrow": "Prefabrication",
+      "heading": "Integrated Prefabrication and Modular MEP Delivery for Data Centres",
+      "description": "Menasco has the capability to develop and deliver fully coordinated prefabricated MEP solutions for data center projects, including modular pipe racks, corridor modules, plantroom skids, riser modules, valve assemblies, and support frames. These solutions are engineered through early BIM coordination, factory-controlled fabrication, pre-assembly, testing where applicable, and planned logistics to site.",
+      "closingStatement": "Powering the Future of Data Centres: MENASCO delivers integrated mission-critical infrastructure solutions designed for maximum reliability, operational continuity & scalable performance."
+    },
+    "faqHeading": {
+      "eyebrow": "FAQ",
+      "heading": "FAQ's"
+    },
+    "faq": [
+      {
+        "id": "what-does-a-data-center-contractor-provide",
+        "title": "What does a Data Center Contractor in the UAE provide?",
+        "content": "MENASCO, as a specialized Data Center MEP Contractor, delivers integrated engineering solutions including power infrastructure, cooling systems, fire protection, monitoring systems, and mission-critical MEP services designed to ensure reliability, scalability, operational continuity, and high-performance data center environments."
+      },
+      {
+        "id": "how-do-menasco-solutions-ensure-reliability",
+        "title": "How do MENASCO's data center solutions ensure reliability?",
+        "content": "MENASCO ensures reliability through mission-critical MEP systems, redundant power infrastructure, precision cooling solutions, continuous monitoring, and engineered designs focused on uptime, operational continuity, and system stability. Our approach combines high-quality execution, advanced coordination, and performance-driven solutions to support resilient and future-ready data center environments."
+      },
+      {
+        "id": "support-scalable-expansion",
+        "title": "Do you support scalable and future-ready data center expansion?",
+        "content": "Absolutely. MENASCO designs scalable and adaptable data center infrastructures built to support future growth and evolving operational demands. Our solutions are engineered for seamless expansion of power, cooling, and critical MEP systems, enabling long-term flexibility, technology integration, and efficient performance without major operational disruptions."
+      },
+      {
+        "id": "what-is-involved-in-data-center-installation",
+        "title": "What is involved in MENASCO's Data Center Installation process?",
+        "content": "MENASCO provides end-to-end data center installation solutions, including site assessment, MEP coordination, installation of critical power and cooling systems, containment solutions, BMS integration, testing & commissioning, and final project handover. Our approach ensures efficient execution, operational readiness, compliance, and reliable long-term performance for mission-critical environments."
+      },
+      {
+        "id": "what-industries-benefit",
+        "title": "What industries benefit from MENASCO's data center services?",
+        "content": "MENASCO delivers mission-critical data center solutions for a wide range of industries, including finance, healthcare, government, telecommunications, cloud services, technology providers, e-commerce, and large enterprises. Our expertise supports organizations that require secure, reliable, and high-availability digital infrastructure."
+      },
+      {
+        "id": "why-choose-menasco-data-center-contractor",
+        "title": "Why choose MENASCO as a Data Center Contractor in the UAE?",
+        "content": "MENASCO combines advanced engineering expertise, mission-critical MEP capabilities, and high-performance project delivery to provide reliable and scalable data center solutions. Our focus on quality, precision, operational continuity, and future-ready infrastructure enables clients to achieve secure, efficient, and resilient digital environments."
+      },
+      {
+        "id": "testing-and-commissioning",
+        "title": "Do you provide Testing & Commissioning for data centers?",
+        "content": "Yes. MENASCO delivers comprehensive Testing & Commissioning (T&C) services for mission-critical systems, ensuring all power, cooling, fire protection, and monitoring systems operate efficiently, safely, and according to international performance standards before handover."
+      },
+      {
+        "id": "mission-critical-mep-coordination",
+        "title": "Can MENASCO handle mission-critical MEP coordination for complex data center projects?",
+        "content": "Absolutely. MENASCO specializes in coordinated mission-critical MEP execution, integrating mechanical, electrical, plumbing, ELV, and fire protection systems with high precision to support uninterrupted operations and maximum efficiency."
+      },
+      {
+        "id": "energy-efficiency-sustainability",
+        "title": "Do your data center solutions support energy efficiency and sustainability?",
+        "content": "Yes. MENASCO integrates energy-efficient cooling systems, optimized power infrastructure, smart monitoring technologies, and sustainable engineering practices to support lower operational costs and environmentally responsible performance."
+      },
+      {
+        "id": "data-center-mep-different",
+        "title": "What makes data center MEP projects different from conventional projects?",
+        "content": "Data center projects require significantly higher levels of reliability, precision, redundancy, and operational continuity. MENASCO applies mission-critical engineering standards focused on uptime, thermal management, backup power, system resilience, and future scalability."
+      },
+      {
+        "id": "retrofit-and-upgrade-works",
+        "title": "Does MENASCO support retrofit and upgrade works for existing data centers?",
+        "content": "Yes. MENASCO provides retrofit, upgrade & expansion solutions for existing data center facilities, including power upgrades, cooling optimization, infrastructure enhancement, and system modernization while minimizing operational disruption."
+      }
+    ]
+  },
+  "bimPage": {
+    "seo": {
+      "title": "BIM & MEP Coordination",
+      "description": "MENASCO's in-house BIM team delivers ISO 19650-aligned digital coordination for MEP engineering, reducing project risk and supporting facility management."
+    },
+    "serviceEyebrow": "Service",
+    "downloadCompanyProfile": "Download Company Profile",
+    "intro": {
+      "eyebrow": "BIM at MENASCO",
+      "heading": "Coordinated From Design to Handover",
+      "paragraph": "Building Information Modeling is central to how MENASCO designs, coordinates, and delivers complex MEP projects. Our in-house BIM team applies ISO 19650 principles to build intelligent, data-rich models that align every discipline and support informed decisions at every stage."
+    },
+    "capabilities": {
+      "eyebrow": "Core Capabilities",
+      "heading": "Core BIM Capabilities",
+      "items": [
+        {
+          "title": "Federated BIM Coordination",
+          "description": "Every engineering discipline is modeled together, so conflicts surface long before construction starts."
+        },
+        {
+          "title": "Clash Detection & Resolution",
+          "description": "Multidisciplinary clashes are identified and resolved before installation begins on site."
+        },
+        {
+          "title": "Constructability Review",
+          "description": "Sequencing and installation plans are reviewed against the model before mobilization."
+        },
+        {
+          "title": "Data-Driven Delivery",
+          "description": "Coordinated model data carries through procurement and fabrication to support long-term facility management."
+        }
+      ]
+    },
+    "workflow": {
+      "eyebrow": "Project Lifecycle",
+      "heading": "BIM Through Every Delivery Stage",
+      "steps": [
+        {
+          "eyebrow": "Design",
+          "title": "ISO 19650-Aligned Workflows",
+          "description": "Digital delivery is structured around ISO 19650 principles from the earliest design stage."
+        },
+        {
+          "eyebrow": "Coordination",
+          "title": "Multidisciplinary Coordination",
+          "description": "Mechanical, electrical, and plumbing systems are coordinated within one federated model."
+        },
+        {
+          "eyebrow": "Construction",
+          "title": "Model-Based Delivery",
+          "description": "Fabrication and installation are guided directly by the coordinated model."
+        },
+        {
+          "eyebrow": "Handover",
+          "title": "Asset Information & Handover",
+          "description": "As-built model data is handed over to support long-term facility management."
+        }
+      ]
+    },
+    "closing": {
+      "heading": "Bring Coordinated BIM Delivery to Your Project",
+      "description": "See how MENASCO's digital engineering approach supports projects across the region, from design through handover.",
+      "cta": "View Our Projects"
+    }
+  },
+  "manufacturingPage": {
+    "seo": {
+      "title": "MEP Prefabrication",
+      "description": "MENASCO delivers off-site MEP prefabrication, including ductwork, pipe fabrication and prefabricated modules, for faster, higher-quality construction."
+    },
+    "hero": {
+      "title": "MEP Prefabrication",
+      "description": "Manufacturing and prefabrication are integral to how MENASCO delivers high-performance Mechanical, Electrical, and Plumbing (MEP) solutions. Through established manufacturing partners, critical fabrication activities are carried out in controlled environments, supporting improved quality, faster project delivery, and reduced on-site complexity. These partner-led manufacturing capabilities are coordinated by MENASCO's engineering teams to enable greater precision, improved coordination, and consistent execution across every stage of construction."
+    },
+    "overview": {
+      "eyebrow": "Overview",
+      "heading": "Advanced Manufacturing for Modern Construction",
+      "paragraph1": "Working closely with established manufacturing partners, MENASCO integrates a wide range of engineered MEP components and prefabricated assemblies into project delivery, produced under strict quality control before arriving on site. By coordinating critical building systems through controlled manufacturing environments, MENASCO delivers greater consistency, improved safety, reduced installation time, and enhanced project certainty.",
+      "paragraph2": "Every component is manufactured to project-specific requirements set by MENASCO's engineering teams, using advanced production processes that ensure dimensional accuracy, reliable performance, and installation readiness. This integrated approach reduces site labour, minimizes rework, and supports more efficient project delivery."
+    },
+    "capabilitiesSection": {
+      "eyebrow": "Our Capabilities",
+      "heading": "Manufacturing Capabilities"
+    },
+    "capabilities": [
+      {
+        "title": "HVAC Ductwork Fabrication",
+        "description": "Precision-manufactured ductwork engineered for performance, efficiency, and seamless installation."
+      },
+      {
+        "title": "Prefabricated MEP Modules",
+        "description": "Factory-built assemblies that improve coordination, quality, and construction speed."
+      },
+      {
+        "title": "Pipe Rack Systems",
+        "description": "Integrated piping assemblies manufactured to reduce installation time and improve consistency."
+      },
+      {
+        "title": "Modular Data Centre Solutions",
+        "description": "Prefabricated support solutions for data center whitespaces."
+      },
+      {
+        "title": "Electrical Containment",
+        "description": "Prefabricated containment systems produced for accurate installation and improved coordination."
+      },
+      {
+        "title": "Custom Engineered Components",
+        "description": "Project-specific manufacturing solutions tailored to complex engineering requirements."
+      }
+    ],
+    "offSite": {
+      "eyebrow": "Off-Site Manufacturing",
+      "heading": "Off-Site Prefabrication",
+      "paragraph1": "MENASCO's off-site prefabrication methodology, delivered through specialist manufacturing partners, allows complete MEP assemblies to be produced before arriving on site. By integrating ductwork, piping, electrical containment, supports, and associated services into modular factory-built components, MENASCO reduces on-site coordination, improves installation efficiency, and increases overall project quality.",
+      "paragraph2": "Manufacturing in controlled environments enables every assembly to undergo inspection before delivery, minimizing site modifications while supporting predictable project schedules and improved construction outcomes.",
+      "benefitsLabel": "Benefits"
+    },
+    "benefits": [
+      "Faster installation",
+      "Improved quality control",
+      "Reduced on-site congestion",
+      "Greater programme certainty",
+      "Enhanced health and safety",
+      "Reduced material waste",
+      "Improved multidisciplinary coordination"
+    ],
+    "qualitySection": {
+      "eyebrow": "Quality Through Manufacturing",
+      "heading": "Quality Through Manufacturing",
+      "paragraph1": "Every manufactured component is produced using advanced fabrication technologies and controlled production processes to ensure precision, repeatability, and long-term performance.",
+      "paragraph2": "MENASCO's approach combines engineering expertise with specialist manufacturing partners' modern production techniques to deliver prefabricated MEP solutions that support residential developments, hospitality projects, commercial buildings, data centres, healthcare facilities, industrial developments, and other technically demanding infrastructure."
+    },
+    "qualityHighlights": [
+      {
+        "title": "Precision Engineering",
+        "description": "Advanced manufacturing processes delivering consistent dimensional accuracy."
+      },
+      {
+        "title": "Quality Assurance",
+        "description": "Every assembly undergoes rigorous inspection before installation."
+      },
+      {
+        "title": "Efficient Production",
+        "description": "Optimized workflows reduce project timelines while maintaining quality."
+      },
+      {
+        "title": "Reliable Delivery",
+        "description": "Factory-controlled manufacturing minimizes site risks and supports predictable execution."
+      }
+    ],
+    "downloadCompanyProfile": "Download Company Profile",
+    "closing": {
+      "heading": "Manufacturing Built Around Engineering Excellence",
+      "description": "From concept to installation, MENASCO integrates engineering expertise with specialist manufacturing partners to deliver faster, safer, and higher-quality project outcomes across every sector we serve.",
+      "cta": "Explore Our Projects"
+    }
+  },
+  "manufacturingPageMobile": {
+    "seo": {
+      "title": "MEP Prefabrication",
+      "description": "MENASCO delivers off-site MEP prefabrication, including ductwork, pipe fabrication and prefabricated modules, for faster, higher-quality construction."
+    },
+    "eyebrow": "Manufacturing & Prefabrication",
+    "heading": "Engineering Precision Before Construction Begins",
+    "description": "Manufacturing and prefabrication are integral to how MENASCO delivers high-performance Mechanical, Electrical, and Plumbing (MEP) solutions. Through established manufacturing partners, critical fabrication activities are carried out in controlled environments, improving quality, accelerating delivery, and reducing on-site complexity.",
+    "overview": {
+      "eyebrow": "Overview",
+      "heading": "Advanced Manufacturing for Modern Construction",
+      "paragraph1": "Working closely with established manufacturing partners, MENASCO integrates a wide range of engineered MEP components and prefabricated assemblies into project delivery, produced under strict quality control before arriving on site. By coordinating critical building systems through controlled manufacturing environments, MENASCO delivers greater consistency, improved safety, reduced installation time, and enhanced project certainty.",
+      "paragraph2": "Every component is manufactured to project-specific requirements set by MENASCO's engineering teams, using advanced production processes that ensure dimensional accuracy, reliable performance, and installation readiness."
+    },
+    "capabilitiesSection": {
+      "eyebrow": "Our Capabilities",
+      "heading": "Manufacturing Capabilities"
+    },
+    "capabilities": [
+      {
+        "title": "HVAC Ductwork Fabrication",
+        "description": "Precision-manufactured ductwork engineered for performance, efficiency, and seamless installation."
+      },
+      {
+        "title": "Prefabricated MEP Modules",
+        "description": "Factory-built assemblies that improve coordination, quality, and construction speed."
+      },
+      {
+        "title": "Pipe Rack Systems",
+        "description": "Integrated piping assemblies manufactured to reduce installation time and improve consistency."
+      },
+      {
+        "title": "Mechanical Support Systems",
+        "description": "Engineered support solutions manufactured for structural integrity and long-term reliability."
+      },
+      {
+        "title": "Electrical Containment",
+        "description": "Prefabricated containment systems produced for accurate installation and improved coordination."
+      },
+      {
+        "title": "Custom Engineered Components",
+        "description": "Project-specific manufacturing solutions tailored to complex engineering requirements."
+      }
+    ],
+    "offSite": {
+      "eyebrow": "Off-Site Manufacturing",
+      "heading": "Off-Site Prefabrication",
+      "paragraph1": "MENASCO's off-site prefabrication methodology, delivered through specialist manufacturing partners, allows complete MEP assemblies to be produced before arriving on site. Integrating ductwork, piping, electrical containment, supports, and associated services into factory-built modules reduces on-site coordination and increases overall project quality.",
+      "paragraph2": "Manufacturing in controlled environments enables every assembly to undergo inspection before delivery, minimizing site modifications while supporting predictable project schedules.",
+      "benefitsLabel": "Benefits"
+    },
+    "benefits": [
+      "Faster installation",
+      "Improved quality control",
+      "Reduced on-site congestion",
+      "Greater programme certainty",
+      "Enhanced health and safety",
+      "Reduced material waste",
+      "Improved multidisciplinary coordination"
+    ],
+    "qualitySection": {
+      "eyebrow": "Quality Through Manufacturing",
+      "heading": "Quality Through Manufacturing",
+      "paragraph1": "Every manufactured component is produced using advanced fabrication technologies and controlled production processes to ensure precision, repeatability, and long-term performance.",
+      "paragraph2": "MENASCO's approach combines engineering expertise with specialist manufacturing partners' modern production techniques to deliver prefabricated MEP solutions across residential, hospitality, commercial, data centre, healthcare, and industrial developments."
+    },
+    "qualityHighlights": [
+      {
+        "title": "Precision Engineering",
+        "description": "Advanced manufacturing processes delivering consistent dimensional accuracy."
+      },
+      {
+        "title": "Quality Assurance",
+        "description": "Every assembly undergoes rigorous inspection before installation."
+      },
+      {
+        "title": "Efficient Production",
+        "description": "Optimized workflows reduce project timelines while maintaining quality."
+      },
+      {
+        "title": "Reliable Delivery",
+        "description": "Factory-controlled manufacturing minimizes site risks and supports predictable execution."
+      }
+    ],
+    "downloadCompanyProfile": "Download Company Profile",
+    "cta": {
+      "heading": "Manufacturing Built Around Engineering Excellence",
+      "description": "From concept to installation, MENASCO integrates engineering expertise with specialist manufacturing partners to deliver faster, safer, and higher-quality project outcomes.",
+      "primaryLabel": "Explore Our Projects"
+    }
+  }
+}
