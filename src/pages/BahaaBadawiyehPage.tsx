@@ -177,7 +177,7 @@ export default function BahaaBadawiyehPage() {
             </Stack>
             <ScrollRevealGroup className="grid grid-cols-1 gap-6 sm:grid-cols-3 md:gap-8">
               {translatedPillars.map((pillar) => (
-                <div key={pillar.title} className="flex flex-col gap-4 rounded-md border border-gray-200 bg-warmwhite p-6 md:p-7">
+                <div key={pillar.title} className="flex h-full flex-col gap-4 rounded-md border border-gray-200 bg-warmwhite p-6 md:p-7">
                   <span className="inline-flex h-11 w-11 items-center justify-center rounded-sm bg-stone text-brand-600">
                     <pillar.icon size={20} aria-hidden="true" />
                   </span>

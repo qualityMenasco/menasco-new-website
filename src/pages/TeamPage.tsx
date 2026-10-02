@@ -104,7 +104,14 @@ function FeaturedLeader({ profile, imageSide }: FeaturedLeaderProps) {
   return (
     <div
       className={cn(
-        'grid grid-cols-1 items-start gap-8 md:gap-10 lg:gap-12',
+        'grid grid-cols-1 gap-8 md:gap-10 lg:gap-12',
+        // Bahaa's message runs longer than Helmi's (4 paragraphs + a closing
+        // line vs. 3), so top-aligning his portrait against his taller text
+        // column leaves the portrait looking too high — center the row
+        // instead so the portrait's visual center matches the text block's.
+        // Helmi's shorter text keeps the original top alignment, which
+        // already reads correctly for him.
+        isBahaa ? 'md:items-center' : 'md:items-start',
         imageFirst ? 'md:grid-cols-[3fr_5fr]' : 'md:grid-cols-[5fr_3fr]',
       )}
     >
