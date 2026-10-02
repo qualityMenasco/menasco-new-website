@@ -53,100 +53,114 @@ export function ServicesShowcase() {
     // joinTop: CompanyIntroduction directly above is also a warmwhite `lg`
     // section on the homepage — share one gap instead of 96px + 96px.
     <Section background="warmwhite" spacing="lg" edgeFade joinTop>
-      <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[5fr_4fr] md:gap-10">
-        <Stack space="lg">
-          <Stack space="sm">
-            <Eyebrow>{t('home:servicesShowcase.eyebrow')}</Eyebrow>
-            <Heading level="h2" as="h3" className="max-w-3xl">
-              {t('home:servicesShowcase.heading')}
-            </Heading>
-            <Text variant="body-lg" className="max-w-2xl">
-              {t('home:servicesShowcase.description')}
-            </Text>
-          </Stack>
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-[5fr_4fr] md:items-stretch md:gap-10">
+        {/* `md:items-stretch` on the grid lets this column stretch to the
+            right card's height (the taller of the two in collapsed state);
+            the CTA below is pushed to the bottom of that stretched space via
+            `flex-1` + `items-end`, so it lines up with the card's bottom
+            without being pinned/absolute. A min-h-free grid row on mobile
+            (single column) makes this a no-op there, so the CTA just follows
+            the content naturally. */}
+        <div className="flex flex-col">
+          <Stack space="lg">
+            <Stack space="sm">
+              <Eyebrow>{t('home:servicesShowcase.eyebrow')}</Eyebrow>
+              <Heading level="h2" as="h3" className="max-w-3xl">
+                {t('home:servicesShowcase.heading')}
+              </Heading>
+              <Text variant="body-lg" className="max-w-2xl">
+                {t('home:servicesShowcase.description')}
+              </Text>
+            </Stack>
 
-          {/* Collapsed by default — only the 5 top-level categories show
-              initially. A group only gets a chevron when it genuinely has
-              subservices (derived from data, never hardcoded per category);
-              the title itself is always a real link to that category's own
-              page, kept as a separate control from the chevron so clicking
-              the name never unexpectedly toggles the accordion instead of
-              navigating. */}
-          <nav aria-label={t('home:servicesShowcase.eyebrow')} className="flex flex-col">
-            {showcaseDisplayGroups.map((group) => {
-              const children = showcaseGroupChildren(group);
-              const isExpandable = children.length > 0;
-              const isExpanded = expandedGroupKey === group.key;
-              const groupName = t(`nav:${group.i18nKey}`);
-              const childrenId = `${uid}-children-${group.key}`;
-              return (
-                <div key={group.key} className="border-t border-gray-200">
-                  <div className="flex items-center">
-                    <SmartLink
-                      href={group.href!}
-                      className="flex min-w-0 flex-1 items-center py-3.5 font-display text-h4 font-semibold text-ink transition-colors duration-base hover:text-brand-600"
-                    >
-                      {groupName}
-                    </SmartLink>
-                    {isExpandable && (
-                      <button
-                        type="button"
-                        aria-expanded={isExpanded}
-                        aria-controls={childrenId}
-                        aria-label={t(isExpanded ? 'common:collapseSection' : 'common:expandSection', { name: groupName })}
-                        onClick={() => toggleGroup(group)}
-                        className="flex h-11 w-11 shrink-0 items-center justify-center text-gray-500 transition-colors duration-base hover:text-brand-600"
+            {/* Collapsed by default — only the 5 top-level categories show
+                initially. A group only gets a chevron when it genuinely has
+                subservices (derived from data, never hardcoded per category);
+                the title itself is always a real link to that category's own
+                page, kept as a separate control from the chevron so clicking
+                the name never unexpectedly toggles the accordion instead of
+                navigating. */}
+            <nav aria-label={t('home:servicesShowcase.eyebrow')} className="flex flex-col">
+              {showcaseDisplayGroups.map((group) => {
+                const children = showcaseGroupChildren(group);
+                const isExpandable = children.length > 0;
+                const isExpanded = expandedGroupKey === group.key;
+                const groupName = t(`nav:${group.i18nKey}`);
+                const childrenId = `${uid}-children-${group.key}`;
+                return (
+                  <div key={group.key} className="border-t border-gray-200">
+                    <div className="flex items-center">
+                      <SmartLink
+                        href={group.href!}
+                        className="flex min-w-0 flex-1 items-center py-3.5 font-display text-h4 font-semibold text-ink transition-colors duration-base hover:text-brand-600"
                       >
-                        <ChevronDown
-                          size={18}
-                          aria-hidden="true"
-                          className={cn('transition-transform duration-base', isExpanded && 'rotate-180')}
-                        />
-                      </button>
-                    )}
+                        {groupName}
+                      </SmartLink>
+                      {isExpandable && (
+                        <button
+                          type="button"
+                          aria-expanded={isExpanded}
+                          aria-controls={childrenId}
+                          aria-label={t(isExpanded ? 'common:collapseSection' : 'common:expandSection', { name: groupName })}
+                          onClick={() => toggleGroup(group)}
+                          className="flex h-11 w-11 shrink-0 items-center justify-center text-gray-500 transition-colors duration-base hover:text-brand-600"
+                        >
+                          <ChevronDown
+                            size={18}
+                            aria-hidden="true"
+                            className={cn('transition-transform duration-base', isExpanded && 'rotate-180')}
+                          />
+                        </button>
+                      )}
+                    </div>
+
+                    <AnimatePresence initial={false}>
+                      {isExpandable && isExpanded && (
+                        <motion.div
+                          id={childrenId}
+                          initial={reducedMotion ? undefined : { height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={reducedMotion ? undefined : { height: 0, opacity: 0 }}
+                          transition={{ duration: reducedMotion ? 0 : 0.25, ease: [0.22, 0.61, 0.36, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <div className="flex flex-col pb-2">
+                            {children.map((leaf) => {
+                              const leafServiceKey = leaf.service ? (serviceI18nKeys[leaf.service.slug] ?? leaf.service.slug) : null;
+                              const leafName = leafServiceKey ? t(`services:items.${leafServiceKey}.name`) : t(`nav:${leaf.i18nKey}`);
+                              const isSelected = selectedHref === leaf.href;
+                              return (
+                                <button
+                                  key={leaf.href}
+                                  type="button"
+                                  aria-current={isSelected ? 'true' : undefined}
+                                  onClick={() => selectChild(leaf.href)}
+                                  className={cn(
+                                    'flex min-h-11 items-center py-2.5 ps-5 text-start text-body font-medium transition-colors duration-base',
+                                    isSelected ? 'text-brand-600' : 'text-gray-500 hover:text-ink',
+                                  )}
+                                >
+                                  {leafName}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
+                );
+              })}
+            </nav>
+          </Stack>
+          <div className="mt-8 flex flex-1 items-end justify-start">
+            <ButtonLink href="/services" variant="primary" trailingIcon={ArrowRight}>
+              {t('home:servicesShowcase.cta')}
+            </ButtonLink>
+          </div>
+        </div>
 
-                  <AnimatePresence initial={false}>
-                    {isExpandable && isExpanded && (
-                      <motion.div
-                        id={childrenId}
-                        initial={reducedMotion ? undefined : { height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={reducedMotion ? undefined : { height: 0, opacity: 0 }}
-                        transition={{ duration: reducedMotion ? 0 : 0.25, ease: [0.22, 0.61, 0.36, 1] }}
-                        className="overflow-hidden"
-                      >
-                        <div className="flex flex-col pb-2">
-                          {children.map((leaf) => {
-                            const leafServiceKey = leaf.service ? (serviceI18nKeys[leaf.service.slug] ?? leaf.service.slug) : null;
-                            const leafName = leafServiceKey ? t(`services:items.${leafServiceKey}.name`) : t(`nav:${leaf.i18nKey}`);
-                            const isSelected = selectedHref === leaf.href;
-                            return (
-                              <button
-                                key={leaf.href}
-                                type="button"
-                                aria-current={isSelected ? 'true' : undefined}
-                                onClick={() => selectChild(leaf.href)}
-                                className={cn(
-                                  'flex min-h-11 items-center py-2.5 ps-5 text-start text-body font-medium transition-colors duration-base',
-                                  isSelected ? 'text-brand-600' : 'text-gray-500 hover:text-ink',
-                                )}
-                              >
-                                {leafName}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              );
-            })}
-          </nav>
-        </Stack>
-
-        <div className="group relative flex flex-col overflow-hidden rounded-md border border-gray-200 transition-colors duration-base ease-engineered hover:border-gray-400 md:sticky md:top-28 md:min-h-[26rem]">
+        <div className="group relative flex flex-col overflow-hidden rounded-md border border-gray-200 transition-colors duration-base ease-engineered hover:border-gray-400 md:sticky md:top-28 md:min-h-[26rem] md:self-start">
           {selectedLeaf && (
             <SmartLink
               href={selectedLeaf.href}
@@ -211,12 +225,6 @@ export function ServicesShowcase() {
             </motion.div>
           </AnimatePresence>
         </div>
-      </div>
-
-      <div className="mt-8 flex justify-start">
-        <ButtonLink href="/services" variant="primary" trailingIcon={ArrowRight}>
-          {t('home:servicesShowcase.cta')}
-        </ButtonLink>
       </div>
     </Section>
   );
