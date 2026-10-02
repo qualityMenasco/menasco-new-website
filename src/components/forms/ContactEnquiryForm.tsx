@@ -46,6 +46,8 @@ export function ContactEnquiryForm() {
     email: t('validation.email'),
     emailInvalid: t('validation.emailInvalid'),
     phone: t('validation.phone'),
+    country: t('validation.country'),
+    jobTitle: t('validation.jobTitle'),
     subject: t('validation.subject'),
     message: t('validation.message'),
     jobCode: t('validation.jobCode'),
@@ -53,6 +55,9 @@ export function ContactEnquiryForm() {
     cvType: t('validation.cvType'),
     cvSize: t('validation.cvSize'),
     companyName: t('validation.companyName'),
+    projectName: t('validation.projectName'),
+    projectLocation: t('validation.projectLocation'),
+    projectValue: t('validation.projectValue'),
     projectType: t('validation.projectType'),
     projectDescription: t('validation.projectDescription'),
   };
@@ -68,6 +73,9 @@ export function ContactEnquiryForm() {
   // (always the General set) and is never read by validation or submission.
   const locked = enquiryType === null;
   const displayType = enquiryType ?? 'general';
+  // Only the Project enquiry type requires every displayed field — General
+  // and Career keep Phone/Country optional.
+  const isProject = displayType === 'project';
 
   return (
     <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-6">
@@ -108,20 +116,42 @@ export function ContactEnquiryForm() {
             <FormField disabled={locked} type="email" dir="ltr" label={t('fields.email')} name="email" autoComplete="email" required value={fields.email} onChange={(e) => fields.setEmail(e.target.value)} error={errors.email} />
           </div>
           <div className={twoCol}>
-            <FormField disabled={locked} type="tel" dir="ltr" label={t('fields.phone')} name="phone" autoComplete="tel" optional={t('fields.optional')} value={fields.phone} onChange={(e) => fields.setPhone(e.target.value)} error={errors.phone} />
-            <FormField disabled={locked} label={t('fields.country')} name="country" autoComplete="country-name" optional={t('fields.optional')} value={fields.country} onChange={(e) => fields.setCountry(e.target.value)} />
+            <FormField
+              disabled={locked}
+              type="tel"
+              dir="ltr"
+              label={t('fields.phone')}
+              name="phone"
+              autoComplete="tel"
+              required={isProject}
+              optional={isProject ? undefined : t('fields.optional')}
+              value={fields.phone}
+              onChange={(e) => fields.setPhone(e.target.value)}
+              error={errors.phone}
+            />
+            <FormField
+              disabled={locked}
+              label={t('fields.country')}
+              name="country"
+              autoComplete="country-name"
+              required={isProject}
+              optional={isProject ? undefined : t('fields.optional')}
+              value={fields.country}
+              onChange={(e) => fields.setCountry(e.target.value)}
+              error={errors.country}
+            />
           </div>
 
           {displayType === 'general' && (
             <div className={twoCol}>
               <FormField disabled={locked} label={t('fields.company')} name="company" autoComplete="organization" optional={t('fields.optional')} value={fields.company} onChange={(e) => fields.setCompany(e.target.value)} />
-              <FormField disabled={locked} label={t('fields.jobTitle')} name="jobTitle" autoComplete="organization-title" optional={t('fields.optional')} value={fields.jobTitle} onChange={(e) => fields.setJobTitle(e.target.value)} />
+              <FormField disabled={locked} label={t('fields.jobTitle')} name="jobTitle" autoComplete="organization-title" required value={fields.jobTitle} onChange={(e) => fields.setJobTitle(e.target.value)} error={errors.jobTitle} />
             </div>
           )}
 
           {(displayType === 'career' || displayType === 'project') && (
             <div className={twoCol}>
-              <FormField disabled={locked} label={t('fields.jobTitle')} name="jobTitle" autoComplete="organization-title" optional={t('fields.optional')} value={fields.jobTitle} onChange={(e) => fields.setJobTitle(e.target.value)} />
+              <FormField disabled={locked} label={t('fields.jobTitle')} name="jobTitle" autoComplete="organization-title" required value={fields.jobTitle} onChange={(e) => fields.setJobTitle(e.target.value)} error={errors.jobTitle} />
             </div>
           )}
         </div>
@@ -162,8 +192,8 @@ export function ContactEnquiryForm() {
             <div className="flex flex-col gap-3">
               <SectionLabel>{t('sections.projectDetails')}</SectionLabel>
               <div className={twoCol}>
-                <FormField disabled={locked} label={t('fields.projectName')} name="projectName" optional={t('fields.optional')} value={fields.projectName} onChange={(e) => fields.setProjectName(e.target.value)} />
-                <FormField disabled={locked} label={t('fields.projectLocation')} name="projectLocation" optional={t('fields.optional')} value={fields.projectLocation} onChange={(e) => fields.setProjectLocation(e.target.value)} />
+                <FormField disabled={locked} label={t('fields.projectName')} name="projectName" required value={fields.projectName} onChange={(e) => fields.setProjectName(e.target.value)} error={errors.projectName} />
+                <FormField disabled={locked} label={t('fields.projectLocation')} name="projectLocation" required value={fields.projectLocation} onChange={(e) => fields.setProjectLocation(e.target.value)} error={errors.projectLocation} />
               </div>
               <div className={twoCol}>
                 <FormField disabled={locked} as="select" label={t('fields.projectType')} name="projectType" required value={fields.projectType} onChange={(e) => fields.setProjectType(e.target.value)} error={errors.projectType}>
@@ -176,7 +206,15 @@ export function ContactEnquiryForm() {
                     </option>
                   ))}
                 </FormField>
-                <CurrencyAmountField currency={fields.currency} onCurrencyChange={fields.setCurrency} amount={fields.projectValue} onAmountChange={fields.setProjectValue} />
+                <CurrencyAmountField
+                  disabled={locked}
+                  required
+                  currency={fields.currency}
+                  onCurrencyChange={fields.setCurrency}
+                  amount={fields.projectValue}
+                  onAmountChange={fields.setProjectValue}
+                  error={errors.projectValue}
+                />
               </div>
               <FormField
                 disabled={locked}

@@ -63,6 +63,8 @@ export function FormField(props: FormFieldProps | FormFieldTextareaProps | FormF
       {as === 'textarea' ? (
         <textarea
           id={id}
+          required={required}
+          aria-required={required}
           aria-invalid={Boolean(error)}
           aria-describedby={describedBy}
           rows={5}
@@ -74,6 +76,8 @@ export function FormField(props: FormFieldProps | FormFieldTextareaProps | FormF
         <div className="relative">
           <select
             id={id}
+            required={required}
+            aria-required={required}
             aria-invalid={Boolean(error)}
             aria-describedby={describedBy}
             disabled={disabled}
@@ -91,6 +95,8 @@ export function FormField(props: FormFieldProps | FormFieldTextareaProps | FormF
       ) : (
         <input
           id={id}
+          required={required}
+          aria-required={required}
           aria-invalid={Boolean(error)}
           aria-describedby={describedBy}
           disabled={disabled}

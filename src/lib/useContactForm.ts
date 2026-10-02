@@ -8,7 +8,24 @@ export const CV_ACCEPTED_EXTENSIONS = '.pdf,.doc,.docx';
 export const CV_MAX_SIZE_BYTES = 10 * 1024 * 1024; // 10 MB
 
 export type ContactFieldErrors = Partial<
-  Record<'fullName' | 'email' | 'phone' | 'subject' | 'message' | 'jobCode' | 'cv' | 'companyName' | 'projectType' | 'projectDescription', string>
+  Record<
+    | 'fullName'
+    | 'email'
+    | 'phone'
+    | 'country'
+    | 'jobTitle'
+    | 'subject'
+    | 'message'
+    | 'jobCode'
+    | 'cv'
+    | 'companyName'
+    | 'projectName'
+    | 'projectLocation'
+    | 'projectValue'
+    | 'projectType'
+    | 'projectDescription',
+    string
+  >
 >;
 
 export interface ContactValidationMessages {
@@ -16,6 +33,8 @@ export interface ContactValidationMessages {
   email: string;
   emailInvalid: string;
   phone: string;
+  country: string;
+  jobTitle: string;
   subject: string;
   message: string;
   jobCode: string;
@@ -23,6 +42,9 @@ export interface ContactValidationMessages {
   cvType: string;
   cvSize: string;
   companyName: string;
+  projectName: string;
+  projectLocation: string;
+  projectValue: string;
   projectType: string;
   projectDescription: string;
 }
@@ -46,7 +68,7 @@ export function useContactForm(messages: ContactValidationMessages) {
   // (see EnquiryTypeTabs in ContactEnquiryForm) before the form appears.
   // Every visit starts unselected, including ?type=general/career/project
   // deep links — that query param is intentionally never read into state.
-  const [enquiryType, setEnquiryType] = useState<ContactEnquiryType | null>(null);
+  const [enquiryType, setEnquiryTypeState] = useState<ContactEnquiryType | null>(null);
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -78,6 +100,15 @@ export function useContactForm(messages: ContactValidationMessages) {
   const [errors, setErrors] = useState<ContactFieldErrors>({});
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
+  // Category-specific requirements differ (e.g. Phone/Country are required
+  // only for Project), so a stale error from the previous category must not
+  // linger after switching — otherwise a field can render as "(optional)"
+  // while still showing a leftover red required-field error beneath it.
+  function setEnquiryType(next: ContactEnquiryType) {
+    setErrors({});
+    setEnquiryTypeState(next);
+  }
+
   // A deep-linked ?job=XXXX (e.g. from a job listing) still prefills the job
   // code field — but never the enquiry type itself; that stays a deliberate
   // click, see the enquiryType state above.
@@ -99,7 +130,20 @@ export function useContactForm(messages: ContactValidationMessages) {
     if (!fullName.trim()) next.fullName = messages.fullName;
     if (!email.trim()) next.email = messages.email;
     else if (!EMAIL_PATTERN.test(email.trim())) next.email = messages.emailInvalid;
-    if (phone.trim() && !PHONE_PATTERN.test(phone.trim())) next.phone = messages.phone;
+
+    // Phone/country are shown for every enquiry type but only Project makes
+    // them mandatory — General and Career keep them optional, still format-
+    // checking phone only when something was actually entered.
+    if (!phone.trim()) {
+      if (enquiryType === 'project') next.phone = messages.phone;
+    } else if (!PHONE_PATTERN.test(phone.trim())) {
+      next.phone = messages.phone;
+    }
+    if (enquiryType === 'project' && !country.trim()) next.country = messages.country;
+
+    // Job Title / Position is shared across all three enquiry types and is
+    // required in every one of them.
+    if (!jobTitle.trim()) next.jobTitle = messages.jobTitle;
 
     if (enquiryType === 'general') {
       if (!subject.trim()) next.subject = messages.subject;
@@ -114,6 +158,9 @@ export function useContactForm(messages: ContactValidationMessages) {
 
     if (enquiryType === 'project') {
       if (!companyName.trim()) next.companyName = messages.companyName;
+      if (!projectName.trim()) next.projectName = messages.projectName;
+      if (!projectLocation.trim()) next.projectLocation = messages.projectLocation;
+      if (!projectValue.trim()) next.projectValue = messages.projectValue;
       if (!projectType.trim()) next.projectType = messages.projectType;
       if (!projectDescription.trim()) next.projectDescription = messages.projectDescription;
     }
