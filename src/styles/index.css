@@ -26,6 +26,19 @@
     @apply font-arabic;
   }
 
+  /* Arabic is a cursive script — letter-spacing breaks the joins between
+     letters, so reset any tracking (scale tokens, tracking-* utilities,
+     eyebrow) for everything under an RTL root. */
+  [dir='rtl'] * {
+    letter-spacing: 0 !important;
+  }
+
+  /* Arabic glyphs have taller ascenders/diacritics than Latin; the display/
+     h1/h2 scale's tight line-heights (1.05–1.15) clip them. Relax for RTL. */
+  [dir='rtl'] :is(h1, h2, .text-display, .text-h1, .text-h2) {
+    line-height: 1.25;
+  }
+
   ::selection {
     @apply bg-brand-600 text-warmwhite;
   }

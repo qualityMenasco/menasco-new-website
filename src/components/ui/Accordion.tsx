@@ -84,7 +84,7 @@ export function Accordion({
                 onClick={() => toggle(item.id)}
                 onKeyDown={(event) => handleKeyDown(event, index)}
                 className={cn(
-                  'flex w-full items-center justify-between gap-4 py-5 text-left font-display text-h4 font-semibold transition-colors duration-base',
+                  'flex w-full items-center justify-between gap-4 py-5 text-start font-display text-h4 font-semibold transition-colors duration-base',
                   triggerClassName,
                   isDark ? 'text-warmwhite hover:text-brand-400' : 'text-ink hover:text-brand-600',
                 )}

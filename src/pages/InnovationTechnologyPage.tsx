@@ -1,4 +1,4 @@
-import { Brain, Camera, ClipboardCheck, Cpu, Database, LineChart, Network, ShieldCheck, Workflow } from 'lucide-react';
+import { Brain, Camera, ClipboardCheck, ClipboardList, Cpu, Database, FileSearch, LineChart, Network, Scale, ScanSearch, Users, Workflow } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../components/layout/Section';
 import { Container } from '../components/layout/Container';
@@ -47,7 +47,7 @@ function InnovationHero() {
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-ink/40" />
-      <div className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-transparent rtl:bg-gradient-to-l" />
 
       <Container className="relative z-10 pb-16 pt-28 md:pb-20 md:pt-32">
         <div className="max-w-3xl">
@@ -193,7 +193,7 @@ export default function InnovationTechnologyPage() {
           section shell (image-right this time, alternating into AI's
           image-left) as every other ecosystem section below it. */}
       <EcosystemSection
-        icon={ShieldCheck}
+        icon={Scale}
         eyebrow={s.atlas.eyebrow}
         heading={s.atlas.heading}
         background="warmwhite"
@@ -202,7 +202,7 @@ export default function InnovationTechnologyPage() {
         layout="right"
         paragraph={s.atlas.paragraph}
         highlights={[
-          { icon: ShieldCheck, title: s.atlas.highlights[0] },
+          { icon: FileSearch, title: s.atlas.highlights[0] },
           { icon: Workflow, title: s.atlas.highlights[1] },
           { icon: Brain, title: s.atlas.highlights[2] },
           { icon: Database, title: s.atlas.highlights[3] },
@@ -224,7 +224,7 @@ export default function InnovationTechnologyPage() {
           { icon: Brain, title: s.lynxqc.highlights[0] },
           { icon: Camera, title: s.lynxqc.highlights[1] },
           { icon: Workflow, title: s.lynxqc.highlights[2] },
-          { icon: ClipboardCheck, title: s.lynxqc.highlights[3] },
+          { icon: ClipboardList, title: s.lynxqc.highlights[3] },
         ]}
         secondaryLink={s.lynxqc.privacyPolicyLink ? { label: s.lynxqc.privacyPolicyLink, href: '/lynxqc/privacy-policy' } : undefined}
       />
@@ -242,7 +242,7 @@ export default function InnovationTechnologyPage() {
           { icon: LineChart, title: s.ai.highlights[0] },
           { icon: Workflow, title: s.ai.highlights[1] },
           { icon: Brain, title: s.ai.highlights[2] },
-          { icon: ShieldCheck, title: s.ai.highlights[3] },
+          { icon: ScanSearch, title: s.ai.highlights[3] },
         ]}
       />
 
@@ -276,7 +276,7 @@ export default function InnovationTechnologyPage() {
           { icon: Workflow, title: s.connect.highlights[0] },
           { icon: Network, title: s.connect.highlights[1] },
           { icon: LineChart, title: s.connect.highlights[2] },
-          { icon: ShieldCheck, title: s.connect.highlights[3] },
+          { icon: Users, title: s.connect.highlights[3] },
         ]}
       />
 

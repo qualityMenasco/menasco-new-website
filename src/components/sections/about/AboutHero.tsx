@@ -36,7 +36,7 @@ export function AboutHero() {
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/30" />
-      <div className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-transparent rtl:bg-gradient-to-l" />
 
       <Container className="relative z-10 pb-16 pt-28 md:pb-20 md:pt-32">
         <div className="max-w-3xl">

@@ -16,7 +16,7 @@ import { MenascoLogo } from '../components/brand/MenascoLogo';
 import { Text } from '../components/typography/Typography';
 import { certifications } from '../data/certifications';
 import { officeLocations, primaryContact } from '../data/locations';
-import { footerCompanyLinks, footerLegalLinks, footerProjectLinks, servicesNavigation } from '../data/navigation';
+import { footerCompanyLinks, footerLegalLinks, footerProjectLinks, footerServiceLinks } from '../data/navigation';
 import { socialLinks } from '../data/socialLinks';
 import { COMPANY_PROFILE_PATH } from '../seo/constants';
 
@@ -40,8 +40,7 @@ const footerCompanyKeys: Record<string, string> = {
 const footerProjectKeys: Record<string, string> = {
   'Projects & Sectors': 'projectsAndSectors',
   'Residential & Commercial': 'sectorsList.residentialCommercial',
-  'Hospitality & Leisure': 'sectorsList.hospitalityLeisure',
-  'Landmark & Entertainment': 'sectorsList.landmarkEntertainment',
+  'Hospitality & Landmark Entertainment': 'sectorsList.hospitalityLandmarkEntertainment',
   'Mission-Critical Facilities': 'sectorsList.missionCriticalFacilities',
   'Infrastructure & Utilities': 'sectorsList.infrastructureUtilities',
 };
@@ -50,15 +49,6 @@ const footerLegalKeys: Record<string, string> = {
   'Privacy Policy': 'privacyPolicy',
   Terms: 'terms',
   'LYNXqc Privacy Policy': 'lynxqcPrivacyPolicy',
-};
-
-const servicesNavKeys: Record<string, string> = {
-  'Mechanical Systems': 'servicesList.mechanical',
-  'Electrical & ELV Systems': 'servicesList.electrical',
-  'Plumbing, Water & Drainage Systems': 'servicesList.plumbing',
-  'Fire Protection & Life Safety Systems': 'servicesList.firesProtection',
-  'BIM & Digital Engineering': 'servicesList.bimDigitalEngineering',
-  'Manufacturing & MEP Prefabrication': 'servicesList.manufacturingPrefabrication',
 };
 
 const locationKeys: Record<string, string> = { dubai: 'dubai', riyadh: 'riyadh', cairo: 'cairo', london: 'london' };
@@ -98,7 +88,7 @@ export function SiteFooter() {
           </ButtonLink>
         </div>
         <FooterLinkGroup heading={t('common:footer.company')} links={translatedLinks(footerCompanyLinks, footerCompanyKeys)} />
-        <FooterLinkGroup heading={t('common:footer.services')} links={translatedLinks(servicesNavigation, servicesNavKeys)} />
+        <FooterLinkGroup heading={t('common:footer.services')} links={footerServiceLinks.map((link) => ({ label: t(link.i18nKey), href: link.href }))} />
         <FooterLinkGroup heading={t('common:footer.projects')} links={translatedLinks(footerProjectLinks, footerProjectKeys)} />
       </div>
 

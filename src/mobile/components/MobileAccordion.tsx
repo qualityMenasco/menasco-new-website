@@ -24,7 +24,7 @@ export function MobileAccordion({ title, children, defaultOpen = false, classNam
         onClick={() => setIsOpen((value) => !value)}
         aria-expanded={isOpen}
         aria-controls={panelId}
-        className="flex w-full items-center justify-between gap-3 py-4 text-left"
+        className="flex w-full items-center justify-between gap-3 py-4 text-start"
       >
         <span className="font-display text-body-lg font-semibold text-ink">{title}</span>
         <ChevronDown

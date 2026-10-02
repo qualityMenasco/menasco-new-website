@@ -1,5 +1,6 @@
 import { Navigate, useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { cn } from '../../lib/utils';
 import { SectionHeader } from '../components/SectionHeader';
 import { MobileCTA } from '../components/MobileCTA';
 import { LocaleLink } from '../components/LocaleLink';
@@ -8,7 +9,7 @@ import { SEO } from '../../seo/SEO';
 import { serviceEntity } from '../../seo/structuredData';
 import { buildProjectFallbackDescription, pickProjectSeoDescription, formatProjectLocation } from '../../seo/projectDescription';
 import { SITE_URL } from '../../seo/constants';
-import { projects } from '../../data/projects';
+import { projects, getMainContractor } from '../../data/projects';
 import { projectCategories } from '../../data/projectCategories';
 import { getProjectImage } from '../../data/images';
 import { translateProjectLocation } from '../../lib/projectLocation';
@@ -16,9 +17,9 @@ import { getLocaleFromPath } from '../../lib/locale';
 
 const categoryKeys: Record<string, string> = {
   'residential-commercial': 'residentialCommercial',
-  hotels: 'hospitality',
-  'landmark-entertainment': 'landmarkEntertainment',
+  'hospitality-landmark-entertainment': 'hospitalityLandmarkEntertainment',
   'advanced-technical-facilities': 'advancedTechnicalFacilities',
+  'infrastructure-utilities': 'infrastructureUtilities',
 };
 
 const statusKeys: Record<string, string> = {
@@ -70,8 +71,16 @@ export default function ProjectDetailPage() {
       : project.safetyRecord
     : undefined;
   const pendingValue = t('projects:detail.pendingValue');
+  const scopeKey = `projects:items.${project.slug}.menascoScope`;
+  const translatedScope = t(scopeKey);
+  // Only verified records show scope — the mobile page has no "pending verification" badge to qualify unconfirmed details the way desktop does.
+  const menascoScope =
+    project.menascoScope && project.verificationStatus === 'verified' ? (translatedScope === scopeKey ? project.menascoScope : translatedScope) : '';
 
-  // Fixed 3×2 order (2×3 on mobile): Workforce Hours / Status / Completion, then Safety / Category / Location.
+  // Order: Workforce Hours / Status / Completion, then Safety / Category /
+  // Location, then Main Contractor last — its trailing position is what lets
+  // the 2-col grid below span it full-width for the 7th slot instead of
+  // leaving a narrow orphan card.
   const highlightStats = [
     { label: t('projects:detail.workforceHoursLabel'), value: workforceHours },
     { label: t('projects:detail.statusLabel'), value: translatedStatus },
@@ -79,6 +88,7 @@ export default function ProjectDetailPage() {
     { label: t('projects:detail.safetyRecordLabel'), value: safetyRecord },
     { label: t('projects:detail.categoryLabel'), value: categoryTitle || sector || undefined },
     { label: t('projects:detail.locationLabel'), value: translatedLocation || undefined },
+    { label: t('projects:detail.mainContractorLabel'), value: getMainContractor(project) },
   ];
 
   return (
@@ -135,10 +145,13 @@ export default function ProjectDetailPage() {
           {t('projects:detail.projectHighlights')}
         </h3>
         <div className="mt-5 grid grid-cols-2 gap-2.5">
-          {highlightStats.map((stat) => (
+          {highlightStats.map((stat, index) => (
             <div
               key={stat.label}
-              className="flex flex-col gap-1 rounded-sm border border-transparent bg-gradient-to-b from-[#fffdfa] via-warmwhite to-stone px-3.5 py-3 shadow-[0_2px_8px_-2px_rgba(10,11,13,0.07)]"
+              className={cn(
+                'flex flex-col gap-1 rounded-sm border border-transparent bg-gradient-to-b from-[#fffdfa] via-warmwhite to-stone px-3.5 py-3 shadow-[0_2px_8px_-2px_rgba(10,11,13,0.07)]',
+                index === highlightStats.length - 1 && highlightStats.length % 2 === 1 && 'col-span-2',
+              )}
             >
               <span className="text-caption font-semibold uppercase tracking-wide text-gray-500">{stat.label}</span>
               {stat.value ? (
@@ -149,11 +162,21 @@ export default function ProjectDetailPage() {
             </div>
           ))}
         </div>
+        {menascoScope && (
+          <p className="mt-6 text-body text-gray-600">
+            <strong className="font-semibold text-ink">{t('projects:detail.scopeOfWork')}</strong>{' '}
+            <span className="text-brand-700">{menascoScope}</span>
+          </p>
+        )}
       </section>
 
       <MobileCTA
         heading={t('projects:detail.discussSimilarProject')}
-        primary={{ label: t('projects:detail.viewAllProjects'), href: '/projects/categories' }}
+        primary={{ label: t('common:buttons.requestQuote'), href: '/contact?type=project' }}
+        secondary={{
+          label: t('projects:detail.viewAllProjects'),
+          href: category ? `/projects/categories?category=${category.slug}` : '/projects/categories',
+        }}
       />
     </>
   );

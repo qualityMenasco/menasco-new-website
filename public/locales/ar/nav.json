@@ -31,14 +31,23 @@
     "plumbing": "أعمال السباكة",
     "firesProtection": "الحماية من الحرائق",
     "bimDigitalEngineering": "نمذجة معلومات البناء والهندسة الرقمية",
-    "manufacturingPrefabrication": "التصنيع والتجميع المسبق"
+    "manufacturingPrefabrication": "التصنيع والتجميع المسبق",
+    "modular": "الوحدات المعيارية",
+    "custom": "التصنيع حسب الطلب"
   },
   "primaryNavigation": "التنقل الرئيسي",
   "sectorsList": {
     "residentialCommercial": "سكني وتجاري",
-    "hospitalityLeisure": "الضيافة والترفيه",
-    "landmarkEntertainment": "المعالم البارزة والترفيه",
+    "hospitalityLandmarkEntertainment": "الضيافة والمعالم الترفيهية",
     "missionCriticalFacilities": "المرافق الحساسة",
     "infrastructureUtilities": "البنية التحتية والمرافق"
+  },
+  "certificationTraining": "شهادات وتدريب ميناسكو",
+  "dataCentres": "مراكز البيانات",
+  "servicesGroups": {
+    "mep": "الأعمال الكهروميكانيكية (MEP)",
+    "civil": "الأعمال المدنية",
+    "manufacturingPrefabrication": "التصنيع والتجميع المسبق",
+    "turnkeyDevelopments": "مشاريع تسليم المفتاح"
   }
 }

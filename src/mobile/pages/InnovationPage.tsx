@@ -1,4 +1,4 @@
-import { Brain, ClipboardCheck, Database, Network, ShieldCheck } from 'lucide-react';
+import { Brain, ClipboardCheck, Database, Network, Scale } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../components/SectionHeader';
 import { MobileTechnologyCard } from '../components/MobileTechnologyCard';
@@ -35,7 +35,7 @@ export default function InnovationPage() {
 
         <div className="mt-5 flex flex-col gap-4">
           <MobileTechnologyCard
-            icon={ShieldCheck}
+            icon={Scale}
             eyebrow={t('innovationMobile.cards.atlas.eyebrow')}
             title={t('innovationMobile.cards.atlas.title')}
             summary={t('innovationMobile.cards.atlas.summary')}

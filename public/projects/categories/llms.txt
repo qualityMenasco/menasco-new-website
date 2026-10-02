@@ -5,8 +5,7 @@
 ## Sectors
 
 - Residential / Commercial (13): Integrated engineering solutions for residential, commercial, office, and mixed-use developments.
-- Hospitality (2): High-performance MEP delivery for premium hospitality, resort, and hotel environments.
-- Landmark Entertainment (1): Complex engineering for destination, entertainment, cultural, and landmark developments.
+- Hospitality & Landmark Entertainment (3): High-performance MEP delivery for premium hospitality, resort, cultural landmark, and entertainment destination environments.
 - Advanced Technical Facilities (7): Specialist engineering for data centres, mission-critical, healthcare, energy, and technically demanding facilities.
 
 ---

@@ -31,7 +31,7 @@ export function DigitalEngineering() {
           <Text variant="body-lg" theme="dark">
             {t('digitalEngineering.description')}
           </Text>
-          <ProfessionalList variant="check" items={capabilities} theme="dark" columns={2} gap="sm" />
+          <ProfessionalList variant="rule" items={capabilities} theme="dark" columns={2} gap="md" className="mt-2 sm:gap-y-6" />
           <ButtonLink href="/services/bim-digital-engineering" variant="primary" className="w-fit self-end">
             {t('digitalEngineering.cta')}
           </ButtonLink>

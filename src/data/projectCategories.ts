@@ -20,7 +20,10 @@ export interface ProjectCategoryMeta {
  * Replaced the original three categories (Hotel / Residential, Landmark
  * Entertainment, Mission-Critical) with four (2026-08-06) — every project
  * was reassigned to whichever of these best represents its primary use;
- * see src/data/projects.ts for the per-project category field.
+ * see src/data/projects.ts for the per-project category field. `Hospitality`
+ * and `Landmark Entertainment` were then merged back into one combined
+ * sector, `Hospitality & Landmark Entertainment` (2026-09-30), leaving
+ * three categories.
  */
 export const projectCategories: Record<string, ProjectCategoryMeta> = {
   'residential-commercial': {
@@ -31,20 +34,12 @@ export const projectCategories: Record<string, ProjectCategoryMeta> = {
     order: 1,
     featuredProjectId: 'vela-by-omniyat',
   },
-  hotels: {
-    id: 'hotels',
-    slug: 'hotels',
-    title: 'Hospitality',
-    description: 'High-performance MEP delivery for premium hospitality, resort, and hotel environments.',
+  'hospitality-landmark-entertainment': {
+    id: 'hospitality-landmark-entertainment',
+    slug: 'hospitality-landmark-entertainment',
+    title: 'Hospitality & Landmark Entertainment',
+    description: 'High-performance MEP delivery for premium hospitality, resort, cultural landmark, and entertainment destination environments.',
     order: 2,
-    featuredProjectId: null,
-  },
-  'landmark-entertainment': {
-    id: 'landmark-entertainment',
-    slug: 'landmark-entertainment',
-    title: 'Landmark Entertainment',
-    description: 'Complex engineering for destination, entertainment, cultural, and landmark developments.',
-    order: 3,
     featuredProjectId: 'qiddiya',
   },
   'advanced-technical-facilities': {
@@ -52,6 +47,20 @@ export const projectCategories: Record<string, ProjectCategoryMeta> = {
     slug: 'advanced-technical-facilities',
     title: 'Advanced Technical Facilities',
     description: 'Specialist engineering for data centres, mission-critical, healthcare, energy, and technically demanding facilities.',
+    order: 3,
+    featuredProjectId: null,
+  },
+  // Added 2026-09-30 as an approved taxonomy addition — no projects exist for
+  // it yet, so `description` deliberately carries no discipline/capability
+  // language (no civil works, roads, utilities claims etc. — none of that is
+  // approved). See scripts/generate-llms.ts, which excludes any category
+  // with zero projects from the public sector listing, so this text is not
+  // published anywhere until real projects justify a real description.
+  'infrastructure-utilities': {
+    id: 'infrastructure-utilities',
+    slug: 'infrastructure-utilities',
+    title: 'Infrastructure & Utilities',
+    description: 'Category reserved for future projects — detailed scope has not yet been published.',
     order: 4,
     featuredProjectId: null,
   },
@@ -60,14 +69,18 @@ export const projectCategories: Record<string, ProjectCategoryMeta> = {
 export const projectCategoryList = Object.values(projectCategories).sort((a, b) => a.order - b.order);
 
 /**
- * Old category slugs this taxonomy replaced (2026-08-06), mapped to their
- * closest new equivalent — kept only so existing bookmarks/links using
- * `?sector=<old-slug>` (or the retired per-category routes) still land on
- * the right category instead of silently landing on "All Projects".
+ * Old category slugs this taxonomy replaced, mapped to their closest current
+ * equivalent — kept only so existing bookmarks/links using `?sector=<old-slug>`
+ * (or the retired per-category routes) still land on the right category
+ * instead of silently landing on "All Projects".
+ *
+ * `hotels` and `landmark-entertainment` were themselves merged into
+ * `hospitality-landmark-entertainment` (2026-09-30) — both map here now.
  */
 export const legacyCategorySlugMap: Record<string, string> = {
   'hotel-residential': 'residential-commercial',
-  'landmark-entertainment': 'landmark-entertainment',
+  hotels: 'hospitality-landmark-entertainment',
+  'landmark-entertainment': 'hospitality-landmark-entertainment',
   'mission-critical': 'advanced-technical-facilities',
 };
 

@@ -62,7 +62,7 @@ export function CvUploadField({ value, onChange, error }: CvUploadFieldProps) {
         onChange={(event) => onChange(event.target.files?.[0] ?? null)}
       />
       <span className="text-caption text-gray-500">{t('fields.cvHelper')}</span>
-      <span className="text-caption text-gray-400">{t('fields.cvBackendNote')}</span>
+      <span className="text-caption text-gray-600">{t('fields.cvBackendNote')}</span>
       {error && (
         <span id={errorId} role="alert" className="text-caption font-medium text-error">
           {error}

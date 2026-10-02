@@ -7,7 +7,6 @@ const statKeys: Record<string, string> = {
   projects: 'stats.projects',
   years: 'stats.years',
   countries: 'stats.countries',
-  workforce: 'stats.workforce',
 };
 
 const verifiedStats = companyStats.filter((stat) => stat.verificationStatus === 'verified');
@@ -23,11 +22,11 @@ export function CompanyStatistics() {
     <Section background="warmwhite" spacing="lg" edgeFade>
       <Statistic
         layout="grid"
-        columns={4}
+        columns={3}
         size="lg"
         items={verifiedStats.map((stat) => ({ value: stat.value, label: t(statKeys[stat.id] ?? stat.label), animate: true }))}
         theme="light"
-        className="pt-4"
+        className="pt-4 lg:!grid-cols-[repeat(3,minmax(0,260px))] lg:!justify-center lg:gap-x-14"
       />
     </Section>
   );

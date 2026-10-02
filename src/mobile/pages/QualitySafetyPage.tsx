@@ -1,4 +1,4 @@
-import { Award, Leaf, ShieldCheck } from 'lucide-react';
+import { Award, HardHat, Leaf } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../components/SectionHeader';
@@ -10,7 +10,7 @@ import { certifications } from '../../data/certifications';
 const certificationIcons: Record<string, LucideIcon> = {
   'ISO 9001:2015': Award,
   'ISO 14001:2015': Leaf,
-  'ISO 45001:2018': ShieldCheck,
+  'ISO 45001:2018': HardHat,
 };
 
 const certificationScopeKeys: Record<string, string> = {

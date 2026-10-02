@@ -99,7 +99,9 @@ function MobileShell() {
       <SkipLink t={t} />
       <MobileHeader onOpenMenu={() => setIsMenuOpen(true)} />
       <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
-      <main id="main-content" className="pb-16">
+      {/* No bottom padding here — MobileFooter's own pb-24 already clears the fixed bottom nav; padding on <main> left a light strip between each page's closing CTA band and the dark footer. */}
+      {/* tabIndex -1: focusable target for the skip link and BackToTopButton's focus hand-off. */}
+      <main id="main-content" tabIndex={-1} className="outline-none">
         <Outlet />
       </main>
       <MobileFooter />

@@ -6,6 +6,8 @@ export interface NavLink {
 
 export interface NavColumn {
   heading: string;
+  /** Set when the group itself has a landing page — the heading renders as a link. */
+  href?: string;
   links: NavLink[];
 }
 
@@ -23,5 +25,7 @@ export interface NavItem {
   megaMenu?: {
     columns: NavColumn[];
     featured?: NavFeatured;
+    /** Full-width row of secondary links beneath the columns (e.g. "All services"). */
+    footerLinks?: NavLink[];
   };
 }

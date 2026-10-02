@@ -25,8 +25,10 @@ export function MobileFooter() {
   const headquarters = officeLocations.find((location) => location.isHeadquarters) ?? officeLocations[0];
   const hqKey = locationKeys[headquarters.id];
 
+  // Bottom clearance = fixed bottom nav (49px) + BackToTopButton (12px gap + 44px) + breathing room,
+  // plus the home-indicator safe area — keeps the last legal links clear of both at the end of every page.
   return (
-    <footer className="bg-ink pb-24 pt-10 text-warmwhite">
+    <footer className="bg-ink pb-[calc(8rem+env(safe-area-inset-bottom))] pt-10 text-warmwhite">
       <div className="flex flex-col gap-6 px-4">
         <MenascoLogo className="h-9" onDark />
         <p className="text-small text-gray-300">{t('common:footer.description')}</p>

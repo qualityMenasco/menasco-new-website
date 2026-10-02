@@ -72,7 +72,7 @@ export function escapeHtml(value: string): string {
   return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-/** Same rule as src/seo/SEO.tsx / scripts/generate-seo-html.ts's fullTitle: a topic that already carries the site name is used verbatim. */
+/** Same rule as src/seo/SEO.tsx / scripts/seo/routes.ts's fullTitle: a topic that already carries the site name is used verbatim. */
 function fullTitle(title: string): string {
   return title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
 }

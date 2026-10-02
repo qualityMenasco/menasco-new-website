@@ -13,7 +13,7 @@ export function MobileHero() {
   const { t } = useTranslation(['home', 'common']);
 
   return (
-    <section className="relative flex min-h-[62vh] w-full items-end overflow-hidden bg-ink">
+    <section className="relative flex min-h-[62svh] w-full items-end overflow-hidden bg-ink">
       <div className="absolute inset-0">
         <MobileVideo src="/menasco-landing-clean.mp4" poster="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=70" alt="" />
       </div>
@@ -23,7 +23,7 @@ export function MobileHero() {
         <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-400">
           {t('home:hero.eyebrow', { year: foundingYear })}
         </span>
-        <h2 className="font-display text-h1 font-semibold leading-tight text-warmwhite">{t('home:hero.title')}</h2>
+        <h1 className="font-display text-h1 font-semibold leading-tight text-warmwhite">{t('home:hero.title')}</h1>
         <p className="max-w-sm text-body text-gray-200">{t('home:hero.description')}</p>
         <div className="mt-3">
           <LocaleLink

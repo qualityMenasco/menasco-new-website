@@ -73,6 +73,14 @@ const routeChildren: RouteObject[] = [
     path: 'services/manufacturing-prefabrication',
     element: responsivePage(() => import('../pages/services/ManufacturingPrefabricationPage'), () => import('../mobile/pages/services/ManufacturingPrefabricationPage')),
   },
+  // Structure-only pages for the grouped Services / About IA — single
+  // shared implementation, noIndex until approved content exists (see
+  // pendingContentPaths in data/navigation.ts).
+  { path: 'services/mep', element: lazyPage(() => import('../pages/PendingContentPages').then((m) => ({ default: m.MepPage }))) },
+  { path: 'services/civil', element: lazyPage(() => import('../pages/PendingContentPages').then((m) => ({ default: m.CivilPage }))) },
+  { path: 'services/manufacturing-prefabrication/modular', element: lazyPage(() => import('../pages/PendingContentPages').then((m) => ({ default: m.ModularPage }))) },
+  { path: 'services/manufacturing-prefabrication/custom', element: lazyPage(() => import('../pages/PendingContentPages').then((m) => ({ default: m.CustomPage }))) },
+  { path: 'services/turnkey-developments', element: lazyPage(() => import('../pages/PendingContentPages').then((m) => ({ default: m.TurnkeyDevelopmentsPage }))) },
   { path: 'services/:slug', element: responsivePage(() => import('../pages/ServiceDetailPage'), () => import('../mobile/pages/ServiceDetailPage')) },
   // The old standalone Projects landing page (large VELA/Saudi F1 banners) is
   // retired — "Explore Our Projects" now scrolls to the homepage's own
@@ -88,13 +96,14 @@ const routeChildren: RouteObject[] = [
   // slugs, from before the 2026-08-06 move to four categories) only
   // exist so old bookmarks/links still land on the right category.
   { path: 'projects/hotel-residential', element: <LocaleNavigate to="/projects/categories?category=residential-commercial" /> },
-  { path: 'projects/landmark-entertainment', element: <LocaleNavigate to="/projects/categories?category=landmark-entertainment" /> },
+  { path: 'projects/landmark-entertainment', element: <LocaleNavigate to="/projects/categories?category=hospitality-landmark-entertainment" /> },
   { path: 'projects/mission-critical', element: <LocaleNavigate to="/projects/categories?category=advanced-technical-facilities" /> },
   { path: 'projects/:slug', element: responsivePage(() => import('../pages/ProjectDetailPage'), () => import('../mobile/pages/ProjectDetailPage')) },
   // The standalone Sectors page is retired — Project Categories is now the
   // single hub for browsing by sector. This route only exists so old
   // bookmarks/links to the bare /sectors URL still land somewhere real.
   { path: 'sectors', element: <LocaleNavigate to="/projects/categories" /> },
+  { path: 'certification-training', element: lazyPage(() => import('../pages/PendingContentPages').then((m) => ({ default: m.CertificationTrainingPage }))) },
   { path: 'quality-safety', element: responsivePage(() => import('../pages/QualitySafetyPage'), () => import('../mobile/pages/QualitySafetyPage')) },
   { path: 'team', element: responsivePage(() => import('../pages/TeamPage'), () => import('../mobile/pages/TeamPage')) },
   { path: 'esg-reporting', element: responsivePage(() => import('../pages/ESGReportingPage'), () => import('../mobile/pages/ESGReportingPage')) },

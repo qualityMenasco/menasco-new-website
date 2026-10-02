@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { cn } from '../lib/utils';
 import { LocaleLink } from './LocaleLink';
-import { getLocaleFromPath, withLocale } from '../../lib/locale';
+import { getLocaleFromPath, stripLocale, withLocale } from '../../lib/locale';
 
 export interface MobileBottomNavProps {
   onOpenMenu: () => void;
@@ -21,6 +21,7 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
   const { t } = useTranslation('nav');
   const { pathname } = useLocation();
   const locale = getLocaleFromPath(pathname);
+  const isHomePage = stripLocale(pathname) === '/';
 
   return (
     <nav
@@ -30,7 +31,8 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
       <div className="grid grid-cols-5">
         {items.map((item) => {
           const target = withLocale(item.href, locale);
-          const isActive = pathname === target || (target !== withLocale('/', locale) && pathname.startsWith(`${target}/`));
+          // Homepage ('/', '/ar', '/ar/') is a neutral state — no tab is marked current there.
+          const isActive = !isHomePage && (pathname === target || (target !== withLocale('/', locale) && pathname.startsWith(`${target}/`)));
           return (
             <LocaleLink
               key={item.href}
@@ -38,7 +40,7 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
               aria-current={isActive ? 'page' : undefined}
               className={cn(
                 'flex min-h-[48px] flex-col items-center justify-center gap-0.5 text-[10px] font-semibold leading-none tracking-tight',
-                isActive ? 'text-brand-600' : 'text-gray-500',
+                isActive ? 'text-brand-600' : 'text-gray-600',
               )}
             >
               <item.icon size={20} aria-hidden="true" />
@@ -49,7 +51,7 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
         <button
           type="button"
           onClick={onOpenMenu}
-          className="flex min-h-[48px] flex-col items-center justify-center gap-0.5 text-[10px] font-semibold leading-none tracking-tight text-gray-500"
+          className="flex min-h-[48px] flex-col items-center justify-center gap-0.5 text-[10px] font-semibold leading-none tracking-tight text-gray-600"
         >
           <MenuIcon size={20} aria-hidden="true" />
           <span className="whitespace-nowrap">{t('menu')}</span>

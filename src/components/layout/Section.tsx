@@ -25,6 +25,15 @@ const spacingClasses: Record<SectionSpacing, string> = {
   lg: 'py-16 md:py-24',
 };
 
+// Same bottom padding as `spacingClasses`, but no top padding — used by
+// `joinTop` so two adjacent same-surface sections share one gap instead of
+// stacking both paddings.
+const joinTopSpacingClasses: Record<SectionSpacing, string> = {
+  sm: 'pt-0 pb-10 md:pb-14',
+  md: 'pt-0 pb-14 md:pb-20',
+  lg: 'pt-0 pb-16 md:pb-24',
+};
+
 export interface SectionProps extends HTMLAttributes<HTMLElement> {
   background?: SectionBackground;
   /** Content theme. Defaults to a value inferred from `background`. */
@@ -40,6 +49,12 @@ export interface SectionProps extends HTMLAttributes<HTMLElement> {
    * every existing page keeps its current hard edges unless this is set.
    */
   edgeFade?: boolean;
+  /**
+   * Removes the section's top padding. Opt-in, only for a section that sits
+   * directly below another section on the SAME background, so the pair reads
+   * as one gap (the previous section's bottom padding) rather than doubling.
+   */
+  joinTop?: boolean;
   children: ReactNode;
 }
 
@@ -51,6 +66,7 @@ export function Section({
   containerWidth = 'standard',
   disableContainer = false,
   edgeFade = false,
+  joinTop = false,
   id,
   className,
   children,
@@ -71,7 +87,7 @@ export function Section({
         className={cn(
           'relative',
           backgroundClasses[background],
-          spacingClasses[spacing],
+          joinTop ? joinTopSpacingClasses[spacing] : spacingClasses[spacing],
           border === 'top' || border === 'both' ? cn('border-t', borderColor) : undefined,
           border === 'bottom' || border === 'both' ? cn('border-b', borderColor) : undefined,
           className,

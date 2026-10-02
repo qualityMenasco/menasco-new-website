@@ -77,7 +77,7 @@ function FeaturedLeader({ profile, imageSide }: FeaturedLeaderProps) {
         {isBahaa && closingLine && (
           <Text
             variant="body"
-            className="mt-3 border-l-2 border-brand-500 pl-4 text-[0.9375rem] font-semibold leading-[1.55] text-ink"
+            className="mt-3 border-s-2 border-brand-500 ps-4 text-[0.9375rem] font-semibold leading-[1.55] text-ink"
           >
             {closingLine}
           </Text>

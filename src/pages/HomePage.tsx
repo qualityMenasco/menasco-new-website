@@ -11,6 +11,7 @@ import { PrefabricationFeature } from '../components/sections/home/Prefabricatio
 import { QualityAndSafety } from '../components/sections/home/QualityAndSafety';
 import { RegionalPresence } from '../components/sections/home/RegionalPresence';
 import { CareersPreview } from '../components/sections/home/CareersPreview';
+import { CtaBand } from '../components/sections/CtaBand';
 import { ScrollReveal } from '../components/common/ScrollReveal';
 import { SEO } from '../seo/SEO';
 import { organizationJsonLd, websiteJsonLd } from '../seo/structuredData';
@@ -26,11 +27,11 @@ import { organizationJsonLd, websiteJsonLd } from '../seo/structuredData';
  * for what each accepts and how to add an alternate variant.
  */
 export default function HomePage() {
-  const { t } = useTranslation('home');
+  const { t } = useTranslation(['home', 'common']);
 
   return (
     <>
-      <SEO title={t('seo.title')} description={t('seo.description')} path="/" structuredData={[organizationJsonLd(), websiteJsonLd()]} />
+      <SEO title={t('home:seo.title')} description={t('home:seo.description')} path="/" structuredData={[organizationJsonLd(), websiteJsonLd()]} />
       <HomeHeroEditorial />
       <ScrollReveal id="stats">
         <CompanyStatistics />
@@ -65,6 +66,13 @@ export default function HomePage() {
       <ScrollReveal id="careers">
         <CareersPreview />
       </ScrollReveal>
+      <CtaBand
+        headingLevel="h1"
+        heading={t('home:finalCta.heading')}
+        description={t('home:finalCta.description')}
+        primary={{ label: t('common:buttons.requestQuote'), href: '/contact?type=project' }}
+        secondary={{ label: t('common:buttons.viewAllServices'), href: '/services' }}
+      />
     </>
   );
 }

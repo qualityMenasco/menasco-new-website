@@ -44,6 +44,18 @@ export interface ProjectRecord {
   capacity?: string;
 }
 
+/**
+ * MENASCO is the main contractor on every project in this portfolio by
+ * default — every current record's own `mainContractor` field is empty (see
+ * the dataset note below), so this fallback is what actually renders today.
+ * A future project where MENASCO held a different role (e.g. a joint
+ * venture, or a trade-only scope under someone else's main contract) can
+ * still override this by setting `mainContractor` explicitly on its own
+ * record — this helper only fills in the default, it never overwrites a
+ * populated value.
+ */
+export const getMainContractor = (project: Pick<ProjectRecord, 'mainContractor'>): string => project.mainContractor || 'MENASCO';
+
 function draftProject(title: string, overrides: Partial<ProjectRecord> = {}): ProjectRecord {
   return {
     id: slugify(title),
@@ -283,7 +295,7 @@ export const projects: ProjectRecord[] = [
     verificationStatus: 'verified',
   }),
   draftProject('Vida Hotel', {
-    category: 'hotels',
+    category: 'hospitality-landmark-entertainment',
     location: 'Sharjah, UAE',
     country: 'UAE',
     sector: 'Luxury Residential / Hospitality',
@@ -409,7 +421,7 @@ export const projects: ProjectRecord[] = [
     verificationStatus: 'verified',
   }),
   draftProject('Seven Hotel', {
-    category: 'hotels',
+    category: 'hospitality-landmark-entertainment',
     location: 'Palm Jumeirah, UAE',
     country: 'UAE',
     sector: 'Luxury Residential / Hospitality',
@@ -476,7 +488,7 @@ export const projects: ProjectRecord[] = [
     menascoScope: 'Engineering, Supply, Installation, Testing & Commissioning Of MEP Systems (HVAC, Plumbing & Electrical)',
     description:
       "Qiddiya City is one of Saudi Arabia's flagship giga-projects under Saudi Vision 2030, a 360 km² entertainment, sports, and residential destination near Riyadh built around the \"Power of Play.\" MENASCO is delivering specialized MEP engineering solutions in support of the development.",
-    category: 'landmark-entertainment',
+    category: 'hospitality-landmark-entertainment',
     // Supplied directly by the user (2026-08-05) — aerial render of the
     // Speed Park Track and surrounding districts at night. Replaces the
     // broken '../images/qiddiya-city-six-flags.jpg' reference that never

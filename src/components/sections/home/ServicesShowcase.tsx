@@ -1,6 +1,5 @@
-import { useEffect, useId, useRef, useState } from 'react';
-import type { KeyboardEvent } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { useId, useState } from 'react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../../layout/Section';
@@ -10,92 +9,51 @@ import { ProfessionalList } from '../../content/ProfessionalList';
 import { ButtonLink } from '../../ui/Button';
 import { SmartLink } from '../../../lib/SmartLink';
 import { cn } from '../../../lib/utils';
-import { services } from '../../../data/services';
+import { serviceI18nKeys, showcaseDisplayGroups, showcaseGroupChildren, isDataCentresLeaf } from '../../../data/services';
+import { dataCentreServiceLink } from '../../../data/navigation';
 
-/** How long each service stays active before auto-advancing. Change this one constant to retune the pace. */
-const AUTO_ROTATE_INTERVAL = 5000;
+/** Default right-panel content before the user expands/selects anything — the first leaf of the first group (today, Mechanical under MEP), not a hardcoded slug, so it stays correct if the taxonomy order ever changes. */
+const defaultLeafHref = showcaseDisplayGroups[0]?.leaves[0]?.href ?? null;
 
-const serviceKeys: Record<string, string> = {
-  mechanical: 'mechanical',
-  electrical: 'electrical',
-  plumbing: 'plumbing',
-  'fire-protection': 'fireProtection',
-  'bim-digital-engineering': 'bimDigitalEngineering',
-  'manufacturing-prefabrication': 'manufacturingPrefabrication',
-};
-
-/**
- * Numbered, image-led service navigator — deliberately not six identical
- * cards. Auto-advances through the list until the user selects one
- * (click or keyboard), at which point it stays put permanently for the
- * rest of the session. Swap for a different ServicesShowcase variant by
- * changing the import in HomePage.tsx.
- */
 export function ServicesShowcase() {
-  const { t } = useTranslation(['home', 'services']);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [hasUserSelected, setHasUserSelected] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isFocusedWithin, setIsFocusedWithin] = useState(false);
-  const [isTabVisible, setIsTabVisible] = useState(true);
+  const { t } = useTranslation(['home', 'services', 'nav', 'common']);
+  const [expandedGroupKey, setExpandedGroupKey] = useState<string | null>(null);
+  const [selectedHref, setSelectedHref] = useState<string | null>(defaultLeafHref);
   const reducedMotion = useReducedMotion();
-  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const uid = useId();
 
-  const active = services[activeIndex];
-  const activeKey = serviceKeys[active.slug] ?? active.slug;
-  const activeName = t(`services:items.${activeKey}.name`);
-  const activeCapabilities = t(`services:items.${activeKey}.capabilities`, {
-    returnObjects: true,
-    defaultValue: active.capabilities,
-  }) as string[];
+  const selectedLeaf = selectedHref ? showcaseDisplayGroups.flatMap((g) => g.leaves).find((leaf) => leaf.href === selectedHref) ?? null : null;
+  const selectedIsDataCentres = selectedLeaf ? isDataCentresLeaf(selectedLeaf) : false;
+  const selectedService = selectedLeaf?.service ?? null;
+  const selectedServiceKey = selectedService ? (serviceI18nKeys[selectedService.slug] ?? selectedService.slug) : null;
+  const selectedName = selectedIsDataCentres
+    ? t(`nav:${dataCentreServiceLink.i18nKey}`)
+    : selectedServiceKey
+      ? t(`services:items.${selectedServiceKey}.name`)
+      : selectedLeaf
+        ? t(`nav:${selectedLeaf.i18nKey}`)
+        : '';
+  const selectedCapabilities = selectedServiceKey
+    ? (t(`services:items.${selectedServiceKey}.capabilities`, { returnObjects: true, defaultValue: selectedService!.capabilities }) as string[])
+    : [];
 
-  useEffect(() => {
-    const handleVisibility = () => setIsTabVisible(document.visibilityState === 'visible');
-    document.addEventListener('visibilitychange', handleVisibility);
-    return () => document.removeEventListener('visibilitychange', handleVisibility);
-  }, []);
-
-  const shouldAutoRotate = !hasUserSelected && !isHovered && !isFocusedWithin && !reducedMotion && isTabVisible;
-
-  useEffect(() => {
-    if (!shouldAutoRotate) return;
-    const interval = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % services.length);
-    }, AUTO_ROTATE_INTERVAL);
-    return () => window.clearInterval(interval);
-  }, [shouldAutoRotate]);
-
-  const selectService = (index: number) => {
-    setActiveIndex(index);
-    setHasUserSelected(true);
-  };
-
-  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
-    const count = services.length;
-    let target: number | null = null;
-    if (event.key === 'ArrowDown') target = (index + 1) % count;
-    else if (event.key === 'ArrowUp') target = (index - 1 + count) % count;
-    else if (event.key === 'Home') target = 0;
-    else if (event.key === 'End') target = count - 1;
-    if (target !== null) {
-      event.preventDefault();
-      selectService(target);
-      tabRefs.current[target]?.focus();
+  const toggleGroup = (group: (typeof showcaseDisplayGroups)[number]) => {
+    const children = showcaseGroupChildren(group);
+    if (expandedGroupKey === group.key) {
+      setExpandedGroupKey(null);
+      return;
     }
+    setExpandedGroupKey(group.key);
+    if (children.length > 0) setSelectedHref(children[0].href);
   };
+
+  const selectChild = (href: string) => setSelectedHref(href);
 
   return (
-    <Section background="warmwhite" spacing="lg" edgeFade>
-      <div
-        className="grid grid-cols-1 items-start gap-8 md:grid-cols-[5fr_4fr] md:items-stretch md:gap-10"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onFocusCapture={() => setIsFocusedWithin(true)}
-        onBlurCapture={(event) => {
-          if (!event.currentTarget.contains(event.relatedTarget as Node)) setIsFocusedWithin(false);
-        }}
-      >
+    // joinTop: CompanyIntroduction directly above is also a warmwhite `lg`
+    // section on the homepage — share one gap instead of 96px + 96px.
+    <Section background="warmwhite" spacing="lg" edgeFade joinTop>
+      <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[5fr_4fr] md:gap-10">
         <Stack space="lg">
           <Stack space="sm">
             <Eyebrow>{t('home:servicesShowcase.eyebrow')}</Eyebrow>
@@ -107,100 +65,149 @@ export function ServicesShowcase() {
             </Text>
           </Stack>
 
-          <ul role="tablist" aria-label="MENASCO services" className="flex flex-col border-t border-gray-200">
-            {services.map((service, index) => {
-              const isActive = index === activeIndex;
-              const key = serviceKeys[service.slug] ?? service.slug;
-              const tabId = `${uid}-tab-${service.id}`;
-              const panelId = `${uid}-panel-${service.id}`;
+          {/* Collapsed by default — only the 5 top-level categories show
+              initially. A group only gets a chevron when it genuinely has
+              subservices (derived from data, never hardcoded per category);
+              the title itself is always a real link to that category's own
+              page, kept as a separate control from the chevron so clicking
+              the name never unexpectedly toggles the accordion instead of
+              navigating. */}
+          <nav aria-label={t('home:servicesShowcase.eyebrow')} className="flex flex-col">
+            {showcaseDisplayGroups.map((group) => {
+              const children = showcaseGroupChildren(group);
+              const isExpandable = children.length > 0;
+              const isExpanded = expandedGroupKey === group.key;
+              const groupName = t(`nav:${group.i18nKey}`);
+              const childrenId = `${uid}-children-${group.key}`;
               return (
-                <li key={service.id} className="relative border-b border-gray-200">
-                  <button
-                    ref={(el) => {
-                      tabRefs.current[index] = el;
-                    }}
-                    type="button"
-                    role="tab"
-                    id={tabId}
-                    aria-selected={isActive}
-                    aria-controls={panelId}
-                    tabIndex={isActive ? 0 : -1}
-                    onClick={() => selectService(index)}
-                    onKeyDown={(event) => handleKeyDown(event, index)}
-                    className={cn(
-                      'group flex w-full items-start gap-4 py-5 text-start transition-colors duration-base',
-                      isActive ? 'text-ink' : 'text-gray-500 hover:text-ink',
-                    )}
-                  >
-                    <span
-                      className={cn(
-                        'mt-0.5 font-display text-small font-semibold tabular-nums transition-colors duration-base',
-                        isActive ? 'text-brand-600' : 'text-gray-400 group-hover:text-brand-600',
-                      )}
+                <div key={group.key} className="border-t border-gray-200">
+                  <div className="flex items-center">
+                    <SmartLink
+                      href={group.href!}
+                      className="flex min-w-0 flex-1 items-center py-3.5 font-display text-h4 font-semibold text-ink transition-colors duration-base hover:text-brand-600"
                     >
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <span className="flex-1">
-                      <span
-                        className={cn(
-                          'block font-display text-h4 font-semibold transition-colors duration-base',
-                          isActive ? 'text-ink' : 'text-gray-500 group-hover:text-ink',
-                        )}
+                      {groupName}
+                    </SmartLink>
+                    {isExpandable && (
+                      <button
+                        type="button"
+                        aria-expanded={isExpanded}
+                        aria-controls={childrenId}
+                        aria-label={t(isExpanded ? 'common:collapseSection' : 'common:expandSection', { name: groupName })}
+                        onClick={() => toggleGroup(group)}
+                        className="flex h-11 w-11 shrink-0 items-center justify-center text-gray-500 transition-colors duration-base hover:text-brand-600"
                       >
-                        {t(`services:items.${key}.name`)}
-                      </span>
-                    </span>
-                  </button>
-                  {isActive && shouldAutoRotate && (
-                    <span className="absolute inset-x-0 bottom-0 h-0.5 overflow-hidden bg-gray-200" aria-hidden="true">
-                      <motion.span
-                        key={`${service.id}-${activeIndex}`}
-                        className="block h-full bg-brand-600"
-                        initial={{ width: '0%' }}
-                        animate={{ width: '100%' }}
-                        transition={{ duration: AUTO_ROTATE_INTERVAL / 1000, ease: 'linear' }}
-                      />
-                    </span>
-                  )}
-                </li>
+                        <ChevronDown
+                          size={18}
+                          aria-hidden="true"
+                          className={cn('transition-transform duration-base', isExpanded && 'rotate-180')}
+                        />
+                      </button>
+                    )}
+                  </div>
+
+                  <AnimatePresence initial={false}>
+                    {isExpandable && isExpanded && (
+                      <motion.div
+                        id={childrenId}
+                        initial={reducedMotion ? undefined : { height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={reducedMotion ? undefined : { height: 0, opacity: 0 }}
+                        transition={{ duration: reducedMotion ? 0 : 0.25, ease: [0.22, 0.61, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="flex flex-col pb-2">
+                          {children.map((leaf) => {
+                            const leafServiceKey = leaf.service ? (serviceI18nKeys[leaf.service.slug] ?? leaf.service.slug) : null;
+                            const leafName = leafServiceKey ? t(`services:items.${leafServiceKey}.name`) : t(`nav:${leaf.i18nKey}`);
+                            const isSelected = selectedHref === leaf.href;
+                            return (
+                              <button
+                                key={leaf.href}
+                                type="button"
+                                aria-current={isSelected ? 'true' : undefined}
+                                onClick={() => selectChild(leaf.href)}
+                                className={cn(
+                                  'flex min-h-11 items-center py-2.5 ps-5 text-start text-body font-medium transition-colors duration-base',
+                                  isSelected ? 'text-brand-600' : 'text-gray-500 hover:text-ink',
+                                )}
+                              >
+                                {leafName}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               );
             })}
-          </ul>
+          </nav>
         </Stack>
 
-        <div className="group relative flex h-full flex-col overflow-hidden rounded-md border border-gray-200 transition-all duration-[220ms] ease-out hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0">
-          <SmartLink
-            href={`/services/${active.slug}`}
-            aria-label={t('home:servicesShowcase.viewService', { name: activeName })}
-            className="absolute inset-0 z-10 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2"
-          />
+        <div className="group relative flex flex-col overflow-hidden rounded-md border border-gray-200 transition-colors duration-base ease-engineered hover:border-gray-400 md:sticky md:top-28 md:min-h-[26rem]">
+          {selectedLeaf && (
+            <SmartLink
+              href={selectedLeaf.href}
+              aria-label={t('home:servicesShowcase.viewService', { name: selectedName })}
+              className="absolute inset-0 z-10 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2"
+            />
+          )}
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.div
-              key={active.id}
-              role="tabpanel"
-              id={`${uid}-panel-${active.id}`}
-              aria-labelledby={`${uid}-tab-${active.id}`}
+              key={selectedLeaf?.href ?? 'default'}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: reducedMotion ? 0 : 0.35, ease: [0.22, 0.61, 0.36, 1] }}
               className="flex h-full flex-col"
             >
-              <div className="aspect-[16/9] shrink-0 overflow-hidden bg-gray-100">
-                <img
-                  src={active.image}
-                  alt=""
-                  className="h-full w-full object-cover transition-transform duration-[220ms] ease-out group-hover:scale-[1.02]"
-                />
-              </div>
-              <div className="flex flex-1 flex-col gap-4 p-6 md:p-7">
-                <Text variant="body-lg">{t(`services:items.${activeKey}.shortDescription`)}</Text>
-                <ProfessionalList
-                  variant="check"
-                  gap="sm"
-                  items={activeCapabilities.slice(0, 4).map((capability) => ({ title: capability }))}
-                />
-              </div>
+              {!selectedLeaf ? (
+                <div className="flex flex-1 flex-col justify-center gap-2 p-6 md:p-7">
+                  <Text variant="body-lg">{t('home:servicesShowcase.description')}</Text>
+                </div>
+              ) : selectedIsDataCentres ? (
+                <>
+                  <div className="aspect-[16/9] shrink-0 overflow-hidden bg-gray-100">
+                    <img
+                      src="/data-center-poster.jpg"
+                      alt=""
+                      className="h-full w-full object-cover transition-transform duration-base ease-engineered group-hover:scale-[1.02]"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col gap-4 p-6 md:p-7">
+                    <Text variant="body-lg">{t('services:dataCenter.hero.description')}</Text>
+                  </div>
+                </>
+              ) : selectedService ? (
+                <>
+                  <div className="aspect-[16/9] shrink-0 overflow-hidden bg-gray-100">
+                    <img
+                      src={selectedService.image}
+                      alt=""
+                      className="h-full w-full object-cover transition-transform duration-base ease-engineered group-hover:scale-[1.02]"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col gap-4 p-6 md:p-7">
+                    <Text variant="body-lg">{t(`services:items.${selectedServiceKey}.shortDescription`)}</Text>
+                    <ProfessionalList
+                      variant="divided"
+                      gap="sm"
+                      items={selectedCapabilities.slice(0, 4).map((capability) => ({ title: capability }))}
+                    />
+                  </div>
+                </>
+              ) : (
+                <div className="flex flex-1 flex-col justify-center gap-2 p-6 md:p-7">
+                  <Text variant="body-lg" className="font-semibold text-ink">
+                    {selectedName}
+                  </Text>
+                  <Text variant="small" muted>
+                    {t('common:pendingContent.notice')}
+                  </Text>
+                </div>
+              )}
             </motion.div>
           </AnimatePresence>
         </div>

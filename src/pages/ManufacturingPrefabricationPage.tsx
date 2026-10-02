@@ -1,4 +1,4 @@
-import { Boxes, Cable, CheckCircle2, Download, FolderKanban, Gauge, Route, Settings2, ShieldCheck, Wind, Wrench, Zap } from 'lucide-react';
+import { ArrowRight, Boxes, Cable, ClipboardList, Download, FolderKanban, Gauge, Route, Settings2, Wind, Wrench, Zap } from 'lucide-react';
 import { Section } from '../components/layout/Section';
 import { Container } from '../components/layout/Container';
 import { Stack } from '../components/layout/Stack';
@@ -14,7 +14,7 @@ import { serviceEntity } from '../seo/structuredData';
 import type { IconComponent } from '../types';
 
 const capabilityIcons: IconComponent[] = [Wind, Boxes, Route, Wrench, Cable, Settings2];
-const qualityIcons: IconComponent[] = [Gauge, ShieldCheck, Zap, FolderKanban];
+const qualityIcons: IconComponent[] = [Gauge, ClipboardList, Zap, FolderKanban];
 
 // Use the shared ProjectHeroBanner for the full-bleed service hero.
 import { ProjectHeroBanner } from '../components/projects/ProjectHeroBanner';
@@ -117,7 +117,7 @@ export default function ManufacturingPrefabricationPage() {
         </Section>
       </ScrollReveal>
 
-      {/* Off-site prefabrication — dark full-width section for visual rhythm, text left + benefits checklist right. */}
+      {/* Off-site prefabrication — dark full-width section for visual rhythm, text left + benefits list right. */}
       <ScrollReveal>
         <Section background="ink" spacing="lg" edgeFade>
           <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16">
@@ -138,7 +138,7 @@ export default function ManufacturingPrefabricationPage() {
                 {t('services:manufacturingPage.offSite.benefitsLabel')}
               </Text>
               <ProfessionalList
-                variant="bullet"
+                variant="divided"
                 theme="dark"
                 columns={2}
                 items={benefits.map((benefit) => ({ title: benefit }))}
@@ -203,7 +203,7 @@ export default function ManufacturingPrefabricationPage() {
                   {t('services:manufacturingPage.closing.description')}
                 </Text>
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                  <ButtonLink href="/projects/categories" variant="primary" leadingIcon={CheckCircle2}>
+                  <ButtonLink href="/projects/categories" variant="primary" trailingIcon={ArrowRight}>
                     {t('services:manufacturingPage.closing.cta')}
                   </ButtonLink>
                 </div>

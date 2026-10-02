@@ -20,6 +20,8 @@
     "sendAnotherEnquiry": "إرسال استفسار آخر",
     "sendEnquiry": "إرسال الاستفسار",
     "explore": "استكشف",
+    "expandSection": "إظهار خدمات {{name}}",
+    "collapseSection": "إخفاء خدمات {{name}}",
     "backToTop": "العودة إلى الأعلى",
     "closeDialog": "إغلاق النافذة",
     "readMore": "قراءة المزيد",
@@ -67,8 +69,13 @@
   "certifications": {
     "qualityManagement": "إدارة الجودة",
     "environmentalManagement": "الإدارة البيئية",
-    "occupationalHealthSafety": "إدارة الصحة والسلامة المهنية"
+    "occupationalHealthSafety": "إدارة الصحة والسلامة المهنية",
+    "viewCertificate": "عرض الشهادة"
   },
   "client": "العميل: {{name}}",
-  "viewItemLabel": "عرض {{name}}"
+  "viewItemLabel": "عرض {{name}}",
+  "pendingContent": {
+    "notice": "يجري إعداد المعلومات التفصيلية. للاستفسارات الحالية، يُرجى التواصل مع فريقنا.",
+    "detailsForthcoming": "التفاصيل قريبًا"
+  }
 }

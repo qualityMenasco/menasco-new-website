@@ -10,15 +10,13 @@ export function ClientsSection() {
 
   return (
     <Section background="graphite" spacing="lg" className="overflow-hidden border-y border-white/10">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center md:gap-12">
-          <Heading level="h2" as="h3" theme="dark" className="whitespace-nowrap uppercase italic tracking-tight">
-            {t('clients.heading')}
-          </Heading>
-          <Text variant="body-lg" theme="dark" className="max-w-xl text-balance">
-            {t('clients.description')}
-          </Text>
-        </div>
+      <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center md:gap-12">
+        <Heading level="h2" as="h3" theme="dark" className="whitespace-nowrap uppercase italic tracking-tight">
+          {t('clients.heading')}
+        </Heading>
+        <Text variant="body-lg" theme="dark" className="max-w-xl text-balance">
+          {t('clients.description')}
+        </Text>
       </div>
 
       {/* Forced LTR — under dir="rtl" the max-content track sits flush-right instead of flush-left, breaking the translateX(-50%) loop; logos have no reading direction so isolating them here is safe. */}

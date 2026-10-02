@@ -1,43 +1,36 @@
+import { projectCategoryList } from './projectCategories';
+
+export type SectorIcon = 'building' | 'hotel' | 'briefcase' | 'route' | 'server' | 'factory' | 'layers' | 'ticket';
+
 export interface Sector {
   id: string;
   slug: string;
-  name: string;
-  description: string;
-  icon: 'building' | 'hotel' | 'briefcase' | 'route' | 'server' | 'factory' | 'layers' | 'ticket';
+  icon: SectorIcon;
 }
 
 /**
- * Aligned with the four project categories in src/data/projectCategories.ts
- * (same names, same descriptions) so the Sectors section and the Projects
- * category system speak with one voice.
+ * Icon-only overlay for the homepage Sectors section — everything else
+ * (name, description, order) is derived directly from `projectCategoryList`
+ * in ./projectCategories.ts, the single source of truth for the category
+ * taxonomy. This file previously carried its own hand-maintained `name`/
+ * `description` copy that claimed to be "aligned" with projectCategories.ts
+ * but had drifted from it (e.g. "HOSPITALITY & LEISURE" here vs.
+ * "Hospitality" there); those fields were never actually read by
+ * `SectorsShowcase.tsx`, which has always pulled its displayed title and
+ * description from the translated `projects:categories.*` strings — so
+ * they were dead, misleading duplication rather than real data. Deriving
+ * this array instead means there's exactly one place a category's name or
+ * description can be edited.
  */
-export const sectors: Sector[] = [
-  {
-    id: 'residential-commercial',
-    slug: 'residential-commercial',
-    name: 'RESIDENTIAL / COMMERCIAL DEVELOPMENTS',
-    description: 'Integrated MEP solutions for residential towers, offices, retail destinations, mixed-use developments & large-scale commercial properties.',
-    icon: 'building',
-  },
-  {
-    id: 'hotels',
-    slug: 'hotels',
-    name: 'HOSPITALITY & LEISURE',
-    description: 'High-performance MEP systems for luxury hotels, resorts, serviced residences, restaurants & leisure destinations designed to enhance comfort, efficiency & guest experience.',
-    icon: 'hotel',
-  },
-  {
-    id: 'landmark-entertainment',
-    slug: 'landmark-entertainment',
-    name: 'LANDMARK & ENTERTAINMENT DESTINATIONS',
-    description: 'Complex engineering solutions for cultural landmarks, entertainment venues, visitor attractions & iconic destination developments requiring seamless system integration.',
-    icon: 'ticket',
-  },
-  {
-    id: 'advanced-technical-facilities',
-    slug: 'advanced-technical-facilities',
-    name: 'MISSION-CRITICAL & TECHNICAL FACILITIES',
-    description: 'Resilient, high-availability engineering solutions for data centers, healthcare facilities, energy projects, control centers & other technically demanding environments.',
-    icon: 'server',
-  },
-];
+const iconBySlug: Record<string, SectorIcon> = {
+  'residential-commercial': 'building',
+  'hospitality-landmark-entertainment': 'hotel',
+  'advanced-technical-facilities': 'server',
+  'infrastructure-utilities': 'route',
+};
+
+export const sectors: Sector[] = projectCategoryList.map((category) => ({
+  id: category.id,
+  slug: category.slug,
+  icon: iconBySlug[category.slug] ?? 'building',
+}));

@@ -1,4 +1,4 @@
-import { ArrowRight, ClipboardCheck, Cpu, HardHat, TrendingUp } from 'lucide-react';
+import { ArrowRight, ClipboardList, Cpu, HardHat, TrendingUp } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../../layout/Section';
 import { Stack } from '../../layout/Stack';
@@ -6,7 +6,7 @@ import { Eyebrow, Heading, Text } from '../../typography/Typography';
 import { ButtonLink } from '../../ui/Button';
 import { ScrollRevealGroup } from '../../common/ScrollReveal';
 
-const pillarIcons = { qualityAssurance: ClipboardCheck, healthSafety: HardHat, technicalExcellence: Cpu, continuousImprovement: TrendingUp } as const;
+const pillarIcons = { qualityAssurance: ClipboardList, healthSafety: HardHat, technicalExcellence: Cpu, continuousImprovement: TrendingUp } as const;
 const pillarKeys = ['qualityAssurance', 'healthSafety', 'technicalExcellence', 'continuousImprovement'] as const;
 
 export function QualityStandards() {

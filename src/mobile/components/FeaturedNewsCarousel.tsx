@@ -120,7 +120,7 @@ export function FeaturedNewsCarousel({ stories, categoryLabel, formatDate }: Fea
             type="button"
             aria-label={t('newsroom:previousStory')}
             onClick={() => goTo(-1)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-stone hover:text-brand-600 rtl:rotate-180"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition-colors hover:bg-stone hover:text-brand-600 rtl:rotate-180"
           >
             <ChevronLeft size={18} aria-hidden="true" />
           </button>
@@ -131,7 +131,7 @@ export function FeaturedNewsCarousel({ stories, categoryLabel, formatDate }: Fea
             type="button"
             aria-label={t('newsroom:nextStory')}
             onClick={() => goTo(1)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-stone hover:text-brand-600 rtl:rotate-180"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition-colors hover:bg-stone hover:text-brand-600 rtl:rotate-180"
           >
             <ChevronRight size={18} aria-hidden="true" />
           </button>

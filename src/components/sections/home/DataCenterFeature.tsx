@@ -44,7 +44,9 @@ export function DataCenterFeature() {
           preload="metadata"
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent" />
+      {/* Same overlay recipe as AboutHero: the copy sits over bright video frames, so the lower half is weighted toward ink (text ≥4.5:1) while the top stays open for the footage. */}
+      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/20" />
+      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-transparent rtl:bg-gradient-to-l" />
 
       <Container className="relative z-10 pb-20 pt-28 md:pb-24 md:pt-32">
         <div className="max-w-2xl">

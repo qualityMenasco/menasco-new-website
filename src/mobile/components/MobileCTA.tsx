@@ -13,6 +13,8 @@ export interface MobileCTAProps {
 /** Full-width closing call-to-action band, reused at the bottom of most pages. */
 export function MobileCTA({ heading, description, primary, secondary, theme = 'dark', className }: MobileCTAProps) {
   const isDark = theme === 'dark';
+  // On the brand gradient a brand-600 button falls to ~1.9:1 against its background — use the light-on-dark treatment desktop CtaBand uses.
+  const primaryClasses = isDark ? 'bg-warmwhite text-ink active:bg-stone' : 'bg-brand-600 text-warmwhite active:bg-brand-700';
   const isPrimaryExternal = /^([a-z]+:|\/[a-z0-9-]+\.[a-z0-9]+$)/i.test(primary.href) && !primary.href.startsWith('/');
 
   return (
@@ -22,11 +24,11 @@ export function MobileCTA({ heading, description, primary, secondary, theme = 'd
         {description && <p className={cn('text-body', isDark ? 'text-brand-100' : 'text-gray-600')}>{description}</p>}
         <div className="mt-2 flex w-full flex-col gap-3">
           {isPrimaryExternal ? (
-            <a href={primary.href} className="flex h-12 w-full items-center justify-center rounded-md bg-brand-600 text-body font-semibold text-warmwhite">
+            <a href={primary.href} className={cn('flex h-12 w-full items-center justify-center rounded-md text-body font-semibold', primaryClasses)}>
               {primary.label}
             </a>
           ) : (
-            <LocaleLink to={primary.href} className="flex h-12 w-full items-center justify-center rounded-md bg-brand-600 text-body font-semibold text-warmwhite">
+            <LocaleLink to={primary.href} className={cn('flex h-12 w-full items-center justify-center rounded-md text-body font-semibold', primaryClasses)}>
               {primary.label}
             </LocaleLink>
           )}

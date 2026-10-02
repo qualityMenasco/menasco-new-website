@@ -60,7 +60,7 @@ export function Select({
           {...valueProps}
           aria-invalid={Boolean(error)}
           aria-describedby={error ? errorId : helperText ? helperId : undefined}
-          className={cn(inputBaseClasses(resolvedTheme, Boolean(error)), 'appearance-none pr-10', className)}
+          className={cn(inputBaseClasses(resolvedTheme, Boolean(error)), 'appearance-none pe-10', className)}
           {...rest}
         >
           {placeholder && (
@@ -78,7 +78,7 @@ export function Select({
           size={18}
           aria-hidden="true"
           className={cn(
-            'pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2',
+            'pointer-events-none absolute end-3.5 top-1/2 -translate-y-1/2',
             resolvedTheme === 'dark' ? 'text-gray-400' : 'text-gray-500',
           )}
         />

@@ -44,7 +44,8 @@ export function MobileHeader({ onOpenMenu }: MobileHeaderProps) {
             className="inline-flex h-9 shrink-0 items-center gap-1 rounded-md bg-brand-600 px-2.5 text-caption font-semibold text-warmwhite xs:text-small"
           >
             <Download size={13} aria-hidden="true" className="shrink-0" />
-            {t('profile')}
+            {/* Icon-only below 400px — with the label the header row outgrows 360–390px phones (worse in Arabic). */}
+            <span className="hidden min-[400px]:inline">{t('profile')}</span>
           </a>
           <button
             type="button"

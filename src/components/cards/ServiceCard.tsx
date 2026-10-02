@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { SmartLink } from '../../lib/SmartLink';
 import { useSectionTheme } from '../../lib/theme-context';
-import type { IconComponent, Theme } from '../../types';
+import type { HeadingLevel, IconComponent, Theme } from '../../types';
 import { Heading, Text } from '../typography/Typography';
 
 export interface ServiceCardProps {
@@ -13,6 +13,8 @@ export interface ServiceCardProps {
   description: string;
   link?: { label: string; href: string };
   featured?: boolean;
+  /** Semantic tag for the title — defaults to h3; use h4 when cards sit under an h3 group heading. */
+  headingAs?: HeadingLevel;
   theme?: Theme;
   className?: string;
 }
@@ -25,6 +27,7 @@ export function ServiceCard({
   description,
   link,
   featured = false,
+  headingAs = 'h3',
   theme,
   className,
 }: ServiceCardProps) {
@@ -71,7 +74,7 @@ export function ServiceCard({
       )}
 
       <div className="flex flex-1 flex-col gap-2">
-        <Heading level="h4" as="h3" theme={resolvedTheme}>
+        <Heading level="h4" as={headingAs} theme={resolvedTheme}>
           {title}
         </Heading>
         <Text theme={resolvedTheme}>{description}</Text>
@@ -86,7 +89,7 @@ export function ServiceCard({
           )}
         >
           {link.label}
-          <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-base group-hover:translate-x-0.5" />
+          <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-base group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
         </SmartLink>
       )}
     </article>

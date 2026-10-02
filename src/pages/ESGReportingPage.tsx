@@ -30,7 +30,7 @@ function ESGHero() {
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-ink/40" />
-      <div className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-transparent rtl:bg-gradient-to-l" />
 
       <Container className="relative z-10 pb-16 pt-28 md:pb-20 md:pt-32">
         <div className="max-w-3xl">
@@ -78,7 +78,7 @@ export default function ESGReportingPage() {
             {pillars.map((pillar) => (
               <div
                 key={pillar.heading}
-                className="flex flex-col gap-4 rounded-md border border-gray-200 bg-stone p-6 transition-shadow duration-200 hover:shadow-md"
+                className="flex flex-col gap-4 rounded-md border border-gray-200 bg-stone p-6 transition-colors duration-base ease-engineered hover:border-gray-300"
               >
                 <div className="flex gap-4">
                   <span className="mt-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-warmwhite text-brand-600">

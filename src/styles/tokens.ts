@@ -8,7 +8,7 @@
  */
 
 export const breakpoints = {
-  xs: 480,
+  xs: 360, // matches tailwind.config.js screens.xs
   sm: 640,
   md: 768,
   lg: 1024,

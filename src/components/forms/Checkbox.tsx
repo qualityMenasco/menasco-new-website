@@ -63,12 +63,12 @@ export function Checkbox({
         <span className={cn('text-small', isDark ? 'text-gray-300' : 'text-gray-700')}>{label}</span>
       </label>
       {error ? (
-        <ErrorMessage id={errorId} className="ml-8">
+        <ErrorMessage id={errorId} className="ms-8">
           {error}
         </ErrorMessage>
       ) : (
         helperText && (
-          <HelperText id={helperId} theme={resolvedTheme} className="ml-8">
+          <HelperText id={helperId} theme={resolvedTheme} className="ms-8">
             {helperText}
           </HelperText>
         )

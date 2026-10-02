@@ -13,7 +13,7 @@ export function DataSection() {
         <SectionHeader
           eyebrow="Data Display"
           heading="Statistics & lists"
-          description="One statistic component covers single figures, rows, and grids. One list component covers bullets, checks, numbering, and technical spec sheets."
+          description="One statistic component covers single figures, rows, and grids. One list component covers bullets, rules, hairline dividers, numbering, and technical spec sheets."
         />
 
         <Stack space="md">
@@ -34,9 +34,9 @@ export function DataSection() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
           <Stack space="sm">
             <Text variant="small" muted className="font-semibold">
-              Check icons
+              Rule marker
             </Text>
-            <ProfessionalList items={capabilityChecklist} variant="check" />
+            <ProfessionalList items={capabilityChecklist} variant="rule" />
           </Stack>
           <Stack space="sm">
             <Text variant="small" muted className="font-semibold">

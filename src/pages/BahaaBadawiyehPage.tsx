@@ -126,7 +126,7 @@ export default function BahaaBadawiyehPage() {
                   </Text>
                 ))}
               </Stack>
-              <Text variant="body-lg" className="border-l-2 border-brand-500 pl-4 font-semibold text-ink">
+              <Text variant="body-lg" className="border-s-2 border-brand-500 ps-4 font-semibold text-ink">
                 {closingLine}
               </Text>
             </Stack>

@@ -1,10 +1,16 @@
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { useSectionTheme } from '../../lib/theme-context';
 import type { Theme } from '../../types';
 import { Text } from '../typography/Typography';
 
-export type ProfessionalListVariant = 'bullet' | 'check' | 'arrow' | 'numbered';
+/**
+ * Marker styles. There is deliberately no tick/check variant — checkmarks read as
+ * "completed" and were decorative everywhere they were used.
+ * - `divided`: no marker; rows separated by hairlines (top rule on the first row too).
+ * - `rule`: a short MENASCO-blue rule at inline-start, aligned to the first line.
+ */
+export type ProfessionalListVariant = 'bullet' | 'rule' | 'divided' | 'arrow' | 'numbered';
 
 export interface ListItemData {
   title: string;
@@ -18,7 +24,7 @@ export interface ProfessionalListProps {
   variant?: ProfessionalListVariant;
   columns?: 1 | 2;
   theme?: Theme;
-  /** Vertical gap between items. Defaults to 'md' (existing spacing) — pass 'sm' for a denser list. */
+  /** Vertical gap between items. Defaults to 'md' (existing spacing) — pass 'sm' for a denser list. Ignored by `divided`, whose rows are spaced by padding. */
   gap?: ProfessionalListGap;
   className?: string;
 }
@@ -31,8 +37,10 @@ const gapClasses: Record<ProfessionalListGap, string> = {
 function Marker({ variant, index, theme }: { variant: ProfessionalListVariant; index: number; theme: Theme }) {
   const accent = theme === 'dark' ? 'text-brand-400' : 'text-brand-600';
 
-  if (variant === 'check') return <Check size={16} className={cn('mt-1 shrink-0', accent)} aria-hidden="true" />;
   if (variant === 'arrow') return <ArrowRight size={16} className={cn('mt-1 shrink-0', accent)} aria-hidden="true" />;
+  if (variant === 'rule')
+    // text-body line-height is 1.65 × 16px ≈ 26px → a 1px rule at mt-3 sits on the first line's centre.
+    return <span className={cn('mt-3 h-px w-3 shrink-0', theme === 'dark' ? 'bg-brand-400' : 'bg-brand-600')} aria-hidden="true" />;
   if (variant === 'numbered')
     return (
       <span className={cn('mt-0.5 shrink-0 font-display text-small font-semibold tabular-nums', accent)} aria-hidden="true">
@@ -50,24 +58,45 @@ function Marker({ variant, index, theme }: { variant: ProfessionalListVariant; i
 /** A single flexible list — marker style, columns, and title+description items are all configurable. */
 export function ProfessionalList({ items, variant = 'bullet', columns = 1, theme, gap = 'md', className }: ProfessionalListProps) {
   const resolvedTheme = useSectionTheme(theme);
+  const isDark = resolvedTheme === 'dark';
   const Tag = variant === 'numbered' ? 'ol' : 'ul';
   const isBullet = variant === 'bullet';
+  const isDivided = variant === 'divided';
+  const hasMarker = !isBullet && !isDivided;
+
+  const listLayout = isBullet
+    ? columns === 2
+      ? 'grid gap-y-4 sm:grid-cols-2 sm:gap-x-10 list-disc ps-5'
+      : 'list-disc ps-5'
+    : isDivided
+      ? columns === 2
+        ? 'grid sm:grid-cols-2 sm:gap-x-10'
+        : 'flex flex-col'
+      : columns === 2
+        ? 'grid gap-y-4 sm:grid-cols-2 sm:gap-x-10'
+        : 'flex flex-col';
+
+  const itemLayout = isBullet
+    ? 'break-inside-avoid'
+    : isDivided
+      ? cn('break-inside-avoid border-t py-3 text-start', isDark ? 'border-white/10' : 'border-gray-200')
+      : 'flex gap-3 break-inside-avoid text-start';
 
   return (
-    <Tag
-      className={cn(
-        isBullet ? (columns === 2 ? 'grid gap-y-4 sm:grid-cols-2 sm:gap-x-10 list-disc pl-5' : 'list-disc pl-5') : columns === 2 ? 'grid gap-y-4 sm:grid-cols-2 sm:gap-x-10' : 'flex flex-col',
-        gapClasses[gap],
-        className,
-      )}
-    >
+    <Tag className={cn(listLayout, !isDivided && gapClasses[gap], className)}>
       {items.map((item, index) => (
-        <li key={item.title} className={cn(isBullet ? 'break-inside-avoid' : 'flex gap-3 break-inside-avoid')}>
-          {!isBullet && <Marker variant={variant} index={index} theme={resolvedTheme} />}
-          <div className={cn('flex flex-col gap-0.5', isBullet ? '' : '')}>
-            <Text as="span" theme={resolvedTheme} className="font-semibold">
-              {item.title}
-            </Text>
+        <li key={item.title} className={itemLayout}>
+          {hasMarker && <Marker variant={variant} index={index} theme={resolvedTheme} />}
+          <div className="flex flex-col gap-0.5">
+            {/* On dark surfaces Text renders body gray-300 vs muted gray-400 — too close for a
+                title/description pair — so titles with a description are lifted to warm white. */}
+            {isDark && item.description ? (
+              <span className="font-sans text-body font-semibold text-warmwhite">{item.title}</span>
+            ) : (
+              <Text as="span" theme={resolvedTheme} className="font-semibold">
+                {item.title}
+              </Text>
+            )}
             {item.description && (
               <Text as="span" variant="small" theme={resolvedTheme} muted>
                 {item.description}
@@ -101,7 +130,7 @@ export function KeyValueList({ items, theme, className }: KeyValueListProps) {
       {items.map((item) => (
         <div key={item.key} className={cn('flex items-baseline justify-between gap-4 border-b py-3 first:pt-0', borderColor)}>
           <dt className={cn('text-small', resolvedTheme === 'dark' ? 'text-gray-400' : 'text-gray-500')}>{item.key}</dt>
-          <dd className={cn('text-right text-small font-semibold', resolvedTheme === 'dark' ? 'text-warmwhite' : 'text-ink')}>
+          <dd className={cn('text-end text-small font-semibold', resolvedTheme === 'dark' ? 'text-warmwhite' : 'text-ink')}>
             {item.value}
           </dd>
         </div>

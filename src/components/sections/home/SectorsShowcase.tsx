@@ -1,4 +1,4 @@
-import { ArrowRight, Building2, Hotel, Server, Ticket } from 'lucide-react';
+import { ArrowRight, Building2, Hotel, Route, Server, Ticket } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../../layout/Section';
 import { Grid } from '../../layout/Grid';
@@ -16,13 +16,14 @@ const sectorIcons: Record<string, typeof Hotel> = {
   hotel: Hotel,
   ticket: Ticket,
   server: Server,
+  route: Route,
 };
 
 const sectorKeys: Record<string, string> = {
   'residential-commercial': 'residentialCommercial',
-  hotels: 'hospitality',
-  'landmark-entertainment': 'landmarkEntertainment',
+  'hospitality-landmark-entertainment': 'hospitalityLandmarkEntertainment',
   'advanced-technical-facilities': 'advancedTechnicalFacilities',
+  'infrastructure-utilities': 'infrastructureUtilities',
 };
 
 const accentByIndex = ['brand', 'sand', 'gray'] as const;
@@ -99,7 +100,11 @@ export function SectorsShowcase() {
                 key={sector.id}
                 icon={sectorIcons[sector.icon]}
                 title={t(`projects:categories.${key}.title`)}
-                description={t(`projects:categories.${key}.description`)}
+                // Categories awaiting approved projects/copy (e.g. Infrastructure
+                // & Utilities) have no `.description` key — fall back to the
+                // site's existing neutral pending-content string rather than
+                // rendering i18next's missing-key text.
+                description={t(`projects:categories.${key}.description`, t('common:pendingContent.notice'))}
                 accent={accentByIndex[index % accentByIndex.length]}
                 link={{ label: t('common:buttons.learnMore'), href: `/projects/categories?category=${sector.slug}` }}
               />

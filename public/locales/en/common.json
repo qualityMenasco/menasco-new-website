@@ -20,6 +20,8 @@
     "sendAnotherEnquiry": "Send Another Enquiry",
     "sendEnquiry": "Send Enquiry",
     "explore": "Explore",
+    "expandSection": "Show {{name}} services",
+    "collapseSection": "Hide {{name}} services",
     "backToTop": "Back to top",
     "closeDialog": "Close dialog",
     "readMore": "Read more",
@@ -67,8 +69,13 @@
   "certifications": {
     "qualityManagement": "Quality Management Systems",
     "environmentalManagement": "Environmental Management Systems",
-    "occupationalHealthSafety": "Occupational Health & Safety Management Systems"
+    "occupationalHealthSafety": "Occupational Health & Safety Management Systems",
+    "viewCertificate": "View certificate"
   },
   "client": "Client: {{name}}",
-  "viewItemLabel": "View {{name}}"
+  "viewItemLabel": "View {{name}}",
+  "pendingContent": {
+    "notice": "Detailed information is being prepared. For current enquiries, please contact our team.",
+    "detailsForthcoming": "Details coming soon"
+  }
 }

@@ -12,6 +12,8 @@ export interface SEOProps {
   path: string;
   ogImage?: string;
   noIndex?: boolean;
+  /** When `noIndex` is set, allow crawlers to follow this page's links (default: don't). Use for structure-only pages whose child links are real, indexable pages — never for 404/internal tooling. */
+  follow?: boolean;
   /** WebPage-family schema.org type for this page's auto-generated JSON-LD. Defaults to 'WebPage'. */
   pageType?: WebPageType;
   /** A more specific entity (Service, Person, etc. — built via src/seo/structuredData.ts) embedded as this page's structured-data `mainEntity`. */
@@ -34,7 +36,7 @@ export interface SEOProps {
  * scripts/generate-seo-html.ts mirrors this exact logic at build time so
  * the same content is visible to crawlers that don't execute JavaScript.
  */
-export function SEO({ title, description, path, ogImage, noIndex = false, pageType, mainEntity, breadcrumb, structuredData }: SEOProps) {
+export function SEO({ title, description, path, ogImage, noIndex = false, follow = false, pageType, mainEntity, breadcrumb, structuredData }: SEOProps) {
   const { t } = useTranslation('seo');
   const location = useLocation();
   const locale = getLocaleFromPath(location.pathname);
@@ -67,7 +69,7 @@ export function SEO({ title, description, path, ogImage, noIndex = false, pageTy
       <link rel="alternate" hrefLang="en" href={enUrl} />
       <link rel="alternate" hrefLang="ar" href={arUrl} />
       <link rel="alternate" hrefLang="x-default" href={enUrl} />
-      {noIndex && <meta name="robots" content="noindex, nofollow" />}
+      {noIndex && <meta name="robots" content={follow ? 'noindex, follow' : 'noindex, nofollow'} />}
 
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={siteName} />

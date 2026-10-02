@@ -5,20 +5,18 @@
       "description": "Integrated MEP solutions for residential towers, offices, retail destinations, mixed-use developments & large-scale commercial properties.",
       "seoTitle": "Residential & Commercial MEP Projects"
     },
-    "hospitality": {
-      "title": "HOSPITALITY & LEISURE",
-      "description": "High-performance MEP systems (HVAC, plumbing and life-safety) for luxury hotels, resorts, serviced residences and leisure destinations.",
-      "seoTitle": "Hospitality MEP Projects"
-    },
-    "landmarkEntertainment": {
-      "title": "LANDMARK & ENTERTAINMENT DESTINATIONS",
-      "description": "Complex MEP and life-safety engineering for cultural landmarks, entertainment venues and iconic destination developments with high-occupancy, integrated systems.",
-      "seoTitle": "Landmark Entertainment Projects"
+    "hospitalityLandmarkEntertainment": {
+      "title": "HOSPITALITY & LANDMARK ENTERTAINMENT",
+      "description": "High-performance MEP and life-safety engineering for luxury hotels, resorts, serviced residences, and leisure destinations, alongside cultural landmarks, entertainment venues, and iconic destination developments with high-occupancy, integrated systems.",
+      "seoTitle": "Hospitality & Landmark Entertainment MEP Projects"
     },
     "advancedTechnicalFacilities": {
       "title": "MISSION-CRITICAL & TECHNICAL FACILITIES",
       "description": "Resilient MEP engineering (cooling, electrical continuity and fire protection) for data centers, healthcare facilities and other mission-critical environments.",
       "seoTitle": "Mission-Critical & Data Centre MEP Projects"
+    },
+    "infrastructureUtilities": {
+      "title": "INFRASTRUCTURE & UTILITIES"
     }
   },
   "categoriesPage": {
@@ -41,7 +39,7 @@
   },
   "seo": {
     "title": "Projects & Sectors",
-    "description": "Explore MENASCO's project portfolio by category: Residential / Commercial, Hospitality, Landmark Entertainment, and Advanced Technical Facilities."
+    "description": "Explore MENASCO's project portfolio by category: Residential / Commercial, Hospitality & Landmark Entertainment, and Advanced Technical Facilities."
   },
   "statuses": {
     "onGoing": "On-Going",
@@ -56,6 +54,7 @@
     "completionLabel": "Completion",
     "workforceHoursLabel": "Workforce Hours",
     "safetyRecordLabel": "Safety Record",
+    "mainContractorLabel": "Main Contractor",
     "scopeOfWork": "Scope of work:",
     "projectOverview": "Project Overview",
     "projectFeatures": "Project Features",

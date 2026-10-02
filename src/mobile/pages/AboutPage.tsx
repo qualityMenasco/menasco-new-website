@@ -1,4 +1,4 @@
-import { ArrowRight, Cpu, Newspaper, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Cpu, HardHat, Newspaper } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../components/SectionHeader';
 import { MobileStatsGrid } from '../components/MobileStatsGrid';
@@ -51,7 +51,7 @@ export default function AboutPage() {
         <div className="mt-4 flex flex-col gap-3">
           <div className="rounded-md border border-gray-200 bg-warmwhite p-4">
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-stone text-brand-600">
-              <ShieldCheck size={18} aria-hidden="true" />
+              <HardHat size={18} aria-hidden="true" />
             </span>
             <h3 className="mt-3 font-display text-h4 font-semibold text-ink">{t('mobile.qhseTitle')}</h3>
             <p className="mt-1 text-small text-gray-600">{t('mobile.qhseDescription')}</p>

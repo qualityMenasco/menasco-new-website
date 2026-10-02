@@ -6,7 +6,6 @@ const statKeys: Record<string, string> = {
   projects: 'stats.projects',
   years: 'stats.years',
   countries: 'stats.countries',
-  workforce: 'stats.workforce',
 };
 
 /** Shorter wording for the homepage's compact tiles — full labels (above) stay unchanged for every other surface reusing this component. */
@@ -14,7 +13,6 @@ const compactStatKeys: Record<string, string> = {
   projects: 'stats.projectsShort',
   years: 'stats.yearsShort',
   countries: 'stats.countriesShort',
-  workforce: 'stats.workforce',
 };
 
 export interface MobileStatsGridProps {
@@ -28,16 +26,20 @@ export function MobileStatsGrid({ compact = false }: MobileStatsGridProps) {
   const keys = compact ? compactStatKeys : statKeys;
 
   return (
-    <div className={cn('grid grid-cols-2', compact ? 'gap-2.5' : 'gap-3')}>
-      {companyStats.map((stat) => (
+    <div className={cn('grid', compact ? 'grid-cols-3 gap-2' : 'grid-cols-2 gap-3')}>
+      {companyStats.map((stat, index) => (
         <div
           key={stat.id}
-          className={cn('rounded-md border border-gray-200 bg-warmwhite', compact ? 'p-3.5' : 'p-4')}
+          className={cn(
+            'rounded-md border border-gray-200 bg-warmwhite',
+            compact ? 'p-3.5' : 'p-4',
+            !compact && index === companyStats.length - 1 && companyStats.length % 2 === 1 && 'col-span-2',
+          )}
         >
           <div
             className={cn(
               'font-display font-semibold text-brand-600',
-              compact ? 'text-[32px] leading-none' : 'text-stat leading-none',
+              compact ? 'text-[28px] leading-none' : 'text-stat leading-none',
             )}
           >
             {stat.value}

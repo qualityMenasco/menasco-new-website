@@ -25,18 +25,17 @@
     "projects": "Projects Successfully Delivered",
     "years": "Years of Engineering Excellence",
     "countries": "Countries of Operation",
-    "workforce": "Workforce",
     "projectsShort": "Projects Delivered",
     "yearsShort": "Years of Excellence",
     "countriesShort": "Countries"
   },
   "servicesShowcase": {
     "eyebrow": "What We Deliver",
-    "heading": "Six disciplines, one integrated contractor",
-    "description": "Select a discipline to see how MENASCO delivers it, or explore the dedicated page for full capabilities.",
+    "heading": "Five service areas, one integrated contractor",
+    "description": "Select a service area to see how MENASCO delivers it, or explore the dedicated page for full capabilities.",
     "cta": "View all services",
     "viewService": "View {{name}} services",
-    "mobileHeading": "Six disciplines, one contractor"
+    "mobileHeading": "Five service areas, one contractor"
   },
   "featuredProjects": {
     "eyebrow": "Portfolio",

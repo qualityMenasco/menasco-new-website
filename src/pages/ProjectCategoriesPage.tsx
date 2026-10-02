@@ -40,16 +40,22 @@ const PRIORITY_IMAGE_COUNT = 3;
 
 const categoryKeys: Record<string, string> = {
   'residential-commercial': 'residentialCommercial',
-  hotels: 'hospitality',
-  'landmark-entertainment': 'landmarkEntertainment',
+  'hospitality-landmark-entertainment': 'hospitalityLandmarkEntertainment',
   'advanced-technical-facilities': 'advancedTechnicalFacilities',
+  'infrastructure-utilities': 'infrastructureUtilities',
 };
 
 export default function ProjectCategoriesPage() {
-  const { t } = useTranslation('projects');
+  const { t } = useTranslation(['projects', 'common']);
   const reducedMotion = useReducedMotion();
   const [searchParams] = useSearchParams();
   const categoryTitle = (slug: string) => t(`categories.${categoryKeys[slug] ?? slug}.title`);
+  // A category can exist in the taxonomy before any project is assigned to
+  // it (e.g. Infrastructure & Utilities). Selecting one never hides/errors —
+  // it just reorders nothing — so without this check the status line below
+  // would claim "<category> projects first, N total" while nothing actually
+  // matched, silently implying results that don't exist.
+  const categoryHasNoMatches = (slug: string) => !categorizedProjects.some((project) => project.category === slug);
 
   const countryNavOptions: CountryNavOption[] = useMemo(
     () => [{ value: null, label: t('categoriesPage.allProjects') }, ...countryList.map((country) => ({ value: country, label: country }))],
@@ -104,7 +110,9 @@ export default function ProjectCategoriesPage() {
     } else {
       setAnnouncement(
         value
-          ? t('categoriesPage.categoryFirst', { category: categoryTitle(value), count: categorizedProjects.length })
+          ? categoryHasNoMatches(value)
+            ? t('common:pendingContent.notice')
+            : t('categoriesPage.categoryFirst', { category: categoryTitle(value), count: categorizedProjects.length })
           : t('categoriesPage.showingAll', { count: categorizedProjects.length }),
       );
     }
@@ -176,17 +184,19 @@ export default function ProjectCategoriesPage() {
 
               <div className="flex min-h-[2.5rem] items-center justify-between">
                 <Text variant="small" muted>
-                  {activeCategory && activeCountry
-                    ? t('categoriesPage.categoryAndCountryFirst', {
-                        category: categoryTitle(activeCategory),
-                        country: activeCountry,
-                        count: categorizedProjects.length,
-                      })
-                    : activeCategory
-                      ? t('categoriesPage.categoryFirst', { category: categoryTitle(activeCategory), count: categorizedProjects.length })
-                      : activeCountry
-                        ? t('categoriesPage.countryFirst', { country: activeCountry, count: categorizedProjects.length })
-                        : t('categoriesPage.showingAll', { count: categorizedProjects.length })}
+                  {activeCategory && categoryHasNoMatches(activeCategory)
+                    ? t('common:pendingContent.notice')
+                    : activeCategory && activeCountry
+                      ? t('categoriesPage.categoryAndCountryFirst', {
+                          category: categoryTitle(activeCategory),
+                          country: activeCountry,
+                          count: categorizedProjects.length,
+                        })
+                      : activeCategory
+                        ? t('categoriesPage.categoryFirst', { category: categoryTitle(activeCategory), count: categorizedProjects.length })
+                        : activeCountry
+                          ? t('categoriesPage.countryFirst', { country: activeCountry, count: categorizedProjects.length })
+                          : t('categoriesPage.showingAll', { count: categorizedProjects.length })}
                 </Text>
                 <AnimatePresence>
                   {(activeCategory || activeCountry) && (
@@ -207,7 +217,7 @@ export default function ProjectCategoriesPage() {
                 </AnimatePresence>
               </div>
 
-              {activeCategory && (
+              {activeCategory && !categoryHasNoMatches(activeCategory) && (
                 <Text variant="small" className="font-semibold uppercase tracking-wide text-ink">
                   {t('categoriesPage.categoryProjects', { category: categoryTitle(activeCategory) })}
                 </Text>

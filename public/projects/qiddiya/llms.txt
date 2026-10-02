@@ -5,7 +5,7 @@
 ## Project Overview
 
 - Sector: Commercial, Sports, and Entertainment
-- Category: Landmark Entertainment
+- Category: Hospitality & Landmark Entertainment
 - Location: Qiddiya City, Saudi Arabia
 - Status: On-Going
 - Year: 2027
@@ -29,6 +29,13 @@ Engineering, Supply, Installation, Testing & Commissioning Of MEP Systems (HVAC,
 - [Fire Protection](https://menascogroup.com/services/fire-protection/llms.txt)
 - [BIM & Digital Engineering](https://menascogroup.com/services/bim-digital-engineering/llms.txt)
 - [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt)
+
+---
+
+## Related Projects
+
+- [Vida Hotel](https://menascogroup.com/projects/vida-hotel/llms.txt): Sharjah, UAE
+- [Seven Hotel](https://menascogroup.com/projects/seven-hotel/llms.txt): Palm Jumeirah, UAE
 
 ---
 

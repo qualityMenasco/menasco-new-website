@@ -191,7 +191,7 @@ function NetworkNode({ office, isActive, isSelected, onHover, onSelect }: Networ
         <span
           className={cn(
             'hidden font-mono text-[11px] font-medium tracking-tight transition-colors duration-300 ease-engineered sm:block',
-            isActive ? 'text-brand-600/80' : 'text-gray-400',
+            isActive ? 'text-brand-600/80' : 'text-gray-600',
           )}
           dir="ltr"
         >
@@ -417,7 +417,7 @@ function OfficeDetailCard({ office, onNavigate }: OfficeDetailCardProps) {
                 variant="ghost"
                 size="sm"
                 onClick={() => onNavigate(-1)}
-                className="text-gray-400 hover:text-brand-600 rtl:rotate-180"
+                className="text-gray-500 hover:text-brand-600 rtl:rotate-180"
               />
               <span className="min-w-[3.5rem] text-center font-semibold tabular-nums text-ink" dir="ltr">
                 {currentIndex + 1} / {officeLocations.length}
@@ -428,7 +428,7 @@ function OfficeDetailCard({ office, onNavigate }: OfficeDetailCardProps) {
                 variant="ghost"
                 size="sm"
                 onClick={() => onNavigate(1)}
-                className="text-gray-400 hover:text-brand-600 rtl:rotate-180"
+                className="text-gray-500 hover:text-brand-600 rtl:rotate-180"
               />
             </nav>
           </div>

@@ -19,9 +19,9 @@ interface ThemedProps {
 export type HeadingLevelStyle = 'display' | 'h1' | 'h2' | 'h3' | 'h4';
 
 const headingStyles: Record<HeadingLevelStyle, string> = {
-  display: 'text-display font-display font-semibold tracking-tight',
-  h1: 'text-h1 font-display font-semibold tracking-tight',
-  h2: 'text-h2 font-display font-semibold tracking-tight',
+  display: 'text-display font-display font-semibold',
+  h1: 'text-h1 font-display font-semibold',
+  h2: 'text-h2 font-display font-semibold',
   h3: 'text-h3 font-display font-semibold',
   h4: 'text-h4 font-display font-semibold',
 };
@@ -82,7 +82,7 @@ export function Text({ variant = 'body', as: Tag = 'p', theme, muted = false, cl
         ? 'text-gray-400'
         : 'text-gray-300'
       : muted || isCaption
-        ? 'text-gray-500'
+        ? 'text-gray-600'
         : 'text-gray-700';
 
   return (

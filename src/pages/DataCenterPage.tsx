@@ -131,7 +131,7 @@ export default function DataCenterPage() {
         </Stack>
       </Section>
 
-      <Section background="warmwhite" spacing="lg">
+      <Section background="warmwhite" spacing="lg" joinTop>
         <SplitContent
           image="/data-centre-prefabrication-mep.webp"
           imageAlt="Data centre MEP infrastructure with server racks, cooling systems, pipework and cable containment"
@@ -145,7 +145,7 @@ export default function DataCenterPage() {
         />
       </Section>
 
-      <Section background="warmwhite" spacing="md" className="pb-20">
+      <Section background="warmwhite" spacing="md" className="pb-20" joinTop>
         <Stack space="lg">
           <SectionHeader eyebrow={t('dataCenter.faqHeading.eyebrow')} heading={t('dataCenter.faqHeading.heading')} headingAs="h3" />
           <Accordion

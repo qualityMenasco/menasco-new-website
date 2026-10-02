@@ -12,9 +12,9 @@ import { translateProjectLocation } from '../../../../lib/projectLocation';
 
 const categoryKeys: Record<string, string> = {
   'residential-commercial': 'residentialCommercial',
-  hotels: 'hospitality',
-  'landmark-entertainment': 'landmarkEntertainment',
+  'hospitality-landmark-entertainment': 'hospitalityLandmarkEntertainment',
   'advanced-technical-facilities': 'advancedTechnicalFacilities',
+  'infrastructure-utilities': 'infrastructureUtilities',
 };
 
 const vela = projects.find((project) => project.slug === 'vela-by-omniyat')!;

@@ -27,6 +27,14 @@ const iconSizeBySize: Record<Size, number> = {
   lg: iconSizes.lg,
 };
 
+// Directional glyphs (arrows/chevrons) point along the reading direction, so
+// they mirror under dir="rtl". Non-directional icons (Download, Plus, brand
+// logos) must not flip. lucide sets displayName explicitly, so this survives
+// minification.
+function isDirectional(Icon: IconComponent): boolean {
+  return /^(Arrow|Chevron|Move)/.test(Icon.displayName ?? '');
+}
+
 function variantClasses(variant: ButtonVariant, theme: Theme): string {
   const light = theme === 'light';
   switch (variant) {
@@ -104,14 +112,23 @@ function useButtonRender({
       {loading ? (
         <Loader2 size={iconSize} className="animate-spin" aria-hidden="true" />
       ) : (
-        LeadingIcon && <LeadingIcon size={iconSize} aria-hidden="true" />
+        LeadingIcon && (
+          <LeadingIcon
+            size={iconSize}
+            aria-hidden="true"
+            className={isDirectional(LeadingIcon) ? 'rtl:rotate-180' : undefined}
+          />
+        )
       )}
       <span className={loading ? 'opacity-80' : undefined}>{children}</span>
       {!loading && TrailingIcon && (
         <TrailingIcon
           size={iconSize}
           aria-hidden="true"
-          className="transition-transform duration-base ease-engineered group-hover:translate-x-0.5"
+          className={cn(
+            'transition-transform duration-base ease-engineered group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5',
+            isDirectional(TrailingIcon) && 'rtl:rotate-180',
+          )}
         />
       )}
     </>

@@ -21,10 +21,9 @@ MENASCO Mechanical Contracting LLC is one of the UAE's leading providers of inte
 - 100+ Projects Successfully Delivered
 - 32+ Years of Engineering Excellence
 - 4 Countries of Operation (United Arab Emirates, Saudi Arabia, Egypt, United Kingdom)
-- 4,000+ Workforce
 - Dubai, UAE is MENASCO’s Head Office.
 - Regional offices in Riyadh (MENASCO KSA), Cairo (MENASCO Misr), London (United Kingdom).
-- Serves sectors including Residential / Commercial, Hospitality, Landmark Entertainment, Advanced Technical Facilities.
+- Serves sectors including Residential / Commercial, Hospitality & Landmark Entertainment, Advanced Technical Facilities.
 - Core service lines include Mechanical, Electrical, Plumbing, Fire Protection, BIM & Digital Engineering, Manufacturing & Prefabrication, alongside dedicated data centre MEP delivery.
 - Delivers specialist engineering for data centres, mission-critical, healthcare, energy, and other technically demanding facilities.
 - Project-delivery approach incorporates early project engagement, BIM-driven coordination, and disciplined execution.
@@ -37,23 +36,33 @@ MENASCO Mechanical Contracting LLC is one of the UAE's leading providers of inte
 
 MENASCO delivers reliable mechanical, electrical, plumbing & fire protection solutions, engineered to operate as one fully integrated system across the UAE, KSA, Egypt & the United Kingdom.
 
+### MEP
+
 - [Mechanical](https://menascogroup.com/services/mechanical/llms.txt): HVAC, chilled-water and plant systems engineered for regional climate loads.
 - [Electrical](https://menascogroup.com/services/electrical/llms.txt): Power distribution, building management and low-current systems, coordinated end to end.
 - [Plumbing](https://menascogroup.com/services/plumbing/llms.txt): Water supply, drainage and sanitary systems built for long-term reliability.
 - [Fire Protection](https://menascogroup.com/services/fire-protection/llms.txt): MENASCO delivers integrated fire protection, firefighting, fire detection, and life safety systems for residential, commercial, hospitality, industrial, infrastructure & mission-critical projects across the UAE and the region.
+
+### Civil
+
 - [BIM & Digital Engineering](https://menascogroup.com/services/bim-digital-engineering/llms.txt): Federated coordination and clash detection that de-risk delivery before site works begin.
+
+### Manufacturing & Prefabrication
+
 - [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt): Off-site production for faster, more consistent on-site installation.
+
+### Data Centres
+
 - [Data Centres](https://menascogroup.com/services/data-centers/llms.txt): MENASCO delivers mission-critical data centre MEP and infrastructure solutions for uptime, reliability and future-ready digital operations.
 
 ---
 
 ## Projects & Sectors
 
-23 current projects across the UAE, KSA and Egypt, organized into 4 sectors.
+23 current projects across the UAE, KSA and Egypt, organized into 3 sectors.
 
 - Residential / Commercial: Integrated engineering solutions for residential, commercial, office, and mixed-use developments.
-- Hospitality: High-performance MEP delivery for premium hospitality, resort, and hotel environments.
-- Landmark Entertainment: Complex engineering for destination, entertainment, cultural, and landmark developments.
+- Hospitality & Landmark Entertainment: High-performance MEP delivery for premium hospitality, resort, cultural landmark, and entertainment destination environments.
 - Advanced Technical Facilities: Specialist engineering for data centres, mission-critical, healthcare, energy, and technically demanding facilities.
 
 - [All Projects & Sectors](https://menascogroup.com/projects/categories/llms.txt): Full project portfolio, browsable by sector.
@@ -78,7 +87,7 @@ MENASCO is investing in proprietary technologies, artificial intelligence, enter
 
 ## Quality, Health, Safety & Environment
 
-MENASCO delivers electro-mechanical and MEP contracting services across the UAE, built on quality management, health and safety, and engineering excellence, governed by an integrated QHSE system certified to ISO 9001, ISO 14001:2015, and ISO 45001:2018.
+MENASCO delivers electro-mechanical and MEP contracting services across the UAE, built on quality management, health and safety, and engineering excellence, governed by an integrated QHSE system certified to ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018.
 
 - [Quality, Health & Safety](https://menascogroup.com/quality-safety/llms.txt)
 

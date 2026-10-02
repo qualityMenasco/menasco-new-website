@@ -31,14 +31,23 @@
     "plumbing": "Plumbing, Water & Drainage Systems",
     "firesProtection": "Fire Protection & Life Safety Systems",
     "bimDigitalEngineering": "BIM & Digital Engineering",
-    "manufacturingPrefabrication": "Manufacturing & MEP Prefabrication"
+    "manufacturingPrefabrication": "Manufacturing & MEP Prefabrication",
+    "modular": "Modular",
+    "custom": "Custom"
   },
   "primaryNavigation": "Primary",
   "sectorsList": {
     "residentialCommercial": "Residential & Commercial",
-    "hospitalityLeisure": "Hospitality & Leisure",
-    "landmarkEntertainment": "Landmark & Entertainment",
+    "hospitalityLandmarkEntertainment": "Hospitality & Landmark Entertainment",
     "missionCriticalFacilities": "Mission-Critical Facilities",
     "infrastructureUtilities": "Infrastructure & Utilities"
+  },
+  "certificationTraining": "MENASCO Certification & Training",
+  "dataCentres": "Data Centres",
+  "servicesGroups": {
+    "mep": "MEP",
+    "civil": "Civil",
+    "manufacturingPrefabrication": "Manufacturing & Prefabrication",
+    "turnkeyDevelopments": "Turnkey Developments"
   }
 }

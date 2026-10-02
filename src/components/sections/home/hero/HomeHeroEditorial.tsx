@@ -42,14 +42,14 @@ export function HomeHeroEditorial() {
       <Container className="relative z-10 pb-20 pt-28 md:pb-24 md:pt-32">
         <div className="max-w-3xl">
           <motion.div initial={rise.initial} animate={rise.animate} transition={{ duration: reducedMotion ? 0 : 0.6, ease: [0.22, 0.61, 0.36, 1] }}>
-            <Eyebrow theme="dark">{t('home:hero.eyebrow', { year: foundingYear })}</Eyebrow>
+            <Eyebrow theme="dark" className="text-warmwhite">{t('home:hero.eyebrow', { year: foundingYear })}</Eyebrow>
           </motion.div>
           <motion.div
             initial={rise.initial}
             animate={rise.animate}
             transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 0.08, ease: [0.22, 0.61, 0.36, 1] }}
           >
-            <Heading level="display" as="h2" theme="dark" className="mt-4">
+            <Heading level="display" as="h1" theme="dark" className="mt-4">
               {t('home:hero.title')}
             </Heading>
           </motion.div>

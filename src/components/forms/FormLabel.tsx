@@ -21,7 +21,7 @@ export function FormLabel({ required, theme, className, children, ...rest }: For
     >
       {children}
       {required && (
-        <span className="ml-0.5 text-brand-600" aria-hidden="true">
+        <span className="ms-0.5 text-brand-600" aria-hidden="true">
           *
         </span>
       )}

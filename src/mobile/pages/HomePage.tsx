@@ -1,45 +1,52 @@
-import { ArrowRight } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { useState } from 'react';
+import { ArrowRight, ArrowUpRight, ChevronDown } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { MobileHero } from '../components/MobileHero';
 import { SectionHeader } from '../components/SectionHeader';
 import { MobileStatsGrid } from '../components/MobileStatsGrid';
-import { MobileServiceCard } from '../components/MobileServiceCard';
 import { MobileProjectCard } from '../components/MobileProjectCard';
 import { RegionalOfficeGrid } from '../components/RegionalOfficeGrid';
 import { MobileCTA } from '../components/MobileCTA';
 import { LocaleLink } from '../components/LocaleLink';
+import { cn } from '../../lib/utils';
 import { SEO } from '../../seo/SEO';
 import { organizationJsonLd, websiteJsonLd } from '../../seo/structuredData';
-import { services } from '../../data/services';
+import { serviceI18nKeys, showcaseDisplayGroups, showcaseGroupChildren } from '../../data/services';
 import { projects } from '../../data/projects';
 import { getProjectImage } from '../../data/images';
+import { certifications } from '../../data/certifications';
 import { foundingYear } from '../../data/companyStats';
 import { translateProjectLocation } from '../../lib/projectLocation';
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 
-const serviceKeys: Record<string, string> = {
-  mechanical: 'mechanical',
-  electrical: 'electrical',
-  plumbing: 'plumbing',
-  'fire-protection': 'fireProtection',
-  'bim-digital-engineering': 'bimDigitalEngineering',
-  'manufacturing-prefabrication': 'manufacturingPrefabrication',
-};
-
 const categoryKeys: Record<string, string> = {
   'residential-commercial': 'residentialCommercial',
-  hotels: 'hospitality',
-  'landmark-entertainment': 'landmarkEntertainment',
+  'hospitality-landmark-entertainment': 'hospitalityLandmarkEntertainment',
   'advanced-technical-facilities': 'advancedTechnicalFacilities',
+  'infrastructure-utilities': 'infrastructureUtilities',
 };
 
 const featuredProjects = projects.filter((project) => project.featured);
 
+const qhseRows = [
+  { pillar: 'qualityManagement', certification: 'ISO 9001:2015' },
+  { pillar: 'healthSafety', certification: 'ISO 45001:2018' },
+  { pillar: 'environmentalManagement', certification: 'ISO 14001:2015' },
+] as const;
+
 export default function HomePage() {
   const reducedMotion = useReducedMotion();
-  const { t } = useTranslation(['home', 'services', 'projects', 'common']);
+  const { t } = useTranslation(['home', 'services', 'nav', 'projects', 'common']);
+
+  // Collapsed-by-default vertical accordion, mirroring the desktop pattern
+  // (src/components/sections/home/ServicesShowcase.tsx) — mobile has no
+  // right-side preview panel, so a subservice tap here is a direct
+  // navigation, same as the Services landing page's own mobile row. Whether
+  // a group gets a chevron derives purely from `showcaseGroupChildren`
+  // (service data), never hardcoded per category.
+  const [expandedGroupKey, setExpandedGroupKey] = useState<string | null>(null);
 
   return (
     <>
@@ -67,26 +74,77 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. Services — horizontal swipe row */}
+      {/* 4. Services — compact accordion, collapsed by default */}
       <section className="py-10">
         <div className="px-4">
           <SectionHeader eyebrow={t('home:servicesShowcase.eyebrow')} heading={t('home:servicesShowcase.mobileHeading')} headingAs="h3" />
         </div>
-        <div className="no-scrollbar mt-4 flex gap-3 overflow-x-auto px-4 pb-1">
-          {services.map((service) => {
-            const key = serviceKeys[service.slug] ?? service.slug;
+        <nav aria-label={t('home:servicesShowcase.eyebrow')} className="mt-4 flex flex-col px-4">
+          {showcaseDisplayGroups.map((group) => {
+            const children = showcaseGroupChildren(group);
+            const isExpandable = children.length > 0;
+            const isExpanded = expandedGroupKey === group.key;
+            const groupName = t(`nav:${group.i18nKey}`);
+            const childrenId = `mobile-services-${group.key}`;
             return (
-              <MobileServiceCard
-                key={service.id}
-                image={service.image}
-                title={t(`services:items.${key}.name`)}
-                description={t(`services:items.${key}.shortDescription`)}
-                href={`/services/${service.slug}`}
-                className="w-64 shrink-0"
-              />
+              <div key={group.key} className="border-t border-gray-200">
+                <div className="flex items-center">
+                  <LocaleLink
+                    to={group.href!}
+                    className="flex min-w-0 flex-1 items-center py-3 font-display text-h4 font-semibold text-ink"
+                  >
+                    {groupName}
+                  </LocaleLink>
+                  {isExpandable && (
+                    <button
+                      type="button"
+                      aria-expanded={isExpanded}
+                      aria-controls={childrenId}
+                      aria-label={t(isExpanded ? 'common:collapseSection' : 'common:expandSection', { name: groupName })}
+                      onClick={() => setExpandedGroupKey(isExpanded ? null : group.key)}
+                      className="flex h-11 w-11 shrink-0 items-center justify-center text-gray-500"
+                    >
+                      <ChevronDown
+                        size={18}
+                        aria-hidden="true"
+                        className={cn('transition-transform duration-base', isExpanded && 'rotate-180')}
+                      />
+                    </button>
+                  )}
+                </div>
+
+                <AnimatePresence initial={false}>
+                  {isExpandable && isExpanded && (
+                    <motion.div
+                      id={childrenId}
+                      initial={reducedMotion ? undefined : { height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={reducedMotion ? undefined : { height: 0, opacity: 0 }}
+                      transition={{ duration: reducedMotion ? 0 : 0.25, ease: EASE }}
+                      className="overflow-hidden"
+                    >
+                      <div className="flex flex-col pb-1.5">
+                        {children.map((leaf) => {
+                          const leafServiceKey = leaf.service ? (serviceI18nKeys[leaf.service.slug] ?? leaf.service.slug) : null;
+                          const leafName = leafServiceKey ? t(`services:items.${leafServiceKey}.name`) : t(`nav:${leaf.i18nKey}`);
+                          return (
+                            <LocaleLink
+                              key={leaf.href}
+                              to={leaf.href}
+                              className="flex min-h-11 items-center py-2 ps-4 text-body font-medium text-gray-600"
+                            >
+                              {leafName}
+                            </LocaleLink>
+                          );
+                        })}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             );
           })}
-        </div>
+        </nav>
         <div className="px-4 pt-4">
           <LocaleLink to="/services" className="inline-flex items-center gap-1.5 text-small font-semibold text-brand-600">
             {t('common:buttons.viewAllServices')}
@@ -122,7 +180,7 @@ export default function HomePage() {
               }
               location={translateProjectLocation(t, project.location)}
               href={`/projects/${project.slug}`}
-              className="w-56 shrink-0"
+              className="w-[78vw] max-w-[20rem] shrink-0"
             />
           ))}
         </div>
@@ -174,6 +232,44 @@ export default function HomePage() {
             </LocaleLink>
           </motion.div>
         </motion.div>
+      </section>
+
+      {/* 6b. QHSE — pillar ↔ certificate evidence list, compact */}
+      <section className="bg-stone px-4 py-10">
+        <SectionHeader eyebrow={t('home:qualitySafety.eyebrow')} heading={t('home:qualitySafety.heading')} headingAs="h3" />
+        <p className="mt-3 text-balance text-small text-gray-600">{t('home:qualitySafety.standardsCaption').replace(/\n/g, ' ')}</p>
+        <ul role="list" className="mt-4 border-t border-gray-200">
+          {qhseRows.map(({ pillar, certification: certificationName }) => {
+            const certification = certifications.find((item) => item.name === certificationName);
+            return (
+              <li key={pillar} className="flex items-center justify-between gap-4 border-b border-gray-200 py-3">
+                <div className="min-w-0 text-start">
+                  <p className="text-body font-semibold text-ink">{t(`home:qualitySafety.pillars.${pillar}.title`)}</p>
+                  {certification && (
+                    <p className="font-display text-small font-semibold text-gray-700">
+                      <span dir="ltr">{certification.name}</span>
+                    </p>
+                  )}
+                </div>
+                {certification?.fileUrl && (
+                  <a
+                    href={certification.fileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${t('common:certifications.viewCertificate')} — ${certification.name} (PDF)`}
+                    className="-me-2.5 inline-flex h-11 w-11 shrink-0 items-center justify-center text-brand-600"
+                  >
+                    <ArrowUpRight size={16} aria-hidden="true" className="rtl:-scale-x-100" />
+                  </a>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+        <LocaleLink to="/quality-safety" className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-brand-600">
+          {t('home:qualitySafety.cta')}
+          <ArrowRight size={15} aria-hidden="true" className="rtl:rotate-180" />
+        </LocaleLink>
       </section>
 
       {/* 7. Regional presence — 2×2 office grid + selected office details */}

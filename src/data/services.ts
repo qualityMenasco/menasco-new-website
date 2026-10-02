@@ -1,4 +1,5 @@
 import { placeholderImages } from './images';
+import { servicesNavigationGroups, pendingContentPaths, dataCentreServiceLink } from './navigation';
 
 export interface ServiceDefinition {
   id: string;
@@ -39,7 +40,7 @@ export const services: ServiceDefinition[] = [
       'Testing, Adjusting & Balancing (TAB)',
       'Testing and Commissioning',
     ],
-    relatedSectors: ['residential-commercial', 'hotels', 'landmark-entertainment', 'advanced-technical-facilities'],
+    relatedSectors: ['residential-commercial', 'hospitality-landmark-entertainment', 'advanced-technical-facilities'],
     image: '/mechanical.jpg',
   },
   {
@@ -75,7 +76,7 @@ export const services: ServiceDefinition[] = [
       'Instrumentation & Control Systems',
       'Testing, Commissioning & System Integration',
     ],
-    relatedSectors: ['residential-commercial', 'hotels', 'landmark-entertainment', 'advanced-technical-facilities'],
+    relatedSectors: ['residential-commercial', 'hospitality-landmark-entertainment', 'advanced-technical-facilities'],
     image: '/electrical.jpg',
   },
   {
@@ -108,7 +109,7 @@ export const services: ServiceDefinition[] = [
       'Swimming Pool, Fountain & Water-Feature Systems',
       'Testing, Flushing, Disinfection & Commissioning',
     ],
-    relatedSectors: ['residential-commercial', 'hotels', 'landmark-entertainment', 'advanced-technical-facilities'],
+    relatedSectors: ['residential-commercial', 'hospitality-landmark-entertainment', 'advanced-technical-facilities'],
     image: '/plumbing.jpg',
   },
   {
@@ -143,7 +144,7 @@ Our solutions are engineered and installed in compliance with the UAE Fire and L
       'Fire Alarm Cause & Effect Programming',
       'Testing, Commissioning, Integration & Handover',
     ],
-    relatedSectors: ['residential-commercial', 'hotels', 'landmark-entertainment', 'advanced-technical-facilities'],
+    relatedSectors: ['residential-commercial', 'hospitality-landmark-entertainment', 'advanced-technical-facilities'],
     image: '/fire.jpg',
   },
   {
@@ -161,7 +162,7 @@ Our solutions are engineered and installed in compliance with the UAE Fire and L
       'Multidisciplinary coordination',
       'Data-driven project delivery',
     ],
-    relatedSectors: ['landmark-entertainment', 'advanced-technical-facilities'],
+    relatedSectors: ['hospitality-landmark-entertainment', 'advanced-technical-facilities'],
     image: '/bim-digital-engineering-hero.jpg',  },
   {
     id: 'manufacturing-prefabrication',
@@ -179,6 +180,91 @@ Our solutions are engineered and installed in compliance with the UAE Fire and L
       'Improved consistency',
       'Modular MEP solutions',
     ],
-    relatedSectors: ['landmark-entertainment', 'advanced-technical-facilities'],
+    relatedSectors: ['hospitality-landmark-entertainment', 'advanced-technical-facilities'],
     image: '/manufacturing-prefab-service-hero.jpg',  },
 ];
+
+/**
+ * Maps a `ServiceDefinition.slug` to its i18n key under `services:items.*` —
+ * shared by every surface that renders a service's name/description/
+ * capabilities from locale JSON (previously duplicated verbatim in
+ * ServicesPage.tsx, ServicesShowcase.tsx, and the mobile homepage).
+ */
+export const serviceI18nKeys: Record<string, string> = {
+  mechanical: 'mechanical',
+  electrical: 'electrical',
+  plumbing: 'plumbing',
+  'fire-protection': 'fireProtection',
+  'bim-digital-engineering': 'bimDigitalEngineering',
+  'manufacturing-prefabrication': 'manufacturingPrefabrication',
+};
+
+export interface ServiceShowcaseLeaf {
+  href: string;
+  i18nKey: string;
+  /** null when this leaf has no rich content yet (a pending page, or a child like Modular/Custom with no ServiceDefinition) — render a title+link only, never fabricated copy. */
+  service: ServiceDefinition | null;
+}
+
+export interface ServiceShowcaseGroup {
+  key: string;
+  i18nKey: string;
+  href?: string;
+  leaves: ServiceShowcaseLeaf[];
+}
+
+const isPendingHref = (href: string) => (pendingContentPaths as readonly string[]).includes(href);
+const serviceByHref = (href: string): ServiceDefinition | null =>
+  services.find((service) => `/services/${service.slug}` === href) ?? null;
+
+const toShowcaseLeaf = (href: string, i18nKey: string): ServiceShowcaseLeaf => ({
+  href,
+  i18nKey,
+  service: serviceByHref(href),
+});
+
+/**
+ * The homepage "What We Deliver" section's data — a presentation-specific
+ * view derived from the canonical taxonomy (`servicesNavigationGroups`) and
+ * this file's own rich content, not a third hardcoded taxonomy. A group's
+ * own page is folded in as a leaf alongside its children exactly when
+ * `src/pages/ServicesPage.tsx` would also show it as a destination card (a
+ * real, non-pending page, or a group with no children at all) — see that
+ * file's `includeLeadDestination` for the precedent this mirrors. Data
+ * Centres isn't part of `servicesNavigationGroups` (it has its own
+ * `services:dataCenter.hero.*` content, not a `ServiceDefinition`) and is
+ * handled separately by each consuming component, the same way
+ * ServicesPage.tsx renders it as its own trailing section.
+ */
+export const serviceShowcaseGroups: ServiceShowcaseGroup[] = servicesNavigationGroups.map((group) => {
+  const includeLeadDestination = Boolean(group.href) && (group.links.length === 0 || !isPendingHref(group.href!));
+  return {
+    key: group.i18nKey,
+    i18nKey: group.i18nKey,
+    href: group.href,
+    leaves: [
+      ...(includeLeadDestination ? [toShowcaseLeaf(group.href!, group.i18nKey)] : []),
+      ...group.links.map((link) => toShowcaseLeaf(link.href, link.i18nKey)),
+    ],
+  };
+});
+
+/** Data Centres isn't part of servicesNavigationGroups (no ServiceDefinition — its own services:dataCenter.hero.* content), so it's appended as its own single-leaf, childless group everywhere this data is consumed. */
+export const dataCentresShowcaseLeaf: ServiceShowcaseLeaf = { href: dataCentreServiceLink.href, i18nKey: dataCentreServiceLink.i18nKey, service: null };
+export const isDataCentresLeaf = (leaf: ServiceShowcaseLeaf) => leaf.href === dataCentresShowcaseLeaf.href;
+
+/** The full set of groups the homepage/other showcase surfaces render, in taxonomy order — MEP/Civil/Manufacturing & Prefabrication/Turnkey Developments plus Data Centres appended. One source for any surface that needs this grouping (currently the desktop and mobile homepage sections), so a new surface — or a future subservice added to Turnkey/Data Centres — doesn't require per-surface hardcoding. */
+export const showcaseDisplayGroups: ServiceShowcaseGroup[] = [
+  ...serviceShowcaseGroups,
+  { key: 'dataCentres', i18nKey: dataCentreServiceLink.i18nKey, href: dataCentreServiceLink.href, leaves: [dataCentresShowcaseLeaf] },
+];
+
+/**
+ * A leaf whose href equals its own group's href is the group's own page
+ * shown as a leaf (Manufacturing & Prefabrication, Turnkey Developments,
+ * Data Centres) — real subservices are every other leaf. Whether a group
+ * gets an expand/collapse control derives purely from whether this list is
+ * non-empty, per service, never hardcoded per category.
+ */
+export const showcaseGroupChildren = (group: ServiceShowcaseGroup): ServiceShowcaseLeaf[] =>
+  group.leaves.filter((leaf) => leaf.href !== group.href);

@@ -62,7 +62,7 @@ export function FeatureBlock({
         {description && <Text theme={resolvedTheme}>{description}</Text>}
       </div>
 
-      {list && list.length > 0 && <ProfessionalList items={list} variant="check" theme={resolvedTheme} />}
+      {list && list.length > 0 && <ProfessionalList items={list} variant="rule" theme={resolvedTheme} />}
 
       {cta && (
         <SmartLink

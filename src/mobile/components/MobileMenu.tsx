@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { X } from 'lucide-react';
+import { ArrowRight, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
@@ -8,30 +8,13 @@ import { LocaleLink } from './LocaleLink';
 import { LanguageSwitch } from './LanguageSwitch';
 import { cn } from '../lib/utils';
 import { useScrollLock } from '../hooks/useScrollLock';
-import { aboutNavigation, servicesNavigation } from '../../data/navigation';
+import { aboutNavigation, dataCentreServiceLink, servicesNavigationGroups } from '../../data/navigation';
 import { getLocaleFromPath, withLocale } from '../../lib/locale';
 
 export interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
-const aboutNavKeys: Record<string, string> = {
-  'About MENASCO': 'aboutMenasco',
-  'Leadership Team': 'leadershipTeam',
-  'Quality & Safety': 'qualitySafety',
-  'ESG Reporting': 'esgReporting',
-  'Innovation & Technology': 'innovationTechnology',
-};
-
-const servicesNavKeys: Record<string, string> = {
-  'Mechanical Systems': 'servicesList.mechanical',
-  'Electrical & ELV Systems': 'servicesList.electrical',
-  'Plumbing, Water & Drainage Systems': 'servicesList.plumbing',
-  'Fire Protection & Life Safety Systems': 'servicesList.firesProtection',
-  'BIM & Digital Engineering': 'servicesList.bimDigitalEngineering',
-  'Manufacturing & MEP Prefabrication': 'servicesList.manufacturingPrefabrication',
-};
 
 /** Full-screen mobile nav overlay — About/Services as accordions, everything else a flat, one-tap link. */
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
@@ -109,7 +92,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       isActive(item.href) ? 'font-semibold text-brand-600' : 'text-ink',
                     )}
                   >
-                    {t(aboutNavKeys[item.label] ?? item.label)}
+                    {t(item.i18nKey)}
                   </LocaleLink>
                 ))}
               </div>
@@ -120,23 +103,59 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 <LocaleLink
                   to="/services"
                   aria-current={isActive('/services') && location.pathname === withLocale('/services', locale) ? 'page' : undefined}
-                  className="min-h-[44px] rounded-sm px-2 py-2.5 text-body font-semibold text-brand-600"
+                  className={cn(
+                    'flex min-h-[44px] items-center gap-1.5 rounded-sm px-2 py-2.5 text-body font-semibold',
+                    location.pathname === withLocale('/services', locale) ? 'text-brand-600' : 'text-ink',
+                  )}
                 >
                   {t('allServices')}
+                  <ArrowRight size={16} aria-hidden="true" className="shrink-0 text-gray-500 rtl:rotate-180" />
                 </LocaleLink>
-                {servicesNavigation.map((item) => (
-                  <LocaleLink
-                    key={item.href}
-                    to={item.href}
-                    aria-current={isActive(item.href) ? 'page' : undefined}
-                    className={cn(
-                      'min-h-[44px] rounded-sm px-2 py-2.5 text-body',
-                      isActive(item.href) ? 'font-semibold text-brand-600' : 'text-ink',
+                {servicesNavigationGroups.map((group) => (
+                  <div key={group.i18nKey} className="flex flex-col">
+                    {group.href ? (
+                      // PARENT = clickable landing page: same ink + arrow
+                      // language "All Services" above uses, so headings that
+                      // link and headings that don't never look alike.
+                      <LocaleLink
+                        to={group.href}
+                        aria-current={isActive(group.href) && location.pathname === withLocale(group.href, locale) ? 'page' : undefined}
+                        className={cn(
+                          'mt-2 flex min-h-[44px] items-center gap-1.5 rounded-sm px-2 py-2.5 text-body font-semibold normal-case',
+                          location.pathname === withLocale(group.href, locale) ? 'text-brand-600' : 'text-ink',
+                        )}
+                      >
+                        {t(group.i18nKey)}
+                        <ArrowRight size={16} aria-hidden="true" className="shrink-0 text-gray-500 rtl:rotate-180" />
+                      </LocaleLink>
+                    ) : (
+                      <p className="px-2 pb-1 pt-4 text-caption font-semibold uppercase tracking-wide text-gray-600">{t(group.i18nKey)}</p>
                     )}
-                  >
-                    {t(servicesNavKeys[item.label] ?? item.label)}
-                  </LocaleLink>
+                    {group.links.map((item) => (
+                      <LocaleLink
+                        key={item.href}
+                        to={item.href}
+                        aria-current={isActive(item.href) ? 'page' : undefined}
+                        className={cn(
+                          'ms-2 min-h-[44px] rounded-sm border-s border-gray-200 px-2 py-2.5 ps-3 text-body',
+                          isActive(item.href) ? 'font-semibold text-brand-600' : 'text-gray-700',
+                        )}
+                      >
+                        {t(item.i18nKey)}
+                      </LocaleLink>
+                    ))}
+                  </div>
                 ))}
+                <LocaleLink
+                  to={dataCentreServiceLink.href}
+                  aria-current={isActive(dataCentreServiceLink.href) ? 'page' : undefined}
+                  className={cn(
+                    'mt-2 min-h-[44px] rounded-sm border-t border-gray-200 px-2 py-3 text-body',
+                    isActive(dataCentreServiceLink.href) ? 'font-semibold text-brand-600' : 'text-ink',
+                  )}
+                >
+                  {t(dataCentreServiceLink.i18nKey)}
+                </LocaleLink>
               </div>
             </MobileAccordion>
 

@@ -2,16 +2,27 @@
 
 > MENASCO delivers reliable mechanical, electrical, plumbing & fire protection solutions, engineered to operate as one fully integrated system across the UAE, KSA, Egypt & the United Kingdom.
 
-Select a discipline to see how MENASCO delivers it, or explore the dedicated page for full capabilities.
+Select a service area to see how MENASCO delivers it, or explore the dedicated page for full capabilities.
 
 ## Services
+
+### MEP
 
 - [Mechanical](https://menascogroup.com/services/mechanical/llms.txt): HVAC, chilled-water and plant systems engineered for regional climate loads.
 - [Electrical](https://menascogroup.com/services/electrical/llms.txt): Power distribution, building management and low-current systems, coordinated end to end.
 - [Plumbing](https://menascogroup.com/services/plumbing/llms.txt): Water supply, drainage and sanitary systems built for long-term reliability.
 - [Fire Protection](https://menascogroup.com/services/fire-protection/llms.txt): MENASCO delivers integrated fire protection, firefighting, fire detection, and life safety systems for residential, commercial, hospitality, industrial, infrastructure & mission-critical projects across the UAE and the region.
+
+### Civil
+
 - [BIM & Digital Engineering](https://menascogroup.com/services/bim-digital-engineering/llms.txt): Federated coordination and clash detection that de-risk delivery before site works begin.
+
+### Manufacturing & Prefabrication
+
 - [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt): Off-site production for faster, more consistent on-site installation.
+
+### Data Centres
+
 - [Data Centres](https://menascogroup.com/services/data-centers/llms.txt): MENASCO delivers mission-critical data centre MEP and infrastructure solutions for uptime, reliability and future-ready digital operations.
 
 ---

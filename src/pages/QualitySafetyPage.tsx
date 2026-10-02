@@ -1,4 +1,4 @@
-import { Award, Leaf, ShieldCheck } from 'lucide-react';
+import { Award, HardHat, Leaf } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../components/layout/Section';
 import { Stack } from '../components/layout/Stack';
@@ -14,7 +14,7 @@ import {} from '../seo/structuredData';
 const certificationIcons: Record<string, IconComponent> = {
   'ISO 9001:2015': Award,
   'ISO 14001:2015': Leaf,
-  'ISO 45001:2018': ShieldCheck,
+  'ISO 45001:2018': HardHat,
 };
 
 const certificationScopeKeys: Record<string, string> = {
@@ -43,8 +43,6 @@ export default function QualitySafetyPage() {
             <div className="flex flex-1 flex-col gap-4">
               <SectionHeader
                 className="w-full"
-                headingClassName="max-w-none"
-                descriptionClassName="max-w-none"
                 eyebrow={t('qualitySafetyPage.eyebrow')}
                 heading={t('qualitySafetyPage.heading')}
                 headingAs="h2"
@@ -102,7 +100,7 @@ export default function QualitySafetyPage() {
                     href={certification.fileUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-full flex-col gap-4 rounded-md border border-gray-200 bg-stone p-6 transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.03] hover:bg-stone/80 hover:shadow-xl motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100"
+                    className="flex h-full flex-col gap-4 rounded-md border border-gray-200 bg-stone p-6 transition-colors duration-base ease-engineered hover:border-gray-300"
                   >
                     {cardContent}
                   </a>

@@ -7,7 +7,7 @@ import { HeaderShell } from '../components/navigation/HeaderShell';
 import { MenascoLogo } from '../components/brand/MenascoLogo';
 import { LanguageSwitch } from '../components/navigation/LanguageSwitch';
 import { SmartLink } from '../lib/SmartLink';
-import { aboutNavigation, homeSectionNavigation, servicesNavigation } from '../data/navigation';
+import { aboutNavigation, dataCentreServiceLink, homeSectionNavigation, servicesNavigationGroups } from '../data/navigation';
 import { homeSectionIds, homeSectionThemeById } from '../data/homeSections';
 import type { NavItem } from '../components/navigation/types';
 import { useActiveSection } from '../hooks/useActiveSection';
@@ -27,25 +27,6 @@ const primaryNavKeys: Record<string, string> = {
   Careers: 'careers',
 };
 
-const aboutNavKeys: Record<string, string> = {
-  'About MENASCO': 'aboutMenasco',
-  'Leadership Team': 'leadershipTeam',
-  'Quality & Safety': 'qualitySafety',
-  'ESG Reporting': 'esgReporting',
-  'Innovation & Technology': 'innovationTechnology',
-};
-
-const servicesNavKeys: Record<string, string> = {
-  'Mechanical Systems': 'servicesList.mechanical',
-  'Electrical & ELV Systems': 'servicesList.electrical',
-  'Plumbing, Water & Drainage Systems': 'servicesList.plumbing',
-  'Fire Protection & Life Safety Systems': 'servicesList.firesProtection',
-  'BIM & Digital Engineering': 'servicesList.bimDigitalEngineering',
-  'Manufacturing & MEP Prefabrication': 'servicesList.manufacturingPrefabrication',
-};
-
-const sectionIds = homeSectionNavigation.map((item) => item.sectionId);
-
 const SCROLL_THRESHOLD = 24;
 
 export function SiteHeader() {
@@ -53,34 +34,38 @@ export function SiteHeader() {
   const { transparent: transparentAllowed, mode: transparencyMode, themeOverride } = useHeaderTransparencyState();
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const isHomePage = location.pathname === '/' || location.pathname === '/ar';
-
-  const dropdownByLabel: Record<string, typeof servicesNavigation> = {
-    About: aboutNavigation,
-    Services: servicesNavigation,
-  };
+  // stripLocale normalises '/ar' and '/ar/' to '/', so every homepage variant is recognised.
+  const isHomePage = stripLocale(location.pathname) === '/';
 
   const navItems: NavItem[] = useMemo(
     () =>
-      homeSectionNavigation.map((item) => ({
-        href: item.directHref ?? `/#${item.sectionId}`,
-        label: ((): string => {
-          const key = primaryNavKeys[item.label];
-          return key ? t(`nav:${key}`) : item.label;
-        })(),
-        ...(dropdownByLabel[item.label]
-          ? {
-              dropdown: dropdownByLabel[item.label].map((link) => ({
-                label: ((): string => {
-                  const map = item.label === 'About' ? aboutNavKeys : servicesNavKeys;
-                  const childKey = map[link.label];
-                  return childKey ? t(`nav:${childKey}`) : link.label;
-                })(),
-                href: link.href,
+      homeSectionNavigation.map((item) => {
+        const key = primaryNavKeys[item.label];
+        const base: NavItem = {
+          href: item.directHref ?? `/#${item.sectionId}`,
+          label: key ? t(`nav:${key}`) : item.label,
+        };
+        if (item.label === 'About') {
+          return { ...base, dropdown: aboutNavigation.map((link) => ({ label: t(`nav:${link.i18nKey}`), href: link.href })) };
+        }
+        if (item.label === 'Services') {
+          return {
+            ...base,
+            megaMenu: {
+              columns: servicesNavigationGroups.map((group) => ({
+                heading: t(`nav:${group.i18nKey}`),
+                href: group.href,
+                links: group.links.map((link) => ({ label: t(`nav:${link.i18nKey}`), href: link.href })),
               })),
-            }
-          : {}),
-      })),
+              footerLinks: [
+                { label: t('nav:allServices'), href: '/services' },
+                { label: t(`nav:${dataCentreServiceLink.i18nKey}`), href: dataCentreServiceLink.href },
+              ],
+            },
+          };
+        }
+        return base;
+      }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [t],
   );
@@ -92,11 +77,8 @@ export function SiteHeader() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const activeSectionId = useActiveSection(sectionIds, isHomePage);
-  // Separate from the nav-highlighting observer above (which only watches the
-  // subset of sections with their own nav link) — this one watches every
-  // homepage section so the always-transparent home header can match its
-  // text colour to whichever section is currently behind it.
+  // Watches every homepage section so the always-transparent home header can
+  // match its text colour to whichever section is currently behind it.
   const activeHomeThemeSectionId = useActiveSection(homeSectionIds, isHomePage, '0px 0px -88% 0px');
 
   const isItemActive = useMemo(() => {
@@ -107,7 +89,10 @@ export function SiteHeader() {
         return expected === item.label;
       });
       if (!navEntry) return false;
-      if (isHomePage) return navEntry.sectionId === activeSectionId;
+      // The homepage is a neutral top-level state: no main nav item is the
+      // current section there (Home has no nav item of its own), even while
+      // scrolling past homepage sections that share a nav item's topic.
+      if (isHomePage) return false;
       // Nav entries' routePrefix/directHref/dropdown hrefs are always the
       // canonical English path (see data/navigation.ts) — strip a /ar prefix
       // from the current path first so active-item detection (and, via it,
@@ -117,10 +102,15 @@ export function SiteHeader() {
       if (navEntry.directHref && (path === navEntry.directHref || path.startsWith(`${navEntry.directHref}/`))) return true;
       // Dropdown children (e.g. About's Leadership Team, Quality & Safety) don't
       // live under the parent's own route prefix, so check their hrefs too.
-      return item.dropdown?.some((link) => path === link.href || path.startsWith(`${link.href}/`)) ?? false;
+      const childLinks = [
+        ...(item.dropdown ?? []),
+        ...(item.megaMenu?.columns.flatMap((column) => [...(column.href ? [{ href: column.href }] : []), ...column.links]) ?? []),
+        ...(item.megaMenu?.footerLinks ?? []),
+      ];
+      return childLinks.some((link) => path === link.href || path.startsWith(`${link.href}/`));
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isHomePage, activeSectionId, location.pathname, t]);
+  }, [isHomePage, location.pathname, t]);
 
   const isTransparent = transparentAllowed && (transparencyMode === 'always' || !isScrolled);
   const homeSectionTheme = isHomePage ? homeSectionThemeById[activeHomeThemeSectionId ?? 'hero'] : undefined;

@@ -1,4 +1,4 @@
-import { Boxes, Handshake, ShieldCheck, Target } from 'lucide-react';
+import { Boxes, Gauge, Handshake, Target } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../../layout/Section';
 import { Stack } from '../../layout/Stack';
@@ -6,7 +6,7 @@ import { Eyebrow, Heading, Text } from '../../typography/Typography';
 import { ScrollRevealGroup } from '../../common/ScrollReveal';
 import type { IconComponent } from '../../../types';
 
-const pillarIcons = { earlyEngagement: Handshake, bimCoordination: Boxes, disciplinedExecution: Target, reliableDelivery: ShieldCheck } as const;
+const pillarIcons = { earlyEngagement: Handshake, bimCoordination: Boxes, disciplinedExecution: Target, reliableDelivery: Gauge } as const;
 const pillarKeys = ['earlyEngagement', 'bimCoordination', 'disciplinedExecution', 'reliableDelivery'] as const;
 
 interface ApproachPillarProps {

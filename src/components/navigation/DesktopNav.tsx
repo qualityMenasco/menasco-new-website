@@ -43,6 +43,9 @@ export function DesktopNav({ items, theme, gap = 'md', className, isItemActive }
   const isDark = resolvedTheme === 'dark';
   const [openLabel, setOpenLabel] = useState<string | null>(null);
   const rootRef = useRef<HTMLUListElement>(null);
+  // One trigger element per item, so Escape can hand focus back to whichever
+  // trigger opened the panel instead of dropping it to <body>.
+  const triggerRefs = useRef<Record<string, HTMLElement | null>>({});
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -50,7 +53,13 @@ export function DesktopNav({ items, theme, gap = 'md', className, isItemActive }
       if (rootRef.current && !rootRef.current.contains(event.target as Node)) setOpenLabel(null);
     };
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpenLabel(null);
+      if (event.key !== 'Escape') return;
+      setOpenLabel((current) => {
+        if (current && rootRef.current?.contains(document.activeElement)) {
+          triggerRefs.current[current]?.focus();
+        }
+        return null;
+      });
     };
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('keydown', handleEscape);
@@ -61,11 +70,15 @@ export function DesktopNav({ items, theme, gap = 'md', className, isItemActive }
   }, []);
 
   return (
-    <ul ref={rootRef} className={cn('flex items-center', gapClasses[gap], className)}>
+    <ul ref={rootRef} className={cn('relative flex items-center', gapClasses[gap], className)}>
       {items.map((item) => {
         const hasPanel = Boolean(item.dropdown || item.megaMenu);
         const isOpen = openLabel === item.label;
         const panelLinks = item.dropdown ?? item.megaMenu?.columns.flatMap((column) => column.links) ?? [];
+        // Mega menus are wider than their trigger, so they anchor to the whole
+        // nav list (centred in the header) rather than to their own item —
+        // keeps a multi-column panel on screen at narrow desktop widths.
+        const anchorToNav = Boolean(item.megaMenu);
         const defaultActive = hasPanel && !item.href ? panelLinks.some((link) => isRouteActive(pathname, link.href)) : isRouteActive(pathname, item.href);
         const isActive = isItemActive ? isItemActive(item) : defaultActive;
         const linkClasses = cn(
@@ -96,12 +109,21 @@ export function DesktopNav({ items, theme, gap = 'md', className, isItemActive }
         return (
           <li
             key={item.label}
-            className="relative"
+            className={cn(!anchorToNav && 'relative')}
             onMouseEnter={() => hasPanel && setOpenLabel(item.label)}
             onMouseLeave={() => hasPanel && setOpenLabel(null)}
+            onBlur={(event) => {
+              // Tabbing past the panel's last link (onward to the next top-level
+              // item) leaves it open over the page with nothing focused inside
+              // it — close it the moment focus moves outside this item.
+              if (isOpen && !event.currentTarget.contains(event.relatedTarget as Node)) setOpenLabel(null);
+            }}
           >
             {item.href ? (
               <SmartLink
+                ref={(el) => {
+                  triggerRefs.current[item.label] = el;
+                }}
                 href={item.href}
                 className={linkClasses}
                 aria-current={isActive ? 'page' : undefined}
@@ -117,6 +139,9 @@ export function DesktopNav({ items, theme, gap = 'md', className, isItemActive }
               </SmartLink>
             ) : (
               <button
+                ref={(el) => {
+                  triggerRefs.current[item.label] = el;
+                }}
                 type="button"
                 aria-expanded={isOpen}
                 aria-haspopup="true"
@@ -136,8 +161,13 @@ export function DesktopNav({ items, theme, gap = 'md', className, isItemActive }
                 </div>
               )}
               {isOpen && item.megaMenu && (
-                <div className="absolute left-1/2 top-full w-[min(90vw,56rem)] -translate-x-1/2 pt-3">
-                  <MegaMenuPanel columns={item.megaMenu.columns} featured={item.megaMenu.featured} theme={resolvedTheme} />
+                <div className="absolute left-1/2 top-full w-[min(calc(100vw-3rem),60rem)] -translate-x-1/2 pt-3">
+                  <MegaMenuPanel
+                    columns={item.megaMenu.columns}
+                    featured={item.megaMenu.featured}
+                    footerLinks={item.megaMenu.footerLinks}
+                    theme={resolvedTheme}
+                  />
                 </div>
               )}
             </AnimatePresence>

@@ -11,11 +11,11 @@ export interface CompanyStat {
 }
 
 /**
- * Workforce and completed-project counts were supplied directly for this
- * section rather than sourced from menascouae.com (which doesn't publish
- * them) — see conversation history for provenance. Years of experience and
- * country count are derived from verified facts (founding year, confirmed
- * offices) and update automatically as those change.
+ * The completed-project count was supplied directly for this section rather
+ * than sourced from menascouae.com (which doesn't publish it) — see
+ * conversation history for provenance. Years of experience and country count
+ * are derived from verified facts (founding year, confirmed offices) and
+ * update automatically as those change.
  */
 export const companyStats: CompanyStat[] = [
   {
@@ -34,12 +34,6 @@ export const companyStats: CompanyStat[] = [
     id: 'countries',
     value: `${regionalCountries.length}`,
     label: 'Countries of Operation',
-    verificationStatus: 'verified',
-  },
-  {
-    id: 'workforce',
-    value: '4,000+',
-    label: 'Workforce',
     verificationStatus: 'verified',
   },
 ];

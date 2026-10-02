@@ -66,7 +66,7 @@ export default function BIMPage() {
       <section className="px-4 py-8">
         <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-600">{t('services:bimPage.capabilities.eyebrow')}</span>
         <h3 className="mt-2 font-display text-h2 font-semibold tracking-tight text-ink">{t('services:bimPage.capabilities.heading')}</h3>
-        <div className="mt-5 grid grid-cols-1 gap-4 xs:grid-cols-2">
+        <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {capabilities.map((capability) => (
             <div key={capability.title} className="flex flex-col gap-3 rounded-md border border-gray-200 bg-warmwhite p-5">
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-stone text-brand-600">

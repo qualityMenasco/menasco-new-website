@@ -60,8 +60,8 @@ export default {
         info: { DEFAULT: '#355d8a', subtle: '#e8eef4' },
       },
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['"Sora"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['Inter', '"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['"Sora"', '"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         arabic: ['"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       fontSize: {

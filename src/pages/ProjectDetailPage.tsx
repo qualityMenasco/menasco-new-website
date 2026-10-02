@@ -12,12 +12,13 @@ import { ButtonLink } from '../components/ui/Button';
 import { ScrollFrameAnimation } from '../components/ScrollFrameAnimation';
 import { ProjectHeroBanner } from '../components/projects/ProjectHeroBanner';
 import { ProjectHighlights } from '../components/projects/ProjectHighlights';
+import { CtaBand } from '../components/sections/CtaBand';
 import { ScrollReveal, ScrollRevealGroup } from '../components/common/ScrollReveal';
 import { SectionThemeContext } from '../lib/theme-context';
 import { translateProjectLocation } from '../lib/projectLocation';
 import { getLocaleFromPath } from '../lib/locale';
 import { cn } from '../lib/utils';
-import { projects, type ProjectRecord } from '../data/projects';
+import { projects, getMainContractor, type ProjectRecord } from '../data/projects';
 import { projectCategories } from '../data/projectCategories';
 import { velaTimeline } from '../data/velaTimeline';
 import { saudiF1Timeline } from '../data/saudiF1Timeline';
@@ -128,9 +129,9 @@ const CINEMATIC_PROJECTS: Record<string, CinematicProjectConfig> = {
 
 const categoryKeys: Record<string, string> = {
   'residential-commercial': 'residentialCommercial',
-  hotels: 'hospitality',
-  'landmark-entertainment': 'landmarkEntertainment',
+  'hospitality-landmark-entertainment': 'hospitalityLandmarkEntertainment',
   'advanced-technical-facilities': 'advancedTechnicalFacilities',
+  'infrastructure-utilities': 'infrastructureUtilities',
 };
 
 const statusKeys: Record<string, string> = {
@@ -170,7 +171,10 @@ function ProjectHighlightsSection({ project, categoryTitle }: { project: Project
       : project.safetyRecord
     : undefined;
 
-  // Fixed 3×2 order: Workforce Hours / Status / Completion, then Safety / Category / Location.
+  // Order: Workforce Hours / Status / Completion, then Safety / Category /
+  // Location, then Main Contractor last — its trailing position is what lets
+  // ProjectHighlights span it full-width across the 7th slot instead of
+  // leaving a narrow orphan card (see that component's span logic).
   const stats = [
     { label: t('projects:detail.workforceHoursLabel'), value: workforceHours },
     { label: t('projects:detail.statusLabel'), value: translatedStatus },
@@ -178,6 +182,7 @@ function ProjectHighlightsSection({ project, categoryTitle }: { project: Project
     { label: t('projects:detail.safetyRecordLabel'), value: safetyRecord },
     { label: t('projects:detail.categoryLabel'), value: category },
     { label: t('projects:detail.locationLabel'), value: location },
+    { label: t('projects:detail.mainContractorLabel'), value: getMainContractor(project) },
   ];
 
   return (
@@ -243,6 +248,18 @@ export default function ProjectDetailPage() {
         ...(category ? [{ label: category.title, path: `/projects/categories?category=${category.slug}` }] : []),
         { label: project.title, path: `/projects/${project.slug}` },
       ]}
+    />
+  );
+
+  const closingCta = (
+    <CtaBand
+      headingLevel="h1"
+      heading={t('projects:detail.discussSimilarProject')}
+      primary={{ label: t('common:buttons.requestQuote'), href: '/contact?type=project' }}
+      secondary={{
+        label: t('projects:detail.viewAllProjects'),
+        href: category ? `/projects/categories?category=${category.slug}` : '/projects/categories',
+      }}
     />
   );
 
@@ -434,6 +451,7 @@ export default function ProjectDetailPage() {
         )}
 
         <ProjectHighlightsSection project={project} categoryTitle={categoryTitle} />
+        {closingCta}
       </>
     );
   }
@@ -500,6 +518,7 @@ export default function ProjectDetailPage() {
       )}
 
       <ProjectHighlightsSection project={project} categoryTitle={categoryTitle} />
+      {closingCta}
     </>
   );
 }

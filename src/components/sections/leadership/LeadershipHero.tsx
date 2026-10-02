@@ -22,7 +22,7 @@ export function LeadershipHero({ personName, photo, photoAlt, eyebrow, role, chi
   return (
     <Section spacing="md" background="warmwhite">
       <Stack space="lg">
-        <ButtonLink href="/about" variant="text" size="sm" leadingIcon={ArrowLeft} className="w-fit rtl:[&>svg]:rotate-180">
+        <ButtonLink href="/about" variant="text" size="sm" leadingIcon={ArrowLeft} className="w-fit">
           {t('team.backToAbout')}
         </ButtonLink>
 

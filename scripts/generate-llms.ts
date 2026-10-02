@@ -35,6 +35,7 @@ import { fileURLToPath } from 'node:url';
 
 import { SITE_URL, SITE_TAGLINE } from '../src/seo/constants';
 import { services } from '../src/data/services';
+import { pendingContentPaths, servicesNavigationGroups } from '../src/data/navigation';
 import { projects } from '../src/data/projects';
 import { projectCategoryList } from '../src/data/projectCategories';
 import { leadershipProfiles, executiveTeam } from '../src/data/leadership';
@@ -100,6 +101,30 @@ function bullets(items: string[]) {
   return items.map((item) => (item.startsWith('- ') ? item : `- ${item}`)).join('\n');
 }
 
+/**
+ * Services grouped the way the site's navigation and Services landing
+ * group them (src/data/navigation.ts). Only live pages are listed —
+ * structure-only pages awaiting approved content (`pendingContentPaths`)
+ * are left out, and a group with no live pages is omitted entirely.
+ * Data Centres follows as a sector solution rather than a fifth group.
+ */
+function groupedServiceBlocks(): string[] {
+  const pending = pendingContentPaths as readonly string[];
+  const serviceLine = (href: string) => {
+    const s = services.find((entry) => `/services/${entry.slug}` === href);
+    return s ? linkLine(s.name, llmsUrl(href), s.shortDescription) : undefined;
+  };
+  const blocks = servicesNavigationGroups.flatMap((group) => {
+    const hrefs = [...(group.href ? [group.href] : []), ...group.links.map((link) => link.href)].filter((href) => !pending.includes(href));
+    const lines = hrefs.map(serviceLine).filter((line): line is string => Boolean(line));
+    return lines.length > 0 ? [`### ${group.label}\n\n${bullets(lines)}`] : [];
+  });
+  return [
+    ...blocks,
+    `### Data Centres\n\n${bullets([linkLine('Data Centres', llmsUrl('/services/data-centers'), servicesCopy.dataCenter.seo.description)])}`,
+  ];
+}
+
 /** Joins page sections with blank lines; `hr: true` sections are preceded by a `---` separator (used between major content groups, not every subsection). */
 function doc(...parts: Array<string | { text: string; hr?: boolean } | undefined | false>) {
   const blocks: string[] = [];
@@ -150,10 +175,21 @@ function relatedServicesForCategory(categorySlug: string | undefined) {
 // durable anchor fact per the source data's own foundingYear constant.
 // ---------------------------------------------------------------------------
 
+/**
+ * Sectors with at least one published project — a category can exist in the
+ * taxonomy (see src/data/projectCategories.ts) before any project has been
+ * assigned to it, and this site's llms.txt is meant to represent verified,
+ * evidenced capability, not the taxonomy's aspirational shape. Excluding an
+ * empty category here means its (deliberately neutral, "reserved for future
+ * projects") description never has to be relied on to stay capability-free
+ * forever — it simply isn't published until real projects justify it.
+ */
+const publishedCategories = projectCategoryList.filter((c) => projects.some((p) => p.category === c.slug));
+
 function buildCompanyKeyFacts(): string[] {
   const statLabels: Record<string, string> = home.stats;
   const serviceNames = services.map((s) => s.name).join(', ');
-  const sectorNames = projectCategoryList.map((c) => c.title).join(', ');
+  const sectorNames = publishedCategories.map((c) => c.title).join(', ');
   const innovationHeadings = Object.values(about.innovation.sections as Record<string, { heading: string }>).map((s) => s.heading);
   const certNames = certifications.map((c) => c.name).join(', ');
   const regionalOffices = officeLocations
@@ -212,11 +248,7 @@ function generateHome() {
       text: doc(
         h2('Services'),
         home.hero.description,
-        bullets(
-          services
-            .map((s) => linkLine(s.name, llmsUrl(`/services/${s.slug}`), s.shortDescription))
-            .concat(linkLine('Data Centres', llmsUrl('/services/data-centers'), servicesCopy.dataCenter.seo.description)),
-        ),
+        ...groupedServiceBlocks(),
       ),
     },
 
@@ -224,8 +256,8 @@ function generateHome() {
       hr: true,
       text: doc(
         h2('Projects & Sectors'),
-        `${projects.length} current projects across ${home.hero.description.includes('KSA') ? 'the UAE, KSA and Egypt' : 'the region'}, organized into ${projectCategoryList.length} sectors.`,
-        bullets(projectCategoryList.map((c) => `${c.title}: ${c.description}`)),
+        `${projects.length} current projects across ${home.hero.description.includes('KSA') ? 'the UAE, KSA and Egypt' : 'the region'}, organized into ${publishedCategories.length} sectors.`,
+        bullets(publishedCategories.map((c) => `${c.title}: ${c.description}`)),
         linkLine('All Projects & Sectors', llmsUrl('/projects/categories'), 'Full project portfolio, browsable by sector.'),
       ),
     },
@@ -479,11 +511,7 @@ function generateServicesIndex() {
 
     doc(
       h2('Services'),
-      bullets(
-        services
-          .map((s) => linkLine(s.name, llmsUrl(`/services/${s.slug}`), s.shortDescription))
-          .concat(linkLine('Data Centres', llmsUrl('/services/data-centers'), servicesCopy.dataCenter.seo.description)),
-      ),
+      ...groupedServiceBlocks(),
     ),
 
     {
@@ -570,7 +598,7 @@ function generateProjectsCategories() {
     doc(
       h2('Sectors'),
       bullets(
-        projectCategoryList.map((c) => {
+        publishedCategories.map((c) => {
           const count = projects.filter((p) => p.category === c.slug).length;
           return `${c.title} (${count}): ${c.description}`;
         }),

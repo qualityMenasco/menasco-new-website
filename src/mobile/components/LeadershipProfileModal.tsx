@@ -67,7 +67,7 @@ export function LeadershipProfileModal({ profile, onClose }: LeadershipProfileMo
             </p>
           ))}
           {profile.closingLine && (
-            <p className="border-l-2 border-brand-500 pl-4 text-body font-semibold leading-relaxed text-ink">
+            <p className="border-s-2 border-brand-500 ps-4 text-body font-semibold leading-relaxed text-ink">
               {profile.closingLine}
             </p>
           )}

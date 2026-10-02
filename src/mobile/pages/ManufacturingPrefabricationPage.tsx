@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { Boxes, Cable, Check, Download, FolderKanban, Gauge, Route, Settings2, ShieldCheck, Wind, Wrench, Zap } from 'lucide-react';
+import { Boxes, Cable, ClipboardList, Download, FolderKanban, Gauge, Route, Settings2, Wind, Wrench, Zap } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../components/SectionHeader';
 import { MobileCTA } from '../components/MobileCTA';
@@ -8,7 +8,7 @@ import { serviceEntity } from '../../seo/structuredData';
 import { COMPANY_PROFILE_PATH, SITE_URL } from '../../seo/constants';
 
 const capabilityIcons: LucideIcon[] = [Wind, Boxes, Route, Wrench, Cable, Settings2];
-const qualityIcons: LucideIcon[] = [Gauge, ShieldCheck, Zap, FolderKanban];
+const qualityIcons: LucideIcon[] = [Gauge, ClipboardList, Zap, FolderKanban];
 
 interface TitleDescription {
   title: string;
@@ -76,7 +76,7 @@ export default function ManufacturingPrefabricationPage() {
       <section className="px-4 py-8">
         <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-600">{t('services:manufacturingPageMobile.capabilitiesSection.eyebrow')}</span>
         <h3 className="mt-2 font-display text-h2 font-semibold tracking-tight text-ink">{t('services:manufacturingPageMobile.capabilitiesSection.heading')}</h3>
-        <div className="mt-5 grid grid-cols-1 gap-4 xs:grid-cols-2">
+        <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {capabilities.map((capability) => (
             <div key={capability.title} className="flex flex-col gap-3 rounded-md border border-gray-200 bg-warmwhite p-5">
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-stone text-brand-600">
@@ -97,10 +97,9 @@ export default function ManufacturingPrefabricationPage() {
         <p className="mt-4 text-body leading-relaxed text-gray-300">{t('services:manufacturingPageMobile.offSite.paragraph1')}</p>
         <p className="mt-3 text-body leading-relaxed text-gray-300">{t('services:manufacturingPageMobile.offSite.paragraph2')}</p>
         <p className="mt-6 font-display font-semibold uppercase tracking-wide text-warmwhite">{t('services:manufacturingPageMobile.offSite.benefitsLabel')}</p>
-        <ul className="mt-3 flex flex-col gap-2.5">
+        <ul className="mt-3 flex flex-col">
           {benefits.map((benefit) => (
-            <li key={benefit} className="flex items-start gap-2.5 text-body text-gray-200">
-              <Check size={16} aria-hidden="true" className="mt-1 shrink-0 text-brand-400" />
+            <li key={benefit} className="border-t border-white/10 py-2.5 text-start text-body text-gray-200">
               {benefit}
             </li>
           ))}

@@ -23,16 +23,20 @@ const ADVANCED_TECHNICAL_FACILITIES_SLUG = 'advanced-technical-facilities';
 
 const categoryKeys: Record<string, string> = {
   'residential-commercial': 'residentialCommercial',
-  hotels: 'hospitality',
-  'landmark-entertainment': 'landmarkEntertainment',
+  'hospitality-landmark-entertainment': 'hospitalityLandmarkEntertainment',
   'advanced-technical-facilities': 'advancedTechnicalFacilities',
+  'infrastructure-utilities': 'infrastructureUtilities',
 };
 
 /** Project Categories hub — the single entry point the "Projects / Sectors" nav item opens directly. */
 export default function ProjectsSectorsPage() {
-  const { t } = useTranslation(['projects', 'nav']);
+  const { t } = useTranslation(['projects', 'nav', 'common']);
   const [searchParams] = useSearchParams();
   const categoryTitle = (slug: string) => t(`projects:categories.${categoryKeys[slug] ?? slug}.title`);
+  // A category can exist before any project is assigned to it (e.g.
+  // Infrastructure & Utilities) — see the matching desktop page for why this
+  // must not fall through to "X projects first" wording.
+  const categoryHasNoMatches = (slug: string) => !categorizedProjects.some((project) => project.category === slug);
   // `category` is current; `sector` is accepted too, purely for old links
   // from before the 2026-08-06 move to four categories.
   const deepLinkedCategory = resolveCategorySlug(searchParams.get('category') ?? searchParams.get('sector'));
@@ -83,13 +87,17 @@ export default function ProjectsSectorsPage() {
 
         <p className="mt-4 text-small text-gray-500">
           {activeCategory
-            ? t('projects:categoriesPage.categoryFirst', { category: categoryTitle(activeCategory), count: categorizedProjects.length })
+            ? categoryHasNoMatches(activeCategory)
+              ? t('common:pendingContent.notice')
+              : t('projects:categoriesPage.categoryFirst', { category: categoryTitle(activeCategory), count: categorizedProjects.length })
             : t('projects:categoriesPage.showingAll', { count: categorizedProjects.length })}
         </p>
 
         <div aria-live="polite" className="sr-only">
           {activeCategory
-            ? t('projects:categoriesPage.categoryFirst', { category: categoryTitle(activeCategory), count: categorizedProjects.length })
+            ? categoryHasNoMatches(activeCategory)
+              ? t('common:pendingContent.notice')
+              : t('projects:categoriesPage.categoryFirst', { category: categoryTitle(activeCategory), count: categorizedProjects.length })
             : ''}
         </div>
 
