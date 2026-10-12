@@ -149,7 +149,7 @@ export default function ProjectDetailPage() {
             <div
               key={stat.label}
               className={cn(
-                'flex flex-col gap-1 rounded-sm border border-transparent bg-gradient-to-b from-[#fffdfa] via-warmwhite to-stone px-3.5 py-3 shadow-[0_2px_8px_-2px_rgba(10,11,13,0.07)]',
+                'flex flex-col gap-1 rounded-sm border border-gray-200 bg-warmwhite px-3.5 py-3 shadow-edge',
                 index === highlightStats.length - 1 && highlightStats.length % 2 === 1 && 'col-span-2',
               )}
             >

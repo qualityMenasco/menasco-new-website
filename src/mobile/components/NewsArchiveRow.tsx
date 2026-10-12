@@ -13,7 +13,7 @@ export interface NewsArchiveRowProps {
 export function NewsArchiveRow({ href, categoryLabel, date, title, readMoreLabel }: NewsArchiveRowProps) {
   return (
     <LocaleLink to={href} className="flex flex-col gap-1.5 border-b border-gray-200 py-5">
-      <span className="text-[11px] font-semibold uppercase tracking-wider text-brand-600">{categoryLabel}</span>
+      <span className="text-caption font-semibold uppercase tracking-wider text-brand-600">{categoryLabel}</span>
       <span className="font-display text-body-lg font-semibold text-ink">{title}</span>
       <div className="mt-1 flex items-center justify-between">
         <span className="text-small text-gray-500">{date}</span>

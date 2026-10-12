@@ -39,10 +39,16 @@ export default function ESGReportingPage() {
       />
       <section className="px-4 py-8">
         <SectionHeader eyebrow={t('esgMobile.eyebrow')} heading={t('esgMobile.heading')} headingAs="h2" />
-        <div className="mt-4 flex flex-col gap-4">
-          {pillars.map((pillar) => (
-            <div key={pillar.heading} className="rounded-md border border-gray-200 p-4">
+        {/* One connected framework, not 4 floating cards — a shared border +
+            internal dividers (plus a running index) reads as a single ESG
+            structure rather than disconnected blocks. */}
+        <div className="mt-4 overflow-hidden rounded-md border border-gray-200 divide-y divide-gray-200">
+          {pillars.map((pillar, index) => (
+            <div key={pillar.heading} className="p-4">
               <div className="flex items-center gap-3">
+                <span dir="ltr" className="font-display text-caption font-semibold text-gray-400">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-stone text-brand-600">
                   <pillar.icon size={18} aria-hidden="true" />
                 </span>

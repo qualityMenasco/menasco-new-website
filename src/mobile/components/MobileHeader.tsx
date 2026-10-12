@@ -33,7 +33,7 @@ export function MobileHeader({ onOpenMenu }: MobileHeaderProps) {
           <LocaleLink
             to="/contact"
             aria-label={t('contactUs')}
-            className="inline-flex h-9 shrink-0 items-center rounded-md border border-gray-300 px-2.5 text-caption font-semibold text-ink xs:text-small"
+            className="inline-flex h-11 shrink-0 items-center rounded-md border border-gray-300 px-2.5 text-caption font-semibold text-ink xs:text-small"
           >
             {t('callUs')}
           </LocaleLink>
@@ -41,7 +41,7 @@ export function MobileHeader({ onOpenMenu }: MobileHeaderProps) {
             href={COMPANY_PROFILE_PATH}
             download="MENASCO-Company-Profile.pdf"
             aria-label={t('profile')}
-            className="inline-flex h-9 shrink-0 items-center gap-1 rounded-md bg-brand-600 px-2.5 text-caption font-semibold text-warmwhite xs:text-small"
+            className="inline-flex h-11 shrink-0 items-center gap-1 rounded-md bg-brand-600 px-2.5 text-caption font-semibold text-warmwhite xs:text-small"
           >
             <Download size={13} aria-hidden="true" className="shrink-0" />
             {/* Icon-only below 400px — with the label the header row outgrows 360–390px phones (worse in Arabic). */}
@@ -51,7 +51,7 @@ export function MobileHeader({ onOpenMenu }: MobileHeaderProps) {
             type="button"
             onClick={onOpenMenu}
             aria-label={t('openMenu')}
-            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-ink transition-colors duration-base hover:bg-ink/5 active:bg-ink/10"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-ink transition-colors duration-base hover:bg-ink/5 active:bg-ink/10"
           >
             <Menu size={20} aria-hidden="true" />
           </button>

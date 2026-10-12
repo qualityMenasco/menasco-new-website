@@ -41,6 +41,8 @@ export interface SectionProps extends HTMLAttributes<HTMLElement> {
   spacing?: SectionSpacing;
   border?: SectionBorder;
   containerWidth?: ContainerWidth;
+  /** Extra classes merged onto the inner Container — e.g. a mobile-only gutter override for a page that otherwise needs the desktop Section/Container defaults. */
+  containerClassName?: string;
   /** Render children without wrapping them in a Container (for custom inner layout). */
   disableContainer?: boolean;
   /**
@@ -64,6 +66,7 @@ export function Section({
   spacing = 'md',
   border = 'none',
   containerWidth = 'standard',
+  containerClassName,
   disableContainer = false,
   edgeFade = false,
   joinTop = false,
@@ -108,7 +111,7 @@ export function Section({
             />
           </>
         )}
-        {disableContainer ? children : <Container width={containerWidth}>{children}</Container>}
+        {disableContainer ? children : <Container width={containerWidth} className={containerClassName}>{children}</Container>}
       </section>
     </SectionThemeContext.Provider>
   );

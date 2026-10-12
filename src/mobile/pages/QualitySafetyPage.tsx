@@ -46,7 +46,10 @@ export default function QualitySafetyPage() {
         >
           {t('qualitySafetyPage.downloadPolicy')}
         </a>
-        <div className="mt-5 flex flex-col gap-3">
+        {/* One connected system, not 3 floating cards — a shared border +
+            internal dividers reads as a single credible certification
+            structure rather than disconnected blocks. */}
+        <div className="mt-5 overflow-hidden rounded-md border border-gray-200 bg-stone divide-y divide-gray-200">
           {certifications.map((certification) => {
             const Icon = certificationIcons[certification.name] ?? Award;
             const scopeKey = certificationScopeKeys[certification.name];
@@ -69,7 +72,7 @@ export default function QualitySafetyPage() {
                   href={certification.fileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 rounded-md border border-gray-200 bg-stone p-4"
+                  className="flex items-center gap-4 p-4"
                 >
                   {cardContent}
                 </a>
@@ -77,7 +80,7 @@ export default function QualitySafetyPage() {
             }
 
             return (
-              <div key={certification.name} className="flex items-center gap-4 rounded-md border border-gray-200 bg-stone p-4">
+              <div key={certification.name} className="flex items-center gap-4 p-4">
                 {cardContent}
               </div>
             );

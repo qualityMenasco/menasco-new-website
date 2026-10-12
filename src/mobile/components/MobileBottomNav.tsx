@@ -39,7 +39,7 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
               to={item.href}
               aria-current={isActive ? 'page' : undefined}
               className={cn(
-                'flex min-h-[48px] flex-col items-center justify-center gap-0.5 text-[10px] font-semibold leading-none tracking-tight',
+                'flex min-h-[48px] flex-col items-center justify-center gap-0.5 text-caption font-semibold leading-none tracking-tight',
                 isActive ? 'text-brand-600' : 'text-gray-600',
               )}
             >
@@ -51,7 +51,7 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
         <button
           type="button"
           onClick={onOpenMenu}
-          className="flex min-h-[48px] flex-col items-center justify-center gap-0.5 text-[10px] font-semibold leading-none tracking-tight text-gray-600"
+          className="flex min-h-[48px] flex-col items-center justify-center gap-0.5 text-caption font-semibold leading-none tracking-tight text-gray-600"
         >
           <MenuIcon size={20} aria-hidden="true" />
           <span className="whitespace-nowrap">{t('menu')}</span>

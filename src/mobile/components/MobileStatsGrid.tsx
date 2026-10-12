@@ -47,7 +47,7 @@ export function MobileStatsGrid({ compact = false }: MobileStatsGridProps) {
           <div
             className={cn(
               'font-medium text-gray-600',
-              compact ? 'mt-1 text-[11px] leading-[1.2]' : 'mt-1.5 text-caption',
+              compact ? 'mt-1 text-caption leading-[1.2]' : 'mt-1.5 text-caption',
             )}
           >
             {t(keys[stat.id] ?? stat.label)}

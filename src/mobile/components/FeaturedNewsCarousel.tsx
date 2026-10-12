@@ -95,10 +95,10 @@ export function FeaturedNewsCarousel({ stories, categoryLabel, formatDate }: Fea
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-ink/50" aria-hidden="true" />
 
               <div className="relative z-10 flex items-start justify-between gap-3 p-4">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-brand-300">
+                <span className="text-caption font-semibold uppercase tracking-wider text-brand-300">
                   {story.category ? categoryLabel(story.category) : null}
                 </span>
-                <span className="text-[11px] font-medium uppercase tracking-wide text-gray-300">{formatDate(story.date)}</span>
+                <span className="text-caption font-medium uppercase tracking-wide text-gray-300">{formatDate(story.date)}</span>
               </div>
 
               <div className="relative z-10 flex flex-col gap-2 p-4">
@@ -120,7 +120,7 @@ export function FeaturedNewsCarousel({ stories, categoryLabel, formatDate }: Fea
             type="button"
             aria-label={t('newsroom:previousStory')}
             onClick={() => goTo(-1)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition-colors hover:bg-stone hover:text-brand-600 rtl:rotate-180"
+            className="relative inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition-colors before:absolute before:-inset-1 before:content-[''] hover:bg-stone hover:text-brand-600 rtl:rotate-180"
           >
             <ChevronLeft size={18} aria-hidden="true" />
           </button>
@@ -131,7 +131,7 @@ export function FeaturedNewsCarousel({ stories, categoryLabel, formatDate }: Fea
             type="button"
             aria-label={t('newsroom:nextStory')}
             onClick={() => goTo(1)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition-colors hover:bg-stone hover:text-brand-600 rtl:rotate-180"
+            className="relative inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition-colors before:absolute before:-inset-1 before:content-[''] hover:bg-stone hover:text-brand-600 rtl:rotate-180"
           >
             <ChevronRight size={18} aria-hidden="true" />
           </button>

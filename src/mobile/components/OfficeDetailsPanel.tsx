@@ -26,7 +26,7 @@ export function OfficeDetailsPanel({ office, email }: OfficeDetailsPanelProps) {
 
   return (
     <div className="flex h-full flex-col rounded-md border border-gray-200 bg-warmwhite p-2.5">
-      <span className="text-[10px] font-semibold uppercase tracking-wide text-brand-600">{label}</span>
+      <span className="text-caption font-semibold uppercase tracking-wide text-brand-600">{label}</span>
       <h3 className="mt-0.5 font-display text-small font-semibold leading-tight text-ink">
         {city}, {country}
       </h3>

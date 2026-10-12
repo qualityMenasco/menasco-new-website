@@ -74,7 +74,7 @@ export default function HelmiBadawiyehPage() {
       </LeadershipHero>
 
       <ScrollReveal>
-        <Section background="stone" spacing="lg" edgeFade>
+        <Section background="stone" spacing="lg" edgeFade className="max-md:!py-10" containerClassName="max-md:!px-4">
           <div className="mx-auto max-w-2xl">
             <Stack space="lg">
               <Eyebrow>{t('team.messageFromFounder')}</Eyebrow>
@@ -82,7 +82,7 @@ export default function HelmiBadawiyehPage() {
               <div className="relative pt-6 sm:pt-8">
                 <span
                   aria-hidden="true"
-                  className="pointer-events-none absolute -left-1 top-0 select-none font-display text-[3.5rem] leading-none text-brand-200 sm:text-[4.5rem]"
+                  className="pointer-events-none absolute -start-1 top-0 select-none font-display text-[3.5rem] leading-none text-brand-200 sm:text-[4.5rem]"
                 >
                   &ldquo;
                 </span>

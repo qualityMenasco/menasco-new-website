@@ -56,7 +56,7 @@ export default function DataCenterPage() {
         ]}
       />
 
-      <section className="relative flex min-h-[72vh] w-full items-end overflow-hidden bg-ink">
+      <section className="relative flex min-h-[46vh] w-full items-end overflow-hidden bg-ink md:min-h-[72vh]">
         <video
           className="absolute inset-0 h-full w-full object-cover object-center"
           src="/data-center.mp4"
@@ -69,10 +69,10 @@ export default function DataCenterPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/35 to-transparent" />
 
-        <Container className="relative z-10 pb-20 pt-28 md:pb-24 md:pt-32">
+        <Container className="relative z-10 max-md:!px-4 pb-10 pt-16 md:pb-24 md:pt-32">
           <div className="max-w-3xl">
             <Eyebrow theme="dark">{t('dataCenter.hero.eyebrow')}</Eyebrow>
-            <Heading level="h1" as="h2" theme="dark" className="mt-4">
+            <Heading level="h2" as="h2" theme="dark" className="mt-4 md:text-h1">
               {t('dataCenter.hero.heading')}
             </Heading>
             <Text variant="body-lg" theme="dark" className="mt-6 max-w-2xl text-gray-200">
@@ -82,7 +82,7 @@ export default function DataCenterPage() {
         </Container>
       </section>
 
-      <Section background="warmwhite" spacing="lg">
+      <Section background="warmwhite" spacing="lg" className="max-md:!py-10" containerClassName="max-md:!px-4">
         <Stack space="lg">
           <SectionHeader
             eyebrow={t('dataCenter.introHeading.eyebrow')}
@@ -107,7 +107,7 @@ export default function DataCenterPage() {
         </Stack>
       </Section>
 
-      <Section background="ink" spacing="md" edgeFade>
+      <Section background="ink" spacing="md" edgeFade className="max-md:!py-8" containerClassName="max-md:!px-4">
         <Statistic
           layout="grid"
           columns={2}
@@ -120,7 +120,7 @@ export default function DataCenterPage() {
         />
       </Section>
 
-      <Section background="warmwhite" spacing="lg">
+      <Section background="warmwhite" spacing="lg" className="max-md:!py-10" containerClassName="max-md:!px-4">
         <Stack space="lg">
           <SectionHeader
             eyebrow={t('dataCenter.capabilitiesHeading.eyebrow')}
@@ -131,7 +131,7 @@ export default function DataCenterPage() {
         </Stack>
       </Section>
 
-      <Section background="warmwhite" spacing="lg" joinTop>
+      <Section background="warmwhite" spacing="lg" joinTop className="max-md:!pb-10" containerClassName="max-md:!px-4">
         <SplitContent
           image="/data-centre-prefabrication-mep.webp"
           imageAlt="Data centre MEP infrastructure with server racks, cooling systems, pipework and cable containment"
@@ -145,7 +145,7 @@ export default function DataCenterPage() {
         />
       </Section>
 
-      <Section background="warmwhite" spacing="md" className="pb-20" joinTop>
+      <Section background="warmwhite" spacing="md" className="max-md:!py-8 max-md:!pb-14 md:pb-20" joinTop containerClassName="max-md:!px-4">
         <Stack space="lg">
           <SectionHeader eyebrow={t('dataCenter.faqHeading.eyebrow')} heading={t('dataCenter.faqHeading.heading')} headingAs="h3" />
           <Accordion

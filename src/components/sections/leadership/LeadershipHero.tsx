@@ -20,7 +20,7 @@ export interface LeadershipHeroProps {
 export function LeadershipHero({ personName, photo, photoAlt, eyebrow, role, children }: LeadershipHeroProps) {
   const { t } = useTranslation('about');
   return (
-    <Section spacing="md" background="warmwhite">
+    <Section spacing="md" background="warmwhite" className="max-md:!py-8" containerClassName="max-md:!px-4">
       <Stack space="lg">
         <ButtonLink href="/about" variant="text" size="sm" leadingIcon={ArrowLeft} className="w-fit">
           {t('team.backToAbout')}

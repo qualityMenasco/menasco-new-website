@@ -73,16 +73,20 @@ export function ServiceSectionCarousel({ sections, regionLabel, image }: Service
 
         {total > 1 && (
           <div className="absolute bottom-5 end-5 flex items-center gap-2">
-            <span dir="ltr" className="text-[11px] font-semibold tabular-nums text-gray-500">
+            <span dir="ltr" className="text-caption font-semibold tabular-nums text-gray-500">
               {String(activeIndex + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
             </span>
             <div className="flex items-center gap-1">
+              {/* Visible circle stays a compact 28px (`h-7 w-7`) to keep the pager
+                  elegant; `before:-inset-2` expands the actual tap target to a
+                  comfortable ~44px without growing the visual element or
+                  disturbing the gap-1 layout between the two buttons. */}
               <button
                 type="button"
                 onClick={() => goTo(activeIndex - 1)}
                 disabled={activeIndex === 0}
                 aria-label={t('services:detail.previousSection')}
-                className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-gray-300 text-ink transition-colors duration-base active:border-brand-600 active:text-brand-600 disabled:pointer-events-none disabled:opacity-30"
+                className="relative inline-flex h-7 w-7 items-center justify-center rounded-full border border-gray-300 text-ink transition-colors duration-base before:absolute before:-inset-2 before:content-[''] active:border-brand-600 active:text-brand-600 disabled:pointer-events-none disabled:opacity-30"
               >
                 <ArrowLeft size={13} aria-hidden="true" className="rtl:rotate-180" />
               </button>
@@ -91,7 +95,7 @@ export function ServiceSectionCarousel({ sections, regionLabel, image }: Service
                 onClick={() => goTo(activeIndex + 1)}
                 disabled={activeIndex === total - 1}
                 aria-label={t('services:detail.nextSection')}
-                className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-gray-300 text-ink transition-colors duration-base active:border-brand-600 active:text-brand-600 disabled:pointer-events-none disabled:opacity-30"
+                className="relative inline-flex h-7 w-7 items-center justify-center rounded-full border border-gray-300 text-ink transition-colors duration-base before:absolute before:-inset-2 before:content-[''] active:border-brand-600 active:text-brand-600 disabled:pointer-events-none disabled:opacity-30"
               >
                 <ArrowRight size={13} aria-hidden="true" className="rtl:rotate-180" />
               </button>

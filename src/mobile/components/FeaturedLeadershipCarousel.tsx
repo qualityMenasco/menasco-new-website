@@ -148,7 +148,7 @@ export function FeaturedLeadershipCarousel({ leaders }: FeaturedLeadershipCarous
               aria-current={activeIndex === index}
               onClick={() => handleDotClick(index)}
               className={cn(
-                'h-1.5 rounded-full transition-all duration-300',
+                'relative h-1.5 rounded-full transition-all duration-300 before:absolute before:-inset-2.5 before:content-[\'\']',
                 activeIndex === index ? 'w-5 bg-brand-600' : 'w-1.5 bg-gray-300',
               )}
             />

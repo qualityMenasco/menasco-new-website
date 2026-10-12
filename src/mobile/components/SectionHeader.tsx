@@ -26,7 +26,7 @@ export function SectionHeader({
   return (
     <div className={cn('flex flex-col gap-2', className)}>
       {eyebrow && <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-600">{eyebrow}</span>}
-      <HeadingTag className="font-display text-h2 font-semibold tracking-tight text-ink">{heading}</HeadingTag>
+      <HeadingTag className="font-display text-h2 font-semibold tracking-tight text-ink text-balance">{heading}</HeadingTag>
       {description && <p className={cn('text-body text-gray-600', descriptionClassName)}>{description}</p>}
       {action}
     </div>

@@ -1,6 +1,7 @@
 import { ArrowRight, Cpu, HardHat, Newspaper } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../components/SectionHeader';
+import { ExpandableText } from '../components/ExpandableText';
 import { MobileStatsGrid } from '../components/MobileStatsGrid';
 import { MobileCTA } from '../components/MobileCTA';
 import { LocaleLink } from '../components/LocaleLink';
@@ -22,11 +23,13 @@ export default function AboutPage() {
 
       <section className="px-4 py-8">
         <SectionHeader eyebrow={t('whoWeAre.eyebrow')} heading={t('whoWeAre.heading')} headingAs="h2" />
-        <div className="mt-4 flex flex-col gap-3">
-          <p className="text-body leading-relaxed text-ink">{t('whoWeAre.paragraph1')}</p>
-          <p className="text-body leading-relaxed text-ink">{t('whoWeAre.paragraph2')}</p>
-          <p className="text-body leading-relaxed text-ink">{t('whoWeAre.paragraph3')}</p>
-        </div>
+        <ExpandableText
+          className="mt-4"
+          summary={t('whoWeAre.paragraph1')}
+          paragraphs={[t('whoWeAre.paragraph2'), t('whoWeAre.paragraph3')]}
+          expandLabel={t('common:buttons.readMore')}
+          collapseLabel={t('common:buttons.showLess')}
+        />
         <p className="mt-4 border-s-2 border-brand-500 ps-4 text-body font-semibold text-ink">{t('whoWeAre.quote')}</p>
       </section>
 

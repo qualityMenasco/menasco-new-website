@@ -104,16 +104,18 @@ export default function BahaaBadawiyehPage() {
         eyebrow={messageEyebrow}
         role={fullRole}
       >
-        <Text as="p" className="font-display text-h3 font-semibold text-ink">
-          {pageTitle}
-        </Text>
+        {/* pageTitle is NOT repeated here — it's the Heading opening the very
+            next section below, and showing the identical string twice at
+            near-identical weight this close together read as an accidental
+            duplicate rather than an intentional echo, especially on mobile
+            where section separation is subtler than desktop's whitespace. */}
         <Text variant="body-lg" muted>
           {heroIntro}
         </Text>
       </LeadershipHero>
 
       <ScrollReveal>
-        <Section background="warmwhite" spacing="lg" edgeFade>
+        <Section background="warmwhite" spacing="lg" edgeFade className="max-md:!py-10" containerClassName="max-md:!px-4">
           <div className="mx-auto max-w-3xl">
             <Stack space="lg">
               <Heading level="h2" as="h3">
@@ -135,14 +137,14 @@ export default function BahaaBadawiyehPage() {
       </ScrollReveal>
 
       <ScrollReveal>
-        <section className="relative overflow-hidden bg-ink py-20 md:py-28">
+        <section className="relative overflow-hidden bg-ink py-12 md:py-28">
           <img
             src={placeholderImages.dubaiSkylineNight}
             alt=""
             className="absolute inset-0 h-full w-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/85 to-ink" />
-          <Container className="relative z-10">
+          <Container className="relative z-10 max-md:!px-4">
             <div className="mx-auto max-w-3xl text-center">
               <span aria-hidden="true" className="mx-auto mb-4 block h-0.5 w-16 bg-brand-500" />
               <span aria-hidden="true" className="block font-display text-h1 leading-none text-brand-400">
@@ -151,7 +153,7 @@ export default function BahaaBadawiyehPage() {
               <Text
                 as="blockquote"
                 theme="dark"
-                className="mt-2 font-display text-h1 font-semibold leading-tight tracking-tight text-warmwhite"
+                className="mt-2 font-display text-h2 font-semibold leading-tight tracking-tight text-warmwhite md:text-h1"
               >
                 {pullQuote}
               </Text>
@@ -167,7 +169,7 @@ export default function BahaaBadawiyehPage() {
       </ScrollReveal>
 
       <ScrollReveal>
-        <Section background="stone" spacing="lg" edgeFade>
+        <Section background="stone" spacing="lg" edgeFade className="max-md:!py-10" containerClassName="max-md:!px-4">
           <Stack space="xl">
             <Stack space="sm" className="max-w-2xl">
               <Eyebrow>{pillarsEyebrow}</Eyebrow>

@@ -10,10 +10,10 @@ export function LeadershipProfileCTA() {
   const { t } = useTranslation('about');
   return (
     <SectionThemeContext.Provider value="dark">
-      <section className="bg-gradient-to-br from-brand-800 via-brand-900 to-ink py-16 md:py-24">
-        <Container>
+      <section className="bg-gradient-to-br from-brand-800 via-brand-900 to-ink py-10 md:py-24">
+        <Container className="max-md:!px-4">
           <div className="mx-auto max-w-2xl text-center">
-            <Heading level="h1" as="h3" theme="dark">
+            <Heading level="h2" as="h3" theme="dark" className="md:text-h1">
               {t('team.profileCta.heading')}
             </Heading>
             <Text variant="body-lg" theme="dark" className="mt-5 text-brand-100">

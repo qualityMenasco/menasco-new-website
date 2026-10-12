@@ -146,15 +146,19 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     ))}
                   </div>
                 ))}
+                {/* Styled identically to the clickable parent categories above
+                    (not the plain-weight treatment it had before) — Data
+                    Centres is a peer top-level service, not an afterthought. */}
                 <LocaleLink
                   to={dataCentreServiceLink.href}
                   aria-current={isActive(dataCentreServiceLink.href) ? 'page' : undefined}
                   className={cn(
-                    'mt-2 min-h-[44px] rounded-sm border-t border-gray-200 px-2 py-3 text-body',
-                    isActive(dataCentreServiceLink.href) ? 'font-semibold text-brand-600' : 'text-ink',
+                    'mt-2 flex min-h-[44px] items-center gap-1.5 rounded-sm border-t border-gray-200 px-2 py-2.5 text-body font-semibold normal-case',
+                    isActive(dataCentreServiceLink.href) ? 'text-brand-600' : 'text-ink',
                   )}
                 >
                   {t(dataCentreServiceLink.i18nKey)}
+                  <ArrowRight size={16} aria-hidden="true" className="shrink-0 text-gray-500 rtl:rotate-180" />
                 </LocaleLink>
               </div>
             </MobileAccordion>
