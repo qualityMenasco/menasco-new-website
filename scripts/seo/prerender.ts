@@ -145,20 +145,52 @@ type Importer = () => Promise<{ default: ComponentType }>;
 // generate-seo-html.ts reads it to emit `<link rel="modulepreload">` hints
 // for a prerendered route's real component chunk, so hydrateRoot never has
 // to suspend on a still-downloading chunk (see this file's module comment).
-const PATTERNS: { pattern: string; importer: Importer; modulePath: string }[] = [
-  { pattern: '/', importer: () => import('../../src/mobile/pages/HomePage'), modulePath: 'src/mobile/pages/HomePage.tsx' },
-  { pattern: '/about', importer: () => import('../../src/mobile/pages/AboutPage'), modulePath: 'src/mobile/pages/AboutPage.tsx' },
-  { pattern: '/services', importer: () => import('../../src/mobile/pages/ServicesPage'), modulePath: 'src/mobile/pages/ServicesPage.tsx' },
+//
+// `desktopModulePath`, where the route has a true responsive split
+// (src/app/router.tsx's `responsivePage()`), is the SAME preload treatment
+// for the desktop component — not needed for the initial hydration (which
+// always renders mobile), but needed for the moment right after, when
+// `useIsDesktop()`'s post-mount correction flips a real desktop visitor
+// over to the desktop tree: without this, that flip re-suspends on a
+// still-downloading desktop chunk and briefly shows the generic loading
+// skeleton again — confirmed live on a throttled connection before this
+// field existed. Routes rendered via `lazyPage()` (one shared component,
+// no responsive split — e.g. Data Centres) omit it; there's no second tree.
+const PATTERNS: { pattern: string; importer: Importer; modulePath: string; desktopModulePath?: string }[] = [
+  { pattern: '/', importer: () => import('../../src/mobile/pages/HomePage'), modulePath: 'src/mobile/pages/HomePage.tsx', desktopModulePath: 'src/pages/HomePage.tsx' },
+  { pattern: '/about', importer: () => import('../../src/mobile/pages/AboutPage'), modulePath: 'src/mobile/pages/AboutPage.tsx', desktopModulePath: 'src/pages/AboutPage.tsx' },
+  { pattern: '/services', importer: () => import('../../src/mobile/pages/ServicesPage'), modulePath: 'src/mobile/pages/ServicesPage.tsx', desktopModulePath: 'src/pages/ServicesPage.tsx' },
   { pattern: '/services/data-centers', importer: () => import('../../src/pages/services/DataCenterPage'), modulePath: 'src/pages/services/DataCenterPage.tsx' },
-  { pattern: '/services/bim-digital-engineering', importer: () => import('../../src/mobile/pages/services/BIMPage'), modulePath: 'src/mobile/pages/services/BIMPage.tsx' },
+  {
+    pattern: '/services/bim-digital-engineering',
+    importer: () => import('../../src/mobile/pages/services/BIMPage'),
+    modulePath: 'src/mobile/pages/services/BIMPage.tsx',
+    desktopModulePath: 'src/pages/services/BIMPage.tsx',
+  },
   {
     pattern: '/services/manufacturing-prefabrication',
     importer: () => import('../../src/mobile/pages/services/ManufacturingPrefabricationPage'),
     modulePath: 'src/mobile/pages/services/ManufacturingPrefabricationPage.tsx',
+    desktopModulePath: 'src/pages/services/ManufacturingPrefabricationPage.tsx',
   },
-  { pattern: '/services/:slug', importer: () => import('../../src/mobile/pages/ServiceDetailPage'), modulePath: 'src/mobile/pages/ServiceDetailPage.tsx' },
-  { pattern: '/projects/categories', importer: () => import('../../src/mobile/pages/ProjectsSectorsPage'), modulePath: 'src/mobile/pages/ProjectsSectorsPage.tsx' },
-  { pattern: '/projects/:slug', importer: () => import('../../src/mobile/pages/ProjectDetailPage'), modulePath: 'src/mobile/pages/ProjectDetailPage.tsx' },
+  {
+    pattern: '/services/:slug',
+    importer: () => import('../../src/mobile/pages/ServiceDetailPage'),
+    modulePath: 'src/mobile/pages/ServiceDetailPage.tsx',
+    desktopModulePath: 'src/pages/ServiceDetailPage.tsx',
+  },
+  {
+    pattern: '/projects/categories',
+    importer: () => import('../../src/mobile/pages/ProjectsSectorsPage'),
+    modulePath: 'src/mobile/pages/ProjectsSectorsPage.tsx',
+    desktopModulePath: 'src/pages/ProjectCategoriesPage.tsx',
+  },
+  {
+    pattern: '/projects/:slug',
+    importer: () => import('../../src/mobile/pages/ProjectDetailPage'),
+    modulePath: 'src/mobile/pages/ProjectDetailPage.tsx',
+    desktopModulePath: 'src/pages/ProjectDetailPage.tsx',
+  },
   // '/newsroom' is deliberately NOT in this map: its component module graph
   // reads `import.meta.env.VITE_NEWSROOM_API_BASE_URL` (src/lib/newsroomApiConfig.ts)
   // at module-evaluation time — a Vite-bundler-only global that doesn't
@@ -192,7 +224,7 @@ export const PRERENDER_PATHS: string[] = [
   // are deliberately NOT in PRERENDER_PATHS" paragraph) for why.
 ];
 
-function matchPattern(path: string): { pattern: string; importer: Importer; modulePath: string } | null {
+function matchPattern(path: string): { pattern: string; importer: Importer; modulePath: string; desktopModulePath?: string } | null {
   const segments = path.split('/').filter(Boolean);
   for (const candidate of PATTERNS) {
     const candidateSegments = candidate.pattern.split('/').filter(Boolean);
@@ -203,10 +235,12 @@ function matchPattern(path: string): { pattern: string; importer: Importer; modu
   return null;
 }
 
-/** The Vite build-manifest source-path key for `canonicalPath`'s component, for generate-seo-html.ts's modulepreload hints — null if the path isn't in PRERENDER_PATHS or matches no known pattern. */
-export function getModulePathForRoute(canonicalPath: string): string | null {
+/** The Vite build-manifest source-path key(s) for `canonicalPath`'s component — `mobile` is what's actually prerendered/hydrated; `desktop`, where the route has a true responsive split, is preloaded too so a desktop visitor's post-mount viewport correction never re-suspends on a still-downloading chunk. Both null if the path isn't in PRERENDER_PATHS or matches no known pattern. */
+export function getModulePathsForRoute(canonicalPath: string): { mobile: string; desktop: string | null } | null {
   if (!PRERENDER_PATHS.includes(canonicalPath)) return null;
-  return matchPattern(canonicalPath)?.modulePath ?? null;
+  const match = matchPattern(canonicalPath);
+  if (!match) return null;
+  return { mobile: match.modulePath, desktop: match.desktopModulePath ?? null };
 }
 
 const resolvedComponentCache = new Map<string, ComponentType>();

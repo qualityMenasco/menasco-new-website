@@ -53,7 +53,7 @@ import { webPageJsonLd, breadcrumbJsonLd, serializeJsonLd } from '../src/seo/str
 // sitemap without running this script's filesystem side effects.
 import { LOCALES, routes, siteName, type Locale, type RouteMeta } from './seo/routes';
 import { buildSitemapXml } from './seo/sitemap';
-import { renderRouteBody, PRERENDER_PATHS, getModulePathForRoute } from './seo/prerender';
+import { renderRouteBody, PRERENDER_PATHS, getModulePathsForRoute } from './seo/prerender';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -137,11 +137,18 @@ function chunkFilesFor(modulePath: string): string[] {
 }
 
 function modulePreloadTags(route: RouteMeta): string {
-  const modulePath = getModulePathForRoute(route.path);
-  if (!modulePath) return '';
-  return chunkFilesFor(modulePath)
-    .map((file) => `<link rel="modulepreload" href="/${file}" />`)
-    .join('\n    ');
+  const modulePaths = getModulePathsForRoute(route.path);
+  if (!modulePaths) return '';
+  // Mobile is what's actually hydrated, so its chunks matter most — listed
+  // first. Desktop, where this route has a true responsive split, is
+  // preloaded too (not hydrated against, just warmed) so a desktop
+  // visitor's post-mount viewport correction (src/lib/hooks.ts's
+  // useIsDesktop) never has to suspend on a still-downloading chunk.
+  const files = new Set<string>(chunkFilesFor(modulePaths.mobile));
+  if (modulePaths.desktop) {
+    for (const file of chunkFilesFor(modulePaths.desktop)) files.add(file);
+  }
+  return [...files].map((file) => `<link rel="modulepreload" href="/${file}" />`).join('\n    ');
 }
 
 // api/newsroom-article-page.ts (the request-time renderer for
