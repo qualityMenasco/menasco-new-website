@@ -58,16 +58,36 @@ export const DESKTOP_QUERY = '(min-width: 1025px)';
  * uses to avoid a visible jump. Non-prerendered routes are completely
  * unaffected: `IS_PRERENDERED_HYDRATION` is `false` for them, so this hook
  * resolves the real value immediately, exactly as before this change.
+ *
+ * `settled` additionally reports whether that one-time correction has
+ * already happened (always `true` for non-prerendered routes, and
+ * immediately after the very first paint for prerendered ones) —
+ * RootLayout uses it to know when it's safe to stop rendering BOTH shells
+ * (see `useIsDesktopSettled` below and RootLayout's own comment for why a
+ * value-mismatch alone wasn't enough to prevent a visible mobile-chrome
+ * flash on a real desktop browser).
  */
-export function useIsDesktop(): boolean {
+function useIsDesktopInternal(): { matches: boolean; settled: boolean } {
   const [matches, setMatches] = useState(
     () => !IS_PRERENDERED_HYDRATION && typeof window !== 'undefined' && window.matchMedia(DESKTOP_QUERY).matches,
   );
+  // Unsettled (renders both shells) in two cases that must produce IDENTICAL
+  // output for hydration to match: server-side prerendering itself
+  // (`typeof window === 'undefined'` — scripts/seo/prerender.ts has no
+  // `IS_PRERENDERED_HYDRATION` concept at all, it's always "unsettled" by
+  // definition, which is exactly right: the static HTML should ship both
+  // shells so any device's CSS picks the right one immediately), and the
+  // client's first hydration pass against that same prerendered markup.
+  // Everywhere else (a normal client load, prerendered or not, once
+  // `window` exists and this isn't the very first hydration pass) starts
+  // settled — zero extra cost, single-branch render from the start.
+  const [settled, setSettled] = useState(() => typeof window !== 'undefined' && !IS_PRERENDERED_HYDRATION);
 
   useLayoutEffect(() => {
     if (!IS_PRERENDERED_HYDRATION) return;
     const real = window.matchMedia(DESKTOP_QUERY).matches;
     if (real !== matches) setMatches(real);
+    setSettled(true);
     // Intentionally only ever runs this correction once, on mount — ongoing
     // resize tracking below (useMediaQuery's own effect) takes over from here.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,5 +101,21 @@ export function useIsDesktop(): boolean {
     return () => mql.removeEventListener('change', listener);
   }, []);
 
-  return matches;
+  return { matches, settled };
+}
+
+export function useIsDesktop(): boolean {
+  return useIsDesktopInternal().matches;
+}
+
+/**
+ * Like `useIsDesktop`, but also reports `settled` — see
+ * `useIsDesktopInternal`'s doc comment. Only `RootLayout` needs this: it's
+ * the one place that must render differently (both shells at once, briefly)
+ * during the one-paint window before a prerendered desktop load's viewport
+ * correction has run.
+ */
+export function useIsDesktopSettled(): { isDesktop: boolean; settled: boolean } {
+  const { matches, settled } = useIsDesktopInternal();
+  return { isDesktop: matches, settled };
 }

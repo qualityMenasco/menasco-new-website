@@ -11,7 +11,7 @@ import { BackToTopButton } from '../mobile/components/BackToTopButton';
 import { MobileBottomNav } from '../mobile/components/MobileBottomNav';
 import { scrollToSectionWhenReady } from '../lib/scrollToSection';
 import { getLocaleFromPath, directionForLocale } from '../lib/locale';
-import { useIsDesktop } from '../lib/hooks';
+import { useIsDesktopSettled } from '../lib/hooks';
 
 /**
  * Single source of truth for scroll position on route entry — deliberately
@@ -112,6 +112,59 @@ function MobileShell() {
 }
 
 /**
+ * Renders BOTH the desktop and mobile chrome at once, each wrapped in a
+ * `desktop:` (1025px, matching `DESKTOP_QUERY` exactly — see
+ * tailwind.config.js) CSS toggle so a real browser's CSS engine decides
+ * which one is actually visible BEFORE first paint, with zero JS involved
+ * in that decision. This exists only for the one unsettled render of a
+ * prerendered page load (see `useIsDesktopSettled`): the prerender always
+ * ships the MOBILE shell's markup, and forcing the client's first render to
+ * match it for a safe `hydrateRoot` meant a real desktop visitor briefly
+ * saw mobile chrome — the hamburger icon, the bottom tab bar — for however
+ * long it took a `useLayoutEffect` correction to swap trees. Shipping both,
+ * CSS-toggled, from the very first paint removes that window entirely: the
+ * correct chrome is visible immediately regardless of how long React takes
+ * to settle, with no blank gap (both are real, fully-painted markup, never
+ * hidden-then-revealed-empty) and no hydration risk (server and client
+ * render the same unconditional two-tree output, so there's nothing left
+ * that depends on viewport at render time to mismatch on).
+ *
+ * The routed page's content is deliberately NOT duplicated this way — only
+ * one `<Outlet/>` renders here — see this file's RootLayout comment for why
+ * that's a separate, smaller, already-acceptable tradeoff.
+ */
+function UnsettledDualShell() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useTranslation('common');
+  return (
+    <>
+      <SkipLink t={t} />
+      <div className="hidden desktop:contents">
+        <SiteHeader />
+      </div>
+      <div className="contents desktop:hidden">
+        <MobileHeader onOpenMenu={() => setIsMenuOpen(true)} />
+        <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      </div>
+      {/* Page content isn't dual-rendered (see this component's doc
+          comment) — the mobile tree's own content keeps correcting itself
+          independently, exactly as before this fix. */}
+      <main id="main-content" tabIndex={-1} className="outline-none">
+        <Outlet />
+      </main>
+      <div className="hidden desktop:contents">
+        <SiteFooter />
+      </div>
+      <div className="contents desktop:hidden">
+        <MobileFooter />
+        <BackToTopButton />
+        <MobileBottomNav onOpenMenu={() => setIsMenuOpen(true)} />
+      </div>
+    </>
+  );
+}
+
+/**
  * Renders the desktop or mobile chrome (header/nav/footer) depending on
  * viewport width — see `useIsDesktop` (src/lib/hooks.ts) for the shared
  * 1024px breakpoint. The routed page itself switches independently at the
@@ -119,11 +172,20 @@ function MobileShell() {
  * `useIsDesktop()` are backed by the same matchMedia query, so the shell and
  * the page always agree with each other and with the live viewport,
  * including on resize — no reload, no remount of unrelated state.
+ *
+ * On a prerendered page's very first paint, `settled` is briefly `false`
+ * (see `useIsDesktopSettled`) — for that one render, both shells are
+ * rendered at once (`UnsettledDualShell`) so a real desktop visitor's
+ * browser shows the correct chrome immediately via CSS, never the mobile
+ * one. Every other render (including the very next one, once mounted, and
+ * every non-prerendered page load) takes the plain single-branch path
+ * exactly as before this fix.
  */
 export function RootLayout() {
   useScrollOnRouteChange();
   useLocaleSync();
-  const isDesktop = useIsDesktop();
+  const { isDesktop, settled } = useIsDesktopSettled();
 
+  if (!settled) return <UnsettledDualShell />;
   return isDesktop ? <DesktopShell /> : <MobileShell />;
 }

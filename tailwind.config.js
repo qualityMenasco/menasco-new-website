@@ -118,6 +118,14 @@ export default {
         // on it functionally (MobileHeader, ServicesPage/Manufacturing grid
         // columns) so it needs to keep its real, narrower value.
         xs: '360px',
+        // Pixel-identical to src/lib/hooks.ts's `DESKTOP_QUERY`
+        // ('(min-width: 1025px)') — used only by RootLayout's brief
+        // dual-shell render (see its own comment) so the CSS breakpoint
+        // that decides which shell is VISIBLE can never disagree with the
+        // JS breakpoint that decides which shell is MOUNTED even for a
+        // single frame at exactly 1024px. Do not use the stock `lg:`
+        // (1024px) for that purpose — it's one pixel off.
+        desktop: '1025px',
       },
     },
   },
