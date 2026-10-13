@@ -10,39 +10,73 @@
  * id="root">` for a deliberately small, explicit allowlist of routes.
  *
  * Design choices (see the SEO/Codebase Organization audit this implements):
- * - `src/main.tsx` keeps using `createRoot` (not `hydrateRoot`) — the client
- *   bundle, once it runs, fully replaces this server-rendered markup rather
- *   than reconciling with it. That is deliberate: it means there is no
- *   hydration-mismatch risk category to worry about at all. This prerendered
- *   HTML exists purely for fetchers that never run JS; a real browser visit
- *   behaves exactly as it did before this change.
+ * - `src/main.tsx` uses `hydrateRoot` (not `createRoot`) for exactly the
+ *   page loads this module successfully prerendered (signaled via the
+ *   `data-prerendered="true"` marker `generate-seo-html.ts` sets on `#root`
+ *   — see src/lib/prerenderHydration.ts). An earlier version of this file
+ *   used `createRoot`, on the theory that fully discarding and re-rendering
+ *   sidesteps hydration risk entirely — a real production check found that
+ *   discard itself caused a visible blank/skeleton flash whenever the
+ *   route's lazy-loaded JS chunk hadn't finished downloading yet (the
+ *   `createRoot` render still has to suspend on that chunk). `hydrateRoot`
+ *   reuses this markup instead, so the real page stays visible continuously
+ *   from first paint through interactivity — see src/lib/hooks.ts's
+ *   `useIsDesktop` for the matching client-side half of this fix (the
+ *   client's FIRST render must deterministically agree with the mobile tree
+ *   below, even on a desktop browser, or hydration itself would mismatch).
  * - `useIsDesktop()` (src/lib/hooks.ts) already resolves to `false` when
  *   `window` is undefined, so rendering here deterministically produces the
  *   MOBILE component tree for every responsive route — the same branch a
  *   real mobile visitor's first paint would show, and the one Google's
- *   mobile-first indexing cares about most. This is also what keeps VELA and
- *   Qiddiya safe to include: their protected desktop-only cinematic/GSAP
- *   treatment never renders here, only their plain shared mobile project
- *   template (confirmed by the empirical render test performed before this
- *   file existed).
+ *   mobile-first indexing cares about most.
+ * - VELA and Qiddiya are deliberately NOT in `PRERENDER_PATHS` (see below).
+ *   Their mobile template renders safely here (same as any other project),
+ *   but the desktop cinematic/GSAP treatment that replaces it after mount
+ *   is a much bigger visual transition than an ordinary responsive swap —
+ *   full-viewport canvas frame sequence, ScrollTrigger pin-spacer height
+ *   changes, async frame-image loads — and forcing that transition to
+ *   happen automatically, once, right after every desktop pageload carries
+ *   real risk of its own (a multi-frame layout "settling" jump) that a
+ *   plain value-mismatch-into-client-re-render doesn't have on ordinary
+ *   pages. These two keep today's plain `createRoot` behavior instead —
+ *   correct UX matters more here than forcing them into this phase.
  * - One content source: this renders the actual React components, not a
  *   hand-written SEO-only copy. If a page's real copy changes, this output
  *   changes with it automatically on the next build.
  * - No new dependency: `react-dom/server` ships with `react-dom`;
  *   `createMemoryRouter`/`RouterProvider` ship with `react-router-dom`; both
  *   are already dependencies of this project.
+ * - Renders via `renderToPipeableStream` (resolved at `onAllReady`), not
+ *   `renderToStaticMarkup`, and wraps the tree in `<Suspense>` boundaries at
+ *   the SAME two nesting positions the real client tree has (one outer,
+ *   around the whole app — mirroring src/App.tsx; one inner, around just
+ *   the matched route's component — mirroring src/app/router.tsx's
+ *   `lazyPage`/`responsivePage`). Both are required together: a real
+ *   production check found that `renderToStaticMarkup` never emits the
+ *   `<!--$-->`/`<!--/$-->` comment markers `hydrateRoot` needs to recognize
+ *   a Suspense boundary's content as already-resolved, and the client tree
+ *   has `<Suspense>` boundaries this file's tree didn't — so every single
+ *   hydration attempt failed (React error #418), regardless of locale,
+ *   viewport, or network speed, and React fell back to discarding the
+ *   prerendered DOM and doing a full client re-render (#423) — reproducing
+ *   the exact flash this prerendering work exists to prevent. Confirmed
+ *   empirically that both changes together (streaming API + matching tree
+ *   shape) resolve this with zero hydration errors, including with the
+ *   client's i18n backend genuinely still loading.
  */
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { renderToStaticMarkup } from 'react-dom/server';
-import { createElement } from 'react';
+import { Writable } from 'node:stream';
+import { renderToPipeableStream } from 'react-dom/server';
+import { createElement, Suspense } from 'react';
 import type { ComponentType } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { HelmetProvider } from 'react-helmet-async';
 import { I18N_NAMESPACES } from '../../src/lib/i18n';
+import { PageLoadingFallback } from '../../src/app/PageLoadingFallback';
 import { HeaderTransparencyProvider } from '../../src/app/header-transparency';
 import { RootLayout } from '../../src/app/RootLayout';
 import type { Locale } from './routes';
@@ -105,16 +139,26 @@ function createPrerenderI18n(locale: Locale) {
 
 type Importer = () => Promise<{ default: ComponentType }>;
 
-const PATTERNS: { pattern: string; importer: Importer }[] = [
-  { pattern: '/', importer: () => import('../../src/mobile/pages/HomePage') },
-  { pattern: '/about', importer: () => import('../../src/mobile/pages/AboutPage') },
-  { pattern: '/services', importer: () => import('../../src/mobile/pages/ServicesPage') },
-  { pattern: '/services/data-centers', importer: () => import('../../src/pages/services/DataCenterPage') },
-  { pattern: '/services/bim-digital-engineering', importer: () => import('../../src/mobile/pages/services/BIMPage') },
-  { pattern: '/services/manufacturing-prefabrication', importer: () => import('../../src/mobile/pages/services/ManufacturingPrefabricationPage') },
-  { pattern: '/services/:slug', importer: () => import('../../src/mobile/pages/ServiceDetailPage') },
-  { pattern: '/projects/categories', importer: () => import('../../src/mobile/pages/ProjectsSectorsPage') },
-  { pattern: '/projects/:slug', importer: () => import('../../src/mobile/pages/ProjectDetailPage') },
+// `modulePath` is the exact source path Vite's build manifest
+// (dist/.vite/manifest.json, enabled via `build.manifest` in
+// vite.config.ts) keys a dynamically-imported module's chunk under —
+// generate-seo-html.ts reads it to emit `<link rel="modulepreload">` hints
+// for a prerendered route's real component chunk, so hydrateRoot never has
+// to suspend on a still-downloading chunk (see this file's module comment).
+const PATTERNS: { pattern: string; importer: Importer; modulePath: string }[] = [
+  { pattern: '/', importer: () => import('../../src/mobile/pages/HomePage'), modulePath: 'src/mobile/pages/HomePage.tsx' },
+  { pattern: '/about', importer: () => import('../../src/mobile/pages/AboutPage'), modulePath: 'src/mobile/pages/AboutPage.tsx' },
+  { pattern: '/services', importer: () => import('../../src/mobile/pages/ServicesPage'), modulePath: 'src/mobile/pages/ServicesPage.tsx' },
+  { pattern: '/services/data-centers', importer: () => import('../../src/pages/services/DataCenterPage'), modulePath: 'src/pages/services/DataCenterPage.tsx' },
+  { pattern: '/services/bim-digital-engineering', importer: () => import('../../src/mobile/pages/services/BIMPage'), modulePath: 'src/mobile/pages/services/BIMPage.tsx' },
+  {
+    pattern: '/services/manufacturing-prefabrication',
+    importer: () => import('../../src/mobile/pages/services/ManufacturingPrefabricationPage'),
+    modulePath: 'src/mobile/pages/services/ManufacturingPrefabricationPage.tsx',
+  },
+  { pattern: '/services/:slug', importer: () => import('../../src/mobile/pages/ServiceDetailPage'), modulePath: 'src/mobile/pages/ServiceDetailPage.tsx' },
+  { pattern: '/projects/categories', importer: () => import('../../src/mobile/pages/ProjectsSectorsPage'), modulePath: 'src/mobile/pages/ProjectsSectorsPage.tsx' },
+  { pattern: '/projects/:slug', importer: () => import('../../src/mobile/pages/ProjectDetailPage'), modulePath: 'src/mobile/pages/ProjectDetailPage.tsx' },
   // '/newsroom' is deliberately NOT in this map: its component module graph
   // reads `import.meta.env.VITE_NEWSROOM_API_BASE_URL` (src/lib/newsroomApiConfig.ts)
   // at module-evaluation time — a Vite-bundler-only global that doesn't
@@ -143,11 +187,12 @@ export const PRERENDER_PATHS: string[] = [
   '/projects/alamein-towers',
   '/projects/town-square-development',
   '/projects/data-centre-vii',
-  '/projects/vela-by-omniyat',
-  '/projects/qiddiya',
+  // /projects/vela-by-omniyat and /projects/qiddiya are deliberately
+  // excluded — see this file's module comment above (the "VELA and Qiddiya
+  // are deliberately NOT in PRERENDER_PATHS" paragraph) for why.
 ];
 
-function matchPattern(path: string): { pattern: string; importer: Importer } | null {
+function matchPattern(path: string): { pattern: string; importer: Importer; modulePath: string } | null {
   const segments = path.split('/').filter(Boolean);
   for (const candidate of PATTERNS) {
     const candidateSegments = candidate.pattern.split('/').filter(Boolean);
@@ -156,6 +201,12 @@ function matchPattern(path: string): { pattern: string; importer: Importer } | n
     if (matches) return candidate;
   }
   return null;
+}
+
+/** The Vite build-manifest source-path key for `canonicalPath`'s component, for generate-seo-html.ts's modulepreload hints — null if the path isn't in PRERENDER_PATHS or matches no known pattern. */
+export function getModulePathForRoute(canonicalPath: string): string | null {
+  if (!PRERENDER_PATHS.includes(canonicalPath)) return null;
+  return matchPattern(canonicalPath)?.modulePath ?? null;
 }
 
 const resolvedComponentCache = new Map<string, ComponentType>();
@@ -191,27 +242,60 @@ export async function renderRouteBody(canonicalPath: string, locale: Locale): Pr
   const routePattern = match.pattern.slice(1); // react-router patterns have no leading slash
   const initialEntry = locale === 'ar' ? `/ar${canonicalPath}` : canonicalPath;
 
+  // Inner Suspense wraps just the route's own component — mirrors
+  // src/app/router.tsx's `lazyPage`/`responsivePage` helpers exactly, which
+  // wrap every real route's `lazy()` component the same way.
+  const routeElement = createElement(Suspense, { fallback: createElement(PageLoadingFallback) }, createElement(Component));
+
   const memoryRouter = createMemoryRouter(
     [
       {
         path: '/',
         element: createElement(RootLayout),
-        children: [{ path: routePattern, element: createElement(Component) }],
+        children: [{ path: routePattern, element: routeElement }],
       },
       {
         path: '/ar',
         element: createElement(RootLayout),
-        children: [{ path: routePattern, element: createElement(Component) }],
+        children: [{ path: routePattern, element: routeElement }],
       },
     ],
     { initialEntries: [initialEntry] },
   );
 
+  // Outer Suspense wraps the whole provider/router tree — mirrors
+  // src/App.tsx's own outer `<Suspense fallback={<PageLoadingFallback/>}>`.
   const tree = createElement(
-    I18nextProvider,
-    { i18n: i18nInstance },
-    createElement(HelmetProvider, null, createElement(HeaderTransparencyProvider, null, createElement(RouterProvider, { router: memoryRouter }))),
+    Suspense,
+    { fallback: createElement(PageLoadingFallback) },
+    createElement(
+      I18nextProvider,
+      { i18n: i18nInstance },
+      createElement(HelmetProvider, null, createElement(HeaderTransparencyProvider, null, createElement(RouterProvider, { router: memoryRouter }))),
+    ),
   );
 
-  return renderToStaticMarkup(tree);
+  return renderStreamToString(tree);
+}
+
+/** renderToStaticMarkup doesn't emit the Suspense hydration markers hydrateRoot needs (see this file's module comment) — renderToPipeableStream does, resolved once every boundary has genuinely settled. */
+function renderStreamToString(tree: ReturnType<typeof createElement>): Promise<string> {
+  return new Promise((resolve, reject) => {
+    let html = '';
+    const writable = new Writable({
+      write(chunk, _encoding, callback) {
+        html += chunk.toString();
+        callback();
+      },
+    });
+    const { pipe } = renderToPipeableStream(tree, {
+      onAllReady() {
+        pipe(writable);
+        writable.on('finish', () => resolve(html));
+      },
+      onError(error) {
+        reject(error instanceof Error ? error : new Error(String(error)));
+      },
+    });
+  });
 }

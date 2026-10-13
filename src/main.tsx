@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import App from './App';
+import { IS_PRERENDERED_HYDRATION } from './lib/prerenderHydration';
 import './styles/index.css';
 
 const rootElement = document.getElementById('root');
@@ -17,8 +18,22 @@ if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
 }
 
-createRoot(rootElement).render(
+const app = (
   <StrictMode>
     <App />
-  </StrictMode>,
+  </StrictMode>
 );
+
+// Build-time prerendering (scripts/seo/prerender.ts) fills `#root` with
+// real markup for a deliberately small set of routes, marked with
+// `data-prerendered="true"` (scripts/generate-seo-html.ts). For exactly
+// those loads, `hydrateRoot` reuses that markup instead of discarding and
+// re-rendering it — the discard was what produced a visible blank/skeleton
+// flash while the route's JS chunk was still downloading (see
+// scripts/seo/prerender.ts's module comment for the full history). Every
+// other route keeps today's plain `createRoot`, completely unaffected.
+if (IS_PRERENDERED_HYDRATION) {
+  hydrateRoot(rootElement, app);
+} else {
+  createRoot(rootElement).render(app);
+}

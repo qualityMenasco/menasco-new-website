@@ -39,11 +39,25 @@ function humanizeMissingKey(key: string): string {
     .trim();
 }
 
+export interface CreateMenascoI18nOptions {
+  /**
+   * Overrides the FIRST render's language, bypassing `LanguageDetector`'s
+   * localStorage-only detection for just the initial load — i18next gives
+   * an explicit `lng` priority over the detector. Pass the locale derived
+   * from the current URL (src/app/i18n.ts does this) so a direct hard-load
+   * of an `/ar/...` page renders Arabic immediately instead of English
+   * (the fallback) until `RootLayout`'s `useLocaleSync` effect corrects it
+   * a render later — which, for a prerendered page, is one render too late
+   * to match what was server-rendered.
+   */
+  initialLng?: Locale;
+}
+
 /**
  * Creates a standalone i18next instance (src/app/i18n.ts is the app's one
  * instance) rather than relying on i18next's default global singleton.
  */
-export function createMenascoI18n(): i18n {
+export function createMenascoI18n(options: CreateMenascoI18nOptions = {}): i18n {
   const instance = i18next.createInstance();
 
   instance
@@ -51,6 +65,7 @@ export function createMenascoI18n(): i18n {
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
+      ...(options.initialLng ? { lng: options.initialLng } : {}),
       supportedLngs: SUPPORTED_LOCALES,
       fallbackLng: 'en',
       ns: I18N_NAMESPACES,

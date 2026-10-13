@@ -18,11 +18,15 @@
  * (`scripts/seo/prerender.ts`'s `PRERENDER_PATHS`), `<div id="root">` is
  * instead pre-filled with real body markup rendered from the actual React
  * page component at build time — so a non-JS crawler/AI fetcher sees real
- * headings, text and internal links immediately, not just an empty div.
- * `src/main.tsx` still mounts via `createRoot` (never `hydrateRoot`), so a
- * JS-enabled browser's client render fully replaces this markup rather than
- * reconciling with it — there is no hydration-mismatch risk, by design; see
- * scripts/seo/prerender.ts's own doc comment for the full reasoning.
+ * headings, text and internal links immediately, not just an empty div —
+ * AND carries `data-prerendered="true"`, which `src/main.tsx` reads to
+ * `hydrateRoot` that specific page load instead of `createRoot`-discarding
+ * it. (An earlier version of this comment claimed `createRoot` always ran
+ * here and that this sidestepped hydration risk entirely — that was true
+ * until a real production check found the discard itself caused a visible
+ * blank/skeleton flash while the route's JS chunk was still downloading.
+ * See scripts/seo/prerender.ts's own doc comment for the full history and
+ * src/lib/prerenderHydration.ts for the marker/hydration decision.)
  *
  * Vercel serves an exact filesystem match (`/about` → `dist/about/index.html`)
  * before falling back to the SPA catch-all rewrite in vercel.json, so a
@@ -49,7 +53,7 @@ import { webPageJsonLd, breadcrumbJsonLd, serializeJsonLd } from '../src/seo/str
 // sitemap without running this script's filesystem side effects.
 import { LOCALES, routes, siteName, type Locale, type RouteMeta } from './seo/routes';
 import { buildSitemapXml } from './seo/sitemap';
-import { renderRouteBody, PRERENDER_PATHS } from './seo/prerender';
+import { renderRouteBody, PRERENDER_PATHS, getModulePathForRoute } from './seo/prerender';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -91,6 +95,53 @@ if (!builtAssetTags) {
   // eslint-disable-next-line no-console
   console.error('generate-seo-html: no built /assets/ script or stylesheet tag found in dist/index.html — aborting to avoid shipping broken pages.');
   process.exit(1);
+}
+
+// ---------------------------------------------------------------------------
+// Modulepreload hints for prerendered routes — the build manifest
+// (dist/.vite/manifest.json, enabled via vite.config.ts's `build.manifest`)
+// maps each prerendered route's real page component to its built chunk
+// file and that chunk's own transitive imports. Without eagerly preloading
+// these, a browser attempting to `hydrateRoot` a prerendered route can
+// still be waiting on that component's lazy `import()` to resolve, which
+// is exactly the gap that caused the original blank/skeleton flash this
+// file's module comment describes — hydrateRoot alone doesn't fix that,
+// the chunk has to actually be available by the time hydration runs.
+// ---------------------------------------------------------------------------
+
+interface ViteManifestEntry {
+  file: string;
+  imports?: string[];
+}
+
+const manifestPath = join(DIST, '.vite', 'manifest.json');
+if (!existsSync(manifestPath)) {
+  console.error(`generate-seo-html: ${manifestPath} not found — expected "build.manifest: true" in vite.config.ts.`);
+  process.exit(1);
+}
+const manifest: Record<string, ViteManifestEntry> = JSON.parse(readFileSync(manifestPath, 'utf8'));
+
+/** Every chunk file (the component's own chunk plus its transitive imports, excluding the "index.html" entry marker) a prerendered route's component needs — in load order, deduplicated. */
+function chunkFilesFor(modulePath: string): string[] {
+  const entry = manifest[modulePath];
+  if (!entry) {
+    throw new Error(`generate-seo-html: no build-manifest entry for "${modulePath}" — expected scripts/seo/prerender.ts's modulePath to match a real dynamically-imported module.`);
+  }
+  const files = new Set<string>([entry.file]);
+  for (const importKey of entry.imports ?? []) {
+    if (importKey === 'index.html') continue;
+    const imported = manifest[importKey];
+    if (imported) files.add(imported.file);
+  }
+  return [...files];
+}
+
+function modulePreloadTags(route: RouteMeta): string {
+  const modulePath = getModulePathForRoute(route.path);
+  if (!modulePath) return '';
+  return chunkFilesFor(modulePath)
+    .map((file) => `<link rel="modulepreload" href="/${file}" />`)
+    .join('\n    ');
 }
 
 // api/newsroom-article-page.ts (the request-time renderer for
@@ -170,6 +221,7 @@ function buildHead(route: RouteMeta, locale: Locale): string {
       rel="stylesheet"
     />
     ${jsonLdScripts}
+    ${modulePreloadTags(route)}
     ${builtAssetTags}`;
 }
 
@@ -191,7 +243,11 @@ async function writeRoute(route: RouteMeta, locale: Locale) {
       if (!html.includes(EMPTY_ROOT_DIV)) {
         throw new Error(`generate-seo-html: expected to find ${EMPTY_ROOT_DIV} in the template for "${localizedPath}" but did not — aborting rather than writing a malformed shell.`);
       }
-      html = html.replace(EMPTY_ROOT_DIV, `<div id="root">${body}</div>`);
+      // The `data-prerendered` marker is the signal src/main.tsx reads to
+      // decide hydrateRoot vs. createRoot for this specific page load — set
+      // ONLY here, only when a body actually rendered, so main.tsx never has
+      // to guess or maintain its own route list.
+      html = html.replace(EMPTY_ROOT_DIV, `<div id="root" data-prerendered="true">${body}</div>`);
     }
   }
 

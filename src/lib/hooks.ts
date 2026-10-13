@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
+import { IS_PRERENDERED_HYDRATION } from './prerenderHydration';
 
 /** Respects the OS-level reduced-motion preference; defaults to `false` on the server. */
 export function usePrefersReducedMotion(): boolean {
@@ -40,6 +41,45 @@ export function useMediaQuery(query: string): boolean {
  */
 export const DESKTOP_QUERY = '(min-width: 1025px)';
 
+/**
+ * On a page that arrived with prerendered markup, the prerender always
+ * rendered the mobile tree (scripts/seo/prerender.ts — `window` is
+ * undefined at build time, so this same hook already resolves `false`
+ * there). `hydrateRoot` (src/main.tsx) requires the client's first render to
+ * match that server markup exactly, so this hook's FIRST render must also
+ * resolve `false` here even on a real desktop browser where
+ * `window.matchMedia` would otherwise immediately say `true` — a plain
+ * value mismatch converts cleanly to a client re-render, but doing that
+ * inside a `lazy()`/Suspense boundary is what caused the original bug
+ * (see scripts/seo/prerender.ts's module comment). Once mounted, a
+ * `useLayoutEffect` corrects to the real viewport BEFORE the browser
+ * paints (not a passive `useEffect`, which would paint the wrong tree
+ * first) — same tool RootLayout's own `useScrollOnRouteChange` already
+ * uses to avoid a visible jump. Non-prerendered routes are completely
+ * unaffected: `IS_PRERENDERED_HYDRATION` is `false` for them, so this hook
+ * resolves the real value immediately, exactly as before this change.
+ */
 export function useIsDesktop(): boolean {
-  return useMediaQuery(DESKTOP_QUERY);
+  const [matches, setMatches] = useState(
+    () => !IS_PRERENDERED_HYDRATION && typeof window !== 'undefined' && window.matchMedia(DESKTOP_QUERY).matches,
+  );
+
+  useLayoutEffect(() => {
+    if (!IS_PRERENDERED_HYDRATION) return;
+    const real = window.matchMedia(DESKTOP_QUERY).matches;
+    if (real !== matches) setMatches(real);
+    // Intentionally only ever runs this correction once, on mount — ongoing
+    // resize tracking below (useMediaQuery's own effect) takes over from here.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const mql = window.matchMedia(DESKTOP_QUERY);
+    setMatches(mql.matches);
+    const listener = (event: MediaQueryListEvent) => setMatches(event.matches);
+    mql.addEventListener('change', listener);
+    return () => mql.removeEventListener('change', listener);
+  }, []);
+
+  return matches;
 }

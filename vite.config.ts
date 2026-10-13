@@ -40,6 +40,14 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react(), devSitemapPlugin()],
+    // Emits dist/.vite/manifest.json, mapping each source module (including
+    // lazy-loaded page components) to its built, hashed chunk file.
+    // scripts/generate-seo-html.ts reads this to inject `<link
+    // rel="modulepreload">` hints for the prerendered routes' page chunks —
+    // without this, a prerendered route can `hydrateRoot` against markup
+    // whose actual React component hasn't finished downloading yet, which
+    // defeats the fix (see scripts/seo/prerender.ts's module comment).
+    build: { manifest: true },
     server: {
       host: '0.0.0.0',
       port: 3000,
