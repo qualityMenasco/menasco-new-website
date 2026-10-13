@@ -29,8 +29,8 @@ export function OfficeCard({ label, country, isSelected, onSelect }: OfficeCardP
       >
         <MapPin size={14} aria-hidden="true" />
       </span>
-      <div className="min-w-0">
-        <span className="block truncate font-display text-body font-semibold text-ink">{country}</span>
+      <div className="w-full min-w-0">
+        <span className="block truncate font-display text-caption font-semibold text-ink">{country}</span>
         <span className="block truncate text-caption text-gray-600">{label}</span>
       </div>
     </button>
