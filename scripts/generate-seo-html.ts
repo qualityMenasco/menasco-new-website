@@ -10,11 +10,19 @@
  *
  * This script runs after `vite build` (wired as `postbuild`) and, for every
  * public indexable route (English and the /ar equivalent), writes a copy of
- * the built `dist/index.html` at `dist/<route>/index.html` with ONLY the
- * `<head>` replaced — same bundled JS/CSS, same empty `<div id="root">`, so
- * React mounts and hydrates over it exactly as it does today. Nothing in
- * `<body>` is prerendered, which sidesteps any hydration-mismatch risk
- * entirely — this is a metadata shell, not a content prerender.
+ * the built `dist/index.html` at `dist/<route>/index.html` with the `<head>`
+ * replaced — same bundled JS/CSS. For most routes `<div id="root">` stays
+ * empty, exactly as before, and React mounts into it client-side.
+ *
+ * For a small, explicit allowlist of the highest-value public routes
+ * (`scripts/seo/prerender.ts`'s `PRERENDER_PATHS`), `<div id="root">` is
+ * instead pre-filled with real body markup rendered from the actual React
+ * page component at build time — so a non-JS crawler/AI fetcher sees real
+ * headings, text and internal links immediately, not just an empty div.
+ * `src/main.tsx` still mounts via `createRoot` (never `hydrateRoot`), so a
+ * JS-enabled browser's client render fully replaces this markup rather than
+ * reconciling with it — there is no hydration-mismatch risk, by design; see
+ * scripts/seo/prerender.ts's own doc comment for the full reasoning.
  *
  * Vercel serves an exact filesystem match (`/about` → `dist/about/index.html`)
  * before falling back to the SPA catch-all rewrite in vercel.json, so a
@@ -41,6 +49,7 @@ import { webPageJsonLd, breadcrumbJsonLd, serializeJsonLd } from '../src/seo/str
 // sitemap without running this script's filesystem side effects.
 import { LOCALES, routes, siteName, type Locale, type RouteMeta } from './seo/routes';
 import { buildSitemapXml } from './seo/sitemap';
+import { renderRouteBody, PRERENDER_PATHS } from './seo/prerender';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -164,12 +173,27 @@ function buildHead(route: RouteMeta, locale: Locale): string {
     ${builtAssetTags}`;
 }
 
-function writeRoute(route: RouteMeta, locale: Locale) {
+const EMPTY_ROOT_DIV = '<div id="root"></div>';
+
+async function writeRoute(route: RouteMeta, locale: Locale) {
   const localizedPath = withLocale(route.path, locale); // "/", "/services/mechanical", "/ar", "/ar/services/mechanical"
   const head = buildHead(route, locale);
-  const html = template
+  let html = template
     .replace(/<html[^>]*>/, `<html lang="${locale}" dir="${directionForLocale(locale)}">`)
     .replace(/<head>[\s\S]*<\/head>/, `<head>${head}\n  </head>`);
+
+  if (PRERENDER_PATHS.includes(route.path)) {
+    // A path on this allowlist that fails to render must fail the build
+    // loudly (see this file's fail-safe contract) — never ship a shell with
+    // a partially-rendered or missing body silently.
+    const body = await renderRouteBody(route.path, locale);
+    if (body) {
+      if (!html.includes(EMPTY_ROOT_DIV)) {
+        throw new Error(`generate-seo-html: expected to find ${EMPTY_ROOT_DIV} in the template for "${localizedPath}" but did not — aborting rather than writing a malformed shell.`);
+      }
+      html = html.replace(EMPTY_ROOT_DIV, `<div id="root">${body}</div>`);
+    }
+  }
 
   const segments = localizedPath.split('/').filter(Boolean);
   const outDir = segments.length > 0 ? join(DIST, ...segments) : DIST;
@@ -177,20 +201,32 @@ function writeRoute(route: RouteMeta, locale: Locale) {
   writeFileSync(join(outDir, 'index.html'), html, 'utf8');
 }
 
+// Every PRERENDER_PATHS entry must correspond to a real, currently-registered
+// route — catches a stale/typo'd path (e.g. a project slug that no longer
+// exists) loudly at build time rather than silently prerendering nothing.
+const registeredPaths = new Set(routes.map((route) => route.path));
+const unknownPrerenderPaths = PRERENDER_PATHS.filter((path) => !registeredPaths.has(path));
+if (unknownPrerenderPaths.length > 0) {
+  console.error(`generate-seo-html: PRERENDER_PATHS lists path(s) not found in the route registry (scripts/seo/routes.ts): ${unknownPrerenderPaths.join(', ')}`);
+  process.exit(1);
+}
+
 let count = 0;
+let prerenderedCount = 0;
 for (const route of routes) {
   for (const locale of LOCALES) {
     // The bare "/" (and "/ar") route would collide with dist/index.html
     // itself — index.html already IS that file, `writeRoute` handles it
     // correctly (outDir === DIST for "/", a dedicated dist/ar/index.html
     // for the Arabic homepage), so no special-casing needed here.
-    writeRoute(route, locale);
+    await writeRoute(route, locale);
     count += 1;
+    if (PRERENDER_PATHS.includes(route.path)) prerenderedCount += 1;
   }
 }
 
 // eslint-disable-next-line no-console
-console.log(`Generated ${count} route-specific SEO HTML shells under dist/ (${routes.length} routes x ${LOCALES.length} locales).`);
+console.log(`Generated ${count} route-specific SEO HTML shells under dist/ (${routes.length} routes x ${LOCALES.length} locales), ${prerenderedCount} with prerendered body content.`);
 
 // ---------------------------------------------------------------------------
 // dist/404.html — a dedicated, explicitly noindex shell for every URL that

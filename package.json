@@ -8,7 +8,7 @@
     "generate:llms": "tsx scripts/generate-llms.ts",
     "prebuild": "npm run generate:llms",
     "build": "tsc -b && vite build",
-    "postbuild": "tsx scripts/generate-seo-html.ts",
+    "postbuild": "tsx --tsconfig tsconfig.app.json scripts/generate-seo-html.ts",
     "preview": "vite preview",
     "vercel:dev": "vercel dev",
     "typecheck:api": "tsc --noEmit -p tsconfig.api.json",
