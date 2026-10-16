@@ -2,7 +2,7 @@ import { Mail, MapPin, Phone } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { useSectionTheme } from '../../lib/theme-context';
 import type { Theme } from '../../types';
-import { Text } from '../typography/Typography';
+import { Heading } from '../typography/Typography';
 
 export interface ContactBlockProps {
   heading?: string;
@@ -21,9 +21,9 @@ export function ContactBlock({ heading = 'Contact', phone, email, address, theme
 
   return (
     <div className={cn('flex flex-col gap-4', className)}>
-      <Text variant="small" theme={resolvedTheme} muted className="font-semibold uppercase tracking-wide">
+      <Heading level="h4" as="h3" theme={resolvedTheme}>
         {heading}
-      </Text>
+      </Heading>
       <ul role="list" className="flex flex-col gap-3">
         {phone && (
           <li className="flex items-start gap-2.5">
