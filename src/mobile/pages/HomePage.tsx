@@ -13,7 +13,7 @@ import { cn } from '../../lib/utils';
 import { SEO } from '../../seo/SEO';
 import { organizationJsonLd, websiteJsonLd } from '../../seo/structuredData';
 import { serviceI18nKeys, showcaseDisplayGroups, showcaseGroupChildren } from '../../data/services';
-import { projects } from '../../data/projects';
+import { publishedProjects } from '../../data/projects';
 import { getProjectImage } from '../../data/images';
 import { certifications } from '../../data/certifications';
 import { foundingYear } from '../../data/companyStats';
@@ -28,7 +28,7 @@ const categoryKeys: Record<string, string> = {
   'infrastructure-utilities': 'infrastructureUtilities',
 };
 
-const featuredProjects = projects.filter((project) => project.featured);
+const featuredProjects = publishedProjects.filter((project) => project.featured);
 
 const qhseRows = [
   { pillar: 'qualityManagement', certification: 'ISO 9001:2015' },

@@ -11,7 +11,7 @@ import { Grid } from '../components/layout/Grid';
 import { Stack } from '../components/layout/Stack';
 import { Text } from '../components/typography/Typography';
 import { projectCategoryList, resolveCategorySlug } from '../data/projectCategories';
-import { projects } from '../data/projects';
+import { publishedProjects } from '../data/projects';
 import { getProjectImage } from '../data/images';
 import { prioritizeProjectsByCategory, prioritizeByField } from '../lib/projectOrdering';
 import { translateProjectLocation } from '../lib/projectLocation';
@@ -21,7 +21,7 @@ import {} from '../seo/structuredData';
 // Only categorized projects participate in this view — every project
 // belongs to exactly one category here, so uncategorized entries (pending
 // classification) simply sit outside this taxonomy rather than being guessed.
-const categorizedProjects = projects.filter((project) => project.category);
+const categorizedProjects = publishedProjects.filter((project) => project.category);
 
 // Derived entirely from project data (first-appearance order), so a new
 // country shows up in the nav automatically the moment a project is tagged

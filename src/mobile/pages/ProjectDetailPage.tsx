@@ -14,6 +14,8 @@ import { projectCategories } from '../../data/projectCategories';
 import { getProjectImage } from '../../data/images';
 import { translateProjectLocation } from '../../lib/projectLocation';
 import { getLocaleFromPath } from '../../lib/locale';
+import { ProjectDetailTabs, type ProjectDetailTab } from '../../components/projects/ProjectDetailTabs';
+import { ProjectGalleryCarousel } from '../../components/projects/ProjectGalleryCarousel';
 
 const categoryKeys: Record<string, string> = {
   'residential-commercial': 'residentialCommercial',
@@ -91,6 +93,22 @@ export default function ProjectDetailPage() {
     { label: t('projects:detail.mainContractorLabel'), value: getMainContractor(project) },
   ];
 
+  // Overview / Scope of Work tabs — same content as the desktop template's
+  // tabs, just stacked below the metrics grid here instead of beside the
+  // gallery (see ProjectDetailTabs for the single-tab fallback when a
+  // project has no menascoScope yet).
+  const tabs: ProjectDetailTab[] = [
+    { id: 'overview', label: t('projects:detail.tabOverview'), content: description },
+    ...(menascoScope ? [{ id: 'scope', label: t('projects:detail.tabScope'), content: menascoScope }] : []),
+  ];
+
+  // Falls back to a single "slide" built from the hero image when the
+  // project has no `gallery` entries yet (true for every project today).
+  const galleryImages =
+    project.gallery.length > 0
+      ? project.gallery.map((src) => ({ src, alt: project.title }))
+      : [{ src: getProjectImage(project.heroImage || undefined, project.slug), alt: project.title }];
+
   return (
     <>
       <NavSectionH1 section="projectsSectors" />
@@ -130,7 +148,7 @@ export default function ProjectDetailPage() {
               {categoryTitle}
             </LocaleLink>
           )}
-          <SectionHeader heading={project.title} headingAs="h2" description={description} className="mt-1" />
+          <SectionHeader heading={project.title} headingAs="h2" className="mt-1" />
           {(translatedLocation || project.client) && (
             <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-small text-gray-600">
               {translatedLocation && <span>{translatedLocation}</span>}
@@ -162,12 +180,19 @@ export default function ProjectDetailPage() {
             </div>
           ))}
         </div>
-        {menascoScope && (
-          <p className="mt-6 text-body text-gray-600">
-            <strong className="font-semibold text-ink">{t('projects:detail.scopeOfWork')}</strong>{' '}
-            <span className="text-brand-700">{menascoScope}</span>
-          </p>
-        )}
+      </section>
+
+      <section className="px-4 py-8">
+        <ProjectDetailTabs tabs={tabs} />
+      </section>
+
+      <section className="px-4 py-8">
+        <ProjectGalleryCarousel
+          images={galleryImages}
+          previousLabel={t('projects:detail.galleryPrevious')}
+          nextLabel={t('projects:detail.galleryNext')}
+          dotLabel={(index) => t('projects:detail.galleryDot', { index: index + 1 })}
+        />
       </section>
 
       <MobileCTA

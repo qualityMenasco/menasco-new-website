@@ -75,7 +75,12 @@
     "scrollToExplore": "مرر للاستكشاف",
     "viewFullProject": "عرض المشروع كاملاً",
     "hoursUnit": "ساعة",
-    "zeroLti": "صفر حوادث ضياع وقت العمل (LTI)"
+    "zeroLti": "صفر حوادث ضياع وقت العمل (LTI)",
+    "tabOverview": "نظرة عامة",
+    "tabScope": "نطاق العمل",
+    "galleryPrevious": "الصورة السابقة",
+    "galleryNext": "الصورة التالية",
+    "galleryDot": "الانتقال إلى الصورة {{index}}"
   },
   "items": {
     "casa-cavalli": {

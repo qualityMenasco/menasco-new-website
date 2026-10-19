@@ -1,0 +1,914 @@
+[
+  {
+    "id": "casa-cavalli",
+    "slug": "casa-cavalli",
+    "title": "Casa Cavalli",
+    "location": "Dubai Marina, UAE",
+    "country": "UAE",
+    "sector": "Residential",
+    "status": "On-Going",
+    "year": "2026",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Full MEP delivery, Shell & Core and high-end fit-out, including HVAC, electrical, plumbing and fire protection.",
+    "services": [
+      "High-end MEP engineering built for premium waterfront living",
+      "Smart-building automation with intelligent energy controls",
+      "Comprehensive fire & life safety systems to UAE Fire Code",
+      "Marine-grade mechanical & electrical works for coastal durability",
+      "High-performance HVAC for comfort, air quality and efficiency"
+    ],
+    "description": "Casa Cavalli is a signature residential tower on Dubai Marina, pairing Cavalli-inspired interiors with a high-performance building services backbone. MENASCO is delivering the full MEP scope, from Shell & Core through to high-end fit-out.",
+    "featured": true,
+    "heroImage": "https://menascouae.com/wp-content/uploads/2025/12/Casa-Cavalli-scaled.png",
+    "gallery": [],
+    "seoTitle": "Casa Cavalli | MENASCO Projects",
+    "seoDescription": "A Cavalli-inspired waterfront residential landmark on Dubai Marina.",
+    "verificationStatus": "verified",
+    "category": "residential-commercial",
+    "workforceHours": "1,661,538 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "1,661,538 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "damac-bay",
+    "slug": "damac-bay",
+    "title": "DAMAC Bay",
+    "location": "Dubai Marina, UAE",
+    "country": "UAE",
+    "sector": "Residential",
+    "status": "On-Going",
+    "year": "2028",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Engineering, supply, installation, testing & commissioning of complete MEP systems: HVAC, electrical, plumbing and firefighting.",
+    "services": [
+      "Complete HVAC, electrical, plumbing and firefighting systems",
+      "Smart-building technologies for automation and energy performance",
+      "Marine-grade systems engineered for waterfront conditions",
+      "Life-safety infrastructure built for long-term regulatory compliance",
+      "High-performance HVAC tuned for comfort and air quality"
+    ],
+    "description": "DAMAC Bay is a landmark residential development overlooking Dubai Marina, pairing premium architecture with an advanced building services infrastructure engineered for comfort and long-term sustainability. MENASCO holds the complete MEP scope for the tower, spanning HVAC, electrical, plumbing and firefighting, along with smart-building technology, marine-grade engineering and life-safety systems built to global standards.",
+    "featured": false,
+    "heroImage": "https://menascouae.com/wp-content/uploads/2025/12/Damac-Bay-1-scaled.png",
+    "gallery": [],
+    "seoTitle": "DAMAC Bay | MENASCO Projects",
+    "seoDescription": "A landmark waterfront residential tower overlooking Dubai Marina.",
+    "verificationStatus": "verified",
+    "category": "residential-commercial",
+    "workforceHours": "3,215,385 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "3,215,385 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "vela-by-omniyat",
+    "slug": "vela-by-omniyat",
+    "title": "VELA by Omniyat",
+    "location": "Dubai, UAE",
+    "country": "UAE",
+    "sector": "Luxury Residential / Hospitality",
+    "status": "On-Going",
+    "year": "2028",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Engineering, supply, installation, testing & commissioning of complete MEP systems: HVAC, electrical, plumbing and firefighting.",
+    "services": [
+      "Full MEP scope for a luxury residential & hospitality landmark",
+      "Smart-living technology for comfort and automation",
+      "Environmentally conscious, energy-efficient engineering",
+      "Premium HVAC, electrical, plumbing & life-safety systems",
+      "Engineering built for long-term reliability and resilience"
+    ],
+    "description": "One of Dubai’s most prestigious ultra-luxury waterfront residential developments, Vela by Omniyat redefines contemporary living through exceptional architecture, refined interiors, and world-class engineering. MENASCO delivered the complete Mechanical, Electrical and Plumbing scope for this landmark development.",
+    "featured": true,
+    "heroImage": "https://menascouae.com/wp-content/uploads/2025/12/Vela-Omniyat-scaled.png",
+    "gallery": [],
+    "seoTitle": "",
+    "seoDescription": "Vela by Omniyat is an ultra-luxury waterfront residential development in Dubai. MENASCO delivered the complete MEP scope for this landmark Omniyat project.",
+    "verificationStatus": "verified",
+    "category": "residential-commercial",
+    "workforceHours": "936,000 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "936,000 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": true
+  },
+  {
+    "id": "vanguard",
+    "slug": "vanguard",
+    "title": "Vanguard",
+    "location": "Dubai, UAE",
+    "country": "UAE",
+    "sector": "Luxury Residential",
+    "status": "On-Going",
+    "year": "2028",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Engineering, supply, installation, testing & commissioning of complete MEP systems: HVAC, electrical, plumbing and firefighting.",
+    "services": [
+      "Advanced MEP infrastructure for high-end residential living",
+      "Full HVAC, electrical, plumbing and firefighting systems",
+      "Smart-living technology for comfort and automation",
+      "Energy-efficient engineering for long-term reliability",
+      "Life-safety systems built for premium residential environments"
+    ],
+    "description": "Vanguard is a high-end residential development aiming to set new standards in contemporary living within Dubai's premium real estate market. MENASCO is delivering the full MEP scope: HVAC, electrical, plumbing and firefighting, tailored to the demands of high-end residences, with smart-living technology and energy-efficient, world-class life-safety infrastructure.",
+    "featured": false,
+    "heroImage": "https://menascouae.com/wp-content/uploads/2025/12/Vanguard-scaled.png",
+    "gallery": [],
+    "seoTitle": "Vanguard | MENASCO Projects",
+    "seoDescription": "A contemporary luxury residential development in Dubai's premium market.",
+    "verificationStatus": "verified",
+    "category": "residential-commercial",
+    "workforceHours": "1,359,000 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "1,359,000 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "bloom-residences",
+    "slug": "bloom-residences",
+    "title": "Bloom Residences",
+    "location": "Dubai Marina, UAE",
+    "country": "UAE",
+    "sector": "Mixed Use / Residential",
+    "status": "Executed",
+    "year": "2021",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Engineering, supply, installation, testing & commissioning of complete MEP systems: HVAC, electrical, plumbing and firefighting.",
+    "services": [
+      "Versatile MEP infrastructure for mixed residential/commercial use",
+      "Complete HVAC, electrical, plumbing & firefighting systems",
+      "Smart-building technology for automation and comfort",
+      "Energy-efficient engineering supporting sustainability",
+      "Fire & life-safety systems ensuring regulatory compliance"
+    ],
+    "description": "Bloom Residences is a premium mixed-use development in Dubai Marina, calling for a versatile MEP infrastructure able to support both residential and commercial components. MENASCO executed the complete MEP scope, integrating smart-building systems, energy-efficient engineering and robust fire & life-safety measures for long-term comfort and sustainability.",
+    "featured": false,
+    "heroImage": "https://menascouae.com/wp-content/uploads/2025/12/Bloom-residences-scaled.png",
+    "gallery": [],
+    "seoTitle": "Bloom Residences | MENASCO Projects",
+    "seoDescription": "A premium mixed-use residential development in Dubai Marina.",
+    "verificationStatus": "verified",
+    "category": "residential-commercial",
+    "workforceHours": "1,232,193 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "1,232,193 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "pcfc-headquarters-building",
+    "slug": "pcfc-headquarters-building",
+    "title": "PCFC Headquarters Building",
+    "location": "Dubai Marina, UAE",
+    "country": "UAE",
+    "sector": "Commercial",
+    "status": "Completed",
+    "year": "2024",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "HVAC, Shell & Core works, and fit-out works for commercial office spaces.",
+    "services": [
+      "Flexible MEP infrastructure spanning Shell & Core and fit-out",
+      "Comprehensive electromechanical, plumbing and fire protection systems",
+      "Smart building management with advanced energy efficiency",
+      "Structural and essential services works",
+      "Built to optimize efficiency, sustainability and safety"
+    ],
+    "description": "The PCFC building is a distinguished commercial project in Dubai, providing state-of-the-art office space for modern business needs, requiring a flexible MEP infrastructure combining Shell & Core work with fit-out finishing. MENASCO executed the full scope of electromechanical, plumbing and fire protection systems, plus structural, essential services and specialized finishing, including smart building management and energy efficiency solutions.",
+    "featured": false,
+    "heroImage": "https://menascouae.com/wp-content/uploads/2025/12/Project-PCFC-scaled.png",
+    "gallery": [],
+    "seoTitle": "PCFC Headquarters Building | MENASCO Projects",
+    "seoDescription": "A flagship commercial headquarters delivering modern, high-performance office space.",
+    "verificationStatus": "verified",
+    "category": "residential-commercial",
+    "workforceHours": "798,393 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "798,393 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "sparkle-tower",
+    "slug": "sparkle-tower",
+    "title": "Sparkle Tower",
+    "location": "Dubai Marina, UAE",
+    "country": "UAE",
+    "sector": "Luxury Residential / Hospitality",
+    "status": "Executed",
+    "year": "2018",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Engineering, supply, installation, testing & commissioning of complete MEP systems: HVAC, electrical, plumbing and firefighting.",
+    "services": [
+      "High-performance MEP infrastructure for luxury amenities",
+      "Complete HVAC, electrical, plumbing & firefighting systems",
+      "Smart-building technology for automation and efficiency",
+      "Marine-grade installations for coastal durability",
+      "Safety systems built for long-term reliability"
+    ],
+    "description": "Sparkle Tower is a landmark residential development in Dubai Marina, requiring a high-performance MEP infrastructure to support luxury amenities and long-term operational efficiency. MENASCO executed the full MEP scope, integrating smart-building technology, marine-grade installations and robust safety systems for comfort, sustainability and reliability.",
+    "featured": false,
+    "heroImage": "https://menascouae.com/wp-content/uploads/2025/12/Sparkle-Tower-scaled.png",
+    "gallery": [],
+    "seoTitle": "Sparkle Tower | MENASCO Projects",
+    "seoDescription": "A landmark residential tower with a premium waterfront lifestyle in Dubai Marina.",
+    "verificationStatus": "verified",
+    "category": "residential-commercial",
+    "workforceHours": "993,462 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "993,462 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "vida-hotel",
+    "slug": "vida-hotel",
+    "title": "Vida Hotel",
+    "location": "Sharjah, UAE",
+    "country": "UAE",
+    "sector": "Luxury Residential / Hospitality",
+    "status": "On-Going",
+    "year": "2026",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Engineering, supply, installation, testing & commissioning of complete MEP systems: HVAC, electrical, plumbing and firefighting.",
+    "services": [
+      "High-efficiency HVAC for guest and service areas",
+      "Smart electrical distribution & lighting to hospitality standards",
+      "Water-saving plumbing systems supporting sustainability",
+      "Advanced firefighting and life-safety systems",
+      "Centralized BMS/automation for real-time monitoring"
+    ],
+    "description": "The Vida Hotel project covers the full delivery of mechanical, electrical and plumbing systems supporting a modern, energy-efficient hospitality environment. MENASCO's scope integrates advanced MEP solutions aligned with hotel operating standards, sustainability targets and seamless day-to-day performance.",
+    "featured": false,
+    "heroImage": "https://menascouae.com/wp-content/uploads/2025/12/Vida-Hotel-scaled.png",
+    "gallery": [],
+    "seoTitle": "Vida Hotel | MENASCO Projects",
+    "seoDescription": "A modern, energy-efficient hospitality development in Sharjah.",
+    "verificationStatus": "verified",
+    "category": "hospitality-landmark-entertainment",
+    "workforceHours": "1,400,000 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "1,400,000 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "dmcc-uptown-dubai-t3-t4",
+    "slug": "dmcc-uptown-dubai-t3-t4",
+    "title": "DMCC Uptown Dubai T3–T4",
+    "location": "Dubai, UAE",
+    "country": "UAE",
+    "sector": "Mixed Use",
+    "status": "On-Going",
+    "year": "2028",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Engineering, supply, installation, testing & commissioning of complete MEP systems across the district's towers, retail and hospitality components.",
+    "services": [
+      "Over 8,000 sqm of advanced MEP installations",
+      "Integrated building automation & smart controls",
+      "Sustainable, energy-efficient engineering design",
+      "High-performance systems for mixed-use operations",
+      "Fire & life safety systems to international standards"
+    ],
+    "description": "Uptown Dubai is a landmark mixed-use district developed by DMCC in the heart of the city. MENASCO holds the full MEP scope, delivering mechanical, electrical and plumbing systems across the district's high-rise towers, retail spaces and hospitality components, built for seamless functionality and energy efficiency.",
+    "featured": false,
+    "heroImage": "https://menascouae.com/wp-content/uploads/2025/11/Project-Dmcc-1.jpg",
+    "gallery": [],
+    "seoTitle": "DMCC Uptown Dubai T3-T4 | MENASCO Projects",
+    "seoDescription": "A landmark mixed-use district under the Dubai Multi Commodities Centre.",
+    "verificationStatus": "verified",
+    "category": "residential-commercial",
+    "workforceHours": "3,125,675 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "3,125,675 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "madinat-jumeirah-living-phase-3b",
+    "slug": "madinat-jumeirah-living-phase-3b",
+    "title": "Madinat Jumeirah Living Phase 3B",
+    "location": "Dubai, UAE",
+    "country": "UAE",
+    "sector": "Residential",
+    "status": "Completed",
+    "year": "2025",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Engineering, supply, installation, testing & commissioning of complete MEP systems.",
+    "services": [
+      "Fully integrated MEP systems for a premium residential community",
+      "Centralized high-efficiency cooling for indoor comfort",
+      "Smart building automation for energy optimization",
+      "Fire & life safety infrastructure to UAE Fire Code",
+      "Sustainable engineering supporting long-term reliability"
+    ],
+    "description": "Madinat Jumeirah Living – Phase 3B is part of a prestigious residential master community near the Burj Al Arab, built to a premium lifestyle standard. MENASCO delivered the complete MEP scope: HVAC, electrical, plumbing and firefighting, along with centralized cooling, smart building automation and robust safety systems for long-term comfort and reliability.",
+    "featured": false,
+    "heroImage": "https://menascouae.com/wp-content/uploads/2025/10/MADINAT.jpg",
+    "gallery": [],
+    "seoTitle": "Madinat Jumeirah Living – Phase 3B | MENASCO Projects",
+    "seoDescription": "A premium residential community near the iconic Burj Al Arab.",
+    "verificationStatus": "verified",
+    "category": "residential-commercial",
+    "workforceHours": "590,146 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "590,146 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "volante-ii-tower",
+    "slug": "volante-ii-tower",
+    "title": "Volante II Tower",
+    "location": "Business Bay, Dubai",
+    "country": "UAE",
+    "sector": "High-End Residential Tower",
+    "status": "Completed",
+    "year": "2024",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Engineering, supply, installation, testing & commissioning of complete MEP systems.",
+    "services": [
+      "High-end mechanical & electrical systems for ultra-luxury living",
+      "Advanced chilled-water & ventilation design",
+      "Integrated low-current & automation systems for smart-home functionality",
+      "Fire & life safety systems to UAE Fire Code",
+      "High-precision installation and finishing standards"
+    ],
+    "description": "Volante II Tower is an ultra-luxury residential development in Business Bay, built around high-end engineering and architectural refinement. MENASCO executed the full MEP scope: HVAC, electrical, plumbing, firefighting and low-current systems, with advanced chilled-water technology, smart-building controls and integrated safety solutions.",
+    "featured": false,
+    "heroImage": "https://menascouae.com/wp-content/uploads/2025/10/VOLANTE.jpg",
+    "gallery": [],
+    "seoTitle": "Volante II Tower | MENASCO Projects",
+    "seoDescription": "An ultra-luxury residential tower in Business Bay with panoramic skyline views.",
+    "verificationStatus": "verified",
+    "category": "residential-commercial",
+    "workforceHours": "684,616 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "684,616 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "orla-infinity-residential-development",
+    "slug": "orla-infinity-residential-development",
+    "title": "ORLA Infinity Residential Development",
+    "location": "Palm Jumeirah, Dubai",
+    "country": "UAE",
+    "sector": "Luxury Residential",
+    "status": "On-Going",
+    "year": "2026",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Engineering, supply, installation, testing & commissioning of complete MEP systems.",
+    "services": [
+      "Ultra-luxury MEP engineering for exclusive residences",
+      "Smart-home automation with advanced energy optimization",
+      "Fire & life safety systems to global residential standards",
+      "Marine-grade mechanical systems for coastal durability",
+      "High-performance HVAC for comfort and air quality"
+    ],
+    "description": "Orla Infinity is a signature luxury residential development on Palm Jumeirah, built around sophisticated architecture and world-class amenities. MENASCO is responsible for the complete MEP works: HVAC, electrical, plumbing and firefighting, alongside Shell & Core and high-end fit-out, with smart-home capability and marine-grade engineering suited to coastal conditions.",
+    "featured": false,
+    "heroImage": "https://menascouae.com/wp-content/uploads/2025/11/Project-Orla.jpg",
+    "gallery": [],
+    "seoTitle": "Orla Infinity Residential Development | MENASCO Projects",
+    "seoDescription": "A signature luxury residential development on Palm Jumeirah.",
+    "verificationStatus": "verified",
+    "category": "residential-commercial",
+    "workforceHours": "611,711 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "611,711 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "seven-hotel",
+    "slug": "seven-hotel",
+    "title": "Seven Hotel",
+    "location": "Palm Jumeirah, UAE",
+    "country": "UAE",
+    "sector": "Luxury Residential / Hospitality",
+    "status": "Executed",
+    "year": "2022",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Design, supply, installation, testing & commissioning of complete MEP systems: HVAC, electrical, plumbing and firefighting.",
+    "services": [
+      "High-end MEP engineering for luxury waterfront hospitality",
+      "Smart-building systems with advanced energy optimization",
+      "Fire & life safety infrastructure to UAE and international standards",
+      "Marine-grade mechanical installations for coastal resilience",
+      "High-efficiency cooling & ventilation for hotel performance"
+    ],
+    "description": "Seven Hotel is an exclusive beachfront development on Palm Jumeirah, combining modern elegance with resort-style luxury living and ocean views. MENASCO delivered the full MEP scope, with marine-grade mechanical installations and high-efficiency cooling and ventilation systems designed for hotel operations and high-rise performance.",
+    "featured": false,
+    "heroImage": "https://menascouae.com/wp-content/uploads/2025/10/seven-rotated.jpg",
+    "gallery": [],
+    "seoTitle": "Seven Hotel | MENASCO Projects",
+    "seoDescription": "An exclusive beachfront hospitality development on Palm Jumeirah.",
+    "verificationStatus": "verified",
+    "category": "hospitality-landmark-entertainment",
+    "workforceHours": "1,502,861 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "1,502,861 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "town-square-development",
+    "slug": "town-square-development",
+    "title": "Town Square Development",
+    "location": "Dubai, UAE",
+    "country": "UAE",
+    "sector": "Residential",
+    "status": "Completed",
+    "year": "2020",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Engineering, supply, installation, testing & commissioning of complete MEP systems: HVAC, electrical, plumbing and firefighting.",
+    "services": [
+      "Efficient MEP design for large-scale residential communities",
+      "Energy-optimized systems supporting sustainable living",
+      "Fire & life safety systems to UAE and international codes",
+      "High-quality mechanical & electrical installations",
+      "Built for long-term operational reliability"
+    ],
+    "description": "Town Square is one of Dubai's largest residential community developments, built for modern family living with high-quality infrastructure and community amenities. MENASCO executed the complete MEP scope across the community, with a strong emphasis on energy efficiency, safety compliance and long-term operational reliability.",
+    "featured": false,
+    "heroImage": "https://menascouae.com/wp-content/uploads/2025/10/Town1-rotated.jpg",
+    "gallery": [],
+    "seoTitle": "Town Square Development | MENASCO Projects",
+    "seoDescription": "One of Dubai's largest master-planned residential communities.",
+    "verificationStatus": "verified",
+    "category": "residential-commercial",
+    "workforceHours": "2,320,500 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "2,320,500 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "qiddiya",
+    "slug": "qiddiya",
+    "title": "Qiddiya",
+    "location": "Qiddiya City",
+    "country": "Saudi Arabia",
+    "sector": "Commercial, Sports, and Entertainment",
+    "status": "On-Going",
+    "year": "2027",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Engineering, Supply, Installation, Testing & Commissioning Of MEP Systems (HVAC, Plumbing & Electrical)",
+    "services": [],
+    "description": "Qiddiya City is one of Saudi Arabia's flagship giga-projects under Saudi Vision 2030, a 360 km² entertainment, sports, and residential destination near Riyadh built around the \"Power of Play.\" MENASCO is delivering specialized MEP engineering solutions in support of the development.",
+    "featured": true,
+    "heroImage": "/assets/projects/qiddiya/qiddiya-speed-park-aerial.jpg",
+    "gallery": [],
+    "seoTitle": "Qiddiya | MENASCO Projects",
+    "seoDescription": "MENASCO delivers specialized MEP engineering solutions for Qiddiya, one of Saudi Arabia's flagship Vision 2030 giga-projects.",
+    "verificationStatus": "verified",
+    "category": "hospitality-landmark-entertainment",
+    "workforceHours": "2,059,650 hours",
+    "safetyRecord": "Zero LTI",
+    "keyMetrics": [
+      {
+        "label": "Workforce Hours",
+        "value": "2,059,650 hours"
+      },
+      {
+        "label": "Safety Record",
+        "value": "Zero LTI"
+      }
+    ],
+    "publishState": "published",
+    "protected": true
+  },
+  {
+    "id": "alamein-towers",
+    "slug": "alamein-towers",
+    "title": "Alamein Towers",
+    "location": "New Alamein, Alamein Towers, Egypt",
+    "country": "Egypt",
+    "sector": "Residential",
+    "status": "On-Going",
+    "year": "2028",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "Engineering, supply, installation, testing & commissioning of complete MEP systems: HVAC, electrical, plumbing and firefighting.",
+    "services": [
+      "Advanced MEP infrastructure for a multi-tower residential community",
+      "Full HVAC, electrical, plumbing and firefighting systems",
+      "Engineering tailored to a coastal environment",
+      "Energy-efficient engineering for long-term reliability",
+      "Life-safety systems built for premium residential towers"
+    ],
+    "description": "Alamein Towers is a landmark residential development in New Alamein, comprising a cluster of striking curvilinear towers set to redefine the skyline of Egypt's north coast. MENASCO is delivering the full MEP scope: HVAC, electrical, plumbing and firefighting, engineered to the standards of a premium coastal residential community.",
+    "featured": false,
+    "heroImage": "/alamein-towers.jpg",
+    "gallery": [],
+    "seoTitle": "Alamein Towers | MENASCO Projects",
+    "seoDescription": "A landmark residential development in New Alamein, Egypt, delivering integrated MEP solutions on the north coast.",
+    "verificationStatus": "verified",
+    "category": "residential-commercial",
+    "keyMetrics": [],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "data-centre-i-12-mw-it",
+    "slug": "data-centre-i-12-mw-it",
+    "title": "Data Centre I",
+    "location": "Abu Dhabi, UAE",
+    "country": "UAE",
+    "sector": "",
+    "status": "",
+    "year": "",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "",
+    "services": [],
+    "description": "Design, construction & commissioning of a 12MW hyperscale data center. Certified from UPTIME as tier III, & with full compliance with local authority and client requirements.",
+    "featured": false,
+    "heroImage": "",
+    "gallery": [],
+    "seoTitle": "",
+    "seoDescription": "",
+    "verificationStatus": "verified",
+    "capacity": "12 MW IT",
+    "category": "advanced-technical-facilities",
+    "keyMetrics": [
+      {
+        "label": "IT Capacity",
+        "value": "12 MW IT"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "data-centre-ii-24-mw-it",
+    "slug": "data-centre-ii-24-mw-it",
+    "title": "Data Centre II",
+    "location": "Abu Dhabi, UAE",
+    "country": "UAE",
+    "sector": "",
+    "status": "",
+    "year": "",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "",
+    "services": [],
+    "description": "Turnkey solution for a 24MW modular data center, including design, build & operational handover (RFS).",
+    "featured": false,
+    "heroImage": "",
+    "gallery": [],
+    "seoTitle": "",
+    "seoDescription": "",
+    "verificationStatus": "verified",
+    "capacity": "24 MW IT",
+    "category": "advanced-technical-facilities",
+    "keyMetrics": [
+      {
+        "label": "IT Capacity",
+        "value": "24 MW IT"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "data-centre-iii-2-4-mw-it",
+    "slug": "data-centre-iii-2-4-mw-it",
+    "title": "Data Centre III",
+    "location": "Dubai, UAE",
+    "country": "UAE",
+    "sector": "",
+    "status": "",
+    "year": "",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "",
+    "services": [],
+    "description": "Maintenance for the smart busway, RTOB & Replacement of the rPDUs for the full IT racks without interrupting the critical load.",
+    "featured": false,
+    "heroImage": "",
+    "gallery": [],
+    "seoTitle": "",
+    "seoDescription": "",
+    "verificationStatus": "verified",
+    "capacity": "2.4 MW IT",
+    "category": "advanced-technical-facilities",
+    "keyMetrics": [
+      {
+        "label": "IT Capacity",
+        "value": "2.4 MW IT"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "data-centre-iv-6-mw-it",
+    "slug": "data-centre-iv-6-mw-it",
+    "title": "Data Centre IV",
+    "location": "Abu Dhabi, UAE",
+    "country": "UAE",
+    "sector": "",
+    "status": "",
+    "year": "",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "",
+    "services": [],
+    "description": "Design, construction & commissioning of a hyperscale data center. Certified from UPTIME as tier III, and with full compliance with local authority and client requirements.",
+    "featured": false,
+    "heroImage": "",
+    "gallery": [],
+    "seoTitle": "",
+    "seoDescription": "",
+    "verificationStatus": "verified",
+    "capacity": "6 MW IT",
+    "category": "advanced-technical-facilities",
+    "keyMetrics": [
+      {
+        "label": "IT Capacity",
+        "value": "6 MW IT"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "data-centre-v-800-kw-it",
+    "slug": "data-centre-v-800-kw-it",
+    "title": "Data Centre V",
+    "location": "Dubai, UAE",
+    "country": "UAE",
+    "sector": "",
+    "status": "",
+    "year": "",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "",
+    "services": [],
+    "description": "Maintenance for the smart busway, RTOB, & Replacement of the rPDUs for the full IT racks without interrupting the critical load.",
+    "featured": false,
+    "heroImage": "",
+    "gallery": [],
+    "seoTitle": "",
+    "seoDescription": "",
+    "verificationStatus": "verified",
+    "capacity": "800 KW IT",
+    "category": "advanced-technical-facilities",
+    "keyMetrics": [
+      {
+        "label": "IT Capacity",
+        "value": "800 KW IT"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "data-centre-vi-12-mw-it",
+    "slug": "data-centre-vi-12-mw-it",
+    "title": "Data Centre VI",
+    "location": "Abu Dhabi, UAE",
+    "country": "UAE",
+    "sector": "",
+    "status": "",
+    "year": "",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "",
+    "services": [],
+    "description": "Design, construction & commissioning of a hyperscale data center. Certified from UPTIME as tier III, and with full compliance with local authority and client requirements.",
+    "featured": false,
+    "heroImage": "",
+    "gallery": [],
+    "seoTitle": "",
+    "seoDescription": "",
+    "verificationStatus": "verified",
+    "capacity": "12 MW IT",
+    "category": "advanced-technical-facilities",
+    "keyMetrics": [
+      {
+        "label": "IT Capacity",
+        "value": "12 MW IT"
+      }
+    ],
+    "publishState": "published",
+    "protected": false
+  },
+  {
+    "id": "data-centre-vii",
+    "slug": "data-centre-vii",
+    "title": "Data Centre VII",
+    "location": "Abu Dhabi, UAE",
+    "country": "UAE",
+    "sector": "",
+    "status": "",
+    "year": "",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "",
+    "services": [],
+    "description": "Led the design & implementation coordination for the region's first NVIDIA NVL72 GB300 cluster, working closely with all project stakeholders to ensure successful technical integration & delivery.",
+    "featured": false,
+    "heroImage": "",
+    "gallery": [],
+    "seoTitle": "",
+    "seoDescription": "",
+    "verificationStatus": "verified",
+    "category": "advanced-technical-facilities",
+    "keyMetrics": [],
+    "publishState": "published",
+    "protected": false
+  }
+]

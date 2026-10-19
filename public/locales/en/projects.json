@@ -71,7 +71,12 @@
     "scrollToExplore": "Scroll to explore",
     "viewFullProject": "View Full Project",
     "hoursUnit": "hours",
-    "zeroLti": "Zero LTI"
+    "zeroLti": "Zero LTI",
+    "tabOverview": "Overview",
+    "tabScope": "Scope of Work",
+    "galleryPrevious": "Previous image",
+    "galleryNext": "Next image",
+    "galleryDot": "Go to image {{index}}"
   },
   "items": {
     "casa-cavalli": {

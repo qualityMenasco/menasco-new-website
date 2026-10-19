@@ -1,6 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 import type { Theme } from '../types';
-import { Award, Cpu, Download, Layers, Leaf, MapPin, ShieldCheck } from 'lucide-react';
+import { Award, Cpu, Download, Layers, Leaf, ShieldCheck } from 'lucide-react';
 import { Navigate, useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../components/layout/Section';
@@ -10,8 +10,13 @@ import { Badge } from '../components/ui/Badge';
 import { Heading, Text } from '../components/typography/Typography';
 import { ButtonLink } from '../components/ui/Button';
 import { ScrollFrameAnimation } from '../components/ScrollFrameAnimation';
-import { ProjectHeroBanner } from '../components/projects/ProjectHeroBanner';
 import { ProjectHighlights } from '../components/projects/ProjectHighlights';
+import { ProjectDetailHero, type ProjectStatusTone } from '../components/projects/ProjectDetailHero';
+import { ProjectMetricsPanel } from '../components/projects/ProjectMetricsPanel';
+import { ProjectDetailTabs, type ProjectDetailTab } from '../components/projects/ProjectDetailTabs';
+import { ProjectGalleryCarousel } from '../components/projects/ProjectGalleryCarousel';
+import { PROJECT_DETAIL_GRID } from '../components/projects/projectDetailLayout';
+import { getProjectImage } from '../data/images';
 import { CtaBand } from '../components/sections/CtaBand';
 import { ScrollReveal, ScrollRevealGroup } from '../components/common/ScrollReveal';
 import { SectionThemeContext } from '../lib/theme-context';
@@ -138,6 +143,19 @@ const statusKeys: Record<string, string> = {
   'On-Going': 'onGoing',
   Completed: 'completed',
   Executed: 'executed',
+};
+
+// Maps a project's raw construction status to a semantic badge tone (see
+// tailwind.config.js's "Status colors" block). On-Going is still in
+// progress, so it reads as informational (`info`, blue) rather than
+// success/warning, which would wrongly imply either "done" or "a problem".
+// Completed and Executed both describe a finished project — green
+// (`success`) for both, since neither implies a worse outcome than the
+// other, just different wording for the same end state.
+const statusToneMap: Record<string, ProjectStatusTone> = {
+  'On-Going': 'info',
+  Completed: 'success',
+  Executed: 'success',
 };
 
 /** Looks up a project's translated field, falling back to the English source data if no translation key exists (e.g. a project not yet covered by the projects:items namespace). */
@@ -459,65 +477,73 @@ export default function ProjectDetailPage() {
   const translatedLocation = translateProjectLocation(t, project.location);
   const defaultEyebrow = categoryTitle || [field('sector', project.sector), translatedLocation].filter(Boolean).join(' · ') || undefined;
   const translatedStatus = project.status ? t(`projects:statuses.${statusKeys[project.status] ?? project.status}`) : undefined;
+  const statusTone: ProjectStatusTone = statusToneMap[project.status] ?? 'info';
+  const scope = field('menascoScope', project.menascoScope);
+
+  const tabs: ProjectDetailTab[] = [
+    { id: 'overview', label: t('projects:detail.tabOverview'), content: translatedDescription || t('projects:detail.contentPendingPlaceholder') },
+    ...(scope ? [{ id: 'scope', label: t('projects:detail.tabScope'), content: scope }] : []),
+  ];
+
+  // Falls back to a single "slide" built from the hero image when the
+  // project has no `gallery` entries yet (true for every project today) —
+  // never a broken/empty carousel.
+  const galleryImages =
+    project.gallery.length > 0
+      ? project.gallery.map((src) => ({ src, alt: project.title }))
+      : [{ src: getProjectImage(project.heroImage || undefined, project.slug), alt: project.title }];
 
   return (
     <>
       {seo}
-      {project.heroImage ? (
-        <ProjectHeroBanner
-          image={project.heroImage}
-          title={project.title}
-          eyebrow={defaultEyebrow}
-          statusLabel={translatedStatus}
-          description={translatedDescription || t('projects:detail.contentPendingPlaceholder')}
-          ctaLabel={t('projects:detail.downloadCompanyProfile')}
-          ctaHref={COMPANY_PROFILE_PATH}
-          ctaDownload="MENASCO-Company-Profile.pdf"
-          showVerificationBadge={project.verificationStatus === 'pending'}
-        />
-      ) : (
-        <Section spacing="lg" background="warmwhite">
-          <Stack space="lg">
-            {project.verificationStatus === 'pending' && <Badge variant="status">{t('projects:detail.detailsPending')}</Badge>}
+      <Section spacing="lg" background="warmwhite">
+        <div className={PROJECT_DETAIL_GRID}>
+          <ProjectDetailHero
+            image={project.heroImage || undefined}
+            title={project.title}
+            eyebrow={defaultEyebrow}
+            location={translatedLocation}
+            statusLabel={translatedStatus}
+            statusTone={statusTone}
+            verificationBadge={
+              project.verificationStatus === 'pending' ? (
+                <Badge variant="status" theme="dark">
+                  {t('projects:detail.detailsPending')}
+                </Badge>
+              ) : undefined
+            }
+          />
+          <ProjectMetricsPanel
+            keyMetrics={project.keyMetrics ?? []}
+            categoryLabel={t('projects:detail.categoryLabel')}
+            categoryTitle={categoryTitle || field('sector', project.sector) || undefined}
+            completionLabel={t('projects:detail.completionLabel')}
+            completionValue={project.year || undefined}
+          />
+        </div>
 
-            <Stack space="sm">
-              {(category || project.sector || project.status) && (
-                <div className="flex flex-wrap items-center gap-2">
-                  {(categoryTitle || project.sector) && (
-                    <Badge variant="sector">{categoryTitle || field('sector', project.sector)}</Badge>
-                  )}
-                  {translatedStatus && <Badge variant="status">{translatedStatus}</Badge>}
-                </div>
-              )}
-              <Heading level="h1" as="h2">
-                {project.title}
-              </Heading>
-              {translatedLocation && (
-                <div className="flex items-center gap-1.5 text-small text-gray-500">
-                  <MapPin size={15} aria-hidden="true" />
-                  <span>{translatedLocation}</span>
-                </div>
-              )}
-            </Stack>
-
-            <Text variant="body-lg" className="max-w-2xl">
-              {translatedDescription || t('projects:detail.contentPendingPlaceholder')}
-            </Text>
-
+        <div className={cn(PROJECT_DETAIL_GRID, 'mt-8')}>
+          <div>
+            <ProjectDetailTabs tabs={tabs} />
             <ButtonLink
               href={COMPANY_PROFILE_PATH}
               download="MENASCO-Company-Profile.pdf"
               variant="primary"
               leadingIcon={Download}
-              className="w-fit"
+              className="mt-6 w-fit"
             >
               {t('projects:detail.downloadCompanyProfile')}
             </ButtonLink>
-          </Stack>
-        </Section>
-      )}
+          </div>
+          <ProjectGalleryCarousel
+            images={galleryImages}
+            previousLabel={t('projects:detail.galleryPrevious')}
+            nextLabel={t('projects:detail.galleryNext')}
+            dotLabel={(index) => t('projects:detail.galleryDot', { index: index + 1 })}
+          />
+        </div>
+      </Section>
 
-      <ProjectHighlightsSection project={project} categoryTitle={categoryTitle} />
       {closingCta}
     </>
   );

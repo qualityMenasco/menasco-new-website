@@ -5,7 +5,7 @@ import { Stack } from '../../../layout/Stack';
 import { Eyebrow, Heading } from '../../../typography/Typography';
 import { ButtonLink } from '../../../ui/Button';
 import { FeaturedProjectPanel } from '../../../projects/FeaturedProjectPanel';
-import { projects } from '../../../../data/projects';
+import { publishedProjects } from '../../../../data/projects';
 import { projectCategories } from '../../../../data/projectCategories';
 import { getProjectImage } from '../../../../data/images';
 import { translateProjectLocation } from '../../../../lib/projectLocation';
@@ -17,10 +17,10 @@ const categoryKeys: Record<string, string> = {
   'infrastructure-utilities': 'infrastructureUtilities',
 };
 
-const vela = projects.find((project) => project.slug === 'vela-by-omniyat')!;
+const vela = publishedProjects.find((project) => project.slug === 'vela-by-omniyat')!;
 // Was 'saudi-f1-track' — that project was renamed "Qiddiya" (see
 // src/data/projects.ts), which also changed its slug.
-const qiddiya = projects.find((project) => project.slug === 'qiddiya')!;
+const qiddiya = publishedProjects.find((project) => project.slug === 'qiddiya')!;
 
 /**
  * Homepage's Projects section — a compact introduction to the portfolio via

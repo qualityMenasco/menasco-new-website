@@ -122,6 +122,8 @@ const routeChildren: RouteObject[] = [
   { path: 'dev/newsroom-admin', element: lazyPage(() => import('../internal/newsroom/NewsroomAdminPage')) },
   // Desktop-only internal Projects data-entry tool (Phase 4) — no mobile equivalent, not linked from the public site, noIndex.
   { path: 'dev/projects-admin', element: lazyPage(() => import('../internal/projects/ProjectsAdminPage')) },
+  // Desktop-only internal GitHub-backed Projects CMS — no mobile equivalent, not linked from the public site, noIndex.
+  { path: 'dev/projects-cms', element: lazyPage(() => import('../internal/projects-cms/ProjectsCmsPage')) },
   { path: '404', element: lazyPage(() => import('../pages/NotFoundPage')) },
   { path: '*', element: lazyPage(() => import('../pages/NotFoundPage')) },
 ];

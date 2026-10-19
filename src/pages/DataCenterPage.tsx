@@ -10,7 +10,7 @@ import { SplitContent } from '../components/content/SplitContent';
 import { Statistic } from '../components/content/Statistic';
 import { ButtonLink } from '../components/ui/Button';
 import { Accordion } from '../components/ui/Accordion';
-import { projects } from '../data/projects';
+import { publishedProjects } from '../data/projects';
 import { SEO } from '../seo/SEO';
 import { serviceEntity } from '../seo/structuredData';
 import { SITE_URL } from '../seo/constants';
@@ -23,7 +23,7 @@ function parseCapacityInMw(capacity?: string): number {
   return match[2].toUpperCase() === 'KW' ? value / 1000 : value;
 }
 
-const dataCenterProjects = projects.filter((project) => project.category === 'advanced-technical-facilities');
+const dataCenterProjects = publishedProjects.filter((project) => project.category === 'advanced-technical-facilities');
 const totalDataCenterMw = Math.round(dataCenterProjects.reduce((sum, project) => sum + parseCapacityInMw(project.capacity), 0) * 10) / 10;
 
 interface FaqEntry {

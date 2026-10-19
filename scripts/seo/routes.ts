@@ -370,6 +370,13 @@ for (const project of projects) {
         ...(category ? [{ label: category.title, path: `/projects/categories?category=${category.slug}` }] : []),
         { label: project.title, path: `/projects/${project.slug}` },
       ],
+      // A project uploaded via the Projects CMS (src/internal/projects-cms)
+      // with publishState 'draft' gets a real page (so a direct/preview link
+      // still works) but is excluded from the sitemap and carries
+      // noindex,follow — "do not publish incomplete projects as indexable
+      // pages" without 404ing a page someone is actively reviewing.
+      noIndex: project.publishState !== 'published',
+      follow: project.publishState !== 'published',
     },
   );
 }

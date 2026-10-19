@@ -6,13 +6,13 @@ import { SectorFilterChips } from '../components/SectorFilterChips';
 import { MobileProjectCard } from '../components/MobileProjectCard';
 import { SEO } from '../../seo/SEO';
 import {} from '../../seo/structuredData';
-import { projects } from '../../data/projects';
+import { publishedProjects } from '../../data/projects';
 import { projectCategoryList, resolveCategorySlug } from '../../data/projectCategories';
 import { getProjectImage } from '../../data/images';
 import { prioritizeProjectsByCategory } from '../../lib/projectOrdering';
 import { translateProjectLocation } from '../../lib/projectLocation';
 
-const categorizedProjects = projects.filter((project) => project.category);
+const categorizedProjects = publishedProjects.filter((project) => project.category);
 
 // Matches the fixed 2-column mobile grid so the first row loads eagerly.
 const PRIORITY_IMAGE_COUNT = 2;

@@ -9,3 +9,4 @@ dist-lambda/
 .env.*
 !.env.example
 .vercel
+.env*
