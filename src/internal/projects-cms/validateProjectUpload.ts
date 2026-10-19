@@ -1,5 +1,3 @@
-import { existsSync } from 'node:fs';
-import path from 'node:path';
 import type { ProjectRecord } from '../../data/projects.js';
 import { projectCategories } from '../../data/projectCategories.js';
 import type { ParsedProjectRow } from './projectCsvJsonParser.js';
@@ -37,14 +35,24 @@ export interface ValidateProjectUploadOptions {
   fullReplacement?: boolean;
   /** Explicit owner override required to edit or delete a protected (VELA/Qiddiya) project. */
   allowProtectedOverride?: boolean;
-  /** Repo root to resolve `/`-prefixed local image paths against `public/<path>` — defaults to process.cwd(). Overridable for tests. */
-  repoRoot?: string;
+  /**
+   * Checks whether a `/`-prefixed local image path exists under `public/`.
+   * Required for any upload that references a local path (vs. an external
+   * https:// URL, which never calls this) — pass a GitHub-backed
+   * implementation in production (see api/_lib/projectsCms/validate.ts),
+   * or a simple in-memory stub in tests. There is deliberately no default:
+   * a plain `fs.existsSync` default would silently work in local
+   * development and fail in every real deployment, which is the exact bug
+   * this replaced (a Vercel serverless function's filesystem never includes
+   * the full public/ directory).
+   */
+  checkLocalImagePathExists: (path: string) => Promise<boolean>;
 }
 
-function isPlausibleImagePath(value: string, repoRoot: string): boolean {
+async function isPlausibleImagePath(value: string, checkLocalImagePathExists: (path: string) => Promise<boolean>): Promise<boolean> {
   if (value.startsWith('https://') || value.startsWith('http://')) return true;
   if (value.startsWith('/')) {
-    return existsSync(path.join(repoRoot, 'public', value));
+    return checkLocalImagePathExists(`public${value}`);
   }
   return false;
 }
@@ -149,12 +157,12 @@ function fieldsChanged(before: ProjectRecord, after: ProjectRecord): string[] {
   return changed;
 }
 
-export function validateProjectUpload(
+export async function validateProjectUpload(
   rows: ParsedProjectRow[],
   currentProjects: ProjectRecord[],
-  options: ValidateProjectUploadOptions = {},
-): ValidationResult {
-  const { fullReplacement = false, allowProtectedOverride = false, repoRoot = process.cwd() } = options;
+  options: ValidateProjectUploadOptions,
+): Promise<ValidationResult> {
+  const { fullReplacement = false, allowProtectedOverride = false, checkLocalImagePathExists } = options;
   const errors: ValidationError[] = [];
   const bySlug = new Map(currentProjects.map((p) => [p.slug, p]));
   const seenSlugs = new Set<string>();
@@ -203,13 +211,19 @@ export function validateProjectUpload(
       continue;
     }
 
-    if (row.heroImage !== undefined && (!row.heroImage.trim() || !isPlausibleImagePath(row.heroImage, repoRoot))) {
+    if (row.heroImage !== undefined && (!row.heroImage.trim() || !(await isPlausibleImagePath(row.heroImage, checkLocalImagePathExists)))) {
       errors.push({ row: rowLabel, field: 'heroImage', message: `heroImage "${row.heroImage}" is not a valid absolute URL or an existing /-prefixed public/ path` });
       continue;
     }
 
     if (row.gallery !== undefined) {
-      const badGalleryEntry = row.gallery.find((g) => !g.trim() || !isPlausibleImagePath(g, repoRoot));
+      let badGalleryEntry: string | undefined;
+      for (const g of row.gallery) {
+        if (!g.trim() || !(await isPlausibleImagePath(g, checkLocalImagePathExists))) {
+          badGalleryEntry = g;
+          break;
+        }
+      }
       if (badGalleryEntry !== undefined) {
         errors.push({ row: rowLabel, field: 'gallery', message: `gallery entry "${badGalleryEntry}" is not a valid absolute URL or an existing /-prefixed public/ path` });
         continue;

@@ -3,7 +3,7 @@ import { HttpError, requireJsonBody, requireMethod, sendJson, withErrorHandling 
 import { requireProjectsCmsAuth } from '../projectsCmsAuth.js';
 import { parseProjectUpload, ProjectUploadParseError } from '../../../src/internal/projects-cms/projectCsvJsonParser.js';
 import { validateProjectUpload } from '../../../src/internal/projects-cms/validateProjectUpload.js';
-import { getFile } from '../../../src/internal/projects-cms/githubCommit.server.js';
+import { getFile, fileExists } from '../../../src/internal/projects-cms/githubCommit.server.js';
 import type { ProjectRecord } from '../../../src/data/projects.js';
 
 const PROJECTS_JSON_PATH = 'src/data/projects.json';
@@ -61,9 +61,10 @@ export async function handleValidate(req: VercelRequest, res: VercelResponse) {
       throw new HttpError(500, 'Could not parse the current src/data/projects.json fetched from GitHub');
     }
 
-    const result = validateProjectUpload(rows, currentProjects, {
+    const result = await validateProjectUpload(rows, currentProjects, {
       fullReplacement: fullReplacement === true,
       allowProtectedOverride: allowProtectedOverride === true,
+      checkLocalImagePathExists: fileExists,
     });
 
     sendJson(res, 200, result);

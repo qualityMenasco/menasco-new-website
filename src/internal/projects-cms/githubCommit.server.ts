@@ -74,6 +74,29 @@ export async function getFile(path: string): Promise<GithubFileContent> {
 }
 
 /**
+ * True if `path` exists in the repo on `main`, false only for a genuine
+ * 404 — any other failure (auth, rate limit, network) re-throws rather than
+ * silently reporting "doesn't exist", which would misreport a real system
+ * problem as an invalid image reference. Used by validateProjectUpload.ts
+ * to check a project's local `/`-prefixed image paths: the obvious
+ * `fs.existsSync` check works locally but can never succeed inside a Vercel
+ * serverless function, since the function's deployment bundle doesn't
+ * include the (large, image-heavy) public/ directory — confirmed by a real
+ * false-positive "invalid image" on two existing, genuinely-correct
+ * projects (qiddiya, alamein-towers) the first time this path was actually
+ * exercised in production.
+ */
+export async function fileExists(path: string): Promise<boolean> {
+  try {
+    await getFile(path);
+    return true;
+  } catch (err) {
+    if (err instanceof GithubCommitError && err.status === 404) return false;
+    throw err;
+  }
+}
+
+/**
  * PUTs updated text content to `path`, using `previousSha` to avoid
  * clobbering a concurrent edit. A 409 or 422 from GitHub (sha mismatch) is
  * surfaced as a clearly-flagged conflict rather than retried automatically
