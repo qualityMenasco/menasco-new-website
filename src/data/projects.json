@@ -910,5 +910,125 @@
     "keyMetrics": [],
     "publishState": "published",
     "protected": false
+  },
+  {
+    "id": "test-industrial-facility",
+    "slug": "test-industrial-facility",
+    "title": "TEST — Industrial Facility",
+    "location": "Dubai, UAE",
+    "country": "",
+    "sector": "",
+    "status": "On-Going",
+    "year": "2027-06",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "TEST DATA ONLY: Mechanical, electrical, plumbing and coordination work.",
+    "services": [],
+    "description": "TEST DATA ONLY: Sample industrial facility project overview.",
+    "featured": true,
+    "heroImage": "",
+    "gallery": [],
+    "seoTitle": "",
+    "seoDescription": "",
+    "verificationStatus": "pending",
+    "keyMetrics": [
+      {
+        "label": "Built-up area",
+        "value": "25,000 m²"
+      },
+      {
+        "label": "MEP systems",
+        "value": "12"
+      },
+      {
+        "label": "Project phases",
+        "value": "3"
+      }
+    ],
+    "publishState": "published",
+    "protected": false,
+    "category": "advanced-technical-facilities"
+  },
+  {
+    "id": "test-data-centre",
+    "slug": "test-data-centre",
+    "title": "TEST — Data Centre",
+    "location": "Abu Dhabi, UAE",
+    "country": "",
+    "sector": "",
+    "status": "Completed",
+    "year": "2025-12",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "TEST DATA ONLY: Cooling, electrical distribution and BIM coordination.",
+    "services": [],
+    "description": "TEST DATA ONLY: Sample data centre project overview.",
+    "featured": false,
+    "heroImage": "",
+    "gallery": [],
+    "seoTitle": "",
+    "seoDescription": "",
+    "verificationStatus": "pending",
+    "keyMetrics": [
+      {
+        "label": "IT capacity",
+        "value": "8 MW"
+      },
+      {
+        "label": "Gross area",
+        "value": "14,000 m²"
+      },
+      {
+        "label": "Phases",
+        "value": "2"
+      }
+    ],
+    "publishState": "published",
+    "protected": false,
+    "category": "advanced-technical-facilities"
+  },
+  {
+    "id": "test-commercial-tower",
+    "slug": "test-commercial-tower",
+    "title": "TEST — Commercial Tower",
+    "location": "Sharjah, UAE",
+    "country": "",
+    "sector": "",
+    "status": "Planned",
+    "year": "",
+    "client": "",
+    "developer": "",
+    "consultant": "",
+    "mainContractor": "",
+    "menascoScope": "TEST DATA ONLY: HVAC, power, plumbing and fire protection.",
+    "services": [],
+    "description": "TEST DATA ONLY: Sample commercial tower project overview.",
+    "featured": false,
+    "heroImage": "",
+    "gallery": [],
+    "seoTitle": "",
+    "seoDescription": "",
+    "verificationStatus": "pending",
+    "keyMetrics": [
+      {
+        "label": "Floors",
+        "value": "28"
+      },
+      {
+        "label": "Area",
+        "value": "40,000 m²"
+      },
+      {
+        "label": "Systems",
+        "value": "6"
+      }
+    ],
+    "publishState": "published",
+    "protected": false,
+    "category": "residential-commercial"
   }
 ]
