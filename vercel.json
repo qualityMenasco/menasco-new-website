@@ -2,6 +2,7 @@
   "rewrites": [
     { "source": "/api/newsroom-admin-proxy/:path*", "destination": "/api/newsroom-admin-proxy/[...path]?path=:path*" },
     { "source": "/api/projects-admin-proxy/:path+", "destination": "/api/projects-admin-proxy/[...path]?path=:path*" },
+    { "source": "/api/projects-cms/:path+", "destination": "/api/projects-cms/[...path]?path=:path*" },
     { "source": "/api/newsroom/public/:path*", "destination": "https://wvojo9g543.execute-api.ap-south-1.amazonaws.com/api/newsroom/public/:path*" },
     { "source": "/newsroom/:slug", "destination": "/api/newsroom-article-page?slug=:slug&locale=en" },
     { "source": "/ar/newsroom/:slug", "destination": "/api/newsroom-article-page?slug=:slug&locale=ar" },
