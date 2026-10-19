@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { getMainContractor, projects } from './projects';
 
 describe('projects.json migration integrity', () => {
-  it('preserves all 23 pre-CMS project records', () => {
-    expect(projects).toHaveLength(23);
+  it('never drops below the 23 pre-CMS project records (src/data/projects.json is now live-edited via the Projects CMS, so new additions are expected and this only guards against accidental data loss)', () => {
+    expect(projects.length).toBeGreaterThanOrEqual(23);
   });
 
   it('flags only vela-by-omniyat and qiddiya as protected — the two slugs hardcoded into ProjectDetailPage.tsx\'s CINEMATIC_PROJECTS map', () => {
