@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { requireMethod, sendJson, withErrorHandling } from '../_lib/http.js';
-import { requireProjectsCmsAuth } from '../_lib/projectsCmsAuth.js';
-import { getFile } from '../../src/internal/projects-cms/githubCommit.server.js';
+import { requireMethod, sendJson, withErrorHandling } from '../http.js';
+import { requireProjectsCmsAuth } from '../projectsCmsAuth.js';
+import { getFile } from '../../../src/internal/projects-cms/githubCommit.server.js';
 
 const PROJECTS_JSON_PATH = 'src/data/projects.json';
 
@@ -14,7 +14,7 @@ const PROJECTS_JSON_PATH = 'src/data/projects.json';
  * with the replacement checkbox — instead of hand-assembling the entire
  * project list from scratch and risking an accidental omission.
  */
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export async function handleExport(req: VercelRequest, res: VercelResponse) {
   await withErrorHandling(res, async () => {
     requireMethod(req, 'GET');
     requireProjectsCmsAuth(req);

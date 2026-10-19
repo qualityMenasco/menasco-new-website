@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { requireMethod, sendJson, withErrorHandling } from '../_lib/http.js';
-import { buildExpiredSessionCookie } from '../_lib/projectsCmsSession.js';
+import { requireMethod, sendJson, withErrorHandling } from '../http.js';
+import { buildExpiredSessionCookie } from '../projectsCmsSession.js';
 
 /** POST /api/projects-cms/logout — clears the session cookie. No auth required. */
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export async function handleLogout(req: VercelRequest, res: VercelResponse) {
   await withErrorHandling(res, async () => {
     requireMethod(req, 'POST');
     res.setHeader('Set-Cookie', buildExpiredSessionCookie());

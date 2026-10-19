@@ -1,10 +1,10 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { HttpError, requireJsonBody, requireMethod, sendJson, withErrorHandling } from '../_lib/http.js';
-import { requireProjectsCmsAuth } from '../_lib/projectsCmsAuth.js';
-import { parseProjectUpload, ProjectUploadParseError, type ParsedProjectRow } from '../../src/internal/projects-cms/projectCsvJsonParser.js';
-import { validateProjectUpload, type ProjectDiff } from '../../src/internal/projects-cms/validateProjectUpload.js';
-import { getFile, putFile, GithubCommitError } from '../../src/internal/projects-cms/githubCommit.server.js';
-import type { ProjectRecord } from '../../src/data/projects.js';
+import { HttpError, requireJsonBody, requireMethod, sendJson, withErrorHandling } from '../http.js';
+import { requireProjectsCmsAuth } from '../projectsCmsAuth.js';
+import { parseProjectUpload, ProjectUploadParseError, type ParsedProjectRow } from '../../../src/internal/projects-cms/projectCsvJsonParser.js';
+import { validateProjectUpload, type ProjectDiff } from '../../../src/internal/projects-cms/validateProjectUpload.js';
+import { getFile, putFile, GithubCommitError } from '../../../src/internal/projects-cms/githubCommit.server.js';
+import type { ProjectRecord } from '../../../src/data/projects.js';
 
 const PROJECTS_JSON_PATH = 'src/data/projects.json';
 const AR_PROJECTS_JSON_PATH = 'public/locales/ar/projects.json';
@@ -88,7 +88,7 @@ function buildArUpdate(currentAr: ArProjectsFile, rows: ParsedProjectRow[], diff
  * independent files; a failure between the two commits is surfaced
  * explicitly rather than claimed as a clean success or total failure).
  */
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export async function handlePublish(req: VercelRequest, res: VercelResponse) {
   await withErrorHandling(res, async () => {
     requireMethod(req, 'POST');
     requireProjectsCmsAuth(req);

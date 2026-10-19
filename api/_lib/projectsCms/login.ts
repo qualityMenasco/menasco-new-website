@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { HttpError, requireJsonBody, requireMethod, sendJson, withErrorHandling } from '../_lib/http.js';
-import { createSessionToken, buildSessionCookie, timingSafeStringEqual } from '../_lib/projectsCmsSession.js';
+import { HttpError, requireJsonBody, requireMethod, sendJson, withErrorHandling } from '../http.js';
+import { createSessionToken, buildSessionCookie, timingSafeStringEqual } from '../projectsCmsSession.js';
 
 /**
  * POST /api/projects-cms/login — password check against
@@ -9,7 +9,7 @@ import { createSessionToken, buildSessionCookie, timingSafeStringEqual } from '.
  * dormant RDS-backed admin) — separate password env var, separate secret,
  * separate cookie name.
  */
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export async function handleLogin(req: VercelRequest, res: VercelResponse) {
   await withErrorHandling(res, async () => {
     requireMethod(req, 'POST');
 

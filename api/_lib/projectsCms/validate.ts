@@ -1,10 +1,10 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { HttpError, requireJsonBody, requireMethod, sendJson, withErrorHandling } from '../_lib/http.js';
-import { requireProjectsCmsAuth } from '../_lib/projectsCmsAuth.js';
-import { parseProjectUpload, ProjectUploadParseError } from '../../src/internal/projects-cms/projectCsvJsonParser.js';
-import { validateProjectUpload } from '../../src/internal/projects-cms/validateProjectUpload.js';
-import { getFile } from '../../src/internal/projects-cms/githubCommit.server.js';
-import type { ProjectRecord } from '../../src/data/projects.js';
+import { HttpError, requireJsonBody, requireMethod, sendJson, withErrorHandling } from '../http.js';
+import { requireProjectsCmsAuth } from '../projectsCmsAuth.js';
+import { parseProjectUpload, ProjectUploadParseError } from '../../../src/internal/projects-cms/projectCsvJsonParser.js';
+import { validateProjectUpload } from '../../../src/internal/projects-cms/validateProjectUpload.js';
+import { getFile } from '../../../src/internal/projects-cms/githubCommit.server.js';
+import type { ProjectRecord } from '../../../src/data/projects.js';
 
 const PROJECTS_JSON_PATH = 'src/data/projects.json';
 
@@ -23,7 +23,7 @@ const PROJECTS_JSON_PATH = 'src/data/projects.json';
  * true current dataset, never a possibly-stale build-time snapshot. Never
  * writes anything.
  */
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export async function handleValidate(req: VercelRequest, res: VercelResponse) {
   await withErrorHandling(res, async () => {
     requireMethod(req, 'POST');
     requireProjectsCmsAuth(req);
