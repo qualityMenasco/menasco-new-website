@@ -13,6 +13,7 @@ import {
   logout,
   validateUpload,
   publishUpload,
+  exportCurrentDataset,
   ProjectsCmsApiError,
   type ValidationResultDto,
   type PublishResultDto,
@@ -257,10 +258,34 @@ export default function ProjectsCmsPage() {
   const [publishing, setPublishing] = useState(false);
   const [publishResult, setPublishResult] = useState<PublishResultDto | null>(null);
   const [publishError, setPublishError] = useState<string | null>(null);
+  const [downloading, setDownloading] = useState(false);
+  const [downloadError, setDownloadError] = useState<string | null>(null);
 
   async function handleLogout() {
     await logout();
     setLoggedIn(false);
+  }
+
+  /** Downloads the live dataset as-is — this is what makes a safe deletion practical: download, remove the entry you don't want, re-upload with "full dataset replacement" checked, instead of hand-assembling the whole project list from memory and risking an accidental omission. */
+  async function handleDownload() {
+    setDownloading(true);
+    setDownloadError(null);
+    try {
+      const data = await exportCurrentDataset();
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `menasco-projects-${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      setDownloadError(err instanceof ProjectsCmsApiError ? err.message : 'Download request failed');
+    } finally {
+      setDownloading(false);
+    }
   }
 
   const runValidation = useCallback(
@@ -355,6 +380,17 @@ export default function ProjectsCmsPage() {
                 Upload a CSV or JSON file describing new or updated projects. Nothing is written until you review the diff below and
                 explicitly confirm publishing.
               </Text>
+
+              <div className="flex items-center justify-between gap-3 rounded-sm border border-gray-200 bg-gray-50 p-3">
+                <Text variant="small" className="text-gray-600">
+                  Deleting a project? Download the current live dataset, remove the entry you don't want, then re-upload it below with
+                  "full dataset replacement" checked.
+                </Text>
+                <Button variant="secondary" size="sm" onClick={handleDownload} loading={downloading}>
+                  Download current dataset
+                </Button>
+              </div>
+              {downloadError && <p className="text-body text-error">{downloadError}</p>}
 
               <UploadBox onFileLoaded={handleFileLoaded} error={fileError} />
               {fileName && (

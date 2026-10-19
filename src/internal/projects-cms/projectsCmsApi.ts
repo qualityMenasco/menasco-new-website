@@ -104,4 +104,15 @@ export async function publishUpload(payload: ValidateOrPublishPayload): Promise<
   }
 }
 
+/** Fetches the live project dataset straight from GitHub — feeds the "Download current dataset" button, which is what makes a safe full-replacement deletion practical (edit the downloaded file, re-upload, rather than hand-assembling the whole list). */
+export async function exportCurrentDataset(): Promise<unknown> {
+  const response = await fetch('/api/projects-cms/export', { method: 'GET', credentials: 'same-origin' });
+  const json = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    if (response.status === 401) markLoggedInLocally(false);
+    throw new ProjectsCmsApiError((json as { error?: string }).error ?? `Request failed (${response.status})`, response.status);
+  }
+  return json;
+}
+
 export type { ParsedProjectRow };
