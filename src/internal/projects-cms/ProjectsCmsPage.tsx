@@ -17,7 +17,7 @@ import {
   type ValidationResultDto,
   type PublishResultDto,
 } from './projectsCmsApi';
-import { PROTECTED_SLUGS } from './validateProjectUpload';
+import { PROTECTED_SLUGS } from './protectedSlugs';
 
 /**
  * Internal GitHub-backed Projects CMS. Reachable only at /dev/projects-cms,

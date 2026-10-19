@@ -3,9 +3,7 @@ import path from 'node:path';
 import type { ProjectRecord } from '../../data/projects';
 import { projectCategories } from '../../data/projectCategories';
 import type { ParsedProjectRow } from './projectCsvJsonParser';
-
-/** The only two slugs the owner confirmed are protected — hardcoded per the CMS brief, never derived or user-settable. */
-export const PROTECTED_SLUGS: ReadonlySet<string> = new Set(['vela-by-omniyat', 'qiddiya']);
+import { PROTECTED_SLUGS } from './protectedSlugs';
 
 export interface ValidationError {
   /** The row's slug when known, else a positional "row N" marker for a row that failed before its slug could be trusted. */
