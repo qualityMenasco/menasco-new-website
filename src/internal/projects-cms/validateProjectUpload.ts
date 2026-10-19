@@ -1,9 +1,9 @@
 import { existsSync } from 'node:fs';
 import path from 'node:path';
-import type { ProjectRecord } from '../../data/projects';
-import { projectCategories } from '../../data/projectCategories';
-import type { ParsedProjectRow } from './projectCsvJsonParser';
-import { PROTECTED_SLUGS } from './protectedSlugs';
+import type { ProjectRecord } from '../../data/projects.js';
+import { projectCategories } from '../../data/projectCategories.js';
+import type { ParsedProjectRow } from './projectCsvJsonParser.js';
+import { PROTECTED_SLUGS } from './protectedSlugs.js';
 
 export interface ValidationError {
   /** The row's slug when known, else a positional "row N" marker for a row that failed before its slug could be trusted. */

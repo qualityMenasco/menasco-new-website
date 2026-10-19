@@ -9,7 +9,7 @@
   ],
   "functions": {
     "api/**/*.ts": {
-      "includeFiles": "{api/_lib/certs/**,api/_generated/**}"
+      "includeFiles": "{api/_lib/certs/**,api/_generated/**,src/data/projects.json}"
     }
   },
   "headers": [

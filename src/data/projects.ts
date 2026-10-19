@@ -1,5 +1,13 @@
-import type { VerificationStatus } from '../types/content';
-import projectsData from './projects.json';
+import type { VerificationStatus } from '../types/content.js';
+// The `with { type: 'json' }` import attribute is required by Node's native
+// ESM loader whenever a JSON file is imported under NodeNext module
+// resolution (api/**/*.ts's build target) — without it, the Vercel API
+// function build reports only a TS warning and still "succeeds", but the
+// deployed function crashes at module-load time the instant it's invoked
+// (before any handler code, including error handling, ever runs), producing
+// a bodyless platform 500. The Vite client build (esbuild) accepts this
+// same syntax harmlessly, so one import works for both build targets.
+import projectsData from './projects.json' with { type: 'json' };
 
 export interface ProjectKeyMetric {
   label: string;

@@ -3,14 +3,25 @@ import { HttpError, requireJsonBody, requireMethod, sendJson, withErrorHandling 
 import { requireProjectsCmsAuth } from '../_lib/projectsCmsAuth.js';
 import { parseProjectUpload, ProjectUploadParseError } from '../../src/internal/projects-cms/projectCsvJsonParser.js';
 import { validateProjectUpload } from '../../src/internal/projects-cms/validateProjectUpload.js';
-import { projects as currentProjects } from '../../src/data/projects.js';
+import { getFile } from '../../src/internal/projects-cms/githubCommit.server.js';
+import type { ProjectRecord } from '../../src/data/projects.js';
+
+const PROJECTS_JSON_PATH = 'src/data/projects.json';
 
 /**
- * POST /api/projects-cms/validate — session-protected. Parses + validates
- * an uploaded CSV/JSON payload against the dataset BUNDLED with this
- * deployment (fine for validation/preview purposes — publish.ts re-fetches
- * the live file from GitHub before actually writing, which is the place a
- * stale-read race would actually matter). Never writes anything.
+ * POST /api/projects-cms/validate — session-protected. Parses + validates an
+ * uploaded CSV/JSON payload against the LIVE dataset fetched fresh from
+ * GitHub on every call (same source publish.ts re-reads right before
+ * writing) rather than a copy statically bundled into this function —
+ * `import ... from '../../src/data/projects.js'` previously pulled in a
+ * static JSON import that depended on Vercel's build correctly tracing and
+ * packaging src/data/projects.json into this function's deployment bundle;
+ * that didn't reliably happen (confirmed via a direct `vercel build` +
+ * execute repro) and crashed the function at module-load time before any
+ * application code ran. Fetching from GitHub avoids the whole bundling
+ * question and is also simply more correct: validation always reflects the
+ * true current dataset, never a possibly-stale build-time snapshot. Never
+ * writes anything.
  */
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   await withErrorHandling(res, async () => {
@@ -40,6 +51,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         throw new HttpError(400, err.message);
       }
       throw err;
+    }
+
+    const freshFile = await getFile(PROJECTS_JSON_PATH);
+    let currentProjects: ProjectRecord[];
+    try {
+      currentProjects = JSON.parse(freshFile.content) as ProjectRecord[];
+    } catch {
+      throw new HttpError(500, 'Could not parse the current src/data/projects.json fetched from GitHub');
     }
 
     const result = validateProjectUpload(rows, currentProjects, {

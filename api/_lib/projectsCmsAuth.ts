@@ -1,6 +1,6 @@
 import type { VercelRequest } from '@vercel/node';
-import { HttpError } from './http';
-import { PROJECTS_CMS_SESSION_COOKIE_NAME, verifySessionToken } from './projectsCmsSession';
+import { HttpError } from './http.js';
+import { PROJECTS_CMS_SESSION_COOKIE_NAME, verifySessionToken } from './projectsCmsSession.js';
 
 /**
  * Session-cookie auth guard for every /api/projects-cms/* endpoint (except
