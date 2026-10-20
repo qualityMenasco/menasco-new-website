@@ -10,8 +10,9 @@ const DIRECTION_THRESHOLD = 8;
  * On-demand return-to-top control. Shown only while the reader is scrolling
  * back up past the first viewport, and hidden again as soon as they scroll
  * down — so it never sits over content that's being read. It rests at the
- * inline end (the ragged edge of text in both LTR and RTL), just above the
- * bottom nav (49px) with a 12px gap, clear of the home-indicator safe area.
+ * inline end (the ragged edge of text in both LTR and RTL), a comfortable
+ * 16px up from the screen edge, clear of the home-indicator safe area. (No
+ * longer needs to clear a fixed bottom tab bar — that's been removed site-wide.)
  */
 export function BackToTopButton() {
   const { t } = useTranslation('common');
@@ -56,7 +57,7 @@ export function BackToTopButton() {
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
       className={cn(
-        'fixed end-4 bottom-[calc(3.8125rem+env(safe-area-inset-bottom))] z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-warmwhite/90 text-ink shadow-soft backdrop-blur-md',
+        'fixed end-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-warmwhite/90 text-ink shadow-soft backdrop-blur-md',
         'transition-[opacity,transform] duration-base ease-engineered motion-reduce:transition-none',
         'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600',
         visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-2 opacity-0',

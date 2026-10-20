@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../components/SectionHeader';
 import { MobileCTA } from '../components/MobileCTA';
 import { LocaleLink } from '../components/LocaleLink';
+import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { SEO } from '../../seo/SEO';
 import {} from '../../seo/structuredData';
 import { services } from '../../data/services';
@@ -114,6 +115,7 @@ export default function ServicesPage() {
 
   return (
     <>
+      <NavSectionH1 section="services" />
       <SEO
         title={t('services:seo.title')}
         description={t('services:seo.description')}

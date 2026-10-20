@@ -80,6 +80,17 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           </div>
 
           <nav className="flex-1 overflow-y-auto px-4" aria-label={t('nav:primaryNavigation')}>
+            <LocaleLink
+              to="/"
+              aria-current={location.pathname === withLocale('/', locale) ? 'page' : undefined}
+              className={cn(
+                'block border-b border-gray-200 py-4 font-display text-body-lg font-semibold',
+                location.pathname === withLocale('/', locale) ? 'text-brand-600' : 'text-ink',
+              )}
+            >
+              {t('home')}
+            </LocaleLink>
+
             <MobileAccordion title={t('about')}>
               <div className="flex flex-col gap-1">
                 {aboutNavigation.map((item) => (

@@ -5,6 +5,7 @@ import { ExpandableText } from '../components/ExpandableText';
 import { MobileStatsGrid } from '../components/MobileStatsGrid';
 import { MobileCTA } from '../components/MobileCTA';
 import { LocaleLink } from '../components/LocaleLink';
+import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { SEO } from '../../seo/SEO';
 import {} from '../../seo/structuredData';
 
@@ -13,6 +14,7 @@ export default function AboutPage() {
 
   return (
     <>
+      <NavSectionH1 section="about" />
       <SEO
         title={t('seo.title')}
         description={t('seo.description')}

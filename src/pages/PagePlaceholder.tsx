@@ -19,7 +19,7 @@ export interface PagePlaceholderProps {
 
 /**
  * Shared stand-in for routes whose full content hasn't been published yet — keeps navigation, SEO, and layout consistent while content is pending.
- * The visible title is an h2 like every other page: the page's H1 is the active nav label (see DesktopNav / MobileBottomNav).
+ * The visible title is an h2 like every other page: on desktop the page's H1 is the active nav label (see DesktopNav); this component is not split by viewport (registered via `lazyPage()`, not `responsivePage()`).
  */
 export function PagePlaceholder({ eyebrow, title, description, lead, links, actions }: PagePlaceholderProps) {
   return (

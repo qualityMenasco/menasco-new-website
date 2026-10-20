@@ -8,7 +8,6 @@ import { MobileHeader } from '../mobile/components/MobileHeader';
 import { MobileMenu } from '../mobile/components/MobileMenu';
 import { MobileFooter } from '../mobile/components/MobileFooter';
 import { BackToTopButton } from '../mobile/components/BackToTopButton';
-import { MobileBottomNav } from '../mobile/components/MobileBottomNav';
 import { scrollToSectionWhenReady } from '../lib/scrollToSection';
 import { getLocaleFromPath, directionForLocale } from '../lib/locale';
 import { useIsDesktopSettled } from '../lib/hooks';
@@ -99,14 +98,13 @@ function MobileShell() {
       <SkipLink t={t} />
       <MobileHeader onOpenMenu={() => setIsMenuOpen(true)} />
       <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
-      {/* No bottom padding here — MobileFooter's own pb-24 already clears the fixed bottom nav; padding on <main> left a light strip between each page's closing CTA band and the dark footer. */}
+      {/* No bottom padding here — MobileFooter's own bottom padding already clears BackToTopButton; padding on <main> left a light strip between each page's closing CTA band and the dark footer. */}
       {/* tabIndex -1: focusable target for the skip link and BackToTopButton's focus hand-off. */}
       <main id="main-content" tabIndex={-1} className="outline-none">
         <Outlet />
       </main>
       <MobileFooter />
       <BackToTopButton />
-      <MobileBottomNav onOpenMenu={() => setIsMenuOpen(true)} />
     </>
   );
 }
@@ -120,7 +118,7 @@ function MobileShell() {
  * prerendered page load (see `useIsDesktopSettled`): the prerender always
  * ships the MOBILE shell's markup, and forcing the client's first render to
  * match it for a safe `hydrateRoot` meant a real desktop visitor briefly
- * saw mobile chrome — the hamburger icon, the bottom tab bar — for however
+ * saw mobile chrome — the hamburger icon and mobile header — for however
  * long it took a `useLayoutEffect` correction to swap trees. Shipping both,
  * CSS-toggled, from the very first paint removes that window entirely: the
  * correct chrome is visible immediately regardless of how long React takes
@@ -158,7 +156,6 @@ function UnsettledDualShell() {
       <div className="contents desktop:hidden">
         <MobileFooter />
         <BackToTopButton />
-        <MobileBottomNav onOpenMenu={() => setIsMenuOpen(true)} />
       </div>
     </>
   );

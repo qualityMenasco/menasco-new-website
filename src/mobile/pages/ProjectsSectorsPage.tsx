@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../components/SectionHeader';
 import { SectorFilterChips } from '../components/SectorFilterChips';
 import { MobileProjectCard } from '../components/MobileProjectCard';
+import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { SEO } from '../../seo/SEO';
 import {} from '../../seo/structuredData';
 import { publishedProjects } from '../../data/projects';
@@ -58,6 +59,7 @@ export default function ProjectsSectorsPage() {
 
   return (
     <>
+      <NavSectionH1 section="projectsSectors" />
       <SEO
         title={seoTitle}
         description={seoDescription}

@@ -10,6 +10,7 @@ import { RegionalOfficeGrid } from '../components/RegionalOfficeGrid';
 import { MobileCTA } from '../components/MobileCTA';
 import { LocaleLink } from '../components/LocaleLink';
 import { cn } from '../../lib/utils';
+import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { SEO } from '../../seo/SEO';
 import { organizationJsonLd, websiteJsonLd } from '../../seo/structuredData';
 import { serviceI18nKeys, showcaseDisplayGroups, showcaseGroupChildren } from '../../data/services';
@@ -50,6 +51,7 @@ export default function HomePage() {
 
   return (
     <>
+      <NavSectionH1 section="home" />
       <SEO title={t('home:seo.title')} description={t('home:seo.description')} path="/" structuredData={[organizationJsonLd(), websiteJsonLd()]} />
 
       {/* 1. Mobile hero */}

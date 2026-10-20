@@ -25,10 +25,12 @@ export function MobileFooter() {
   const headquarters = officeLocations.find((location) => location.isHeadquarters) ?? officeLocations[0];
   const hqKey = locationKeys[headquarters.id];
 
-  // Bottom clearance = fixed bottom nav (49px) + BackToTopButton (12px gap + 44px) + breathing room,
-  // plus the home-indicator safe area — keeps the last legal links clear of both at the end of every page.
+  // Bottom clearance = BackToTopButton's own offset (16px) + height (44px) + a little
+  // breathing room, plus the home-indicator safe area — keeps the last legal links clear
+  // of it at the end of every page. The fixed bottom tab bar this used to also clear was
+  // removed site-wide; BackToTopButton is now the only fixed mobile chrome left to clear.
   return (
-    <footer className="bg-ink pb-[calc(8rem+env(safe-area-inset-bottom))] pt-10 text-warmwhite">
+    <footer className="bg-ink pb-[calc(4.5rem+env(safe-area-inset-bottom))] pt-10 text-warmwhite">
       <div className="flex flex-col gap-6 px-4">
         <MenascoLogo className="h-9" onDark />
         <p className="text-small text-gray-300">{t('common:footer.description')}</p>
