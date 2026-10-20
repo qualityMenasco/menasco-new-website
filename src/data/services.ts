@@ -253,7 +253,7 @@ export const serviceShowcaseGroups: ServiceShowcaseGroup[] = servicesNavigationG
 export const dataCentresShowcaseLeaf: ServiceShowcaseLeaf = { href: dataCentreServiceLink.href, i18nKey: dataCentreServiceLink.i18nKey, service: null };
 export const isDataCentresLeaf = (leaf: ServiceShowcaseLeaf) => leaf.href === dataCentresShowcaseLeaf.href;
 
-/** The full set of groups the homepage/other showcase surfaces render, in taxonomy order — MEP/Civil/Manufacturing & Prefabrication/Turnkey Developments plus Data Centres appended. One source for any surface that needs this grouping (currently the desktop and mobile homepage sections), so a new surface — or a future subservice added to Turnkey/Data Centres — doesn't require per-surface hardcoding. */
+/** The full set of groups the homepage/other showcase surfaces render, in taxonomy order — MEP/Civil/Manufacturing & Prefabrication/EPC plus Data Centres appended. One source for any surface that needs this grouping (currently the desktop and mobile homepage sections), so a new surface — or a future subservice added to EPC/Data Centres — doesn't require per-surface hardcoding. */
 export const showcaseDisplayGroups: ServiceShowcaseGroup[] = [
   ...serviceShowcaseGroups,
   { key: 'dataCentres', i18nKey: dataCentreServiceLink.i18nKey, href: dataCentreServiceLink.href, leaves: [dataCentresShowcaseLeaf] },
@@ -261,7 +261,7 @@ export const showcaseDisplayGroups: ServiceShowcaseGroup[] = [
 
 /**
  * A leaf whose href equals its own group's href is the group's own page
- * shown as a leaf (Manufacturing & Prefabrication, Turnkey Developments,
+ * shown as a leaf (Manufacturing & Prefabrication, EPC,
  * Data Centres) — real subservices are every other leaf. Whether a group
  * gets an expand/collapse control derives purely from whether this list is
  * non-empty, per service, never hardcoded per category.

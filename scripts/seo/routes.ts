@@ -416,7 +416,7 @@ addRoute(
 );
 addRoute(
   '/services/turnkey-developments',
-  (l) => fullTitle(l, tr(l, 'nav', 'servicesGroups.turnkeyDevelopments', 'Turnkey Developments')),
+  (l) => fullTitle(l, tr(l, 'nav', 'servicesGroups.turnkeyDevelopments', 'EPC')),
   pendingDescription,
   { noIndex: true, follow: true },
 );

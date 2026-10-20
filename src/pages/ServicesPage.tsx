@@ -127,7 +127,7 @@ export default function ServicesPage() {
               // own page ALSO appears as a destination among the children
               // (a card, or — while pending — a "coming soon" row) only when
               // skipping it would either leave the content column empty (no
-              // children at all, e.g. Turnkey Developments) or would delete
+              // children at all, e.g. EPC) or would delete
               // a genuine already-built preview card (a real, non-pending
               // page, e.g. Manufacturing & Prefabrication) rather than a
               // bare row that merely repeats the now-clickable heading.

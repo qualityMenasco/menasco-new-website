@@ -139,7 +139,7 @@ export default function ServicesPage() {
             // Every group with its own page gets a clickable heading. Its own
             // page ALSO appears as a row among the children only when
             // skipping it would either leave the section empty (no children
-            // at all, e.g. Turnkey Developments) or would delete a genuine
+            // at all, e.g. EPC) or would delete a genuine
             // already-built preview row (a real, non-pending page, e.g.
             // Manufacturing & Prefabrication) rather than a bare row that
             // merely repeats the now-clickable heading.

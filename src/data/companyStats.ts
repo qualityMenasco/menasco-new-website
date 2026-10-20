@@ -20,7 +20,7 @@ export interface CompanyStat {
 export const companyStats: CompanyStat[] = [
   {
     id: 'projects',
-    value: '100+',
+    value: '350+',
     label: 'Projects Successfully Delivered',
     verificationStatus: 'verified',
   },

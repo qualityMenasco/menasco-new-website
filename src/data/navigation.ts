@@ -88,7 +88,7 @@ export const servicesNavigationGroups: NavGroupEntry[] = [
     ],
   },
   {
-    label: 'Turnkey Developments',
+    label: 'EPC',
     i18nKey: 'servicesGroups.turnkeyDevelopments',
     href: '/services/turnkey-developments',
     links: [],
