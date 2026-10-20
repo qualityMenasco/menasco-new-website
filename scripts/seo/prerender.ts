@@ -69,7 +69,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Writable } from 'node:stream';
 import { renderToPipeableStream } from 'react-dom/server';
-import { createElement, Suspense } from 'react';
+import { createElement, Fragment, Suspense } from 'react';
 import type { ComponentType } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import i18next from 'i18next';
@@ -156,40 +156,69 @@ type Importer = () => Promise<{ default: ComponentType }>;
 // skeleton again — confirmed live on a throttled connection before this
 // field existed. Routes rendered via `lazyPage()` (one shared component,
 // no responsive split — e.g. Data Centres) omit it; there's no second tree.
-const PATTERNS: { pattern: string; importer: Importer; modulePath: string; desktopModulePath?: string }[] = [
-  { pattern: '/', importer: () => import('../../src/mobile/pages/HomePage'), modulePath: 'src/mobile/pages/HomePage.tsx', desktopModulePath: 'src/pages/HomePage.tsx' },
-  { pattern: '/about', importer: () => import('../../src/mobile/pages/AboutPage'), modulePath: 'src/mobile/pages/AboutPage.tsx', desktopModulePath: 'src/pages/AboutPage.tsx' },
-  { pattern: '/services', importer: () => import('../../src/mobile/pages/ServicesPage'), modulePath: 'src/mobile/pages/ServicesPage.tsx', desktopModulePath: 'src/pages/ServicesPage.tsx' },
+// `desktopImporter`, alongside `desktopModulePath`, lets `renderRouteBody`
+// actually render the desktop tree too (not just preload-hint it) — see
+// this file's module comment's "dual-render" paragraph: the server must
+// emit BOTH CSS-toggled trees here, matching router.tsx's `ResponsiveSwitch`
+// unsettled output exactly, or the client's first (also-unsettled, because
+// `settled` starts false on every prerendered load) hydration pass mismatches.
+const PATTERNS: { pattern: string; importer: Importer; modulePath: string; desktopModulePath?: string; desktopImporter?: Importer }[] = [
+  {
+    pattern: '/',
+    importer: () => import('../../src/mobile/pages/HomePage'),
+    modulePath: 'src/mobile/pages/HomePage.tsx',
+    desktopModulePath: 'src/pages/HomePage.tsx',
+    desktopImporter: () => import('../../src/pages/HomePage'),
+  },
+  {
+    pattern: '/about',
+    importer: () => import('../../src/mobile/pages/AboutPage'),
+    modulePath: 'src/mobile/pages/AboutPage.tsx',
+    desktopModulePath: 'src/pages/AboutPage.tsx',
+    desktopImporter: () => import('../../src/pages/AboutPage'),
+  },
+  {
+    pattern: '/services',
+    importer: () => import('../../src/mobile/pages/ServicesPage'),
+    modulePath: 'src/mobile/pages/ServicesPage.tsx',
+    desktopModulePath: 'src/pages/ServicesPage.tsx',
+    desktopImporter: () => import('../../src/pages/ServicesPage'),
+  },
   { pattern: '/services/data-centers', importer: () => import('../../src/pages/services/DataCenterPage'), modulePath: 'src/pages/services/DataCenterPage.tsx' },
   {
     pattern: '/services/bim-digital-engineering',
     importer: () => import('../../src/mobile/pages/services/BIMPage'),
     modulePath: 'src/mobile/pages/services/BIMPage.tsx',
     desktopModulePath: 'src/pages/services/BIMPage.tsx',
+    desktopImporter: () => import('../../src/pages/services/BIMPage'),
   },
   {
     pattern: '/services/manufacturing-prefabrication',
     importer: () => import('../../src/mobile/pages/services/ManufacturingPrefabricationPage'),
     modulePath: 'src/mobile/pages/services/ManufacturingPrefabricationPage.tsx',
     desktopModulePath: 'src/pages/services/ManufacturingPrefabricationPage.tsx',
+    desktopImporter: () => import('../../src/pages/services/ManufacturingPrefabricationPage'),
   },
   {
     pattern: '/services/:slug',
     importer: () => import('../../src/mobile/pages/ServiceDetailPage'),
     modulePath: 'src/mobile/pages/ServiceDetailPage.tsx',
     desktopModulePath: 'src/pages/ServiceDetailPage.tsx',
+    desktopImporter: () => import('../../src/pages/ServiceDetailPage'),
   },
   {
     pattern: '/projects/categories',
     importer: () => import('../../src/mobile/pages/ProjectsSectorsPage'),
     modulePath: 'src/mobile/pages/ProjectsSectorsPage.tsx',
     desktopModulePath: 'src/pages/ProjectCategoriesPage.tsx',
+    desktopImporter: () => import('../../src/pages/ProjectCategoriesPage'),
   },
   {
     pattern: '/projects/:slug',
     importer: () => import('../../src/mobile/pages/ProjectDetailPage'),
     modulePath: 'src/mobile/pages/ProjectDetailPage.tsx',
     desktopModulePath: 'src/pages/ProjectDetailPage.tsx',
+    desktopImporter: () => import('../../src/pages/ProjectDetailPage'),
   },
   // '/newsroom' is deliberately NOT in this map: its component module graph
   // reads `import.meta.env.VITE_NEWSROOM_API_BASE_URL` (src/lib/newsroomApiConfig.ts)
@@ -224,7 +253,7 @@ export const PRERENDER_PATHS: string[] = [
   // are deliberately NOT in PRERENDER_PATHS" paragraph) for why.
 ];
 
-function matchPattern(path: string): { pattern: string; importer: Importer; modulePath: string; desktopModulePath?: string } | null {
+function matchPattern(path: string): { pattern: string; importer: Importer; modulePath: string; desktopModulePath?: string; desktopImporter?: Importer } | null {
   const segments = path.split('/').filter(Boolean);
   for (const candidate of PATTERNS) {
     const candidateSegments = candidate.pattern.split('/').filter(Boolean);
@@ -271,15 +300,33 @@ export async function renderRouteBody(canonicalPath: string, locale: Locale): Pr
   }
 
   const Component = await resolveComponent(match.importer, match.pattern);
+  // Mirrors router.tsx's `ResponsiveSwitch` exactly for its unsettled
+  // (server-rendered) branch: `settled` starts `false` whenever `window` is
+  // undefined (src/lib/hooks.ts's `useIsDesktopInternal`), which is always
+  // true here, so the client's first hydration pass against this markup is
+  // also unsettled and must produce the SAME dual CSS-toggle output — see
+  // this file's module comment and router.tsx's `ResponsiveSwitch` doc
+  // comment for why (a desktop visitor otherwise sees the mobile tree for
+  // as long as hydration takes, not just one frame).
+  const DesktopComponent = match.desktopImporter ? await resolveComponent(match.desktopImporter, `${match.pattern}#desktop`) : null;
   const i18nInstance = createPrerenderI18n(locale);
 
   const routePattern = match.pattern.slice(1); // react-router patterns have no leading slash
   const initialEntry = locale === 'ar' ? `/ar${canonicalPath}` : canonicalPath;
 
+  const pageContent = DesktopComponent
+    ? createElement(
+        Fragment,
+        null,
+        createElement('div', { className: 'hidden desktop:contents' }, createElement(DesktopComponent)),
+        createElement('div', { className: 'contents desktop:hidden' }, createElement(Component)),
+      )
+    : createElement(Component);
+
   // Inner Suspense wraps just the route's own component — mirrors
   // src/app/router.tsx's `lazyPage`/`responsivePage` helpers exactly, which
   // wrap every real route's `lazy()` component the same way.
-  const routeElement = createElement(Suspense, { fallback: createElement(PageLoadingFallback) }, createElement(Component));
+  const routeElement = createElement(Suspense, { fallback: createElement(PageLoadingFallback) }, pageContent);
 
   const memoryRouter = createMemoryRouter(
     [

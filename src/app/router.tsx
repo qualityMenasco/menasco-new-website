@@ -5,7 +5,7 @@ import type { RouteObject } from 'react-router-dom';
 import { RootLayout } from './RootLayout';
 import { PageLoadingFallback } from './PageLoadingFallback';
 import { getLocaleFromPath, withLocale } from '../lib/locale';
-import { useIsDesktop } from '../lib/hooks';
+import { useIsDesktopSettled } from '../lib/hooks';
 
 function lazyPage(importer: () => Promise<{ default: ComponentType }>): ReactNode {
   const LazyComponent = lazy(importer);
@@ -16,8 +16,39 @@ function lazyPage(importer: () => Promise<{ default: ComponentType }>): ReactNod
   );
 }
 
+/**
+ * Same `settled` CSS-toggle technique as RootLayout's `UnsettledDualShell`
+ * (src/app/RootLayout.tsx), applied to routed PAGE CONTENT instead of
+ * header/footer chrome. Background: on a prerendered route (see
+ * scripts/seo/prerender.ts), the server always renders BOTH trees here too
+ * (it has no concept of "settled" — see that file's `renderRouteBody`), so
+ * this must match exactly or hydration mismatches. Without this, the one
+ * render React does before `useIsDesktop()`'s post-mount correction fires
+ * shipped the full MOBILE page component (hero copy, mobile video, mobile
+ * section layouts) to every desktop visitor for however long hydration
+ * takes under real network/CPU conditions — confirmed via throttled-network
+ * screenshot testing to be visibly wrong (mobile services accordion, mobile
+ * hero treatment) for close to a second, not a single frame, because it's
+ * gated on JS download+parse time, not just one layout-effect tick. Once
+ * `settled` (true immediately for every non-prerendered route, and after
+ * the client's one hydration pass everywhere else), this collapses back to
+ * the plain single-branch render — zero extra cost, nothing duplicated,
+ * exactly as before this fix.
+ */
 function ResponsiveSwitch({ Desktop, Mobile }: { Desktop: ComponentType; Mobile: ComponentType }) {
-  const isDesktop = useIsDesktop();
+  const { isDesktop, settled } = useIsDesktopSettled();
+  if (!settled) {
+    return (
+      <>
+        <div className="hidden desktop:contents">
+          <Desktop />
+        </div>
+        <div className="contents desktop:hidden">
+          <Mobile />
+        </div>
+      </>
+    );
+  }
   return isDesktop ? <Desktop /> : <Mobile />;
 }
 
