@@ -1,6 +1,7 @@
 [
   {
     "id": "casa-cavalli",
+    "internalId": "MENASCO-0001",
     "slug": "casa-cavalli",
     "title": "Casa Cavalli",
     "location": "Dubai Marina, UAE",
@@ -45,6 +46,7 @@
   },
   {
     "id": "damac-bay",
+    "internalId": "MENASCO-0002",
     "slug": "damac-bay",
     "title": "DAMAC Bay",
     "location": "Dubai Marina, UAE",
@@ -89,6 +91,7 @@
   },
   {
     "id": "vela-by-omniyat",
+    "internalId": "MENASCO-0003",
     "slug": "vela-by-omniyat",
     "title": "VELA by Omniyat",
     "location": "Dubai, UAE",
@@ -133,6 +136,7 @@
   },
   {
     "id": "vanguard",
+    "internalId": "MENASCO-0004",
     "slug": "vanguard",
     "title": "Vanguard",
     "location": "Dubai, UAE",
@@ -177,6 +181,7 @@
   },
   {
     "id": "bloom-residences",
+    "internalId": "MENASCO-0005",
     "slug": "bloom-residences",
     "title": "Bloom Residences",
     "location": "Dubai Marina, UAE",
@@ -221,6 +226,7 @@
   },
   {
     "id": "pcfc-headquarters-building",
+    "internalId": "MENASCO-0006",
     "slug": "pcfc-headquarters-building",
     "title": "PCFC Headquarters Building",
     "location": "Dubai Marina, UAE",
@@ -265,6 +271,7 @@
   },
   {
     "id": "sparkle-tower",
+    "internalId": "MENASCO-0007",
     "slug": "sparkle-tower",
     "title": "Sparkle Tower",
     "location": "Dubai Marina, UAE",
@@ -309,6 +316,7 @@
   },
   {
     "id": "vida-hotel",
+    "internalId": "MENASCO-0008",
     "slug": "vida-hotel",
     "title": "Vida Hotel",
     "location": "Sharjah, UAE",
@@ -353,6 +361,7 @@
   },
   {
     "id": "dmcc-uptown-dubai-t3-t4",
+    "internalId": "MENASCO-0009",
     "slug": "dmcc-uptown-dubai-t3-t4",
     "title": "DMCC Uptown Dubai T3–T4",
     "location": "Dubai, UAE",
@@ -397,6 +406,7 @@
   },
   {
     "id": "madinat-jumeirah-living-phase-3b",
+    "internalId": "MENASCO-0010",
     "slug": "madinat-jumeirah-living-phase-3b",
     "title": "Madinat Jumeirah Living Phase 3B",
     "location": "Dubai, UAE",
@@ -441,6 +451,7 @@
   },
   {
     "id": "volante-ii-tower",
+    "internalId": "MENASCO-0011",
     "slug": "volante-ii-tower",
     "title": "Volante II Tower",
     "location": "Business Bay, Dubai",
@@ -485,6 +496,7 @@
   },
   {
     "id": "orla-infinity-residential-development",
+    "internalId": "MENASCO-0012",
     "slug": "orla-infinity-residential-development",
     "title": "ORLA Infinity Residential Development",
     "location": "Palm Jumeirah, Dubai",
@@ -529,6 +541,7 @@
   },
   {
     "id": "seven-hotel",
+    "internalId": "MENASCO-0013",
     "slug": "seven-hotel",
     "title": "Seven Hotel",
     "location": "Palm Jumeirah, UAE",
@@ -573,6 +586,7 @@
   },
   {
     "id": "town-square-development",
+    "internalId": "MENASCO-0014",
     "slug": "town-square-development",
     "title": "Town Square Development",
     "location": "Dubai, UAE",
@@ -617,6 +631,7 @@
   },
   {
     "id": "qiddiya",
+    "internalId": "MENASCO-0015",
     "slug": "qiddiya",
     "title": "Qiddiya",
     "location": "Qiddiya City",
@@ -655,6 +670,7 @@
   },
   {
     "id": "alamein-towers",
+    "internalId": "MENASCO-0016",
     "slug": "alamein-towers",
     "title": "Alamein Towers",
     "location": "New Alamein, Alamein Towers, Egypt",
@@ -688,6 +704,7 @@
   },
   {
     "id": "data-centre-i-12-mw-it",
+    "internalId": "MENASCO-0017",
     "slug": "data-centre-i-12-mw-it",
     "title": "Data Centre I",
     "location": "Abu Dhabi, UAE",
@@ -721,6 +738,7 @@
   },
   {
     "id": "data-centre-ii-24-mw-it",
+    "internalId": "MENASCO-0018",
     "slug": "data-centre-ii-24-mw-it",
     "title": "Data Centre II",
     "location": "Abu Dhabi, UAE",
@@ -754,6 +772,7 @@
   },
   {
     "id": "data-centre-iii-2-4-mw-it",
+    "internalId": "MENASCO-0019",
     "slug": "data-centre-iii-2-4-mw-it",
     "title": "Data Centre III",
     "location": "Dubai, UAE",
@@ -787,6 +806,7 @@
   },
   {
     "id": "data-centre-iv-6-mw-it",
+    "internalId": "MENASCO-0020",
     "slug": "data-centre-iv-6-mw-it",
     "title": "Data Centre IV",
     "location": "Abu Dhabi, UAE",
@@ -820,6 +840,7 @@
   },
   {
     "id": "data-centre-v-800-kw-it",
+    "internalId": "MENASCO-0021",
     "slug": "data-centre-v-800-kw-it",
     "title": "Data Centre V",
     "location": "Dubai, UAE",
@@ -853,6 +874,7 @@
   },
   {
     "id": "data-centre-vi-12-mw-it",
+    "internalId": "MENASCO-0022",
     "slug": "data-centre-vi-12-mw-it",
     "title": "Data Centre VI",
     "location": "Abu Dhabi, UAE",
@@ -886,6 +908,7 @@
   },
   {
     "id": "data-centre-vii",
+    "internalId": "MENASCO-0023",
     "slug": "data-centre-vii",
     "title": "Data Centre VII",
     "location": "Abu Dhabi, UAE",
@@ -913,6 +936,7 @@
   },
   {
     "id": "test-industrial-facility",
+    "internalId": "MENASCO-0024",
     "slug": "test-industrial-facility",
     "title": "TEST — Industrial Facility",
     "location": "Dubai, UAE",
@@ -953,6 +977,7 @@
   },
   {
     "id": "test-data-centre",
+    "internalId": "MENASCO-0025",
     "slug": "test-data-centre",
     "title": "TEST — Data Centre",
     "location": "Abu Dhabi, UAE",
@@ -993,6 +1018,7 @@
   },
   {
     "id": "test-commercial-tower",
+    "internalId": "MENASCO-0026",
     "slug": "test-commercial-tower",
     "title": "TEST — Commercial Tower",
     "location": "Sharjah, UAE",

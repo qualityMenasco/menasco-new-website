@@ -6,6 +6,7 @@ import type { ParsedProjectRow } from './projectCsvJsonParser';
 function makeProject(overrides: Partial<ProjectRecord>): ProjectRecord {
   return {
     id: overrides.slug ?? 'x',
+    internalId: '',
     slug: 'x',
     title: 'X',
     location: '',
@@ -192,5 +193,27 @@ describe('validateProjectUpload', () => {
     const result = await validateProjectUpload(rows, CURRENT, { checkLocalImagePathExists: noLocalImagesExist });
     expect(result.valid).toBe(false);
     expect(result.errors.some((e) => e.message.includes('Duplicate slug'))).toBe(true);
+  });
+
+  it('auto-assigns a sequential internalId to new projects, continuing from the highest existing one, and never from upload input', async () => {
+    const withIds: ProjectRecord[] = [
+      makeProject({ slug: 'casa-cavalli', internalId: 'MENASCO-0001' }),
+      makeProject({ slug: 'damac-bay', internalId: 'MENASCO-0005' }),
+    ];
+    const rows: ParsedProjectRow[] = [
+      { slug: 'brand-new-one', title: 'Brand New One' },
+      { slug: 'brand-new-two', title: 'Brand New Two' },
+    ];
+    // @ts-expect-error -- internalId is not a settable upload field; this confirms it's silently ignored even if present
+    rows[0].internalId = 'HACKED-0001';
+    const result = await validateProjectUpload(rows, withIds, { checkLocalImagePathExists: noLocalImagesExist });
+    expect(result.diff.added.map((p) => p.internalId)).toEqual(['MENASCO-0006', 'MENASCO-0007']);
+  });
+
+  it('leaves internalId untouched on an update to an existing project', async () => {
+    const withIds: ProjectRecord[] = [makeProject({ slug: 'casa-cavalli', internalId: 'MENASCO-0001' })];
+    const rows: ParsedProjectRow[] = [{ slug: 'casa-cavalli', title: 'Casa Cavalli Updated' }];
+    const result = await validateProjectUpload(rows, withIds, { checkLocalImagePathExists: noLocalImagesExist });
+    expect(result.diff.updated[0].after.internalId).toBe('MENASCO-0001');
   });
 });

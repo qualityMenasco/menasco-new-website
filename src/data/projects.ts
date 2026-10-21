@@ -16,6 +16,17 @@ export interface ProjectKeyMetric {
 
 export interface ProjectRecord {
   id: string;
+  /**
+   * Internal tracking ID (e.g. "MENASCO-0001") — NOT the same as `id`/`slug`,
+   * which are used in routing. Auto-assigned sequentially by the Projects
+   * CMS for every new project (api/_lib/projectsCms, validateProjectUpload.ts)
+   * and never user-settable via CSV/JSON upload, matching the `protected`
+   * field's pattern. Deliberately never read by any public-facing
+   * component — it exists in the dataset (and in CSV/JSON exports from the
+   * "Download current dataset" button) for internal record-keeping only,
+   * not for display on the site.
+   */
+  internalId: string;
   slug: string;
   title: string;
   location: string;

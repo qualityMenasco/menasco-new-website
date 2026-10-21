@@ -374,6 +374,8 @@ export function parseProjectUpload(content: string, format: 'csv' | 'json'): Par
 
 /** Minimal shape needed to serialize a stored project back to CSV — avoids importing the full ProjectRecord type into this dependency-light parser module. */
 export interface SerializableProject {
+  /** Internal tracking ID (e.g. "MENASCO-0001") — export-only, never read back on re-upload (see projectCsvJsonParser's STRING_FIELDS, which deliberately omits it). */
+  internalId: string;
   slug: string;
   title: string;
   location: string;
@@ -399,6 +401,7 @@ export interface SerializableProject {
 }
 
 const CSV_EXPORT_COLUMNS = [
+  'internalId',
   'slug',
   'title',
   'location',
@@ -441,6 +444,7 @@ export function projectsToCsv(projects: SerializableProject[]): string {
   const lines = [CSV_EXPORT_COLUMNS.join(',')];
   for (const p of projects) {
     const row: Record<(typeof CSV_EXPORT_COLUMNS)[number], string> = {
+      internalId: p.internalId,
       slug: p.slug,
       title: p.title,
       location: p.location,

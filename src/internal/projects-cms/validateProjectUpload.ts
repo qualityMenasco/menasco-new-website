@@ -61,6 +61,7 @@ async function isPlausibleImagePath(value: string, checkLocalImagePathExists: (p
 function mergeRow(row: ParsedProjectRow, existing: ProjectRecord | undefined): ProjectRecord {
   const base: ProjectRecord = existing ?? {
     id: row.slug,
+    internalId: '',
     slug: row.slug,
     title: '',
     location: '',
@@ -121,6 +122,20 @@ function mergeRow(row: ParsedProjectRow, existing: ProjectRecord | undefined): P
   merged.protected = existing?.protected ?? PROTECTED_SLUGS.has(row.slug);
 
   return merged;
+}
+
+const INTERNAL_ID_PREFIX = 'MENASCO-';
+const INTERNAL_ID_PATTERN = /^MENASCO-(\d+)$/;
+
+/** Next sequential internalId, continuing from the highest "MENASCO-NNNN" already in the dataset (0001 if none exist yet). Never user-settable via upload — assigned here, same as `protected`. */
+function nextInternalId(currentProjects: ProjectRecord[], alreadyAssignedThisBatch: number): string {
+  const highest = currentProjects.reduce((max, p) => {
+    const match = p.internalId?.match(INTERNAL_ID_PATTERN);
+    if (!match) return max;
+    return Math.max(max, Number(match[1]));
+  }, 0);
+  const n = highest + alreadyAssignedThisBatch + 1;
+  return `${INTERNAL_ID_PREFIX}${String(n).padStart(4, '0')}`;
 }
 
 const DIFF_FIELDS: (keyof ProjectRecord)[] = [
@@ -249,6 +264,7 @@ export async function validateProjectUpload(
       const changedFields = fieldsChanged(existing!, merged);
       updated.push({ slug: row.slug, before: existing!, after: merged, changedFields: Array.from(new Set([...changedFields, 'slug'])) });
     } else if (isNew) {
+      merged.internalId = nextInternalId(currentProjects, added.length);
       added.push(merged);
     } else {
       const changedFields = fieldsChanged(existing!, merged);
