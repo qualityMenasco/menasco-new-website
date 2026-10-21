@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { parseProjectCsv, parseProjectJson, parseProjectUpload, ProjectUploadParseError } from './projectCsvJsonParser';
+import {
+  parseProjectCsv,
+  parseProjectJson,
+  parseProjectUpload,
+  projectsToCsv,
+  ProjectUploadParseError,
+  type SerializableProject,
+} from './projectCsvJsonParser';
 
 describe('parseProjectCsv', () => {
   it('parses a valid CSV with multiple rows and semicolon lists', () => {
@@ -93,6 +100,45 @@ describe('parseProjectJson', () => {
 
   it('throws on an invalid keyMetrics entry shape', () => {
     expect(() => parseProjectJson(JSON.stringify([{ slug: 'x', keyMetrics: [{ label: 'Only label' }] }]))).toThrow(ProjectUploadParseError);
+  });
+});
+
+describe('capacity field (IT-capacity badge on the project card)', () => {
+  it('parses capacity from CSV and JSON uploads', () => {
+    expect(parseProjectCsv('slug,capacity\nx,18 MW IT')[0].capacity).toBe('18 MW IT');
+    expect(parseProjectJson(JSON.stringify([{ slug: 'x', capacity: '18 MW IT' }]))[0].capacity).toBe('18 MW IT');
+  });
+
+  it('round-trips through projectsToCsv and back via parseProjectCsv', () => {
+    const project: SerializableProject = {
+      internalId: 'MENASCO-0001',
+      slug: 'data-centre-viii',
+      title: 'Data Centre VIII',
+      location: 'Abu Dhabi, UAE',
+      country: 'UAE',
+      sector: '',
+      status: '',
+      year: '',
+      client: '',
+      developer: '',
+      consultant: '',
+      mainContractor: '',
+      menascoScope: '',
+      services: [],
+      description: '',
+      featured: false,
+      heroImage: '/x.jpg',
+      gallery: [],
+      seoTitle: '',
+      seoDescription: '',
+      category: 'advanced-technical-facilities',
+      capacity: '18 MW IT',
+      keyMetrics: [],
+      publishState: 'published',
+    };
+    const csv = projectsToCsv([project]);
+    const parsed = parseProjectCsv(csv);
+    expect(parsed[0].capacity).toBe('18 MW IT');
   });
 });
 

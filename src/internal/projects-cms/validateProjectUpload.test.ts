@@ -110,6 +110,14 @@ describe('validateProjectUpload', () => {
     expect(result.valid).toBe(true);
   });
 
+  it('accepts a capacity update and reports it in the diff — this drives the IT-capacity badge on the project card, separate from keyMetrics', async () => {
+    const rows: ParsedProjectRow[] = [{ slug: 'casa-cavalli', capacity: '18 MW IT' }];
+    const result = await validateProjectUpload(rows, CURRENT, { checkLocalImagePathExists: noLocalImagesExist });
+    expect(result.valid).toBe(true);
+    expect(result.diff.updated[0].after.capacity).toBe('18 MW IT');
+    expect(result.diff.updated[0].changedFields).toContain('capacity');
+  });
+
   it('rejects a bad heroImage path (neither https URL nor an existing /public path)', async () => {
     const rows: ParsedProjectRow[] = [{ slug: 'casa-cavalli', heroImage: '/this-file-does-not-exist-anywhere.jpg' }];
     const result = await validateProjectUpload(rows, CURRENT, { checkLocalImagePathExists: noLocalImagesExist });

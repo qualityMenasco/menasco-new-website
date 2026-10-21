@@ -47,6 +47,8 @@ export interface ParsedProjectRow {
   seoTitle?: string;
   seoDescription?: string;
   category?: string;
+  /** IT capacity shown as a small badge on the project card (e.g. "12 MW IT") — unrelated to keyMetrics, which feed the detail page's metrics panel instead. */
+  capacity?: string;
   keyMetrics?: ParsedProjectKeyMetric[];
   publishState?: 'draft' | 'published';
   ar?: ParsedProjectAr;
@@ -71,6 +73,7 @@ const STRING_FIELDS = [
   'seoTitle',
   'seoDescription',
   'category',
+  'capacity',
 ] as const;
 
 /** An empty cell means "not provided" (leave the existing value alone on an update), matching every other optional CSV column — not "clear this list to empty". */
@@ -396,6 +399,7 @@ export interface SerializableProject {
   seoTitle: string;
   seoDescription: string;
   category?: string;
+  capacity?: string;
   keyMetrics: ParsedProjectKeyMetric[];
   publishState: 'draft' | 'published';
 }
@@ -422,6 +426,7 @@ const CSV_EXPORT_COLUMNS = [
   'seoTitle',
   'seoDescription',
   'category',
+  'capacity',
   'keyMetric1Label',
   'keyMetric1Value',
   'keyMetric2Label',
@@ -465,6 +470,7 @@ export function projectsToCsv(projects: SerializableProject[]): string {
       seoTitle: p.seoTitle,
       seoDescription: p.seoDescription,
       category: p.category ?? '',
+      capacity: p.capacity ?? '',
       keyMetric1Label: p.keyMetrics[0]?.label ?? '',
       keyMetric1Value: p.keyMetrics[0]?.value ?? '',
       keyMetric2Label: p.keyMetrics[1]?.label ?? '',

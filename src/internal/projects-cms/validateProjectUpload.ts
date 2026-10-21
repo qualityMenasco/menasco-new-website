@@ -113,6 +113,7 @@ function mergeRow(row: ParsedProjectRow, existing: ProjectRecord | undefined): P
   assignIfPresent('seoTitle');
   assignIfPresent('seoDescription');
   assignIfPresent('category');
+  assignIfPresent('capacity');
   assignIfPresent('keyMetrics');
   assignIfPresent('publishState');
 
@@ -158,6 +159,7 @@ const DIFF_FIELDS: (keyof ProjectRecord)[] = [
   'seoTitle',
   'seoDescription',
   'category',
+  'capacity',
   'keyMetrics',
   'publishState',
 ];
