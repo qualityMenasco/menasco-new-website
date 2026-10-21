@@ -18,6 +18,7 @@ import {
   type ValidationResultDto,
   type PublishResultDto,
 } from './projectsCmsApi';
+import { projectsToCsv, type SerializableProject } from './projectCsvJsonParser';
 import { PROTECTED_SLUGS } from './protectedSlugs';
 
 /**
@@ -266,17 +267,27 @@ export default function ProjectsCmsPage() {
     setLoggedIn(false);
   }
 
-  /** Downloads the live dataset as-is — this is what makes a safe deletion practical: download, remove the entry you don't want, re-upload with "full dataset replacement" checked, instead of hand-assembling the whole project list from memory and risking an accidental omission. */
-  async function handleDownload() {
+  /** Downloads the live dataset as-is, in either format — this is what makes a safe deletion practical: download, remove the entry you don't want, re-upload with "full dataset replacement" checked, instead of hand-assembling the whole project list from memory and risking an accidental omission. CSV is built client-side from the same fetched data, so both buttons share one network call. */
+  async function handleDownload(format: 'csv' | 'json') {
     setDownloading(true);
     setDownloadError(null);
     try {
       const data = await exportCurrentDataset();
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const dateStamp = new Date().toISOString().slice(0, 10);
+      let blob: Blob;
+      let filename: string;
+      if (format === 'json') {
+        blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        filename = `menasco-projects-${dateStamp}.json`;
+      } else {
+        const csv = projectsToCsv(data as SerializableProject[]);
+        blob = new Blob([csv], { type: 'text/csv' });
+        filename = `menasco-projects-${dateStamp}.csv`;
+      }
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `menasco-projects-${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -386,9 +397,14 @@ export default function ProjectsCmsPage() {
                   Deleting a project? Download the current live dataset, remove the entry you don't want, then re-upload it below with
                   "full dataset replacement" checked.
                 </Text>
-                <Button variant="secondary" size="sm" onClick={handleDownload} loading={downloading}>
-                  Download current dataset
-                </Button>
+                <div className="flex gap-2">
+                  <Button variant="secondary" size="sm" onClick={() => handleDownload('csv')} loading={downloading}>
+                    Download as CSV
+                  </Button>
+                  <Button variant="secondary" size="sm" onClick={() => handleDownload('json')} loading={downloading}>
+                    Download as JSON
+                  </Button>
+                </div>
               </div>
               {downloadError && <p className="text-body text-error">{downloadError}</p>}
 

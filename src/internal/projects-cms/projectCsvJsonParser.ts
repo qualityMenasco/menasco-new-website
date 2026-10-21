@@ -333,3 +333,105 @@ export function parseProjectUpload(content: string, format: 'csv' | 'json'): Par
   if (format === 'json') return parseProjectJson(content);
   throw new ProjectUploadParseError(`Unknown upload format "${format}" — must be "csv" or "json"`);
 }
+
+/** Minimal shape needed to serialize a stored project back to CSV — avoids importing the full ProjectRecord type into this dependency-light parser module. */
+export interface SerializableProject {
+  slug: string;
+  title: string;
+  location: string;
+  country: string;
+  sector: string;
+  status: string;
+  year: string;
+  client: string;
+  developer: string;
+  consultant: string;
+  mainContractor: string;
+  menascoScope: string;
+  services: string[];
+  description: string;
+  featured: boolean;
+  heroImage: string;
+  gallery: string[];
+  seoTitle: string;
+  seoDescription: string;
+  category?: string;
+  keyMetrics: ParsedProjectKeyMetric[];
+  publishState: 'draft' | 'published';
+}
+
+const CSV_EXPORT_COLUMNS = [
+  'slug',
+  'title',
+  'location',
+  'country',
+  'sector',
+  'status',
+  'year',
+  'client',
+  'developer',
+  'consultant',
+  'mainContractor',
+  'menascoScope',
+  'services',
+  'description',
+  'featured',
+  'heroImage',
+  'gallery',
+  'seoTitle',
+  'seoDescription',
+  'category',
+  'keyMetric1Label',
+  'keyMetric1Value',
+  'keyMetric2Label',
+  'keyMetric2Value',
+  'keyMetric3Label',
+  'keyMetric3Value',
+  'publishState',
+] as const;
+
+/** RFC4180 field escaping — quotes a field only when it contains a comma, quote, or newline (matching parseProjectCsv's own quoting assumptions). */
+function csvEscape(value: string): string {
+  if (/[",\n\r]/.test(value)) {
+    return `"${value.replace(/"/g, '""')}"`;
+  }
+  return value;
+}
+
+/** Serializes stored projects back into the same CSV shape parseProjectCsv accepts — round-trippable with the upload format, for the CMS's "download current dataset" export. */
+export function projectsToCsv(projects: SerializableProject[]): string {
+  const lines = [CSV_EXPORT_COLUMNS.join(',')];
+  for (const p of projects) {
+    const row: Record<(typeof CSV_EXPORT_COLUMNS)[number], string> = {
+      slug: p.slug,
+      title: p.title,
+      location: p.location,
+      country: p.country,
+      sector: p.sector,
+      status: p.status,
+      year: p.year,
+      client: p.client,
+      developer: p.developer,
+      consultant: p.consultant,
+      mainContractor: p.mainContractor,
+      menascoScope: p.menascoScope,
+      services: p.services.join(';'),
+      description: p.description,
+      featured: p.featured ? 'true' : 'false',
+      heroImage: p.heroImage,
+      gallery: p.gallery.join(';'),
+      seoTitle: p.seoTitle,
+      seoDescription: p.seoDescription,
+      category: p.category ?? '',
+      keyMetric1Label: p.keyMetrics[0]?.label ?? '',
+      keyMetric1Value: p.keyMetrics[0]?.value ?? '',
+      keyMetric2Label: p.keyMetrics[1]?.label ?? '',
+      keyMetric2Value: p.keyMetrics[1]?.value ?? '',
+      keyMetric3Label: p.keyMetrics[2]?.label ?? '',
+      keyMetric3Value: p.keyMetrics[2]?.value ?? '',
+      publishState: p.publishState,
+    };
+    lines.push(CSV_EXPORT_COLUMNS.map((col) => csvEscape(row[col])).join(','));
+  }
+  return lines.join('\r\n');
+}
