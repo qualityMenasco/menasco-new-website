@@ -84,6 +84,38 @@ function splitSemicolonList(value: unknown): string[] | undefined {
     .filter((s) => s.length > 0);
 }
 
+/**
+ * Google Drive "share" links (drive.google.com/file/d/ID/view,
+ * drive.google.com/open?id=ID, drive.google.com/uc?id=ID) are HTML viewer
+ * pages, not image URLs — a browser <img> tag can't render them directly.
+ * This rewrites a recognized Drive link to lh3.googleusercontent.com/d/ID,
+ * Google's image-serving host, which DOES return the raw image for a file
+ * shared as "Anyone with the link can view". This only works for files
+ * actually shared that way — an access-restricted file still won't load
+ * (no URL rewrite can bypass that), and Google could change or block this
+ * undocumented hotlinking path at any time; re-hosting the image file in
+ * the repo remains the reliable option, but is deliberately not what this
+ * project wants (see conversation: repo-hosted images considered too slow).
+ * Any URL that isn't a recognized Drive share link is returned unchanged.
+ */
+function normalizeGoogleDriveImageUrl(url: string): string {
+  const trimmed = url.trim();
+  const patterns = [
+    /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/,
+    /drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/,
+    /drive\.google\.com\/uc\?.*?[?&]id=([a-zA-Z0-9_-]+)/,
+    /drive\.google\.com\/uc\?id=([a-zA-Z0-9_-]+)/,
+    /drive\.google\.com\/thumbnail\?id=([a-zA-Z0-9_-]+)/,
+  ];
+  for (const pattern of patterns) {
+    const match = trimmed.match(pattern);
+    if (match) {
+      return `https://lh3.googleusercontent.com/d/${match[1]}=w2000`;
+    }
+  }
+  return trimmed;
+}
+
 function parseBoolean(value: unknown): boolean | undefined {
   if (typeof value === 'boolean') return value;
   if (typeof value !== 'string') return undefined;
@@ -205,12 +237,15 @@ export function parseProjectCsv(content: string): ParsedProjectRow[] {
         parsed[field] = raw.trim();
       }
     }
+    if (parsed.heroImage !== undefined) {
+      parsed.heroImage = normalizeGoogleDriveImageUrl(parsed.heroImage);
+    }
 
     const services = splitSemicolonList(get('services'));
     if (services !== undefined) parsed.services = services;
 
     const gallery = splitSemicolonList(get('gallery'));
-    if (gallery !== undefined) parsed.gallery = gallery;
+    if (gallery !== undefined) parsed.gallery = gallery.map(normalizeGoogleDriveImageUrl);
 
     const featured = parseBoolean(get('featured'));
     if (featured !== undefined) parsed.featured = featured;
@@ -275,12 +310,15 @@ export function parseProjectJson(content: string): ParsedProjectRow[] {
         parsed[field] = raw.trim();
       }
     }
+    if (parsed.heroImage !== undefined) {
+      parsed.heroImage = normalizeGoogleDriveImageUrl(parsed.heroImage);
+    }
 
     if (Array.isArray(obj.services)) {
       parsed.services = obj.services.filter((s): s is string => typeof s === 'string');
     }
     if (Array.isArray(obj.gallery)) {
-      parsed.gallery = obj.gallery.filter((s): s is string => typeof s === 'string');
+      parsed.gallery = obj.gallery.filter((s): s is string => typeof s === 'string').map(normalizeGoogleDriveImageUrl);
     }
     if (typeof obj.featured === 'boolean') {
       parsed.featured = obj.featured;

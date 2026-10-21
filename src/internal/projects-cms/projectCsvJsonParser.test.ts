@@ -96,6 +96,39 @@ describe('parseProjectJson', () => {
   });
 });
 
+describe('Google Drive image URL normalization', () => {
+  it('rewrites a drive.google.com/file/d/ID/view link to the lh3 image host, for both CSV and JSON uploads', () => {
+    const driveUrl = 'https://drive.google.com/file/d/1HhqcNC_t_Stm3nzpJBxvdsq1r4oAUu3y/view?usp=drive_link';
+    const expected = 'https://lh3.googleusercontent.com/d/1HhqcNC_t_Stm3nzpJBxvdsq1r4oAUu3y=w2000';
+
+    const csvRows = parseProjectCsv(`slug,heroImage,gallery\nx,${driveUrl},${driveUrl};${driveUrl}`);
+    expect(csvRows[0].heroImage).toBe(expected);
+    expect(csvRows[0].gallery).toEqual([expected, expected]);
+
+    const jsonRows = parseProjectJson(JSON.stringify([{ slug: 'x', heroImage: driveUrl, gallery: [driveUrl] }]));
+    expect(jsonRows[0].heroImage).toBe(expected);
+    expect(jsonRows[0].gallery).toEqual([expected]);
+  });
+
+  it('rewrites open?id= and uc?id= Drive link variants', () => {
+    const openUrl = 'https://drive.google.com/open?id=abcDEF123-_';
+    const ucUrl = 'https://drive.google.com/uc?id=abcDEF123-_&export=view';
+    const expected = 'https://lh3.googleusercontent.com/d/abcDEF123-_=w2000';
+
+    expect(parseProjectCsv(`slug,heroImage\nx,${openUrl}`)[0].heroImage).toBe(expected);
+    expect(parseProjectCsv(`slug,heroImage\nx,${ucUrl}`)[0].heroImage).toBe(expected);
+  });
+
+  it('leaves non-Drive image URLs unchanged', () => {
+    const url = 'https://example.com/photo.jpg';
+    expect(parseProjectCsv(`slug,heroImage\nx,${url}`)[0].heroImage).toBe(url);
+  });
+
+  it('leaves a local /-prefixed image path unchanged', () => {
+    expect(parseProjectCsv('slug,heroImage\nx,/images/photo.jpg')[0].heroImage).toBe('/images/photo.jpg');
+  });
+});
+
 describe('parseProjectUpload', () => {
   it('dispatches to CSV or JSON based on format', () => {
     expect(parseProjectUpload('slug,title\nx,X', 'csv')).toEqual([{ slug: 'x', title: 'X' }]);

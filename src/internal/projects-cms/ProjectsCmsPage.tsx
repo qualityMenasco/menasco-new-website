@@ -389,7 +389,8 @@ export default function ProjectsCmsPage() {
 
               <Text variant="body" className="text-gray-600">
                 Upload a CSV or JSON file describing new or updated projects. Nothing is written until you review the diff below and
-                explicitly confirm publishing.
+                explicitly confirm publishing. Google Drive image links (heroImage/gallery) are auto-converted to a direct image URL —
+                the file must be shared as "Anyone with the link can view," or it still won't load.
               </Text>
 
               <div className="flex items-center justify-between gap-3 rounded-sm border border-gray-200 bg-gray-50 p-3">
