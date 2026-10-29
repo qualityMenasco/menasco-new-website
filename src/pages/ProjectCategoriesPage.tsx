@@ -11,7 +11,7 @@ import { Grid } from '../components/layout/Grid';
 import { Stack } from '../components/layout/Stack';
 import { Text } from '../components/typography/Typography';
 import { projectCategoryList, resolveCategorySlug } from '../data/projectCategories';
-import { publishedProjects } from '../data/projects';
+import { publishedProjects, deriveCapacityBadge } from '../data/projects';
 import { getProjectImage } from '../data/images';
 import { prioritizeProjectsByCategory, prioritizeByField } from '../lib/projectOrdering';
 import { translateProjectLocation } from '../lib/projectLocation';
@@ -241,7 +241,7 @@ export default function ProjectCategoriesPage() {
                           ? { variant: 'icon' as const }
                           : { image: getProjectImage(project.heroImage || undefined, project.slug) })}
                         location={translateProjectLocation(t, project.location)}
-                        capacity={project.capacity}
+                        capacity={deriveCapacityBadge(project)}
                         muted={hoveredSlug !== null && !activeCategory && project.category !== hoveredSlug}
                         priority={index < PRIORITY_IMAGE_COUNT}
                       />

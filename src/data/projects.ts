@@ -120,3 +120,27 @@ export const publishedProjects: ProjectRecord[] = projects.filter((project) => p
  * populated value.
  */
 export const getMainContractor = (project: Pick<ProjectRecord, 'mainContractor'>): string => project.mainContractor || 'MENASCO';
+
+/**
+ * Derives the project card's bottom-right capacity badge (see
+ * ProjectCard.tsx's `capacity` prop) without requiring it to be typed in
+ * by hand for every project. An explicit `capacity` value always wins
+ * (preserves the 7 pre-CMS data-centre records, which already carry it
+ * directly, and lets anyone override this on a case-by-case basis).
+ * Otherwise, it's read straight off `keyMetrics`, which the CMS/migration
+ * sheet already populates: an "IT Capacity" metric produces the "X MW IT"
+ * badge data centre cards use today, and a "Voltage" metric (e.g. for
+ * substations) produces the raw "132/11 kV" value as-is. Returns undefined
+ * — and the badge simply doesn't render — when neither is present, which
+ * is the common case for most non-technical-facility projects.
+ */
+export function deriveCapacityBadge(project: Pick<ProjectRecord, 'capacity' | 'keyMetrics'>): string | undefined {
+  if (project.capacity) return project.capacity;
+  const itCapacity = project.keyMetrics.find((m) => /it capacity/i.test(m.label));
+  if (itCapacity) {
+    return /\bit\b/i.test(itCapacity.value) ? itCapacity.value : `${itCapacity.value} IT`;
+  }
+  const voltage = project.keyMetrics.find((m) => /voltage/i.test(m.label));
+  if (voltage) return voltage.value;
+  return undefined;
+}
