@@ -76,7 +76,8 @@
     "tabScope": "Scope of Work",
     "galleryPrevious": "Previous image",
     "galleryNext": "Next image",
-    "galleryDot": "Go to image {{index}}"
+    "galleryDot": "Go to image {{index}}",
+    "galleryCounter": "{{current}} / {{total}}"
   },
   "items": {
     "casa-cavalli": {

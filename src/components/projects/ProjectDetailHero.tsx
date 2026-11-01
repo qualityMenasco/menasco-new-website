@@ -42,11 +42,20 @@ export function ProjectDetailHero({
   className,
 }: ProjectDetailHeroProps) {
   return (
-    <div className={cn('relative min-h-[430px] w-full overflow-hidden rounded-md bg-ink', className)}>
+    <div className={cn('relative aspect-[16/10] min-h-[360px] w-full overflow-hidden rounded-md bg-ink', className)}>
       {image && <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" loading="eager" />}
+      {/*
+       * Strengthened from the original from-ink/85 via-ink/15 — the title
+       * block's full height (eyebrow + h1 + location, taller still when the
+       * title wraps to 2 lines) extends well above the gradient's default
+       * via-stop (50% up), so a light-colored photo risked under-85-opacity
+       * coverage across the upper part of the text block, not just its
+       * bottom edge. via-ink/60 keeps real contrast through roughly the
+       * bottom half of the image regardless of photo content.
+       */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/15 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/60 to-transparent"
       />
 
       {verificationBadge && <div className="absolute start-5 top-5">{verificationBadge}</div>}

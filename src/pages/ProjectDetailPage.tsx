@@ -499,7 +499,7 @@ export default function ProjectDetailPage() {
       <Section spacing="lg" background="warmwhite">
         <div className={PROJECT_DETAIL_GRID}>
           <ProjectDetailHero
-            image={project.heroImage || undefined}
+            image={getProjectImage(project.heroImage || undefined, project.slug)}
             title={project.title}
             eyebrow={defaultEyebrow}
             location={translatedLocation}
@@ -540,6 +540,7 @@ export default function ProjectDetailPage() {
             previousLabel={t('projects:detail.galleryPrevious')}
             nextLabel={t('projects:detail.galleryNext')}
             dotLabel={(index) => t('projects:detail.galleryDot', { index: index + 1 })}
+            counterLabel={(current, total) => t('projects:detail.galleryCounter', { current, total })}
           />
         </div>
       </Section>

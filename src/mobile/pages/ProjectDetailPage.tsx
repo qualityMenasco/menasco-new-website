@@ -1,6 +1,7 @@
 import { Navigate, useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { cn } from '../../lib/utils';
+import { Badge } from '../../components/ui/Badge';
 import { SectionHeader } from '../components/SectionHeader';
 import { MobileCTA } from '../components/MobileCTA';
 import { LocaleLink } from '../components/LocaleLink';
@@ -75,9 +76,10 @@ export default function ProjectDetailPage() {
   const pendingValue = t('projects:detail.pendingValue');
   const scopeKey = `projects:items.${project.slug}.menascoScope`;
   const translatedScope = t(scopeKey);
-  // Only verified records show scope — the mobile page has no "pending verification" badge to qualify unconfirmed details the way desktop does.
-  const menascoScope =
-    project.menascoScope && project.verificationStatus === 'verified' ? (translatedScope === scopeKey ? project.menascoScope : translatedScope) : '';
+  // Scope is shown regardless of verification status, same as desktop — the
+  // "Details Pending Verification" badge on the hero below is what qualifies
+  // every unconfirmed field on the page, not a per-field hide.
+  const menascoScope = project.menascoScope ? (translatedScope === scopeKey ? project.menascoScope : translatedScope) : '';
 
   // Order: Workforce Hours / Status / Completion, then Safety / Category /
   // Location, then Main Contractor last — its trailing position is what lets
@@ -135,8 +137,15 @@ export default function ProjectDetailPage() {
       />
 
       <section className="px-4 py-8">
-        <div className="aspect-[4/3] w-full overflow-hidden rounded-md bg-gray-100">
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md bg-gray-100">
           <img src={getProjectImage(project.heroImage || undefined, project.slug)} alt={project.title} className="h-full w-full object-cover" />
+          {project.verificationStatus === 'pending' && (
+            <div className="absolute start-3 top-3">
+              <Badge variant="status" theme="dark">
+                {t('projects:detail.detailsPending')}
+              </Badge>
+            </div>
+          )}
         </div>
 
         <div className="mt-5">
@@ -192,6 +201,7 @@ export default function ProjectDetailPage() {
           previousLabel={t('projects:detail.galleryPrevious')}
           nextLabel={t('projects:detail.galleryNext')}
           dotLabel={(index) => t('projects:detail.galleryDot', { index: index + 1 })}
+          counterLabel={(current, total) => t('projects:detail.galleryCounter', { current, total })}
         />
       </section>
 

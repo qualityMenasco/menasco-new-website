@@ -647,5 +647,590 @@
       "description": "From concept to installation, MENASCO integrates engineering expertise with specialist manufacturing partners to deliver faster, safer, and higher-quality project outcomes.",
       "primaryLabel": "Explore Our Projects"
     }
+  },
+  "epcPage": {
+    "seo": {
+      "title": "EPC — Engineering, Procurement & Construction",
+      "description": "MENASCO delivers integrated Engineering, Procurement and Construction (EPC) services, providing a single point of accountability from design through handover."
+    },
+    "hero": {
+      "title": "EPC",
+      "description": "MENASCO delivers integrated Engineering, Procurement and Construction (EPC) solutions, providing a single point of responsibility from early-stage design through procurement, installation and handover. Our EPC capability combines in-house MEP engineering, coordinated procurement and on-site execution, so a project's building services are delivered as one accountable scope rather than a series of separate contracts to coordinate."
+    },
+    "overview": {
+      "eyebrow": "Overview",
+      "heading": "A Single Point of Responsibility, From Design to Handover",
+      "paragraph1": "Rather than splitting a project's building services across multiple contracts and interfaces, MENASCO's EPC model brings engineering, procurement and construction under one accountable scope. Our in-house design and BIM teams establish the technical basis for the works, our procurement function coordinates materials and equipment against the project programme, and our site teams carry the design through to installation, testing and commissioning.",
+      "paragraph2": "This integrated structure reduces the coordination burden on clients and consultants, shortens the path between design decisions and site execution, and gives a single team accountability for cost, schedule and quality across the full scope of works."
+    },
+    "capabilitiesSection": {
+      "eyebrow": "Our Capabilities",
+      "heading": "EPC Capabilities"
+    },
+    "capabilities": [
+      {
+        "title": "Engineering Design & BIM Coordination",
+        "description": "In-house MEP design and model coordination establishing a clash-free technical basis before construction begins."
+      },
+      {
+        "title": "Procurement & Supply-Chain Coordination",
+        "description": "Equipment and materials procurement coordinated against the project programme to keep delivery on schedule."
+      },
+      {
+        "title": "Site Mobilisation & Construction Management",
+        "description": "On-site teams and subcontractors mobilised and managed under a single point of accountability."
+      },
+      {
+        "title": "Installation, Testing & Commissioning",
+        "description": "MEP systems installed, tested and commissioned against project specifications and standards."
+      },
+      {
+        "title": "Project Scheduling & Progress Reporting",
+        "description": "Programme management and transparent progress reporting throughout delivery."
+      },
+      {
+        "title": "Quality Assurance & HSE Compliance",
+        "description": "Quality and HSE processes embedded across design, procurement and site execution."
+      }
+    ],
+    "integratedDelivery": {
+      "eyebrow": "Integrated Delivery",
+      "heading": "One Team, One Point of Accountability",
+      "paragraph1": "Traditional delivery models split a project's MEP scope across separate design consultants, suppliers and contractors, each with their own interfaces to manage. MENASCO's EPC approach removes those handover points by keeping design, procurement and construction within a single coordinated team.",
+      "paragraph2": "That structure gives clients one point of contact for cost, schedule and technical decisions throughout the project, with engineering and site delivery working from the same model and the same programme from day one.",
+      "benefitsLabel": "Benefits"
+    },
+    "benefits": [
+      "Single point of accountability",
+      "Fewer interfaces to coordinate",
+      "Design and site teams aligned from day one",
+      "Clearer cost and schedule control",
+      "Faster resolution of technical issues",
+      "Consistent quality across design, procurement and construction"
+    ],
+    "qualitySection": {
+      "eyebrow": "Quality Across the Full Scope",
+      "heading": "Quality Across the Full Scope",
+      "paragraph1": "Because engineering, procurement and construction sit within one team, quality control is applied consistently from early design decisions through to final commissioning, rather than being re-established at each handover.",
+      "paragraph2": "MENASCO's EPC approach supports residential developments, hospitality projects, commercial buildings, data centres, healthcare facilities and other technically demanding infrastructure, with the same accountable delivery model applied across every sector."
+    },
+    "qualityHighlights": [
+      {
+        "title": "Coordinated Engineering",
+        "description": "Design and BIM coordination carried out in-house, ahead of procurement and construction."
+      },
+      {
+        "title": "Managed Procurement",
+        "description": "Materials and equipment procured and tracked against the project programme."
+      },
+      {
+        "title": "Disciplined Execution",
+        "description": "Site delivery managed against the same technical basis established at design stage."
+      },
+      {
+        "title": "Full Accountability",
+        "description": "One team responsible for cost, schedule and quality from design to handover."
+      }
+    ],
+    "downloadCompanyProfile": "Download Company Profile",
+    "closing": {
+      "heading": "A Single Accountable Partner for Your Next Project",
+      "description": "From early design through procurement, construction and handover, MENASCO's EPC model gives clients one coordinated team and one point of accountability for their building services scope.",
+      "cta": "Explore Our Projects"
+    }
+  },
+  "epcPageMobile": {
+    "seo": {
+      "title": "EPC — Engineering, Procurement & Construction",
+      "description": "MENASCO delivers integrated Engineering, Procurement and Construction (EPC) services, providing a single point of accountability from design through handover."
+    },
+    "eyebrow": "EPC",
+    "heading": "A Single Point of Responsibility, From Design to Handover",
+    "description": "MENASCO delivers integrated Engineering, Procurement and Construction (EPC) solutions, providing a single point of responsibility from early-stage design through procurement, installation and handover. Our EPC capability combines in-house MEP engineering, coordinated procurement and on-site execution.",
+    "overview": {
+      "eyebrow": "Overview",
+      "heading": "One Accountable Scope",
+      "paragraph1": "Rather than splitting a project's building services across multiple contracts and interfaces, MENASCO's EPC model brings engineering, procurement and construction under one accountable scope. Our in-house design and BIM teams establish the technical basis for the works, and our site teams carry the design through to installation, testing and commissioning.",
+      "paragraph2": "This integrated structure reduces the coordination burden on clients and consultants, and gives a single team accountability for cost, schedule and quality across the full scope of works."
+    },
+    "capabilitiesSection": {
+      "eyebrow": "Our Capabilities",
+      "heading": "EPC Capabilities"
+    },
+    "capabilities": [
+      {
+        "title": "Engineering Design & BIM Coordination",
+        "description": "In-house MEP design and model coordination establishing a clash-free technical basis before construction begins."
+      },
+      {
+        "title": "Procurement & Supply-Chain Coordination",
+        "description": "Equipment and materials procurement coordinated against the project programme to keep delivery on schedule."
+      },
+      {
+        "title": "Site Mobilisation & Construction Management",
+        "description": "On-site teams and subcontractors mobilised and managed under a single point of accountability."
+      },
+      {
+        "title": "Installation, Testing & Commissioning",
+        "description": "MEP systems installed, tested and commissioned against project specifications and standards."
+      },
+      {
+        "title": "Project Scheduling & Progress Reporting",
+        "description": "Programme management and transparent progress reporting throughout delivery."
+      },
+      {
+        "title": "Quality Assurance & HSE Compliance",
+        "description": "Quality and HSE processes embedded across design, procurement and site execution."
+      }
+    ],
+    "integratedDelivery": {
+      "eyebrow": "Integrated Delivery",
+      "heading": "One Team, One Point of Accountability",
+      "paragraph1": "Traditional delivery models split a project's MEP scope across separate design consultants, suppliers and contractors, each with their own interfaces to manage. MENASCO's EPC approach removes those handover points by keeping design, procurement and construction within a single coordinated team.",
+      "paragraph2": "That structure gives clients one point of contact for cost, schedule and technical decisions throughout the project.",
+      "benefitsLabel": "Benefits"
+    },
+    "benefits": [
+      "Single point of accountability",
+      "Fewer interfaces to coordinate",
+      "Design and site teams aligned from day one",
+      "Clearer cost and schedule control",
+      "Faster resolution of technical issues",
+      "Consistent quality across design, procurement and construction"
+    ],
+    "qualitySection": {
+      "eyebrow": "Quality Across the Full Scope",
+      "heading": "Quality Across the Full Scope",
+      "paragraph1": "Because engineering, procurement and construction sit within one team, quality control is applied consistently from early design decisions through to final commissioning.",
+      "paragraph2": "MENASCO's EPC approach supports residential, hospitality, commercial, data centre, healthcare and industrial developments, with the same accountable delivery model applied across every sector."
+    },
+    "qualityHighlights": [
+      {
+        "title": "Coordinated Engineering",
+        "description": "Design and BIM coordination carried out in-house, ahead of procurement and construction."
+      },
+      {
+        "title": "Managed Procurement",
+        "description": "Materials and equipment procured and tracked against the project programme."
+      },
+      {
+        "title": "Disciplined Execution",
+        "description": "Site delivery managed against the same technical basis established at design stage."
+      },
+      {
+        "title": "Full Accountability",
+        "description": "One team responsible for cost, schedule and quality from design to handover."
+      }
+    ],
+    "downloadCompanyProfile": "Download Company Profile",
+    "cta": {
+      "heading": "A Single Accountable Partner for Your Next Project",
+      "description": "From early design through procurement, construction and handover, MENASCO's EPC model gives clients one coordinated team and one point of accountability.",
+      "primaryLabel": "Explore Our Projects"
+    }
+  },
+  "mepPage": {
+    "seo": {
+      "title": "MEP — Mechanical, Electrical & Plumbing",
+      "description": "MENASCO delivers integrated Mechanical, Electrical, Plumbing and Fire Protection engineering as one coordinated scope, from design through handover."
+    },
+    "hero": {
+      "title": "MEP",
+      "description": "MENASCO delivers integrated Mechanical, Electrical and Plumbing (MEP) engineering across every major building system — from HVAC and chilled-water plant to power distribution, water and drainage, and fire protection. Our in-house teams design, install, test and commission these systems as one coordinated scope, supported by BIM coordination from concept through handover."
+    },
+    "overview": {
+      "eyebrow": "Overview",
+      "heading": "One Team Across Every Building System",
+      "paragraph1": "MENASCO's MEP capability spans Mechanical, Electrical, Plumbing, and Fire Protection & Life Safety systems, delivered by in-house engineering and site teams rather than coordinated across separate specialist contractors. This keeps design intent, procurement and installation aligned across every discipline, reducing the interface risk that typically arises when MEP systems are delivered by multiple unconnected parties.",
+      "paragraph2": "From central plant and power distribution through to water systems and life-safety infrastructure, our teams work from a shared BIM model and a single project programme, supporting coordinated installation, testing and commissioning across the full building-services scope."
+    },
+    "capabilitiesSection": {
+      "eyebrow": "Our Capabilities",
+      "heading": "MEP Capabilities"
+    },
+    "capabilities": [
+      {
+        "title": "HVAC & Chilled-Water Systems",
+        "description": "Mechanical plant, ductwork and cooling systems engineered for regional climate loads."
+      },
+      {
+        "title": "Power Distribution & ELV Systems",
+        "description": "Medium- and low-voltage distribution, backup power and building management systems."
+      },
+      {
+        "title": "Water, Drainage & Plumbing Systems",
+        "description": "Water supply, drainage and treatment systems engineered for reliability and compliance."
+      },
+      {
+        "title": "Fire Protection & Life Safety",
+        "description": "Fire detection, suppression and life-safety systems designed to code and international standards."
+      },
+      {
+        "title": "BIM Coordination & Design",
+        "description": "Clash-free coordination across all four disciplines ahead of installation."
+      },
+      {
+        "title": "Testing, Commissioning & Handover",
+        "description": "Integrated testing and commissioning across every system before handover."
+      }
+    ],
+    "disciplines": {
+      "eyebrow": "Our Disciplines",
+      "heading": "Explore Each MEP Discipline",
+      "paragraph1": "Every MEP discipline is delivered by the same in-house MENASCO team, working from a shared design and programme rather than handed between separate specialist contractors.",
+      "items": [
+        { "title": "Mechanical", "description": "HVAC, chilled-water and plant systems.", "href": "/services/mechanical" },
+        { "title": "Electrical", "description": "Power distribution and ELV systems.", "href": "/services/electrical" },
+        { "title": "Plumbing", "description": "Water supply, drainage and treatment systems.", "href": "/services/plumbing" },
+        { "title": "Fire Protection", "description": "Fire detection, suppression and life safety.", "href": "/services/fire-protection" }
+      ]
+    },
+    "qualitySection": {
+      "eyebrow": "Quality Across the Full Scope",
+      "heading": "Quality Across the Full Scope",
+      "paragraph1": "Because mechanical, electrical, plumbing and fire protection are delivered by one coordinated team, quality control is applied consistently across every system rather than varying from one contractor to the next.",
+      "paragraph2": "MENASCO's MEP approach supports residential developments, hospitality projects, commercial buildings, data centres, healthcare facilities and other technically demanding infrastructure, with the same coordinated delivery model applied across every sector."
+    },
+    "qualityHighlights": [
+      {
+        "title": "Single-Source Accountability",
+        "description": "One team responsible for every MEP discipline, from design through handover."
+      },
+      {
+        "title": "Code & Standards Compliance",
+        "description": "Systems engineered and installed to UAE and international codes and standards."
+      },
+      {
+        "title": "Integrated Testing & Commissioning",
+        "description": "Every system tested and commissioned together before handover."
+      },
+      {
+        "title": "Long-Term Reliability",
+        "description": "Systems engineered for dependable performance in demanding regional conditions."
+      }
+    ],
+    "downloadCompanyProfile": "Download Company Profile",
+    "closing": {
+      "heading": "One Coordinated Team for Every Building System",
+      "description": "From HVAC and power distribution to water systems and fire protection, MENASCO delivers MEP engineering as a single, accountable scope across every sector we serve.",
+      "cta": "Explore Our Projects"
+    }
+  },
+  "mepPageMobile": {
+    "seo": {
+      "title": "MEP — Mechanical, Electrical & Plumbing",
+      "description": "MENASCO delivers integrated Mechanical, Electrical, Plumbing and Fire Protection engineering as one coordinated scope, from design through handover."
+    },
+    "eyebrow": "MEP",
+    "heading": "One Team Across Every Building System",
+    "description": "MENASCO delivers integrated Mechanical, Electrical and Plumbing (MEP) engineering across every major building system — from HVAC and chilled-water plant to power distribution, water and drainage, and fire protection, delivered as one coordinated in-house scope.",
+    "overview": {
+      "eyebrow": "Overview",
+      "heading": "One Team Across Every Building System",
+      "paragraph1": "MENASCO's MEP capability spans Mechanical, Electrical, Plumbing, and Fire Protection & Life Safety systems, delivered by in-house engineering and site teams rather than coordinated across separate specialist contractors.",
+      "paragraph2": "Our teams work from a shared BIM model and a single project programme, supporting coordinated installation, testing and commissioning across the full building-services scope."
+    },
+    "capabilitiesSection": {
+      "eyebrow": "Our Capabilities",
+      "heading": "MEP Capabilities"
+    },
+    "capabilities": [
+      {
+        "title": "HVAC & Chilled-Water Systems",
+        "description": "Mechanical plant, ductwork and cooling systems engineered for regional climate loads."
+      },
+      {
+        "title": "Power Distribution & ELV Systems",
+        "description": "Medium- and low-voltage distribution, backup power and building management systems."
+      },
+      {
+        "title": "Water, Drainage & Plumbing Systems",
+        "description": "Water supply, drainage and treatment systems engineered for reliability and compliance."
+      },
+      {
+        "title": "Fire Protection & Life Safety",
+        "description": "Fire detection, suppression and life-safety systems designed to code and international standards."
+      },
+      {
+        "title": "BIM Coordination & Design",
+        "description": "Clash-free coordination across all four disciplines ahead of installation."
+      },
+      {
+        "title": "Testing, Commissioning & Handover",
+        "description": "Integrated testing and commissioning across every system before handover."
+      }
+    ],
+    "disciplines": {
+      "eyebrow": "Our Disciplines",
+      "heading": "Explore Each MEP Discipline",
+      "paragraph1": "Every MEP discipline is delivered by the same in-house MENASCO team, working from a shared design and programme.",
+      "items": [
+        { "title": "Mechanical", "description": "HVAC, chilled-water and plant systems.", "href": "/services/mechanical" },
+        { "title": "Electrical", "description": "Power distribution and ELV systems.", "href": "/services/electrical" },
+        { "title": "Plumbing", "description": "Water supply, drainage and treatment systems.", "href": "/services/plumbing" },
+        { "title": "Fire Protection", "description": "Fire detection, suppression and life safety.", "href": "/services/fire-protection" }
+      ]
+    },
+    "qualitySection": {
+      "eyebrow": "Quality Across the Full Scope",
+      "heading": "Quality Across the Full Scope",
+      "paragraph1": "Because mechanical, electrical, plumbing and fire protection are delivered by one coordinated team, quality control is applied consistently across every system.",
+      "paragraph2": "MENASCO's MEP approach supports residential, hospitality, commercial, data centre, healthcare and industrial developments, with the same coordinated delivery model applied across every sector."
+    },
+    "qualityHighlights": [
+      {
+        "title": "Single-Source Accountability",
+        "description": "One team responsible for every MEP discipline, from design through handover."
+      },
+      {
+        "title": "Code & Standards Compliance",
+        "description": "Systems engineered and installed to UAE and international codes and standards."
+      },
+      {
+        "title": "Integrated Testing & Commissioning",
+        "description": "Every system tested and commissioned together before handover."
+      },
+      {
+        "title": "Long-Term Reliability",
+        "description": "Systems engineered for dependable performance in demanding regional conditions."
+      }
+    ],
+    "downloadCompanyProfile": "Download Company Profile",
+    "cta": {
+      "heading": "One Coordinated Team for Every Building System",
+      "description": "From HVAC and power distribution to water systems and fire protection, MENASCO delivers MEP engineering as a single, accountable scope.",
+      "primaryLabel": "Explore Our Projects"
+    }
+  },
+  "civilPage": {
+    "seo": {
+      "title": "Civil Works Coordination",
+      "description": "MENASCO coordinates civil and structural works with our MEP delivery through a trusted civil engineering partner, from design through handover."
+    },
+    "hero": {
+      "title": "Civil",
+      "description": "MENASCO's civil capability is delivered in close coordination with a trusted civil engineering partner, aligning structural and site works with our own MEP scope from design through handover. This integrated approach keeps civil and building-services interfaces coordinated from the outset, reducing rework and supporting a single, consistent project programme."
+    },
+    "overview": {
+      "eyebrow": "Overview",
+      "heading": "Civil Works, Coordinated With Our Building-Services Scope",
+      "paragraph1": "Civil and structural works are delivered through MENASCO's established civil engineering partner, with our own engineering and site teams coordinating the interface between civil works and MEP systems from early design through construction. This keeps foundations, structure and site infrastructure aligned with the mechanical, electrical, plumbing and fire-protection systems that depend on them.",
+      "paragraph2": "Working from a shared BIM model, our teams identify and resolve civil–MEP interfaces, such as structural penetrations, plant-room foundations and underground service routing, before they become site issues, supporting a smoother, better-coordinated construction programme."
+    },
+    "capabilitiesSection": {
+      "eyebrow": "Our Capabilities",
+      "heading": "Civil Coordination Capabilities"
+    },
+    "capabilities": [
+      {
+        "title": "Site Works & Enabling Coordination",
+        "description": "Groundworks, utilities and site infrastructure aligned with our civil partner ahead of construction."
+      },
+      {
+        "title": "Structural Interface Coordination",
+        "description": "Structural penetrations, plant-room foundations and builder's work coordinated with MEP design."
+      },
+      {
+        "title": "BIM-Based Clash Detection",
+        "description": "Civil and MEP models coordinated in a shared environment to resolve clashes before site works begin."
+      },
+      {
+        "title": "Underground Services Coordination",
+        "description": "Drainage, water and electrical routing coordinated with civil infrastructure and utility works."
+      },
+      {
+        "title": "Project Scheduling & Progress Reporting",
+        "description": "Civil and MEP programmes aligned and tracked together across the project."
+      },
+      {
+        "title": "Quality Assurance & HSE Compliance",
+        "description": "Quality and HSE processes maintained consistently across civil and building-services scope."
+      }
+    ],
+    "integratedDelivery": {
+      "eyebrow": "Integrated Delivery",
+      "heading": "Fewer Interfaces, Better Outcomes",
+      "paragraph1": "Civil and MEP works are often delivered by separate, disconnected teams, leaving clash resolution and interface coordination to be worked out on site. MENASCO closes that gap by coordinating directly with our civil partner from early design, so structural and building-services decisions are made together rather than in isolation.",
+      "paragraph2": "This collaborative approach reduces rework, protects the project programme, and gives clients a single point of contact for how civil and MEP scopes come together on site.",
+      "benefitsLabel": "Benefits"
+    },
+    "benefits": [
+      "Fewer on-site clashes",
+      "Coordinated civil and MEP programmes",
+      "Earlier resolution of structural interfaces",
+      "Reduced rework and abortive works",
+      "Clearer coordination across trades",
+      "Consistent quality and HSE standards"
+    ],
+    "qualitySection": {
+      "eyebrow": "Quality Across Civil and MEP",
+      "heading": "Quality Across Civil and MEP",
+      "paragraph1": "Because civil works are coordinated directly with our own building-services teams, quality and programme control are maintained consistently across both scopes rather than managed separately.",
+      "paragraph2": "This coordinated approach supports residential developments, hospitality projects, commercial buildings, data centres, healthcare facilities and other technically demanding infrastructure, wherever civil and MEP scopes need to work in step."
+    },
+    "qualityHighlights": [
+      {
+        "title": "Coordinated Planning",
+        "description": "Civil and MEP programmes planned and tracked together from the outset."
+      },
+      {
+        "title": "Clash-Free Design",
+        "description": "BIM coordination resolves civil–MEP interfaces before construction begins."
+      },
+      {
+        "title": "Consistent Standards",
+        "description": "The same quality and HSE processes applied across civil and building-services scope."
+      },
+      {
+        "title": "Single Point of Contact",
+        "description": "One MENASCO team coordinating civil and MEP delivery on your behalf."
+      }
+    ],
+    "downloadCompanyProfile": "Download Company Profile",
+    "closing": {
+      "heading": "Coordinated Civil & MEP Delivery for Your Next Project",
+      "description": "From site works through structural interfaces and building-services installation, MENASCO coordinates with our civil engineering partner to keep every discipline working from the same plan.",
+      "cta": "Explore Our Projects"
+    }
+  },
+  "civilPageMobile": {
+    "seo": {
+      "title": "Civil Works Coordination",
+      "description": "MENASCO coordinates civil and structural works with our MEP delivery through a trusted civil engineering partner, from design through handover."
+    },
+    "eyebrow": "Civil",
+    "heading": "Civil Works, Coordinated With Our Building-Services Scope",
+    "description": "MENASCO's civil capability is delivered in close coordination with a trusted civil engineering partner, aligning structural and site works with our own MEP scope from design through handover.",
+    "overview": {
+      "eyebrow": "Overview",
+      "heading": "Civil Works, Coordinated With Our Building-Services Scope",
+      "paragraph1": "Civil and structural works are delivered through MENASCO's established civil engineering partner, with our own engineering and site teams coordinating the interface between civil works and MEP systems from early design through construction.",
+      "paragraph2": "Working from a shared BIM model, our teams identify and resolve civil–MEP interfaces before they become site issues, supporting a smoother, better-coordinated construction programme."
+    },
+    "capabilitiesSection": {
+      "eyebrow": "Our Capabilities",
+      "heading": "Civil Coordination Capabilities"
+    },
+    "capabilities": [
+      {
+        "title": "Site Works & Enabling Coordination",
+        "description": "Groundworks, utilities and site infrastructure aligned with our civil partner ahead of construction."
+      },
+      {
+        "title": "Structural Interface Coordination",
+        "description": "Structural penetrations, plant-room foundations and builder's work coordinated with MEP design."
+      },
+      {
+        "title": "BIM-Based Clash Detection",
+        "description": "Civil and MEP models coordinated in a shared environment to resolve clashes before site works begin."
+      },
+      {
+        "title": "Underground Services Coordination",
+        "description": "Drainage, water and electrical routing coordinated with civil infrastructure and utility works."
+      },
+      {
+        "title": "Project Scheduling & Progress Reporting",
+        "description": "Civil and MEP programmes aligned and tracked together across the project."
+      },
+      {
+        "title": "Quality Assurance & HSE Compliance",
+        "description": "Quality and HSE processes maintained consistently across civil and building-services scope."
+      }
+    ],
+    "integratedDelivery": {
+      "eyebrow": "Integrated Delivery",
+      "heading": "Fewer Interfaces, Better Outcomes",
+      "paragraph1": "Civil and MEP works are often delivered by separate, disconnected teams, leaving clash resolution to be worked out on site. MENASCO closes that gap by coordinating directly with our civil partner from early design.",
+      "paragraph2": "This collaborative approach reduces rework, protects the project programme, and gives clients a single point of contact for how civil and MEP scopes come together on site.",
+      "benefitsLabel": "Benefits"
+    },
+    "benefits": [
+      "Fewer on-site clashes",
+      "Coordinated civil and MEP programmes",
+      "Earlier resolution of structural interfaces",
+      "Reduced rework and abortive works",
+      "Clearer coordination across trades",
+      "Consistent quality and HSE standards"
+    ],
+    "qualitySection": {
+      "eyebrow": "Quality Across Civil and MEP",
+      "heading": "Quality Across Civil and MEP",
+      "paragraph1": "Because civil works are coordinated directly with our own building-services teams, quality and programme control are maintained consistently across both scopes.",
+      "paragraph2": "This coordinated approach supports residential, hospitality, commercial, data centre, healthcare and industrial developments, wherever civil and MEP scopes need to work in step."
+    },
+    "qualityHighlights": [
+      {
+        "title": "Coordinated Planning",
+        "description": "Civil and MEP programmes planned and tracked together from the outset."
+      },
+      {
+        "title": "Clash-Free Design",
+        "description": "BIM coordination resolves civil–MEP interfaces before construction begins."
+      },
+      {
+        "title": "Consistent Standards",
+        "description": "The same quality and HSE processes applied across civil and building-services scope."
+      },
+      {
+        "title": "Single Point of Contact",
+        "description": "One MENASCO team coordinating civil and MEP delivery on your behalf."
+      }
+    ],
+    "downloadCompanyProfile": "Download Company Profile",
+    "cta": {
+      "heading": "Coordinated Civil & MEP Delivery for Your Next Project",
+      "description": "From site works through structural interfaces and building-services installation, MENASCO coordinates with our civil engineering partner to keep every discipline working from the same plan.",
+      "primaryLabel": "Explore Our Projects"
+    }
+  },
+  "modularPage": {
+    "seo": {
+      "title": "Modular MEP Solutions",
+      "description": "MENASCO delivers factory-built modular MEP assemblies, including modular data-centre whitespace solutions, produced off-site for faster, higher-quality installation."
+    },
+    "name": "Modular MEP Solutions",
+    "hero": {
+      "description": "MENASCO's modular MEP capability delivers complete mechanical, electrical and plumbing assemblies as factory-built units, produced in controlled manufacturing environments before arriving on site. From prefabricated plant skids to modular data-centre whitespace solutions, our modular approach reduces on-site installation time while maintaining the same engineering standards applied across every MENASCO project."
+    },
+    "sections": [
+      {
+        "heading": "What We Deliver",
+        "paragraph": "Our modular scope spans complete plant-room skids, prefabricated MEP modules and containerised building-services units, engineered and assembled off-site to project-specific requirements before being transported and installed as complete units."
+      },
+      {
+        "heading": "Modular Data Centre Solutions",
+        "paragraph": "For data centre and mission-critical projects, modular prefabrication extends to whitespace support solutions — factory-built mechanical and electrical plant modules that are tested before leaving the manufacturing environment and installed with minimal on-site work."
+      },
+      {
+        "heading": "Why Modular",
+        "paragraph": "Building complete assemblies off-site, ahead of installation, delivers measurable advantages over conventional on-site construction:",
+        "list": ["Faster on-site installation", "Reduced on-site labour and congestion", "Consistent factory-controlled quality", "Lower exposure to weather and site delays"]
+      }
+    ]
+  },
+  "customPage": {
+    "seo": {
+      "title": "Custom Engineered Components",
+      "description": "MENASCO delivers project-specific, custom-engineered MEP components for complex or non-standard installations, through our manufacturing partners."
+    },
+    "name": "Custom Engineered Components",
+    "hero": {
+      "description": "Not every project fits a standard specification. MENASCO's custom engineering capability, delivered through our manufacturing partners, produces project-specific MEP components engineered to the exact requirements of complex or non-standard installations — from bespoke plant assemblies to purpose-built containment and support systems."
+    },
+    "sections": [
+      {
+        "heading": "Engineered to Project Requirements",
+        "paragraph": "Where standard components don't fit a project's layout, loads or sequencing, MENASCO's engineering teams design custom MEP assemblies in close coordination with our manufacturing partners, translating project-specific requirements into fabricated components built to exact tolerances."
+      },
+      {
+        "heading": "Where Custom Fabrication Applies",
+        "paragraph": "Custom-engineered components are typically used where standard products cannot meet a project's specific constraints:",
+        "list": ["Non-standard plant-room layouts", "Complex structural or spatial constraints", "Purpose-built support and containment systems", "Specialist process or industrial requirements"]
+      },
+      {
+        "heading": "Quality & Coordination",
+        "paragraph": "Every custom component is coordinated through the same BIM-based design process applied across MENASCO's standard manufacturing scope, ensuring custom-fabricated elements integrate cleanly with the rest of the project's MEP systems before and during installation."
+      }
+    ]
   }
 }

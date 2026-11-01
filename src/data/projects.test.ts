@@ -35,9 +35,9 @@ describe('getMainContractor', () => {
     expect(getMainContractor({ mainContractor: 'Some Other Co.' })).toBe('Some Other Co.');
   });
 
-  it('every current project resolves to MENASCO today, since none has overridden mainContractor', () => {
+  it('every project with no explicit mainContractor falls back to MENASCO, and every project with one keeps its own value', () => {
     for (const project of projects) {
-      expect(getMainContractor(project)).toBe('MENASCO');
+      expect(getMainContractor(project)).toBe(project.mainContractor || 'MENASCO');
     }
   });
 });

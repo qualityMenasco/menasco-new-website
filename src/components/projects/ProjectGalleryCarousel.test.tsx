@@ -10,9 +10,22 @@ const THREE_IMAGES: ProjectGalleryImage[] = [
 ];
 
 const dotLabel = (index: number) => `Go to image ${index + 1}`;
+const counterLabel = (current: number, total: number) => `${current} / ${total}`;
 
 function renderCarousel(images: ProjectGalleryImage[]) {
-  return render(<ProjectGalleryCarousel images={images} previousLabel="Previous image" nextLabel="Next image" dotLabel={dotLabel} />);
+  return render(
+    <ProjectGalleryCarousel
+      images={images}
+      previousLabel="Previous image"
+      nextLabel="Next image"
+      dotLabel={dotLabel}
+      counterLabel={counterLabel}
+    />,
+  );
+}
+
+function touch(clientX: number) {
+  return { touches: [{ clientX }], changedTouches: [{ clientX }] };
 }
 
 describe('ProjectGalleryCarousel — empty gallery (hero-image-only fallback)', () => {
@@ -69,5 +82,43 @@ describe('ProjectGalleryCarousel — multiple images', () => {
     expect(screen.getByAltText('Third image')).toBeInTheDocument();
     fireEvent.click(screen.getByLabelText('Go to image 1'));
     expect(screen.getByAltText('First image')).toBeInTheDocument();
+  });
+
+  it('shows a numeric counter that updates as the image changes', () => {
+    renderCarousel(THREE_IMAGES);
+    expect(screen.getByText('1 / 3')).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText('Next image'));
+    expect(screen.getByText('2 / 3')).toBeInTheDocument();
+  });
+
+  it('a left swipe advances to the next image', () => {
+    const { container } = renderCarousel(THREE_IMAGES);
+    const carousel = container.firstChild as HTMLElement;
+    fireEvent.touchStart(carousel, touch(200));
+    fireEvent.touchEnd(carousel, touch(100));
+    expect(screen.getByAltText('Second image')).toBeInTheDocument();
+  });
+
+  it('a right swipe goes to the previous image', () => {
+    const { container } = renderCarousel(THREE_IMAGES);
+    const carousel = container.firstChild as HTMLElement;
+    fireEvent.touchStart(carousel, touch(100));
+    fireEvent.touchEnd(carousel, touch(200));
+    expect(screen.getByAltText('Third image')).toBeInTheDocument();
+  });
+
+  it('a short drag below the swipe threshold does not change the image', () => {
+    const { container } = renderCarousel(THREE_IMAGES);
+    const carousel = container.firstChild as HTMLElement;
+    fireEvent.touchStart(carousel, touch(200));
+    fireEvent.touchEnd(carousel, touch(190));
+    expect(screen.getByAltText('First image')).toBeInTheDocument();
+  });
+});
+
+describe('ProjectGalleryCarousel — single image (no counter/swipe affordances shown)', () => {
+  it('shows no numeric counter when there is only one image', () => {
+    renderCarousel(ONE_IMAGE);
+    expect(screen.queryByText(/\d+ \/ \d+/)).not.toBeInTheDocument();
   });
 });

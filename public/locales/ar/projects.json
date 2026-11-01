@@ -80,7 +80,8 @@
     "tabScope": "نطاق العمل",
     "galleryPrevious": "الصورة السابقة",
     "galleryNext": "الصورة التالية",
-    "galleryDot": "الانتقال إلى الصورة {{index}}"
+    "galleryDot": "الانتقال إلى الصورة {{index}}",
+    "galleryCounter": "{{current}} / {{total}}"
   },
   "items": {
     "casa-cavalli": {

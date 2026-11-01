@@ -104,14 +104,33 @@ const routeChildren: RouteObject[] = [
     path: 'services/manufacturing-prefabrication',
     element: responsivePage(() => import('../pages/services/ManufacturingPrefabricationPage'), () => import('../mobile/pages/services/ManufacturingPrefabricationPage')),
   },
-  // Structure-only pages for the grouped Services / About IA — single
-  // shared implementation, noIndex until approved content exists (see
-  // pendingContentPaths in data/navigation.ts).
-  { path: 'services/mep', element: lazyPage(() => import('../pages/PendingContentPages').then((m) => ({ default: m.MepPage }))) },
-  { path: 'services/civil', element: lazyPage(() => import('../pages/PendingContentPages').then((m) => ({ default: m.CivilPage }))) },
-  { path: 'services/manufacturing-prefabrication/modular', element: lazyPage(() => import('../pages/PendingContentPages').then((m) => ({ default: m.ModularPage }))) },
-  { path: 'services/manufacturing-prefabrication/custom', element: lazyPage(() => import('../pages/PendingContentPages').then((m) => ({ default: m.CustomPage }))) },
-  { path: 'services/turnkey-developments', element: lazyPage(() => import('../pages/PendingContentPages').then((m) => ({ default: m.TurnkeyDevelopmentsPage }))) },
+  // Dedicated bespoke page (same pattern as Manufacturing & Prefabrication
+  // above) rather than the generic services/:slug template — 2026-10-29.
+  {
+    path: 'services/turnkey-developments',
+    element: responsivePage(() => import('../pages/services/EPCPage'), () => import('../mobile/pages/services/EPCPage')),
+  },
+  // Dedicated bespoke pages (same pattern as Manufacturing & Prefabrication
+  // and EPC above) rather than the structure-only PendingContentPages
+  // placeholder — 2026-11-02. Still left in `pendingContentPaths`
+  // (src/data/navigation.ts) so the footer/sitemap/llms.txt keep treating
+  // these as "coming soon" until the draft copy is approved, even though
+  // they're now reachable with real content at their real URLs.
+  { path: 'services/mep', element: responsivePage(() => import('../pages/services/MEPPage'), () => import('../mobile/pages/services/MEPPage')) },
+  { path: 'services/civil', element: responsivePage(() => import('../pages/services/CivilPage'), () => import('../mobile/pages/services/CivilPage')) },
+  // Dedicated pages (2026-11-02) reusing the same hero + section-carousel
+  // "cards" treatment as Mechanical/Electrical/Plumbing/Fire Protection
+  // (ServiceHero + ServiceSectionCarousel), rather than the structure-only
+  // PendingContentPages placeholder. Still left in `pendingContentPaths`
+  // (src/data/navigation.ts) — see the comment on services/mep above.
+  {
+    path: 'services/manufacturing-prefabrication/modular',
+    element: responsivePage(() => import('../pages/ModularPage'), () => import('../mobile/pages/ModularPage')),
+  },
+  {
+    path: 'services/manufacturing-prefabrication/custom',
+    element: responsivePage(() => import('../pages/CustomPage'), () => import('../mobile/pages/CustomPage')),
+  },
   { path: 'services/:slug', element: responsivePage(() => import('../pages/ServiceDetailPage'), () => import('../mobile/pages/ServiceDetailPage')) },
   // The old standalone Projects landing page (large VELA/Saudi F1 banners) is
   // retired — "Explore Our Projects" now scrolls to the homepage's own

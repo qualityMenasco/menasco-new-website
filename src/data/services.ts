@@ -182,6 +182,35 @@ Our solutions are engineered and installed in compliance with the UAE Fire and L
     ],
     relatedSectors: ['hospitality-landmark-entertainment', 'advanced-technical-facilities'],
     image: '/manufacturing-prefab-service-hero.jpg',  },
+  // Default/placeholder content (2026-10-29, image updated) — the user
+  // explicitly asked for draft text here, to be replaced once real EPC copy
+  // and project-specific photography are approved. This entry now only
+  // drives the services-listing card/thumbnail — the live page itself
+  // (src/pages/EPCPage.tsx) is a dedicated bespoke component with its own
+  // locale content, routed ahead of the services/:slug catch-all. Route
+  // preserved as 'turnkey-developments' per the earlier "Turnkey
+  // Developments" → "EPC" rename (the URL was deliberately kept unchanged
+  // at that time; `name` here is the current approved "EPC" label).
+  {
+    id: 'turnkey-developments',
+    slug: 'turnkey-developments',
+    name: 'EPC',
+    shortDescription: 'Single-point engineering, procurement and construction delivery, coordinated end to end by MENASCO.',
+    introduction:
+      "MENASCO delivers integrated Engineering, Procurement and Construction (EPC) solutions, providing a single point of responsibility from early-stage design through procurement, installation and handover. Our EPC capability combines in-house MEP engineering, coordinated procurement and on-site execution, so a project's building services are delivered as one accountable scope rather than a series of separate contracts to coordinate.",
+    capabilities: [
+      'Engineering Design & BIM Coordination',
+      'Procurement & Supply-Chain Coordination',
+      'Site Mobilisation & Construction Management',
+      'Single-Point MEP Delivery',
+      'Installation, Testing & Commissioning',
+      'Project Scheduling & Progress Reporting',
+      'Quality Assurance & HSE Compliance',
+      'Handover & Close-Out Documentation',
+    ],
+    relatedSectors: ['residential-commercial', 'hospitality-landmark-entertainment', 'advanced-technical-facilities'],
+    image: '/Mechanical_Floor_Volante-2-2-3.jpg',
+  },
 ];
 
 /**

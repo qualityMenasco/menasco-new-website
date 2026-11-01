@@ -66,9 +66,20 @@ describe('navigation data', () => {
     // if their slug happens to also be a real service's slug, which would
     // make the explicit route shadow it. Manufacturing & Prefabrication is
     // exempt: its href IS the real live service page, by design.
+    //
+    // 'turnkey-developments' (EPC) is a second, deliberate exemption
+    // (2026-10-29): it now has its own dedicated bespoke page component
+    // (src/pages/services/EPCPage.tsx), routed explicitly ahead of the
+    // services/:slug catch-all — the same pattern as Manufacturing &
+    // Prefabrication above — but it's intentionally LEFT in
+    // pendingContentPaths so the footer and services-listing page keep
+    // treating it as "coming soon" rather than promoting draft content,
+    // until the real copy is approved.
+    const exemptFromCollisionCheck = new Set(['manufacturing-prefabrication', 'turnkey-developments']);
     const pendingGroupSlugs = servicesNavigationGroups
       .filter((g) => g.href && (pendingContentPaths as readonly string[]).includes(g.href))
-      .map((g) => g.href!.replace('/services/', ''));
+      .map((g) => g.href!.replace('/services/', ''))
+      .filter((slug) => !exemptFromCollisionCheck.has(slug));
     for (const slug of pendingGroupSlugs) {
       const matchesRealService = services.some((service) => service.slug === slug);
       expect(matchesRealService, `${slug} collides with a real service slug`).toBe(false);

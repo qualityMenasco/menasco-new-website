@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import type { TouchEvent } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
@@ -13,24 +14,33 @@ export interface ProjectGalleryCarouselProps {
   nextLabel: string;
   /** e.g. (index) => `Go to image ${index + 1}` */
   dotLabel: (index: number) => string;
+  /** e.g. (current, total) => `${current} / ${total}` — rendered opposite the dots. */
+  counterLabel: (current: number, total: number) => string;
   className?: string;
 }
+
+/** Minimum horizontal drag distance (px) to register as a swipe rather than a tap. */
+const SWIPE_THRESHOLD = 40;
 
 /**
  * Gallery carousel for the standard project detail template (see the
  * approved wireframe's `.gallery`/`.dots`). Unlike `ArticleImageGallery`,
  * this one WRAPS (Next past the last image returns to the first, and vice
- * versa) and shows dot indicators — both called for by the Ratio+Format
- * spec for this template. A project with an empty `gallery` array falls
- * back to a single-image "slide" built from its hero image by the caller;
- * with exactly one image, arrows/dots are hidden rather than shown
- * pointlessly.
+ * versa), shows dot indicators, and supports touch swipe + a numeric
+ * counter — all called for by the Ratio+Format spec for this template. A
+ * project with an empty `gallery` array falls back to a single-image
+ * "slide" built from its hero image by the caller; with exactly one image,
+ * arrows/dots/counter are hidden rather than shown pointlessly.
  *
  * Logical `start-4`/`end-4` positioning (not `left`/`right`) so prev/next
- * mirror correctly under `dir="rtl"`.
+ * mirror correctly under `dir="rtl"` — swipe direction is handled the same
+ * way: a left-drag always means "next" visually, which is what a user
+ * expects regardless of reading direction, so the touch delta isn't
+ * flipped for RTL the way the arrow icons are.
  */
-export function ProjectGalleryCarousel({ images, previousLabel, nextLabel, dotLabel, className }: ProjectGalleryCarouselProps) {
+export function ProjectGalleryCarousel({ images, previousLabel, nextLabel, dotLabel, counterLabel, className }: ProjectGalleryCarouselProps) {
   const [index, setIndex] = useState(0);
+  const touchStartX = useRef<number | null>(null);
 
   if (images.length === 0) return null;
 
@@ -41,8 +51,25 @@ export function ProjectGalleryCarousel({ images, previousLabel, nextLabel, dotLa
   const goPrevious = () => setIndex((prev) => (prev - 1 + total) % total);
   const goNext = () => setIndex((prev) => (prev + 1) % total);
 
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  };
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    if (touchStartX.current === null) return;
+    const endX = event.changedTouches[0]?.clientX ?? touchStartX.current;
+    const delta = endX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(delta) < SWIPE_THRESHOLD) return;
+    if (delta < 0) goNext();
+    else goPrevious();
+  };
+
   return (
-    <div className={cn('group relative aspect-[16/9] w-full overflow-hidden rounded-md bg-ink', className)}>
+    <div
+      className={cn('group relative aspect-[16/9] w-full touch-pan-y overflow-hidden rounded-md bg-ink', className)}
+      onTouchStart={isMultiple ? handleTouchStart : undefined}
+      onTouchEnd={isMultiple ? handleTouchEnd : undefined}
+    >
       <img key={current.src} src={current.src} alt={current.alt} className="h-full w-full object-cover" />
 
       {isMultiple && (
@@ -63,6 +90,10 @@ export function ProjectGalleryCarousel({ images, previousLabel, nextLabel, dotLa
           >
             <ChevronRight size={20} aria-hidden="true" className="rtl:rotate-180" />
           </button>
+
+          <div className="absolute bottom-3 end-4 rounded-full bg-ink/70 px-3 py-1 text-caption font-medium tabular-nums text-warmwhite backdrop-blur-sm">
+            {counterLabel(index + 1, total)}
+          </div>
 
           <div className="absolute inset-x-0 bottom-3 flex justify-center gap-2.5">
             {images.map((image, dotIndex) => (

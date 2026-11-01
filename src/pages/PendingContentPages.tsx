@@ -92,6 +92,12 @@ function ServiceGroupPage({ groupHref }: { groupHref: string }) {
   );
 }
 
+// MepPage/CivilPage below are no longer routed — src/app/router.tsx now
+// points 'services/mep' and 'services/civil' at their own dedicated bespoke
+// pages (src/pages/MEPPage.tsx, src/pages/CivilPage.tsx), same pattern as
+// Manufacturing & Prefabrication / EPC. Left here (unused) rather than
+// deleted, in case this needs to revert before the draft content is
+// approved — 2026-11-02.
 export function MepPage() {
   return <ServiceGroupPage groupHref="/services/mep" />;
 }
@@ -100,6 +106,10 @@ export function CivilPage() {
   return <ServiceGroupPage groupHref="/services/civil" />;
 }
 
+// ModularPage/CustomPage below are no longer routed — src/app/router.tsx now
+// points both 'modular' and 'custom' at their own dedicated pages
+// (src/pages/ModularPage.tsx, src/pages/CustomPage.tsx). Left here (unused)
+// rather than deleted, in case this needs to revert — 2026-11-02.
 export function ModularPage() {
   // capabilities[1] = "Prefabricated MEP Modules"
   return <ManufacturingChildPage path="/services/manufacturing-prefabrication/modular" navKey="servicesList.modular" capabilityIndex={1} />;
