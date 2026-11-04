@@ -5,9 +5,11 @@
  * the location string itself rather than a project slug, since location
  * values repeat across projects (e.g. "Dubai, UAE").
  */
-export function translateProjectLocation(t: (key: string) => string, location: string | undefined): string | undefined {
+export function translateProjectLocation(t: (key: string, options?: Record<string, unknown>) => string, location: string | undefined): string | undefined {
   if (!location) return undefined;
-  const key = `projects:locations.${location}`;
-  const translated = t(key);
-  return translated === key ? location : translated;
+  // `defaultValue` (not a `translated === key` comparison) — i18next's own
+  // missing-key handling can rewrite an unmatched key into something that
+  // no longer equals it (see getProjectField in ProjectDetailPage.tsx for
+  // the full explanation), which would silently break that comparison.
+  return t(`projects:locations.${location}`, { defaultValue: location });
 }

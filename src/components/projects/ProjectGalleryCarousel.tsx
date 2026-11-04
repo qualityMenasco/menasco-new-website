@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import type { TouchEvent } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { ProjectImage } from '../media/ProjectImage';
 
 export interface ProjectGalleryImage {
   src: string;
@@ -70,7 +71,15 @@ export function ProjectGalleryCarousel({ images, previousLabel, nextLabel, dotLa
       onTouchStart={isMultiple ? handleTouchStart : undefined}
       onTouchEnd={isMultiple ? handleTouchEnd : undefined}
     >
-      <img key={current.src} src={current.src} alt={current.alt} className="h-full w-full object-cover" />
+      {/*
+       * ProjectImage (not a raw <img>) — a hotlinked Google Drive image URL
+       * has no uptime/rate-limit guarantee and can intermittently fail to
+       * load even when the file is correctly shared; this shows the same
+       * graceful placeholder the project grid cards already fall back to.
+       * `key` forces a remount (and so a reset of ProjectImage's own
+       * loading/error state) whenever the active slide changes.
+       */}
+      <ProjectImage key={current.src} src={current.src} alt={current.alt} />
 
       {isMultiple && (
         <>

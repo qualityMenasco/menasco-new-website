@@ -158,12 +158,22 @@ const statusToneMap: Record<string, ProjectStatusTone> = {
   Executed: 'success',
 };
 
-/** Looks up a project's translated field, falling back to the English source data if no translation key exists (e.g. a project not yet covered by the projects:items namespace). */
+/**
+ * Looks up a project's translated field, falling back to the English source
+ * data if no translation key exists (e.g. a project not yet covered by the
+ * projects:items namespace — true for every CMS-uploaded project, which has
+ * no hand-written locale entry). Passes `fallback` as i18next's own
+ * `defaultValue` rather than calling `t(key)` and comparing the result to
+ * `key` — that comparison silently breaks because src/lib/i18n.ts's
+ * `parseMissingKeyHandler` humanizes a missing key into a readable string
+ * (e.g. "menascoScope" -> "Menasco Scope") instead of returning the raw key,
+ * so `translated === key` never matches and the humanized placeholder was
+ * rendered as if it were real content instead of falling back.
+ */
 function getProjectField(t: (key: string, options?: Record<string, unknown>) => string, slug: string) {
   return (field: 'description' | 'menascoScope' | 'sector', fallback: string) => {
     const key = `projects:items.${slug}.${field}`;
-    const translated = t(key);
-    return translated === key ? fallback : translated;
+    return t(key, { defaultValue: fallback });
   };
 }
 

@@ -17,6 +17,7 @@ import { translateProjectLocation } from '../../lib/projectLocation';
 import { getLocaleFromPath } from '../../lib/locale';
 import { ProjectDetailTabs, type ProjectDetailTab } from '../../components/projects/ProjectDetailTabs';
 import { ProjectGalleryCarousel } from '../../components/projects/ProjectGalleryCarousel';
+import { ProjectImage } from '../../components/media/ProjectImage';
 
 const categoryKeys: Record<string, string> = {
   'residential-commercial': 'residentialCommercial',
@@ -48,9 +49,15 @@ export default function ProjectDetailPage() {
 
   const category = project.category ? projectCategories[project.category] : undefined;
   const categoryTitle = category ? t(`projects:categories.${categoryKeys[category.slug] ?? category.slug}.title`) : undefined;
-  const descriptionKey = `projects:items.${project.slug}.description`;
-  const rawTranslatedDescription = t(descriptionKey);
-  const translatedDescription = rawTranslatedDescription === descriptionKey ? project.description : rawTranslatedDescription;
+  // Pass `project.description` as i18next's own `defaultValue` rather than
+  // calling `t(key)` and comparing the result to `key` — that comparison
+  // silently breaks because src/lib/i18n.ts's `parseMissingKeyHandler`
+  // humanizes a missing key into a readable string (e.g. "description" ->
+  // "Description") instead of returning the raw key, so `translated ===
+  // key` never matches and the humanized placeholder renders instead of
+  // the real data. Every CMS-uploaded project hits this (none have a
+  // hand-written projects:items.{slug}.* locale entry).
+  const translatedDescription = t(`projects:items.${project.slug}.description`, { defaultValue: project.description });
   const description = translatedDescription || t('projects:detail.contentPendingPlaceholder');
   const seoDescriptionText = pickProjectSeoDescription({
     locale,
@@ -60,9 +67,7 @@ export default function ProjectDetailPage() {
     fallback: buildProjectFallbackDescription({ title: project.title, location: project.location, country: project.country, categoryTitle, capacity: project.capacity }),
   });
 
-  const sectorKey = `projects:items.${project.slug}.sector`;
-  const translatedSector = t(sectorKey);
-  const sector = translatedSector === sectorKey ? project.sector : translatedSector;
+  const sector = t(`projects:items.${project.slug}.sector`, { defaultValue: project.sector });
   const translatedStatus = project.status ? t(`projects:statuses.${statusKeys[project.status] ?? project.status}`) : undefined;
   const translatedLocation = translateProjectLocation(t, project.location);
   const workforceHours = project.workforceHours
@@ -74,12 +79,12 @@ export default function ProjectDetailPage() {
       : project.safetyRecord
     : undefined;
   const pendingValue = t('projects:detail.pendingValue');
-  const scopeKey = `projects:items.${project.slug}.menascoScope`;
-  const translatedScope = t(scopeKey);
   // Scope is shown regardless of verification status, same as desktop — the
   // "Details Pending Verification" badge on the hero below is what qualifies
   // every unconfirmed field on the page, not a per-field hide.
-  const menascoScope = project.menascoScope ? (translatedScope === scopeKey ? project.menascoScope : translatedScope) : '';
+  const menascoScope = project.menascoScope
+    ? t(`projects:items.${project.slug}.menascoScope`, { defaultValue: project.menascoScope })
+    : '';
 
   // Order: Workforce Hours / Status / Completion, then Safety / Category /
   // Location, then Main Contractor last — its trailing position is what lets
@@ -138,7 +143,14 @@ export default function ProjectDetailPage() {
 
       <section className="px-4 py-8">
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md bg-gray-100">
-          <img src={getProjectImage(project.heroImage || undefined, project.slug)} alt={project.title} className="h-full w-full object-cover" />
+          {/*
+           * ProjectImage (not a raw <img>) — a hotlinked Google Drive
+           * heroImage URL has no uptime/rate-limit guarantee and can
+           * intermittently fail to load even when the file is correctly
+           * shared; this shows the same graceful placeholder the project
+           * grid cards already fall back to.
+           */}
+          <ProjectImage src={getProjectImage(project.heroImage || undefined, project.slug)} alt={project.title} priority />
           {project.verificationStatus === 'pending' && (
             <div className="absolute start-3 top-3">
               <Badge variant="status" theme="dark">

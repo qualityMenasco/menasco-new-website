@@ -31,11 +31,7 @@ export function WhoWeAre() {
         <Stack space="sm" className="lg:mt-[100px]">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {leadershipProfiles.map((leader) => {
-              const translatedRole = (() => {
-                const key = `team.titles.${leader.role}`;
-                const translated = t(key);
-                return translated === key ? leader.role : translated;
-              })();
+              const translatedRole = t(`team.titles.${leader.role}`, { defaultValue: leader.role });
               return (
                 <LeadershipMiniCard
                   key={leader.slug}

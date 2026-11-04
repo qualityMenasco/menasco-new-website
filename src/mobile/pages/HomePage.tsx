@@ -174,11 +174,7 @@ export default function HomePage() {
               categoryLabel={
                 project.category && categoryKeys[project.category]
                   ? t(`projects:categories.${categoryKeys[project.category]}.title`)
-                  : (() => {
-                      const key = `projects:items.${project.slug}.sector`;
-                      const translated = t(key);
-                      return (translated === key ? project.sector : translated) || undefined;
-                    })()
+                  : t(`projects:items.${project.slug}.sector`, { defaultValue: project.sector }) || undefined
               }
               location={translateProjectLocation(t, project.location)}
               href={`/projects/${project.slug}`}

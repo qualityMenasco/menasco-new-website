@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import ProjectDetailPage from './ProjectDetailPage';
@@ -13,7 +13,15 @@ vi.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key: string, options?: { defaultValue?: unknown; returnObjects?: boolean; [k: string]: unknown }) => {
       if (options?.returnObjects) return options.defaultValue ?? [];
-      return (options?.defaultValue as string | undefined) ?? key;
+      if (options && 'defaultValue' in options) return options.defaultValue as string;
+      // Simulates src/lib/i18n.ts's real `parseMissingKeyHandler`, which
+      // humanizes a missing key into a readable string rather than
+      // returning the raw key — a call made with NO `defaultValue` (the
+      // regression this file's "falls back ... without a locale entry"
+      // test guards against) must not reach here and still render
+      // correctly, since this sentinel is never equal to `key` or to any
+      // real project field.
+      return '__MISSING_KEY_HUMANIZED_PLACEHOLDER__';
     },
   }),
 }));
@@ -55,11 +63,12 @@ describe('ProjectDetailPage — standard template (casa-cavalli)', () => {
 
   it('renders Overview and Scope of Work tabs (casa-cavalli has menascoScope)', () => {
     renderProject('casa-cavalli');
-    expect(screen.getByRole('tablist')).toBeInTheDocument();
-    // The mocked `t` returns the raw translation key when no `defaultValue` is passed (this
-    // test isn't about real locale copy) — so tabs are queried by their resolved i18n keys.
-    expect(screen.getByRole('tab', { name: 'projects:detail.tabOverview' })).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: 'projects:detail.tabScope' })).toBeInTheDocument();
+    const tablist = screen.getByRole('tablist');
+    // The mocked `t` doesn't simulate real locale copy for UI labels like tab names (this
+    // test isn't about that) — it returns a fixed sentinel for any call made with no
+    // `defaultValue`, so both tabs render with that same label text; what matters here is
+    // that there are exactly two of them (Overview + Scope of Work).
+    expect(within(tablist).getAllByRole('tab')).toHaveLength(2);
   });
 
   it('falls back the gallery to the hero image alone — casa-cavalli has an empty gallery array', () => {
@@ -68,6 +77,23 @@ describe('ProjectDetailPage — standard template (casa-cavalli)', () => {
     // One in the hero overlay region's <img> (decorative alt="") is separate; the gallery's
     // single fallback slide is the only element carrying the project title as alt text.
     expect(images.length).toBeGreaterThanOrEqual(1);
+  });
+
+  // Regression test for a real production bug (2026-11-02): getProjectField
+  // called `t(key)` with no `defaultValue`, then checked `translated ===
+  // key` to detect a missing locale entry — but i18next's real
+  // missingKeyHandler/parseMissingKeyHandler (src/lib/i18n.ts) rewrites a
+  // missing key into a humanized string instead of returning the raw key,
+  // so that comparison silently failed and every CMS-uploaded project
+  // (none of which have a hand-written projects:items.<slug>.* locale
+  // entry) rendered a placeholder like "Menasco Scope" instead of its real
+  // description/scope text. This file's mock `t` simulates that exact
+  // failure mode for any call made without `defaultValue`.
+  it('renders the real English description and scope text, not a humanized missing-key placeholder (casa-cavalli has no projects:items locale coverage in this mock)', () => {
+    renderProject('casa-cavalli');
+    const overviewPanel = screen.getByRole('tabpanel');
+    expect(overviewPanel).toHaveTextContent('Casa Cavalli is a signature residential tower on Dubai Marina');
+    expect(overviewPanel).not.toHaveTextContent('__MISSING_KEY_HUMANIZED_PLACEHOLDER__');
   });
 });
 

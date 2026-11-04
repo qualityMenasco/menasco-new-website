@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
 import { Heading, Text } from '../typography/Typography';
+import { ProjectImage } from '../media/ProjectImage';
 
 export type ProjectStatusTone = 'info' | 'success' | 'warning';
 
@@ -43,7 +44,15 @@ export function ProjectDetailHero({
 }: ProjectDetailHeroProps) {
   return (
     <div className={cn('relative aspect-[16/10] min-h-[360px] w-full overflow-hidden rounded-md bg-ink', className)}>
-      {image && <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" loading="eager" />}
+      {/*
+       * ProjectImage (not a raw <img>) — a hotlinked Google Drive heroImage
+       * URL (lh3.googleusercontent.com) has no uptime/rate-limit guarantee
+       * and can intermittently fail to load even when the file is
+       * correctly shared; this shows the same graceful placeholder the
+       * project grid cards already fall back to, instead of a raw
+       * broken-image icon.
+       */}
+      {image && <ProjectImage src={image} alt="" priority />}
       {/*
        * Strengthened from the original from-ink/85 via-ink/15 — the title
        * block's full height (eyebrow + h1 + location, taller still when the

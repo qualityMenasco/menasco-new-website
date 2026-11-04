@@ -32,11 +32,7 @@ const qiddiya = publishedProjects.find((project) => project.slug === 'qiddiya')!
 export function FeaturedProjectsEditorial() {
   const { t } = useTranslation(['home', 'projects']);
   const categoryLabel = (slug: string) => t(`projects:categories.${categoryKeys[slug] ?? slug}.title`);
-  const projectDescription = (slug: string, fallback: string) => {
-    const key = `projects:items.${slug}.description`;
-    const translated = t(key);
-    return translated === key ? fallback : translated;
-  };
+  const projectDescription = (slug: string, fallback: string) => t(`projects:items.${slug}.description`, { defaultValue: fallback });
 
   return (
     <Section background="stone" spacing="md" edgeFade>

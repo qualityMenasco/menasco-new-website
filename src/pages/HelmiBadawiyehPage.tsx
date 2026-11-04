@@ -16,9 +16,11 @@ import { SITE_URL } from '../seo/constants';
 const profile = getLeadershipProfile('helmi-badawiyeh')!;
 
 /** English data.ts strings stay the fallback; about.json's `leadershipProfiles.<slug>`/`team` supply Arabic. Same overlay pattern as getProjectField. */
-function overlay(t: (key: string) => string, key: string, fallback: string) {
-  const translated = t(key);
-  return translated === key ? fallback : translated;
+function overlay(t: (key: string, options?: Record<string, unknown>) => string, key: string, fallback: string) {
+  // `defaultValue` (not a `translated === key` comparison) — see
+  // getProjectField in ProjectDetailPage.tsx for why that comparison
+  // silently breaks on a missing key.
+  return t(key, { defaultValue: fallback });
 }
 
 export default function HelmiBadawiyehPage() {
