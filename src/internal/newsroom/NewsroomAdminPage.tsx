@@ -648,8 +648,9 @@ function ArticleEditor({ articleId, onBack }: { articleId: string; onBack: () =>
       {saveError && <p className="text-body text-error">{saveError}</p>}
 
       <EditorSection title="Article Details" first>
-        <TextField label="Title" defaultValue={article.title ?? ''} onBlur={(e) => e.target.value !== (article.title ?? '') && save({ title: e.target.value })} />
-        <Textarea label="Subtitle" rows={2} defaultValue={article.subtitle ?? ''} onBlur={(e) => e.target.value !== (article.subtitle ?? '') && save({ subtitle: e.target.value })} />
+        {/* `dir="auto"` — the browser itself picks LTR/RTL per field from the FIRST strong-directional character typed/pasted, so an Arabic title displays right-to-left and right-aligned while an English one stays left-to-right, with no language flag to maintain by hand. Same treatment on every other content field below (block text in StructuredContentEditor). */}
+        <TextField label="Title" dir="auto" defaultValue={article.title ?? ''} onBlur={(e) => e.target.value !== (article.title ?? '') && save({ title: e.target.value })} />
+        <Textarea label="Subtitle" dir="auto" rows={2} defaultValue={article.subtitle ?? ''} onBlur={(e) => e.target.value !== (article.subtitle ?? '') && save({ subtitle: e.target.value })} />
         <div className="grid gap-4 sm:grid-cols-2">
           <TextField label="Slug" defaultValue={article.slug ?? ''} onBlur={(e) => e.target.value !== (article.slug ?? '') && save({ slug: e.target.value })} />
           <TextField label="Category" defaultValue={article.category ?? ''} onBlur={(e) => e.target.value !== (article.category ?? '') && save({ category: e.target.value })} />

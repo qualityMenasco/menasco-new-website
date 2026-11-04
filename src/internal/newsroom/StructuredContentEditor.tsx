@@ -100,12 +100,12 @@ function BlockEditor(props: BlockEditorProps) {
   switch (block.type) {
     case 'paragraph':
     case 'quote':
-      fields = <Textarea label={block.type === 'quote' ? 'Quote text' : 'Paragraph text'} rows={3} value={block.text} onChange={(e) => onChange({ ...block, text: e.target.value })} />;
+      fields = <Textarea label={block.type === 'quote' ? 'Quote text' : 'Paragraph text'} dir="auto" rows={3} value={block.text} onChange={(e) => onChange({ ...block, text: e.target.value })} />;
       break;
     case 'heading':
       fields = (
         <div className="flex gap-3">
-          <TextField label="Heading text" containerClassName="flex-1" value={block.text} onChange={(e) => onChange({ ...block, text: e.target.value })} />
+          <TextField label="Heading text" dir="auto" containerClassName="flex-1" value={block.text} onChange={(e) => onChange({ ...block, text: e.target.value })} />
           <Select
             label="Level"
             containerClassName="w-28 shrink-0"
@@ -121,6 +121,7 @@ function BlockEditor(props: BlockEditorProps) {
       fields = (
         <Textarea
           label={block.type === 'bullet_list' ? 'Bullet items (one per line)' : 'Numbered items (one per line)'}
+          dir="auto"
           rows={4}
           value={block.items.join('\n')}
           onChange={(e) => onChange({ ...block, items: e.target.value.split('\n') })}
@@ -138,7 +139,7 @@ function BlockEditor(props: BlockEditorProps) {
             value={block.imageId}
             onChange={(e) => onChange({ ...block, imageId: e.target.value })}
           />
-          <TextField label="Caption" containerClassName="flex-1" value={block.caption ?? ''} onChange={(e) => onChange({ ...block, caption: e.target.value })} />
+          <TextField label="Caption" dir="auto" containerClassName="flex-1" value={block.caption ?? ''} onChange={(e) => onChange({ ...block, caption: e.target.value })} />
         </div>
       );
       break;
@@ -189,6 +190,7 @@ function SectionEditor({ section, images, onChange, onDelete, onMoveUp, onMoveDo
       <div className="flex items-start gap-3">
         <TextField
           label="Section heading (leave blank for a headless intro/closing section)"
+          dir="auto"
           containerClassName="flex-1"
           value={section.heading ?? ''}
           onChange={(e) => onChange({ ...section, heading: e.target.value || undefined })}

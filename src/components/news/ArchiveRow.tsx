@@ -18,7 +18,7 @@ export function ArchiveRow({ href, categoryLabel, date, title, readMoreLabel }: 
     >
       <div className="flex flex-col gap-1 sm:flex-1">
         <span className="text-[11px] font-semibold uppercase tracking-wider text-brand-600">{categoryLabel}</span>
-        <span className="font-display text-body-lg font-semibold text-ink transition-colors duration-base group-hover:text-brand-600">
+        <span className="font-display text-body-lg font-semibold text-ink transition-colors duration-base group-hover:text-brand-600" dir="auto">
           {title}
         </span>
       </div>

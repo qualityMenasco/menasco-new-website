@@ -70,8 +70,14 @@ export function ArticleDetailView({ article, locale, onBackClick }: ArticleDetai
           {t('newsroom:publishedOn', { date: formatNewsDate(article.publishedAt, locale) })}
         </time>
       </div>
-      <h2 className="mt-2 font-display text-h2 font-semibold tracking-tight text-ink">{article.title}</h2>
-      {article.subtitle && <p className="mt-2 text-body text-gray-600">{article.subtitle}</p>}
+      <h2 className="mt-2 font-display text-h2 font-semibold tracking-tight text-ink" dir="auto">
+        {article.title}
+      </h2>
+      {article.subtitle && (
+        <p className="mt-2 text-body text-gray-600" dir="auto">
+          {article.subtitle}
+        </p>
+      )}
 
       {galleryImages.length > 0 && (
         <div className="mt-6">

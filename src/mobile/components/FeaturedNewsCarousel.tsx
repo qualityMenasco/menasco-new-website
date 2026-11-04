@@ -102,8 +102,12 @@ export function FeaturedNewsCarousel({ stories, categoryLabel, formatDate }: Fea
               </div>
 
               <div className="relative z-10 flex flex-col gap-2 p-4">
-                <h3 className="font-display text-h4 font-semibold leading-tight text-warmwhite">{story.title}</h3>
-                <p className="text-small text-gray-200">{story.subtitle}</p>
+                <h3 className="font-display text-h4 font-semibold leading-tight text-warmwhite" dir="auto">
+                  {story.title}
+                </h3>
+                <p className="text-small text-gray-200" dir="auto">
+                  {story.subtitle}
+                </p>
                 <span className="mt-1 inline-flex w-fit items-center gap-1.5 text-small font-semibold text-brand-300">
                   {t('newsroom:readMore')}
                   <ArrowRight size={15} aria-hidden="true" className="rtl:rotate-180" />

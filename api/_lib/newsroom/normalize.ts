@@ -26,8 +26,46 @@ interface RawLine {
 }
 
 const BULLET_MARKER = /^[•●▪○\-*]\s+(.*)$/;
-const NUMBERED_MARKER = /^(\d{1,3})[.)]\s+(.*)$/;
-const TERMINAL_PUNCTUATION = /[.!?][")”]?$/;
+// Accepts an ASCII (1.) or Eastern Arabic-Indic (١.) numeral list marker —
+// `[\d٠-٩]` matches both digit sets, so a numbered list keeps working
+// whichever numeral system the source PDF used.
+const NUMBERED_MARKER = /^([\d٠-٩]{1,3})[.)]\s+(.*)$/;
+// `؟` (U+061F, Arabic question mark) alongside the existing ASCII
+// terminators — a line ending in it is exactly as disqualifying from being
+// a heading as one ending in `?`.
+const TERMINAL_PUNCTUATION = /[.!?؟][")”]?$/;
+
+// Same Arabic-script definition as pdfExtract.ts's ARABIC_SCRIPT_RANGE —
+// kept as an independent local constant (not a shared import) because
+// every other regex in this file is likewise self-contained per module;
+// the two are a deliberate duplication of one small definition, not drift.
+const ARABIC_SCRIPT_RANGE = /[؀-ۿݐ-ݿࢠ-ࣿﭐ-﷿ﹰ-﻿]/;
+
+/** Whether Arabic-script characters outnumber Latin ones in `line` — the majority script decides which heading-detection strategy applies to a mixed-language line (see `isHeadingCandidate`), rather than any single Arabic character forcing the stricter Arabic path. */
+function isArabicDominant(line: string): boolean {
+  let arabic = 0;
+  let latin = 0;
+  for (const ch of line) {
+    if (ARABIC_SCRIPT_RANGE.test(ch)) arabic++;
+    else if (/[A-Za-z]/.test(ch)) latin++;
+  }
+  return arabic > latin;
+}
+
+/**
+ * Arabic has no uppercase/lowercase distinction, so the Title Case signal
+ * `isTitleCaseLike` (below) relies on for English headings has no Arabic
+ * equivalent — and with no font-size/weight metadata available (see
+ * pdfExtract.ts's module comment), there's no reliable POSITIVE signal
+ * left for "this short Arabic line is a heading" beyond its isolation:
+ * short, standalone, no terminal punctuation, not a list item. Per this
+ * pipeline's "don't guess" rule (see this file's own module comment), the
+ * heading word-count ceiling is deliberately tighter for an Arabic-
+ * dominant line (6) than English's (12), specifically to reduce how often
+ * an ordinary short Arabic sentence fragment gets misclassified as a
+ * heading — a risk this signal set can reduce but not eliminate.
+ */
+const ARABIC_HEADING_MAX_WORDS = 6;
 
 /**
  * Lowercase connector words that stay lowercase in real Title Case
@@ -64,6 +102,12 @@ function isHeadingCandidate(line: string): boolean {
   if (line.length < 3 || line.length > 80) return false;
   if (TERMINAL_PUNCTUATION.test(line)) return false;
   if (BULLET_MARKER.test(line) || NUMBERED_MARKER.test(line)) return false;
+
+  if (isArabicDominant(line)) {
+    const wordCount = line.split(/\s+/).filter(Boolean).length;
+    return wordCount > 0 && wordCount <= ARABIC_HEADING_MAX_WORDS;
+  }
+
   if (!/^[A-Z0-9À-Ü]/.test(line)) return false;
   const wordCount = line.split(/\s+/).length;
   if (wordCount > 12) return false;

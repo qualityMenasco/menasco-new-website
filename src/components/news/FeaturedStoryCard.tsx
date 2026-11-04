@@ -46,8 +46,12 @@ export function FeaturedStoryCard({ href, image, categoryLabel, date, title, sub
       </div>
 
       <div className="relative z-10 flex flex-col gap-1.5 p-4">
-        <h3 className="font-display text-h4 font-semibold leading-tight text-warmwhite">{title}</h3>
-        <p className="text-small text-gray-200">{subtitle}</p>
+        <h3 className="font-display text-h4 font-semibold leading-tight text-warmwhite" dir="auto">
+          {title}
+        </h3>
+        <p className="text-small text-gray-200" dir="auto">
+          {subtitle}
+        </p>
         <span className="mt-1 inline-flex w-fit items-center gap-1.5 text-small font-semibold text-brand-300 transition-colors duration-base group-hover:text-brand-200">
           {readMoreLabel}
           <ArrowRight size={15} aria-hidden="true" className="rtl:rotate-180 transition-transform duration-base group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />

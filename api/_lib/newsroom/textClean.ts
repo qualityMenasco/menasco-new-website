@@ -6,7 +6,12 @@
  * live PDF.
  */
 
-const PAGE_NUMBER_LINE = /^(page\s+)?\d{1,4}(\s+of\s+\d{1,4})?$/i;
+// Matches both ASCII digits ("Page 3 of 12") and Eastern Arabic-Indic
+// digits (٠-٩, common in Arabic-authored PDFs), plus the Arabic words for
+// "page" (صفحة) and "of" (من) alongside the existing English ones — a
+// page-number line is boilerplate regardless of which numeral system or
+// language the PDF's page furniture used.
+const PAGE_NUMBER_LINE = /^((page|صفحة)\s+)?[\d٠-٩]{1,4}(\s+(of|من)\s+[\d٠-٩]{1,4})?$/i;
 
 function isPageNumberLine(line: string): boolean {
   return PAGE_NUMBER_LINE.test(line.trim());

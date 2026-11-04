@@ -14,7 +14,9 @@ export function NewsArchiveRow({ href, categoryLabel, date, title, readMoreLabel
   return (
     <LocaleLink to={href} className="flex flex-col gap-1.5 border-b border-gray-200 py-5">
       <span className="text-caption font-semibold uppercase tracking-wider text-brand-600">{categoryLabel}</span>
-      <span className="font-display text-body-lg font-semibold text-ink">{title}</span>
+      <span className="font-display text-body-lg font-semibold text-ink" dir="auto">
+        {title}
+      </span>
       <div className="mt-1 flex items-center justify-between">
         <span className="text-small text-gray-500">{date}</span>
         <span className="inline-flex items-center gap-1.5 text-small font-semibold text-brand-600">

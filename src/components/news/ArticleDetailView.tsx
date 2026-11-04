@@ -97,12 +97,12 @@ export function ArticleDetailView({ article, locale, onBackClick }: ArticleDetai
             </div>
           </div>
 
-          <Heading level="h1" as="h2" className="min-w-0 lg:col-start-1 lg:row-start-2">
+          <Heading level="h1" as="h2" dir="auto" className="min-w-0 lg:col-start-1 lg:row-start-2">
             {article.title}
           </Heading>
 
           {article.subtitle && (
-            <Text variant="body-lg" muted className="min-w-0 max-w-2xl lg:col-start-1 lg:row-start-3">
+            <Text variant="body-lg" muted dir="auto" className="min-w-0 max-w-2xl lg:col-start-1 lg:row-start-3">
               {article.subtitle}
             </Text>
           )}

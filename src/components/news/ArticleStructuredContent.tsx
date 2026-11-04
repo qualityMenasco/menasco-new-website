@@ -27,19 +27,33 @@ interface Props {
   mobile?: boolean;
 }
 
+// `dir="auto"` on every text-bearing element below — the browser picks
+// LTR/RTL per element from the first strong-directional character in ITS
+// OWN text (not a per-article or per-section flag), so an Arabic
+// paragraph displays right-to-left and right-aligned, an English one
+// stays left-to-right, and a section mixing both (e.g. an English
+// paragraph under an Arabic heading, or vice versa) gets each element
+// resolved independently and correctly rather than inheriting a single
+// wrong direction from its neighbor. No language field is read and no
+// string is ever reversed — `dir="auto"` is a native HTML behavior.
+
 function DesktopBlock({ block, images }: { block: ContentBlock; images: PublicImage[] }) {
   switch (block.type) {
     case 'paragraph':
-      return <Text variant="body-lg">{block.text}</Text>;
+      return (
+        <Text variant="body-lg" dir="auto">
+          {block.text}
+        </Text>
+      );
     case 'heading':
       return (
-        <Heading level={block.level === 2 ? 'h3' : 'h4'} as="h3">
+        <Heading level={block.level === 2 ? 'h3' : 'h4'} as="h3" dir="auto">
           {block.text}
         </Heading>
       );
     case 'bullet_list':
       return (
-        <ul className="list-disc space-y-1.5 ps-5 text-body-lg text-ink">
+        <ul className="list-disc space-y-1.5 ps-5 text-body-lg text-ink" dir="auto">
           {block.items.map((item, i) => (
             <li key={i}>{item}</li>
           ))}
@@ -47,7 +61,7 @@ function DesktopBlock({ block, images }: { block: ContentBlock; images: PublicIm
       );
     case 'numbered_list':
       return (
-        <ol className="list-decimal space-y-1.5 ps-5 text-body-lg text-ink">
+        <ol className="list-decimal space-y-1.5 ps-5 text-body-lg text-ink" dir="auto">
           {block.items.map((item, i) => (
             <li key={i}>{item}</li>
           ))}
@@ -55,7 +69,7 @@ function DesktopBlock({ block, images }: { block: ContentBlock; images: PublicIm
       );
     case 'quote':
       return (
-        <blockquote className="border-s-4 border-brand-600 py-1 ps-5 font-display text-h4 font-semibold leading-snug text-ink">
+        <blockquote className="border-s-4 border-brand-600 py-1 ps-5 font-display text-h4 font-semibold leading-snug text-ink" dir="auto">
           {block.text}
         </blockquote>
       );
@@ -66,7 +80,9 @@ function DesktopBlock({ block, images }: { block: ContentBlock; images: PublicIm
         <figure className="my-2 aspect-[16/9] w-full overflow-hidden rounded-md bg-gray-100">
           <img src={image.url} alt={image.altText ?? ''} loading="lazy" className="h-full w-full object-cover" />
           {(block.caption || image.caption) && (
-            <figcaption className="mt-2 text-caption text-gray-500">{block.caption || image.caption}</figcaption>
+            <figcaption className="mt-2 text-caption text-gray-500" dir="auto">
+              {block.caption || image.caption}
+            </figcaption>
           )}
         </figure>
       );
@@ -77,12 +93,20 @@ function DesktopBlock({ block, images }: { block: ContentBlock; images: PublicIm
 function MobileBlock({ block, images }: { block: ContentBlock; images: PublicImage[] }) {
   switch (block.type) {
     case 'paragraph':
-      return <p className="text-body leading-relaxed text-gray-700">{block.text}</p>;
+      return (
+        <p className="text-body leading-relaxed text-gray-700" dir="auto">
+          {block.text}
+        </p>
+      );
     case 'heading':
-      return <h3 className="font-display text-h4 font-semibold tracking-tight text-ink">{block.text}</h3>;
+      return (
+        <h3 className="font-display text-h4 font-semibold tracking-tight text-ink" dir="auto">
+          {block.text}
+        </h3>
+      );
     case 'bullet_list':
       return (
-        <ul className="list-disc space-y-1 ps-5 text-body text-gray-700">
+        <ul className="list-disc space-y-1 ps-5 text-body text-gray-700" dir="auto">
           {block.items.map((item, i) => (
             <li key={i}>{item}</li>
           ))}
@@ -90,7 +114,7 @@ function MobileBlock({ block, images }: { block: ContentBlock; images: PublicIma
       );
     case 'numbered_list':
       return (
-        <ol className="list-decimal space-y-1 ps-5 text-body text-gray-700">
+        <ol className="list-decimal space-y-1 ps-5 text-body text-gray-700" dir="auto">
           {block.items.map((item, i) => (
             <li key={i}>{item}</li>
           ))}
@@ -98,7 +122,7 @@ function MobileBlock({ block, images }: { block: ContentBlock; images: PublicIma
       );
     case 'quote':
       return (
-        <blockquote className="border-s-4 border-brand-600 py-1 ps-4 font-display text-h4 font-semibold leading-snug text-ink">
+        <blockquote className="border-s-4 border-brand-600 py-1 ps-4 font-display text-h4 font-semibold leading-snug text-ink" dir="auto">
           {block.text}
         </blockquote>
       );
@@ -121,7 +145,11 @@ export function ArticleStructuredContent({ sections, images, mobile }: Props) {
       {sections.map((section, i) =>
         mobile ? (
           <div key={i} className="mt-8 flex flex-col gap-4 first:mt-6">
-            {section.heading && <h3 className="font-display text-h4 font-semibold tracking-tight text-ink">{section.heading}</h3>}
+            {section.heading && (
+              <h3 className="font-display text-h4 font-semibold tracking-tight text-ink" dir="auto">
+                {section.heading}
+              </h3>
+            )}
             {section.blocks.map((block, j) => (
               <Block key={j} block={block} images={images} />
             ))}
@@ -129,7 +157,7 @@ export function ArticleStructuredContent({ sections, images, mobile }: Props) {
         ) : (
           <Stack space="sm" key={i}>
             {section.heading && (
-              <Heading level="h3" as="h3">
+              <Heading level="h3" as="h3" dir="auto">
                 {section.heading}
               </Heading>
             )}
