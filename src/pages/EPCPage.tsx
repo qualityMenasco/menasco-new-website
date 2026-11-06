@@ -100,12 +100,12 @@ export default function EPCPage() {
             </Stack>
             <ScrollRevealGroup className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 md:gap-6">
               {capabilities.map((capability) => (
-                <div key={capability.title} className="flex flex-col gap-4 rounded-md border border-gray-200 bg-warmwhite p-6 sm:min-h-[206px]">
+                <div key={capability.title} className="flex flex-col gap-4 rounded-md border border-gray-200 bg-warmwhite p-6 sm:min-h-[240px]">
                   <span className="inline-flex h-11 w-11 items-center justify-center rounded-sm bg-stone text-brand-600">
                     <capability.icon size={20} aria-hidden="true" />
                   </span>
                   <div>
-                    <Text className="font-display font-semibold text-ink">{capability.title}</Text>
+                    <Text className="min-h-[3.3rem] font-display font-semibold text-ink">{capability.title}</Text>
                     <Text variant="small" muted className="mt-1">
                       {capability.description}
                     </Text>
