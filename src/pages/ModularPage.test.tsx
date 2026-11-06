@@ -22,7 +22,7 @@ vi.mock('react-i18next', () => ({
         if (key === 'services:modularPage.sections') {
           return [
             { heading: 'What We Deliver', paragraph: 'x' },
-            { heading: 'Modular Data Centre Solutions', paragraph: 'x' },
+            { heading: 'Modular Data Center Solutions', paragraph: 'x' },
             { heading: 'Why Modular', paragraph: 'x', list: ['Faster on-site installation'] },
           ];
         }
@@ -52,6 +52,6 @@ describe('ModularPage (Manufacturing & Prefabrication child page)', () => {
     renderModularPage();
     expect(screen.getByRole('heading', { name: 'Modular MEP Solutions' })).toBeInTheDocument();
     expect(screen.getByText('What We Deliver')).toBeInTheDocument();
-    expect(screen.getByText('Modular Data Centre Solutions')).toBeInTheDocument();
+    expect(screen.getByText('Modular Data Center Solutions')).toBeInTheDocument();
   });
 });

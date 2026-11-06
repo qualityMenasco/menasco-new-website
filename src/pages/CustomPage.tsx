@@ -39,7 +39,7 @@ export default function CustomPage() {
       />
 
       <ServiceHero
-        image="/custom-mep-fabrication-inspection.png"
+        image="/custom-mep-fabrication-inspection.webp"
         title={name}
         description={t('services:customPage.hero.description')}
         ctaLabel={t('services:detail.downloadCompanyProfile')}

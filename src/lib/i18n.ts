@@ -16,7 +16,6 @@ export const I18N_NAMESPACES = [
   'contact',
   'seo',
   'newsroom',
-  'careers',
   'legal',
 ] as const;
 

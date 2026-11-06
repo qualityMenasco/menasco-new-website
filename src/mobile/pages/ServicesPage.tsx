@@ -6,8 +6,8 @@ import { LocaleLink } from '../components/LocaleLink';
 import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { SEO } from '../../seo/SEO';
 import {} from '../../seo/structuredData';
-import { services } from '../../data/services';
-import { dataCentreServiceLink, pendingContentPaths, servicesNavigationGroups } from '../../data/navigation';
+import { services, servicePagePreviews } from '../../data/services';
+import { dataCentreServiceLink, servicesNavigationGroups } from '../../data/navigation';
 import { slugify } from '../../lib/utils';
 
 const serviceKeys: Record<string, string> = {
@@ -18,8 +18,6 @@ const serviceKeys: Record<string, string> = {
   'bim-digital-engineering': 'bimDigitalEngineering',
   'manufacturing-prefabrication': 'manufacturingPrefabrication',
 };
-
-const isPending = (href: string) => (pendingContentPaths as readonly string[]).includes(href);
 
 /**
  * A clickable category title ("Civil →") shared by every top-level group
@@ -96,11 +94,14 @@ export default function ServicesPage() {
   const { t } = useTranslation(['services', 'common', 'nav']);
 
   const rowFor = (label: string, href: string) => {
-    if (isPending(href)) {
-      return <ServiceRow key={href} href={href} title={label} summary={t('common:pendingContent.detailsForthcoming')} />;
+    const preview = servicePagePreviews[href];
+    if (preview) {
+      return <ServiceRow key={href} href={href} image={preview.image} title={label} summary={t(`services:${preview.copyKey}.seo.description`)} />;
     }
     const service = services.find((entry) => `/services/${entry.slug}` === href);
-    if (!service) return null;
+    if (!service) {
+      return <ServiceRow key={href} href={href} title={label} summary={t('common:pendingContent.detailsForthcoming')} />;
+    }
     const key = serviceKeys[service.slug] ?? service.slug;
     return (
       <ServiceRow
@@ -136,15 +137,12 @@ export default function ServicesPage() {
           {servicesNavigationGroups.map((group) => {
             const groupName = t(`nav:${group.i18nKey}`);
             const anchorId = slugify(group.label);
-            // Every group with its own page gets a clickable heading. Its own
-            // page ALSO appears as a row among the children only when
-            // skipping it would either leave the section empty (no children
-            // at all, e.g. EPC) or would delete a genuine
-            // already-built preview row (a real, non-pending page, e.g.
-            // Manufacturing & Prefabrication) rather than a bare row that
-            // merely repeats the now-clickable heading.
+            // Every group with its own page gets a clickable heading, and its
+            // subservices get the rows. Its own page only appears as a row
+            // when skipping it would leave the section empty (no subservices
+            // at all, e.g. EPC).
             const linkHeading = Boolean(group.href);
-            const includeLeadRow = Boolean(group.href) && (group.links.length === 0 || !isPending(group.href!));
+            const includeLeadRow = Boolean(group.href) && group.links.length === 0;
             return (
               <section key={group.i18nKey} id={anchorId} aria-labelledby={`${anchorId}-heading`} className="scroll-mt-20 border-t border-gray-200 pt-5 pb-3">
                 {linkHeading ? (

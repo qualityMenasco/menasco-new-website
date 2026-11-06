@@ -58,7 +58,16 @@ describe('buildSitemapXml', () => {
   });
 
   it('includes EN/AR pairs for core pages', () => {
-    for (const path of ['/services/mechanical', '/services', '/about']) {
+    for (const path of [
+      '/services/mechanical',
+      '/services/mep',
+      '/services/civil',
+      '/services/turnkey-developments',
+      '/services/manufacturing-prefabrication/modular',
+      '/services/manufacturing-prefabrication/custom',
+      '/services',
+      '/about',
+    ]) {
       expect(locs).toContain(`${SITE}${path}`);
       expect(locs).toContain(`${SITE}/ar${path}`);
     }

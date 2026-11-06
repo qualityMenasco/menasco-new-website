@@ -39,7 +39,7 @@ export default function CustomPage() {
           <p className="whitespace-pre-line text-small text-gray-600">{t('services:customPage.hero.description')}</p>
         </div>
         <div className="mt-2.5 aspect-[2.2/1] w-full overflow-hidden rounded-md bg-gray-100">
-          <img src="/custom-mep-fabrication-inspection.png" alt={`MENASCO ${name}`} className="h-full w-full object-cover" />
+          <img src="/custom-mep-fabrication-inspection.webp" alt={`MENASCO ${name}`} className="h-full w-full object-cover" />
         </div>
       </section>
 

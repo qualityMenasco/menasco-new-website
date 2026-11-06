@@ -108,13 +108,13 @@ export const newsArticles: NewsArticle[] = [
     id: 'advanced-technical-facilities-portfolio',
     slug: 'menasco-expands-advanced-technical-facilities-portfolio',
     title: 'MENASCO Expands Advanced Technical Facilities Portfolio',
-    subtitle: 'Continued investment in mission-critical and data centre engineering capability across the region.',
+    subtitle: 'Continued investment in mission-critical and data center engineering capability across the region.',
     category: 'company-news',
     date: '2026-08-10',
-    images: [{ src: placeholderImages.controlRoom, alt: 'Engineer working at a data centre control room' }],
+    images: [{ src: placeholderImages.controlRoom, alt: 'Engineer working at a data center control room' }],
     featured: true,
     body: [
-      'MENASCO continues to grow its Advanced Technical Facilities capability, adding engineering resources dedicated to mission-critical and data centre projects across the UAE and the wider region.',
+      'MENASCO continues to grow its Advanced Technical Facilities capability, adding engineering resources dedicated to mission-critical and data center projects across the UAE and the wider region.',
       'The expansion reflects sustained regional demand for hyperscale and enterprise data infrastructure, where MEP delivery must meet uptime, resilience, and commissioning standards well beyond conventional commercial buildings.',
       "MENASCO's Advanced Technical Facilities team works across design coordination, prefabrication, and commissioning, supporting clients from early planning through operational handover.",
     ],
@@ -122,7 +122,7 @@ export const newsArticles: NewsArticle[] = [
       {
         heading: 'Meeting the Demands of Mission-Critical Environments',
         paragraphs: [
-          'Data centres and other mission-critical facilities operate under a different standard than typical commercial developments. Cooling systems must hold tight temperature and humidity tolerances around the clock, power distribution has to remain resilient through planned maintenance and unplanned faults alike, and every system needs to be documented and tested to a level that supports formal commissioning sign-off.',
+          'Data centers and other mission-critical facilities operate under a different standard than typical commercial developments. Cooling systems must hold tight temperature and humidity tolerances around the clock, power distribution has to remain resilient through planned maintenance and unplanned faults alike, and every system needs to be documented and tested to a level that supports formal commissioning sign-off.',
           'For an MEP contractor, that shifts emphasis earlier in the programme. Coordination between mechanical, electrical, and controls disciplines has to happen well before equipment reaches site, and commissioning sequences need to be planned in parallel with design rather than treated as a final-stage activity once installation is complete.',
         ],
       },
@@ -312,21 +312,21 @@ export const newsArticles: NewsArticle[] = [
   {
     id: 'data-centre-commissioning',
     slug: 'hyperscale-data-centre-commissioning-progress',
-    title: 'Hyperscale Data Centre Commissioning Progress',
-    subtitle: "MENASCO's Advanced Technical Facilities team advances commissioning on active data centre projects.",
+    title: 'Hyperscale Data Center Commissioning Progress',
+    subtitle: "MENASCO's Advanced Technical Facilities team advances commissioning on active data center projects.",
     category: 'project-news',
     date: '2026-06-22',
-    images: [{ src: placeholderImages.controlRoom, alt: 'Technician monitoring systems in a data centre control room' }],
+    images: [{ src: placeholderImages.controlRoom, alt: 'Technician monitoring systems in a data center control room' }],
     featured: false,
     body: [
-      "MENASCO's Advanced Technical Facilities team continues to progress commissioning activities across its active data centre projects in the UAE, supporting clients toward operational readiness.",
+      "MENASCO's Advanced Technical Facilities team continues to progress commissioning activities across its active data center projects in the UAE, supporting clients toward operational readiness.",
       'Commissioning on mission-critical facilities requires close coordination between mechanical, electrical, and controls disciplines to validate system performance against demanding uptime requirements.',
     ],
     sections: [
       {
         heading: 'What Commissioning Involves',
         paragraphs: [
-          'Commissioning a hyperscale data centre is not a single event but a structured sequence of tests, each building on the last: component-level checks, then integrated systems testing, then full-load validation under conditions that simulate real operating demand as closely as possible before a facility goes live.',
+          'Commissioning a hyperscale data center is not a single event but a structured sequence of tests, each building on the last: component-level checks, then integrated systems testing, then full-load validation under conditions that simulate real operating demand as closely as possible before a facility goes live.',
           'Every stage has to be documented to a standard that satisfies both the client and, in many cases, independent certification bodies, which means commissioning teams are producing a detailed evidence trail alongside the technical testing itself.',
         ],
       },

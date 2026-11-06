@@ -52,7 +52,7 @@ export default function DataCenterPage() {
         breadcrumb={[
           { label: 'Home', path: '/' },
           { label: 'Services', path: '/services' },
-          { label: 'Data Centres', path: '/services/data-centers' },
+          { label: 'Data Centers', path: '/services/data-centers' },
         ]}
       />
 
@@ -134,7 +134,7 @@ export default function DataCenterPage() {
       <Section background="warmwhite" spacing="lg" joinTop className="max-md:!pb-10" containerClassName="max-md:!px-4">
         <SplitContent
           image="/data-centre-prefabrication-mep.webp"
-          imageAlt="Data centre MEP infrastructure with server racks, cooling systems, pipework and cable containment"
+          imageAlt="Data center MEP infrastructure with server racks, cooling systems, pipework and cable containment"
           imageSide="right"
           eyebrow={t('dataCenter.prefab.eyebrow')}
           heading={t('dataCenter.prefab.heading')}

@@ -228,6 +228,20 @@ export const serviceI18nKeys: Record<string, string> = {
   'manufacturing-prefabrication': 'manufacturingPrefabrication',
 };
 
+/**
+ * Service pages with no services:items.* copy — previewed with their own hero
+ * image and page copy (services:<copyKey>.*). Shared by every surface that
+ * previews a service (ServicesPage.tsx, its mobile counterpart, and
+ * ServicesShowcase.tsx) so they can't drift apart.
+ */
+export const servicePagePreviews: Record<string, { image: string; copyKey: string }> = {
+  '/services/mep': { image: '/electrical-switchgear-room.jpg', copyKey: 'mepPage' },
+  '/services/civil': { image: '/bim-digital-engineering-hero.jpg', copyKey: 'civilPage' },
+  '/services/turnkey-developments': { image: '/Mechanical_Floor_Volante-2-2-3.jpg', copyKey: 'epcPage' },
+  '/services/manufacturing-prefabrication/modular': { image: '/data-centre-prefabrication-mep.webp', copyKey: 'modularPage' },
+  '/services/manufacturing-prefabrication/custom': { image: '/custom-mep-fabrication-inspection.webp', copyKey: 'customPage' },
+};
+
 export interface ServiceShowcaseLeaf {
   href: string;
   i18nKey: string;
@@ -278,11 +292,11 @@ export const serviceShowcaseGroups: ServiceShowcaseGroup[] = servicesNavigationG
   };
 });
 
-/** Data Centres isn't part of servicesNavigationGroups (no ServiceDefinition — its own services:dataCenter.hero.* content), so it's appended as its own single-leaf, childless group everywhere this data is consumed. */
+/** Data Centers isn't part of servicesNavigationGroups (no ServiceDefinition — its own services:dataCenter.hero.* content), so it's appended as its own single-leaf, childless group everywhere this data is consumed. */
 export const dataCentresShowcaseLeaf: ServiceShowcaseLeaf = { href: dataCentreServiceLink.href, i18nKey: dataCentreServiceLink.i18nKey, service: null };
 export const isDataCentresLeaf = (leaf: ServiceShowcaseLeaf) => leaf.href === dataCentresShowcaseLeaf.href;
 
-/** The full set of groups the homepage/other showcase surfaces render, in taxonomy order — MEP/Civil/Manufacturing & Prefabrication/EPC plus Data Centres appended. One source for any surface that needs this grouping (currently the desktop and mobile homepage sections), so a new surface — or a future subservice added to EPC/Data Centres — doesn't require per-surface hardcoding. */
+/** The full set of groups the homepage/other showcase surfaces render, in taxonomy order — MEP/Civil/Manufacturing & Prefabrication/EPC plus Data Centers appended. One source for any surface that needs this grouping (currently the desktop and mobile homepage sections), so a new surface — or a future subservice added to EPC/Data Centers — doesn't require per-surface hardcoding. */
 export const showcaseDisplayGroups: ServiceShowcaseGroup[] = [
   ...serviceShowcaseGroups,
   { key: 'dataCentres', i18nKey: dataCentreServiceLink.i18nKey, href: dataCentreServiceLink.href, leaves: [dataCentresShowcaseLeaf] },
@@ -291,7 +305,7 @@ export const showcaseDisplayGroups: ServiceShowcaseGroup[] = [
 /**
  * A leaf whose href equals its own group's href is the group's own page
  * shown as a leaf (Manufacturing & Prefabrication, EPC,
- * Data Centres) — real subservices are every other leaf. Whether a group
+ * Data Centers) — real subservices are every other leaf. Whether a group
  * gets an expand/collapse control derives purely from whether this list is
  * non-empty, per service, never hardcoded per category.
  */

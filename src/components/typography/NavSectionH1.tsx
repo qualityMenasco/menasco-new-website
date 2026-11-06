@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-const SECTIONS = ['home', 'about', 'services', 'projectsSectors', 'newsroom', 'careers'] as const;
+const SECTIONS = ['home', 'about', 'services', 'projectsSectors', 'newsroom'] as const;
 
 export type NavSection = (typeof SECTIONS)[number];
 

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "generate:llms": "tsx scripts/generate-llms.ts",
+    "export:nav": "tsx scripts/export-nav.ts",
     "prebuild": "npm run generate:llms",
     "build": "tsc -b && vite build",
     "postbuild": "NODE_ENV=production tsx --tsconfig tsconfig.app.json scripts/generate-seo-html.ts",

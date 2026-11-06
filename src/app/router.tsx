@@ -1,10 +1,11 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import type { ComponentType, ReactNode } from 'react';
 import { createBrowserRouter, Navigate, useLocation } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 import { RootLayout } from './RootLayout';
 import { PageLoadingFallback } from './PageLoadingFallback';
 import { getLocaleFromPath, withLocale } from '../lib/locale';
+import { CAREERS_URL } from '../data/navigation';
 import { useIsDesktopSettled } from '../lib/hooks';
 
 function lazyPage(importer: () => Promise<{ default: ComponentType }>): ReactNode {
@@ -87,6 +88,14 @@ function LocaleNavigate({ to }: { to: string }) {
   return <Navigate to={withLocale(to, locale)} replace />;
 }
 
+/** Full-page navigation to another site, replacing this history entry so Back doesn't bounce the visitor straight back to the redirect. */
+function ExternalRedirect({ to }: { to: string }) {
+  useEffect(() => {
+    window.location.replace(to);
+  }, [to]);
+  return <PageLoadingFallback />;
+}
+
 const routeChildren: RouteObject[] = [
   { index: true, element: responsivePage(() => import('../pages/HomePage'), () => import('../mobile/pages/HomePage')) },
   { path: 'about', element: responsivePage(() => import('../pages/AboutPage'), () => import('../mobile/pages/AboutPage')) },
@@ -112,17 +121,13 @@ const routeChildren: RouteObject[] = [
   },
   // Dedicated bespoke pages (same pattern as Manufacturing & Prefabrication
   // and EPC above) rather than the structure-only PendingContentPages
-  // placeholder — 2026-11-02. Still left in `pendingContentPaths`
-  // (src/data/navigation.ts) so the footer/sitemap/llms.txt keep treating
-  // these as "coming soon" until the draft copy is approved, even though
-  // they're now reachable with real content at their real URLs.
+  // placeholder — live and indexable since 2026-11-05.
   { path: 'services/mep', element: responsivePage(() => import('../pages/services/MEPPage'), () => import('../mobile/pages/services/MEPPage')) },
   { path: 'services/civil', element: responsivePage(() => import('../pages/services/CivilPage'), () => import('../mobile/pages/services/CivilPage')) },
   // Dedicated pages (2026-11-02) reusing the same hero + section-carousel
   // "cards" treatment as Mechanical/Electrical/Plumbing/Fire Protection
   // (ServiceHero + ServiceSectionCarousel), rather than the structure-only
-  // PendingContentPages placeholder. Still left in `pendingContentPaths`
-  // (src/data/navigation.ts) — see the comment on services/mep above.
+  // PendingContentPages placeholder — live and indexable since 2026-11-05.
   {
     path: 'services/manufacturing-prefabrication/modular',
     element: responsivePage(() => import('../pages/ModularPage'), () => import('../mobile/pages/ModularPage')),
@@ -161,7 +166,9 @@ const routeChildren: RouteObject[] = [
   { path: 'innovation-technology', element: responsivePage(() => import('../pages/InnovationTechnologyPage'), () => import('../mobile/pages/InnovationPage')) },
   { path: 'newsroom', element: responsivePage(() => import('../pages/NewsroomPage'), () => import('../mobile/pages/NewsroomPage')) },
   { path: 'newsroom/:slug', element: responsivePage(() => import('../pages/NewsDetailPage'), () => import('../mobile/pages/NewsDetailPage')) },
-  { path: 'careers', element: responsivePage(() => import('../pages/CareersPage'), () => import('../mobile/pages/CareersPage')) },
+  // Careers lives in a separate app — /careers and /ar/careers both redirect
+  // there (vercel.json does the same server-side for direct visits).
+  { path: 'careers', element: <ExternalRedirect to={CAREERS_URL} /> },
   { path: 'privacy-policy', element: responsivePage(() => import('../pages/PrivacyPolicyPage'), () => import('../mobile/pages/PrivacyPolicyPage')) },
   { path: 'terms', element: responsivePage(() => import('../pages/TermsPage'), () => import('../mobile/pages/TermsPage')) },
   // Single shared implementation for both breakpoints — see LynxqcPrivacyPolicyPage's own comment.

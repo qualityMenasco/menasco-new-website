@@ -40,7 +40,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
 const PUBLIC_DIR = join(ROOT, 'public');
 
-const NAMESPACES = ['about', 'careers', 'common', 'contact', 'home', 'legal', 'nav', 'newsroom', 'projects', 'seo', 'services'] as const;
+const NAMESPACES = ['about', 'common', 'contact', 'home', 'legal', 'nav', 'newsroom', 'projects', 'seo', 'services'] as const;
 
 function readNamespace(locale: Locale, name: string): any {
   return JSON.parse(readFileSync(join(PUBLIC_DIR, 'locales', locale, `${name}.json`), 'utf8'));
@@ -191,16 +191,16 @@ addRoute(
 );
 addRoute(
   '/services/data-centers',
-  (l) => fullTitle(l, tr(l, 'services', 'dataCenter.seo.title', 'Data Centre MEP Services')),
+  (l) => fullTitle(l, tr(l, 'services', 'dataCenter.seo.title', 'Data Center MEP Services')),
   (l) => tr(l, 'services', 'dataCenter.seo.description', NS[l].seo.defaultDescription),
   {
     mainEntity: (l) =>
       serviceEntity({
-        name: tr(l, 'services', 'dataCenter.seo.title', 'Data Centre MEP Services'),
+        name: tr(l, 'services', 'dataCenter.seo.title', 'Data Center MEP Services'),
         description: tr(l, 'services', 'dataCenter.seo.description', NS[l].seo.defaultDescription),
         url: `${SITE_URL}/services/data-centers`,
       }),
-    breadcrumb: () => [HOME, { label: 'Services', path: '/services' }, { label: 'Data Centres', path: '/services/data-centers' }],
+    breadcrumb: () => [HOME, { label: 'Services', path: '/services' }, { label: 'Data Centers', path: '/services/data-centers' }],
   },
 );
 addRoute(
@@ -215,6 +215,86 @@ addRoute(
         url: `${SITE_URL}/services/bim-digital-engineering`,
       }),
     breadcrumb: (l) => [HOME, { label: 'Services', path: '/services' }, { label: tr(l, 'services', 'items.bimDigitalEngineering.name', 'BIM & Digital Engineering'), path: '/services/bim-digital-engineering' }],
+  },
+);
+addRoute(
+  '/services/mep',
+  (l) => fullTitle(l, tr(l, 'services', 'mepPage.seo.title', 'MEP — Mechanical, Electrical & Plumbing')),
+  (l) => tr(l, 'services', 'mepPage.seo.description', NS[l].seo.defaultDescription),
+  {
+    mainEntity: (l) =>
+      serviceEntity({
+        name: tr(l, 'services', 'mepPage.seo.title', 'MEP — Mechanical, Electrical & Plumbing'),
+        description: tr(l, 'services', 'mepPage.seo.description', NS[l].seo.defaultDescription),
+        url: `${SITE_URL}/services/mep`,
+      }),
+    breadcrumb: () => [HOME, { label: 'Services', path: '/services' }, { label: 'MEP', path: '/services/mep' }],
+  },
+);
+addRoute(
+  '/services/civil',
+  (l) => fullTitle(l, tr(l, 'services', 'civilPage.seo.title', 'Civil Works Coordination')),
+  (l) => tr(l, 'services', 'civilPage.seo.description', NS[l].seo.defaultDescription),
+  {
+    mainEntity: (l) =>
+      serviceEntity({
+        name: tr(l, 'services', 'civilPage.seo.title', 'Civil Works Coordination'),
+        description: tr(l, 'services', 'civilPage.seo.description', NS[l].seo.defaultDescription),
+        url: `${SITE_URL}/services/civil`,
+      }),
+    breadcrumb: () => [HOME, { label: 'Services', path: '/services' }, { label: 'Civil', path: '/services/civil' }],
+  },
+);
+addRoute(
+  '/services/turnkey-developments',
+  (l) => fullTitle(l, tr(l, 'services', 'epcPage.seo.title', 'EPC — Engineering, Procurement & Construction')),
+  (l) => tr(l, 'services', 'epcPage.seo.description', NS[l].seo.defaultDescription),
+  {
+    mainEntity: (l) =>
+      serviceEntity({
+        name: tr(l, 'services', 'epcPage.seo.title', 'EPC — Engineering, Procurement & Construction'),
+        description: tr(l, 'services', 'epcPage.seo.description', NS[l].seo.defaultDescription),
+        url: `${SITE_URL}/services/turnkey-developments`,
+      }),
+    breadcrumb: () => [HOME, { label: 'Services', path: '/services' }, { label: 'EPC', path: '/services/turnkey-developments' }],
+  },
+);
+addRoute(
+  '/services/manufacturing-prefabrication/modular',
+  (l) => fullTitle(l, tr(l, 'services', 'modularPage.seo.title', 'Modular MEP Solutions')),
+  (l) => tr(l, 'services', 'modularPage.seo.description', NS[l].seo.defaultDescription),
+  {
+    mainEntity: (l) =>
+      serviceEntity({
+        name: tr(l, 'services', 'modularPage.seo.title', 'Modular MEP Solutions'),
+        description: tr(l, 'services', 'modularPage.seo.description', NS[l].seo.defaultDescription),
+        url: `${SITE_URL}/services/manufacturing-prefabrication/modular`,
+      }),
+    breadcrumb: (l) => [
+      HOME,
+      { label: 'Services', path: '/services' },
+      { label: 'Manufacturing & Prefabrication', path: '/services/manufacturing-prefabrication' },
+      { label: tr(l, 'services', 'modularPage.name', 'Modular'), path: '/services/manufacturing-prefabrication/modular' },
+    ],
+  },
+);
+addRoute(
+  '/services/manufacturing-prefabrication/custom',
+  (l) => fullTitle(l, tr(l, 'services', 'customPage.seo.title', 'Custom Engineered Components')),
+  (l) => tr(l, 'services', 'customPage.seo.description', NS[l].seo.defaultDescription),
+  {
+    mainEntity: (l) =>
+      serviceEntity({
+        name: tr(l, 'services', 'customPage.seo.title', 'Custom Engineered Components'),
+        description: tr(l, 'services', 'customPage.seo.description', NS[l].seo.defaultDescription),
+        url: `${SITE_URL}/services/manufacturing-prefabrication/custom`,
+      }),
+    breadcrumb: (l) => [
+      HOME,
+      { label: 'Services', path: '/services' },
+      { label: 'Manufacturing & Prefabrication', path: '/services/manufacturing-prefabrication' },
+      { label: tr(l, 'services', 'customPage.name', 'Custom'), path: '/services/manufacturing-prefabrication/custom' },
+    ],
   },
 );
 addRoute(
@@ -242,12 +322,6 @@ addRoute(
   (l) => fullTitle(l, tr(l, 'newsroom', 'seo.title', 'MENASCO Newsroom | News & Insights')),
   (l) => tr(l, 'newsroom', 'seo.description', NS[l].seo.defaultDescription),
   { pageType: 'CollectionPage', breadcrumb: () => [HOME, { label: 'Newsroom', path: '/newsroom' }] },
-);
-addRoute(
-  '/careers',
-  (l) => fullTitle(l, tr(l, 'careers', 'seo.title', 'Careers at MENASCO | Join Our Team')),
-  (l) => tr(l, 'careers', 'seo.description', NS[l].seo.defaultDescription),
-  { breadcrumb: () => [HOME, { label: 'Careers', path: '/careers' }] },
 );
 addRoute(
   '/privacy-policy',
@@ -296,7 +370,7 @@ for (const profile of leadershipProfiles) {
 }
 
 // ---------------------------------------------------------------------------
-// Services (generic :slug detail pages only — BIM/Manufacturing/Data Centres
+// Services (generic :slug detail pages only — BIM/Manufacturing/Data Centers
 // have their own dedicated routes, added above)
 // ---------------------------------------------------------------------------
 
@@ -389,37 +463,6 @@ for (const project of projects) {
 // ---------------------------------------------------------------------------
 
 const pendingDescription = (l: Locale) => tr(l, 'common', 'pendingContent.notice', NS[l].seo.defaultDescription);
-const manufacturingGroupName = (l: Locale) => tr(l, 'nav', 'servicesGroups.manufacturingPrefabrication', 'Manufacturing & Prefabrication');
-addRoute(
-  '/services/mep',
-  (l) => fullTitle(l, tr(l, 'nav', 'servicesGroups.mep', 'MEP')),
-  pendingDescription,
-  { noIndex: true, follow: true },
-);
-addRoute(
-  '/services/civil',
-  (l) => fullTitle(l, tr(l, 'nav', 'servicesGroups.civil', 'Civil')),
-  pendingDescription,
-  { noIndex: true, follow: true },
-);
-addRoute(
-  '/services/manufacturing-prefabrication/modular',
-  (l) => fullTitle(l, `${tr(l, 'nav', 'servicesList.modular', 'Modular')} | ${manufacturingGroupName(l)}`),
-  pendingDescription,
-  { noIndex: true, follow: true },
-);
-addRoute(
-  '/services/manufacturing-prefabrication/custom',
-  (l) => fullTitle(l, `${tr(l, 'nav', 'servicesList.custom', 'Custom')} | ${manufacturingGroupName(l)}`),
-  pendingDescription,
-  { noIndex: true, follow: true },
-);
-addRoute(
-  '/services/turnkey-developments',
-  (l) => fullTitle(l, tr(l, 'nav', 'servicesGroups.turnkeyDevelopments', 'EPC')),
-  pendingDescription,
-  { noIndex: true, follow: true },
-);
 addRoute(
   '/certification-training',
   (l) => fullTitle(l, tr(l, 'nav', 'certificationTraining', 'MENASCO Certification & Training')),

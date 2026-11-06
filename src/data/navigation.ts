@@ -32,8 +32,18 @@ export const homeSectionNavigation: HomeSectionNavItem[] = [
   // No homepage section anymore (the News teaser was removed from the
   // homepage) — this is a direct link to its own page only.
   { label: 'Newsroom', sectionId: 'newsroom', routePrefix: '/newsroom', directHref: '/newsroom' },
-  { label: 'Careers', sectionId: 'careers', routePrefix: '/careers' },
+  // Always the real /careers route (never a homepage #careers scroll) — that
+  // route redirects to the external careers app at CAREERS_URL.
+  { label: 'Careers', sectionId: 'careers', routePrefix: '/careers', directHref: '/careers' },
 ];
+
+/**
+ * The external careers app. Every Careers link on the site points at the
+ * internal `/careers` route, which redirects here (client-side in
+ * src/app/router.tsx, server-side in vercel.json) — so changing this URL
+ * means updating it in those two places only.
+ */
+export const CAREERS_URL = 'https://main.d5ycnj71qvqrf.amplifyapp.com/';
 
 /** A child link inside a navigation group — `i18nKey` is its key in the `nav` namespace. */
 export interface NavGroupLinkEntry extends NavLinkEntry {
@@ -97,11 +107,6 @@ export const servicesNavigationGroups: NavGroupEntry[] = [
 
 /** Structure-only routes awaiting approved content — rendered noindex and kept out of the sitemap and llms.txt. */
 export const pendingContentPaths = [
-  '/services/mep',
-  '/services/civil',
-  '/services/manufacturing-prefabrication/modular',
-  '/services/manufacturing-prefabrication/custom',
-  '/services/turnkey-developments',
   '/certification-training',
 ] as const;
 
@@ -111,14 +116,14 @@ export const servicesNavigation: NavGroupLinkEntry[] = servicesNavigationGroups.
   ...group.links,
 ]);
 
-/** Data centre MEP capability — not one of the four service groups, surfaced alongside them as a sector solution. */
+/** Data center MEP capability — not one of the four service groups, surfaced alongside them as a sector solution. */
 export const dataCentreServiceLink: NavGroupLinkEntry = {
-  label: 'Data Centres',
+  label: 'Data Centers',
   href: '/services/data-centers',
   i18nKey: 'dataCentres',
 };
 
-/** Footer Services column — live service pages only (structure-only pages join once they have approved content), plus Data Centres. */
+/** Footer Services column — live service pages only (structure-only pages join once they have approved content), plus Data Centers. */
 export const footerServiceLinks: NavGroupLinkEntry[] = [
   ...servicesNavigation.filter((link) => !(pendingContentPaths as readonly string[]).includes(link.href)),
   dataCentreServiceLink,

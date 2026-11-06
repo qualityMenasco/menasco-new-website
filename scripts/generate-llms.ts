@@ -35,7 +35,7 @@ import { fileURLToPath } from 'node:url';
 
 import { SITE_URL, SITE_TAGLINE } from '../src/seo/constants';
 import { services } from '../src/data/services';
-import { pendingContentPaths, servicesNavigationGroups } from '../src/data/navigation';
+import { CAREERS_URL, pendingContentPaths, servicesNavigationGroups } from '../src/data/navigation';
 import { projects } from '../src/data/projects';
 import { projectCategoryList } from '../src/data/projectCategories';
 import { leadershipProfiles, executiveTeam } from '../src/data/leadership';
@@ -54,7 +54,6 @@ function readNamespace(name: string): any {
 }
 
 const about = readNamespace('about');
-const careers = readNamespace('careers');
 const legal = readNamespace('legal');
 const servicesCopy = readNamespace('services');
 const home = readNamespace('home');
@@ -101,16 +100,27 @@ function bullets(items: string[]) {
   return items.map((item) => (item.startsWith('- ') ? item : `- ${item}`)).join('\n');
 }
 
+/** Live service pages described by their own page copy rather than a services.ts record. */
+const umbrellaPages: Record<string, { seo: { title: string; description: string }; hero: { description: string } }> = {
+  '/services/mep': servicesCopy.mepPage,
+  '/services/civil': servicesCopy.civilPage,
+  '/services/turnkey-developments': servicesCopy.epcPage,
+  '/services/manufacturing-prefabrication/modular': servicesCopy.modularPage,
+  '/services/manufacturing-prefabrication/custom': servicesCopy.customPage,
+};
+
 /**
  * Services grouped the way the site's navigation and Services landing
  * group them (src/data/navigation.ts). Only live pages are listed —
  * structure-only pages awaiting approved content (`pendingContentPaths`)
  * are left out, and a group with no live pages is omitted entirely.
- * Data Centres follows as a sector solution rather than a fifth group.
+ * Data Centers follows as a sector solution rather than a fifth group.
  */
 function groupedServiceBlocks(): string[] {
   const pending = pendingContentPaths as readonly string[];
   const serviceLine = (href: string) => {
+    const umbrella = umbrellaPages[href];
+    if (umbrella) return linkLine(umbrella.seo.title, llmsUrl(href), umbrella.seo.description);
     const s = services.find((entry) => `/services/${entry.slug}` === href);
     return s ? linkLine(s.name, llmsUrl(href), s.shortDescription) : undefined;
   };
@@ -121,7 +131,7 @@ function groupedServiceBlocks(): string[] {
   });
   return [
     ...blocks,
-    `### Data Centres\n\n${bullets([linkLine('Data Centres', llmsUrl('/services/data-centers'), servicesCopy.dataCenter.seo.description)])}`,
+    `### Data Centers\n\n${bullets([linkLine('Data Centers', llmsUrl('/services/data-centers'), servicesCopy.dataCenter.seo.description)])}`,
   ];
 }
 
@@ -207,8 +217,8 @@ function buildCompanyKeyFacts(): string[] {
     'Dubai, UAE is MENASCO’s Head Office.',
     `Regional offices in ${regionalOffices}.`,
     `Serves sectors including ${sectorNames}.`,
-    `Core service lines include ${serviceNames}, alongside dedicated data centre MEP delivery.`,
-    'Delivers specialist engineering for data centres, mission-critical, healthcare, energy, and other technically demanding facilities.',
+    `Core service lines include ${serviceNames}, alongside dedicated data center MEP delivery.`,
+    'Delivers specialist engineering for data centers, mission-critical, healthcare, energy, and other technically demanding facilities.',
     'Project-delivery approach incorporates early project engagement, BIM-driven coordination, and disciplined execution.',
     `Maintains a dedicated Innovation & Technology ecosystem spanning ${innovationHeadings.join(', ')}.`,
     `Maintains an integrated QHSE system certified to ${certNames}.`,
@@ -225,7 +235,7 @@ function generateHome() {
   const content = doc(
     h1('MENASCO'),
     bq(
-      `MENASCO is an integrated MEP (mechanical, electrical, plumbing & fire protection) engineering contractor, operating across the UAE, Saudi Arabia, Egypt and the United Kingdom.`,
+      `MENASCO is an integrated MEP (mechanical, electrical, plumbing & fire protection) engineering contractor, operating across the UAE, Saudi Arabia, Egypt, the United Kingdom and the USA.`,
     ),
     `${SITE_TAGLINE}. Established in ${foundingYear} in the UAE as MENASCO Mechanical Contracting L.L.C.`,
 
@@ -256,7 +266,7 @@ function generateHome() {
       hr: true,
       text: doc(
         h2('Projects & Sectors'),
-        `${projects.length} current projects across ${home.hero.description.includes('KSA') ? 'the UAE, KSA and Egypt' : 'the region'}, organized into ${publishedCategories.length} sectors.`,
+        `${projects.length} current projects across ${home.hero.description.includes('Saudi Arabia') ? 'the UAE, Saudi Arabia, Egypt and the USA' : 'the region'}, organized into ${publishedCategories.length} sectors.`,
         bullets(publishedCategories.map((c) => `${c.title}: ${c.description}`)),
         linkLine('All Projects & Sectors', llmsUrl('/projects/categories'), 'Full project portfolio, browsable by sector.'),
       ),
@@ -296,7 +306,7 @@ function generateHome() {
 
     {
       hr: true,
-      text: doc(h2('Careers'), home.careersPreview.description, linkLine('Careers at MENASCO', llmsUrl('/careers'))),
+      text: doc(h2('Careers'), home.careersPreview.description, linkLine('Careers at MENASCO', CAREERS_URL)),
     },
   );
 
@@ -554,6 +564,20 @@ function generateServiceDetail() {
   }
 }
 
+function generateUmbrellaPages() {
+  for (const [path, page] of Object.entries(umbrellaPages)) {
+    const content = doc(
+      h1(page.seo.title),
+      bq(page.hero.description),
+      {
+        hr: true,
+        text: doc(h2('Related Pages'), linkLine('All Services', llmsUrl('/services'))),
+      },
+    );
+    write(path, content);
+  }
+}
+
 function generateDataCenters() {
   const dc = servicesCopy.dataCenter;
   const dcProjects = projects.filter((p) => p.category === 'advanced-technical-facilities');
@@ -689,21 +713,8 @@ function generateNewsroom() {
 }
 
 // ---------------------------------------------------------------------------
-// Careers / Legal
+// Legal (Careers is an external app — see CAREERS_URL — so it has no llms.txt here)
 // ---------------------------------------------------------------------------
-
-function generateCareers() {
-  const content = doc(
-    h1('Careers at MENASCO'),
-    bq(careers.description),
-    doc(h2('Current Openings'), `${careers.emptyState.title}. ${careers.emptyState.description.replace('{{email}}', primaryContact.email)}`),
-    {
-      hr: true,
-      text: doc(h2('Related Pages'), linkLine('About MENASCO', llmsUrl('/about'))),
-    },
-  );
-  write('/careers', content);
-}
 
 function generateLegal() {
   for (const [key, path, title] of [
@@ -757,6 +768,7 @@ function generateLynxqcPrivacyPolicy() {
 // not runs alongside it.
 rmSync(join(PUBLIC_DIR, 'llms'), { recursive: true, force: true });
 if (existsSync(join(PUBLIC_DIR, 'projects', 'llms.txt'))) rmSync(join(PUBLIC_DIR, 'projects', 'llms.txt'), { force: true });
+rmSync(join(PUBLIC_DIR, 'careers'), { recursive: true, force: true });
 
 generateHome();
 generateAbout();
@@ -768,11 +780,11 @@ generateInnovation();
 generateContact();
 generateServicesIndex();
 generateServiceDetail();
+generateUmbrellaPages();
 generateDataCenters();
 generateProjectsCategories();
 generateProjectDetail();
 generateNewsroom();
-generateCareers();
 generateLegal();
 generateLynxqcPrivacyPolicy();
 

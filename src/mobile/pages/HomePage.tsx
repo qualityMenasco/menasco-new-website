@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ArrowRight, ArrowUpRight, ChevronDown } from 'lucide-react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { MobileHero } from '../components/MobileHero';
 import { SectionHeader } from '../components/SectionHeader';
@@ -44,9 +44,10 @@ export default function HomePage() {
   // Collapsed-by-default vertical accordion, mirroring the desktop pattern
   // (src/components/sections/home/ServicesShowcase.tsx) — mobile has no
   // right-side preview panel, so a subservice tap here is a direct
-  // navigation, same as the Services landing page's own mobile row. Whether
-  // a group gets a chevron derives purely from `showcaseGroupChildren`
-  // (service data), never hardcoded per category.
+  // navigation, same as the Services landing page's own mobile row. The whole
+  // row toggles its dropdown, and the umbrella page is reached through the
+  // "About" link inside it. Collapsed panels stay in the DOM (hidden, not
+  // unmounted) so those links remain in the page for crawlers.
   const [expandedGroupKey, setExpandedGroupKey] = useState<string | null>(null);
 
   return (
@@ -84,65 +85,55 @@ export default function HomePage() {
         <nav aria-label={t('home:servicesShowcase.eyebrow')} className="mt-4 flex flex-col px-4">
           {showcaseDisplayGroups.map((group) => {
             const children = showcaseGroupChildren(group);
-            const isExpandable = children.length > 0;
             const isExpanded = expandedGroupKey === group.key;
             const groupName = t(`nav:${group.i18nKey}`);
             const childrenId = `mobile-services-${group.key}`;
             return (
               <div key={group.key} className="border-t border-gray-200">
-                <div className="flex items-center">
-                  <LocaleLink
-                    to={group.href!}
-                    className="flex min-w-0 flex-1 items-center py-3 font-display text-h4 font-semibold text-ink"
-                  >
-                    {groupName}
-                  </LocaleLink>
-                  {isExpandable && (
-                    <button
-                      type="button"
-                      aria-expanded={isExpanded}
-                      aria-controls={childrenId}
-                      aria-label={t(isExpanded ? 'common:collapseSection' : 'common:expandSection', { name: groupName })}
-                      onClick={() => setExpandedGroupKey(isExpanded ? null : group.key)}
-                      className="flex h-11 w-11 shrink-0 items-center justify-center text-gray-500"
-                    >
-                      <ChevronDown
-                        size={18}
-                        aria-hidden="true"
-                        className={cn('transition-transform duration-base', isExpanded && 'rotate-180')}
-                      />
-                    </button>
-                  )}
-                </div>
+                <button
+                  type="button"
+                  aria-expanded={isExpanded}
+                  aria-controls={childrenId}
+                  onClick={() => setExpandedGroupKey(isExpanded ? null : group.key)}
+                  className="flex w-full items-center justify-between gap-4 py-3 text-start font-display text-h4 font-semibold text-ink"
+                >
+                  <span className="min-w-0">{groupName}</span>
+                  <ChevronDown
+                    size={18}
+                    aria-hidden="true"
+                    className={cn('shrink-0 transition-transform duration-base', isExpanded && 'rotate-180')}
+                  />
+                </button>
 
-                <AnimatePresence initial={false}>
-                  {isExpandable && isExpanded && (
-                    <motion.div
-                      id={childrenId}
-                      initial={reducedMotion ? undefined : { height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={reducedMotion ? undefined : { height: 0, opacity: 0 }}
-                      transition={{ duration: reducedMotion ? 0 : 0.25, ease: EASE }}
-                      className="overflow-hidden"
+                <motion.div
+                  id={childrenId}
+                  initial={false}
+                  animate={isExpanded ? { height: 'auto', opacity: 1, visibility: 'visible' } : { height: 0, opacity: 0, transitionEnd: { visibility: 'hidden' } }}
+                  transition={{ duration: reducedMotion ? 0 : 0.25, ease: EASE }}
+                  className="overflow-hidden"
+                >
+                  <div className="flex flex-col pb-1.5">
+                    <LocaleLink
+                      to={group.href!}
+                      className="flex min-h-11 items-center py-2 ps-4 text-body font-medium text-gray-600"
                     >
-                      <div className="flex flex-col pb-1.5">
-                        {children.map((leaf) => {
-                          const leafServiceKey = leaf.service ? (serviceI18nKeys[leaf.service.slug] ?? leaf.service.slug) : null;
-                          const leafName = leafServiceKey ? t(`services:items.${leafServiceKey}.name`) : t(`nav:${leaf.i18nKey}`);
-                          return (
-                            <LocaleLink
-                              key={leaf.href}
-                              to={leaf.href}
-                              className="flex min-h-11 items-center py-2 ps-4 text-body font-medium text-gray-600"
-                            >
-                              {leafName}
-                            </LocaleLink>
-                          );
-                        })}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                      {t('home:servicesShowcase.aboutService', { name: groupName, defaultValue: 'About {{name}}' })}
+                    </LocaleLink>
+                    {children.map((leaf) => {
+                      const leafServiceKey = leaf.service ? (serviceI18nKeys[leaf.service.slug] ?? leaf.service.slug) : null;
+                      const leafName = leafServiceKey ? t(`services:items.${leafServiceKey}.name`) : t(`nav:${leaf.i18nKey}`);
+                      return (
+                        <LocaleLink
+                          key={leaf.href}
+                          to={leaf.href}
+                          className="flex min-h-11 items-center py-2 ps-4 text-body font-medium text-gray-600"
+                        >
+                          {leafName}
+                        </LocaleLink>
+                      );
+                    })}
+                  </div>
+                </motion.div>
               </div>
             );
           })}

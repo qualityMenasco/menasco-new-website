@@ -6,15 +6,15 @@ import { SectionHeader } from '../components/typography/SectionHeader';
 import { Heading, Text } from '../components/typography/Typography';
 import { ServiceCard } from '../components/cards/ServiceCard';
 import { CtaBand } from '../components/sections/CtaBand';
-import { services, serviceI18nKeys as serviceKeys } from '../data/services';
-import { dataCentreServiceLink, pendingContentPaths, servicesNavigationGroups } from '../data/navigation';
+import { services, serviceI18nKeys as serviceKeys, servicePagePreviews } from '../data/services';
+import { dataCentreServiceLink, servicesNavigationGroups } from '../data/navigation';
 import { SmartLink } from '../lib/SmartLink';
 import { slugify } from '../lib/utils';
 import { SEO } from '../seo/SEO';
 import {} from '../seo/structuredData';
 
-const isPending = (href: string) => (pendingContentPaths as readonly string[]).includes(href);
 const serviceByHref = (href: string) => services.find((service) => `/services/${service.slug}` === href);
+const hasCardContent = (href: string) => Boolean(servicePagePreviews[href] ?? serviceByHref(href));
 
 /**
  * A clickable category title ("Civil →") shared by every top-level group
@@ -82,7 +82,21 @@ function PendingServiceRow({ label, href }: { label: string; href: string }) {
 export default function ServicesPage() {
   const { t } = useTranslation(['services', 'nav', 'common']);
 
-  const renderServiceCard = (href: string) => {
+  const renderServiceCard = (href: string, label: string) => {
+    const preview = servicePagePreviews[href];
+    if (preview) {
+      return (
+        <ServiceCard
+          key={href}
+          image={preview.image}
+          imageAlt={`MENASCO ${label} services`}
+          title={label}
+          description={t(`services:${preview.copyKey}.seo.description`)}
+          link={{ label: t('services:listing.exploreService', { name: label }), href }}
+          headingAs="h4"
+        />
+      );
+    }
     const service = serviceByHref(href);
     if (!service) return null;
     const key = serviceKeys[service.slug] ?? service.slug;
@@ -123,22 +137,19 @@ export default function ServicesPage() {
           <div className="flex flex-col">
             {servicesNavigationGroups.map((group) => {
               const groupName = t(`nav:${group.i18nKey}`);
-              // Every group with its own page gets a clickable heading. Its
-              // own page ALSO appears as a destination among the children
-              // (a card, or — while pending — a "coming soon" row) only when
-              // skipping it would either leave the content column empty (no
-              // children at all, e.g. EPC) or would delete
-              // a genuine already-built preview card (a real, non-pending
-              // page, e.g. Manufacturing & Prefabrication) rather than a
-              // bare row that merely repeats the now-clickable heading.
+              // Every group with its own page gets a clickable heading, and
+              // its subservices get the cards. Its own page only appears as a
+              // card when skipping it would leave the content column empty
+              // (no subservices at all, e.g. EPC). A destination with nothing
+              // to preview yet falls back to a "coming soon" row.
               const groupHeadingHref = group.href;
-              const includeLeadDestination = Boolean(group.href) && (group.links.length === 0 || !isPending(group.href!));
+              const includeLeadDestination = Boolean(group.href) && group.links.length === 0;
               const destinations = [
                 ...(includeLeadDestination ? [{ label: groupName, href: group.href! }] : []),
                 ...group.links.map((link) => ({ label: t(`nav:${link.i18nKey}`), href: link.href })),
               ];
-              const live = destinations.filter((destination) => !isPending(destination.href));
-              const pending = destinations.filter((destination) => isPending(destination.href));
+              const live = destinations.filter((destination) => hasCardContent(destination.href));
+              const pending = destinations.filter((destination) => !hasCardContent(destination.href));
               const anchorId = slugify(group.label);
 
               return (
@@ -163,7 +174,7 @@ export default function ServicesPage() {
                     </div>
                   </div>
                   <div className="flex flex-col gap-6 lg:col-span-8">
-                    {live.length > 0 && <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">{live.map((destination) => renderServiceCard(destination.href))}</div>}
+                    {live.length > 0 && <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">{live.map((destination) => renderServiceCard(destination.href, destination.label))}</div>}
                     {pending.length > 0 && (
                       <ul role="list" className="divide-y divide-gray-200 border-y border-gray-200">
                         {pending.map((destination) => (

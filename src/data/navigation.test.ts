@@ -51,7 +51,9 @@ describe('navigation data', () => {
   });
 
   it('every service group href is either a live service page or explicitly pending', () => {
-    const liveSlugs = new Set(services.map((service) => `/services/${service.slug}`));
+    // MEP and Civil are live umbrella pages with their own dedicated page
+    // components (src/app/router.tsx) rather than a services.ts record.
+    const liveSlugs = new Set([...services.map((service) => `/services/${service.slug}`), '/services/mep', '/services/civil']);
     for (const group of servicesNavigationGroups) {
       if (!group.href) continue;
       const isLiveService = liveSlugs.has(group.href);
@@ -66,16 +68,7 @@ describe('navigation data', () => {
     // if their slug happens to also be a real service's slug, which would
     // make the explicit route shadow it. Manufacturing & Prefabrication is
     // exempt: its href IS the real live service page, by design.
-    //
-    // 'turnkey-developments' (EPC) is a second, deliberate exemption
-    // (2026-10-29): it now has its own dedicated bespoke page component
-    // (src/pages/services/EPCPage.tsx), routed explicitly ahead of the
-    // services/:slug catch-all — the same pattern as Manufacturing &
-    // Prefabrication above — but it's intentionally LEFT in
-    // pendingContentPaths so the footer and services-listing page keep
-    // treating it as "coming soon" rather than promoting draft content,
-    // until the real copy is approved.
-    const exemptFromCollisionCheck = new Set(['manufacturing-prefabrication', 'turnkey-developments']);
+    const exemptFromCollisionCheck = new Set(['manufacturing-prefabrication']);
     const pendingGroupSlugs = servicesNavigationGroups
       .filter((g) => g.href && (pendingContentPaths as readonly string[]).includes(g.href))
       .map((g) => g.href!.replace('/services/', ''))

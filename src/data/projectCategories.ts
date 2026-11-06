@@ -46,7 +46,7 @@ export const projectCategories: Record<string, ProjectCategoryMeta> = {
     id: 'advanced-technical-facilities',
     slug: 'advanced-technical-facilities',
     title: 'Advanced Technical Facilities',
-    description: 'Specialist engineering for data centres, mission-critical, healthcare, energy, and technically demanding facilities.',
+    description: 'Specialist engineering for data centers, mission-critical, healthcare, energy, and technically demanding facilities.',
     order: 3,
     featuredProjectId: null,
   },

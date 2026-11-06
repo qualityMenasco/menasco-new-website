@@ -273,25 +273,25 @@
   },
   "dataCenter": {
     "seo": {
-      "title": "Data Centre MEP Services",
-      "description": "MENASCO delivers mission-critical data centre MEP and infrastructure solutions for uptime, reliability and future-ready digital operations."
+      "title": "Data Center MEP Services",
+      "description": "MENASCO delivers mission-critical data center MEP and infrastructure solutions for uptime, reliability and future-ready digital operations."
     },
     "hero": {
-      "eyebrow": "Data Centre Infrastructure",
+      "eyebrow": "Data Center Infrastructure",
       "heading": "Engineering Reliable Data Center Infrastructure for the Digital Future",
       "description": "Building high-performance mission-critical environments designed to power the future of digital infrastructure with reliability, efficiency & operational continuity."
     },
     "introHeading": {
-      "eyebrow": "Data Centres",
+      "eyebrow": "Data Centers",
       "heading": "Building the Backbone of the Digital Future"
     },
     "introParagraphs": [
-      "MENASCO is a trusted MEP & infrastructure partner delivering end-to-end mission-critical data center solutions across the UAE. We specialize in the design coordination, engineering, installation, testing & commissioning of high-performance data centre environments built to support reliability, operational continuity & future scalability.",
+      "MENASCO is a trusted MEP & infrastructure partner delivering end-to-end mission-critical data center solutions across the UAE. We specialize in the design coordination, engineering, installation, testing & commissioning of high-performance data center environments built to support reliability, operational continuity & future scalability.",
       "With extensive experience in complex & mission-critical projects, MENASCO delivers integrated solutions covering critical power infrastructure, precision cooling systems, automation, fire protection, ELV & smart building technologies all engineered to meet the demanding requirements of modern digital infrastructure.",
       "Our expertise extends across the full project lifecycle, from early-stage coordination & value engineering to final commissioning & operational readiness, ensuring efficient execution, optimized performance & long-term reliability.",
       "At MENASCO, we are committed to delivering resilient, scalable & future-ready infrastructure that supports the evolving needs of data-driven industries & the growing digital economy."
     ],
-    "exploreProjectsCta": "Explore Our Data Centre Projects",
+    "exploreProjectsCta": "Explore Our Data Center Projects",
     "stats": {
       "featuredDataCenters": "Featured Data Centers",
       "megawatts": "MegaWatts",
@@ -299,12 +299,12 @@
     },
     "capabilitiesHeading": {
       "eyebrow": "Capabilities",
-      "heading": "Our Data Centre Capabilities"
+      "heading": "Our Data Center Capabilities"
     },
     "capabilities": [
       {
         "title": "Complete MEP & Infrastructure Solutions",
-        "description": "MENASCO delivers integrated electromechanical & infrastructure solutions for mission-critical data centre environments, covering complete MEP systems coordination, installation, testing & commissioning."
+        "description": "MENASCO delivers integrated electromechanical & infrastructure solutions for mission-critical data center environments, covering complete MEP systems coordination, installation, testing & commissioning."
       },
       {
         "title": "Critical Power Infrastructure",
@@ -312,7 +312,7 @@
       },
       {
         "title": "Cooling & Precision HVAC Systems",
-        "description": "Design and execution of advanced HVAC systems, chilled water networks, precision cooling solutions & containment systems tailored for air cooled and direct-to-chip liquid cooled datacentre operations."
+        "description": "Design and execution of advanced HVAC systems, chilled water networks, precision cooling solutions & containment systems tailored for air cooled and direct-to-chip liquid cooled datacenter operations."
       },
       {
         "title": "Automation & Smart Control Systems",
@@ -324,7 +324,7 @@
       },
       {
         "title": "Testing, Commissioning & Performance Validation",
-        "description": "Comprehensive testing and commissioning processes ensuring system reliability, operational readiness, efficiency & compliance with international data centre standards."
+        "description": "Comprehensive testing and commissioning processes ensuring system reliability, operational readiness, efficiency & compliance with international data center standards."
       },
       {
         "title": "Scalable & Future-Ready Infrastructure",
@@ -333,9 +333,9 @@
     ],
     "prefab": {
       "eyebrow": "Prefabrication",
-      "heading": "Integrated Prefabrication and Modular MEP Delivery for Data Centres",
+      "heading": "Integrated Prefabrication and Modular MEP Delivery for Data Centers",
       "description": "Menasco has the capability to develop and deliver fully coordinated prefabricated MEP solutions for data center projects, including modular pipe racks, corridor modules, plantroom skids, riser modules, valve assemblies, and support frames. These solutions are engineered through early BIM coordination, factory-controlled fabrication, pre-assembly, testing where applicable, and planned logistics to site.",
-      "closingStatement": "Powering the Future of Data Centres: MENASCO delivers integrated mission-critical infrastructure solutions designed for maximum reliability, operational continuity & scalable performance."
+      "closingStatement": "Powering the Future of Data Centers: MENASCO delivers integrated mission-critical infrastructure solutions designed for maximum reliability, operational continuity & scalable performance."
     },
     "faqHeading": {
       "eyebrow": "FAQ",
@@ -498,7 +498,7 @@
         "description": "Integrated piping assemblies manufactured to reduce installation time and improve consistency."
       },
       {
-        "title": "Modular Data Centre Solutions",
+        "title": "Modular Data Center Solutions",
         "description": "Prefabricated support solutions for data center whitespaces."
       },
       {
@@ -530,7 +530,7 @@
       "eyebrow": "Quality Through Manufacturing",
       "heading": "Quality Through Manufacturing",
       "paragraph1": "Every manufactured component is produced using advanced fabrication technologies and controlled production processes to ensure precision, repeatability, and long-term performance.",
-      "paragraph2": "MENASCO's approach combines engineering expertise with specialist manufacturing partners' modern production techniques to deliver prefabricated MEP solutions that support residential developments, hospitality projects, commercial buildings, data centres, healthcare facilities, industrial developments, and other technically demanding infrastructure."
+      "paragraph2": "MENASCO's approach combines engineering expertise with specialist manufacturing partners' modern production techniques to deliver prefabricated MEP solutions that support residential developments, hospitality projects, commercial buildings, data centers, healthcare facilities, industrial developments, and other technically demanding infrastructure."
     },
     "qualityHighlights": [
       {
@@ -621,7 +621,7 @@
       "eyebrow": "Quality Through Manufacturing",
       "heading": "Quality Through Manufacturing",
       "paragraph1": "Every manufactured component is produced using advanced fabrication technologies and controlled production processes to ensure precision, repeatability, and long-term performance.",
-      "paragraph2": "MENASCO's approach combines engineering expertise with specialist manufacturing partners' modern production techniques to deliver prefabricated MEP solutions across residential, hospitality, commercial, data centre, healthcare, and industrial developments."
+      "paragraph2": "MENASCO's approach combines engineering expertise with specialist manufacturing partners' modern production techniques to deliver prefabricated MEP solutions across residential, hospitality, commercial, data center, healthcare, and industrial developments."
     },
     "qualityHighlights": [
       {
@@ -712,7 +712,7 @@
       "eyebrow": "Quality Across the Full Scope",
       "heading": "Quality Across the Full Scope",
       "paragraph1": "Because engineering, procurement and construction sit within one team, quality control is applied consistently from early design decisions through to final commissioning, rather than being re-established at each handover.",
-      "paragraph2": "MENASCO's EPC approach supports residential developments, hospitality projects, commercial buildings, data centres, healthcare facilities and other technically demanding infrastructure, with the same accountable delivery model applied across every sector."
+      "paragraph2": "MENASCO's EPC approach supports residential developments, hospitality projects, commercial buildings, data centers, healthcare facilities and other technically demanding infrastructure, with the same accountable delivery model applied across every sector."
     },
     "qualityHighlights": [
       {
@@ -802,7 +802,7 @@
       "eyebrow": "Quality Across the Full Scope",
       "heading": "Quality Across the Full Scope",
       "paragraph1": "Because engineering, procurement and construction sit within one team, quality control is applied consistently from early design decisions through to final commissioning.",
-      "paragraph2": "MENASCO's EPC approach supports residential, hospitality, commercial, data centre, healthcare and industrial developments, with the same accountable delivery model applied across every sector."
+      "paragraph2": "MENASCO's EPC approach supports residential, hospitality, commercial, data center, healthcare and industrial developments, with the same accountable delivery model applied across every sector."
     },
     "qualityHighlights": [
       {
@@ -889,7 +889,7 @@
       "eyebrow": "Quality Across the Full Scope",
       "heading": "Quality Across the Full Scope",
       "paragraph1": "Because mechanical, electrical, plumbing and fire protection are delivered by one coordinated team, quality control is applied consistently across every system rather than varying from one contractor to the next.",
-      "paragraph2": "MENASCO's MEP approach supports residential developments, hospitality projects, commercial buildings, data centres, healthcare facilities and other technically demanding infrastructure, with the same coordinated delivery model applied across every sector."
+      "paragraph2": "MENASCO's MEP approach supports residential developments, hospitality projects, commercial buildings, data centers, healthcare facilities and other technically demanding infrastructure, with the same coordinated delivery model applied across every sector."
     },
     "qualityHighlights": [
       {
@@ -975,7 +975,7 @@
       "eyebrow": "Quality Across the Full Scope",
       "heading": "Quality Across the Full Scope",
       "paragraph1": "Because mechanical, electrical, plumbing and fire protection are delivered by one coordinated team, quality control is applied consistently across every system.",
-      "paragraph2": "MENASCO's MEP approach supports residential, hospitality, commercial, data centre, healthcare and industrial developments, with the same coordinated delivery model applied across every sector."
+      "paragraph2": "MENASCO's MEP approach supports residential, hospitality, commercial, data center, healthcare and industrial developments, with the same coordinated delivery model applied across every sector."
     },
     "qualityHighlights": [
       {
@@ -1066,7 +1066,7 @@
       "eyebrow": "Quality Across Civil and MEP",
       "heading": "Quality Across Civil and MEP",
       "paragraph1": "Because civil works are coordinated directly with our own building-services teams, quality and programme control are maintained consistently across both scopes rather than managed separately.",
-      "paragraph2": "This coordinated approach supports residential developments, hospitality projects, commercial buildings, data centres, healthcare facilities and other technically demanding infrastructure, wherever civil and MEP scopes need to work in step."
+      "paragraph2": "This coordinated approach supports residential developments, hospitality projects, commercial buildings, data centers, healthcare facilities and other technically demanding infrastructure, wherever civil and MEP scopes need to work in step."
     },
     "qualityHighlights": [
       {
@@ -1156,7 +1156,7 @@
       "eyebrow": "Quality Across Civil and MEP",
       "heading": "Quality Across Civil and MEP",
       "paragraph1": "Because civil works are coordinated directly with our own building-services teams, quality and programme control are maintained consistently across both scopes.",
-      "paragraph2": "This coordinated approach supports residential, hospitality, commercial, data centre, healthcare and industrial developments, wherever civil and MEP scopes need to work in step."
+      "paragraph2": "This coordinated approach supports residential, hospitality, commercial, data center, healthcare and industrial developments, wherever civil and MEP scopes need to work in step."
     },
     "qualityHighlights": [
       {
@@ -1186,11 +1186,11 @@
   "modularPage": {
     "seo": {
       "title": "Modular MEP Solutions",
-      "description": "MENASCO delivers factory-built modular MEP assemblies, including modular data-centre whitespace solutions, produced off-site for faster, higher-quality installation."
+      "description": "MENASCO delivers factory-built modular MEP assemblies, including modular data-center whitespace solutions, produced off-site for faster, higher-quality installation."
     },
     "name": "Modular MEP Solutions",
     "hero": {
-      "description": "MENASCO's modular MEP capability delivers complete mechanical, electrical and plumbing assemblies as factory-built units, produced in controlled manufacturing environments before arriving on site. From prefabricated plant skids to modular data-centre whitespace solutions, our modular approach reduces on-site installation time while maintaining the same engineering standards applied across every MENASCO project."
+      "description": "MENASCO's modular MEP capability delivers complete mechanical, electrical and plumbing assemblies as factory-built units, produced in controlled manufacturing environments before arriving on site. From prefabricated plant skids to modular data-center whitespace solutions, our modular approach reduces on-site installation time while maintaining the same engineering standards applied across every MENASCO project."
     },
     "sections": [
       {
@@ -1198,8 +1198,8 @@
         "paragraph": "Our modular scope spans complete plant-room skids, prefabricated MEP modules and containerised building-services units, engineered and assembled off-site to project-specific requirements before being transported and installed as complete units."
       },
       {
-        "heading": "Modular Data Centre Solutions",
-        "paragraph": "For data centre and mission-critical projects, modular prefabrication extends to whitespace support solutions — factory-built mechanical and electrical plant modules that are tested before leaving the manufacturing environment and installed with minimal on-site work."
+        "heading": "Modular Data Center Solutions",
+        "paragraph": "For data center and mission-critical projects, modular prefabrication extends to whitespace support solutions — factory-built mechanical and electrical plant modules that are tested before leaving the manufacturing environment and installed with minimal on-site work."
       },
       {
         "heading": "Why Modular",

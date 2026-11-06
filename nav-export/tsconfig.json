@@ -1,0 +1,23 @@
+{
+  // Standalone type-check for the header export + its generator script:
+  //   npx tsc --noEmit -p nav-export
+  // Deliberately NOT referenced from the repo's root tsconfig.json, so `tsc -b`
+  // for the site is unaffected. Not needed in the host app (its own tsconfig
+  // covers the copied files).
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["vite/client", "node"]
+  },
+  "include": ["MenascoHeader.tsx", "../scripts/export-nav.ts"]
+}
