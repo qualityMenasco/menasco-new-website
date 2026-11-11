@@ -18,6 +18,21 @@ if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
 }
 
+// Recover from a stale build. After a deploy, a page loaded from the previous
+// build still references that build's hashed chunks, which no longer exist —
+// loading one fails and the app would crash. Vite fires `vite:preloadError`
+// when a lazy chunk can't load; reload once to pick up the current build. The
+// timestamp guard stops a reload loop if the failure persists for another
+// reason (e.g. the network is down).
+window.addEventListener('vite:preloadError', (event) => {
+  const key = 'menasco:stale-build-reload';
+  const last = Number(sessionStorage.getItem(key) ?? 0);
+  if (Date.now() - last < 10_000) return;
+  sessionStorage.setItem(key, String(Date.now()));
+  event.preventDefault();
+  window.location.reload();
+});
+
 const app = (
   <StrictMode>
     <App />

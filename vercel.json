@@ -10,7 +10,7 @@
     { "source": "/api/newsroom/public/:path*", "destination": "https://wvojo9g543.execute-api.ap-south-1.amazonaws.com/api/newsroom/public/:path*" },
     { "source": "/newsroom/:slug", "destination": "/api/newsroom-article-page?slug=:slug&locale=en" },
     { "source": "/ar/newsroom/:slug", "destination": "/api/newsroom-article-page?slug=:slug&locale=ar" },
-    { "source": "/((?!api/).*)", "destination": "/404.html" }
+    { "source": "/((?!api/|assets/).*)", "destination": "/404.html" }
   ],
   "functions": {
     "api/**/*.ts": {
