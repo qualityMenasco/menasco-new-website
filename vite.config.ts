@@ -47,7 +47,21 @@ export default defineConfig(({ mode }) => {
     // without this, a prerendered route can `hydrateRoot` against markup
     // whose actual React component hasn't finished downloading yet, which
     // defeats the fix (see scripts/seo/prerender.ts's module comment).
-    build: { manifest: true },
+    build: {
+      manifest: true,
+      rollupOptions: {
+        output: {
+          // Built files live under /assets/v2/ (2026-11-11). Moving every
+          // hashed file to an address no browser has seen before abandons any
+          // bad copies a visitor's browser cached from earlier deploys (when a
+          // missing asset was answered with the 404 page as HTML and cached as
+          // immutable). Bump the folder again only if that ever recurs.
+          entryFileNames: 'assets/v2/[name]-[hash].js',
+          chunkFileNames: 'assets/v2/[name]-[hash].js',
+          assetFileNames: 'assets/v2/[name]-[hash][extname]',
+        },
+      },
+    },
     server: {
       host: '0.0.0.0',
       port: 3000,
