@@ -42,28 +42,64 @@
     "services": "الخدمات",
     "projects": "المشاريع",
     "follow": "تابعنا",
-    "headOffice": "المكتب الرئيسي"
+    "headOffice": "المكتب الرئيسي",
+    "pending": "قيد التحديث",
+    "offices": "مكاتبنا",
+    "connect": "تواصل معنا"
+  },
+  "contactLink": {
+    "copied": "تم النسخ",
+    "copyHint": "انقر للنسخ"
   },
   "locations": {
     "dubai": {
+      "short": "الإمارات",
       "label": "دبي، المكتب الرئيسي",
+      "officeHeading": "مكتب الإمارات",
       "city": "دبي",
       "country": "الإمارات العربية المتحدة"
     },
     "riyadh": {
+      "short": "السعودية",
       "label": "الرياض، ميناسكو السعودية",
+      "officeHeading": "مكتب السعودية",
       "city": "الرياض",
       "country": "المملكة العربية السعودية"
     },
     "cairo": {
+      "short": "مصر",
       "label": "القاهرة، ميناسكو مصر",
+      "officeHeading": "مكتب مصر",
       "city": "القاهرة",
       "country": "مصر"
     },
     "london": {
+      "short": "المملكة المتحدة",
       "label": "مكتب لندن",
+      "officeHeading": "مكتب المملكة المتحدة",
       "city": "لندن",
       "country": "المملكة المتحدة"
+    },
+    "usa": {
+      "short": "الولايات المتحدة",
+      "label": "مكتب دنفر",
+      "city": "دنفر",
+      "country": "الولايات المتحدة الأمريكية",
+      "officeHeading": "مكتب الولايات المتحدة"
+    },
+    "jordan": {
+      "short": "الأردن",
+      "label": "مكتب عمّان",
+      "city": "عمّان",
+      "country": "الأردن",
+      "officeHeading": "مكتب الأردن"
+    },
+    "syria": {
+      "short": "سوريا",
+      "label": "مكتب دمشق",
+      "city": "دمشق",
+      "country": "سوريا",
+      "officeHeading": "مكتب سوريا"
     }
   },
   "certifications": {

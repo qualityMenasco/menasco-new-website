@@ -7,7 +7,9 @@ export function CompanyIntroduction() {
   const { t } = useTranslation('home');
 
   return (
-    <Section background="warmwhite" spacing="lg" edgeFade>
+    // Stone: sits between the dark Data Centre band and the warmwhite Services
+    // section, keeping the homepage's light sections strictly alternating.
+    <Section background="stone" spacing="lg" edgeFade>
       <SplitContent
         image="/company-intro-mep-hero.jpg"
         imageAlt="Engineers reviewing coordinated MEP drawings"
@@ -16,7 +18,10 @@ export function CompanyIntroduction() {
         heading={t('companyIntro.heading', { years: new Date().getFullYear() - foundingYear })}
         headingAs="h3"
         description={t('companyIntro.description', { foundingYear })}
-        action={{ label: t('companyIntro.cta'), href: '/about' }}
+        // Image fills the text column's height (no floating gap on smaller
+        // desktops), and the text gets more width there — same as Manufacturing.
+        stretch
+        textWeighted
       />
     </Section>
   );

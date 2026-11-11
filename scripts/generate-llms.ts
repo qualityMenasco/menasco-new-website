@@ -266,7 +266,7 @@ function generateHome() {
       hr: true,
       text: doc(
         h2('Projects & Sectors'),
-        `${projects.length} current projects across ${home.hero.description.includes('Saudi Arabia') ? 'the UAE, Saudi Arabia, Egypt and the USA' : 'the region'}, organized into ${publishedCategories.length} sectors.`,
+        `${projects.length} current projects across the UAE, Saudi Arabia, Egypt and the USA, organized into ${publishedCategories.length} sectors.`,
         bullets(publishedCategories.map((c) => `${c.title}: ${c.description}`)),
         linkLine('All Projects & Sectors', llmsUrl('/projects/categories'), 'Full project portfolio, browsable by sector.'),
       ),
@@ -492,7 +492,8 @@ function generateContact() {
       h2('Offices'),
       officeLocations
         .map((o) => {
-          const lines = [`${o.label} (${o.country})`, o.address];
+          const lines = [`${o.label} (${o.country})`];
+          if (o.address) lines.push(o.address);
           if (o.phone) lines.push(`Phone: ${o.phone}`);
           if (o.isHeadquarters) lines.push('Head Office');
           return lines.join(' | ');

@@ -5,16 +5,18 @@ import type { Theme } from '../../types';
 
 export interface CertificationStripProps {
   certifications: string[];
+  /** Horizontal alignment of the badge row (default centered). */
+  align?: 'center' | 'start';
   theme?: Theme;
   className?: string;
 }
 
-export function CertificationStrip({ certifications, theme, className }: CertificationStripProps) {
+export function CertificationStrip({ certifications, align = 'center', theme, className }: CertificationStripProps) {
   const resolvedTheme = useSectionTheme(theme);
   const isDark = resolvedTheme === 'dark';
 
   return (
-    <div className={cn('flex flex-wrap items-center justify-center gap-3', className)}>
+    <div className={cn('flex flex-wrap items-center gap-3', align === 'start' ? 'justify-start' : 'justify-center', className)}>
       {certifications.map((certification) => (
         <span
           key={certification}

@@ -5,12 +5,11 @@ import { Stack } from '../components/layout/Stack';
 import { Eyebrow, Heading, Text } from '../components/typography/Typography';
 import { NavSectionH1 } from '../components/typography/NavSectionH1';
 import { Badge } from '../components/ui/Badge';
+import { ContactLink } from '../components/ui/ContactLink';
 import { ContactEnquiryForm } from '../components/forms/ContactEnquiryForm';
 import { officeLocations } from '../data/locations';
 import { SEO } from '../seo/SEO';
 import {} from '../seo/structuredData';
-
-const locationKeys: Record<string, string> = { dubai: 'dubai', riyadh: 'riyadh', cairo: 'cairo', london: 'london' };
 
 /** Compact office list — same officeLocations data the Home page's Regional Presence section and mobile Contact page already use. */
 function OfficesPanel() {
@@ -22,8 +21,7 @@ function OfficesPanel() {
       </Heading>
       <Stack space="sm">
         {officeLocations.map((office) => {
-          const key = locationKeys[office.id];
-          const label = key ? t(`common:locations.${key}.label`) : office.label;
+          const label = t(`common:locations.${office.id}.label`, office.label);
           return (
             <div key={office.id} className="flex flex-col gap-1.5 border-t border-gray-200 pt-3 first:border-t-0 first:pt-0">
               <div className="flex flex-wrap items-center gap-2">
@@ -32,16 +30,16 @@ function OfficesPanel() {
               </div>
               <div className="flex items-start gap-2 text-small text-gray-600">
                 <MapPin size={14} aria-hidden="true" className="mt-0.5 shrink-0 text-gray-400" />
-                <span>{office.address}</span>
+                {office.address ? <span>{office.address}</span> : <span className="italic text-gray-500">{t('common:footer.pending')}</span>}
               </div>
-              {office.phone && (
-                <div className="flex items-center gap-2 text-small text-gray-600" dir="ltr">
-                  <Phone size={14} aria-hidden="true" className="shrink-0 text-gray-400" />
-                  <a href={`tel:${office.phone.replace(/\s+/g, '')}`} className="hover:text-brand-600">
-                    {office.phone}
-                  </a>
-                </div>
-              )}
+              <div className="flex items-center gap-2 text-small text-gray-600">
+                <Phone size={14} aria-hidden="true" className="shrink-0 text-gray-400" />
+                {office.phone ? (
+                  <ContactLink kind="tel" value={office.phone} className="hover:text-brand-600" />
+                ) : (
+                  <span className="italic text-gray-500">{t('common:footer.pending')}</span>
+                )}
+              </div>
             </div>
           );
         })}

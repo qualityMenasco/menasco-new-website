@@ -11,7 +11,6 @@ import { PrefabricationFeature } from '../components/sections/home/Prefabricatio
 import { QualityAndSafety } from '../components/sections/home/QualityAndSafety';
 import { RegionalPresence } from '../components/sections/home/RegionalPresence';
 import { CareersPreview } from '../components/sections/home/CareersPreview';
-import { CtaBand } from '../components/sections/CtaBand';
 import { ScrollReveal } from '../components/common/ScrollReveal';
 import { SEO } from '../seo/SEO';
 import { organizationJsonLd, websiteJsonLd } from '../seo/structuredData';
@@ -66,13 +65,6 @@ export default function HomePage() {
       <ScrollReveal id="careers">
         <CareersPreview />
       </ScrollReveal>
-      <CtaBand
-        headingLevel="h1"
-        heading={t('home:finalCta.heading')}
-        description={t('home:finalCta.description')}
-        primary={{ label: t('common:buttons.requestQuote'), href: '/contact?type=project' }}
-        secondary={{ label: t('common:buttons.viewAllServices'), href: '/services' }}
-      />
     </>
   );
 }

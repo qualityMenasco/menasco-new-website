@@ -29,8 +29,27 @@ const iconBySlug: Record<string, SectorIcon> = {
   'infrastructure-utilities': 'route',
 };
 
-export const sectors: Sector[] = projectCategoryList.map((category) => ({
-  id: category.id,
-  slug: category.slug,
-  icon: iconBySlug[category.slug] ?? 'building',
-}));
+/**
+ * Homepage-only card order. Projects pages and the contact form keep the
+ * taxonomy order from projectCategories.ts; any category not listed here
+ * falls in after these, in that taxonomy order.
+ */
+const homepageOrder = [
+  'advanced-technical-facilities',
+  'infrastructure-utilities',
+  'residential-commercial',
+  'hospitality-landmark-entertainment',
+];
+
+const homepageRank = (slug: string) => {
+  const rank = homepageOrder.indexOf(slug);
+  return rank === -1 ? homepageOrder.length : rank;
+};
+
+export const sectors: Sector[] = [...projectCategoryList]
+  .sort((a, b) => homepageRank(a.slug) - homepageRank(b.slug))
+  .map((category) => ({
+    id: category.id,
+    slug: category.slug,
+    icon: iconBySlug[category.slug] ?? 'building',
+  }));

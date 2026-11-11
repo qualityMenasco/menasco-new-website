@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, ArrowUpRight, ChevronDown } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, BookOpen, Briefcase, ChevronDown } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { MobileHero } from '../components/MobileHero';
@@ -7,7 +7,8 @@ import { SectionHeader } from '../components/SectionHeader';
 import { MobileStatsGrid } from '../components/MobileStatsGrid';
 import { MobileProjectCard } from '../components/MobileProjectCard';
 import { RegionalOfficeGrid } from '../components/RegionalOfficeGrid';
-import { MobileCTA } from '../components/MobileCTA';
+import { RegionalPresence } from '../../components/sections/home/RegionalPresence';
+import { officeLocations } from '../../data/locations';
 import { LocaleLink } from '../components/LocaleLink';
 import { cn } from '../../lib/utils';
 import { NavSectionH1 } from '../../components/typography/NavSectionH1';
@@ -35,6 +36,12 @@ const qhseRows = [
   { pillar: 'qualityManagement', certification: 'ISO 9001:2015' },
   { pillar: 'healthSafety', certification: 'ISO 45001:2018' },
   { pillar: 'environmentalManagement', certification: 'ISO 14001:2015' },
+] as const;
+
+/** The two opportunity types in the Careers section (information only — the section's one link is its button). */
+const careerPaths = [
+  { key: 'internships', icon: BookOpen },
+  { key: 'jobApplications', icon: Briefcase },
 ] as const;
 
 export default function HomePage() {
@@ -68,17 +75,13 @@ export default function HomePage() {
           </h3>
           <p className="text-small text-gray-600">{t('home:companyIntro.mobileDescription', { foundingYear })}</p>
         </div>
-        <LocaleLink to="/about" className="mt-2.5 inline-flex items-center gap-1.5 text-small font-semibold text-brand-600">
-          {t('home:companyIntro.cta')}
-          <ArrowRight size={15} aria-hidden="true" className="rtl:rotate-180" />
-        </LocaleLink>
         <div className="mt-5">
           <MobileStatsGrid compact />
         </div>
       </section>
 
-      {/* 4. Services — compact accordion, collapsed by default */}
-      <section className="py-10">
+      {/* 4. Services — compact accordion, collapsed by default (stone, between the warm About block and warm Projects) */}
+      <section className="bg-stone py-10">
         <div className="px-4">
           <SectionHeader eyebrow={t('home:servicesShowcase.eyebrow')} heading={t('home:servicesShowcase.mobileHeading')} headingAs="h3" />
         </div>
@@ -138,16 +141,20 @@ export default function HomePage() {
             );
           })}
         </nav>
-        <div className="px-4 pt-4">
-          <LocaleLink to="/services" className="inline-flex items-center gap-1.5 text-small font-semibold text-brand-600">
+        <div className="flex flex-wrap gap-x-6 gap-y-1 px-4 pt-4">
+          <LocaleLink to="/services" className="inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-brand-600">
             {t('common:buttons.viewAllServices')}
+            <ArrowRight size={15} aria-hidden="true" className="rtl:rotate-180" />
+          </LocaleLink>
+          <LocaleLink to="/about" className="inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-brand-600">
+            {t('home:companyIntro.cta')}
             <ArrowRight size={15} aria-hidden="true" className="rtl:rotate-180" />
           </LocaleLink>
         </div>
       </section>
 
-      {/* 5. Portfolio — featured projects + Browse All Projects CTA */}
-      <section className="bg-stone py-10">
+      {/* 5. Portfolio — featured projects (warm, between stone Services and the dark Data Centre band) */}
+      <section className="py-10">
         <div className="px-4">
           <SectionHeader
             eyebrow={t('home:featuredProjects.eyebrow')}
@@ -172,15 +179,6 @@ export default function HomePage() {
               className="w-[78vw] max-w-[20rem] shrink-0"
             />
           ))}
-        </div>
-        <div className="px-4 pt-5">
-          <LocaleLink
-            to="/projects/categories"
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-md bg-brand-600 text-body font-semibold text-warmwhite"
-          >
-            {t('home:featuredProjects.mobileCta')}
-            <ArrowRight size={16} aria-hidden="true" className="rtl:rotate-180" />
-          </LocaleLink>
         </div>
       </section>
 
@@ -223,10 +221,36 @@ export default function HomePage() {
         </motion.div>
       </section>
 
+      {/* 6a. Off-site manufacturing — photo + short pitch + one link. Stacked on
+          phones; photo beside the text on tablets. */}
+      <section className="px-4 py-10 md:py-14">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:items-center md:gap-8">
+          <div className="aspect-[16/10] overflow-hidden rounded-md bg-gray-100 md:aspect-[4/3]">
+            <img
+              src="/manufacturing-prefab-hero.jpg"
+              alt="Ductwork fabrication on the MENASCO manufacturing floor"
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div>
+            <SectionHeader eyebrow={t('home:prefabrication.eyebrow')} heading={t('home:prefabrication.heading')} headingAs="h3" />
+            <p className="mt-3 text-small text-gray-600 md:text-body">{t('home:prefabrication.mobileDescription')}</p>
+            <LocaleLink
+              to="/services/manufacturing-prefabrication"
+              className="mt-5 inline-flex h-11 items-center gap-2 rounded-md border border-brand-600 px-5 text-small font-semibold text-brand-600 transition-colors duration-base active:bg-brand-50"
+            >
+              {t('home:prefabrication.cta')}
+              <ArrowRight size={15} aria-hidden="true" className="rtl:rotate-180" />
+            </LocaleLink>
+          </div>
+        </div>
+      </section>
+
       {/* 6b. QHSE — pillar ↔ certificate evidence list, compact */}
       <section className="bg-stone px-4 py-10">
         <SectionHeader eyebrow={t('home:qualitySafety.eyebrow')} heading={t('home:qualitySafety.heading')} headingAs="h3" />
-        <p className="mt-3 text-balance text-small text-gray-600">{t('home:qualitySafety.standardsCaption').replace(/\n/g, ' ')}</p>
         <ul role="list" className="mt-4 border-t border-gray-200">
           {qhseRows.map(({ pillar, certification: certificationName }) => {
             const certification = certifications.find((item) => item.name === certificationName);
@@ -255,27 +279,60 @@ export default function HomePage() {
             );
           })}
         </ul>
-        <LocaleLink to="/quality-safety" className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-brand-600">
-          {t('home:qualitySafety.cta')}
-          <ArrowRight size={15} aria-hidden="true" className="rtl:rotate-180" />
-        </LocaleLink>
       </section>
 
-      {/* 7. Regional presence — 2×2 office grid + selected office details */}
-      <section className="px-4 py-10">
-        <SectionHeader eyebrow={t('home:regionalPresence.eyebrow')} heading={t('home:regionalPresence.heading')} headingAs="h3" />
+      {/* 7. Regional presence — tablets get the desktop map + office card;
+          phones keep the compact office grid + selected office details. */}
+      <div className="hidden md:block">
+        <RegionalPresence />
+      </div>
+      <section className="px-4 py-10 md:hidden">
+        <SectionHeader eyebrow={t('home:regionalPresence.eyebrow')} heading={t('home:regionalPresence.heading', { count: officeLocations.length })} headingAs="h3" />
         <div className="mt-4">
           <RegionalOfficeGrid />
         </div>
       </section>
 
-      {/* 8. Final call to action */}
-      <MobileCTA
-        heading={t('home:finalCta.heading')}
-        description={t('home:finalCta.description')}
-        primary={{ label: t('common:buttons.requestQuote'), href: '/contact?type=project' }}
-        secondary={{ label: t('common:buttons.viewAllServices'), href: '/services' }}
-      />
+      {/* 8. Careers — one button only. Stacked on phones; the pitch + button
+          beside the two opportunity types on tablets (same as desktop). */}
+      <section className="bg-stone px-4 py-10 md:py-14">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:items-center md:gap-10">
+          <div className="flex flex-col items-start">
+            <SectionHeader eyebrow={t('home:careersPreview.eyebrow')} heading={t('home:careersPreview.heading')} headingAs="h3" />
+            <p className="mt-3 text-small text-gray-600 md:text-body">{t('home:careersPreview.description')}</p>
+            <LocaleLink
+              to="/careers"
+              className="mt-5 inline-flex h-11 items-center gap-2 rounded-md bg-brand-600 px-5 text-small font-semibold text-warmwhite max-md:hidden"
+            >
+              {t('home:careersPreview.cta')}
+              <ArrowRight size={15} aria-hidden="true" className="rtl:rotate-180" />
+            </LocaleLink>
+          </div>
+          <div className="flex flex-col gap-5">
+            <ul role="list" className="divide-y divide-gray-200 border-y border-gray-200">
+              {careerPaths.map(({ key, icon: Icon }) => (
+                <li key={key} className="flex items-start gap-3 py-4">
+                  <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-warmwhite text-brand-600">
+                    <Icon size={18} aria-hidden="true" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-body font-semibold text-ink">{t(`home:careersPreview.${key}.title`)}</p>
+                    <p className="mt-0.5 text-small text-gray-600">{t(`home:careersPreview.${key}.description`)}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            {/* Phones: the single button follows the two points. */}
+            <LocaleLink
+              to="/careers"
+              className="inline-flex h-11 w-fit items-center gap-2 rounded-md bg-brand-600 px-5 text-small font-semibold text-warmwhite md:hidden"
+            >
+              {t('home:careersPreview.cta')}
+              <ArrowRight size={15} aria-hidden="true" className="rtl:rotate-180" />
+            </LocaleLink>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

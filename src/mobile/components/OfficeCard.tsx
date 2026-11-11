@@ -7,10 +7,11 @@ export interface OfficeCardProps {
   country: string;
   isSelected: boolean;
   onSelect: () => void;
+  className?: string;
 }
 
-/** Compact 2×2-grid office tile — a real button (not hover-only), marks its selected state via aria-pressed. */
-export function OfficeCard({ label, country, isSelected, onSelect }: OfficeCardProps) {
+/** Compact two-column-grid office tile — a real button (not hover-only), marks its selected state via aria-pressed. */
+export function OfficeCard({ label, country, isSelected, onSelect, className }: OfficeCardProps) {
   return (
     <button
       type="button"
@@ -19,6 +20,7 @@ export function OfficeCard({ label, country, isSelected, onSelect }: OfficeCardP
       className={cn(
         'flex min-h-[92px] flex-col items-start gap-1.5 rounded-md border p-3 text-start transition-colors duration-base',
         isSelected ? 'border-brand-600 bg-brand-50' : 'border-gray-200 bg-warmwhite active:border-gray-300',
+        className,
       )}
     >
       <span

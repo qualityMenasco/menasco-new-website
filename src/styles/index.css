@@ -85,3 +85,32 @@
     animation: gallery-fade 280ms ease-out;
   }
 }
+
+/*
+ * Homepage sector title cards (SectorsShowcase). The titles are long uppercase
+ * words ("INFRASTRUCTURE") that cannot wrap, so the size follows the card's own
+ * width rather than the viewport: the longest word is ~9.5x the font size, and
+ * 9.8 leaves a small margin. Wide cards put the icon beside the title (44px
+ * icon + 16px gap = 60px); narrow ones stack it above to give the title the
+ * full width. Unlayered so it wins over the text-h4 utility.
+ */
+.sector-title-card {
+  container-type: inline-size;
+}
+.sector-title-row {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.sector-title {
+  font-size: min(clamp(1.125rem, 1.05rem + 0.3vw, 1.375rem), calc(100cqi / 9.8));
+  overflow-wrap: break-word;
+}
+@container (min-width: 14.25rem) {
+  .sector-title-row {
+    flex-direction: row;
+    align-items: center;
+  }
+  .sector-title {
+    font-size: min(clamp(1.125rem, 1.05rem + 0.3vw, 1.375rem), calc((100cqi - 60px) / 9.8));
+  }
+}

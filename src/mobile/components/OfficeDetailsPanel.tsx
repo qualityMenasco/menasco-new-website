@@ -1,13 +1,12 @@
 import { Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import type { OfficeLocation } from '../../data/locations';
+import { ContactLink } from '../../components/ui/ContactLink';
 
 export interface OfficeDetailsPanelProps {
   office: OfficeLocation;
   email: string;
 }
-
-const locationKeys: Record<string, string> = { dubai: 'dubai', riyadh: 'riyadh', cairo: 'cairo', london: 'london' };
 
 /**
  * Single shared detail panel — one per office, laid out in a compact 2×2
@@ -18,11 +17,12 @@ const locationKeys: Record<string, string> = { dubai: 'dubai', riyadh: 'riyadh',
  */
 export function OfficeDetailsPanel({ office, email }: OfficeDetailsPanelProps) {
   const { t } = useTranslation('common');
-  const directionsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office.address)}`;
-  const key = locationKeys[office.id];
-  const label = key ? t(`locations.${key}.label`) : office.label;
-  const city = key ? t(`locations.${key}.city`) : office.city;
-  const country = key ? t(`locations.${key}.country`) : office.country;
+  // No address yet → no directions link, and "Pending" in its place.
+  const directionsHref = office.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office.address)}` : null;
+  const label = t(`locations.${office.id}.label`, office.label);
+  const city = t(`locations.${office.id}.city`, office.city);
+  const country = t(`locations.${office.id}.country`, office.country);
+  const pending = <span className="italic text-gray-500">{t('footer.pending')}</span>;
 
   return (
     <div className="flex h-full flex-col rounded-md border border-gray-200 bg-warmwhite p-2.5">
@@ -34,29 +34,47 @@ export function OfficeDetailsPanel({ office, email }: OfficeDetailsPanelProps) {
       <div className="mt-1.5 flex flex-col gap-1 text-caption text-gray-700">
         <div className="flex items-start gap-1.5">
           <MapPin size={11} aria-hidden="true" className="mt-0.5 shrink-0 text-brand-600" />
-          <span dir="ltr" className="text-start leading-snug">{office.address}</span>
+          {office.address ? (
+            <span dir="ltr" className="text-start leading-snug">
+              {office.address}
+            </span>
+          ) : (
+            pending
+          )}
         </div>
-        {office.phone && (
-          <a href={`tel:${office.phone.replace(/\s+/g, '')}`} className="flex items-center gap-1.5 font-semibold text-ink">
+        {office.phone ? (
+          <ContactLink
+            kind="tel"
+            value={office.phone}
+            className="flex items-center gap-1.5 font-semibold text-ink"
+            icon={<Phone size={11} aria-hidden="true" className="shrink-0 text-brand-600" />}
+          />
+        ) : (
+          <div className="flex items-center gap-1.5">
             <Phone size={11} aria-hidden="true" className="shrink-0 text-brand-600" />
-            <span dir="ltr">{office.phone}</span>
-          </a>
+            {pending}
+          </div>
         )}
-        <a href={`mailto:${email}`} className="flex items-center gap-1.5 font-semibold text-ink">
-          <Mail size={11} aria-hidden="true" className="shrink-0 text-brand-600" />
-          <span dir="ltr" className="truncate">{email}</span>
-        </a>
+        <ContactLink
+          kind="email"
+          value={email}
+          className="flex items-center gap-1.5 font-semibold text-ink"
+          textClassName="truncate"
+          icon={<Mail size={11} aria-hidden="true" className="shrink-0 text-brand-600" />}
+        />
       </div>
 
-      <a
-        href={directionsHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-auto inline-flex items-center gap-1 pt-1.5 text-caption font-semibold text-brand-600"
-      >
-        {t('buttons.getDirections')}
-        <ArrowUpRight size={11} aria-hidden="true" className="rtl:-scale-x-100" />
-      </a>
+      {directionsHref && (
+        <a
+          href={directionsHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-auto inline-flex items-center gap-1 pt-1.5 text-caption font-semibold text-brand-600"
+        >
+          {t('buttons.getDirections')}
+          <ArrowUpRight size={11} aria-hidden="true" className="rtl:-scale-x-100" />
+        </a>
+      )}
     </div>
   );
 }

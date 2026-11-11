@@ -1,8 +1,6 @@
-import { ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Eyebrow, Heading, Text } from '../typography/Typography';
 import { Badge } from '../ui/Badge';
-import { ButtonLink } from '../ui/Button';
 import { SmartLink } from '../../lib/SmartLink';
 
 export interface FeaturedProjectPanelProps {
@@ -20,8 +18,9 @@ export interface FeaturedProjectPanelProps {
 /**
  * One half of the homepage's side-by-side flagship-project pair — a
  * compact, controlled-aspect-ratio portfolio feature (not a full-bleed hero
- * panel). The image links to this project's own detail page; "View Project"
- * below is a second, sibling link to the same destination (not nested).
+ * panel). The description lives behind the image: hovering (or keyboard-
+ * focusing) the image dims the photo and brings the text up, like the BIM
+ * section. The image and the title both link to the project's detail page.
  */
 export function FeaturedProjectPanel({
   title,
@@ -35,16 +34,27 @@ export function FeaturedProjectPanel({
 }: FeaturedProjectPanelProps) {
   const { t } = useTranslation(['common', 'projects']);
   return (
-    <div className="group">
-      <SmartLink href={viewProjectHref} className="block focus-visible:outline-offset-4" aria-label={t('viewItemLabel', { name: title })}>
-        <div className="aspect-[4/3] overflow-hidden rounded-md bg-gray-100">
+    <div>
+      <SmartLink
+        href={viewProjectHref}
+        className="group block focus-visible:outline-offset-4"
+        aria-label={t('viewItemLabel', { name: title })}
+      >
+        <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-ink">
           <img
             src={image}
             alt={imageAlt}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover transition-transform duration-slow ease-engineered group-hover:scale-[1.03]"
+            className="h-full w-full object-cover transition-[opacity,transform] duration-500 ease-engineered group-hover:scale-[1.03] group-hover:opacity-20 group-focus-visible:scale-[1.03] group-focus-visible:opacity-20"
           />
+          {description && (
+            <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 transition-opacity duration-500 ease-engineered group-hover:opacity-100 group-focus-visible:opacity-100 lg:p-10">
+              <Text variant="body" className="max-w-md text-center !leading-relaxed !text-warmwhite">
+                {description}
+              </Text>
+            </div>
+          )}
         </div>
       </SmartLink>
 
@@ -60,21 +70,15 @@ export function FeaturedProjectPanel({
           </div>
         )}
         <Heading level="h4" as="h3">
-          {title}
+          <SmartLink href={viewProjectHref} className="transition-colors duration-base hover:text-brand-600">
+            {title}
+          </SmartLink>
         </Heading>
         {location && (
           <Text variant="small" muted className="uppercase tracking-wide">
             {location}
           </Text>
         )}
-        {description && (
-          <Text variant="small" className="hidden sm:block">
-            {description}
-          </Text>
-        )}
-        <ButtonLink href={viewProjectHref} variant="outline" size="sm" trailingIcon={ArrowRight} className="mt-2 w-fit">
-          {t('buttons.viewProject')}
-        </ButtonLink>
       </div>
     </div>
   );

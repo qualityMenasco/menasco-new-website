@@ -18,7 +18,7 @@ export function FooterContainer({ theme = 'dark', className, children, ...rest }
         className={cn('border-t', isDark ? 'border-white/10 bg-charcoal' : 'border-gray-200 bg-warmwhite', className)}
         {...rest}
       >
-        <Container className="flex flex-col gap-16 py-16 md:py-20">{children}</Container>
+        <Container className="flex flex-col gap-12 py-14 md:py-16">{children}</Container>
       </footer>
     </SectionThemeContext.Provider>
   );

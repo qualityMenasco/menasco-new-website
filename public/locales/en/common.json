@@ -42,28 +42,64 @@
     "services": "Services",
     "projects": "Projects",
     "follow": "Follow",
-    "headOffice": "Head Office"
+    "headOffice": "Head Office",
+    "pending": "Pending",
+    "offices": "Offices",
+    "connect": "Connect with us"
+  },
+  "contactLink": {
+    "copied": "Copied",
+    "copyHint": "Click to copy"
   },
   "locations": {
     "dubai": {
+      "short": "UAE",
       "label": "Dubai, Head Office",
+      "officeHeading": "UAE Office",
       "city": "Dubai",
       "country": "United Arab Emirates"
     },
     "riyadh": {
+      "short": "KSA",
       "label": "Riyadh, MENASCO KSA",
+      "officeHeading": "KSA Office",
       "city": "Riyadh",
       "country": "Saudi Arabia"
     },
     "cairo": {
+      "short": "Egypt",
       "label": "Cairo, MENASCO Misr",
+      "officeHeading": "Egypt Office",
       "city": "Cairo",
       "country": "Egypt"
     },
     "london": {
+      "short": "UK",
       "label": "London Office",
+      "officeHeading": "UK Office",
       "city": "London",
       "country": "United Kingdom"
+    },
+    "usa": {
+      "short": "USA",
+      "label": "Denver Office",
+      "city": "Denver",
+      "country": "United States",
+      "officeHeading": "USA Office"
+    },
+    "jordan": {
+      "short": "Jordan",
+      "label": "Amman Office",
+      "city": "Amman",
+      "country": "Jordan",
+      "officeHeading": "Jordan Office"
+    },
+    "syria": {
+      "short": "Syria",
+      "label": "Damascus Office",
+      "city": "Damascus",
+      "country": "Syria",
+      "officeHeading": "Syria Office"
     }
   },
   "certifications": {

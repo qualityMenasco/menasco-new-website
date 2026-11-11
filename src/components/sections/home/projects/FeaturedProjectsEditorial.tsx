@@ -24,10 +24,10 @@ const qiddiya = publishedProjects.find((project) => project.slug === 'qiddiya')!
 
 /**
  * Homepage's Projects section — a compact introduction to the portfolio via
- * exactly two flagship projects, side by side on desktop. Each panel's
- * "View Project" links to that project's own detail page; the single
- * "Explore Projects" button at the end of the section is the one shared
- * path to the full Project Categories page.
+ * exactly two flagship projects, side by side on desktop. Each panel's image
+ * and title link to that project's own detail page; the single "Explore
+ * Projects" button at the end of the section is the one shared path to the
+ * full Project Categories page.
  */
 export function FeaturedProjectsEditorial() {
   const { t } = useTranslation(['home', 'projects']);
@@ -66,7 +66,8 @@ export function FeaturedProjectsEditorial() {
           />
         </div>
 
-        <div className="flex justify-end">
+        {/* The section's one call to action, now that the per-project buttons are gone. */}
+        <div className="flex justify-start pt-2">
           <ButtonLink href="/projects/categories" variant="primary" trailingIcon={ArrowRight}>
             {t('home:featuredProjects.cta')}
           </ButtonLink>

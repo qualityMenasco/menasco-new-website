@@ -5,6 +5,7 @@ import { Stack } from '../components/layout/Stack';
 import { Heading, Text } from '../components/typography/Typography';
 import { NavSectionH1 } from '../components/typography/NavSectionH1';
 import { ProfessionalList } from '../components/content/ProfessionalList';
+import { ContactLink } from '../components/ui/ContactLink';
 import { SEO } from '../seo/SEO';
 import {} from '../seo/structuredData';
 import {
@@ -109,9 +110,7 @@ export default function LynxqcPrivacyPolicyPage() {
                 )}
                 {section.heading === '12. Contact Information' && (
                   <Text className="max-w-2xl">
-                    <a href={`mailto:${lynxqcPrivacyPolicyContactEmail}`} className="font-semibold text-brand-600 hover:text-brand-700">
-                      {lynxqcPrivacyPolicyContactEmail}
-                    </a>
+                    <ContactLink kind="email" value={lynxqcPrivacyPolicyContactEmail} className="font-semibold text-brand-600 hover:text-brand-700" />
                   </Text>
                 )}
               </Stack>

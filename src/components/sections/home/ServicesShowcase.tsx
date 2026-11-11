@@ -56,17 +56,13 @@ export function ServicesShowcase() {
   };
 
   return (
-    // joinTop: CompanyIntroduction directly above is also a warmwhite `lg`
-    // section on the homepage — share one gap instead of 96px + 96px.
-    <Section background="warmwhite" spacing="lg" edgeFade joinTop>
+    // Its own full padding + edge fade, like every other homepage section
+    // boundary, so it reads as a distinct section from About MENASCO above
+    // (both are warmwhite).
+    <Section background="warmwhite" spacing="lg" edgeFade>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-[5fr_4fr] md:items-stretch md:gap-10">
-        {/* `md:items-stretch` on the grid lets this column stretch to the
-            right card's height (the taller of the two in collapsed state);
-            the CTA below is pushed to the bottom of that stretched space via
-            `flex-1` + `items-end`, so it lines up with the card's bottom
-            without being pinned/absolute. A min-h-free grid row on mobile
-            (single column) makes this a no-op there, so the CTA just follows
-            the content naturally. */}
+        {/* Left column: heading, the service list, then the CTA directly
+            beneath the list. */}
         <div className="flex flex-col">
           <Stack space="lg">
             <Stack space="sm">
@@ -145,9 +141,15 @@ export function ServicesShowcase() {
               })}
             </nav>
           </Stack>
-          <div className="mt-8 flex flex-1 items-end justify-start">
+          {/* Sits directly under the list rather than pinned to the column's
+              bottom, which left a large dead gap above it. */}
+          <div className="mt-8 flex flex-wrap justify-start gap-3">
             <ButtonLink href="/services" variant="primary" trailingIcon={ArrowRight}>
               {t('home:servicesShowcase.cta')}
+            </ButtonLink>
+            {/* Moved here from About MENASCO; outlined so the services CTA stays primary. */}
+            <ButtonLink href="/about" variant="outline">
+              {t('home:companyIntro.cta')}
             </ButtonLink>
           </div>
         </div>

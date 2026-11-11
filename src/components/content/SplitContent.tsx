@@ -28,6 +28,12 @@ export interface SplitContentProps {
    * opt in when the text column's length should drive the image's height.
    */
   stretch?: boolean;
+  /**
+   * On smaller desktops (lg, below xl) gives the text column ~55% of the
+   * width and tightens the gap, so long copy wraps less; even split from xl
+   * up. Off by default.
+   */
+  textWeighted?: boolean;
 }
 
 export function SplitContent({
@@ -46,12 +52,22 @@ export function SplitContent({
   theme,
   className,
   stretch = false,
+  textWeighted = false,
 }: SplitContentProps) {
   const resolvedTheme = useSectionTheme(theme);
   const imageFirst = imageSide === 'left';
 
   return (
-    <div className={cn('grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16', stretch && 'lg:items-stretch', className)}>
+    <div
+      className={cn(
+        'grid grid-cols-1 items-center gap-10',
+        textWeighted
+          ? cn('lg:gap-10 xl:grid-cols-2 xl:gap-16', imageFirst ? 'lg:grid-cols-[9fr_11fr]' : 'lg:grid-cols-[11fr_9fr]')
+          : 'lg:grid-cols-2 lg:gap-16',
+        stretch && 'lg:items-stretch',
+        className,
+      )}
+    >
       <div className={cn('relative', imageFirst ? 'lg:order-1' : 'lg:order-2')}>
         <div className={cn('overflow-hidden rounded-md bg-gray-100', stretch ? 'aspect-[4/3] lg:aspect-auto lg:h-full' : 'aspect-[4/3]')}>
           {video ? (

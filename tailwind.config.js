@@ -29,7 +29,7 @@ export default {
         slatealt: '#1b1f24', // tertiary dark surface — subtle differentiation
         // Light surfaces
         warmwhite: '#faf8f4', // warm white — primary light background
-        stone: '#f3efe8', // secondary light surface
+        stone: '#ebeff3', // secondary light surface — soft blue-grey (2026-11-11; was beige #f3efe8). The cooler hue separates it from warmwhite; it echoes the globe's sea colour
         // Muted sand / metallic accent
         sand: {
           50: '#f8f4ec',

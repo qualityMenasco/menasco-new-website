@@ -1,49 +1,17 @@
-import { Download, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { useState } from 'react';
+import { Download, MapPin, Phone } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import type { IconComponent } from '../types';
-import {
-  CertificationStrip,
-  CompanySummary,
-  ContactBlock,
-  FooterContainer,
-  FooterLinkGroup,
-  LegalRow,
-  LocationBlock,
-  SocialLinks,
-} from '../components/navigation';
+import { CertificationStrip, CompanySummary, FooterContainer, FooterLinkGroup, LegalRow, SocialLinks } from '../components/navigation';
 import { ButtonLink } from '../components/ui/Button';
+import { ContactLink } from '../components/ui/ContactLink';
 import { MenascoLogo } from '../components/brand/MenascoLogo';
-import { Text } from '../components/typography/Typography';
+import { cn } from '../lib/utils';
 import { certifications } from '../data/certifications';
-import { officeLocations, primaryContact } from '../data/locations';
-import { footerCompanyLinks, footerLegalLinks, footerProjectLinks, footerServiceLinks } from '../data/navigation';
-import { socialLinks } from '../data/socialLinks';
+import { officeLocations } from '../data/locations';
+import { footerLegalLinks } from '../data/navigation';
+import { footerSocialLinks } from '../data/socialLinks';
+import { useFooterLinkGroups } from '../lib/useFooterLinkGroups';
 import { COMPANY_PROFILE_PATH } from '../seo/constants';
-
-const socialIcons: Record<string, IconComponent> = {
-  LinkedIn: Linkedin,
-  Instagram: Instagram,
-  Facebook: Facebook,
-  X: Twitter,
-};
-
-const footerCompanyKeys: Record<string, string> = {
-  'About MENASCO': 'aboutMenasco',
-  'Quality & Safety': 'qualitySafety',
-  'ESG Reporting': 'esgReporting',
-  'Innovation & Technology': 'innovationTechnology',
-  Team: 'team',
-  Newsroom: 'newsroom',
-  Careers: 'careers',
-};
-
-const footerProjectKeys: Record<string, string> = {
-  'Projects & Sectors': 'projectsAndSectors',
-  'Residential & Commercial': 'sectorsList.residentialCommercial',
-  'Hospitality & Landmark Entertainment': 'sectorsList.hospitalityLandmarkEntertainment',
-  'Mission-Critical Facilities': 'sectorsList.missionCriticalFacilities',
-  'Infrastructure & Utilities': 'sectorsList.infrastructureUtilities',
-};
 
 const footerLegalKeys: Record<string, string> = {
   'Privacy Policy': 'privacyPolicy',
@@ -51,7 +19,6 @@ const footerLegalKeys: Record<string, string> = {
   'LYNXqc Privacy Policy': 'lynxqcPrivacyPolicy',
 };
 
-const locationKeys: Record<string, string> = { dubai: 'dubai', riyadh: 'riyadh', cairo: 'cairo', london: 'london' };
 
 const certificationScopeKeys: Record<string, string> = {
   'ISO 9001:2015': 'qualityManagement',
@@ -61,19 +28,20 @@ const certificationScopeKeys: Record<string, string> = {
 
 export function SiteFooter() {
   const { t } = useTranslation(['nav', 'common']);
-  const headquarters = officeLocations.find((location) => location.isHeadquarters) ?? officeLocations[0];
-  const regionalOffices = officeLocations.filter((location) => location.id !== headquarters.id);
-  const verifiedSocialLinks = socialLinks
-    .filter((link) => link.verificationStatus === 'verified' && link.href)
-    .map((link) => ({ platform: link.platform, href: link.href, icon: socialIcons[link.platform] }))
-    .filter((link) => Boolean(link.icon));
+  const linkGroups = useFooterLinkGroups();
+  const headquarters = officeLocations.find((office) => office.isHeadquarters) ?? officeLocations[0];
+  const [selectedOfficeId, setSelectedOfficeId] = useState(headquarters.id);
+  const selectedOffice = officeLocations.find((office) => office.id === selectedOfficeId) ?? headquarters;
 
   const translatedLinks = (links: { label: string; href: string }[], keyMap: Record<string, string>) =>
     links.map((link) => ({ label: t(keyMap[link.label] ?? link.label), href: link.href }));
 
   return (
     <FooterContainer theme="dark">
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
+      {/* Band 1 — brand + social on the left, then the link columns.
+          Services (12 links) gets two inner columns so it ends level with
+          Company and Projects instead of setting the row's height. */}
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_2fr_1fr_1fr] lg:gap-10">
         <div className="flex flex-col gap-6">
           <CompanySummary logo={<MenascoLogo className="h-10" onDark />} description={t('common:footer.description')} />
           <ButtonLink
@@ -86,49 +54,87 @@ export function SiteFooter() {
           >
             {t('common:buttons.downloadCompanyProfile')}
           </ButtonLink>
-        </div>
-        <FooterLinkGroup heading={t('common:footer.company')} links={translatedLinks(footerCompanyLinks, footerCompanyKeys)} />
-        <FooterLinkGroup heading={t('common:footer.services')} links={footerServiceLinks.map((link) => ({ label: t(link.i18nKey), href: link.href }))} />
-        <FooterLinkGroup heading={t('common:footer.projects')} links={translatedLinks(footerProjectLinks, footerProjectKeys)} />
-      </div>
-
-      <div className="grid grid-cols-1 gap-12 border-t border-white/10 pt-12 sm:grid-cols-2 lg:grid-cols-4">
-        <ContactBlock
-          heading={locationKeys[headquarters.id] ? t(`common:locations.${locationKeys[headquarters.id]}.label`) : headquarters.label}
-          address={headquarters.address}
-          phone={headquarters.phone}
-          email={primaryContact.email}
-        />
-        {regionalOffices.map((office) => (
-          <LocationBlock
-            key={office.id}
-            name={locationKeys[office.id] ? t(`common:locations.${locationKeys[office.id]}.label`) : office.label}
-            address={office.address}
-            phone={office.phone}
-          />
-        ))}
-        {verifiedSocialLinks.length > 0 && (
-          <div className="flex flex-col gap-4">
-            <Text variant="small" muted className="font-semibold uppercase tracking-wide">
-              {t('common:footer.follow')}
-            </Text>
-            <SocialLinks links={verifiedSocialLinks} />
+          <div className="flex flex-col gap-3">
+            <span className="text-small font-semibold uppercase tracking-wide text-gray-400">{t('common:footer.connect')}</span>
+            <SocialLinks links={footerSocialLinks} />
           </div>
-        )}
+        </div>
+        {linkGroups.map((group) => (
+          <FooterLinkGroup key={group.id} heading={group.heading} links={group.links} columns={group.id === 'services' ? 2 : 1} />
+        ))}
       </div>
 
-      <CertificationStrip
-        certifications={certifications.map((certification) =>
-          certificationScopeKeys[certification.name]
-            ? `${certification.name}, ${t(`common:certifications.${certificationScopeKeys[certification.name]}`)}`
-            : certification.name,
-        )}
-      />
+      {/* Band 2 — offices: country chips on the left drive one details panel
+          on the right (same pattern as tablet and phone). */}
+      <div className="grid grid-cols-1 items-start gap-8 border-t border-white/10 pt-10 lg:grid-cols-[1.4fr_2fr] lg:gap-10">
+        <div className="flex flex-col gap-4">
+          <span className="text-small font-semibold uppercase tracking-wide text-gray-400">{t('common:footer.offices')}</span>
+          <div role="group" aria-label={t('common:footer.offices')} className="flex flex-wrap gap-2">
+            {officeLocations.map((office) => {
+              const isSelected = office.id === selectedOffice.id;
+              return (
+                <button
+                  key={office.id}
+                  type="button"
+                  aria-pressed={isSelected}
+                  aria-controls="site-footer-office-panel"
+                  onClick={() => setSelectedOfficeId(office.id)}
+                  className={cn(
+                    'inline-flex h-9 items-center rounded-full border px-4 text-small font-medium transition-colors duration-base',
+                    isSelected ? 'border-brand-500 text-warmwhite' : 'border-white/15 text-gray-300 hover:border-white/40 hover:text-warmwhite',
+                  )}
+                >
+                  {t(`common:locations.${office.id}.short`, office.country)}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        {/* Same structure as the tablet panel: small office title, then
+            phone above address. */}
+        <div id="site-footer-office-panel" aria-live="polite" className="flex flex-col gap-3 rounded-md border border-white/10 bg-white/[0.03] p-4">
+          <span className="text-small font-semibold uppercase tracking-wide text-gray-400">
+            {t(`common:locations.${selectedOffice.id}.officeHeading`, selectedOffice.label)}
+          </span>
+          <ul role="list" className="flex flex-col gap-3">
+            <li className="flex items-start gap-2 text-small text-gray-300">
+              <Phone size={15} aria-hidden="true" className="mt-0.5 shrink-0 text-gray-500" />
+              {selectedOffice.phone ? (
+                <ContactLink kind="tel" value={selectedOffice.phone} className="transition-colors duration-base hover:text-warmwhite" />
+              ) : (
+                <span className="italic text-gray-500">{t('common:footer.pending')}</span>
+              )}
+            </li>
+            <li className="flex items-start gap-2 text-small text-gray-300">
+              <MapPin size={15} aria-hidden="true" className="mt-0.5 shrink-0 text-gray-500" />
+              {selectedOffice.address ? (
+                <span dir="ltr" className="text-start">
+                  {selectedOffice.address}
+                </span>
+              ) : (
+                <span className="italic text-gray-500">{t('common:footer.pending')}</span>
+              )}
+            </li>
+          </ul>
+        </div>
+      </div>
 
-      <LegalRow
-        copyrightText={t('common:footer.copyright', { year: new Date().getFullYear() })}
-        links={translatedLinks(footerLegalLinks, footerLegalKeys)}
-      />
+      {/* Band 3 — certifications + legal, one band. */}
+      <div className="flex flex-col gap-6 border-t border-white/10 pt-8">
+        <CertificationStrip
+          align="start"
+          certifications={certifications.map((certification) =>
+            certificationScopeKeys[certification.name]
+              ? `${certification.name}, ${t(`common:certifications.${certificationScopeKeys[certification.name]}`)}`
+              : certification.name,
+          )}
+        />
+        <LegalRow
+          className="!border-t-0 !pt-0"
+          copyrightText={t('common:footer.copyright', { year: new Date().getFullYear() })}
+          links={translatedLinks(footerLegalLinks, footerLegalKeys)}
+        />
+      </div>
     </FooterContainer>
   );
 }

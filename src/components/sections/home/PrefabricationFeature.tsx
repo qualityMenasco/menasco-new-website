@@ -16,6 +16,10 @@ export function PrefabricationFeature() {
         headingAs="h3"
         description={t('prefabrication.description')}
         action={{ label: t('prefabrication.cta'), href: '/services/manufacturing-prefabrication' }}
+        // The photo fills the text column's full height (no floating gap),
+        // and the text gets more width on smaller desktops.
+        stretch
+        textWeighted
       />
     </Section>
   );

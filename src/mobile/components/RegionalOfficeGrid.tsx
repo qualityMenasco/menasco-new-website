@@ -4,9 +4,7 @@ import { OfficeCard } from './OfficeCard';
 import { OfficeDetailsPanel } from './OfficeDetailsPanel';
 import { officeLocations, primaryContact } from '../../data/locations';
 
-const locationKeys: Record<string, string> = { dubai: 'dubai', riyadh: 'riyadh', cairo: 'cairo', london: 'london' };
-
-/** 2×2 office grid + one shared detail panel beneath it — tapping a card updates the panel in place. */
+/** Two-column office grid + one shared detail panel beneath it — tapping a card updates the panel in place. */
 export function RegionalOfficeGrid() {
   const { t } = useTranslation('common');
   const headquarters = officeLocations.find((office) => office.isHeadquarters) ?? officeLocations[0];
@@ -27,14 +25,16 @@ export function RegionalOfficeGrid() {
     <div>
       <div className="grid grid-cols-2 gap-3">
         {officeLocations.map((office) => {
-          const key = locationKeys[office.id];
           return (
             <OfficeCard
               key={office.id}
-              label={key ? t(`locations.${key}.label`) : office.label}
-              country={key ? t(`locations.${key}.country`) : office.country}
+              label={t(`locations.${office.id}.label`, office.label)}
+              country={t(`locations.${office.id}.country`, office.country)}
               isSelected={office.id === selectedId}
               onSelect={() => handleSelect(office.id)}
+              // With an odd number of offices, the head office spans both
+              // columns so every row below it is a full pair.
+              className={office.isHeadquarters && officeLocations.length % 2 === 1 ? 'col-span-2' : undefined}
             />
           );
         })}
