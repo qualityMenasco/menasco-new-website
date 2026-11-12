@@ -6,20 +6,18 @@
   "dataCenter": {
     "eyebrow": "Critical Infrastructure",
    "title": "High-Performance Systems for Data Centers and Mission-Critical Infrastructure.",
-   "description": "MENASCO delivers the critical systems behind high-performance data centers and specialized infrastructure, integrating electrical substations, resilient power networks, precision cooling, advanced fire protection, and cleanroom-grade environments to support uninterrupted performance at scale.",
     "mobileTitle": "High-Performance Systems for Data Centers and Mission-Critical Infrastructure.",
     "mobileEyebrow": "Critical Infrastructure",
-    "mobileDescription": "MENASCO delivers the critical systems behind high-performance data centers and specialized infrastructure, integrating electrical substations, resilient power networks, precision cooling, advanced fire protection, and cleanroom-grade environments to support uninterrupted performance at scale.",
     "mobileCta": "Explore Data Center Projects",
     "cta": "EXPLORE DATA CENTER SOLUTIONS"
   },
   "companyIntro": {
     "eyebrow": "About MENASCO",
     "heading": "Integrated MEP Solutions Built on Over Three Decades of Engineering Excellence",
-    "description": "Established in the UAE in 1994, MENASCO is a multidisciplinary MEP contractor delivering integrated mechanical, electrical, plumbing, and fire protection systems for complex developments. With operations spanning the UAE, Saudi Arabia, Egypt, and the United Kingdom, we combine decades of technical expertise with modern engineering practices to deliver reliable, high-performance infrastructure across diverse sectors.",
+    "description": "Established in the UAE in 1994, MENASCO is a multidisciplinary MEP contractor delivering integrated mechanical, electrical, plumbing, and fire protection systems for complex developments. With operations spanning seven countries, we combine decades of technical expertise with modern engineering practices to deliver reliable, high-performance infrastructure across diverse sectors.",
     "cta": "Discover MENASCO",
     "mobileHeading": "{{years}}+ years in the region",
-    "mobileDescription": "Established in the UAE in {{foundingYear}}, MENASCO is a multidisciplinary MEP contractor delivering integrated mechanical, electrical, plumbing, and fire protection systems for complex developments. With operations spanning the UAE, Saudi Arabia, Egypt, and the United Kingdom, we combine decades of technical expertise with modern engineering practices to deliver reliable, high-performance infrastructure across diverse sectors."
+    "mobileDescription": "Established in the UAE in {{foundingYear}}, MENASCO is a multidisciplinary MEP contractor delivering integrated mechanical, electrical, plumbing, and fire protection systems for complex developments. With operations spanning seven countries, we combine decades of technical expertise with modern engineering practices to deliver reliable, high-performance infrastructure across diverse sectors."
   },
   "stats": {
     "projects": "Projects Successfully Delivered",

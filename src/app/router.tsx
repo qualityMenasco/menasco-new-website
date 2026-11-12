@@ -161,7 +161,9 @@ const routeChildren: RouteObject[] = [
   { path: 'certification-training', element: lazyPage(() => import('../pages/PendingContentPages').then((m) => ({ default: m.CertificationTrainingPage }))) },
   { path: 'quality-safety', element: responsivePage(() => import('../pages/QualitySafetyPage'), () => import('../mobile/pages/QualitySafetyPage')) },
   { path: 'team', element: responsivePage(() => import('../pages/TeamPage'), () => import('../mobile/pages/TeamPage')) },
-  { path: 'esg-reporting', element: responsivePage(() => import('../pages/ESGReportingPage'), () => import('../mobile/pages/ESGReportingPage')) },
+  { path: 'community-people', element: responsivePage(() => import('../pages/CommunityPeoplePage'), () => import('../mobile/pages/CommunityPeoplePage')) },
+  // ESG Reporting was replaced by Community & People (2026-11-12); old links land on the new page.
+  { path: 'esg-reporting', element: <LocaleNavigate to="/community-people" /> },
   // Same path, differently-named components on each side (InnovationTechnologyPage vs. InnovationPage).
   { path: 'innovation-technology', element: responsivePage(() => import('../pages/InnovationTechnologyPage'), () => import('../mobile/pages/InnovationPage')) },
   { path: 'newsroom', element: responsivePage(() => import('../pages/NewsroomPage'), () => import('../mobile/pages/NewsroomPage')) },

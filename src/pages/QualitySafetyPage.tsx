@@ -7,6 +7,7 @@ import { ButtonLink } from '../components/ui/Button';
 import { Text } from '../components/typography/Typography';
 import { ScrollReveal, ScrollRevealGroup } from '../components/common/ScrollReveal';
 import { certifications } from '../data/certifications';
+import { qualitySafetyPhotos } from '../data/siteSafety';
 import type { IconComponent } from '../types';
 import { SEO } from '../seo/SEO';
 import {} from '../seo/structuredData';
@@ -39,8 +40,11 @@ export default function QualitySafetyPage() {
 
       <Section spacing="lg" background="warmwhite">
         <Stack space="lg">
-          <div className="flex w-full flex-col gap-6 md:flex-row md:items-start">
-            <div className="flex flex-1 flex-col gap-4">
+          {/* Intro copy beside a two-tier photo grid: the two safety portraits side by
+              side, the landscape site photo across beneath them; the two columns are
+              vertically centred on each other. */}
+          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:items-center">
+            <div className="flex flex-col gap-4 lg:col-span-6">
               <SectionHeader
                 className="w-full"
                 eyebrow={t('qualitySafetyPage.eyebrow')}
@@ -49,7 +53,7 @@ export default function QualitySafetyPage() {
                 description={t('qualitySafetyPage.description')}
               />
 
-              <Stack space="sm" className="max-w-3xl">
+              <Stack space="sm">
                 <Text variant="body-lg">{t('qualitySafetyPage.paragraph1')}</Text>
                 <Text variant="body-lg">
                   {t('qualitySafetyPage.paragraph2Prefix')}{' '}
@@ -59,11 +63,16 @@ export default function QualitySafetyPage() {
               </Stack>
             </div>
 
-            <img
-              src="/manufacturing-prefab-service-hero.jpg"
-              alt="MENASCO site engineer at a construction site"
-              className="aspect-[4/5] w-full rounded-md object-cover md:mt-24 md:w-[380px]"
-            />
+            <div className="grid grid-cols-2 gap-4 lg:col-span-6">
+              {[...qualitySafetyPhotos.portraits, qualitySafetyPhotos.landscape].map((photo, index) => (
+                <div
+                  key={photo.src}
+                  className={`overflow-hidden rounded-md bg-gray-100 ${index === 2 ? 'col-span-2 aspect-[16/9]' : 'aspect-[4/5]'}`}
+                >
+                  <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                </div>
+              ))}
+            </div>
           </div>
 
           <ButtonLink
@@ -116,7 +125,6 @@ export default function QualitySafetyPage() {
           </ScrollRevealGroup>
         </Stack>
       </Section>
-
     </>
   );
 }

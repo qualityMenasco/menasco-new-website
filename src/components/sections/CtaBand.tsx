@@ -34,8 +34,8 @@ export interface CtaBandProps {
 
 /**
  * The site's closing brand CTA band — the same dark brand gradient used by
- * AboutFinalCTA / LeadershipProfileCTA and the service sub-pages. One primary
- * action (solid, light-on-dark) plus an optional outline secondary action.
+ * the service sub-pages. One primary action (solid, light-on-dark) plus an
+ * optional outline secondary action.
  */
 export function CtaBand({
   eyebrow,

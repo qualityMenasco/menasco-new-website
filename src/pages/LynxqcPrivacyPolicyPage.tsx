@@ -74,7 +74,7 @@ export default function LynxqcPrivacyPolicyPage() {
         breadcrumb={[
           { label: 'Home', path: '/' },
           { label: 'Innovation & Technology', path: '/innovation-technology' },
-          { label: 'LYNXqc Privacy Policy', path: '/lynxqc/privacy-policy' },
+          { label: 'LYNX Privacy Policy', path: '/lynxqc/privacy-policy' },
         ]}
       />
 

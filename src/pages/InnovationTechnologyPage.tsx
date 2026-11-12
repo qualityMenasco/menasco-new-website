@@ -1,4 +1,4 @@
-import { Brain, Camera, ClipboardCheck, ClipboardList, Cpu, Database, FileSearch, LineChart, Network, Scale, ScanSearch, Users, Workflow } from 'lucide-react';
+import { Brain, ClipboardCheck, Database, Network, Scale } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../components/layout/Section';
 import { Container } from '../components/layout/Container';
@@ -6,70 +6,75 @@ import { Stack } from '../components/layout/Stack';
 import { Eyebrow, Heading, Text } from '../components/typography/Typography';
 import { SmartLink } from '../lib/SmartLink';
 import { ScrollReveal } from '../components/common/ScrollReveal';
-import { SectionThemeContext, useSectionTheme } from '../lib/theme-context';
-import { useTransparentHeader } from '../app/header-transparency';
+import { SectionThemeContext } from '../lib/theme-context';
 import { placeholderImages } from '../data/images';
-import { cn } from '../lib/utils';
-import type { IconComponent, Theme } from '../types';
+import { innovationHeroFilm, innovationHeroPhotos } from '../data/innovationPhotos';
+import { AutoplayVideo } from '../components/common/AutoplayVideo';
+import { PhotoWithVideo } from '../components/sections/community/PhotoWithVideo';
+import type { IconComponent } from '../types';
 import { SEO } from '../seo/SEO';
 import {} from '../seo/structuredData';
 
-/** Icon + title only — no description. Shared by "Where We're Investing" and each ecosystem section's 2–4 highlights. */
-function MiniHighlight({ icon: Icon, title, theme, className }: { icon: IconComponent; title: string; theme?: Theme; className?: string }) {
-  const resolvedTheme = useSectionTheme(theme);
-  const isDark = resolvedTheme === 'dark';
-  return (
-    <div
-      className={cn(
-        'flex flex-col items-start gap-3 rounded-md border px-5 py-5',
-        isDark ? 'border-white/10 bg-white/5' : 'border-gray-200 bg-warmwhite',
-        className,
-      )}
-    >
-      <span className={cn('inline-flex h-10 w-10 items-center justify-center rounded-sm', isDark ? 'bg-white/10 text-brand-400' : 'bg-stone text-brand-600')}>
-        <Icon size={18} aria-hidden="true" />
-      </span>
-      <Text theme={resolvedTheme} className="font-display font-semibold">
-        {title}
-      </Text>
-    </div>
-  );
-}
-
+/**
+ * Opens the page with the title and introduction beside the portrait film and
+ * the two event photos stacked on its right (the page has no dark cover image,
+ * so the header stays in its light theme). The film's aspect ratio sets the
+ * row height; the photo column stretches to match.
+ *
+ * Below 1280px the container stops being full width and the film would have
+ * to shrink, so the layout collapses to text + the two photos side by side,
+ * with a "Watch the video" button on the first photo that opens the film
+ * full screen (the inline film is display:none there, so it never downloads).
+ */
 function InnovationHero() {
   const { t } = useTranslation('about');
-  useTransparentHeader(true);
   return (
-    <section className="relative flex min-h-[70vh] scroll-mt-24 items-end overflow-hidden bg-ink md:min-h-[75vh]">
-      <img
-        src="/innovation-technology-hero.jpg"
-        alt="MENASCO engineer using an AI-powered digital dashboard on the factory floor"
-        className="absolute inset-0 h-full w-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-ink/40" />
-      <div className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-transparent rtl:bg-gradient-to-l" />
-
-      <Container className="relative z-10 pb-16 pt-28 md:pb-20 md:pt-32">
-        <div className="max-w-3xl">
-          <Eyebrow theme="dark">{t('innovation.hero.eyebrow')}</Eyebrow>
-          <Heading level="display" as="h2" theme="dark" className="mt-4">
-            {t('innovation.hero.heading')}
+    <Section spacing="lg" background="stone">
+      <div className="grid grid-cols-12 gap-8">
+        <div className="col-span-4 self-center">
+          <Eyebrow>{t('innovation.hero.eyebrow')}</Eyebrow>
+          <Heading level="h1" as="h2" className="mt-4 text-balance">
+            {/* Non-breaking space keeps the "&" with "Innovation" so it never wraps onto a line alone. */}
+            {t('innovation.hero.heading').replace(' & ', ' & ')}
           </Heading>
-          <Text theme="dark" className="mt-4 font-display text-h3 font-semibold text-warmwhite">
-            {t('innovation.hero.subheading')}
-          </Text>
-          <Text variant="body-lg" theme="dark" className="mt-6 max-w-xl text-gray-200">
+          <Text className="mt-4 font-display text-h4 font-semibold text-ink">{t('innovation.hero.subheading')}</Text>
+          <Text variant="body-lg" muted className="mt-5">
             {t('innovation.hero.description')}
           </Text>
         </div>
-      </Container>
-    </section>
+        <AutoplayVideo
+          src={innovationHeroFilm.src}
+          poster={innovationHeroFilm.poster}
+          alt={t('innovation.hero.filmAlt')}
+          className="col-span-4 hidden aspect-[768/1376] rounded-md min-[1280px]:block"
+        />
+        <div className="col-span-8 grid grid-cols-2 gap-8 min-[1280px]:col-span-4 min-[1280px]:min-h-0 min-[1280px]:grid-cols-1 min-[1280px]:grid-rows-[repeat(2,minmax(0,1fr))]">
+          {innovationHeroPhotos.map((photo, index) => (
+            // 4:5 tiles side by side when collapsed; stacked beside the film they fill its
+            // height, absolutely positioned so their own size never stretches the row.
+            <div key={photo.src} className="relative aspect-[4/5] overflow-hidden rounded-md bg-gray-100 min-[1280px]:aspect-auto">
+              {index === 0 ? (
+                <PhotoWithVideo
+                  image={photo}
+                  video={innovationHeroFilm.src}
+                  className="!absolute inset-0 [&_img]:object-[50%_0%]"
+                  overlayClassName="min-[1280px]:hidden"
+                />
+              ) : (
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover"
+                  style={photo.focus ? { objectPosition: photo.focus } : undefined}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </Section>
   );
-}
-
-interface Highlight {
-  icon: IconComponent;
-  title: string;
 }
 
 interface EcosystemSectionProps {
@@ -83,21 +88,20 @@ interface EcosystemSectionProps {
   layout: 'left' | 'right';
   paragraph: string;
   caption?: string;
-  highlights: Highlight[];
   /** Small secondary link (e.g. a product's privacy policy) — never the section's primary CTA. */
   secondaryLink?: { label: string; href: string };
 }
 
 /**
  * Shared shell for every Technology Ecosystem section (including ATLAS —
- * see the "Intelligent Compliance" call below): one short paragraph, a
- * prominent image, and 2–4 icon+title highlights — no long lists. The
+ * see the "Intelligent Compliance" call below): one short paragraph beside
+ * a prominent image — no lists or highlight tiles. The
  * image-left/image-right variants alternate across sections to create
  * visual rhythm down the page. Every section — including the first —
  * shares this exact same structure, proportions, typography, and
  * animation so the page reads as one continuous story.
  */
-function EcosystemSection({ icon: Icon, eyebrow, heading, background, imageSrc, imageAlt, layout, paragraph, caption, highlights, secondaryLink }: EcosystemSectionProps) {
+function EcosystemSection({ icon: Icon, eyebrow, heading, background, imageSrc, imageAlt, layout, paragraph, caption, secondaryLink }: EcosystemSectionProps) {
   const header = (
     <span className="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-warmwhite text-brand-600">
       <Icon size={18} aria-hidden="true" />
@@ -117,6 +121,11 @@ function EcosystemSection({ icon: Icon, eyebrow, heading, background, imageSrc, 
           {caption}
         </Text>
       )}
+      {secondaryLink && (
+        <SmartLink href={secondaryLink.href} className="self-start text-small font-semibold text-brand-600 transition-colors duration-base hover:text-brand-700">
+          {secondaryLink.label}
+        </SmartLink>
+      )}
     </Stack>
   );
 
@@ -129,31 +138,19 @@ function EcosystemSection({ icon: Icon, eyebrow, heading, background, imageSrc, 
   return (
     <ScrollReveal>
       <Section background={background} spacing="md" edgeFade>
-        <Stack space="lg">
-          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
-            {layout === 'left' ? (
-              <>
-                {imageColumn}
-                {textColumn}
-              </>
-            ) : (
-              <>
-                {textColumn}
-                {imageColumn}
-              </>
-            )}
-          </div>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {highlights.map((item) => (
-              <MiniHighlight key={item.title} icon={item.icon} title={item.title} />
-            ))}
-          </div>
-          {secondaryLink && (
-            <SmartLink href={secondaryLink.href} className="text-small font-semibold text-brand-600 transition-colors duration-base hover:text-brand-700">
-              {secondaryLink.label}
-            </SmartLink>
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
+          {layout === 'left' ? (
+            <>
+              {imageColumn}
+              {textColumn}
+            </>
+          ) : (
+            <>
+              {textColumn}
+              {imageColumn}
+            </>
           )}
-        </Stack>
+        </div>
       </Section>
     </ScrollReveal>
   );
@@ -163,7 +160,6 @@ interface TranslatedSection {
   eyebrow: string;
   heading: string;
   paragraph: string;
-  highlights: string[];
   privacyPolicyLink?: string;
 }
 
@@ -201,15 +197,9 @@ export default function InnovationTechnologyPage() {
         imageAlt="Precision-engineered modern architecture reflecting regulatory and design compliance"
         layout="right"
         paragraph={s.atlas.paragraph}
-        highlights={[
-          { icon: FileSearch, title: s.atlas.highlights[0] },
-          { icon: Workflow, title: s.atlas.highlights[1] },
-          { icon: Brain, title: s.atlas.highlights[2] },
-          { icon: Database, title: s.atlas.highlights[3] },
-        ]}
       />
 
-      {/* LYNXqc — MENASCO's field quality management platform. Second by
+      {/* LYNX — MENASCO's field quality management platform. Second by
           position, directly beneath ATLAS, per the approved page order. */}
       <EcosystemSection
         icon={ClipboardCheck}
@@ -217,15 +207,9 @@ export default function InnovationTechnologyPage() {
         heading={s.lynxqc.heading}
         background="stone"
         imageSrc="/mobile-applications-hero.jpg"
-        imageAlt="Engineer using LYNXqc on a mobile device to log a field quality issue on site"
+        imageAlt="Engineer using LYNX on a mobile device to log a field quality issue on site"
         layout="left"
         paragraph={s.lynxqc.paragraph}
-        highlights={[
-          { icon: Brain, title: s.lynxqc.highlights[0] },
-          { icon: Camera, title: s.lynxqc.highlights[1] },
-          { icon: Workflow, title: s.lynxqc.highlights[2] },
-          { icon: ClipboardList, title: s.lynxqc.highlights[3] },
-        ]}
         secondaryLink={s.lynxqc.privacyPolicyLink ? { label: s.lynxqc.privacyPolicyLink, href: '/lynxqc/privacy-policy' } : undefined}
       />
 
@@ -238,12 +222,6 @@ export default function InnovationTechnologyPage() {
         imageAlt="Modern engineering design reflecting intelligent, technology-driven construction"
         layout="right"
         paragraph={s.ai.paragraph}
-        highlights={[
-          { icon: LineChart, title: s.ai.highlights[0] },
-          { icon: Workflow, title: s.ai.highlights[1] },
-          { icon: Brain, title: s.ai.highlights[2] },
-          { icon: ScanSearch, title: s.ai.highlights[3] },
-        ]}
       />
 
       <EcosystemSection
@@ -255,12 +233,6 @@ export default function InnovationTechnologyPage() {
         imageAlt="Modern engineering facility representing enterprise-scale infrastructure"
         layout="left"
         paragraph={s.dataLake.paragraph}
-        highlights={[
-          { icon: LineChart, title: s.dataLake.highlights[0] },
-          { icon: Database, title: s.dataLake.highlights[1] },
-          { icon: Cpu, title: s.dataLake.highlights[2] },
-          { icon: Brain, title: s.dataLake.highlights[3] },
-        ]}
       />
 
       <EcosystemSection
@@ -272,12 +244,6 @@ export default function InnovationTechnologyPage() {
         imageAlt="Engineering documentation and coordinated business processes"
         layout="right"
         paragraph={s.connect.paragraph}
-        highlights={[
-          { icon: Workflow, title: s.connect.highlights[0] },
-          { icon: Network, title: s.connect.highlights[1] },
-          { icon: LineChart, title: s.connect.highlights[2] },
-          { icon: Users, title: s.connect.highlights[3] },
-        ]}
       />
 
       <ScrollReveal>

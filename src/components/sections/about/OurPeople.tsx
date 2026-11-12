@@ -3,7 +3,8 @@ import { Section } from '../../layout/Section';
 import { Stack } from '../../layout/Stack';
 import { Eyebrow, Heading, Text } from '../../typography/Typography';
 
-const OUR_PEOPLE_IMAGE = '/civil-engineer-reviews-construction-plans-urban-construction-site_146671-151367.avif';
+// Portrait frame, anchored to the bottom so both his face and the MENASCO logo on the vest show.
+const OUR_PEOPLE_IMAGE = '/about-our-people.jpg';
 
 /** "Our People" — alternates image-left against WhoWeAre's image-right above. */
 export function OurPeople() {
@@ -19,24 +20,27 @@ export function OurPeople() {
           </Heading>
         </div>
 
-        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16">
+        {/* The photo is 4:5 at most widths; where the copy wraps taller (narrow laptops)
+            it stretches to the text's height instead, cropping in from the sides. */}
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:items-stretch lg:gap-16">
           <div className="relative">
-            <div className="aspect-[4/3] overflow-hidden rounded-md bg-gray-100">
+            <div className="aspect-[4/5] w-full overflow-hidden rounded-md bg-gray-100 lg:h-full">
               <img
                 src={OUR_PEOPLE_IMAGE}
-                alt="MENASCO engineer reviewing construction drawings on an active site"
+                alt="A MENASCO engineer in a high-visibility vest at the MENASCO office"
                 loading="lazy"
                 decoding="async"
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover object-bottom"
               />
             </div>
           </div>
 
-          <Stack space="md" as="article">
-            <Stack space="sm">
-              <Text variant="body-lg">{t('ourPeople.paragraph1')}</Text>
-              <Text variant="body-lg">{t('ourPeople.paragraph2')}</Text>
-              <Text variant="body-lg">{t('ourPeople.paragraph3')}</Text>
+          <Stack space="md" as="article" className="lg:self-center">
+            {/* Set larger than body-lg on desktop (stepping up on wider screens) so the copy balances the portrait beside it. */}
+            <Stack space="sm" className="lg:gap-7">
+              <Text variant="body-lg" className="lg:text-[1.3125rem] lg:leading-[1.6] xl:text-[1.5rem]">{t('ourPeople.paragraph1')}</Text>
+              <Text variant="body-lg" className="lg:text-[1.3125rem] lg:leading-[1.6] xl:text-[1.5rem]">{t('ourPeople.paragraph2')}</Text>
+              <Text variant="body-lg" className="lg:text-[1.3125rem] lg:leading-[1.6] xl:text-[1.5rem]">{t('ourPeople.paragraph3')}</Text>
             </Stack>
           </Stack>
         </div>

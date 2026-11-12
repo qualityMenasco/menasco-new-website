@@ -12,6 +12,7 @@ import { ButtonLink } from '../components/ui/Button';
 import { Accordion } from '../components/ui/Accordion';
 import { publishedProjects } from '../data/projects';
 import { SEO } from '../seo/SEO';
+import { useTransparentHeader } from '../app/header-transparency';
 import { serviceEntity } from '../seo/structuredData';
 import { SITE_URL } from '../seo/constants';
 
@@ -34,6 +35,9 @@ interface FaqEntry {
 
 export default function DataCenterPage() {
   const { t } = useTranslation('services');
+  // Full-bleed dark hero (content aligned to its bottom edge) — float the
+  // header over it like the other hero pages, so the glass sits on the hero.
+  useTransparentHeader(true);
   const introParagraphs = t('dataCenter.introParagraphs', { returnObjects: true }) as string[];
   const dataCenterCapabilities = t('dataCenter.capabilities', { returnObjects: true }) as { title: string; description: string }[];
   const dataCenterFaqItems = t('dataCenter.faq', { returnObjects: true }) as FaqEntry[];

@@ -7,7 +7,6 @@ import { VisionMissionValues } from '../components/sections/about/VisionMissionV
 import { QualityStandards } from '../components/sections/about/QualityStandards';
 import { OurExperience } from '../components/sections/about/OurExperience';
 import { OurPeople } from '../components/sections/about/OurPeople';
-import { AboutFinalCTA } from '../components/sections/about/AboutFinalCTA';
 import { ClientsSection } from '../components/sections/ClientsSection';
 import { CredentialsSection } from '../components/sections/CredentialsSection';
 import { ScrollReveal } from '../components/common/ScrollReveal';
@@ -60,10 +59,6 @@ export default function AboutPage() {
       </ScrollReveal>
 
       <CredentialsSection />
-
-      <ScrollReveal>
-        <AboutFinalCTA />
-      </ScrollReveal>
     </>
   );
 }

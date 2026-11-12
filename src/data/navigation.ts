@@ -135,14 +135,14 @@ export const aboutNavigation: NavGroupLinkEntry[] = [
   { label: 'Leadership Team', href: '/team', i18nKey: 'leadershipTeam' },
   { label: 'Quality & Safety', href: '/quality-safety', i18nKey: 'qualitySafety' },
   { label: 'MENASCO Certification & Training', href: '/certification-training', i18nKey: 'certificationTraining' },
-  { label: 'ESG Reporting', href: '/esg-reporting', i18nKey: 'esgReporting' },
+  { label: 'Community & People', href: '/community-people', i18nKey: 'communityPeople' },
   { label: 'Innovation & Technology', href: '/innovation-technology', i18nKey: 'innovationTechnology' },
 ];
 
 export const footerCompanyLinks: NavLinkEntry[] = [
   { label: 'About MENASCO', href: '/about' },
   { label: 'Quality & Safety', href: '/quality-safety' },
-  { label: 'ESG Reporting', href: '/esg-reporting' },
+  { label: 'Community & People', href: '/community-people' },
   { label: 'Innovation & Technology', href: '/innovation-technology' },
   { label: 'Team', href: '/team' },
   { label: 'Newsroom', href: '/newsroom' },
@@ -160,5 +160,5 @@ export const footerProjectLinks: NavLinkEntry[] = [
 export const footerLegalLinks: NavLinkEntry[] = [
   { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'Terms', href: '/terms' },
-  { label: 'LYNXqc Privacy Policy', href: '/lynxqc/privacy-policy' },
+  { label: 'LYNX Privacy Policy', href: '/lynxqc/privacy-policy' },
 ];

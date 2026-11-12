@@ -258,7 +258,7 @@ export const newsArticles: NewsArticle[] = [
         heading: 'Strengthening Digital Tools and Ways of Working',
         paragraphs: [
           "Digital tools continue to play a growing role in how MENASCO coordinates its projects. Internally developed platforms such as ATLAS, MENASCO's AI-powered compliance system, help evaluate engineering designs against applicable codes and standards earlier in the process, improving readiness for review before submission.",
-          'Alongside design-stage tools, site-facing platforms such as LYNXqc support construction reporting and quality management for project teams and stakeholders working across active sites. Together, these tools are part of a broader shift toward coordinating projects with better information at every stage, from design through to site delivery.',
+          'Alongside design-stage tools, site-facing platforms such as LYNX support construction reporting and quality management for project teams and stakeholders working across active sites. Together, these tools are part of a broader shift toward coordinating projects with better information at every stage, from design through to site delivery.',
         ],
       },
       {

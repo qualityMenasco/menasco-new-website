@@ -63,11 +63,14 @@ const graticule = geoGraticule10();
 
 /** The globe's fixed palette ("Arctic"): white land on a cool pale sea, brand-blue route, navy pins. */
 const COLORS = {
-  ocean: '#eef2f5',
+  // Sea and coastline carry the land/water contrast — tuned (2026-11-12) so
+  // shapes stay legible on bright or low-contrast displays, where the white
+  // land and a paler sea used to merge.
+  ocean: '#e3eaf0',
   land: '#ffffff',
-  coastline: '#c5d0d8',
+  coastline: '#8fa3b3',
   borders: '#dde4e9',
-  grid: '#e1e8ed',
+  grid: '#d5dee6',
   glowInner: 'rgba(159, 179, 193, 0.14)',
   glowOuter: 'rgba(159, 179, 193, 0)',
   route: '#0c76a3',
@@ -178,7 +181,7 @@ export function OfficeGlobe({ pins, selectedId, onSelect, headOfficeLabel, class
       ctx.fillStyle = COLORS.land;
       ctx.fill();
       ctx.strokeStyle = COLORS.coastline;
-      ctx.lineWidth = 0.8;
+      ctx.lineWidth = 1;
       ctx.stroke();
       stroke(current.borders, COLORS.borders, 0.6);
     }

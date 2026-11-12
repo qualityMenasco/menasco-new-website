@@ -16,7 +16,7 @@ import { COMPANY_PROFILE_PATH } from '../seo/constants';
 const footerLegalKeys: Record<string, string> = {
   'Privacy Policy': 'privacyPolicy',
   Terms: 'terms',
-  'LYNXqc Privacy Policy': 'lynxqcPrivacyPolicy',
+  'LYNX Privacy Policy': 'lynxqcPrivacyPolicy',
 };
 
 

@@ -6,7 +6,7 @@ import { Eyebrow, Heading, Text } from '../../typography/Typography';
 import { CurvedCard } from '../../cards/CurvedCard';
 import { ScrollRevealGroup } from '../../common/ScrollReveal';
 
-const valueKeys = ['innovation', 'reliability', 'sustainability', 'integrity', 'excellence', 'collaboration'] as const;
+const valueKeys = ['innovation', 'integrity', 'excellence'] as const;
 
 export function VisionMissionValues() {
   const { t } = useTranslation('about');
@@ -46,7 +46,7 @@ export function VisionMissionValues() {
             {valueKeys.map((key) => (
               <div
                 key={key}
-                className="flex flex-col justify-center gap-1.5 rounded-md border border-white/10 bg-graphite p-6 lg:min-h-[128px]"
+                className="flex h-full flex-col justify-center gap-1.5 rounded-md border border-white/10 bg-graphite p-6 lg:min-h-[128px]"
               >
                 <Text theme="dark" className="font-display font-semibold text-warmwhite">
                   {t(`visionMissionValues.values.${key}.title`)}

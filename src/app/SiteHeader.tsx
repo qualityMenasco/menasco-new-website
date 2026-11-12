@@ -8,9 +8,8 @@ import { MenascoLogo } from '../components/brand/MenascoLogo';
 import { LanguageSwitch } from '../components/navigation/LanguageSwitch';
 import { SmartLink } from '../lib/SmartLink';
 import { aboutNavigation, dataCentreServiceLink, homeSectionNavigation, servicesNavigationGroups } from '../data/navigation';
-import { homeSectionIds, homeSectionThemeById } from '../data/homeSections';
 import type { NavItem } from '../components/navigation/types';
-import { useActiveSection } from '../hooks/useActiveSection';
+import { useBackdropTheme } from '../lib/useBackdropTheme';
 import { useHeaderTransparencyState } from './header-transparency';
 import { stripLocale } from '../lib/locale';
 
@@ -77,9 +76,8 @@ export function SiteHeader() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Watches every homepage section so the always-transparent home header can
-  // match its text colour to whichever section is currently behind it.
-  const activeHomeThemeSectionId = useActiveSection(homeSectionIds, isHomePage, '0px 0px -88% 0px');
+  // Light/dark theme of the content directly behind the header, on every page.
+  const backdropTheme = useBackdropTheme();
 
   const isItemActive = useMemo(() => {
     return (item: NavItem) => {
@@ -113,15 +111,22 @@ export function SiteHeader() {
   }, [isHomePage, location.pathname, t]);
 
   const isTransparent = transparentAllowed && (transparencyMode === 'always' || !isScrolled);
-  const homeSectionTheme = isHomePage ? homeSectionThemeById[activeHomeThemeSectionId ?? 'hero'] : undefined;
-  const headerTheme = themeOverride ?? homeSectionTheme ?? (isTransparent ? 'dark' : 'light');
+  // Every page: the header reads whatever section is actually behind it and
+  // switches between dark and light glass to match (pages can still force a
+  // theme via useHeaderThemeOverride, e.g. over a dark hero).
+  const headerTheme = themeOverride ?? backdropTheme ?? (isTransparent ? 'dark' : 'light');
 
   return (
     <HeaderShell
-      variant={isTransparent ? 'transparent' : 'solid'}
+      // Pages with a full-bleed hero (they call useTransparentHeader) float the
+      // header over their content for the whole visit, exactly like the
+      // homepage — so at the top of the page the glass sits on the hero (dark
+      // glass over a dark hero reads black, not grey over the page background),
+      // and nothing jumps when it would otherwise drop back into the flow.
+      variant={transparentAllowed ? 'transparent' : 'solid'}
       theme={headerTheme}
       navBreakpoint="none"
-      floatOverContent={isHomePage}
+      floatOverContent={transparentAllowed}
       logo={
         <SmartLink href="/" className="flex items-center" aria-label={t('nav:menascoHome')}>
           <MenascoLogo className="h-9 sm:h-10" onDark={headerTheme === 'dark'} />

@@ -8,10 +8,10 @@ export interface HomeSectionMeta {
 /**
  * Every major homepage section, top to bottom, tagged with the light/dark
  * theme matching its own `<Section background="...">` (see each section's
- * component for the source of truth on background). Single list consumed by
- * HomePage.tsx (anchor ids, auto-scroll sequence) and SiteHeader.tsx (so the
- * always-transparent home header can switch its text colour to match
- * whichever section is currently behind it).
+ * component for the source of truth on background). Used by HomePage.tsx for
+ * anchor ids and the auto-scroll sequence. The header no longer reads these
+ * themes — it samples the real background behind it on every page (see
+ * src/lib/useBackdropTheme.ts) — so `theme` here is documentation only.
  */
 export const homeSections: HomeSectionMeta[] = [
   { id: 'hero', theme: 'dark' }, // HomeHeroEditorial — bg-ink

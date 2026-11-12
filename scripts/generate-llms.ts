@@ -319,7 +319,6 @@ function generateHome() {
 
 function generateAbout() {
   const w = about.whoWeAre;
-  const approach = about.ourApproach;
   const vmv = about.visionMissionValues;
 
   const content = doc(
@@ -334,12 +333,6 @@ function generateAbout() {
       h2('Values'),
       bullets(Object.values(vmv.values as Record<string, { title: string; description: string }>).map((v) => `${v.title}: ${v.description}`)),
     ),
-    doc(
-      h2('Our Approach'),
-      bullets(
-        Object.values(approach.pillars as Record<string, { title: string; description: string }>).map((p) => `${p.title}: ${p.description}`),
-      ),
-    ),
 
     {
       hr: true,
@@ -348,7 +341,7 @@ function generateAbout() {
         bullets([
           linkLine('Leadership & Team', llmsUrl('/team'), 'MENASCO leadership and engineering management team.'),
           linkLine('Quality, Health & Safety', llmsUrl('/quality-safety'), "MENASCO's QHSE approach and ISO certifications."),
-          linkLine('ESG & Sustainability', llmsUrl('/esg-reporting'), "MENASCO's environmental, social and governance approach."),
+          linkLine('Community & People', llmsUrl('/community-people'), 'MENASCO blood drive, Culture Day and Training & Mentoring Centre.'),
           linkLine('Innovation & Technology', llmsUrl('/innovation-technology'), "MENASCO's digital and technology initiatives."),
           linkLine('Contact & Regional Presence', llmsUrl('/contact'), 'Office locations and contact details.'),
         ]),
@@ -365,14 +358,14 @@ function generateTeam() {
 
   const content = doc(
     h1('Leadership & Team'),
-    bq("MENASCO's executive leadership and engineering management team."),
+    bq("MENASCO's founder, CEO, and corporate and technical leadership."),
 
     doc(
       h2('Executive Leadership'),
       bullets(leadershipProfiles.map((p) => linkLine(p.fullName, llmsUrl(`/leadership/${p.slug}`), p.fullRole))),
     ),
-    doc(h2('Executive Team'), bullets(execGroup.map((m) => `${m.name}, ${m.title}`))),
-    doc(h2('Engineering & Support Leads'), bullets(supportGroup.map((m) => `${m.name}, ${m.title}`))),
+    doc(h2('Corporate Leadership'), bullets(execGroup.map((m) => `${m.name}, ${m.title}`))),
+    doc(h2('Technical Leadership'), bullets(supportGroup.map((m) => `${m.name}, ${m.title}`))),
 
     {
       hr: true,
@@ -415,25 +408,21 @@ function generateQualitySafety() {
       hr: true,
       text: doc(
         h2('Related Pages'),
-        bullets([linkLine('ESG & Sustainability', llmsUrl('/esg-reporting')), linkLine('About MENASCO', llmsUrl('/about'))]),
+        bullets([linkLine('Community & People', llmsUrl('/community-people')), linkLine('About MENASCO', llmsUrl('/about'))]),
       ),
     },
   );
   write('/quality-safety', content);
 }
 
-function generateEsg() {
-  const esg = about.esg;
-  const pillars = esg.pillars as Array<{ heading: string; paragraphs: string[] }>;
+function generateCommunity() {
+  const community = about.community;
+  const chapters = [community.bloodDrive, community.healthcare, community.cultureDay, community.dubaiRun, community.careerFairs, community.training] as Array<{ eyebrow: string; heading: string; caption: string }>;
   const content = doc(
-    h1('ESG & Sustainability'),
-    bq(esg.hero.description),
+    h1('Community & People'),
+    bq(community.seo.description),
 
-    ...pillars.map((pillar) => doc(h2(pillar.heading), pillar.paragraphs.join('\n\n'))),
-    doc(
-      h2(esg.highlightsHeading),
-      bullets((esg.highlights as Array<{ title: string; description: string }>).map((h) => `${h.title}: ${h.description}`)),
-    ),
+    ...chapters.map((chapter) => doc(h2(chapter.eyebrow), `${chapter.heading}. ${chapter.caption}`)),
 
     {
       hr: true,
@@ -443,13 +432,13 @@ function generateEsg() {
       ),
     },
   );
-  write('/esg-reporting', content);
+  write('/community-people', content);
 }
 
 function generateInnovation() {
   const inn = about.innovation;
   const sectionEntries = Object.entries(
-    inn.sections as Record<string, { heading: string; paragraph: string; highlights: string[]; privacyPolicyLink?: string }>,
+    inn.sections as Record<string, { heading: string; paragraph: string; privacyPolicyLink?: string }>,
   );
   const content = doc(
     h1('Innovation & Technology'),
@@ -459,7 +448,6 @@ function generateInnovation() {
       doc(
         h2(sec.heading),
         sec.paragraph,
-        bullets(sec.highlights),
         key === 'lynxqc' && sec.privacyPolicyLink ? linkLine(sec.privacyPolicyLink, llmsUrl('/lynxqc/privacy-policy')) : '',
       ),
     ),
@@ -737,15 +725,15 @@ function generateLegal() {
 }
 
 /**
- * Summarizes the LYNXqc Privacy Policy's existence, scope and section list —
+ * Summarizes the LYNX Privacy Policy's existence, scope and section list —
  * does not reproduce or expand the legal text itself (that stays exclusively
  * on the actual policy page, sourced verbatim from data/lynxqcPrivacyPolicy.ts).
  */
 function generateLynxqcPrivacyPolicy() {
   const content = doc(
-    h1('LYNXqc Privacy Policy'),
+    h1('LYNX Privacy Policy'),
     bq(
-      'Privacy policy for LYNXqc, a construction site reporting and quality management platform used by authorized MENASCO employees, contractors, consultants, clients, and project stakeholders.',
+      'Privacy policy for LYNX, a construction site reporting and quality management platform used by authorized MENASCO employees, contractors, consultants, clients, and project stakeholders.',
     ),
     `Last updated: ${lynxqcPrivacyPolicyLastUpdated}. Available in English only.`,
     doc(h2('Sections'), bullets(lynxqcPrivacyPolicySections.map((s) => s.heading))),
@@ -776,7 +764,7 @@ generateAbout();
 generateTeam();
 generateLeadershipProfiles();
 generateQualitySafety();
-generateEsg();
+generateCommunity();
 generateInnovation();
 generateContact();
 generateServicesIndex();

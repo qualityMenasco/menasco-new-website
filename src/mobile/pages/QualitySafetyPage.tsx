@@ -2,10 +2,12 @@ import { Award, HardHat, Leaf } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../components/SectionHeader';
+import { PhotoRail } from '../components/PhotoRail';
 import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { SEO } from '../../seo/SEO';
 import {} from '../../seo/structuredData';
 import { certifications } from '../../data/certifications';
+import { qualitySafetyPhotos } from '../../data/siteSafety';
 
 const certificationIcons: Record<string, LucideIcon> = {
   'ISO 9001:2015': Award,
@@ -38,6 +40,17 @@ export default function QualitySafetyPage() {
           description={t('qualitySafetyPageMobile.description')}
         />
         <p className="mt-4 text-body text-gray-700">{t('qualitySafetyPageMobile.body')}</p>
+        {/* Featured photos: the two portraits as a swipeable row (side by side on tablets), then the landscape full width. */}
+        <PhotoRail
+          images={qualitySafetyPhotos.portraits}
+          label={t('qualitySafetyPage.heading')}
+          className="-mx-4"
+          gutterClassName="scroll-px-4 px-4"
+          itemClassName="aspect-[4/5] w-[70vw] max-w-[20rem] md:w-[calc(50%-6px)] md:max-w-none"
+        />
+        <div className="mt-3 aspect-[16/9] overflow-hidden rounded-md bg-gray-100">
+          <img src={qualitySafetyPhotos.landscape.src} alt={qualitySafetyPhotos.landscape.alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+        </div>
         <a
           href="/certificates/qhse-policy.pdf"
           target="_blank"
@@ -87,6 +100,7 @@ export default function QualitySafetyPage() {
           })}
         </div>
       </section>
+
     </>
   );
 }

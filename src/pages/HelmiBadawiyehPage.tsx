@@ -6,7 +6,6 @@ import { Eyebrow, Text } from '../components/typography/Typography';
 import { ButtonLink } from '../components/ui/Button';
 import { ScrollReveal } from '../components/common/ScrollReveal';
 import { LeadershipHero } from '../components/sections/leadership/LeadershipHero';
-import { LeadershipProfileCTA } from '../components/sections/leadership/LeadershipProfileCTA';
 import { NavSectionH1 } from '../components/typography/NavSectionH1';
 import { getLeadershipProfile } from '../data/leadership';
 import { SEO } from '../seo/SEO';
@@ -34,11 +33,6 @@ export default function HelmiBadawiyehPage() {
     t,
     `${base}.seoDescription`,
     "Learn about Eng. Helmi Badawiyeh, Founder and General Manager of MENASCO, and his vision for quality, long-term value, and engineering excellence.",
-  );
-  const heroIntro = overlay(
-    t,
-    `${base}.heroIntro`,
-    "A message from the founder of MENASCO on the company's journey, values, technical expertise, and commitment to long-term growth.",
   );
 
   return (
@@ -70,9 +64,11 @@ export default function HelmiBadawiyehPage() {
         eyebrow={messageEyebrow}
         role={fullRole}
       >
-        <Text variant="body-lg" muted>
-          {heroIntro}
-        </Text>
+        <div className="pt-2">
+          <ButtonLink href="/team#corporate-leadership" variant="primary" trailingIcon={ArrowRight}>
+            {t('team.meetOurTeam')}
+          </ButtonLink>
+        </div>
       </LeadershipHero>
 
       <ScrollReveal>
@@ -111,18 +107,10 @@ export default function HelmiBadawiyehPage() {
                   MENASCO Mechanical Contracting LLC
                 </Text>
               </div>
-
-              <div className="pt-2">
-                <ButtonLink href="/team" variant="primary" trailingIcon={ArrowRight}>
-                  {t('team.meetOurLeadership')}
-                </ButtonLink>
-              </div>
             </Stack>
           </div>
         </Section>
       </ScrollReveal>
-
-      <LeadershipProfileCTA />
     </>
   );
 }

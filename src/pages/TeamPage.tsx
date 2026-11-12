@@ -187,8 +187,8 @@ export default function TeamPage() {
         </Stack>
       </Section>
 
-      {/* Executive Leadership */}
-      <Section spacing="lg" background="stone" edgeFade>
+      {/* Corporate Leadership — anchor target for the profile pages' "Meet Our Team" button */}
+      <Section id="corporate-leadership" spacing="lg" background="stone" edgeFade>
         <Stack space="lg">
           <SectionHeader
             eyebrow={t('team.executive.eyebrow')}
@@ -204,7 +204,7 @@ export default function TeamPage() {
         </Stack>
       </Section>
 
-      {/* Engineering and Support Leads */}
+      {/* Technical Leadership */}
       <Section spacing="lg" background="warmwhite">
         <Stack space="lg">
           <SectionHeader

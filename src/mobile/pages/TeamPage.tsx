@@ -67,8 +67,8 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Executive Leadership */}
-      <section className="bg-stone px-4 py-8">
+      {/* Corporate Leadership */}
+      <section id="corporate-leadership" className="scroll-mt-14 bg-stone px-4 py-8">
         <SectionHeader eyebrow={t('team.executive.eyebrow')} heading={t('team.executive.heading')} headingAs="h3" description={t('team.executive.description')} />
         <div className="mt-5 grid grid-cols-2 gap-3">
           {executiveLeadership.map((member) => (
@@ -84,7 +84,7 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Engineering and Support Leads */}
+      {/* Technical Leadership */}
       <section className="px-4 py-8">
         <SectionHeader eyebrow={t('team.engineeringSupport.eyebrow')} heading={t('team.engineeringSupport.heading')} headingAs="h3" description={t('team.engineeringSupport.description')} />
         <div className="mt-5 grid grid-cols-2 gap-3">

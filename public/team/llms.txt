@@ -1,27 +1,27 @@
 # Leadership & Team
 
-> MENASCO's executive leadership and engineering management team.
+> MENASCO's founder, CEO, and corporate and technical leadership.
 
 ## Executive Leadership
 
 - [Eng. Helmi Badawiyeh](https://menascogroup.com/leadership/helmi-badawiyeh/llms.txt): Founder & General Manager
 - [Eng. Bahaa H. Badawiyeh](https://menascogroup.com/leadership/bahaa-badawiyeh/llms.txt): Chief Executive Officer
 
-## Executive Team
+## Corporate Leadership
 
 - Mr. Hani Badawiyeh, Chief Financial Officer
 - Eng. Refad Al-Dwairi, Chief Operating Officer
 - Eng. Ihab Saadi, Manpower & Resourcing Division Manager
 - Eng. Mohamed Youssef, Commercial Director
-- Eng. Zakaria Motawe, Engineering Head – Electrical
+- Eng. Sura Mustafa, Estimation & Procurement Manager
 - Mr. Ed Smith, Professional Services Manager
-- Eng. Rakan Abdullah, BIM Manager
+- Eng. Victor Eze, HSE Manager
 - Eng. Motaz Abu Fada, Planning & Control Manager
 
-## Engineering & Support Leads
+## Technical Leadership
 
-- Eng. Sura Mustafa, Estimation & Procurement Manager
-- Eng. Victor Eze, HSE Manager
+- Eng. Zakaria Motawe, Engineering Head – Electrical
+- Eng. Rakan Abdullah, BIM Manager
 - Eng. Ahmed Abbas, IT Manager
 - Mr. Ammar Theeb, HR Manager
 - Eng. Ibrahim Rahmah, Design & Engineering Section Head

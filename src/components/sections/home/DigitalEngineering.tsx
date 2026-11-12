@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 import { Section } from '../../layout/Section';
 import { Stack } from '../../layout/Stack';
 import { Eyebrow, Heading, Text } from '../../typography/Typography';
-import { placeholderImages } from '../../../data/images';
 
 /** In workflow order — shown as a numbered 01–04 process strip. */
 const capabilityKeys = ['federatedBim', 'clashDetection', 'constructability', 'dataDriven'] as const;
@@ -30,9 +29,11 @@ export function DigitalEngineering() {
             The text is always in the page, so screen readers read it too. */}
         <div tabIndex={0} className="group relative aspect-[21/9] overflow-hidden rounded-md bg-charcoal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400">
           <img
-            src={placeholderImages.controlRoom}
-            alt="Site team in high-visibility gear working on a rebar deck"
-            className="h-full w-full object-cover transition-[opacity,transform] duration-500 ease-engineered group-hover:scale-[1.02] group-hover:opacity-15 group-focus-visible:scale-[1.02] group-focus-visible:opacity-15"
+            src="/home-bim-coordination.jpg"
+            alt="Two Menasco engineers reviewing a coordinated 3D MEP model on a large display"
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover object-[50%_35%] transition-[opacity,transform] duration-500 ease-engineered group-hover:scale-[1.02] group-hover:opacity-15 group-focus-visible:scale-[1.02] group-focus-visible:opacity-15"
           />
           <div className="absolute inset-0 flex items-center justify-center p-8 opacity-0 transition-opacity duration-500 ease-engineered group-hover:opacity-100 group-focus-visible:opacity-100 lg:p-16">
             <Text variant="body-lg" theme="dark" className="max-w-3xl text-center !text-h4 !leading-relaxed !text-warmwhite">

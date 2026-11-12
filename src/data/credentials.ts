@@ -1,7 +1,9 @@
 export type CredentialButtonVariant = 'filled' | 'outline';
 
 export interface Credential {
-  icon: 'document' | 'book' | 'shield';
+  /** about.json `credentials.<key>` block holding the translated copy. */
+  key: 'companyProfile' | 'community' | 'innovation';
+  icon: 'document' | 'people' | 'chip';
   eyebrow: string;
   title: string;
   description: string;
@@ -10,10 +12,13 @@ export interface Credential {
   // e.g. "/documents/menasco-company-profile.pdf".
   href: string;
   buttonVariant: CredentialButtonVariant;
+  /** An on-site page (opens in the same tab) rather than a document. */
+  internal?: boolean;
 }
 
 const credentials: Credential[] = [
   {
+    key: 'companyProfile',
     icon: 'document',
     eyebrow: 'Company Profile',
     title: 'Who We Are, On Paper.',
@@ -24,24 +29,28 @@ const credentials: Credential[] = [
     buttonVariant: 'filled',
   },
   {
-    icon: 'book',
-    eyebrow: 'Guidelines',
-    title: 'MENASCO Guidelines',
+    key: 'community',
+    icon: 'people',
+    eyebrow: 'Community & People',
+    title: 'Our Community',
     description:
-      'Our internal engineering, QHSE & operational guidelines: the standards our team follows on every site.',
-    buttonLabel: 'View Guidelines',
-    href: '/documents/menasco-guidelines.pdf',
+      'Blood drives, Culture Day, career fairs and our training centre: the people and causes behind MENASCO.',
+    buttonLabel: 'Explore Our Community',
+    href: '/community-people',
     buttonVariant: 'outline',
+    internal: true,
   },
   {
-    icon: 'shield',
-    eyebrow: 'Sustainability',
-    title: 'MENASCO Sustainability Program',
+    key: 'innovation',
+    icon: 'chip',
+    eyebrow: 'Innovation & Technology',
+    title: 'Paving The Future',
     description:
-      'How MENASCO builds responsibly: energy-efficient systems, safer sites and reduced environmental impact.',
-    buttonLabel: 'View Report',
-    href: '/documents/menasco-sustainability-report.pdf',
+      'ATLAS, LYNX, and AI: the digital tools behind how MENASCO tenders, builds and delivers.',
+    buttonLabel: 'Discover More',
+    href: '/innovation-technology',
     buttonVariant: 'outline',
+    internal: true,
   },
 ];
 

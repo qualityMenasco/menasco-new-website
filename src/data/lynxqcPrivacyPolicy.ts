@@ -1,5 +1,5 @@
 /**
- * LYNXqc Privacy Policy — full text transcribed verbatim from the supplied
+ * LYNX Privacy Policy — full text transcribed verbatim from the supplied
  * LYNXqc_PrivacyPolicy.html source (English only; see LynxqcPrivacyPolicyPage
  * for why no Arabic legal translation is provided). Wording is preserved
  * exactly; only markup/structure was adapted to render through the site's
@@ -29,7 +29,7 @@ export const lynxqcPrivacyPolicySections: LynxqcPolicySection[] = [
     blocks: [
       {
         type: 'p',
-        text: 'LYNXqc is a construction site reporting and quality management platform used by authorized employees, contractors, consultants, clients, and project stakeholders participating in managed construction and engineering projects.',
+        text: 'LYNX is a construction site reporting and quality management platform used by authorized employees, contractors, consultants, clients, and project stakeholders participating in managed construction and engineering projects.',
       },
       {
         type: 'p',
@@ -62,7 +62,7 @@ export const lynxqcPrivacyPolicySections: LynxqcPolicySection[] = [
         blocks: [
           {
             type: 'p',
-            text: 'To support platform administration, performance monitoring, security, adoption reporting, and operational analytics, LYNXqc collects limited usage and session information, including:',
+            text: 'To support platform administration, performance monitoring, security, adoption reporting, and operational analytics, LYNX collects limited usage and session information, including:',
           },
           {
             type: 'list',
@@ -116,7 +116,7 @@ export const lynxqcPrivacyPolicySections: LynxqcPolicySection[] = [
   {
     heading: '3. Purpose of Data Collection',
     blocks: [
-      { type: 'p', text: 'We collect and process information solely to provide the services offered by LYNXqc, including:' },
+      { type: 'p', text: 'We collect and process information solely to provide the services offered by LYNX, including:' },
       {
         type: 'list',
         items: [
@@ -139,7 +139,7 @@ export const lynxqcPrivacyPolicySections: LynxqcPolicySection[] = [
   },
   {
     heading: '4. Camera, Microphone, and Media Access',
-    blocks: [{ type: 'p', text: 'LYNXqc requests access to your device only when you explicitly use a related feature.' }],
+    blocks: [{ type: 'p', text: 'LYNX requests access to your device only when you explicitly use a related feature.' }],
     subsections: [
       { heading: 'Camera Access', blocks: [{ type: 'p', text: 'Used to capture photographs and documentation related to project issues, inspections, and snag reports.' }] },
       { heading: 'Photo Library Access', blocks: [{ type: 'p', text: 'Used when you choose to attach existing images or documents to a report.' }] },
@@ -147,7 +147,7 @@ export const lynxqcPrivacyPolicySections: LynxqcPolicySection[] = [
         heading: 'Microphone Access',
         blocks: [
           { type: 'p', text: 'Used exclusively to record voice notes that are converted into text and attached to snag reports.' },
-          { type: 'p', text: 'LYNXqc does not access your camera, microphone, photo library, contacts, or media files in the background.' },
+          { type: 'p', text: 'LYNX does not access your camera, microphone, photo library, contacts, or media files in the background.' },
         ],
       },
     ],
@@ -160,7 +160,7 @@ export const lynxqcPrivacyPolicySections: LynxqcPolicySection[] = [
         blocks: [
           {
             type: 'p',
-            text: 'LYNXqc does not sell, rent, trade, license, monetize, distribute, or otherwise disclose personal information to advertisers, marketing companies, data brokers, or unrelated third parties.',
+            text: 'LYNX does not sell, rent, trade, license, monetize, distribute, or otherwise disclose personal information to advertisers, marketing companies, data brokers, or unrelated third parties.',
           },
           {
             type: 'p',
@@ -178,7 +178,7 @@ export const lynxqcPrivacyPolicySections: LynxqcPolicySection[] = [
         blocks: [
           {
             type: 'p',
-            text: 'LYNXqc utilizes third-party infrastructure, hosting, storage, notification, analytics, artificial intelligence, and technology service providers that support the operation of the platform.',
+            text: 'LYNX utilizes third-party infrastructure, hosting, storage, notification, analytics, artificial intelligence, and technology service providers that support the operation of the platform.',
           },
           {
             type: 'p',

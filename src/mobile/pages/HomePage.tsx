@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { ArrowRight, ArrowUpRight, BookOpen, Briefcase, ChevronDown } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { ArrowRight, ArrowUpRight, BookOpen, Briefcase, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { MobileHero } from '../components/MobileHero';
@@ -47,6 +47,32 @@ const careerPaths = [
 export default function HomePage() {
   const reducedMotion = useReducedMotion();
   const { t } = useTranslation(['home', 'services', 'nav', 'projects', 'common']);
+
+  // Featured projects rail — tablet arrows step one card at a time; each
+  // arrow disables at its end of the rail. Direction-aware, so in RTL "next"
+  // moves the way the content flows (scrollLeft runs negative there).
+  const projectRailRef = useRef<HTMLDivElement>(null);
+  const [projectScroll, setProjectScroll] = useState({ canPrev: false, canNext: true });
+  const updateProjectScroll = useCallback(() => {
+    const rail = projectRailRef.current;
+    if (!rail) return;
+    const travelled = Math.abs(rail.scrollLeft);
+    const max = rail.scrollWidth - rail.clientWidth;
+    setProjectScroll({ canPrev: travelled > 4, canNext: travelled < max - 4 });
+  }, []);
+  const scrollProjects = (step: 1 | -1) => {
+    const rail = projectRailRef.current;
+    if (!rail) return;
+    const card = rail.firstElementChild as HTMLElement | null;
+    const distance = card ? card.getBoundingClientRect().width + 12 : rail.clientWidth * 0.8;
+    const rtl = getComputedStyle(rail).direction === 'rtl';
+    rail.scrollBy({ left: step * distance * (rtl ? -1 : 1), behavior: reducedMotion ? 'auto' : 'smooth' });
+  };
+  useEffect(() => {
+    updateProjectScroll();
+    window.addEventListener('resize', updateProjectScroll);
+    return () => window.removeEventListener('resize', updateProjectScroll);
+  }, [updateProjectScroll]);
 
   // Collapsed-by-default vertical accordion, mirroring the desktop pattern
   // (src/components/sections/home/ServicesShowcase.tsx) — mobile has no
@@ -155,15 +181,43 @@ export default function HomePage() {
 
       {/* 5. Portfolio — featured projects (warm, between stone Services and the dark Data Centre band) */}
       <section className="py-10">
-        <div className="px-4">
+        <div className="flex items-end justify-between gap-4 px-4">
           <SectionHeader
             eyebrow={t('home:featuredProjects.eyebrow')}
             heading={t('home:featuredProjects.heading')}
             headingAs="h3"
             description={t('home:featuredProjects.mobileDescription')}
           />
+          {/* Tablets: arrows to step through the cards. Phones stay swipe-only. */}
+          <div className="hidden shrink-0 gap-2 md:flex">
+            <button
+              type="button"
+              onClick={() => scrollProjects(-1)}
+              disabled={!projectScroll.canPrev}
+              aria-label={t('common:buttons.previousProjects')}
+              aria-controls="home-featured-projects"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-300 text-ink transition-colors duration-base hover:border-ink disabled:cursor-default disabled:opacity-35"
+            >
+              <ChevronLeft size={18} aria-hidden="true" className="rtl:rotate-180" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollProjects(1)}
+              disabled={!projectScroll.canNext}
+              aria-label={t('common:buttons.nextProjects')}
+              aria-controls="home-featured-projects"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-300 text-ink transition-colors duration-base hover:border-ink disabled:cursor-default disabled:opacity-35"
+            >
+              <ChevronRight size={18} aria-hidden="true" className="rtl:rotate-180" />
+            </button>
+          </div>
         </div>
-        <div className="no-scrollbar mt-4 flex gap-3 overflow-x-auto px-4 pb-1">
+        <div
+          id="home-featured-projects"
+          ref={projectRailRef}
+          onScroll={updateProjectScroll}
+          className="no-scrollbar mt-4 flex gap-3 overflow-x-auto scroll-smooth px-4 pb-1"
+        >
           {featuredProjects.map((project) => (
             <MobileProjectCard
               key={project.id}
@@ -208,7 +262,6 @@ export default function HomePage() {
           <h3 className="mt-2 font-display text-h2 font-semibold tracking-tight text-warmwhite">
             {t('home:dataCenter.mobileTitle')}
           </h3>
-          <p className="mt-3 text-body text-gray-200">{t('home:dataCenter.mobileDescription')}</p>
           <motion.div whileTap={reducedMotion ? undefined : { scale: 0.97 }} className="mt-5 inline-block">
             <LocaleLink
               to="/projects/categories?category=advanced-technical-facilities"

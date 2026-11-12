@@ -1,13 +1,15 @@
 import { Brain, ClipboardCheck, Database, Network, Scale } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../components/SectionHeader';
+import { PhotoRail } from '../components/PhotoRail';
 import { MobileTechnologyCard } from '../components/MobileTechnologyCard';
 import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { SEO } from '../../seo/SEO';
+import { innovationHeroFilm, innovationHeroPhotos } from '../../data/innovationPhotos';
 import {} from '../../seo/structuredData';
 
 /**
- * Same order established on desktop: ATLAS → LYNXqc → AI → Enterprise Data
+ * Same order established on desktop: ATLAS → LYNX → AI → Enterprise Data
  * Lake → MENASCO Connect, with "Where We're Investing" excluded.
  */
 export default function InnovationPage() {
@@ -28,9 +30,21 @@ export default function InnovationPage() {
       <section className="px-4 py-8">
         <SectionHeader
           eyebrow={t('innovationMobile.hero.eyebrow')}
-          heading={t('innovationMobile.hero.heading')}
+          // Non-breaking space keeps the "&" with "Innovation" so it never wraps onto a line alone.
+          heading={t('innovationMobile.hero.heading').replace(' & ', ' & ')}
           headingAs="h2"
           description={t('innovationMobile.hero.description')}
+        />
+
+        {/* The desktop header's two photos as a swipeable row (side by side on tablets).
+            The film doesn't fit beside them here, so it collapses into a "Watch the
+            video" button on the first photo that opens it full screen. */}
+        <PhotoRail
+          images={innovationHeroPhotos.map((photo, index) => (index === 0 ? { ...photo, video: innovationHeroFilm.src } : photo))}
+          label={t('innovationMobile.hero.heading')}
+          className="-mx-4"
+          gutterClassName="scroll-px-4 px-4"
+          itemClassName="aspect-[4/5] w-[78vw] max-w-[22rem] md:w-[calc(50%-6px)] md:max-w-none"
         />
 
         <div className="mt-5 flex flex-col gap-4">

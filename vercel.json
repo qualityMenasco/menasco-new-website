@@ -1,7 +1,9 @@
 {
   "redirects": [
     { "source": "/careers", "destination": "https://main.d5ycnj71qvqrf.amplifyapp.com/", "permanent": false },
-    { "source": "/ar/careers", "destination": "https://main.d5ycnj71qvqrf.amplifyapp.com/", "permanent": false }
+    { "source": "/ar/careers", "destination": "https://main.d5ycnj71qvqrf.amplifyapp.com/", "permanent": false },
+    { "source": "/esg-reporting", "destination": "/community-people", "permanent": true },
+    { "source": "/ar/esg-reporting", "destination": "/ar/community-people", "permanent": true }
   ],
   "rewrites": [
     { "source": "/api/newsroom-admin-proxy/:path*", "destination": "/api/newsroom-admin-proxy/[...path]?path=:path*" },

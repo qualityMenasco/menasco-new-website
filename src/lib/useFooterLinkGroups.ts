@@ -4,7 +4,7 @@ import { footerCompanyLinks, footerProjectLinks, footerServiceLinks } from '../d
 const footerCompanyKeys: Record<string, string> = {
   'About MENASCO': 'aboutMenasco',
   'Quality & Safety': 'qualitySafety',
-  'ESG Reporting': 'esgReporting',
+  'Community & People': 'communityPeople',
   'Innovation & Technology': 'innovationTechnology',
   Team: 'team',
   Newsroom: 'newsroom',

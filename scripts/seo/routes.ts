@@ -166,10 +166,10 @@ addRoute(
   { breadcrumb: () => [HOME, { label: 'Quality, Health & Safety', path: '/quality-safety' }] },
 );
 addRoute(
-  '/esg-reporting',
-  (l) => fullTitle(l, tr(l, 'about', 'esg.seo.title', 'ESG & Sustainability')),
-  (l) => tr(l, 'about', 'esg.seo.description', NS[l].seo.defaultDescription),
-  { breadcrumb: () => [HOME, { label: 'ESG Reporting', path: '/esg-reporting' }] },
+  '/community-people',
+  (l) => fullTitle(l, tr(l, 'about', 'community.seo.title', 'Community & People')),
+  (l) => tr(l, 'about', 'community.seo.description', NS[l].seo.defaultDescription),
+  { breadcrumb: () => [HOME, { label: 'Community & People', path: '/community-people' }] },
 );
 addRoute(
   '/innovation-technology',
@@ -335,9 +335,9 @@ addRoute(
 );
 addRoute(
   '/lynxqc/privacy-policy',
-  (l) => fullTitle(l, tr(l, 'legal', 'lynxqcPrivacy.seo.title', 'LYNXqc Privacy Policy | MENASCO')),
+  (l) => fullTitle(l, tr(l, 'legal', 'lynxqcPrivacy.seo.title', 'LYNX Privacy Policy | MENASCO')),
   (l) => tr(l, 'legal', 'lynxqcPrivacy.seo.description', NS[l].seo.defaultDescription),
-  { breadcrumb: () => [HOME, { label: 'Innovation & Technology', path: '/innovation-technology' }, { label: 'LYNXqc Privacy Policy', path: '/lynxqc/privacy-policy' }] },
+  { breadcrumb: () => [HOME, { label: 'Innovation & Technology', path: '/innovation-technology' }, { label: 'LYNX Privacy Policy', path: '/lynxqc/privacy-policy' }] },
 );
 
 // ---------------------------------------------------------------------------

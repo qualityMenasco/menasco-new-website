@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Container } from '../../layout/Container';
-import { Eyebrow, Heading, Text } from '../../typography/Typography';
+import { Eyebrow, Heading } from '../../typography/Typography';
 import { SmartLink } from '../../../lib/SmartLink';
 
 const POSTER = '/data-center-poster.jpg';
@@ -54,9 +54,6 @@ export function DataCenterFeature() {
           <Heading level="h1" as="h3" theme="dark" className="mt-4 max-w-xl">
             {t('dataCenter.title')}
           </Heading>
-          <Text variant="body-lg" theme="dark" className="mt-6 max-w-xl text-gray-200">
-            {t('dataCenter.description')}
-          </Text>
 
           <div className="mt-10">
             <SmartLink href="/services/data-centers" className="group inline-flex items-center gap-4">

@@ -1,12 +1,12 @@
-import { HeartHandshake, Layers, TrendingUp } from 'lucide-react';
+import { ArrowRight, HeartHandshake, Layers, TrendingUp } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../components/layout/Section';
 import { Stack } from '../components/layout/Stack';
 import { Container } from '../components/layout/Container';
 import { Eyebrow, Heading, Text } from '../components/typography/Typography';
+import { ButtonLink } from '../components/ui/Button';
 import { ScrollReveal, ScrollRevealGroup } from '../components/common/ScrollReveal';
 import { LeadershipHero } from '../components/sections/leadership/LeadershipHero';
-import { LeadershipProfileCTA } from '../components/sections/leadership/LeadershipProfileCTA';
 import { NavSectionH1 } from '../components/typography/NavSectionH1';
 import { getLeadershipProfile } from '../data/leadership';
 import { placeholderImages } from '../data/images';
@@ -61,11 +61,6 @@ export default function BahaaBadawiyehPage() {
     'Meet Eng. Bahaa H. Badawiyeh, CEO of MENASCO, and explore his leadership approach to innovation, regional growth, sustainability, and engineering excellence.',
   );
   const pageTitle = overlay(t, `${base}.pageTitle`, PAGE_TITLE);
-  const heroIntro = overlay(
-    t,
-    `${base}.heroIntro`,
-    'Leading MENASCO through innovation-driven growth, operational excellence, and a people-first engineering culture.',
-  );
   const pullQuote = overlay(
     t,
     `${base}.pullQuote`,
@@ -111,9 +106,11 @@ export default function BahaaBadawiyehPage() {
             near-identical weight this close together read as an accidental
             duplicate rather than an intentional echo, especially on mobile
             where section separation is subtler than desktop's whitespace. */}
-        <Text variant="body-lg" muted>
-          {heroIntro}
-        </Text>
+        <div className="pt-2">
+          <ButtonLink href="/team#corporate-leadership" variant="primary" trailingIcon={ArrowRight}>
+            {t('team.meetOurTeam')}
+          </ButtonLink>
+        </div>
       </LeadershipHero>
 
       <ScrollReveal>
@@ -197,8 +194,6 @@ export default function BahaaBadawiyehPage() {
           </Stack>
         </Section>
       </ScrollReveal>
-
-      <LeadershipProfileCTA />
     </>
   );
 }
