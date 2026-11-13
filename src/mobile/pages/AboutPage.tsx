@@ -1,4 +1,4 @@
-import { Cpu, FileText, Users, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Cpu, FileText, Users, type LucideIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../components/SectionHeader';
 import { ExpandableText } from '../components/ExpandableText';
@@ -39,6 +39,7 @@ export default function AboutPage() {
         <PhotoWithVideo
           image={{ src: '/about/approach-engineer.jpg', alt: t('hero.filmAlt') }}
           video="/about/about-hero-film.mp4"
+          hasAudio={false}
           className="mt-5 aspect-[4/3] md:col-start-2 md:row-span-2 md:row-start-1 md:mt-0 md:aspect-[4/5] [&_img]:object-[50%_38%]"
         />
         <div className="md:col-start-1 md:row-start-2">
@@ -110,6 +111,38 @@ export default function AboutPage() {
         </ul>
       </section>
 
+      {/* Commitment to Quality — the desktop section adapted: the site photo, the heading,
+          the first paragraph with the second behind "Read more", and the Explore More button.
+          Tablets put the copy beside the photo. */}
+      <section className="grid px-4 py-8 md:grid-cols-2 md:items-center md:gap-x-8 md:py-12">
+        <div className="aspect-[4/3] overflow-hidden rounded-md bg-gray-100 md:order-2 md:aspect-[4/5]">
+          <img
+            src="/about/quality-site.jpg"
+            alt="MENASCO's QA/QC manager and an engineer in high-visibility vests inspecting a completed building"
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover object-[50%_75%]"
+          />
+        </div>
+        <div className="mt-6 md:mt-0">
+          <SectionHeader eyebrow={t('qualityStandards.eyebrow')} heading={t('qualityStandards.heading')} headingAs="h3" />
+          <ExpandableText
+            className="mt-4"
+            summary={t('qualityStandards.paragraph1')}
+            paragraphs={[t('qualityStandards.paragraph2')]}
+            expandLabel={t('common:buttons.readMore')}
+            collapseLabel={t('common:buttons.showLess')}
+          />
+          <LocaleLink
+            to="/quality-safety"
+            className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-brand-600 text-body font-semibold text-warmwhite md:w-fit md:px-8"
+          >
+            {t('qualityStandards.exploreMore')}
+            <ArrowRight size={16} aria-hidden="true" className="rtl:rotate-180" />
+          </LocaleLink>
+        </div>
+      </section>
+
       {/* Mirrors the desktop page's closing "Learn More" cards (same data and copy), as a swipeable row (three across on tablets). */}
       <section className="py-8 md:py-12">
         <div className="px-4">
@@ -122,7 +155,7 @@ export default function AboutPage() {
               t(`credentials.${credential.key}.${field}`, { defaultValue: credential[field] });
             const buttonClass =
               credential.buttonVariant === 'filled'
-                ? 'mt-auto inline-flex h-11 items-center justify-center rounded-md bg-brand-600 px-4 text-small font-semibold text-warmwhite'
+                ? 'mt-auto inline-flex h-11 items-center justify-center rounded-md border border-ink bg-white px-4 text-small font-semibold text-ink'
                 : 'mt-auto inline-flex h-11 items-center justify-center rounded-md border border-ink px-4 text-small font-semibold text-ink';
             return (
               <article

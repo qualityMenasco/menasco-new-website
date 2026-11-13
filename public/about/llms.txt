@@ -23,7 +23,7 @@ Our multidisciplinary teams combine engineering expertise, advanced technologies
 - Core service lines include Mechanical, Electrical, Plumbing, Fire Protection, BIM & Digital Engineering, Manufacturing & Prefabrication, alongside dedicated data centre MEP delivery.
 - Delivers specialist engineering for data centres, mission-critical, healthcare, energy, and other technically demanding facilities.
 - Project-delivery approach incorporates early project engagement, BIM-driven coordination, and disciplined execution.
-- Maintains a dedicated Innovation & Technology ecosystem spanning Automatic Tendering Logic Assessment System (ATLAS), LYNX, Artificial Intelligence & Intelligent Automation, Enterprise Data Lake, MENASCO Connect.
+- Maintains a dedicated Innovation & Technology ecosystem spanning Automatic Tendering Logic Assessment System (ATLAS), LYNX, AI Engineering, MENASCO Connect.
 - Maintains an integrated QHSE system certified to ISO 9001:2015, ISO 14001:2015, ISO 45001:2018.
 
 ## Mission

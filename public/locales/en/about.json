@@ -22,11 +22,7 @@
   },
   "brandStatement": {
     "heading1": "Engineering the Skyline,",
-    "heading2": "Shaping the Future.",
-    "tagline": "At MENASCO, every detail tells a story of",
-    "innovation": "Innovation",
-    "integrity": "Integrity",
-    "excellence": "Excellence"
+    "heading2": "Shaping the Future."
   },
   "ourApproach": {
     "eyebrow": "Our Approach",
@@ -68,21 +64,6 @@
     "paragraph1": "Quality is embedded into every stage of our operations. MENASCO operates under an integrated Quality, Health, Safety, and Environmental (QHSE) management framework that promotes continuous improvement, proactive risk management, and operational excellence across every project.",
     "paragraph2": "Our commitment extends beyond compliance. Through rigorous quality control, technical oversight, and performance monitoring, we consistently deliver engineering solutions that meet the highest standards expected throughout the construction industry. This commitment enables us to deliver projects that are safe, reliable, efficient, and built for long-term performance.",
     "exploreMore": "Explore More"
-  },
-  "ourExperience": {
-    "eyebrow": "Our Experience",
-    "heading": "Engineering Expertise That Delivers",
-    "description": "Over three decades, MENASCO has successfully completed a diverse portfolio of complex MEP projects throughout the region. Every project reflects our commitment to engineering excellence, innovation, safety, and client satisfaction.",
-    "expertise": {
-      "hvac": "HVAC Systems",
-      "plumbing": "Plumbing Systems",
-      "fireProtection": "Fire Protection Systems",
-      "electrical": "Electrical Engineering",
-      "elv": "ELV & Emergency Systems",
-      "buildingServices": "Building Services",
-      "integratedMep": "Integrated MEP Solutions",
-      "commissioning": "Commissioning & Testing"
-    }
   },
   "ourPeople": {
     "eyebrow": "Our People",
@@ -336,7 +317,7 @@
       "atlas": {
         "eyebrow": "Intelligent Compliance",
         "heading": "Automatic Tendering Logic Assessment System (ATLAS)",
-        "paragraph": "ATLAS is MENASCO's AI-powered compliance platform, evaluating engineering designs against applicable codes, standards, and regulatory frameworks to improve readiness for review before submission across technically demanding project types, from mission-critical facilities to hospitality and residential developments."
+        "paragraph": "ATLAS is a MENASCO pilot project focussed on AI-powered compliance. The platform is being designed to evaluate engineering designs against applicable codes, standards, and regulatory frameworks to improve readiness for review before submission. From mission-critical facilities to hospitality and residential developments; ATLAS ensures we do it right the first time, every time."
       },
       "lynxqc": {
         "eyebrow": "Intelligent Field Quality Management",
@@ -346,58 +327,22 @@
       },
       "ai": {
         "eyebrow": "Artificial Intelligence",
-        "heading": "Artificial Intelligence & Intelligent Automation",
-        "paragraph": "MENASCO is integrating artificial intelligence across its operations, from predictive analytics to workflow automation, to support engineers and project teams with faster, more informed decisions, not replace them."
-      },
-      "dataLake": {
-        "eyebrow": "Data & Business Intelligence",
-        "heading": "Enterprise Data Lake",
-        "paragraph": "MENASCO is building a centralized data platform that consolidates information from every major operational system across the business, turning operational data into real-time visibility and better-informed decisions."
+        "heading": "AI Engineering",
+        "paragraph": "Using AI across engineering, quantity takeoffs, recruitment, payroll management and tenders, MENASCO has increased its workforce efficiency by 30%. That time has freed our teams to take on larger projects, more of them, and to train and upskill for more impactful work."
       },
       "connect": {
-        "eyebrow": "Enterprise Collaboration",
+        "eyebrow": "Workforce Management",
         "heading": "MENASCO Connect",
-        "paragraph": "MENASCO Connect is our proprietary collaboration platform, unifying engineering, commercial, planning, QA/QC, and every other department into one digital workflow, accelerating administrative decisions to ensure consistent delivery across every project."
+        "paragraph": "MENASCO Connect is our proprietary workforce management platform, integrating recruitment, manpower planning, site attendance, leave management, employee assessments, and internal communications into a unified digital environment. By connecting workforce forecasts with real-time deployment and personnel data, the platform streamlines administrative processes, improves resource allocation, and strengthens workforce visibility across the organization."
       }
     },
     "closing": {
       "heading": "Engineering Tomorrow",
       "description": "MENASCO believes the future of engineering lies in combining decades of construction expertise with intelligent technologies that improve quality, efficiency, sustainability, compliance, and project certainty. Technology is not replacing engineering: it is empowering our engineers to deliver better outcomes for clients and projects."
-    }
-  },
-  "innovationMobile": {
-    "hero": {
-      "eyebrow": "About MENASCO",
-      "heading": "Innovation & Technology",
-      "description": "MENASCO is investing in proprietary technologies, artificial intelligence, enterprise data systems, automation, and digital engineering platforms to improve project delivery, operational efficiency, compliance, quality, and decision-making."
     },
-    "cards": {
-      "atlas": {
-        "eyebrow": "Intelligent Compliance",
-        "title": "Intelligent Compliance (ATLAS)",
-        "summary": "ATLAS, our Automatic Tendering Logic Assessment System, is an AI-powered compliance platform that evaluates engineering designs against applicable codes, standards, and regulatory frameworks to improve readiness for review before submission."
-      },
-      "lynxqc": {
-        "eyebrow": "Intelligent Field Quality Management",
-        "title": "LYNX",
-        "summary": "LYNX is MENASCO's intelligent field quality management platform, built to make identifying, assigning, and resolving construction issues faster and more transparent. Using photos, voice notes, and AI-assisted issue recognition, LYNX captures critical site information and routes it to the right teams for action. From initial observation through verification and closure, every issue is tracked in one auditable workflow, improving accountability, visibility, and quality across projects.",
-        "privacyPolicyLink": "Privacy Policy"
-      },
-      "ai": {
-        "eyebrow": "Artificial Intelligence",
-        "title": "Artificial Intelligence & Intelligent Automation",
-        "summary": "MENASCO is integrating artificial intelligence across its operations, from predictive analytics to workflow automation, to support engineers and project teams with faster, more informed decisions while not replacing them."
-      },
-      "dataLake": {
-        "eyebrow": "Data & Business Intelligence",
-        "title": "Enterprise Data Lake",
-        "summary": "MENASCO is building a centralized data platform that consolidates information from every major operational system across the business, turning operational data into real-time visibility and better-informed decisions."
-      },
-      "connect": {
-        "eyebrow": "Enterprise Collaboration",
-        "title": "MENASCO Connect",
-        "summary": "MENASCO Connect is our proprietary collaboration platform, unifying engineering, commercial, planning, QA/QC, and every other department into one digital workflow."
-      }
+    "stat": {
+      "value": "30%",
+      "label": "More workforce efficiency through AI"
     }
   },
   "qualitySafetyPage": {
@@ -412,10 +357,110 @@
     "paragraph2Prefix": "We are committed to protecting the health and wellbeing of our employees, partners, clients, and the communities where we work. Through proactive risk management,",
     "continuousImprovement": "continuous improvement",
     "paragraph2Suffix": ", and strict adherence to QHSE principles, we minimize health, safety, environmental, and operational risks across every activity, product, and service we deliver.",
-    "downloadPolicy": "Download full QHSE Policy"
-  },
-  "qualitySafetyPageMobile": {
-    "description": "Governed by an integrated QHSE system certified to ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018.",
-    "body": "We are committed to protecting the health and wellbeing of our employees, partners, clients, and the communities where we work, minimizing health, safety, environmental, and operational risks across every activity we deliver."
+    "downloadPolicy": "Download full QHSE Policy",
+    "hero": {
+      "eyebrow": "QHSE · Assurance System",
+      "annotations": {
+        "facade": {
+          "title": "Inspection point",
+          "note": "Façade & MEP interface"
+        },
+        "lead": {
+          "title": "Inspection lead",
+          "note": "QA/QC manager on site"
+        },
+        "ppe": {
+          "title": "PPE in use",
+          "note": "Helmet · eyewear · hi-vis"
+        },
+        "zone": {
+          "title": "Controlled zone",
+          "note": "Live works · restricted access"
+        }
+      },
+      "figureCaption": "Fig. 01 — Site inspection, annotated."
+    },
+    "disciplines": {
+      "eyebrow": "Two Disciplines",
+      "heading": "One Assurance System",
+      "quality": {
+        "tag": "Quality",
+        "title": "Technical precision, verified outcomes",
+        "lead": "Every installation is planned, inspected, tested and documented before it is handed over.",
+        "points": [
+          "Inspection & test plans",
+          "Material & workmanship inspections",
+          "Testing & commissioning records",
+          "Documented, traceable handover"
+        ]
+      },
+      "safety": {
+        "tag": "Safety",
+        "title": "Risk awareness, prevention first",
+        "lead": "Hazards are identified before work starts, controlled while it runs, and communicated to everyone on site.",
+        "points": [
+          "Risk assessments & method statements",
+          "Permits to work & site controls",
+          "Toolbox talks & clear signage",
+          "Workforce accountability & reporting"
+        ]
+      }
+    },
+    "process": {
+      "eyebrow": "Assurance Process",
+      "heading": "From Plan to Handover",
+      "steps": [
+        {
+          "title": "Plan",
+          "text": "Inspection and test plans and risk assessments are agreed before mobilisation."
+        },
+        {
+          "title": "Inspect",
+          "text": "Materials and workmanship are checked at defined hold points."
+        },
+        {
+          "title": "Test",
+          "text": "Systems are pressure-, function- and performance-tested to specification."
+        },
+        {
+          "title": "Verify",
+          "text": "Results are recorded, reviewed and signed off by QA/QC."
+        },
+        {
+          "title": "Hand over",
+          "text": "Complete, traceable documentation is handed to the client."
+        }
+      ]
+    },
+    "metrics": {
+      "eyebrow": "Performance",
+      "heading": "Measured, Not Assumed",
+      "pending": "Figures pending verification",
+      "items": {
+        "safeHours": "Safe man-hours",
+        "ltifr": "Lost-time injury frequency rate",
+        "inspections": "Inspections completed",
+        "ncr": "Non-conformance closure rate"
+      }
+    },
+    "commitment": {
+      "eyebrow": "Our Commitment",
+      "heading": "Governed by Certified Systems"
+    },
+    "field": {
+      "eyebrow": "On Site",
+      "heading": "Quality & Safety in the Field",
+      "captions": {
+        "engineer": "Fig. 02 — Site engineer in full PPE on a rebar deck.",
+        "team": "Fig. 03 — Safety team reviewing works on site.",
+        "site": "Fig. 04 — Active construction site at sunset.",
+        "award": "Fig. 05 — Quality award ceremony."
+      }
+    },
+    "certs": {
+      "eyebrow": "Certification",
+      "heading": "Independently Certified",
+      "viewCertificate": "View certificate"
+    }
   }
 }

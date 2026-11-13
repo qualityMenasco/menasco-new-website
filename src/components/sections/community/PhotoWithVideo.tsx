@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Play, X } from 'lucide-react';
+import { Pause, Play, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { cn } from '../../../lib/utils';
 
@@ -10,18 +10,26 @@ export interface PhotoWithVideoProps {
   className?: string;
   /** Extra classes for the scrim + button overlay, e.g. to hide it at widths where the film plays inline instead. */
   overlayClassName?: string;
+  /**
+   * False for silent clips: the viewer drops the browser's native controls (their
+   * volume button suggests sound that isn't there) for a muted loop with only a
+   * play/pause button.
+   */
+  hasAudio?: boolean;
 }
 
 /**
  * A photo with a "Watch the video" play button that opens the (portrait)
- * video full screen, with sound — the compact mobile alternative to
+ * video full screen (with sound unless `hasAudio` is false) — the compact mobile alternative to
  * stacking a tall video under the photo. Esc / the close button / the
  * backdrop dismiss it; the page doesn't scroll while it's open and focus
  * returns to the play button afterwards.
  */
-export function PhotoWithVideo({ image, video, className, overlayClassName }: PhotoWithVideoProps) {
+export function PhotoWithVideo({ image, video, className, overlayClassName, hasAudio = true }: PhotoWithVideoProps) {
   const { t } = useTranslation(['about', 'common']);
   const [open, setOpen] = useState(false);
+  const [playing, setPlaying] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
 
@@ -34,6 +42,7 @@ export function PhotoWithVideo({ image, video, className, overlayClassName }: Ph
     document.addEventListener('keydown', onKey);
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    setPlaying(true);
     closeRef.current?.focus();
     return () => {
       document.removeEventListener('keydown', onKey);
@@ -77,14 +86,43 @@ export function PhotoWithVideo({ image, video, className, overlayClassName }: Ph
           >
             <X size={20} aria-hidden="true" />
           </button>
-          <video
-            src={video}
-            autoPlay
-            controls
-            playsInline
-            onClick={(event) => event.stopPropagation()}
-            className="max-h-[85svh] w-auto max-w-full rounded-md bg-black"
-          />
+          {hasAudio ? (
+            <video
+              src={video}
+              autoPlay
+              controls
+              playsInline
+              onClick={(event) => event.stopPropagation()}
+              className="max-h-[85svh] w-auto max-w-full rounded-md bg-black"
+            />
+          ) : (
+            <div className="relative" onClick={(event) => event.stopPropagation()}>
+              <video
+                ref={videoRef}
+                src={video}
+                autoPlay
+                muted
+                loop
+                playsInline
+                onPlay={() => setPlaying(true)}
+                onPause={() => setPlaying(false)}
+                className="max-h-[85svh] w-auto max-w-full rounded-md bg-black"
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  const el = videoRef.current;
+                  if (!el) return;
+                  if (el.paused) void el.play();
+                  else el.pause();
+                }}
+                aria-label={t(playing ? 'community.video.pause' : 'community.video.play')}
+                className="absolute bottom-4 end-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-ink/60 text-warmwhite backdrop-blur-sm transition-colors hover:bg-ink/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warmwhite"
+              >
+                {playing ? <Pause size={18} aria-hidden="true" /> : <Play size={18} aria-hidden="true" />}
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

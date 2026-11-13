@@ -50,7 +50,7 @@ export function CredentialsSection() {
               </Text>
 
               {credential.buttonVariant === 'filled' ? (
-                <ButtonLink href={credential.href} download variant="primary" size="lg" fullWidth>
+                <ButtonLink href={credential.href} download variant="outline" size="lg" fullWidth className="bg-white">
                   {t(`credentials.${key}.buttonLabel`, { defaultValue: credential.buttonLabel })}
                 </ButtonLink>
               ) : credential.internal ? (

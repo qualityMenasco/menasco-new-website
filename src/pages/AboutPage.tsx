@@ -5,7 +5,6 @@ import { AboutBrandStatement } from '../components/sections/about/AboutBrandStat
 import { OurApproach } from '../components/sections/about/OurApproach';
 import { VisionMissionValues } from '../components/sections/about/VisionMissionValues';
 import { QualityStandards } from '../components/sections/about/QualityStandards';
-import { OurExperience } from '../components/sections/about/OurExperience';
 import { OurPeople } from '../components/sections/about/OurPeople';
 import { ClientsSection } from '../components/sections/ClientsSection';
 import { CredentialsSection } from '../components/sections/CredentialsSection';
@@ -46,10 +45,6 @@ export default function AboutPage() {
 
       <ScrollReveal>
         <QualityStandards />
-      </ScrollReveal>
-
-      <ScrollReveal>
-        <OurExperience />
       </ScrollReveal>
 
       <ClientsSection />

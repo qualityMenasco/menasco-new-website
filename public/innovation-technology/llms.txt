@@ -4,7 +4,7 @@
 
 ## Automatic Tendering Logic Assessment System (ATLAS)
 
-ATLAS is MENASCO's AI-powered compliance platform, evaluating engineering designs against applicable codes, standards, and regulatory frameworks to improve readiness for review before submission across technically demanding project types, from mission-critical facilities to hospitality and residential developments.
+ATLAS is a MENASCO pilot project focussed on AI-powered compliance. The platform is being designed to evaluate engineering designs against applicable codes, standards, and regulatory frameworks to improve readiness for review before submission. From mission-critical facilities to hospitality and residential developments; ATLAS ensures we do it right the first time, every time.
 
 ## LYNX
 
@@ -12,17 +12,13 @@ LYNX is MENASCO's intelligent field quality management platform, built to make i
 
 - [Privacy Policy](https://menascogroup.com/lynxqc/privacy-policy/llms.txt)
 
-## Artificial Intelligence & Intelligent Automation
+## AI Engineering
 
-MENASCO is integrating artificial intelligence across its operations, from predictive analytics to workflow automation, to support engineers and project teams with faster, more informed decisions, not replace them.
-
-## Enterprise Data Lake
-
-MENASCO is building a centralized data platform that consolidates information from every major operational system across the business, turning operational data into real-time visibility and better-informed decisions.
+Using AI across engineering, quantity takeoffs, recruitment, payroll management and tenders, MENASCO has increased its workforce efficiency by 30%. That time has freed our teams to take on larger projects, more of them, and to train and upskill for more impactful work.
 
 ## MENASCO Connect
 
-MENASCO Connect is our proprietary collaboration platform, unifying engineering, commercial, planning, QA/QC, and every other department into one digital workflow, accelerating administrative decisions to ensure consistent delivery across every project.
+MENASCO Connect is our proprietary workforce management platform, integrating recruitment, manpower planning, site attendance, leave management, employee assessments, and internal communications into a unified digital environment. By connecting workforce forecasts with real-time deployment and personnel data, the platform streamlines administrative processes, improves resource allocation, and strengthens workforce visibility across the organization.
 
 ## Engineering Tomorrow
 
