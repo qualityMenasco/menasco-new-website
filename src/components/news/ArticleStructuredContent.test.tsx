@@ -3,7 +3,8 @@ import { render, screen } from '@testing-library/react';
 import { ArticleStructuredContent } from './ArticleStructuredContent';
 import type { ArticleSection, ContentBlock, PublicImage } from '../../lib/newsroomPublicApi';
 
-const image: PublicImage = { id: 'img-1', position: 0, altText: 'A real photo', caption: 'A caption', role: null, url: '/api/newsroom/public/images/img-1' };
+const image: PublicImage = { id: 'img-1', position: 0, mediaType: 'image', altText: 'A real photo', caption: 'A caption', role: null, url: '/api/newsroom/public/images/img-1' };
+const video: PublicImage = { id: 'vid-1', position: 0, mediaType: 'video', altText: null, caption: 'A video caption', role: null, url: 'https://s3.example.com/vid-1.mp4?presigned=1' };
 
 function section(blocks: ContentBlock[], heading?: string): ArticleSection {
   return heading ? { heading, blocks } : { blocks };
@@ -106,5 +107,30 @@ describe('ArticleStructuredContent', () => {
     render(<ArticleStructuredContent sections={sections} images={[]} />);
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
     expect(screen.getByText('Click [here](javascript:alert(1)) now.')).toBeInTheDocument();
+  });
+
+  it('an "image" block referencing a video-type media item renders a real <video>, not an <img>, with controls and the right src', () => {
+    const sections = [section([{ type: 'image', imageId: 'vid-1', caption: 'A block caption' }])];
+    const { container } = render(<ArticleStructuredContent sections={sections} images={[video]} />);
+    const videoEl = container.querySelector('video');
+    expect(videoEl).toBeInTheDocument();
+    expect(videoEl).toHaveAttribute('src', video.url);
+    expect(videoEl).toHaveAttribute('controls');
+    expect(videoEl).toHaveAttribute('playsinline');
+    expect(container.querySelector('img')).not.toBeInTheDocument();
+    expect(screen.getByText('A block caption')).toBeInTheDocument();
+  });
+
+  it('falls back to the media item\'s own caption when the block has none', () => {
+    const sections = [section([{ type: 'image', imageId: 'vid-1' }])];
+    render(<ArticleStructuredContent sections={sections} images={[video]} />);
+    expect(screen.getByText('A video caption')).toBeInTheDocument();
+  });
+
+  it('the mobile variant renders a video the same way (no figcaption, matching the existing mobile image convention)', () => {
+    const sections = [section([{ type: 'image', imageId: 'vid-1', caption: 'Should not render on mobile' }])];
+    const { container } = render(<ArticleStructuredContent sections={sections} images={[video]} mobile />);
+    expect(container.querySelector('video')).toBeInTheDocument();
+    expect(screen.queryByText('Should not render on mobile')).not.toBeInTheDocument();
   });
 });

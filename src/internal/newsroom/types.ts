@@ -38,9 +38,12 @@ export interface StructuredContent {
   sections: ArticleSection[];
 }
 
+export type MediaType = 'image' | 'video';
+
 export interface ArticleImage {
   id: string;
   s3Key: string;
+  mediaType: MediaType;
   position: number;
   altText: string | null;
   caption: string | null;

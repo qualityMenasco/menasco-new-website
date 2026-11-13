@@ -2,9 +2,31 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { requireNewsroomAuth } from '../../../../_lib/auth';
 import { HttpError, requireIdParam, requireJsonBody, requireMethod, sendJson, withErrorHandling } from '../../../../_lib/http';
 import { getArticleImages, getArticleOrThrow, setArticlePdfKey, upsertArticleImage } from '../../../../_lib/articles';
+import type { ImageRow } from '../../../../_lib/articles';
 import { headObject } from '../../../../_lib/s3';
 import { buildPdfKey, isKeyWithinArticlePrefix } from '../../../../_lib/s3Keys';
-import { MAX_IMAGE_BYTES, MAX_PDF_BYTES, PDF_CONTENT_TYPE, isAllowedImageContentType, isValidPosition, isValidUuid } from '../../../../_lib/validation';
+import {
+  MAX_IMAGE_BYTES,
+  MAX_PDF_BYTES,
+  MAX_VIDEO_BYTES,
+  PDF_CONTENT_TYPE,
+  isAllowedImageContentType,
+  isAllowedVideoContentType,
+  isValidPosition,
+  isValidUuid,
+} from '../../../../_lib/validation';
+
+function serializeImageRow(image: ImageRow) {
+  return {
+    id: image.id,
+    s3Key: image.s3_key,
+    mediaType: image.media_type,
+    position: image.position,
+    altText: image.alt_text,
+    caption: image.caption,
+    role: image.role,
+  };
+}
 
 /**
  * POST /api/newsroom/articles/:id/uploads/complete — confirms an upload
@@ -73,23 +95,32 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const caption = typeof body.caption === 'string' ? body.caption : undefined;
       const role = typeof body.role === 'string' ? body.role : undefined;
 
-      await upsertArticleImage({ articleId: id, s3Key, position: body.position, altText, caption, role });
+      await upsertArticleImage({ articleId: id, s3Key, mediaType: 'image', position: body.position, altText, caption, role });
       const images = await getArticleImages(id);
-      sendJson(
-        res,
-        200,
-        images.map((image) => ({
-          id: image.id,
-          s3Key: image.s3_key,
-          position: image.position,
-          altText: image.alt_text,
-          caption: image.caption,
-          role: image.role,
-        })),
-      );
+      sendJson(res, 200, images.map(serializeImageRow));
       return;
     }
 
-    throw new HttpError(400, 'type must be "pdf" or "image"');
+    if (type === 'video') {
+      if (!isAllowedVideoContentType(head.contentType)) {
+        throw new HttpError(422, `Uploaded object's content type (${head.contentType ?? 'unknown'}) is not an allowed video type`);
+      }
+      if ((head.contentLength ?? 0) > MAX_VIDEO_BYTES) {
+        throw new HttpError(413, `Uploaded video exceeds the maximum allowed size of ${MAX_VIDEO_BYTES} bytes`);
+      }
+      if (!isValidPosition(body.position)) {
+        throw new HttpError(400, 'position must be a non-negative integer');
+      }
+      const altText = typeof body.altText === 'string' ? body.altText : undefined;
+      const caption = typeof body.caption === 'string' ? body.caption : undefined;
+      const role = typeof body.role === 'string' ? body.role : undefined;
+
+      await upsertArticleImage({ articleId: id, s3Key, mediaType: 'video', position: body.position, altText, caption, role });
+      const images = await getArticleImages(id);
+      sendJson(res, 200, images.map(serializeImageRow));
+      return;
+    }
+
+    throw new HttpError(400, 'type must be "pdf", "image", or "video"');
   });
 }

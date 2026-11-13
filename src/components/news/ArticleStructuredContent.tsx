@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Stack } from '../layout/Stack';
 import { Heading, Text } from '../typography/Typography';
+import { useMediaOrientation } from '../../lib/useMediaOrientation';
 import type { ArticleSection, ContentBlock, PublicImage } from '../../lib/newsroomPublicApi';
 
 /**
@@ -83,6 +84,60 @@ function linkify(text: string): ReactNode[] {
 // wrong direction from its neighbor. No language field is read and no
 // string is ever reversed — `dir="auto"` is a native HTML behavior.
 
+/**
+ * The `image` block's media, shared between Desktop/Mobile — an image or a
+ * video (see `PublicImage.mediaType`), in a container whose aspect ratio
+ * adapts to the media's own orientation (`useMediaOrientation`): the
+ * existing wide default until it's known or confirmed landscape, a taller
+ * box once a portrait video/image is detected, so a vertically-shot clip
+ * isn't crushed into a wide letterboxed strip. Video gets native `controls`
+ * (this is body content a reader scrubs through, not a decorative
+ * autoplaying thumbnail — see FeaturedStoryCard/FeaturedNewsCarousel for
+ * that treatment on the Newsroom listing page) and `object-contain` so nothing
+ * is ever cropped, matching the same crop bug fix already applied to
+ * ArticleImageGallery.
+ */
+function ArticleMediaBlock({
+  image,
+  caption,
+  mobile,
+}: {
+  image: PublicImage;
+  caption?: string;
+  mobile?: boolean;
+}) {
+  const { orientation, onImageLoad, onVideoLoadedMetadata } = useMediaOrientation();
+  const aspectClassName = orientation === 'portrait' ? 'aspect-[3/4]' : mobile ? 'aspect-[16/10]' : 'aspect-[16/9]';
+  const resolvedCaption = caption || image.caption;
+
+  return (
+    <figure className={`my-2 w-full overflow-hidden rounded-md bg-gray-100 ${aspectClassName}`}>
+      {image.mediaType === 'video' ? (
+        <video
+          src={image.url}
+          controls
+          playsInline
+          onLoadedMetadata={onVideoLoadedMetadata}
+          className="h-full w-full object-contain"
+        />
+      ) : (
+        <img
+          src={image.url}
+          alt={image.altText ?? ''}
+          loading="lazy"
+          onLoad={onImageLoad}
+          className="h-full w-full object-cover"
+        />
+      )}
+      {!mobile && resolvedCaption && (
+        <figcaption className="mt-2 text-caption text-gray-500" dir="auto">
+          {resolvedCaption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
 function DesktopBlock({ block, images }: { block: ContentBlock; images: PublicImage[] }) {
   switch (block.type) {
     case 'paragraph':
@@ -122,16 +177,7 @@ function DesktopBlock({ block, images }: { block: ContentBlock; images: PublicIm
     case 'image': {
       const image = images.find((img) => img.id === block.imageId);
       if (!image) return null;
-      return (
-        <figure className="my-2 aspect-[16/9] w-full overflow-hidden rounded-md bg-gray-100">
-          <img src={image.url} alt={image.altText ?? ''} loading="lazy" className="h-full w-full object-cover" />
-          {(block.caption || image.caption) && (
-            <figcaption className="mt-2 text-caption text-gray-500" dir="auto">
-              {block.caption || image.caption}
-            </figcaption>
-          )}
-        </figure>
-      );
+      return <ArticleMediaBlock image={image} caption={block.caption} />;
     }
   }
 }
@@ -175,11 +221,7 @@ function MobileBlock({ block, images }: { block: ContentBlock; images: PublicIma
     case 'image': {
       const image = images.find((img) => img.id === block.imageId);
       if (!image) return null;
-      return (
-        <figure className="aspect-[16/10] w-full overflow-hidden rounded-md bg-gray-100">
-          <img src={image.url} alt={image.altText ?? ''} loading="lazy" className="h-full w-full object-cover" />
-        </figure>
-      );
+      return <ArticleMediaBlock image={image} caption={block.caption} mobile />;
     }
   }
 }

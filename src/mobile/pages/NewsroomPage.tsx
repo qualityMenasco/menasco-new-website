@@ -45,7 +45,7 @@ export default function NewsroomPage() {
     date: article.publishedAt,
     title: article.title,
     subtitle: article.subtitle,
-    images: article.primaryImage ? [{ src: article.primaryImage.url }] : [],
+    images: article.primaryImage ? [{ src: article.primaryImage.url, mediaType: article.primaryImage.mediaType }] : [],
   }));
 
   const taggedArticles = tagSlug ? byNewestFirst.filter((article) => article.tags.some((tag) => tag.slug === tagSlug)) : [];

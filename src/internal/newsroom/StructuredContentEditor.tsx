@@ -23,7 +23,7 @@ const BLOCK_TYPE_OPTIONS: { label: string; value: ContentBlockType }[] = [
   { label: 'Bullet list', value: 'bullet_list' },
   { label: 'Numbered list', value: 'numbered_list' },
   { label: 'Quote', value: 'quote' },
-  { label: 'Image', value: 'image' },
+  { label: 'Image / Video', value: 'image' },
 ];
 
 function blankBlockOfType(type: ContentBlockType): ContentBlock {
@@ -142,10 +142,13 @@ function BlockEditor(props: BlockEditorProps) {
       fields = (
         <div className="flex gap-3">
           <Select
-            label="Image"
+            label="Image / Video"
             containerClassName="flex-1"
-            placeholder="Select an uploaded image…"
-            options={images.map((img) => ({ label: img.altText || img.s3Key.split('/').pop() || img.id, value: img.id }))}
+            placeholder="Select an uploaded image or video…"
+            options={images.map((img) => ({
+              label: `${img.mediaType === 'video' ? '[Video] ' : ''}${img.altText || img.s3Key.split('/').pop() || img.id}`,
+              value: img.id,
+            }))}
             value={block.imageId}
             onChange={(e) => onChange({ ...block, imageId: e.target.value })}
           />

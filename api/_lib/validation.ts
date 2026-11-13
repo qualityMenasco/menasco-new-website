@@ -11,6 +11,13 @@ export function isAllowedImageContentType(value: unknown): value is AllowedImage
   return typeof value === 'string' && (ALLOWED_IMAGE_CONTENT_TYPES as readonly string[]).includes(value);
 }
 
+export const ALLOWED_VIDEO_CONTENT_TYPES = ['video/mp4', 'video/quicktime', 'video/webm'] as const;
+export type AllowedVideoContentType = (typeof ALLOWED_VIDEO_CONTENT_TYPES)[number];
+
+export function isAllowedVideoContentType(value: unknown): value is AllowedVideoContentType {
+  return typeof value === 'string' && (ALLOWED_VIDEO_CONTENT_TYPES as readonly string[]).includes(value);
+}
+
 export const PDF_CONTENT_TYPE = 'application/pdf';
 
 /**
@@ -21,9 +28,22 @@ export const PDF_CONTENT_TYPE = 'application/pdf';
  * enough to make a single upload a real abuse vector. Both are generous
  * Phase-1 defaults, not derived from a specific known document — revisit if
  * real submissions need more.
+ *
+ * Video: 300MB — a short (a few minutes) H.264 clip at a social/web bitrate
+ * comfortably fits; well beyond that starts looking like raw camera footage
+ * that should be compressed before upload, not something this endpoint
+ * should accept. This number is bounded by a real, separate constraint, not
+ * just abuse: the upload itself goes straight to S3 via a presigned PUT (no
+ * size limit there), but PLAYBACK then goes through a presigned GET straight
+ * to S3 too (see publicArticles.ts) — never through the Lambda itself —
+ * specifically because the Lambda's own API Gateway integration caps a
+ * single response at 10MB and cannot stream or serve byte-range requests,
+ * so buffering a video through it the way images are proxied today would
+ * silently fail (truncated or rejected) well before reaching this limit.
  */
 export const MAX_PDF_BYTES = 50 * 1024 * 1024;
 export const MAX_IMAGE_BYTES = 15 * 1024 * 1024;
+export const MAX_VIDEO_BYTES = 300 * 1024 * 1024;
 
 /** Presigned PUT URLs expire quickly — long enough for an admin to start an upload without racing a slow connection, short enough that a leaked URL isn't useful for long. */
 export const PRESIGNED_URL_EXPIRY_SECONDS = 15 * 60;

@@ -10,9 +10,12 @@ import { buildNewsroomApiUrl } from './newsroomApiConfig';
  * return, nothing more.
  */
 
+export type MediaType = 'image' | 'video';
+
 export interface PublicImage {
   id: string;
   position: number;
+  mediaType: MediaType;
   altText: string | null;
   caption: string | null;
   role: string | null;

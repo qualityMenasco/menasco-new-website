@@ -24,6 +24,7 @@ export function buildPreviewArticle(article: ArticleDetail, imageUrls: Record<st
     .map((image) => ({
       id: image.id,
       position: image.position,
+      mediaType: image.mediaType,
       altText: image.altText,
       caption: image.caption,
       role: image.role,

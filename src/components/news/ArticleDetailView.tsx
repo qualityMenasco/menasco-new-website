@@ -57,7 +57,7 @@ export function ArticleDetailView({ article, locale, onBackClick }: ArticleDetai
     return key ? t(`newsroom:categories.${key}`) : humanizeCategory(category);
   };
 
-  const galleryImages = article.images.length > 0 ? article.images.map((img) => ({ src: img.url, alt: img.altText ?? '' })) : [];
+  const galleryImages = article.images.length > 0 ? article.images.map((img) => ({ src: img.url, alt: img.altText ?? '', mediaType: img.mediaType })) : [];
 
   return (
     <Section spacing="lg" background="warmwhite">

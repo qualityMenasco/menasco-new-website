@@ -17,7 +17,7 @@ const baseArticle: ArticleDetailViewArticle = {
   category: 'company-news',
   publishedAt: '2026-01-01T00:00:00.000Z',
   tags: [{ name: 'MEP', slug: 'mep' }],
-  images: [{ id: 'img-1', position: 0, altText: 'Hero image', caption: null, role: null, url: '/api/newsroom/public/images/img-1' }],
+  images: [{ id: 'img-1', position: 0, mediaType: 'image', altText: 'Hero image', caption: null, role: null, url: '/api/newsroom/public/images/img-1' }],
   structuredContent: {
     version: 1,
     sections: [{ blocks: [{ type: 'paragraph', text: 'Body paragraph.' }] }],

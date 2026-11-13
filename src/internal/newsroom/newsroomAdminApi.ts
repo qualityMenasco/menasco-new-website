@@ -131,11 +131,16 @@ export const newsroomAdminApi = {
 
   presignUpload: (
     articleId: string,
-    input: { type: 'pdf'; filename: string; contentType: 'application/pdf' } | { type: 'image'; filename: string; contentType: string; position: number },
+    input:
+      | { type: 'pdf'; filename: string; contentType: 'application/pdf' }
+      | { type: 'image'; filename: string; contentType: string; position: number }
+      | { type: 'video'; filename: string; contentType: string; position: number },
   ) => request<{ uploadUrl: string; s3Key: string; expiresIn: number }>(`/articles/${articleId}/uploads`, { method: 'POST', body: input }),
 
-  finalizeUpload: (articleId: string, input: { type: 'pdf'; s3Key: string } | { type: 'image'; s3Key: string; position: number }) =>
-    request<unknown>(`/articles/${articleId}/uploads/complete`, { method: 'POST', body: input }),
+  finalizeUpload: (
+    articleId: string,
+    input: { type: 'pdf'; s3Key: string } | { type: 'image'; s3Key: string; position: number } | { type: 'video'; s3Key: string; position: number },
+  ) => request<unknown>(`/articles/${articleId}/uploads/complete`, { method: 'POST', body: input }),
 };
 
 export async function uploadFileToS3(uploadUrl: string, file: File): Promise<void> {

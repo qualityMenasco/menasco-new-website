@@ -14,6 +14,12 @@ export const IMAGE_EXTENSION_BY_CONTENT_TYPE: Record<string, string> = {
   'image/webp': 'webp',
 };
 
+export const VIDEO_EXTENSION_BY_CONTENT_TYPE: Record<string, string> = {
+  'video/mp4': 'mp4',
+  'video/quicktime': 'mov',
+  'video/webm': 'webm',
+};
+
 export function articlePrefix(articleId: string): string {
   return `newsroom/articles/${articleId}/`;
 }
@@ -32,6 +38,13 @@ export function buildImageKey(articleId: string, contentType: string): string {
   const extension = IMAGE_EXTENSION_BY_CONTENT_TYPE[contentType];
   if (!extension) throw new Error(`Unsupported image content type: ${contentType}`);
   return `${articlePrefix(articleId)}images/${randomUUID()}.${extension}`;
+}
+
+/** Same server-generated-key reasoning as buildImageKey — videos just live under their own `videos/` prefix for clarity in S3, even though they're tracked in the same `news_article_images` table (see migration 006). */
+export function buildVideoKey(articleId: string, contentType: string): string {
+  const extension = VIDEO_EXTENSION_BY_CONTENT_TYPE[contentType];
+  if (!extension) throw new Error(`Unsupported video content type: ${contentType}`);
+  return `${articlePrefix(articleId)}videos/${randomUUID()}.${extension}`;
 }
 
 /** Defends the finalize endpoint against a key that doesn't belong to this article (or a path-traversal attempt) even though the server is the only key-generator — belt and suspenders, since finalize trusts the key the client echoes back. */

@@ -29,10 +29,13 @@ export interface ArticleRow extends RowDataPacket {
   first_published_at: Date | null;
 }
 
+export type MediaType = 'image' | 'video';
+
 export interface ImageRow extends RowDataPacket {
   id: string;
   article_id: string;
   s3_key: string;
+  media_type: MediaType;
   position: number;
   alt_text: string | null;
   caption: string | null;
@@ -304,6 +307,7 @@ export interface UpsertImageInput {
   articleId: string;
   s3Key: string;
   position: number;
+  mediaType?: MediaType;
   altText?: string | null;
   caption?: string | null;
   role?: string | null;
@@ -317,10 +321,11 @@ export interface UpsertImageInput {
 export async function upsertArticleImage(input: UpsertImageInput): Promise<void> {
   const id = randomUUID();
   await getPool().query(
-    `INSERT INTO news_article_images (id, article_id, s3_key, \`position\`, alt_text, caption, role)
-     VALUES (:id, :articleId, :s3Key, :position, :altText, :caption, :role)
+    `INSERT INTO news_article_images (id, article_id, s3_key, media_type, \`position\`, alt_text, caption, role)
+     VALUES (:id, :articleId, :s3Key, :mediaType, :position, :altText, :caption, :role)
      ON DUPLICATE KEY UPDATE
        s3_key = VALUES(s3_key),
+       media_type = VALUES(media_type),
        alt_text = VALUES(alt_text),
        caption = VALUES(caption),
        role = VALUES(role),
@@ -329,6 +334,7 @@ export async function upsertArticleImage(input: UpsertImageInput): Promise<void>
       id,
       articleId: input.articleId,
       s3Key: input.s3Key,
+      mediaType: input.mediaType ?? 'image',
       position: input.position,
       altText: input.altText ?? null,
       caption: input.caption ?? null,
@@ -429,6 +435,7 @@ export function serializeArticle(article: ArticleRow, images: ImageRow[]) {
     images: images.map((image) => ({
       id: image.id,
       s3Key: image.s3_key,
+      mediaType: image.media_type,
       position: image.position,
       altText: image.alt_text,
       caption: image.caption,

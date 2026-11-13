@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { LocaleLink } from './LocaleLink';
 import { cn } from '../lib/utils';
+import { useMediaOrientation } from '../../lib/useMediaOrientation';
 
 /** Only the fields this carousel actually reads — narrower than the full static `NewsArticle` shape so callers can pass RDS-backed public-API article summaries directly (Phase 4) without adapting them into a fake legacy object. */
 export interface FeaturedNewsCarouselStory {
@@ -12,13 +13,83 @@ export interface FeaturedNewsCarouselStory {
   date: string;
   title: string;
   subtitle: string | null;
-  images: { src: string }[];
+  images: { src: string; mediaType?: 'image' | 'video' }[];
 }
 
 export interface FeaturedNewsCarouselProps {
   stories: FeaturedNewsCarouselStory[];
   categoryLabel: (category: string) => string;
   formatDate: (date: string) => string;
+}
+
+/**
+ * One Featured carousel slide — a separate component (not inline in the
+ * `.map`) because orientation detection is a stateful hook
+ * (`useMediaOrientation`) and each slide's media needs its own independent
+ * instance of it. A video slide's aspect ratio adapts to the clip's real
+ * orientation (landscape stays the shared `aspect-[4/3]`, portrait grows
+ * taller rather than being cropped to a sliver); an image slide is
+ * unaffected, keeping today's exact behavior.
+ */
+function FeaturedStoryTile({
+  story,
+  categoryLabel,
+  formatDate,
+  readMoreLabel,
+  tileRef,
+}: {
+  story: FeaturedNewsCarouselStory;
+  categoryLabel: (category: string) => string;
+  formatDate: (date: string) => string;
+  readMoreLabel: string;
+  tileRef: (node: HTMLDivElement | null) => void;
+}) {
+  const { orientation, onVideoLoadedMetadata } = useMediaOrientation();
+  const media = story.images[0];
+  const isVideo = media?.mediaType === 'video';
+  const aspectClassName = isVideo && orientation === 'portrait' ? 'aspect-[3/4]' : 'aspect-[4/3]';
+
+  return (
+    <div ref={tileRef} className="w-full shrink-0 snap-start">
+      <LocaleLink to={`/newsroom/${story.slug}`} className={cn('group relative flex flex-col justify-between overflow-hidden rounded-md bg-ink', aspectClassName)}>
+        {media &&
+          (isVideo ? (
+            <video
+              src={media.src}
+              autoPlay
+              muted
+              loop
+              playsInline
+              onLoadedMetadata={onVideoLoadedMetadata}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <img src={media.src} alt="" className="absolute inset-0 h-full w-full object-cover" />
+          ))}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-ink/50" aria-hidden="true" />
+
+        <div className="relative z-10 flex items-start justify-between gap-3 p-4">
+          <span className="text-caption font-semibold uppercase tracking-wider text-brand-300">
+            {story.category ? categoryLabel(story.category) : null}
+          </span>
+          <span className="text-caption font-medium uppercase tracking-wide text-gray-300">{formatDate(story.date)}</span>
+        </div>
+
+        <div className="relative z-10 flex flex-col gap-2 p-4">
+          <h3 className="font-display text-h4 font-semibold leading-tight text-warmwhite" dir="auto">
+            {story.title}
+          </h3>
+          <p className="text-small text-gray-200" dir="auto">
+            {story.subtitle}
+          </p>
+          <span className="mt-1 inline-flex w-fit items-center gap-1.5 text-small font-semibold text-brand-300">
+            {readMoreLabel}
+            <ArrowRight size={15} aria-hidden="true" className="rtl:rotate-180" />
+          </span>
+        </div>
+      </LocaleLink>
+    </div>
+  );
 }
 
 /**
@@ -80,41 +151,16 @@ export function FeaturedNewsCarousel({ stories, categoryLabel, formatDate }: Fea
         className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-1"
       >
         {stories.map((story, index) => (
-          <div
+          <FeaturedStoryTile
             key={story.id}
-            ref={(node) => {
+            story={story}
+            categoryLabel={categoryLabel}
+            formatDate={formatDate}
+            readMoreLabel={t('newsroom:readMore')}
+            tileRef={(node) => {
               cardRefs.current[index] = node;
             }}
-            className="w-full shrink-0 snap-start"
-          >
-            <LocaleLink
-              to={`/newsroom/${story.slug}`}
-              className="group relative flex aspect-[4/3] flex-col justify-between overflow-hidden rounded-md bg-ink"
-            >
-              {story.images[0] && <img src={story.images[0].src} alt="" className="absolute inset-0 h-full w-full object-cover" />}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-ink/50" aria-hidden="true" />
-
-              <div className="relative z-10 flex items-start justify-between gap-3 p-4">
-                <span className="text-caption font-semibold uppercase tracking-wider text-brand-300">
-                  {story.category ? categoryLabel(story.category) : null}
-                </span>
-                <span className="text-caption font-medium uppercase tracking-wide text-gray-300">{formatDate(story.date)}</span>
-              </div>
-
-              <div className="relative z-10 flex flex-col gap-2 p-4">
-                <h3 className="font-display text-h4 font-semibold leading-tight text-warmwhite" dir="auto">
-                  {story.title}
-                </h3>
-                <p className="text-small text-gray-200" dir="auto">
-                  {story.subtitle}
-                </p>
-                <span className="mt-1 inline-flex w-fit items-center gap-1.5 text-small font-semibold text-brand-300">
-                  {t('newsroom:readMore')}
-                  <ArrowRight size={15} aria-hidden="true" className="rtl:rotate-180" />
-                </span>
-              </div>
-            </LocaleLink>
-          </div>
+          />
         ))}
       </div>
 

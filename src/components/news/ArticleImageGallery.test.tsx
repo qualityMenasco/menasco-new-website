@@ -149,3 +149,25 @@ describe('ArticleImageGallery — aspect ratio matches the loading skeleton', ()
     expect(container.querySelector('.aspect-\\[16\\/10\\]')).toBeInTheDocument();
   });
 });
+
+describe('ArticleImageGallery — video media', () => {
+  const ONE_VIDEO: GalleryImage[] = [{ src: '/mock/clip.mp4', alt: 'A clip', mediaType: 'video' }];
+
+  it('renders a real <video> (not an <img>) that autoplays muted, loops, and still exposes controls', () => {
+    const { container } = renderGallery(ONE_VIDEO);
+    const videoEl = container.querySelector('video');
+    expect(videoEl).toBeInTheDocument();
+    expect(videoEl).toHaveAttribute('src', '/mock/clip.mp4');
+    expect(videoEl).toHaveAttribute('autoplay');
+    // React sets `muted` as a live DOM property, not a reflected HTML attribute — toHaveAttribute would always see null here regardless of the prop.
+    expect((videoEl as HTMLVideoElement).muted).toBe(true);
+    expect(videoEl).toHaveAttribute('loop');
+    expect(videoEl).toHaveAttribute('controls');
+    expect(container.querySelector('img')).not.toBeInTheDocument();
+  });
+
+  it('defaults to the same aspect-[16/10] box as an image until orientation is known', () => {
+    const { container } = renderGallery(ONE_VIDEO);
+    expect(container.querySelector('.aspect-\\[16\\/10\\]')).toBeInTheDocument();
+  });
+});

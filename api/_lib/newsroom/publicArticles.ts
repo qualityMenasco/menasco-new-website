@@ -1,6 +1,7 @@
 import type { RowDataPacket } from 'mysql2';
 import { getPool } from '../db';
-import type { ArticleRow, ImageRow } from '../articles';
+import type { ArticleRow, ImageRow, MediaType } from '../articles';
+import { createPresignedGetUrl } from '../s3';
 
 /**
  * Every query here filters `status = 'published'` in SQL, never in
@@ -16,9 +17,27 @@ export function publicImageUrl(imageId: string): string {
   return `${PUBLIC_IMAGE_PROXY_PREFIX}/${imageId}`;
 }
 
+/**
+ * Video playback deliberately does NOT go through the same Lambda proxy as
+ * images (`publicImageUrl` / `/api/newsroom/public/images/:id`, see that
+ * route's own comment). That proxy buffers an entire object into memory and
+ * sends it as one response — fine for an image, but a real video can easily
+ * exceed the API Gateway integration's 10MB response cap, and the proxy
+ * supports no byte-range requests at all, so a `<video>` element could never
+ * seek. Instead, a video gets a direct, short-lived presigned S3 GET URL:
+ * playback talks straight to S3 (which natively supports Range requests),
+ * and the same `status = 'published'` gate still applies because this URL
+ * is only ever generated from rows this file's own published-only queries
+ * already returned — an unpublished article's video is never presigned in
+ * the first place, the same security property the image proxy enforces via
+ * its join, just checked at generation time instead of request time.
+ */
+const PUBLIC_VIDEO_URL_EXPIRY_SECONDS = 60 * 60;
+
 export interface PublicImage {
   id: string;
   position: number;
+  mediaType: MediaType;
   altText: string | null;
   caption: string | null;
   role: string | null;
@@ -47,14 +66,15 @@ export interface PublicArticleDetail extends PublicArticleSummary {
   images: PublicImage[];
 }
 
-function serializeImage(image: ImageRow): PublicImage {
+async function serializeImage(image: ImageRow): Promise<PublicImage> {
   return {
     id: image.id,
     position: image.position,
+    mediaType: image.media_type,
     altText: image.alt_text,
     caption: image.caption,
     role: image.role,
-    url: publicImageUrl(image.id),
+    url: image.media_type === 'video' ? await createPresignedGetUrl(image.s3_key, PUBLIC_VIDEO_URL_EXPIRY_SECONDS) : publicImageUrl(image.id),
   };
 }
 
@@ -74,7 +94,7 @@ export function sanitizeStructuredContentForPublic(structuredContent: unknown): 
   return { version, sections, ...(summary !== undefined ? { summary } : {}) };
 }
 
-function serializeSummary(article: ArticleRow, images: ImageRow[]): PublicArticleSummary {
+async function serializeSummary(article: ArticleRow, images: ImageRow[]): Promise<PublicArticleSummary> {
   return {
     id: article.id,
     slug: article.slug as string, // published articles always have a slug — publishArticle() enforces this before allowing the status transition
@@ -84,7 +104,7 @@ function serializeSummary(article: ArticleRow, images: ImageRow[]): PublicArticl
     publishedAt: (article.published_at as Date).toISOString(),
     featured: Boolean(article.featured),
     tags: article.tags ?? [],
-    primaryImage: images.length > 0 ? serializeImage(images[0]) : null,
+    primaryImage: images.length > 0 ? await serializeImage(images[0]) : null,
   };
 }
 
@@ -99,7 +119,7 @@ export async function listPublishedArticles(): Promise<PublicArticleSummary[]> {
       `SELECT * FROM news_article_images WHERE article_id = :articleId ORDER BY \`position\` ASC LIMIT 1`,
       { articleId: row.id },
     );
-    summaries.push(serializeSummary(row, images));
+    summaries.push(await serializeSummary(row, images));
   }
   return summaries;
 }
@@ -121,10 +141,10 @@ export async function getPublishedArticleBySlug(slug: string): Promise<PublicArt
     `SELECT * FROM news_article_images WHERE article_id = :articleId ORDER BY \`position\` ASC`,
     { articleId: article.id },
   );
-  const images = imageRows.map(serializeImage);
+  const images = await Promise.all(imageRows.map(serializeImage));
 
   return {
-    ...serializeSummary(article, imageRows),
+    ...(await serializeSummary(article, imageRows)),
     structuredContent: sanitizeStructuredContentForPublic(article.structured_content),
     images,
   };

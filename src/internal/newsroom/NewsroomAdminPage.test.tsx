@@ -92,8 +92,8 @@ const articleWithContent: ArticleDetail = {
     sections: [{ blocks: [{ type: 'paragraph', text: 'Original body paragraph.' }] }],
   },
   images: [
-    { id: 'image-1', s3Key: 'articles/article-1/image-1.jpg', position: 0, altText: 'First image', caption: null, role: null },
-    { id: 'image-2', s3Key: 'articles/article-1/image-2.jpg', position: 1, altText: 'Second image', caption: null, role: null },
+    { id: 'image-1', s3Key: 'articles/article-1/image-1.jpg', mediaType: 'image', position: 0, altText: 'First image', caption: null, role: null },
+    { id: 'image-2', s3Key: 'articles/article-1/image-2.jpg', mediaType: 'image', position: 1, altText: 'Second image', caption: null, role: null },
   ],
   tags: [{ name: 'MEP', slug: 'mep' }],
 };
@@ -121,8 +121,8 @@ async function renderEditorWithImageUpload() {
   const row = await screen.findByText('Test Article');
   fireEvent.click(row);
 
-  const input = (await screen.findByLabelText('Choose image file')) as HTMLInputElement;
-  const uploadButton = screen.getByRole('button', { name: 'Upload images' });
+  const input = (await screen.findByLabelText('Choose image or video file')) as HTMLInputElement;
+  const uploadButton = screen.getByRole('button', { name: 'Upload' });
   return { input, uploadButton };
 }
 
@@ -267,8 +267,8 @@ describe('Newsroom admin — Preview Article', () => {
     const outOfOrder: ArticleDetail = {
       ...articleWithContent,
       images: [
-        { id: 'image-2', s3Key: 'articles/article-1/image-2.jpg', position: 1, altText: 'Second image', caption: null, role: null },
-        { id: 'image-1', s3Key: 'articles/article-1/image-1.jpg', position: 0, altText: 'First image', caption: null, role: null },
+        { id: 'image-2', s3Key: 'articles/article-1/image-2.jpg', mediaType: 'image', position: 1, altText: 'Second image', caption: null, role: null },
+        { id: 'image-1', s3Key: 'articles/article-1/image-1.jpg', mediaType: 'image', position: 0, altText: 'First image', caption: null, role: null },
       ],
     };
     await renderEditorForPreview(outOfOrder);

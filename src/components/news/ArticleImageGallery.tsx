@@ -2,11 +2,13 @@ import { useRef, useState } from 'react';
 import type { KeyboardEvent, TouchEvent } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { useMediaOrientation } from '../../lib/useMediaOrientation';
 
-/** Deliberately decoupled from any specific data source (real API `PublicImage`, or anything else) — this component only ever needs a flat `{src, alt}` list, built by the caller. */
+/** Deliberately decoupled from any specific data source (real API `PublicImage`, or anything else) — this component only ever needs a flat `{src, alt, mediaType}` list, built by the caller. */
 export interface GalleryImage {
   src: string;
   alt: string;
+  mediaType?: 'image' | 'video';
 }
 
 export interface ArticleImageGalleryProps {
@@ -48,6 +50,9 @@ export function ArticleImageGallery({ images, previousLabel, nextLabel, position
   const isMultiple = total > 1;
   const isFirst = index === 0;
   const isLast = index === total - 1;
+
+  const { orientation, onImageLoad, onVideoLoadedMetadata } = useMediaOrientation();
+  const aspectClassName = orientation === 'portrait' ? 'aspect-[3/4]' : 'aspect-[16/10]';
 
   const goTo = (next: number) => setIndex(Math.max(0, Math.min(total - 1, next)));
   const goPrevious = () => {
@@ -92,11 +97,25 @@ export function ArticleImageGallery({ images, previousLabel, nextLabel, position
   return (
     <div className={cn('group relative', className)} onKeyDown={handleKeyDown}>
       <div
-        className="relative aspect-[16/10] w-full overflow-hidden rounded-md bg-gray-100"
+        className={cn('relative w-full overflow-hidden rounded-md bg-gray-100', aspectClassName)}
         onTouchStart={isMultiple ? handleTouchStart : undefined}
         onTouchEnd={isMultiple ? handleTouchEnd : undefined}
       >
-        <img key={current.src} src={current.src} alt={current.alt} className="h-full w-full object-contain animate-gallery-fade" />
+        {current.mediaType === 'video' ? (
+          <video
+            key={current.src}
+            src={current.src}
+            autoPlay
+            muted
+            loop
+            playsInline
+            controls
+            onLoadedMetadata={onVideoLoadedMetadata}
+            className="h-full w-full object-contain animate-gallery-fade"
+          />
+        ) : (
+          <img key={current.src} src={current.src} alt={current.alt} onLoad={onImageLoad} className="h-full w-full object-contain animate-gallery-fade" />
+        )}
 
         {isMultiple && (
           <>

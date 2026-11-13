@@ -65,13 +65,19 @@ export function ImageManager({ articleId, images, onImagesChanged }: ImageManage
         <div key={image.id} className="flex gap-3 rounded-sm border border-gray-200 bg-warmwhite p-2.5">
           <div className="flex w-20 shrink-0 flex-col items-center gap-1.5">
             {previewUrls[image.id] ? (
-              <img src={previewUrls[image.id]} alt={image.altText ?? ''} className="h-16 w-20 rounded-sm object-cover" />
+              image.mediaType === 'video' ? (
+                <video src={previewUrls[image.id]} muted loop playsInline controls className="h-16 w-20 rounded-sm bg-ink object-cover" />
+              ) : (
+                <img src={previewUrls[image.id]} alt={image.altText ?? ''} className="h-16 w-20 rounded-sm object-cover" />
+              )
             ) : (
               <Button variant="outline" size="sm" onClick={() => loadPreview(image.id)}>
                 Preview
               </Button>
             )}
-            <span className="text-caption font-semibold text-gray-500">Image {i + 1}</span>
+            <span className="text-caption font-semibold text-gray-500">
+              {image.mediaType === 'video' ? 'Video' : 'Image'} {i + 1}
+            </span>
           </div>
           <div className="flex-1 space-y-1.5">
             <TextField
@@ -92,7 +98,12 @@ export function ImageManager({ articleId, images, onImagesChanged }: ImageManage
             <IconButton icon={ArrowUp} label="Move up" size="sm" onClick={() => reorder(i, -1)} disabled={i === 0} />
             <IconButton icon={ArrowDown} label="Move down" size="sm" onClick={() => reorder(i, 1)} disabled={i === images.length - 1} />
             {previewUrls[image.id] && (
-              <IconButton icon={ExternalLink} label="Open full image" size="sm" onClick={() => window.open(previewUrls[image.id], '_blank', 'noopener')} />
+              <IconButton
+                icon={ExternalLink}
+                label={image.mediaType === 'video' ? 'Open full video' : 'Open full image'}
+                size="sm"
+                onClick={() => window.open(previewUrls[image.id], '_blank', 'noopener')}
+              />
             )}
           </div>
         </div>

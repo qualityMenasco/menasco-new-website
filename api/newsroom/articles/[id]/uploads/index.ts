@@ -3,8 +3,15 @@ import { requireNewsroomAuth } from '../../../../_lib/auth';
 import { HttpError, requireIdParam, requireJsonBody, requireMethod, sendJson, withErrorHandling } from '../../../../_lib/http';
 import { getArticleOrThrow } from '../../../../_lib/articles';
 import { createPresignedPutUrl } from '../../../../_lib/s3';
-import { buildImageKey, buildPdfKey } from '../../../../_lib/s3Keys';
-import { PDF_CONTENT_TYPE, PRESIGNED_URL_EXPIRY_SECONDS, isAllowedImageContentType, isValidPosition, isValidUuid } from '../../../../_lib/validation';
+import { buildImageKey, buildPdfKey, buildVideoKey } from '../../../../_lib/s3Keys';
+import {
+  PDF_CONTENT_TYPE,
+  PRESIGNED_URL_EXPIRY_SECONDS,
+  isAllowedImageContentType,
+  isAllowedVideoContentType,
+  isValidPosition,
+  isValidUuid,
+} from '../../../../_lib/validation';
 
 /**
  * POST /api/newsroom/articles/:id/uploads — issue a short-lived presigned S3
@@ -48,6 +55,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return;
     }
 
-    throw new HttpError(400, 'type must be "pdf" or "image"');
+    if (type === 'video') {
+      if (!isAllowedVideoContentType(body.contentType)) {
+        throw new HttpError(400, 'contentType must be one of video/mp4, video/quicktime, video/webm');
+      }
+      if (!isValidPosition(body.position)) {
+        throw new HttpError(400, 'position must be a non-negative integer');
+      }
+      const s3Key = buildVideoKey(id, body.contentType);
+      const uploadUrl = await createPresignedPutUrl(s3Key, body.contentType, PRESIGNED_URL_EXPIRY_SECONDS);
+      sendJson(res, 200, { uploadUrl, s3Key, expiresIn: PRESIGNED_URL_EXPIRY_SECONDS });
+      return;
+    }
+
+    throw new HttpError(400, 'type must be "pdf", "image", or "video"');
   });
 }

@@ -607,9 +607,10 @@ function ArticleEditor({ articleId, onBack }: { articleId: string; onBack: () =>
     setActionError(null);
     try {
       const position = article.images.length;
-      const presign = await newsroomAdminApi.presignUpload(articleId, { type: 'image', filename: imageFile.name, contentType: imageFile.type, position });
+      const mediaType = imageFile.type.startsWith('video/') ? 'video' : 'image';
+      const presign = await newsroomAdminApi.presignUpload(articleId, { type: mediaType, filename: imageFile.name, contentType: imageFile.type, position });
       await uploadFileToS3(presign.uploadUrl, imageFile);
-      await newsroomAdminApi.finalizeUpload(articleId, { type: 'image', s3Key: presign.s3Key, position });
+      await newsroomAdminApi.finalizeUpload(articleId, { type: mediaType, s3Key: presign.s3Key, position });
       setImageFile(null);
       // The file <input> is uncontrolled — React state alone doesn't clear its displayed
       // filename, and this reset must only happen on success so a failed upload leaves the
@@ -629,7 +630,7 @@ function ArticleEditor({ articleId, onBack }: { articleId: string; onBack: () =>
   const canPublish = article.status === 'ready' || article.status === 'published';
   const imageCount = article.images.length;
   const imageCountLabel =
-    imageCount === 0 ? 'No images uploaded yet. You can add multiple images.' : `${imageCount} ${imageCount === 1 ? 'image' : 'images'} uploaded`;
+    imageCount === 0 ? 'No images or videos uploaded yet. You can add multiple.' : `${imageCount} ${imageCount === 1 ? 'item' : 'items'} uploaded`;
 
   return (
     <div className="space-y-6">
@@ -734,7 +735,7 @@ function ArticleEditor({ articleId, onBack }: { articleId: string; onBack: () =>
       </EditorSection>
 
       <EditorSection
-        title="Images"
+        title="Images & Videos"
         action={
           <p className="text-caption text-gray-500">
             {imageCountLabel}
@@ -758,13 +759,13 @@ function ArticleEditor({ articleId, onBack }: { articleId: string; onBack: () =>
           <input
             ref={imageUploadInputRef}
             type="file"
-            accept="image/jpeg,image/png,image/webp"
-            aria-label="Choose image file"
+            accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime,video/webm"
+            aria-label="Choose image or video file"
             className={fileInputClassName}
             onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
           />
           <Button variant="outline" size="sm" onClick={handleUploadImage} disabled={!imageFile} loading={uploading}>
-            Upload images
+            Upload
           </Button>
         </div>
       </EditorSection>

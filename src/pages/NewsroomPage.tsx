@@ -161,12 +161,13 @@ export default function NewsroomPage() {
               <Container>
                 <Stack space="md">
                   <Eyebrow>{t('newsroom:featuredLabel')}</Eyebrow>
-                  <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
+                  <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-3 lg:gap-8">
                     {featured.map((article) => (
                       <FeaturedStoryCard
                         key={article.id}
                         href={`/newsroom/${article.slug}`}
                         image={article.primaryImage?.url}
+                        mediaType={article.primaryImage?.mediaType}
                         categoryLabel={categoryLabel(article.category)}
                         date={formatNewsDate(article.publishedAt, locale)}
                         title={article.title}
