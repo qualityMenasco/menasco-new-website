@@ -106,28 +106,26 @@ function ArticleMediaBlock({
   caption?: string;
   mobile?: boolean;
 }) {
-  const { orientation, onImageLoad, onVideoLoadedMetadata } = useMediaOrientation();
-  const aspectClassName = orientation === 'portrait' ? 'aspect-[3/4]' : mobile ? 'aspect-[16/10]' : 'aspect-[16/9]';
+  const { aspectRatio, onVideoLoadedMetadata } = useMediaOrientation();
+  const defaultAspectClassName = mobile ? 'aspect-[16/10]' : 'aspect-[16/9]';
   const resolvedCaption = caption || image.caption;
+  const isVideo = image.mediaType === 'video';
 
   return (
-    <figure className={`my-2 w-full overflow-hidden rounded-md bg-gray-100 ${aspectClassName}`}>
-      {image.mediaType === 'video' ? (
-        <video
-          src={image.url}
-          controls
-          playsInline
-          onLoadedMetadata={onVideoLoadedMetadata}
-          className="h-full w-full object-contain"
-        />
+    <figure
+      className={`my-2 w-full overflow-hidden rounded-md bg-gray-100 ${defaultAspectClassName}`}
+      // Exact aspect ratio only for video, once known — a video's real shape
+      // can be anything (e.g. a 9:19.5 phone screen-recording), and fitting
+      // it into one of two fixed preset boxes left visible letterbox bars on
+      // the sides. An image intentionally keeps the fixed box + object-cover
+      // crop below, unchanged, so photos still read as a consistent width
+      // across body content regardless of their own aspect ratio.
+      style={isVideo && aspectRatio ? { aspectRatio } : undefined}
+    >
+      {isVideo ? (
+        <video src={image.url} controls playsInline onLoadedMetadata={onVideoLoadedMetadata} className="h-full w-full object-contain" />
       ) : (
-        <img
-          src={image.url}
-          alt={image.altText ?? ''}
-          loading="lazy"
-          onLoad={onImageLoad}
-          className="h-full w-full object-cover"
-        />
+        <img src={image.url} alt={image.altText ?? ''} loading="lazy" className="h-full w-full object-cover" />
       )}
       {!mobile && resolvedCaption && (
         <figcaption className="mt-2 text-caption text-gray-500" dir="auto">

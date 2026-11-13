@@ -170,4 +170,16 @@ describe('ArticleImageGallery — video media', () => {
     const { container } = renderGallery(ONE_VIDEO);
     expect(container.querySelector('.aspect-\\[16\\/10\\]')).toBeInTheDocument();
   });
+
+  it('once dimensions load, sizes the box to the video\'s EXACT aspect ratio (not a fixed landscape/portrait bucket) — this is what eliminates the letterbox borders a tall phone-recording showed in a generic 3:4 box', () => {
+    const { container } = renderGallery(ONE_VIDEO);
+    const videoEl = container.querySelector('video') as HTMLVideoElement;
+    Object.defineProperty(videoEl, 'videoWidth', { value: 1080, configurable: true });
+    Object.defineProperty(videoEl, 'videoHeight', { value: 2340, configurable: true }); // a real 9:19.5-ish phone screen-recording ratio
+    fireEvent.loadedMetadata(videoEl);
+
+    const box = videoEl.parentElement as HTMLElement;
+    // jsdom normalizes a numeric CSS aspect-ratio to "<n> / 1" — assert the ratio value, not the exact string form.
+    expect(parseFloat(box.style.aspectRatio)).toBeCloseTo(1080 / 2340);
+  });
 });

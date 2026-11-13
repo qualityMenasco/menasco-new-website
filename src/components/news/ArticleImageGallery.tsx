@@ -51,8 +51,7 @@ export function ArticleImageGallery({ images, previousLabel, nextLabel, position
   const isFirst = index === 0;
   const isLast = index === total - 1;
 
-  const { orientation, onImageLoad, onVideoLoadedMetadata } = useMediaOrientation();
-  const aspectClassName = orientation === 'portrait' ? 'aspect-[3/4]' : 'aspect-[16/10]';
+  const { aspectRatio, onImageLoad, onVideoLoadedMetadata } = useMediaOrientation();
 
   const goTo = (next: number) => setIndex(Math.max(0, Math.min(total - 1, next)));
   const goPrevious = () => {
@@ -97,7 +96,8 @@ export function ArticleImageGallery({ images, previousLabel, nextLabel, position
   return (
     <div className={cn('group relative', className)} onKeyDown={handleKeyDown}>
       <div
-        className={cn('relative w-full overflow-hidden rounded-md bg-gray-100', aspectClassName)}
+        className="relative aspect-[16/10] w-full overflow-hidden rounded-md bg-gray-100"
+        style={aspectRatio ? { aspectRatio } : undefined}
         onTouchStart={isMultiple ? handleTouchStart : undefined}
         onTouchEnd={isMultiple ? handleTouchEnd : undefined}
       >
