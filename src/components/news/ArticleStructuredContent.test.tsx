@@ -76,4 +76,35 @@ describe('ArticleStructuredContent', () => {
     expect(screen.getByText('Mobile body text.')).toBeInTheDocument();
     expect(screen.getByText('Mobile Heading')).toBeInTheDocument();
   });
+
+  it('linkifies a bare URL in paragraph text as a real, safe <a>, stripping trailing sentence punctuation from the href', () => {
+    const sections = [section([{ type: 'paragraph', text: 'See https://menasco.com/press. for details.' }])];
+    render(<ArticleStructuredContent sections={sections} images={[]} />);
+    const link = screen.getByRole('link', { name: 'https://menasco.com/press' });
+    expect(link).toHaveAttribute('href', 'https://menasco.com/press');
+    expect(link).toHaveAttribute('target', '_blank');
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(screen.getByText(/for details\.$/)).toBeInTheDocument();
+  });
+
+  it('renders markdown-style [label](url) links with custom link text, in paragraphs, quotes, and list items', () => {
+    const sections = [
+      section([
+        { type: 'paragraph', text: 'Read the [full announcement](https://menasco.com/news/1) here.' },
+        { type: 'quote', text: 'See [our profile](https://menasco.com/profile.pdf) for more.' },
+        { type: 'bullet_list', items: ['Visit [the site](https://menasco.com)'] },
+      ]),
+    ];
+    render(<ArticleStructuredContent sections={sections} images={[]} />);
+    expect(screen.getByRole('link', { name: 'full announcement' })).toHaveAttribute('href', 'https://menasco.com/news/1');
+    expect(screen.getByRole('link', { name: 'our profile' })).toHaveAttribute('href', 'https://menasco.com/profile.pdf');
+    expect(screen.getByRole('link', { name: 'the site' })).toHaveAttribute('href', 'https://menasco.com');
+  });
+
+  it('never linkifies a non-http(s) scheme (e.g. javascript:) — it stays plain text', () => {
+    const sections = [section([{ type: 'paragraph', text: 'Click [here](javascript:alert(1)) now.' }])];
+    render(<ArticleStructuredContent sections={sections} images={[]} />);
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+    expect(screen.getByText('Click [here](javascript:alert(1)) now.')).toBeInTheDocument();
+  });
 });

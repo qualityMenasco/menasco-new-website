@@ -96,7 +96,7 @@ export function ArticleImageGallery({ images, previousLabel, nextLabel, position
         onTouchStart={isMultiple ? handleTouchStart : undefined}
         onTouchEnd={isMultiple ? handleTouchEnd : undefined}
       >
-        <img key={current.src} src={current.src} alt={current.alt} className="h-full w-full object-cover animate-gallery-fade" />
+        <img key={current.src} src={current.src} alt={current.alt} className="h-full w-full object-contain animate-gallery-fade" />
 
         {isMultiple && (
           <>

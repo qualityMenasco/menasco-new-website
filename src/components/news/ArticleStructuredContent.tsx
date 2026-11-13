@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Stack } from '../layout/Stack';
 import { Heading, Text } from '../typography/Typography';
 import type { ArticleSection, ContentBlock, PublicImage } from '../../lib/newsroomPublicApi';
@@ -27,6 +28,51 @@ interface Props {
   mobile?: boolean;
 }
 
+// Block text is plain data (see structuredContent.ts's zod schema), never
+// HTML, so a live URL typed by a writer — either bare
+// (`https://example.com`) or markdown-style (`[label](https://example.com)`
+// for custom link text) — only becomes a clickable <a> through this parser,
+// never via dangerouslySetInnerHTML. Only http(s) URLs are linkified;
+// anything else (mailto:, javascript:, etc.) is left as plain text.
+const LINK_PATTERN = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s<>"')\]]+)/g;
+const TRAILING_PUNCTUATION = /[.,;:!?)\]]+$/;
+
+function linkify(text: string): ReactNode[] {
+  const nodes: ReactNode[] = [];
+  let lastIndex = 0;
+  let key = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = LINK_PATTERN.exec(text)) !== null) {
+    if (match.index > lastIndex) nodes.push(text.slice(lastIndex, match.index));
+
+    if (match[1] && match[2]) {
+      nodes.push(
+        <a key={key++} href={match[2]} target="_blank" rel="noopener noreferrer" className="text-brand-600 underline decoration-1 underline-offset-2 hover:text-brand-700">
+          {match[1]}
+        </a>,
+      );
+    } else if (match[3]) {
+      // A bare URL often has sentence punctuation stuck to it ("...site.com.")
+      // — strip trailing punctuation from the link itself and render it as
+      // plain text after, so the period/comma isn't swallowed into the href.
+      const trailing = match[3].match(TRAILING_PUNCTUATION)?.[0] ?? '';
+      const url = trailing ? match[3].slice(0, -trailing.length) : match[3];
+      nodes.push(
+        <a key={key++} href={url} target="_blank" rel="noopener noreferrer" className="break-words text-brand-600 underline decoration-1 underline-offset-2 hover:text-brand-700">
+          {url}
+        </a>,
+      );
+      if (trailing) nodes.push(trailing);
+    }
+
+    lastIndex = LINK_PATTERN.lastIndex;
+  }
+
+  if (lastIndex < text.length) nodes.push(text.slice(lastIndex));
+  return nodes;
+}
+
 // `dir="auto"` on every text-bearing element below — the browser picks
 // LTR/RTL per element from the first strong-directional character in ITS
 // OWN text (not a per-article or per-section flag), so an Arabic
@@ -42,20 +88,20 @@ function DesktopBlock({ block, images }: { block: ContentBlock; images: PublicIm
     case 'paragraph':
       return (
         <Text variant="body-lg" dir="auto">
-          {block.text}
+          {linkify(block.text)}
         </Text>
       );
     case 'heading':
       return (
         <Heading level={block.level === 2 ? 'h3' : 'h4'} as="h3" dir="auto">
-          {block.text}
+          {linkify(block.text)}
         </Heading>
       );
     case 'bullet_list':
       return (
         <ul className="list-disc space-y-1.5 ps-5 text-body-lg text-ink" dir="auto">
           {block.items.map((item, i) => (
-            <li key={i}>{item}</li>
+            <li key={i}>{linkify(item)}</li>
           ))}
         </ul>
       );
@@ -63,14 +109,14 @@ function DesktopBlock({ block, images }: { block: ContentBlock; images: PublicIm
       return (
         <ol className="list-decimal space-y-1.5 ps-5 text-body-lg text-ink" dir="auto">
           {block.items.map((item, i) => (
-            <li key={i}>{item}</li>
+            <li key={i}>{linkify(item)}</li>
           ))}
         </ol>
       );
     case 'quote':
       return (
         <blockquote className="border-s-4 border-brand-600 py-1 ps-5 font-display text-h4 font-semibold leading-snug text-ink" dir="auto">
-          {block.text}
+          {linkify(block.text)}
         </blockquote>
       );
     case 'image': {
@@ -95,20 +141,20 @@ function MobileBlock({ block, images }: { block: ContentBlock; images: PublicIma
     case 'paragraph':
       return (
         <p className="text-body leading-relaxed text-gray-700" dir="auto">
-          {block.text}
+          {linkify(block.text)}
         </p>
       );
     case 'heading':
       return (
         <h3 className="font-display text-h4 font-semibold tracking-tight text-ink" dir="auto">
-          {block.text}
+          {linkify(block.text)}
         </h3>
       );
     case 'bullet_list':
       return (
         <ul className="list-disc space-y-1 ps-5 text-body text-gray-700" dir="auto">
           {block.items.map((item, i) => (
-            <li key={i}>{item}</li>
+            <li key={i}>{linkify(item)}</li>
           ))}
         </ul>
       );
@@ -116,14 +162,14 @@ function MobileBlock({ block, images }: { block: ContentBlock; images: PublicIma
       return (
         <ol className="list-decimal space-y-1 ps-5 text-body text-gray-700" dir="auto">
           {block.items.map((item, i) => (
-            <li key={i}>{item}</li>
+            <li key={i}>{linkify(item)}</li>
           ))}
         </ol>
       );
     case 'quote':
       return (
         <blockquote className="border-s-4 border-brand-600 py-1 ps-4 font-display text-h4 font-semibold leading-snug text-ink" dir="auto">
-          {block.text}
+          {linkify(block.text)}
         </blockquote>
       );
     case 'image': {

@@ -100,7 +100,16 @@ function BlockEditor(props: BlockEditorProps) {
   switch (block.type) {
     case 'paragraph':
     case 'quote':
-      fields = <Textarea label={block.type === 'quote' ? 'Quote text' : 'Paragraph text'} dir="auto" rows={3} value={block.text} onChange={(e) => onChange({ ...block, text: e.target.value })} />;
+      fields = (
+        <Textarea
+          label={block.type === 'quote' ? 'Quote text' : 'Paragraph text'}
+          helperText="Links: paste a URL as-is, or use [link text](https://example.com) for custom link text."
+          dir="auto"
+          rows={3}
+          value={block.text}
+          onChange={(e) => onChange({ ...block, text: e.target.value })}
+        />
+      );
       break;
     case 'heading':
       fields = (
@@ -121,6 +130,7 @@ function BlockEditor(props: BlockEditorProps) {
       fields = (
         <Textarea
           label={block.type === 'bullet_list' ? 'Bullet items (one per line)' : 'Numbered items (one per line)'}
+          helperText="Links: paste a URL as-is, or use [link text](https://example.com) for custom link text."
           dir="auto"
           rows={4}
           value={block.items.join('\n')}
