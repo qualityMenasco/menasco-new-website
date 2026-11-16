@@ -37,13 +37,18 @@ Engineering, supply, installation, testing & commissioning of complete MEP syste
 - [Fire Protection](https://menascogroup.com/services/fire-protection/llms.txt)
 - [BIM & Digital Engineering](https://menascogroup.com/services/bim-digital-engineering/llms.txt)
 - [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt)
+- [EPC](https://menascogroup.com/services/turnkey-developments/llms.txt)
 
 ---
 
 ## Related Projects
 
-- [Seven Hotel](https://menascogroup.com/projects/seven-hotel/llms.txt): Palm Jumeirah, UAE
+- [Seven Hotel](https://menascogroup.com/projects/seven-hotel/llms.txt): Palm Jumeirah, Dubai, UAE
 - [Qiddiya](https://menascogroup.com/projects/qiddiya/llms.txt): Qiddiya City, Saudi Arabia
+- [Hanayen Abaya Factory](https://menascogroup.com/projects/hanayen-abaya-factory/llms.txt): Al Qusais, Dubai, UAE
+- [Grand Hyatt Kids Club](https://menascogroup.com/projects/grand-hyatt-kids-club/llms.txt): Oud Metha, Dubai, UAE
+- [Damas Hotel Fujairah](https://menascogroup.com/projects/damas-hotel-fujairah/llms.txt): Fujairah, UAE
+- [Radisson Blu Resort Fujairah](https://menascogroup.com/projects/radisson-blu-resort-fujairah/llms.txt): Al Aqah, Fujairah, UAE
 
 ---
 

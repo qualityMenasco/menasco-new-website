@@ -1,0 +1,30 @@
+# City Walk Substation
+
+> City Walk substation is a 132/11 kV primary station serving City Walk, the low-rise shopping, dining and residential district in Al Wasl, Dubai. It converts 132 kV transmission supply to 11 kV for the district's boutiques, apartments, hotels, cinema and district cooling load. Known on the Dubai grid as Khazan, it is an indoor, gas-insulated station with eight 132 kV bays and 50 MVA transformers, sized to sit inside a dense urban neighbourhood.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Al Wasl, Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+The City Walk 132/11 kV Substation is a primary power substation serving City Walk, the mixed-use urban district developed by Meraas in Dubai. MENASCO delivered the MEP works for the substation building, with Energoprojekt Entel as consultant. The building services support the safe, reliable operation of high-voltage equipment that underpins power supply to the district's retail, residential and leisure destinations.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

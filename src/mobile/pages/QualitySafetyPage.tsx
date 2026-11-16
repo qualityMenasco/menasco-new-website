@@ -1,49 +1,220 @@
+import { useRef, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { PhotoRail } from '../components/PhotoRail';
+import { SectionHeader } from '../components/SectionHeader';
 import { ExpandableText } from '../components/ExpandableText';
+import { TopicAccordion, type AccordionTopic } from '../../components/sections/quality/TopicAccordion';
 import { NavSectionH1 } from '../../components/typography/NavSectionH1';
-import { VideoPlaceholder } from '../../components/sections/community/VideoPlaceholder';
-import { PhotoWithVideo } from '../../components/sections/community/PhotoWithVideo';
 import { SEO } from '../../seo/SEO';
 import {} from '../../seo/structuredData';
 import { certifications } from '../../data/certifications';
-import { qhseAnnotations, qhseAwardVideo, qhseHeroPhoto, qhseMetrics, qualitySafetyPhotos } from '../../data/siteSafety';
+import { qhseAnnotations, qhseHeroPhoto, qualitySafetyPhotos } from '../../data/siteSafety';
 import { cn } from '../lib/utils';
 
 /*
- * Phone/tablet version of the Quality, Health & Safety assurance page — same
- * copy, sections and colour rules as desktop (brand blue for quality and the
- * system, safety amber only for risk), stacked and condensed: the hero
- * callouts become a numbered key under the photo, long text sits behind
- * "Read more", and photo rows swipe.
+ * Phone/tablet version of Quality, Health & Safety — same copy and sections as
+ * desktop, in the site's standard mobile components: the hero callouts become
+ * tappable numbered points, Quality and Safety swipe (side by side on tablets),
+ * and the commitment text sits behind "Read more".
  */
 
-const label = 'text-caption font-semibold uppercase tracking-[0.14em]';
+const scopeKeys: Record<string, string> = {
+  'ISO 9001:2015': 'qualityManagement',
+  'ISO 14001:2015': 'environmentalManagement',
+  'ISO 45001:2018': 'occupationalHealthSafety',
+};
 
-function Opener({ index, eyebrow, heading, dark = false }: { index: string; eyebrow: string; heading: string; dark?: boolean }) {
+type DisciplineCopy = { tag: string; title: string; lead: string; points: string[] };
+type ResultGroup = { tag: string; stats: { value: string; label: string }[]; text: string };
+
+/** Same photos and crops as desktop: the team reviewing works for Quality, the site at sunset for Safety. */
+const disciplines = [
+  { key: 'quality' as const, photo: qualitySafetyPhotos.portraits[1], focus: 'object-[50%_25%]', risk: false },
+  { key: 'safety' as const, photo: qualitySafetyPhotos.landscape, focus: 'object-center', risk: true },
+];
+
+/*
+ * The hero photo is cropped to a 3:4 frame (the source is ~4:7) so it isn't
+ * awkwardly tall on phones. The frame shows the image from 20% down; the
+ * callout coordinates (percentages of the full photo) are remapped into it.
+ */
+const PHOTO_RATIO = 753 / 1280;
+const FRAME_RATIO = 3 / 4;
+const VISIBLE = (PHOTO_RATIO / FRAME_RATIO) * 100; // % of the photo's height inside the frame
+const OFFSET = 20; // % of the photo's height above the frame
+const framePosY = (OFFSET / (100 - VISIBLE)) * 100;
+const toFrameY = (y: number) => ((y - OFFSET) / VISIBLE) * 100;
+
+/**
+ * The annotated site photo with tappable numbered points. The selected point's
+ * note fades into one fixed slot under the photo (the hint shows there when
+ * nothing is selected), so it never covers the photo and always appears in
+ * the same place.
+ */
+function HeroHotspots() {
+  const { t } = useTranslation(['about', 'common']);
+  const reducedMotion = useReducedMotion();
+  const [open, setOpen] = useState<number | null>(null);
+  const current = open === null ? null : qhseAnnotations[open];
+  const fade = {
+    initial: { opacity: 0, y: reducedMotion ? 0 : 6 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: reducedMotion ? 0 : -6 },
+    transition: { duration: reducedMotion ? 0 : 0.22, ease: [0.22, 0.61, 0.36, 1] as const },
+  };
   return (
-    <div className={cn('border-t pt-3', dark ? 'border-white/30' : 'border-ink')}>
-      <div className="flex gap-4">
-        <span dir="ltr" className={cn('tabular-nums', label, dark ? 'text-gray-400' : 'text-gray-500')}>
-          {index}
-        </span>
-        <span className={cn(label, dark ? 'text-brand-400' : 'text-brand-600')}>{eyebrow}</span>
+    // Stacked (under 440px) the photo is capped and centred; side by side it fills its column.
+    // There the note slot is taken out of the flow (absolute, under the photo) so the photo itself
+    // centres on the text; the section reserves room for it with extra bottom padding.
+    <div className="relative mx-auto w-full max-w-[22rem] min-[440px]:max-w-none">
+      <div className="relative aspect-[3/4]">
+        <img
+          src={qhseHeroPhoto.src}
+          alt={qhseHeroPhoto.alt}
+          className="h-full w-full rounded-md object-cover contrast-[1.08] grayscale"
+          style={{ objectPosition: `50% ${framePosY}%` }}
+        />
+        {qhseAnnotations.map((a, i) => {
+          const risk = a.kind === 'risk';
+          const active = open === i;
+          return (
+            // Physical left/top: the photo doesn't mirror in Arabic, so neither do its features.
+            <button
+              key={a.key}
+              type="button"
+              onClick={() => setOpen(active ? null : i)}
+              aria-expanded={active}
+              aria-controls="qhse-hotspot-note"
+              aria-label={t(`qualitySafetyPage.hero.annotations.${a.key}.title`)}
+              className={cn(
+                'absolute flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 text-small font-bold tabular-nums transition-all duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warmwhite',
+                risk ? 'border-warning' : 'border-brand-400',
+                active ? cn('scale-110', risk ? 'bg-warning text-ink' : 'bg-brand-400 text-ink') : cn('bg-ink/70', risk ? 'text-warning' : 'text-brand-400'),
+              )}
+              style={{ left: `${a.x}%`, top: `${toFrameY(a.y)}%` }}
+            >
+              {i + 1}
+            </button>
+          );
+        })}
       </div>
-      <h3 className={cn('mt-4 font-display text-h2 font-bold tracking-[-0.02em]', dark ? 'text-warmwhite' : 'text-ink')}>{heading}</h3>
+      {/* Fixed-height slot: the note (or the hint) crossfades here, so nothing jumps. */}
+      <div id="qhse-hotspot-note" aria-live="polite" className="mt-4 min-h-[4.5rem] min-[440px]:absolute min-[440px]:inset-x-0 min-[440px]:top-full">
+        <AnimatePresence mode="wait" initial={false}>
+          {current ? (
+            <motion.div key={current.key} {...fade} className="flex items-start gap-3">
+              <span
+                aria-hidden="true"
+                className={cn(
+                  'flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-small font-bold tabular-nums text-ink',
+                  current.kind === 'risk' ? 'bg-warning' : 'bg-brand-400',
+                )}
+              >
+                {(open ?? 0) + 1}
+              </span>
+              <span>
+                <span className={cn('block text-body font-semibold', current.kind === 'risk' ? 'text-warning' : 'text-brand-400')}>
+                  {t(`qualitySafetyPage.hero.annotations.${current.key}.title`)}
+                </span>
+                <span className="mt-0.5 block text-small text-gray-300">{t(`qualitySafetyPage.hero.annotations.${current.key}.note`)}</span>
+              </span>
+            </motion.div>
+          ) : (
+            <motion.p key="hint" {...fade} className="pt-1 text-center text-small text-gray-400">
+              {t('qualitySafetyPage.hero.tapHint')}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
 
-type DisciplineCopy = { tag: string; title: string; lead: string; points: string[] };
+/**
+ * Hero. From 440px up: the text beside the annotated photo. On narrower phones
+ * the two would only fit stacked, so they become two side-by-side panels in a
+ * horizontal scroller (swipe), with a tab switcher above that follows the
+ * scroll position and scrolls to a panel when tapped.
+ */
+function Hero() {
+  const { t } = useTranslation(['about', 'common']);
+  const reducedMotion = useReducedMotion();
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [panel, setPanel] = useState(0);
+  const tabs = [t('qualitySafetyPage.hero.tabs.overview'), t('qualitySafetyPage.hero.tabs.photo')];
+
+  const onScroll = () => {
+    const el = scrollerRef.current;
+    if (el && el.clientWidth) setPanel(Math.round(Math.abs(el.scrollLeft) / el.clientWidth));
+  };
+  const goTo = (i: number) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const rtl = getComputedStyle(el).direction === 'rtl';
+    el.scrollTo({ left: (rtl ? -1 : 1) * i * el.clientWidth, behavior: reducedMotion ? 'auto' : 'smooth' });
+    setPanel(i);
+  };
+
+  return (
+    <section className="bg-ink px-4 pb-10 pt-6 min-[440px]:pb-28 min-[440px]:pt-8 md:px-8">
+      {/* Tab switcher, narrow phones only. */}
+      <div role="tablist" aria-label={t('qualitySafetyPage.heading')} className="mb-6 grid grid-cols-2 rounded-full bg-white/10 p-1 min-[440px]:hidden">
+        {tabs.map((label, i) => (
+          <button
+            key={label}
+            type="button"
+            role="tab"
+            id={`qhse-hero-tab-${i}`}
+            aria-selected={panel === i}
+            aria-controls={`qhse-hero-panel-${i}`}
+            onClick={() => goTo(i)}
+            className={cn(
+              'rounded-full px-3 py-2 text-small font-semibold transition-colors duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warmwhite',
+              panel === i ? 'bg-warmwhite text-ink' : 'text-gray-300',
+            )}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      <div
+        ref={scrollerRef}
+        onScroll={onScroll}
+        className="no-scrollbar -mx-4 flex snap-x snap-mandatory items-start overflow-x-auto min-[440px]:items-center min-[440px]:mx-0 min-[440px]:grid min-[440px]:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] min-[440px]:gap-5 min-[440px]:overflow-visible sm:gap-6"
+      >
+        <div id="qhse-hero-panel-0" role="tabpanel" aria-labelledby="qhse-hero-tab-0" className="w-full shrink-0 snap-start px-4 min-[440px]:w-auto min-[440px]:px-0">
+          <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-400">{t('qualitySafetyPage.eyebrow')}</span>
+          <h2 className="mt-2 font-display text-h1 font-semibold tracking-tight text-warmwhite text-balance min-[440px]:text-h2 sm:text-h1">{t('qualitySafetyPage.heading')}</h2>
+          <p className="mt-3 text-body text-gray-300 min-[440px]:text-small sm:text-body">{t('qualitySafetyPage.description')}</p>
+          <a
+            href="/certificates/qhse-policy.pdf"
+            download="MENASCO-QHSE-Policy-2026.pdf"
+            className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-md bg-brand-600 px-3 py-2 text-body font-semibold text-warmwhite min-[440px]:text-small sm:text-body md:w-fit md:px-8"
+          >
+            <Download size={16} aria-hidden="true" className="shrink-0" />
+            {t('qualitySafetyPage.downloadPolicy')}
+          </a>
+        </div>
+        <div id="qhse-hero-panel-1" role="tabpanel" aria-labelledby="qhse-hero-tab-1" className="w-full shrink-0 snap-start px-4 min-[440px]:w-auto min-[440px]:px-0">
+          <HeroHotspots />
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function QualitySafetyPage() {
   const { t } = useTranslation(['about', 'common']);
-  const steps = t('qualitySafetyPage.process.steps', { returnObjects: true }) as { title: string; text: string }[];
-  const scopeKeys: Record<string, string> = {
-    'ISO 9001:2015': 'qualityManagement',
-    'ISO 14001:2015': 'environmentalManagement',
-    'ISO 45001:2018': 'occupationalHealthSafety',
+  const commitment = t('qualitySafetyPage.commitment.paragraphs', { returnObjects: true }) as string[];
+  const topics = t('qualitySafetyPage.commitment.topics', { returnObjects: true }) as AccordionTopic[];
+  const railRef = useRef<HTMLDivElement>(null);
+  const [activeCard, setActiveCard] = useState(0);
+  const onRailScroll = () => {
+    const rail = railRef.current;
+    const first = rail?.firstElementChild as HTMLElement | null;
+    if (rail && first) setActiveCard(Math.min(disciplines.length - 1, Math.round(Math.abs(rail.scrollLeft) / (first.offsetWidth + 12))));
   };
 
   return (
@@ -56,189 +227,116 @@ export default function QualitySafetyPage() {
         breadcrumb={[{ label: 'Home', path: '/' }, { label: 'Quality, Health & Safety', path: '/quality-safety' }]}
       />
 
-      {/* Hero: title, intro, certifications and policy, then the annotated photo with a numbered key. */}
-      <section className="bg-ink px-4 pb-10 pt-8">
-        <span className={cn(label, 'text-brand-400')}>{t('qualitySafetyPage.hero.eyebrow')}</span>
-        <h2 className="mt-4 font-display text-[12vw] font-bold leading-[0.95] tracking-[-0.035em] text-warmwhite md:text-[8vw]">{t('qualitySafetyPage.heading')}</h2>
-        <p className="mt-5 text-body text-gray-300">{t('qualitySafetyPage.description')}</p>
-        <div className="mt-6 flex flex-wrap gap-2">
-          {certifications.map((c) => (
-            <span key={c.name} dir="ltr" className={cn('border border-white/25 px-2.5 py-1 text-warmwhite', label)}>
-              {c.name}
-            </span>
+      <Hero />
+
+      {/* Quality and Safety: a swipeable row of equal-height cards on phones, side by side on tablets. */}
+      <section className="px-4 py-10 md:px-8">
+        <SectionHeader eyebrow={t('qualitySafetyPage.disciplines.eyebrow')} heading={t('qualitySafetyPage.disciplines.heading')} headingAs="h3" />
+        <div
+          ref={railRef}
+          onScroll={onRailScroll}
+          className="no-scrollbar -mx-4 mt-6 flex snap-x snap-mandatory items-stretch gap-3 overflow-x-auto scroll-px-4 px-4 md:mx-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0"
+        >
+          {disciplines.map(({ key, photo, focus, risk }) => {
+            const copy = t(`qualitySafetyPage.disciplines.${key}`, { returnObjects: true }) as DisciplineCopy;
+            return (
+              <article key={key} className="flex w-[84vw] max-w-[22rem] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-gray-200 bg-stone md:w-auto md:max-w-none">
+                {/* Absolutely positioned so the photo's own size can't stretch the 4:3 frame (it's a flex child). */}
+                <div className="relative aspect-[4/3] shrink-0 overflow-hidden bg-gray-100">
+                  <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" className={cn('absolute inset-0 h-full w-full object-cover', focus)} />
+                </div>
+                <div className="p-5">
+                  <span className={cn('inline-flex items-center gap-2 text-eyebrow font-semibold uppercase tracking-widest', risk ? 'text-warning' : 'text-brand-600')}>
+                    <span aria-hidden="true" className={cn('h-2 w-2 rounded-full', risk ? 'bg-warning' : 'bg-brand-600')} />
+                    {copy.tag}
+                  </span>
+                  <h4 className="mt-2 font-display text-h4 font-semibold text-ink">{copy.title}</h4>
+                  <p className="mt-2 text-body text-gray-600">{copy.lead}</p>
+                  <ul className="mt-4 space-y-2">
+                    {copy.points.map((point) => (
+                      <li key={point} className="flex items-start gap-3 text-small text-ink">
+                        <span aria-hidden="true" className={cn('mt-2 h-1.5 w-1.5 shrink-0 rounded-full', risk ? 'bg-warning' : 'bg-brand-600')} />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+        <div aria-hidden="true" className="mt-4 flex justify-center gap-1.5 md:hidden">
+          {disciplines.map((d, i) => (
+            <span key={d.key} className={cn('h-1.5 rounded-full transition-all duration-base', i === activeCard ? 'w-5 bg-ink' : 'w-1.5 bg-gray-300')} />
           ))}
         </div>
-        <a
-          href="/certificates/qhse-policy.pdf"
-          download="MENASCO-QHSE-Policy-2026.pdf"
-          className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-brand-600 text-body font-semibold text-warmwhite md:w-fit md:px-8"
-        >
-          <Download size={16} aria-hidden="true" />
-          {t('qualitySafetyPage.downloadPolicy')}
-        </a>
-
-        <figure className="mt-8 md:grid md:grid-cols-2 md:items-center md:gap-8">
-          <div className="relative mx-auto aspect-[753/1280] w-full max-w-[22rem]">
-            <img src={qhseHeroPhoto.src} alt={qhseHeroPhoto.alt} className="h-full w-full object-cover contrast-[1.08] grayscale" />
-            {qhseAnnotations.map((a, i) => (
-              // Physical left/top: the photo doesn't mirror in Arabic, so neither do its features.
-              <span
-                key={a.key}
-                aria-hidden="true"
-                className={cn(
-                  'absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 bg-ink/70 text-[0.6875rem] font-bold tabular-nums',
-                  a.kind === 'risk' ? 'border-warning text-warning' : 'border-brand-400 text-brand-400',
-                )}
-                style={{ left: `${a.x}%`, top: `${a.y}%` }}
-              >
-                {i + 1}
-              </span>
-            ))}
-          </div>
-          <div className="mt-5 md:mt-0">
-            <ol className="border-t border-white/20">
-              {qhseAnnotations.map((a, i) => (
-                <li key={a.key} className="grid grid-cols-[2rem_1fr] items-baseline border-b border-white/20 py-3">
-                  <span dir="ltr" className={cn('tabular-nums', label, a.kind === 'risk' ? 'text-warning' : 'text-brand-400')}>
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span>
-                    <span className={cn('block', label, a.kind === 'risk' ? 'text-warning' : 'text-brand-400')}>
-                      {t(`qualitySafetyPage.hero.annotations.${a.key}.title`)}
-                    </span>
-                    <span className="mt-0.5 block text-small text-gray-300">{t(`qualitySafetyPage.hero.annotations.${a.key}.note`)}</span>
-                  </span>
-                </li>
-              ))}
-            </ol>
-            <figcaption className="mt-3 text-caption text-gray-400">{t('qualitySafetyPage.hero.figureCaption')}</figcaption>
-          </div>
-        </figure>
       </section>
 
-      {/* 01 — Quality and Safety, stacked (side by side on tablets). */}
-      <section className="px-4 py-10">
-        <Opener index="01" eyebrow={t('qualitySafetyPage.disciplines.eyebrow')} heading={t('qualitySafetyPage.disciplines.heading')} />
-        <div className="mt-8 grid gap-px bg-gray-300 md:grid-cols-2">
-          {(['quality', 'safety'] as const).map((key) => {
-            const copy = t(`qualitySafetyPage.disciplines.${key}`, { returnObjects: true }) as DisciplineCopy;
+      {/* Three-year results on a dark band. */}
+      <section className="bg-charcoal px-4 py-10 md:px-8">
+        <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-400">{t('qualitySafetyPage.results.eyebrow')}</span>
+        <h3 className="mt-2 font-display text-h2 font-semibold tracking-tight text-warmwhite text-balance">{t('qualitySafetyPage.results.heading')}</h3>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {(['safety', 'quality'] as const).map((key) => {
+            const g = t(`qualitySafetyPage.results.${key}`, { returnObjects: true }) as ResultGroup;
             const risk = key === 'safety';
             return (
-              <div key={key} className="bg-warmwhite py-6 md:p-6">
-                <span className={cn('inline-flex items-center gap-2', label, risk ? 'text-warning' : 'text-brand-600')}>
-                  <span aria-hidden="true" className={cn('h-2.5 w-2.5', risk ? 'bg-warning' : 'bg-brand-600')} />
-                  {copy.tag}
+              <div key={key} className="rounded-md border border-white/10 bg-graphite p-5">
+                <span className={cn('inline-flex items-center gap-2 text-eyebrow font-semibold uppercase tracking-widest', risk ? 'text-warning' : 'text-brand-400')}>
+                  <span aria-hidden="true" className={cn('h-2 w-2 rounded-full', risk ? 'bg-warning' : 'bg-brand-400')} />
+                  {g.tag}
                 </span>
-                <h4 className="mt-4 font-display text-h3 font-bold tracking-[-0.015em] text-ink">{copy.title}</h4>
-                <p className="mt-3 text-body text-gray-700">{copy.lead}</p>
-                <ol className="mt-5 border-t border-gray-300">
-                  {copy.points.map((point, i) => (
-                    <li key={point} className="grid grid-cols-[2rem_1fr] items-baseline border-b border-gray-300 py-2.5">
-                      <span dir="ltr" className={cn('tabular-nums', label, risk ? 'text-warning' : 'text-brand-600')}>
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      <span className="text-small text-ink">{point}</span>
-                    </li>
+                <dl className={cn('mt-4 grid gap-4', g.stats.length > 1 && 'grid-cols-2')}>
+                  {g.stats.map((s) => (
+                    <div key={s.label}>
+                      <dd dir="ltr" className="font-display text-stat font-semibold leading-none text-brand-400 rtl:text-end">
+                        {s.value}
+                      </dd>
+                      <dt className="mt-2 text-small text-gray-300">{s.label}<span aria-hidden="true">*</span></dt>
+                    </div>
                   ))}
-                </ol>
+                </dl>
+                <p className="mt-5 border-t border-white/10 pt-4 text-small text-gray-300">{g.text}</p>
               </div>
             );
           })}
         </div>
+        <p className="mt-5 text-caption text-gray-400">* {t('qualitySafetyPage.results.footnote')}</p>
       </section>
 
-      {/* 02 — The process as a vertical procedure with a blue spine. */}
-      <section className="bg-stone px-4 py-10">
-        <Opener index="02" eyebrow={t('qualitySafetyPage.process.eyebrow')} heading={t('qualitySafetyPage.process.heading')} />
-        <ol className="ms-1.5 mt-8 border-s-2 border-brand-600">
-          {steps.map((step, i) => (
-            <li key={step.title} className="relative pb-6 ps-6 last:pb-0">
-              <span aria-hidden="true" className="absolute -start-[7px] top-1 h-3 w-3 bg-brand-600" />
-              <span dir="ltr" className={cn('block tabular-nums text-gray-500 rtl:text-end', label)}>
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <span className="mt-1 block font-display text-h4 font-bold text-ink">{step.title}</span>
-              <span className="mt-1 block text-small text-gray-700">{step.text}</span>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* 03 — Measured values (placeholders until verified figures are supplied). */}
-      <section className="bg-charcoal px-4 py-10">
-        <Opener dark index="03" eyebrow={t('qualitySafetyPage.metrics.eyebrow')} heading={t('qualitySafetyPage.metrics.heading')} />
-        <dl className="mt-8 grid grid-cols-2 gap-px bg-white/15 md:grid-cols-4">
-          {qhseMetrics.map((m) => (
-            <div key={m.key} className="bg-charcoal p-4">
-              <dd dir="ltr" className="font-display text-[2.5rem] font-bold leading-none tracking-[-0.03em] text-brand-400 rtl:text-end">
-                {m.value ?? '—'}
-              </dd>
-              <dt className="mt-3 text-small text-gray-300">{t(`qualitySafetyPage.metrics.items.${m.key}`)}</dt>
-            </div>
-          ))}
-        </dl>
-        {qhseMetrics.some((m) => !m.value) && <p className={cn('mt-5 text-gray-500', label)}>{t('qualitySafetyPage.metrics.pending')}</p>}
-      </section>
-
-      {/* 04 — The policy statement, first paragraph with the second behind "Read more". */}
-      <section className="px-4 py-10">
-        <Opener index="04" eyebrow={t('qualitySafetyPage.commitment.eyebrow')} heading={t('qualitySafetyPage.commitment.heading')} />
-        <ExpandableText
-          className="mt-6"
-          summary={t('qualitySafetyPage.paragraph1')}
-          paragraphs={[`${t('qualitySafetyPage.paragraph2Prefix')} ${t('qualitySafetyPage.continuousImprovement')}${t('qualitySafetyPage.paragraph2Suffix')}`]}
-          expandLabel={t('common:buttons.readMore')}
-          collapseLabel={t('common:buttons.showLess')}
-          textClassName="text-body text-gray-700"
-        />
-      </section>
-
-      {/* 05 — Field photos as a swipeable row, then the award film (placeholder until supplied). */}
-      <section className="bg-stone py-10">
-        <div className="px-4">
-          <Opener index="05" eyebrow={t('qualitySafetyPage.field.eyebrow')} heading={t('qualitySafetyPage.field.heading')} />
+      {/* What clients can expect, beside the site engineer's portrait at full length; the rest behind "Read more". */}
+      <section className="px-4 py-10 md:grid md:grid-cols-2 md:items-center md:gap-8 md:px-8">
+        <div className="mx-auto aspect-[4/5] max-w-[22rem] overflow-hidden rounded-md bg-gray-100 md:order-2 md:max-w-none">
+          <img src={qualitySafetyPhotos.portraits[0].src} alt={qualitySafetyPhotos.portraits[0].alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
         </div>
-        <PhotoRail
-          images={[...qualitySafetyPhotos.portraits, qualitySafetyPhotos.landscape]}
-          label={t('qualitySafetyPage.field.heading')}
-          className="mt-8"
-          gutterClassName="scroll-px-4 px-4"
-          itemClassName="aspect-[4/5] w-[70vw] max-w-[20rem] md:w-[calc((100%-24px)/3)] md:max-w-none"
-        />
-        <figure className="mt-6 px-4">
-          {qhseAwardVideo ? (
-            <PhotoWithVideo
-              image={{ src: qualitySafetyPhotos.landscape.src, alt: t('qualitySafetyPage.field.captions.award') }}
-              video={qhseAwardVideo}
-              className="aspect-[16/10]"
-            />
-          ) : (
-            <VideoPlaceholder className="aspect-[16/10] w-full" />
-          )}
-          <figcaption className="mt-3 text-caption text-gray-500">{t('qualitySafetyPage.field.captions.award')}</figcaption>
-        </figure>
+        <div className="mt-6 md:mt-0">
+          <SectionHeader eyebrow={t('qualitySafetyPage.commitment.eyebrow')} heading={t('qualitySafetyPage.commitment.heading')} headingAs="h3" />
+          <ExpandableText
+            className="mt-4"
+            summary={commitment[0]}
+            paragraphs={commitment.slice(1)}
+            expandLabel={t('common:buttons.readMore')}
+            collapseLabel={t('common:buttons.showLess')}
+          />
+        </div>
+        {/* The detail behind the overview: six expandable topics, the first open (full width on tablets). */}
+        <TopicAccordion topics={topics} idPrefix="qhse-topic-m" className="mt-8 md:col-span-2 md:mt-4" />
       </section>
 
-      {/* 06 — Certificates as dark plates. */}
-      <section className="px-4 py-10">
-        <Opener index="06" eyebrow={t('qualitySafetyPage.certs.eyebrow')} heading={t('qualitySafetyPage.certs.heading')} />
-        <div className="mt-8 grid gap-3 md:grid-cols-3">
+      {/* The three ISO certificates as one connected list. */}
+      <section className="bg-stone px-4 py-10 md:px-8">
+        <SectionHeader eyebrow={t('qualitySafetyPage.certs.eyebrow')} heading={t('qualitySafetyPage.certs.heading')} headingAs="h3" />
+        <div className="mt-6 divide-y divide-gray-200 overflow-hidden rounded-md border border-gray-200 bg-warmwhite md:grid md:grid-cols-3 md:divide-x md:divide-y-0">
           {certifications.map((c) => {
-            const [code, year] = c.name.split(':');
             const scope = scopeKeys[c.name] ? t(`common:certifications.${scopeKeys[c.name]}`) : c.scope;
             const body = (
               <>
-                <span className="flex items-baseline justify-between gap-3">
-                  <span dir="ltr" className="font-display text-[2.25rem] font-bold leading-none tracking-[-0.03em] text-warmwhite">
-                    {code}
-                  </span>
-                  <span dir="ltr" className={cn('text-brand-400', label)}>
-                    {year}
-                  </span>
+                <span dir="ltr" className="block font-display text-h4 font-semibold text-ink rtl:text-end">
+                  {c.name}
                 </span>
-                <span className="mt-4 block text-small text-gray-300">{scope}</span>
+                <span className="mt-1 block text-small text-gray-600">{scope}</span>
                 {c.fileUrl && (
-                  <span className={cn('mt-4 inline-flex items-center gap-2 text-brand-400', label)}>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-small font-semibold text-brand-600">
                     {t('qualitySafetyPage.certs.viewCertificate')}
                     <ArrowRight size={14} aria-hidden="true" className="rtl:rotate-180" />
                   </span>
@@ -246,11 +344,11 @@ export default function QualitySafetyPage() {
               </>
             );
             return c.fileUrl ? (
-              <a key={c.name} href={c.fileUrl} target="_blank" rel="noopener noreferrer" className="block bg-ink p-5">
+              <a key={c.name} href={c.fileUrl} target="_blank" rel="noopener noreferrer" className="block p-4">
                 {body}
               </a>
             ) : (
-              <div key={c.name} className="bg-ink p-5">
+              <div key={c.name} className="p-4">
                 {body}
               </div>
             );

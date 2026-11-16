@@ -29,8 +29,9 @@ export function DataCenterFeature() {
     return () => observer.disconnect();
   }, [shouldLoadVideo]);
 
+  // Sized to its content (≈60–65% of the screen) with the copy centred vertically, so there's no dead video space above it.
   return (
-    <section ref={sectionRef} id="data-center" className="relative flex min-h-screen w-full items-end overflow-hidden bg-ink">
+    <section ref={sectionRef} id="data-center" className="relative flex min-h-[62vh] w-full items-center overflow-hidden bg-ink">
       <img src={POSTER} alt="" className="absolute inset-0 h-full w-full object-cover object-center" />
       {shouldLoadVideo && (
         <video
@@ -44,18 +45,18 @@ export function DataCenterFeature() {
           preload="metadata"
         />
       )}
-      {/* Same overlay recipe as AboutHero: the copy sits over bright video frames, so the lower half is weighted toward ink (text ≥4.5:1) while the top stays open for the footage. */}
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/20" />
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-transparent rtl:bg-gradient-to-l" />
+      {/* Even ink wash plus a start-side gradient: the copy (start-aligned, vertically centred) stays ≥4.5:1 over bright frames. */}
+      <div aria-hidden="true" className="absolute inset-0 bg-ink/45" />
+      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/45 to-transparent rtl:bg-gradient-to-l" />
 
-      <Container className="relative z-10 pb-20 pt-28 md:pb-24 md:pt-32">
+      <Container className="relative z-10 py-20 md:py-24">
         <div className="max-w-2xl">
           <Eyebrow theme="dark">{t('dataCenter.eyebrow')}</Eyebrow>
           <Heading level="h1" as="h3" theme="dark" className="mt-4 max-w-xl">
             {t('dataCenter.title')}
           </Heading>
 
-          <div className="mt-10">
+          <div className="mt-8">
             <SmartLink href="/services/data-centers" className="group inline-flex items-center gap-4">
               <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-white/30 bg-white/10 text-warmwhite transition-colors duration-base group-hover:border-brand-600 group-hover:bg-brand-600">
                 <ArrowRight className="h-6 w-6 rtl:rotate-180" aria-hidden="true" />

@@ -1,0 +1,41 @@
+# IRIS AUH5 Data Centre
+
+> This campus serves cloud, enterprise and artificial intelligence workloads, and its newer halls are built for the far higher rack densities that AI and high-performance computing demand. It sits within one of the fastest-growing concentrations of digital infrastructure in the area. A hyperscale data centre campus made up of several linked facilities of roughly 6 MW each and about 36 MW of IT capacity in total. The Tier III-certified campus offers some 8,200 square metres of white space, carrier-neutral connectivity and diverse fibre entry to support enterprise workloads.
+
+## Project Overview
+
+- Category: Advanced Technical Facilities
+- Location: KEZAD, Abu Dhabi, UAE
+
+## MENASCO Scope
+
+This project introduces liquid cooling for Sky 21 at IRIS (AUH 5.4), part of Khazna Data Centers' KDC-AUH5 campus in the Khalifa Industrial Zone Abu Dhabi. Liquid cooling enables the higher rack densities required by AI and high-performance computing workloads. MENASCO's scope covers the liquid cooling works, extending its role on Khazna's IRIS campus alongside its earlier retrofit works. IRIS, also known as KDC-AUH5, is Khazna Data Centers' hyperscale campus in the Khalifa Industrial Zone Abu Dhabi (KIZAD), comprising several data centres of around 6 MW each. Undertaken as additional works for Khazna, MENASCO's scope covers MEP retrofit works on the campus's existing facilities, helping to keep mission-critical infrastructure performing reliably.
+
+---
+
+## Related Services
+
+- [Mechanical](https://menascogroup.com/services/mechanical/llms.txt)
+- [Electrical](https://menascogroup.com/services/electrical/llms.txt)
+- [Plumbing](https://menascogroup.com/services/plumbing/llms.txt)
+- [Fire Protection](https://menascogroup.com/services/fire-protection/llms.txt)
+- [BIM & Digital Engineering](https://menascogroup.com/services/bim-digital-engineering/llms.txt)
+- [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt)
+- [EPC](https://menascogroup.com/services/turnkey-developments/llms.txt)
+
+---
+
+## Related Projects
+
+- [Data Centre I](https://menascogroup.com/projects/data-centre-i-12-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre II](https://menascogroup.com/projects/data-centre-ii-24-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre III](https://menascogroup.com/projects/data-centre-iii-2-4-mw-it/llms.txt): Dubai, UAE
+- [Data Centre IV](https://menascogroup.com/projects/data-centre-iv-6-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre V](https://menascogroup.com/projects/data-centre-v-800-kw-it/llms.txt): Dubai, UAE
+- [Data Centre VI](https://menascogroup.com/projects/data-centre-vi-12-mw-it/llms.txt): Abu Dhabi, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

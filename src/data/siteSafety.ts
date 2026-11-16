@@ -39,14 +39,3 @@ export const qhseAnnotations: { key: 'facade' | 'lead' | 'ppe' | 'zone'; x: numb
   { key: 'lead', x: 77, y: 71, kind: 'quality' },
   { key: 'zone', x: 40, y: 93, kind: 'risk' },
 ];
-
-/** Performance figures — PLACEHOLDERS: set `value` once verified figures are supplied. */
-export const qhseMetrics: { key: 'safeHours' | 'ltifr' | 'inspections' | 'ncr'; value: string | null }[] = [
-  { key: 'safeHours', value: null },
-  { key: 'ltifr', value: null },
-  { key: 'inspections', value: null },
-  { key: 'ncr', value: null },
-];
-
-/** Quality award ceremony film — null until the file is supplied (a placeholder frame shows meanwhile). */
-export const qhseAwardVideo: string | null = null;

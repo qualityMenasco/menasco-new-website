@@ -1,0 +1,31 @@
+# DEWA Substations 5
+
+> This contract covered four electrical substations built at separate sites across Dubai, at Seef, Al Warqa, Al Khawaneej and Hora North. Each station is an enclosed building housing switchgear, transformers and the associated control and auxiliary rooms, taking supply from the transmission network and stepping it down for local distribution. The four sites lie in residential and mixed-use districts on the eastern and inland sides of the city, where demand grew quickly as those areas expanded.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Dubai, UAE
+- Status: Completed
+- Year: 2005
+
+## MENASCO Scope
+
+DEWA contract CE300A/2005 covered four electrical substations across Dubai, at Seef, Al Warqa, Al Khawaneej and Hora North. MENASCO executed the MEP works across all four sites directly for the Dubai Electricity and Water Authority, which also acted as consultant. The package forms part of MENASCO's portfolio of DEWA substation projects supporting the growth of the emirate's power network.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

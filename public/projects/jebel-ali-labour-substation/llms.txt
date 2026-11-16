@@ -1,0 +1,30 @@
+# Jebel Ali Labour Substation
+
+> This 132/11 kV primary substation serves the labour accommodation city at Jebel Ali, in industrial south-west Dubai, where residential blocks, dining halls, clinics and sports facilities house a large workforce employed around the port and free zone. It converts 132 kV transmission supply to 11 kV for local distribution, forming part of the emirate's high-voltage network.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Jebel Ali, Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+The Jebel Ali Labour City 132/11 kV Substation is an electrical transmission substation serving the Labour City area of Jebel Ali, delivered for Meraas Development with Energoprojekt as consultant. It steps 132 kV transmission power down to 11 kV for local distribution within DEWA's network. MENASCO carried out the MEP works for the substation building.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

@@ -22,7 +22,7 @@ MENASCO Connect is our proprietary workforce management platform, integrating re
 
 ## Engineering Tomorrow
 
-MENASCO believes the future of engineering lies in combining decades of construction expertise with intelligent technologies that improve quality, efficiency, sustainability, compliance, and project certainty. Technology is not replacing engineering: it is empowering our engineers to deliver better outcomes for clients and projects.
+MENASCO believes the future of engineering lies in combining decades of construction expertise with intelligent technologies that improve quality, efficiency, sustainability, compliance, and project certainty. Technology is empowering our engineers to deliver better outcomes for clients and projects.
 
 ---
 

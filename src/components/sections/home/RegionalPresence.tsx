@@ -175,7 +175,8 @@ function OfficeDetailCard({ office, onNavigate }: OfficeDetailCardProps) {
   );
 }
 
-export function RegionalPresence() {
+/** `background` lets the mobile tree (tablets) slot it into its own warm-white / stone rhythm. */
+export function RegionalPresence({ background = 'warmwhite' }: { background?: 'warmwhite' | 'stone' } = {}) {
   const { t } = useTranslation(['home', 'common']);
   const headquarters = officeLocations.find((office) => office.isHeadquarters) ?? officeLocations[0];
   const [selectedId, setSelectedId] = useState(headquarters.id);
@@ -189,7 +190,7 @@ export function RegionalPresence() {
   };
 
   return (
-    <Section background="warmwhite" spacing="lg" edgeFade>
+    <Section background={background} spacing="md">
       <Stack space="xl">
         <SectionHeader
           eyebrow={t('regionalPresence.eyebrow')}

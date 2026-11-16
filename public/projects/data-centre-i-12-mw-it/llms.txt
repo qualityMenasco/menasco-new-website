@@ -18,6 +18,7 @@
 - [Fire Protection](https://menascogroup.com/services/fire-protection/llms.txt)
 - [BIM & Digital Engineering](https://menascogroup.com/services/bim-digital-engineering/llms.txt)
 - [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt)
+- [EPC](https://menascogroup.com/services/turnkey-developments/llms.txt)
 
 ---
 

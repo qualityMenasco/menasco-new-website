@@ -1,0 +1,30 @@
+# Nad Al Sheba Substation
+
+> This 132/11 kV primary substation stands at Nad Al Sheba, the district in southern Dubai best known for its racecourse and the residential neighbourhoods around it. It steps high-voltage transmission supply down to 11 kV for local distribution, feeding the racing venue, community facilities and homes nearby. Substations of this type are built as secure, largely unattended buildings and form part of the transmission network that underpins the emirate's growth.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Nad Al Sheba, Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+Nad Al Sheba 132/11 kV Substation was delivered under contract NAS/A608/2007 for Dubai Racing Club in the Nad Al Sheba district of Dubai. MENASCO executed the MEP works for the substation, working to the Dubai Electricity and Water Authority's engineering requirements as consultant. The project forms part of MENASCO's portfolio of substation projects across the emirate.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

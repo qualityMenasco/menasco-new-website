@@ -1,0 +1,30 @@
+# Gas Bottling Plant
+
+> This industrial facility in the United Arab Emirates is a gas bottling and distribution plant, where bulk liquefied petroleum gas is received, stored and decanted into cylinders for onward supply. Plants of this kind bring together a filling hall and cylinder carousel, bulk storage vessels, a cylinder yard and loading bays for distribution vehicles. Dedicated fire protection, gas detection and safety systems govern the layout throughout.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Jebel Ali, Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+This project comprised a gas bottling and distribution plant in the UAE, an industrial facility for filling and dispatching gas cylinders. It was delivered with Abdulhadi Contracting as main contractor and Khatib & Alami as consultant. MENASCO executed the MEP works for the plant, providing its mechanical, electrical and plumbing services.
+
+---
+
+## Related Projects
+
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+- [Maha Substation Dubai](https://menascogroup.com/projects/maha-substation-dubai/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

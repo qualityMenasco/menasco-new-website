@@ -1,6 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { companyStats } from '../../data/companyStats';
 import { cn } from '../lib/utils';
+import { useCountUp } from '../../components/content/Statistic';
+
+/** The stat value, counting up from 0 the first time it scrolls into view (static under reduced motion). */
+function CountUp({ value }: { value: string }) {
+  const { ref, display } = useCountUp(value, true);
+  return <span ref={ref}>{display}</span>;
+}
 
 const statKeys: Record<string, string> = {
   projects: 'stats.projects',
@@ -43,7 +50,7 @@ export function MobileStatsGrid({ compact = false }: MobileStatsGridProps) {
               compact ? 'text-[28px] leading-none' : 'text-stat leading-none',
             )}
           >
-            {stat.value}
+            <CountUp value={stat.value} />
           </div>
           <div
             className={cn(

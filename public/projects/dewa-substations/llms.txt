@@ -1,0 +1,30 @@
+# DEWA Substations
+
+> This contract covered three electrical substations built at separate sites across Dubai and designated GD, DC and TP. Each is an enclosed substation building housing switchgear, transformers and the associated control and auxiliary rooms, taking supply from the transmission network and stepping it down for local distribution. Multi-site packages of this kind group several stations under a single award so that network capacity is added across the city in step with its growth.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+DEWA contract CE024B/2004 covered three electrical substations in Dubai, designated GD, DC and TP, built for the Dubai Electricity and Water Authority. MENASCO executed the MEP works across all three sites for EEE, working to DEWA's engineering requirements as consultant. The package forms part of MENASCO's long-running portfolio of DEWA substation projects across the emirate.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [Maha Substation Dubai](https://menascogroup.com/projects/maha-substation-dubai/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

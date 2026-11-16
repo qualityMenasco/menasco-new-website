@@ -1,0 +1,42 @@
+# IRIS Data Center
+
+> A prefabricated modular data centre campus in Abu Dhabi, assembled from 552 factory-built units arranged across four separate data centre buildings. The campus carries around 18MW of IT capacity and is designed to Uptime Institute Tier III standards for concurrent maintainability. It is configured for mission-critical workloads that need resilient, high-availability capacity. A hyperscale campus, this building was stripped back and rebuilt to current design standards, restoring its white space, power and cooling infrastructure. Modular construction of this kind allows each building on such a campus to be delivered, replaced or returned to service quickly, supporting cloud, enterprise and high-density workloads for the regional market. The battery rooms at the IRIS Data Center campus in Abu Dhabi house the stored-energy plant that holds the site's critical load during a mains interruption, bridging the gap until standby generation picks up. They sit within a prefabricated modular data centre development whose halls are assembled from factory-built units. Dedicated, environmentally controlled battery accommodation of this kind is a standard requirement for facilities targeting Uptime Institute Tier III resilience. This campus is a prefabricated modular development in which the halls are assembled from factory-built units and joined by common site services. The external areas carry the access routes, utility corridors and hardstanding that let the buildings run as a single high-availability facility.
+
+## Project Overview
+
+- Category: Advanced Technical Facilities
+- Location: Abu Dhabi, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+The IRIS Data Center (A100) project is a prefabricated modular data centre campus in Abu Dhabi, comprising four data centre buildings delivered to Uptime Institute Tier III standards. MENASCO delivered the MEP works across the campus's modular units, providing the engineered building services that underpin a resilient, mission-critical facility. This additional works package covered the rebuild of the IRIS 4 data centre building at the IRIS Data Center campus in Abu Dhabi, a prefabricated modular data centre development. MENASCO, which delivered the MEP works for the original campus, executed the MEP works for the rebuild. This additional works package at the IRIS Data Center campus in Abu Dhabi covered the construction of dedicated battery rooms for the IRIS data centre buildings, supporting the facility's backup power infrastructure. MENASCO carried out the construction works as an extension of its main MEP contract on the modular data centre campus. This additional works package extended MENASCO's involvement at the IRIS Data Center (A100) campus in Abu Dhabi, a prefabricated modular data centre development. The scope covered external works serving five data centre buildings: IDC1, IDC2, IDC4, IDC5 and IDC6. MENASCO executed these external works alongside its main MEP contract on the campus.
+
+---
+
+## Related Services
+
+- [Mechanical](https://menascogroup.com/services/mechanical/llms.txt)
+- [Electrical](https://menascogroup.com/services/electrical/llms.txt)
+- [Plumbing](https://menascogroup.com/services/plumbing/llms.txt)
+- [Fire Protection](https://menascogroup.com/services/fire-protection/llms.txt)
+- [BIM & Digital Engineering](https://menascogroup.com/services/bim-digital-engineering/llms.txt)
+- [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt)
+- [EPC](https://menascogroup.com/services/turnkey-developments/llms.txt)
+
+---
+
+## Related Projects
+
+- [Data Centre I](https://menascogroup.com/projects/data-centre-i-12-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre II](https://menascogroup.com/projects/data-centre-ii-24-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre III](https://menascogroup.com/projects/data-centre-iii-2-4-mw-it/llms.txt): Dubai, UAE
+- [Data Centre IV](https://menascogroup.com/projects/data-centre-iv-6-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre V](https://menascogroup.com/projects/data-centre-v-800-kw-it/llms.txt): Dubai, UAE
+- [Data Centre VI](https://menascogroup.com/projects/data-centre-vi-12-mw-it/llms.txt): Abu Dhabi, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

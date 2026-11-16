@@ -1,0 +1,30 @@
+# World Trade Centre Substation
+
+> This 132/11 kV primary substation serves the Dubai World Trade Centre district on Sheikh Zayed Road, the city's long-established exhibition, convention and business quarter. It converts transmission supply to 11 kV for the exhibition halls, conference centre, offices and hotels around it, where major events place heavy and highly variable demand on the network. The building holds switchgear, transformers and control rooms, with dedicated cooling, fire protection and remote monitoring.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Trade Centre, Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+The DWTC 132/11 kV Substation is a primary power substation at the Dubai World Trade Centre, the city's long-established exhibition and convention district on Sheikh Zayed Road. MENASCO executed the MEP works for the substation building for Dubai World Trade Centre, with Energoprojekt Entel as consultant. The building services support the safe, reliable operation of the high-voltage installation serving the exhibition and convention complex.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

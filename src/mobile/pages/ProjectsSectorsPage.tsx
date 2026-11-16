@@ -76,7 +76,6 @@ export default function ProjectsSectorsPage() {
           eyebrow={t('nav:projectsSectors')}
           heading={t('projects:categoriesPage.title')}
           headingAs="h2"
-          description={t('projects:mobile.description')}
         />
 
         <div className="mt-5">

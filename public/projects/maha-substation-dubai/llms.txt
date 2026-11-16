@@ -1,0 +1,30 @@
+# Maha Substation Dubai
+
+> Maha Substation is a 132/11 kV substation forming part of Dubai's electricity transmission and distribution network. Stations of this type take supply at 132 kV from the transmission grid and step it down to 11 kV for the local feeders that serve homes, offices and industry in the surrounding catchment. The plant is housed in an enclosed building containing switchgear halls, transformer bays and control and auxiliary rooms.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+Maha 132/11 kV Substation was delivered under Dubai Electricity and Water Authority (DEWA) contract CE002D/2005 as part of Dubai's electricity transmission network. MENASCO executed the MEP works for the substation for EEE, working to DEWA's engineering requirements as consultant. The project forms part of MENASCO's portfolio of DEWA substation projects across the emirate.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

@@ -1,0 +1,30 @@
+# Oud Al Muteena Substation
+
+> Oud Al Muteena Substation is a 132/11 kV substation serving Oud Al Muteena, a low-rise residential district in eastern Dubai lying between Al Khawaneej and Mirdif. The station takes supply at 132 kV from the transmission network and steps it down to 11 kV for the local distribution feeders that serve the surrounding villas, schools and small commercial units. It is housed in an enclosed building containing switchgear halls and transformer bays.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Oud Al Muteena, Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+Oud Al Muteena 132/11 kV Substation is a Dubai Electricity and Water Authority (DEWA) transmission substation serving the Oud Al Muteena district of Dubai. MENASCO executed the MEP works for the substation as subcontractor to Al Rostamani Pegel, working to DEWA's engineering requirements as consultant. The project forms part of MENASCO's portfolio of DEWA substation work across the emirate.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+- [Maha Substation Dubai](https://menascogroup.com/projects/maha-substation-dubai/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

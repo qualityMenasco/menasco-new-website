@@ -25,7 +25,7 @@ MENASCO uses BIM-driven coordination to resolve multidisciplinary clashes, valid
 ## Relevant Projects
 
 - [Vida Hotel](https://menascogroup.com/projects/vida-hotel/llms.txt): Sharjah, UAE
-- [Seven Hotel](https://menascogroup.com/projects/seven-hotel/llms.txt): Palm Jumeirah, UAE
+- [Seven Hotel](https://menascogroup.com/projects/seven-hotel/llms.txt): Palm Jumeirah, Dubai, UAE
 - [Qiddiya](https://menascogroup.com/projects/qiddiya/llms.txt): Qiddiya City, Saudi Arabia
 - [Data Centre I](https://menascogroup.com/projects/data-centre-i-12-mw-it/llms.txt): Abu Dhabi, UAE
 - [Data Centre II](https://menascogroup.com/projects/data-centre-ii-24-mw-it/llms.txt): Abu Dhabi, UAE

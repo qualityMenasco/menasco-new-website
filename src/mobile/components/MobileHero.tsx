@@ -28,9 +28,9 @@ export function MobileHero() {
         <div className="mt-3">
           <LocaleLink
             to="/projects/categories"
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-md bg-brand-600 text-body font-semibold text-warmwhite"
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-md bg-brand-600 text-body font-semibold text-warmwhite md:inline-flex md:h-11 md:w-fit md:px-6 md:text-small"
           >
-            {t('common:buttons.exploreProjects')}
+            {t('home:hero.ctaPrimary')}
             <ArrowRight size={18} aria-hidden="true" className="rtl:rotate-180" />
           </LocaleLink>
         </div>

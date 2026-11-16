@@ -1,0 +1,30 @@
+# Jebel Ali Quay Substation
+
+> This 132/11 kV substation serves the quayside at Jebel Ali, the deep-water port in southern Dubai and the largest man-made harbour in the world, with 67 berths handling well over thirteen million containers a year. The building steps transmission supply down to 11 kV for the cranes, refrigerated container yards, workshops and lighting along the berths. Its equipment halls, cable basements, cooling and fire systems are built for continuous, largely unattended operation.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Jebel Ali, Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+This 132/11 kV substation was built for DP World at Jebel Ali, supporting power distribution for the port operator's facilities at its Jebel Ali operations in Dubai. Energoprojekt Entel acted as consultant on the project. MENASCO executed the MEP works for the substation, supporting the delivery of critical power infrastructure for the port and its associated facilities.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

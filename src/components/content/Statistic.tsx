@@ -7,7 +7,8 @@ import { StatText, Text } from '../typography/Typography';
 
 const VALUE_PATTERN = /^(\D*)([\d,.]+)(\D*)$/;
 
-function useCountUp(rawValue: string, animate: boolean) {
+/** Counts a numeric stat ("350+", "32+") up from 0 the first time it scrolls into view. No-op under reduced motion. */
+export function useCountUp(rawValue: string, animate: boolean) {
   const reducedMotion = usePrefersReducedMotion();
   const ref = useRef<HTMLSpanElement>(null);
   const [display, setDisplay] = useState(rawValue);

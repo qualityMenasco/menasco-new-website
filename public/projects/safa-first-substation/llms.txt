@@ -1,0 +1,30 @@
+# Safa First Substation
+
+> Safa First is a 132/11 kV primary substation serving Al Safa, an established residential district beside Sheikh Zayed Road in Dubai. It steps transmission-level supply down to 11 kV for the local distribution network, feeding homes, schools, mosques and shops across the surrounding neighbourhoods. Housed in a compact enclosed building, it forms one link in the emirate's high-voltage grid, which carries power from generating plants to individual districts.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Al Safa, Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+The Safa First 132/11 kV Substation is a primary substation on the Dubai Electricity and Water Authority (DEWA) transmission network, converting 132 kV supply to 11 kV for local distribution. MENASCO delivered the MEP works for the substation building, with DEWA as client and Energoprojekt Entel as consultant. The building services support the safe, reliable operation of critical high-voltage equipment serving the surrounding community.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

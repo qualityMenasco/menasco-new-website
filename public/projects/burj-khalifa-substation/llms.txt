@@ -1,0 +1,30 @@
+# Burj Khalifa Substation
+
+> Burj Khalifa Substation is a 132/11 kV primary distribution substation in Downtown Dubai. It steps high-voltage supply down for the dense mix of towers, hotels, retail and public realm that surrounds the world's tallest building, and forms one node in the emirate's high-voltage transmission network. Substations of this type house switchgear, transformers and protection and control equipment inside a secure, purpose-built enclosure.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Downtown Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+The Burj Khalifa 132/11 kV Substation is a primary power substation in Downtown Dubai, forming part of the high-voltage infrastructure that supplies the district around the world's tallest building. Working for Emaar Properties, MENASCO delivered the MEP works for the substation building. The building services support the safe, reliable operation of the high-voltage equipment within this busy urban district.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

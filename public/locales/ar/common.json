@@ -31,7 +31,9 @@
     "readMore": "قراءة المزيد",
     "showLess": "عرض أقل",
     "exploreMore": "اكتشف المزيد",
-    "viewProject": "عرض المشروع"
+    "viewProject": "عرض المشروع",
+    "previousSectors": "القطاعات السابقة",
+    "nextSectors": "القطاعات التالية"
   },
   "states": {
     "loading": "جارٍ التحميل…",

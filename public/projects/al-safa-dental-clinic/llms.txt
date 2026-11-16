@@ -1,0 +1,42 @@
+# Al Safa Dental Clinic
+
+> A dental clinic and a private villa within a single two-storey building in Al Safa, a low-rise residential district of Dubai off Sheikh Zayed Road. Part of the building serves as a neighbourhood dental practice, with the remainder given over to a family home. Small owner-occupied clinics of this kind are a familiar feature of Dubai's villa districts, serving residents close to where they live.
+
+## Project Overview
+
+- Category: Advanced Technical Facilities
+- Location: Al Safa, Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+This project combined a dental clinic with a G+1 private villa, delivered with Dubai Contracting Company as main contractor. MENASCO executed the MEP works for both the clinical and residential spaces, providing the mechanical, electrical and plumbing services required for a working dental practice alongside a family home.
+
+---
+
+## Related Services
+
+- [Mechanical](https://menascogroup.com/services/mechanical/llms.txt)
+- [Electrical](https://menascogroup.com/services/electrical/llms.txt)
+- [Plumbing](https://menascogroup.com/services/plumbing/llms.txt)
+- [Fire Protection](https://menascogroup.com/services/fire-protection/llms.txt)
+- [BIM & Digital Engineering](https://menascogroup.com/services/bim-digital-engineering/llms.txt)
+- [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt)
+- [EPC](https://menascogroup.com/services/turnkey-developments/llms.txt)
+
+---
+
+## Related Projects
+
+- [Data Centre I](https://menascogroup.com/projects/data-centre-i-12-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre II](https://menascogroup.com/projects/data-centre-ii-24-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre III](https://menascogroup.com/projects/data-centre-iii-2-4-mw-it/llms.txt): Dubai, UAE
+- [Data Centre IV](https://menascogroup.com/projects/data-centre-iv-6-mw-it/llms.txt): Abu Dhabi, UAE
+- [Data Centre V](https://menascogroup.com/projects/data-centre-v-800-kw-it/llms.txt): Dubai, UAE
+- [Data Centre VI](https://menascogroup.com/projects/data-centre-vi-12-mw-it/llms.txt): Abu Dhabi, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

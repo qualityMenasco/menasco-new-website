@@ -1,18 +1,18 @@
 # Seven Hotel
 
-> Seven Hotel is an exclusive beachfront development on Palm Jumeirah, combining modern elegance with resort-style luxury living and ocean views. MENASCO delivered the full MEP scope, with marine-grade mechanical installations and high-efficiency cooling and ventilation systems designed for hotel operations and high-rise performance.
+> Seven Palm is a mixed-use hotel and residential development on the trunk of Palm Jumeirah, Dubai, formed of two 16-storey towers above two basement levels and a shared retail podium. It holds 1,066 hotel rooms, hotel apartments and residences, the hotel trading as NH Collection Dubai The Palm. A rooftop infinity pool, direct beach access and podium dining and retail serve guests and residents alike.
 
 ## Project Overview
 
 - Sector: Luxury Residential / Hospitality
 - Category: Hospitality & Landmark Entertainment
-- Location: Palm Jumeirah, UAE
-- Status: Executed
+- Location: Palm Jumeirah, Dubai, UAE
+- Status: Completed
 - Year: 2022
 
 ## MENASCO Scope
 
-Design, supply, installation, testing & commissioning of complete MEP systems: HVAC, electrical, plumbing and firefighting.
+Seven Palm is a mixed-use hotel and residential development on the trunk of Palm Jumeirah, comprising two 16-storey towers above two basement levels, with hotel apartments, residences, podium retail and a rooftop infinity pool. Its hotel component operates as NH Collection Dubai The Palm. MENASCO executed the MEP works, covering design, supply, installation, testing and commissioning of HVAC, electrical, plumbing and firefighting systems, with the project completing in 2022.
 
 ## Technical Highlights
 
@@ -37,6 +37,7 @@ Design, supply, installation, testing & commissioning of complete MEP systems: H
 - [Fire Protection](https://menascogroup.com/services/fire-protection/llms.txt)
 - [BIM & Digital Engineering](https://menascogroup.com/services/bim-digital-engineering/llms.txt)
 - [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt)
+- [EPC](https://menascogroup.com/services/turnkey-developments/llms.txt)
 
 ---
 
@@ -44,6 +45,10 @@ Design, supply, installation, testing & commissioning of complete MEP systems: H
 
 - [Vida Hotel](https://menascogroup.com/projects/vida-hotel/llms.txt): Sharjah, UAE
 - [Qiddiya](https://menascogroup.com/projects/qiddiya/llms.txt): Qiddiya City, Saudi Arabia
+- [Hanayen Abaya Factory](https://menascogroup.com/projects/hanayen-abaya-factory/llms.txt): Al Qusais, Dubai, UAE
+- [Grand Hyatt Kids Club](https://menascogroup.com/projects/grand-hyatt-kids-club/llms.txt): Oud Metha, Dubai, UAE
+- [Damas Hotel Fujairah](https://menascogroup.com/projects/damas-hotel-fujairah/llms.txt): Fujairah, UAE
+- [Radisson Blu Resort Fujairah](https://menascogroup.com/projects/radisson-blu-resort-fujairah/llms.txt): Al Aqah, Fujairah, UAE
 
 ---
 

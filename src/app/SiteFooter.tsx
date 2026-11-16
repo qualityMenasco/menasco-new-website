@@ -123,11 +123,12 @@ export function SiteFooter() {
       <div className="flex flex-col gap-6 border-t border-white/10 pt-8">
         <CertificationStrip
           align="start"
-          certifications={certifications.map((certification) =>
-            certificationScopeKeys[certification.name]
+          certifications={certifications.map((certification) => ({
+            label: certificationScopeKeys[certification.name]
               ? `${certification.name}, ${t(`common:certifications.${certificationScopeKeys[certification.name]}`)}`
               : certification.name,
-          )}
+            href: certification.fileUrl,
+          }))}
         />
         <LegalRow
           className="!border-t-0 !pt-0"

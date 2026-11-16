@@ -1,0 +1,30 @@
+# Dubai Design District Substation
+
+> This 132/11 kV primary substation serves Dubai Design District, the creative quarter beside Business Bay that houses design studios, fashion and art brands, galleries, cafes and offices. It steps 132 kV transmission supply down to 11 kV to power the district's buildings, street lighting and district cooling. It is one of three substations planned for d3, added as the district grows and its events programme expands.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Dubai Design District, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+The Dubai Design District 132/11 kV Substation is a DEWA transmission substation serving d3, Dubai's creative business district, delivered for Dubai Design District with Green Energy Consultancy as consultant. It steps 132 kV transmission power down to 11 kV for distribution across the district's buildings and district cooling. MENASCO carried out the MEP works for the substation.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

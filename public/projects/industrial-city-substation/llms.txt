@@ -1,0 +1,31 @@
+# Industrial City Substation
+
+> This package covered a group of five primary electricity substations built on separate sites across Dubai, among them Al Sufouh, Dubai Industrial City, International City and Dubai Lagoon. Each substation steps transmission-level supply down to distribution voltage for the residential, industrial and commercial districts around it. Together they extended the emirate's power network into areas that were expanding rapidly through the mid-2000s.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Dubai, UAE
+- Status: Completed
+- Year: 2006
+
+## MENASCO Scope
+
+DEWA contract CE/288A/2006 covered a package of electrical substations across Dubai, including sites at Al Sufouh, Dubai Industrial City, International City and Dubai Lagoon. MENASCO executed the MEP works across the package, working to the Dubai Electricity and Water Authority's engineering requirements as consultant. The contract forms part of MENASCO's portfolio of DEWA substation projects across the emirate.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

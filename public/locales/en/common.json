@@ -31,7 +31,9 @@
     "readMore": "Read more",
     "showLess": "Show less",
     "exploreMore": "Explore More",
-    "viewProject": "View Project"
+    "viewProject": "View Project",
+    "previousSectors": "Previous sectors",
+    "nextSectors": "Next sectors"
   },
   "states": {
     "loading": "Loading…",

@@ -212,12 +212,20 @@ export function MobileFooter() {
 
         {/* Certifications + legal — one band on tablets (no divider between them). */}
         <div className="flex flex-wrap justify-center gap-2 border-t border-white/10 pt-6 sm:justify-start">
-          {certifications.map((cert) => (
-            <span key={cert.name} className="rounded-sm border border-white/15 px-2.5 py-1 text-caption text-gray-300">
-              {cert.name}
-              {certificationKeys[cert.name] ? `, ${t(`common:certifications.${certificationKeys[cert.name]}`)}` : ''}
-            </span>
-          ))}
+          {certifications.map((cert) => {
+            const label = `${cert.name}${certificationKeys[cert.name] ? `, ${t(`common:certifications.${certificationKeys[cert.name]}`)}` : ''}`;
+            const badge = 'rounded-sm border border-white/15 px-2.5 py-1 text-caption text-gray-300';
+            // Each badge opens its certificate PDF.
+            return cert.fileUrl ? (
+              <a key={cert.name} href={cert.fileUrl} target="_blank" rel="noopener noreferrer" className={`${badge} underline-offset-2 hover:text-warmwhite hover:underline`}>
+                {label}
+              </a>
+            ) : (
+              <span key={cert.name} className={badge}>
+                {label}
+              </span>
+            );
+          })}
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-caption text-gray-400 sm:-mt-2 sm:border-t-0 sm:pt-0">

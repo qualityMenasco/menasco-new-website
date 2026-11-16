@@ -17,7 +17,7 @@ export function CareersPreview() {
   const { t } = useTranslation('home');
 
   return (
-    <Section background="stone" spacing="lg" edgeFade>
+    <Section background="stone" spacing="md">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center lg:gap-x-10">
         <div className="flex flex-col items-start gap-5 lg:col-span-6">
           <Eyebrow>{t('careersPreview.eyebrow')}</Eyebrow>

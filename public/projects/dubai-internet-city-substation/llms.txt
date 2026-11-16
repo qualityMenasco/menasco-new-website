@@ -1,0 +1,30 @@
+# Dubai Internet City Substation
+
+> Dubai Internet City Substation is a 132/11 kV substation supplying Dubai Internet City, the technology free zone on Sheikh Zayed Road that hosts regional offices for many of the world's largest software, telecommunications and media companies. The station steps 132 kV transmission supply down to 11 kV for the feeders serving the district's office campuses and power-intensive tenants. It is housed in an enclosed building containing switchgear halls and transformer bays.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Dubai Internet City, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+Dubai Internet City 132/11 kV Substation is a Dubai Electricity and Water Authority (DEWA) transmission substation supplying the Dubai Internet City business district. MENASCO executed the MEP works for the substation as subcontractor to Al Rostamani Pegel, working to DEWA's engineering requirements as consultant. The project forms part of MENASCO's portfolio of DEWA substation work across Dubai.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+- [Maha Substation Dubai](https://menascogroup.com/projects/maha-substation-dubai/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

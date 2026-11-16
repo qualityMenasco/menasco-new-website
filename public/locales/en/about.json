@@ -326,7 +326,7 @@
         "privacyPolicyLink": "Privacy Policy"
       },
       "ai": {
-        "eyebrow": "Artificial Intelligence",
+        "eyebrow": "AI-Assisted Quantity Takeoffs",
         "heading": "AI Engineering",
         "paragraph": "Using AI across engineering, quantity takeoffs, recruitment, payroll management and tenders, MENASCO has increased its workforce efficiency by 30%. That time has freed our teams to take on larger projects, more of them, and to train and upskill for more impactful work."
       },
@@ -338,12 +338,14 @@
     },
     "closing": {
       "heading": "Engineering Tomorrow",
-      "description": "MENASCO believes the future of engineering lies in combining decades of construction expertise with intelligent technologies that improve quality, efficiency, sustainability, compliance, and project certainty. Technology is not replacing engineering: it is empowering our engineers to deliver better outcomes for clients and projects."
+      "description": "MENASCO believes the future of engineering lies in combining decades of construction expertise with intelligent technologies that improve quality, efficiency, sustainability, compliance, and project certainty. Technology is empowering our engineers to deliver better outcomes for clients and projects."
     },
     "stat": {
       "value": "30%",
-      "label": "More workforce efficiency through AI"
-    }
+      "label": "More workforce efficiency through AI",
+      "eyebrow": "Artificial Intelligence"
+    },
+    "chaptersLabel": "Technology initiatives"
   },
   "qualitySafetyPage": {
     "seo": {
@@ -352,14 +354,9 @@
     },
     "eyebrow": "QHSE",
     "heading": "Quality, Health & Safety",
-    "description": "MENASCO delivers electro-mechanical and MEP contracting services across the UAE, built on quality management, health and safety, and engineering excellence, governed by an integrated QHSE system certified to ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018.",
-    "paragraph1": "As a mechanical contracting and MEP engineering company operating across the UAE, MENASCO continually works to ensure our electro-mechanical services and the quality of our work meet the highest standards in the construction industry. Every process we run is governed by an integrated management system certified to ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018, internationally recognized standards for Quality, Health, Safety, and Environmental (QHSE) management.",
-    "paragraph2Prefix": "We are committed to protecting the health and wellbeing of our employees, partners, clients, and the communities where we work. Through proactive risk management,",
-    "continuousImprovement": "continuous improvement",
-    "paragraph2Suffix": ", and strict adherence to QHSE principles, we minimize health, safety, environmental, and operational risks across every activity, product, and service we deliver.",
+    "description": "MENASCO delivers electro-mechanical and MEP contracting services across three continents, built on quality management, health and safety, and engineering excellence. Our team is proudly governed by an integrated QHSE system certified to ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018.",
     "downloadPolicy": "Download full QHSE Policy",
     "hero": {
-      "eyebrow": "QHSE · Assurance System",
       "annotations": {
         "facade": {
           "title": "Inspection point",
@@ -378,7 +375,11 @@
           "note": "Live works · restricted access"
         }
       },
-      "figureCaption": "Fig. 01 — Site inspection, annotated."
+      "tapHint": "Tap a point to learn more",
+      "tabs": {
+        "overview": "Overview",
+        "photo": "Site inspection"
+      }
     },
     "disciplines": {
       "eyebrow": "Two Disciplines",
@@ -406,61 +407,92 @@
         ]
       }
     },
-    "process": {
-      "eyebrow": "Assurance Process",
-      "heading": "From Plan to Handover",
-      "steps": [
-        {
-          "title": "Plan",
-          "text": "Inspection and test plans and risk assessments are agreed before mobilisation."
-        },
-        {
-          "title": "Inspect",
-          "text": "Materials and workmanship are checked at defined hold points."
-        },
-        {
-          "title": "Test",
-          "text": "Systems are pressure-, function- and performance-tested to specification."
-        },
-        {
-          "title": "Verify",
-          "text": "Results are recorded, reviewed and signed off by QA/QC."
-        },
-        {
-          "title": "Hand over",
-          "text": "Complete, traceable documentation is handed to the client."
-        }
-      ]
-    },
-    "metrics": {
-      "eyebrow": "Performance",
-      "heading": "Measured, Not Assumed",
-      "pending": "Figures pending verification",
-      "items": {
-        "safeHours": "Safe man-hours",
-        "ltifr": "Lost-time injury frequency rate",
-        "inspections": "Inspections completed",
-        "ncr": "Non-conformance closure rate"
-      }
-    },
     "commitment": {
       "eyebrow": "Our Commitment",
-      "heading": "Governed by Certified Systems"
-    },
-    "field": {
-      "eyebrow": "On Site",
-      "heading": "Quality & Safety in the Field",
-      "captions": {
-        "engineer": "Fig. 02 — Site engineer in full PPE on a rebar deck.",
-        "team": "Fig. 03 — Safety team reviewing works on site.",
-        "site": "Fig. 04 — Active construction site at sunset.",
-        "award": "Fig. 05 — Quality award ceremony."
-      }
+      "heading": "Built to International Standards",
+      "paragraphs": [
+        "For our clients, quality and safety decide whether a project is delivered on time, handed over cleanly and operated without surprises. At MENASCO, both are top priorities on every project, and our work is held to internationally recognized ISO standards from the first submittal to final handover.",
+        "Safety comes first on every site. Each one runs on risk assessments and method statements, permits to work and site controls, toolbox talks and clear signage, and workforce accountability with transparent reporting.",
+        "Quality is proven before it reaches the client. Our state-of-the-art testing, commissioning and handover procedures verify that every system performs to specification, backed by complete, traceable documentation."
+      ],
+      "topics": [
+        {
+          "title": "International standards & certification",
+          "body": [
+            "MENASCO operates an integrated management system certified to ISO 9001:2015 (quality), ISO 14001:2015 (environment) and ISO 45001:2018 (occupational health and safety). The system sets out how every project is planned, controlled, checked and improved, from tender through handover.",
+            "Our certification is maintained through regular audits by an independent certification body, alongside our own internal audits across projects and departments. Findings are tracked to closure, keeping the system alive on site, not just on paper."
+          ]
+        },
+        {
+          "title": "Site safety controls",
+          "body": [
+            "No work starts without an approved risk assessment and method statement describing the task, its hazards and the controls in place. High-risk activities, such as work at height, hot works, lifting operations and confined spaces, require a permit to work that is issued, checked on site and formally closed out when the work is complete.",
+            "Regular toolbox talks keep teams briefed on upcoming tasks and their risks, supported by clear signage and controlled access zones. Site HSE teams carry out routine inspections, and every worker is empowered to stop unsafe work."
+          ]
+        },
+        {
+          "title": "Inspection & testing",
+          "body": [
+            "Before installation begins, each system is planned through an inspection and test plan agreed with the consultant, defining the hold and witness points where work cannot proceed until it has been inspected and signed off.",
+            "Materials are checked against approved submittals on delivery, and installations are inspected in stages as they progress. Systems are then pressure-, function- and performance-tested to specification, with every result recorded so it can be traced back to the exact area, system and date."
+          ]
+        },
+        {
+          "title": "Commissioning & handover",
+          "body": [
+            "Commissioning brings each system to its designed performance in a planned, witnessed sequence. Our engineers work alongside consultants, clients and specialist vendors until every system is proven to operate as intended, individually and together.",
+            "At handover, clients receive a complete, organized package of as-built drawings, operation and maintenance manuals, test and commissioning certificates, and warranties. Operating teams are trained on the systems they inherit, and we remain responsive throughout the defects liability period."
+          ]
+        },
+        {
+          "title": "Training & competence",
+          "body": [
+            "Every person who joins a MENASCO site completes a site induction before starting work. Skilled roles are filled by trained, certified operatives, and supervisors and engineers receive ongoing training in quality procedures, safety leadership and new technologies.",
+            "This helps ensure the right people are assigned to the right tasks, and that competence keeps pace as projects and standards evolve."
+          ]
+        },
+        {
+          "title": "Reporting & continuous improvement",
+          "body": [
+            "Incidents, near misses, inspections and non-conformances are reported through centralized digital tools, giving management real-time visibility across every project. Each event is investigated to its root cause, and corrective actions are tracked until they are closed.",
+            "Lessons learned on one site are shared across all of them. This cycle of measuring, learning and improving is behind the results shown above, and it keeps raising the standard on every new project."
+          ]
+        }
+      ]
     },
     "certs": {
       "eyebrow": "Certification",
       "heading": "Independently Certified",
       "viewCertificate": "View certificate"
+    },
+    "results": {
+      "eyebrow": "Performance",
+      "heading": "Results We Can Measure",
+      "safety": {
+        "tag": "Safety · 3 years",
+        "stats": [
+          {
+            "value": "66%",
+            "label": "Reduction in total recordable incident rate (TRIR)"
+          },
+          {
+            "value": "85%",
+            "label": "Reduction in medical treatment cases (MT)"
+          }
+        ],
+        "text": "Centralized reporting tools, proactive risk prevention and lessons learned from every site drove these results. We are always learning and finding new ways to make conditions safer for the people who make MENASCO possible."
+      },
+      "quality": {
+        "tag": "Quality · 3 years",
+        "stats": [
+          {
+            "value": "33%",
+            "label": "Reduction in non-conformance reports (NCRs)"
+          }
+        ],
+        "text": "Proactive inspections and centralized semantic analysis of our site WhatsApp communications catch issues earlier, delivering more quality for our clients."
+      },
+      "footnote": "As measured across all projects between 2022–2025."
     }
   }
 }

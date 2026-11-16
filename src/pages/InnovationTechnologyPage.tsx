@@ -1,21 +1,18 @@
-import { ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../components/layout/Section';
 import { Eyebrow } from '../components/typography/Typography';
-import { SmartLink } from '../lib/SmartLink';
 import { ScrollReveal } from '../components/common/ScrollReveal';
-import { placeholderImages } from '../data/images';
 import { innovationHeroFilm, innovationHeroPhotos } from '../data/innovationPhotos';
 import { AutoplayVideo } from '../components/common/AutoplayVideo';
 import { PhotoWithVideo } from '../components/sections/community/PhotoWithVideo';
-import { splitAcronym, textOutline } from '../lib/textOutline';
+import { splitAcronym } from '../lib/splitAcronym';
 import { cn } from '../lib/utils';
 import { SEO } from '../seo/SEO';
 import {} from '../seo/structuredData';
 
 /*
  * Typographic-maximalist page (same approach as the mobile tree): poster-scale
- * display type and giant outlined index numbers and figures. Display sizes use
+ * display type with index numbers and figures set in Inter. Display sizes use
  * clamp(…vw…) so lines fill the container from 1025px up and stop growing once
  * the container reaches its max width.
  */
@@ -46,18 +43,18 @@ function InnovationHero() {
       <h2 className="mt-4 font-display font-bold uppercase leading-[0.86] tracking-[-0.04em] text-ink">
         {lineTwo ? (
           <>
-            <span className="block text-[clamp(6rem,11.4vw,10.25rem)]">{lineOne}</span>
-            <span className="block whitespace-nowrap text-[clamp(5rem,9.4vw,8.5rem)]">
+            <span className="block text-[clamp(4rem,7vw,6.25rem)]">{lineOne}</span>
+            <span className="block whitespace-nowrap text-[clamp(3.25rem,5.8vw,5.25rem)]">
               <span className="text-brand-600">&amp; {lineTwo}</span>
             </span>
           </>
         ) : (
-          <span className="block text-[clamp(5rem,10vw,9rem)] leading-[1.05]">{lineOne}</span>
+          <span className="block text-[clamp(3.5rem,6vw,5.5rem)] leading-[1.05]">{lineOne}</span>
         )}
       </h2>
       <div className="mt-12 grid grid-cols-12 gap-8">
         <div className="col-span-4 self-center">
-          <p className="font-display text-h3 font-semibold uppercase leading-tight tracking-tight text-ink">{t('innovation.hero.subheading')}</p>
+          <p className="font-display text-h4 font-semibold leading-snug text-ink">{t('innovation.hero.subheading')}</p>
           <p className="mt-5 border-s-4 border-brand-500 ps-4 text-body-lg text-gray-700">{t('innovation.hero.description')}</p>
         </div>
         <AutoplayVideo
@@ -102,12 +99,12 @@ function EfficiencyStat() {
     <ScrollReveal>
       <Section spacing="lg" background="charcoal" className="overflow-hidden">
         <div className="grid grid-cols-12 items-end gap-8">
-          <p dir="ltr" className="col-span-8 font-display text-[clamp(10rem,19vw,17rem)] font-bold leading-[0.78] tracking-[-0.06em] text-brand-400 rtl:text-end">
+          <p dir="ltr" className="col-span-5 font-sans text-[clamp(6rem,10vw,8.5rem)] font-normal leading-[0.9] tracking-[-0.04em] tabular-nums text-brand-400 rtl:text-end">
             {t('innovation.stat.value')}
           </p>
-          <div className="col-span-4 pb-4">
-            <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-400">{t('innovation.sections.ai.eyebrow')}</span>
-            <p className="mt-3 font-display text-h2 font-bold uppercase leading-[0.95] tracking-tight text-warmwhite">{t('innovation.stat.label')}</p>
+          <div className="col-span-6 col-start-7 pb-4">
+            <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-400">{t('innovation.stat.eyebrow')}</span>
+            <p className="mt-3 font-display text-h3 font-semibold leading-tight tracking-tight text-warmwhite">{t('innovation.stat.label')}</p>
           </div>
         </div>
       </Section>
@@ -132,34 +129,34 @@ type Chapter = {
 const chapters: Chapter[] = [
   {
     key: 'atlas',
-    image: '/intelligent-compliance-hero.jpg',
-    imageAlt: 'Precision-engineered modern architecture reflecting regulatory and design compliance',
+    image: '/innovation/atlas.jpg',
+    imageAlt: 'MENASCO engineers reviewing tender documents at a desk, with the word ATLAS and compliance-scan markers',
     // Applies to the short name "ATLAS"; its full meaning is set small beneath.
-    titleClass: 'text-[clamp(13rem,25vw,22rem)] !leading-[0.8]',
+    titleClass: 'text-[clamp(3.25rem,5.6vw,5rem)]',
     theme: 'light',
     imageSide: 'end',
   },
   {
     key: 'lynxqc',
-    image: '/mobile-applications-hero.jpg',
-    imageAlt: 'Engineer using LYNX on a mobile device to log a field quality issue on site',
-    titleClass: 'text-[clamp(14rem,27vw,24rem)] !leading-[0.8]',
+    image: '/innovation/lynx.jpg',
+    imageAlt: "MENASCO's QA/QC manager and an engineer inspecting ductwork on site, with the word LYNX and issue markers",
+    titleClass: 'text-[clamp(3.25rem,5.6vw,5rem)]',
     theme: 'dark',
     imageSide: 'start',
   },
   {
     key: 'ai',
-    image: '/ai-automation-hero.jpg',
-    imageAlt: 'Modern engineering design reflecting intelligent, technology-driven construction',
-    titleClass: 'text-[clamp(6rem,11vw,9.75rem)]',
+    image: '/innovation/ai.jpg',
+    imageAlt: 'MENASCO engineers working over MEP drawings, with the letters AI and quantity markers on the fixtures',
+    titleClass: 'text-[clamp(3.25rem,5.6vw,5rem)]',
     theme: 'stone',
     imageSide: 'end',
   },
   {
     key: 'connect',
-    image: placeholderImages.blueprintReview,
-    imageAlt: 'Engineering documentation and coordinated business processes',
-    titleClass: 'text-[clamp(6rem,11vw,9.75rem)]',
+    image: '/innovation/connect.jpg',
+    imageAlt: 'MENASCO site workforce walking onto a construction site, with the word CONNECT and check-in markers',
+    titleClass: 'text-[clamp(3.25rem,5.6vw,5rem)]',
     theme: 'light',
     imageSide: 'start',
   },
@@ -178,7 +175,7 @@ interface TranslatedSection {
   privacyPolicyLink?: string;
 }
 
-/** One technology: giant outlined index + label, poster title across the full width, then the image beside the paragraph. */
+/** One technology: index number + label, title across the full width, then the image beside the paragraph. */
 function ChapterSection({ chapter, index, copy }: { chapter: Chapter; index: number; copy: TranslatedSection }) {
   const theme = themeClasses[chapter.theme];
   const acronym = splitAcronym(copy.heading);
@@ -190,12 +187,6 @@ function ChapterSection({ chapter, index, copy }: { chapter: Chapter; index: num
   const text = (
     <div className="col-span-5 self-center">
       <p className={cn('text-body-lg', theme.muted)}>{copy.paragraph}</p>
-      {chapter.key === 'lynxqc' && copy.privacyPolicyLink && (
-        <SmartLink href="/lynxqc/privacy-policy" className={cn('mt-5 inline-flex items-center gap-1.5 text-small font-semibold', theme.accent)}>
-          {copy.privacyPolicyLink}
-          <ArrowRight size={14} aria-hidden="true" className="rtl:rotate-180" />
-        </SmartLink>
-      )}
     </div>
   );
   return (
@@ -205,24 +196,16 @@ function ChapterSection({ chapter, index, copy }: { chapter: Chapter; index: num
           <span
             dir="ltr"
             aria-hidden="true"
-            className={cn('font-display text-[clamp(8rem,13vw,11.5rem)] font-bold leading-[0.75] tracking-[-0.05em]', theme.accent)}
-            style={textOutline(2)}
+            className={cn('font-sans text-[clamp(2.5rem,3.6vw,3.25rem)] font-normal leading-[0.85] tracking-[-0.03em] tabular-nums', theme.accent)}
           >
             {String(index + 1).padStart(2, '0')}
           </span>
           <span className={cn('pb-2 text-eyebrow font-semibold uppercase tracking-widest', theme.accent)}>{copy.eyebrow}</span>
         </div>
-        {acronym ? (
-          // "Name (ACRONYM)" headings: the acronym as the poster, the meaning beneath, no parentheses.
-          <h3 className={theme.text}>
-            <span className={cn('mt-6 block font-display font-bold uppercase leading-[0.92] tracking-[-0.04em]', chapter.titleClass)}>{acronym.name}</span>
-            <span className="mt-4 block font-display text-h3 font-semibold uppercase tracking-tight">{acronym.meaning}</span>
-          </h3>
-        ) : (
-          <h3 className={cn('mt-6 font-display font-bold uppercase leading-[0.92] tracking-[-0.04em]', chapter.titleClass, theme.text)}>
-            {keepAmpersand(copy.heading)}
-          </h3>
-        )}
+        {/* "Name (ACRONYM)" headings show the acronym alone; the full name stays in the copy (and llms.txt). */}
+        <h3 className={cn('mt-6 font-display font-bold uppercase leading-[0.92] tracking-[-0.04em]', chapter.titleClass, theme.text)}>
+          {acronym ? acronym.name : keepAmpersand(copy.heading)}
+        </h3>
         <div className="mt-12 grid grid-cols-12 gap-12">
           {chapter.imageSide === 'start' ? (
             <>
@@ -268,7 +251,7 @@ export default function InnovationTechnologyPage() {
       <ScrollReveal>
         <Section spacing="lg" background="ink" className="overflow-hidden">
           <div>
-            <h3 className="font-display text-[clamp(5rem,10.4vw,9.25rem)] font-bold uppercase leading-[0.88] tracking-[-0.04em] text-warmwhite">
+            <h3 className="font-display text-[clamp(3.5rem,6vw,5.5rem)] font-bold uppercase leading-[0.92] tracking-[-0.04em] text-warmwhite">
               {t('innovation.closing.heading')
                 .split(' ')
                 .map((word, i) => (

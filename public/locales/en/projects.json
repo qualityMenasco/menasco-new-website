@@ -34,9 +34,6 @@
     "categoryProjects": "{{category}} Projects",
     "exploreMore": "Explore More"
   },
-  "mobile": {
-    "description": "Tap a category to bring it to the top. Every project stays visible."
-  },
   "seo": {
     "title": "Projects & Sectors",
     "description": "Explore MENASCO's project portfolio by category: Residential / Commercial, Hospitality & Landmark Entertainment, and Advanced Technical Facilities."

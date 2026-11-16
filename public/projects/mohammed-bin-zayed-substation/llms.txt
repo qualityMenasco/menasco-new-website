@@ -1,0 +1,30 @@
+# Mohammed Bin Zayed Substation
+
+> This 132/11 kV primary substation stands on the Sheikh Mohammed Bin Zayed Road corridor, the E311 motorway that runs the length of Dubai and carries much of the emirate's inland growth. It receives power at 132 kV and steps it down to 11 kV for distribution to the communities, warehouses and commercial premises nearby, forming one node in Dubai's high-voltage transmission network.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+The Sheikh Mohammed Bin Zayed Road 132/11 kV Substation (DEWA code SHKMBZRD) is an electrical transmission substation in Dubai, delivered for Meraas Development with Energoprojekt as consultant. It steps 132 kV transmission power down to 11 kV for local distribution within DEWA's network. MENASCO carried out the MEP works for the substation building.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

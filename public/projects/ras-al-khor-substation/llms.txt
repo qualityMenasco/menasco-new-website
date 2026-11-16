@@ -1,0 +1,30 @@
+# Ras Al Khor Substation
+
+> Ras Al Khor Substation is a 132/11 kV substation in Ras Al Khor, an inland district at the head of Dubai Creek that mixes heavy industrial plots with a protected wildlife sanctuary. The station takes supply at 132 kV from the transmission network and steps it down to 11 kV for local feeders serving the surrounding industrial units and residential neighbourhoods. It is housed in an enclosed building containing switchgear halls and transformer bays.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Ras Al Khor, Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+Ras Al Khor 132/11 kV Substation is a Dubai Electricity and Water Authority (DEWA) transmission substation serving the Ras Al Khor area of Dubai. It was built with Al Rostamani Pegel as contractor as part of a wider DEWA substation programme. MENASCO executed the MEP works for the substation, providing the building services required for its operation.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+- [Maha Substation Dubai](https://menascogroup.com/projects/maha-substation-dubai/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

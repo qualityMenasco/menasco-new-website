@@ -35,7 +35,7 @@ export function FeaturedProjectsEditorial() {
   const projectDescription = (slug: string, fallback: string) => t(`projects:items.${slug}.description`, { defaultValue: fallback });
 
   return (
-    <Section background="stone" spacing="md" edgeFade>
+    <Section background="warmwhite" spacing="md">
       <Stack space="md">
         <Stack space="sm" className="max-w-2xl">
           <Eyebrow>{t('home:featuredProjects.eyebrow')}</Eyebrow>

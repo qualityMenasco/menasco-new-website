@@ -1,13 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { HomeHeroEditorial } from '../components/sections/home/hero/HomeHeroEditorial';
 import { DataCenterFeature } from '../components/sections/home/DataCenterFeature';
-import { CompanyIntroduction } from '../components/sections/home/CompanyIntroduction';
-import { CompanyStatistics } from '../components/sections/home/CompanyStatistics';
 import { ServicesShowcase } from '../components/sections/home/ServicesShowcase';
 import { FeaturedProjectsEditorial } from '../components/sections/home/projects/FeaturedProjectsEditorial';
 import { SectorsShowcase } from '../components/sections/home/SectorsShowcase';
-import { DigitalEngineering } from '../components/sections/home/DigitalEngineering';
-import { PrefabricationFeature } from '../components/sections/home/PrefabricationFeature';
+import { EngineeringDelivery } from '../components/sections/home/EngineeringDelivery';
 import { QualityAndSafety } from '../components/sections/home/QualityAndSafety';
 import { RegionalPresence } from '../components/sections/home/RegionalPresence';
 import { CareersPreview } from '../components/sections/home/CareersPreview';
@@ -31,36 +28,29 @@ export default function HomePage() {
   return (
     <>
       <SEO title={t('home:seo.title')} description={t('home:seo.description')} path="/" structuredData={[organizationJsonLd(), websiteJsonLd()]} />
+      {/* Visuals lead: hero (with stats) → projects → data centre, then the company story (About + services, one section).
+          Backgrounds alternate warm white / stone, with dark bands (hero, data centre, BIM) as anchors. */}
       <HomeHeroEditorial />
-      <ScrollReveal id="stats">
-        <CompanyStatistics />
+      <ScrollReveal id="projects">
+        <FeaturedProjectsEditorial />
       </ScrollReveal>
       <ScrollReveal id="data-center">
         <DataCenterFeature />
       </ScrollReveal>
-      <ScrollReveal id="about">
-        <CompanyIntroduction />
-      </ScrollReveal>
       <ScrollReveal id="services">
         <ServicesShowcase />
-      </ScrollReveal>
-      <ScrollReveal id="projects">
-        <FeaturedProjectsEditorial />
       </ScrollReveal>
       <ScrollReveal id="sectors">
         <SectorsShowcase />
       </ScrollReveal>
-      <ScrollReveal id="bim">
-        <DigitalEngineering />
+      <ScrollReveal id="regional-presence">
+        <RegionalPresence />
       </ScrollReveal>
-      <ScrollReveal id="manufacturing">
-        <PrefabricationFeature />
+      <ScrollReveal>
+        <EngineeringDelivery />
       </ScrollReveal>
       <ScrollReveal id="quality">
         <QualityAndSafety />
-      </ScrollReveal>
-      <ScrollReveal id="regional-presence">
-        <RegionalPresence />
       </ScrollReveal>
       <ScrollReveal id="careers">
         <CareersPreview />

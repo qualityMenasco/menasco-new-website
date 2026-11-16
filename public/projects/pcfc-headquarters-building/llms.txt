@@ -35,6 +35,7 @@ HVAC, Shell & Core works, and fit-out works for commercial office spaces.
 - [Electrical](https://menascogroup.com/services/electrical/llms.txt)
 - [Plumbing](https://menascogroup.com/services/plumbing/llms.txt)
 - [Fire Protection](https://menascogroup.com/services/fire-protection/llms.txt)
+- [EPC](https://menascogroup.com/services/turnkey-developments/llms.txt)
 
 ---
 

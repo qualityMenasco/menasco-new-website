@@ -1,0 +1,31 @@
+# Downtown Dubai Substation
+
+> This primary substation stands on Mohammed Bin Rashid Boulevard in Downtown Dubai, the district built around Burj Khalifa, The Dubai Mall and the Dubai Fountain. Rising three levels above ground, it transforms 132 kV transmission supply to 11 kV for distribution to the towers, hotels, retail and public realm around it. Substations serving dense city districts are designed for quiet, largely unattended running and are treated externally to suit a prominent setting.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Downtown Dubai, UAE
+- Status: Completed
+- Year: 2018
+
+## MENASCO Scope
+
+The Downtown 132/11 kV Substation is a primary power substation developed by Emaar Properties to strengthen the electricity network serving its Downtown Dubai master development. MENASCO executed the MEP works for the substation building, with Green Energy Consultancy as consultant. The building services support the safe, reliable operation of the high-voltage equipment that powers the district.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

@@ -401,7 +401,20 @@ function generateQualitySafety() {
     h1('Quality, Health & Safety'),
     bq(q.description),
 
-    doc(h2('QHSE Framework'), `${q.paragraph1}\n\n${q.paragraph2Prefix} ${q.continuousImprovement}${q.paragraph2Suffix}`),
+    doc(
+      h2(q.commitment.heading),
+      (q.commitment.paragraphs as string[]).join('\n\n'),
+      ...(q.commitment.topics as { title: string; body: string[] }[]).map((topic) => `### ${topic.title}\n\n${topic.body.join('\n\n')}`),
+    ),
+    doc(
+      h2(q.results.heading),
+      bullets(
+        [...q.results.safety.stats, ...q.results.quality.stats].map(
+          (s: { value: string; label: string }) => `${s.value} ${s.label.charAt(0).toLowerCase()}${s.label.slice(1)} over three years (2022–2025, all projects)`,
+        ),
+      ),
+      `${q.results.safety.text} ${q.results.quality.text}`,
+    ),
     doc(h2('Certifications'), bullets(certifications.map((c) => `${c.name}, ${c.scope}`)), 'Certificate numbers and issue dates are not publicly published.'),
 
     {

@@ -1,6 +1,6 @@
 # MENASCO Services
 
-> MENASCO delivers reliable mechanical, electrical, plumbing & fire protection solutions, engineered to operate as one fully integrated system across the UAE, KSA, Egypt & the United Kingdom.
+> Behind every complex development is an intricate network of systems working in harmony. MENASCO brings together engineering expertise, technical precision, and coordinated execution to transform complex requirements into reliable, high-performance environments.
 
 Select a service area to see how MENASCO delivers it, or explore the dedicated page for full capabilities.
 
@@ -8,6 +8,7 @@ Select a service area to see how MENASCO delivers it, or explore the dedicated p
 
 ### MEP
 
+- [MEP — Mechanical, Electrical & Plumbing](https://menascogroup.com/services/mep/llms.txt): MENASCO delivers integrated Mechanical, Electrical, Plumbing and Fire Protection engineering as one coordinated scope, from design through handover.
 - [Mechanical](https://menascogroup.com/services/mechanical/llms.txt): HVAC, chilled-water and plant systems engineered for regional climate loads.
 - [Electrical](https://menascogroup.com/services/electrical/llms.txt): Power distribution, building management and low-current systems, coordinated end to end.
 - [Plumbing](https://menascogroup.com/services/plumbing/llms.txt): Water supply, drainage and sanitary systems built for long-term reliability.
@@ -15,15 +16,22 @@ Select a service area to see how MENASCO delivers it, or explore the dedicated p
 
 ### Civil
 
+- [Civil Works Coordination](https://menascogroup.com/services/civil/llms.txt): MENASCO coordinates civil and structural works with our MEP delivery through a trusted civil engineering partner, from design through handover.
 - [BIM & Digital Engineering](https://menascogroup.com/services/bim-digital-engineering/llms.txt): Federated coordination and clash detection that de-risk delivery before site works begin.
 
 ### Manufacturing & Prefabrication
 
 - [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt): Off-site production for faster, more consistent on-site installation.
+- [Modular MEP Solutions](https://menascogroup.com/services/manufacturing-prefabrication/modular/llms.txt): MENASCO delivers factory-built modular MEP assemblies, including modular data-center whitespace solutions, produced off-site for faster, higher-quality installation.
+- [Custom Engineered Components](https://menascogroup.com/services/manufacturing-prefabrication/custom/llms.txt): MENASCO delivers project-specific, custom-engineered MEP components for complex or non-standard installations, through our manufacturing partners.
 
-### Data Centres
+### EPC
 
-- [Data Centres](https://menascogroup.com/services/data-centers/llms.txt): MENASCO delivers mission-critical data centre MEP and infrastructure solutions for uptime, reliability and future-ready digital operations.
+- [EPC — Engineering, Procurement & Construction](https://menascogroup.com/services/turnkey-developments/llms.txt): MENASCO delivers integrated Engineering, Procurement and Construction (EPC) services, providing a single point of accountability from design through handover.
+
+### Data Centers
+
+- [Data Centers](https://menascogroup.com/services/data-centers/llms.txt): MENASCO delivers mission-critical data center MEP and infrastructure solutions for uptime, reliability and future-ready digital operations.
 
 ---
 

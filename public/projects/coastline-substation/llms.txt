@@ -1,0 +1,30 @@
+# Coastline Substation
+
+> Coastline is a 132/11 kV primary substation on Dubai's high-voltage transmission network. It takes in power at 132 kV and steps it down to 11 kV for distribution to the homes, hotels, shops and public facilities in the district around it. Like other primary substations in the city, it is built as an enclosed, indoor station, allowing it to sit close to occupied buildings without an open switchyard.
+
+## Project Overview
+
+- Category: Infrastructure & Utilities
+- Location: Dubai, UAE
+- Status: Completed
+
+## MENASCO Scope
+
+The Coastline 132/11 kV Substation is a primary power substation delivered for Meraas, the Dubai-based master developer. MENASCO delivered the MEP works for the substation building, with Energoprojekt Entel as consultant. The building services support the safe, reliable operation of high-voltage equipment, forming part of a series of Meraas substations on which MENASCO has worked.
+
+---
+
+## Related Projects
+
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+
+---
+
+## Related Pages
+
+- [All Projects](https://menascogroup.com/projects/categories/llms.txt)

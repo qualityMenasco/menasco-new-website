@@ -6,7 +6,7 @@ export interface Certification {
 }
 
 export const certifications: Certification[] = [
-  { name: 'ISO 9001:2015', scope: 'Quality Management Systems', fileUrl: '/certificates/iso-9001.pdf' },
-  { name: 'ISO 14001:2015', scope: 'Environmental Management Systems', fileUrl: '/certificates/iso-14001.pdf' },
-  { name: 'ISO 45001:2018', scope: 'Occupational Health & Safety Management Systems', fileUrl: '/certificates/iso-45001.pdf' },
+  { name: 'ISO 9001:2015', scope: 'Quality Management Systems', fileUrl: '/certificates/menasco-iso-9001-2015.pdf' },
+  { name: 'ISO 14001:2015', scope: 'Environmental Management Systems', fileUrl: '/certificates/menasco-iso-14001-2015.pdf' },
+  { name: 'ISO 45001:2018', scope: 'Occupational Health & Safety Management Systems', fileUrl: '/certificates/menasco-iso-45001-2018.pdf' },
 ];

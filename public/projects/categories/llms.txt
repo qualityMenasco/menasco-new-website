@@ -4,9 +4,10 @@
 
 ## Sectors
 
-- Residential / Commercial (13): Integrated engineering solutions for residential, commercial, office, and mixed-use developments.
-- Hospitality & Landmark Entertainment (3): High-performance MEP delivery for premium hospitality, resort, cultural landmark, and entertainment destination environments.
-- Advanced Technical Facilities (7): Specialist engineering for data centres, mission-critical, healthcare, energy, and technically demanding facilities.
+- Residential / Commercial (85): Integrated engineering solutions for residential, commercial, office, and mixed-use developments.
+- Hospitality & Landmark Entertainment (15): High-performance MEP delivery for premium hospitality, resort, cultural landmark, and entertainment destination environments.
+- Advanced Technical Facilities (16): Specialist engineering for data centers, mission-critical, healthcare, energy, and technically demanding facilities.
+- Infrastructure & Utilities (24): Category reserved for future projects — detailed scope has not yet been published.
 
 ---
 
@@ -24,7 +25,7 @@
 - [Madinat Jumeirah Living Phase 3B](https://menascogroup.com/projects/madinat-jumeirah-living-phase-3b/llms.txt): Dubai, UAE
 - [Volante II Tower](https://menascogroup.com/projects/volante-ii-tower/llms.txt): Business Bay, Dubai, UAE
 - [ORLA Infinity Residential Development](https://menascogroup.com/projects/orla-infinity-residential-development/llms.txt): Palm Jumeirah, Dubai, UAE
-- [Seven Hotel](https://menascogroup.com/projects/seven-hotel/llms.txt): Palm Jumeirah, UAE
+- [Seven Hotel](https://menascogroup.com/projects/seven-hotel/llms.txt): Palm Jumeirah, Dubai, UAE
 - [Town Square Development](https://menascogroup.com/projects/town-square-development/llms.txt): Dubai, UAE
 - [Qiddiya](https://menascogroup.com/projects/qiddiya/llms.txt): Qiddiya City, Saudi Arabia
 - [Alamein Towers](https://menascogroup.com/projects/alamein-towers/llms.txt): New Alamein, Alamein Towers, Egypt
@@ -35,6 +36,124 @@
 - [Data Centre V](https://menascogroup.com/projects/data-centre-v-800-kw-it/llms.txt): Dubai, UAE
 - [Data Centre VI](https://menascogroup.com/projects/data-centre-vi-12-mw-it/llms.txt): Abu Dhabi, UAE
 - [Data Centre VII](https://menascogroup.com/projects/data-centre-vii/llms.txt): Abu Dhabi, UAE
+- [TEST — Industrial Facility](https://menascogroup.com/projects/test-industrial-facility/llms.txt): Dubai, UAE
+- [TEST — Data Centre](https://menascogroup.com/projects/test-data-centre/llms.txt): Abu Dhabi, UAE
+- [TEST — Commercial Tower](https://menascogroup.com/projects/test-commercial-tower/llms.txt): Sharjah, UAE
+- [Fujairah Hospital Maternity Department](https://menascogroup.com/projects/fujairah-hospital-maternity-department/llms.txt): Fujairah, UAE
+- [NMC Hospital Fujairah](https://menascogroup.com/projects/nmc-hospital-fujairah/llms.txt): Fujairah, UAE
+- [NMC Hospital Fujairah](https://menascogroup.com/projects/nmc-hospital-fujairah-2/llms.txt): Fujairah, UAE
+- [IRIS Data Center](https://menascogroup.com/projects/iris-data-center/llms.txt): Abu Dhabi, UAE
+- [Gas Bottling Plant](https://menascogroup.com/projects/gas-bottling-plant/llms.txt): Jebel Ali, Dubai, UAE
+- [Sheikh Zayed Armour School](https://menascogroup.com/projects/sheikh-zayed-armour-school/llms.txt): Sharjah, UAE
+- [Sharjah STP Phase 6](https://menascogroup.com/projects/sharjah-stp-phase-6/llms.txt): Sharjah, UAE
+- [Able Tower Sharjah](https://menascogroup.com/projects/able-tower-sharjah/llms.txt): Sharjah, UAE
+- [Burhani Masjid](https://menascogroup.com/projects/burhani-masjid/llms.txt): Al Qusais, Dubai, UAE
+- [Hanayen Abaya Factory](https://menascogroup.com/projects/hanayen-abaya-factory/llms.txt): Al Qusais, Dubai, UAE
+- [Al Quoz Warehouse Seven](https://menascogroup.com/projects/al-quoz-warehouse-seven/llms.txt): Al Quoz, Dubai, UAE
+- [Al Garhoud Mid-Rise Building](https://menascogroup.com/projects/al-garhoud-mid-rise-building/llms.txt): Al Garhoud, Dubai, UAE
+- [Al Mankhool Residential Building](https://menascogroup.com/projects/al-mankhool-residential-building/llms.txt): Al Mankhool, Dubai, UAE
+- [Al Rostamani Building, Fujairah](https://menascogroup.com/projects/al-rostamani-building-fujairah/llms.txt): Fujairah, UAE
+- [Grand Hyatt Kids Club](https://menascogroup.com/projects/grand-hyatt-kids-club/llms.txt): Oud Metha, Dubai, UAE
+- [DAFZA Warehouse D-20](https://menascogroup.com/projects/dafza-warehouse-d-20/llms.txt): Dubai Airport Freezone, UAE
+- [Ras Al Khor Substation](https://menascogroup.com/projects/ras-al-khor-substation/llms.txt): Ras Al Khor, Dubai, UAE
+- [Oud Al Muteena Substation](https://menascogroup.com/projects/oud-al-muteena-substation/llms.txt): Oud Al Muteena, Dubai, UAE
+- [Dubai Internet City Substation](https://menascogroup.com/projects/dubai-internet-city-substation/llms.txt): Dubai Internet City, UAE
+- [DEWA Substations](https://menascogroup.com/projects/dewa-substations/llms.txt): Dubai, UAE
+- [Oud Metha Building 298](https://menascogroup.com/projects/oud-metha-building-298/llms.txt): Oud Metha, Dubai, UAE
+- [Sun & Sand Sports Complex](https://menascogroup.com/projects/sun-sand-sports-complex/llms.txt): Jumeirah 1, Dubai, UAE
+- [Sun & Sand Offices](https://menascogroup.com/projects/sun-sand-offices/llms.txt): Oud Metha, Dubai, UAE
+- [Maha Substation Dubai](https://menascogroup.com/projects/maha-substation-dubai/llms.txt): Dubai, UAE
+- [Dugas JAFZA Substation](https://menascogroup.com/projects/dugas-jafza-substation/llms.txt): Jebel Ali Free Zone, Dubai, UAE
+- [Damas Hotel Fujairah](https://menascogroup.com/projects/damas-hotel-fujairah/llms.txt): Fujairah, UAE
+- [Radisson Blu Resort Fujairah](https://menascogroup.com/projects/radisson-blu-resort-fujairah/llms.txt): Al Aqah, Fujairah, UAE
+- [Nad Al Sheba Substation](https://menascogroup.com/projects/nad-al-sheba-substation/llms.txt): Nad Al Sheba, Dubai, UAE
+- [Garhoud Substation](https://menascogroup.com/projects/garhoud-substation/llms.txt): Dubai, UAE
+- [Trimex Office AU Tower](https://menascogroup.com/projects/trimex-office-au-tower/llms.txt): Jumeirah Lakes Towers, Dubai, UAE
+- [Silicon Oasis Residences, Plot 22-018](https://menascogroup.com/projects/silicon-oasis-residences-plot-22-018/llms.txt): Dubai Silicon Oasis, UAE
+- [Grand Hyatt Dubai Spa](https://menascogroup.com/projects/grand-hyatt-dubai-spa/llms.txt): Umm Hurair 2, Dubai, UAE
+- [Archirodon Office Building](https://menascogroup.com/projects/archirodon-office-building/llms.txt): Dubai Investments Park, UAE
+- [Emerald Office Boulevard Plaza](https://menascogroup.com/projects/emerald-office-boulevard-plaza/llms.txt): Downtown Dubai, UAE
+- [Auris Hotel Lounge](https://menascogroup.com/projects/auris-hotel-lounge/llms.txt): Al Barsha, Dubai, UAE
+- [Cucina Mia RESTAURANT Dubai Marina](https://menascogroup.com/projects/cucina-mia-restaurant-dubai-marina/llms.txt): Dubai Marina, UAE
+- [Burj Al Hamam](https://menascogroup.com/projects/burj-al-hamam/llms.txt): Downtown Dubai, UAE
+- [Gloria Jean's Dubai Mall](https://menascogroup.com/projects/gloria-jean-s-dubai-mall/llms.txt): Downtown Dubai, UAE
+- [Minerco Office Boulevard Plaza](https://menascogroup.com/projects/minerco-office-boulevard-plaza/llms.txt): Downtown Dubai, UAE
+- [Emitac Boulevard Plaza](https://menascogroup.com/projects/emitac-boulevard-plaza/llms.txt): Downtown Dubai, UAE
+- [Nicole Farhi Mercato Mall](https://menascogroup.com/projects/nicole-farhi-mercato-mall/llms.txt): Jumeirah, Dubai, UAE
+- [Hill Advertising Boulevard Plaza](https://menascogroup.com/projects/hill-advertising-boulevard-plaza/llms.txt): Downtown Dubai, UAE
+- [Café Moka Dubai Mall](https://menascogroup.com/projects/caf-moka-dubai-mall/llms.txt): Downtown Dubai, UAE
+- [DEWA Substations 5](https://menascogroup.com/projects/dewa-substations-5/llms.txt): Dubai, UAE
+- [DEC Towers](https://menascogroup.com/projects/dec-towers/llms.txt): Dubai Marina, UAE
+- [Ruwais Fertiliser Plant Buildings](https://menascogroup.com/projects/ruwais-fertiliser-plant-buildings/llms.txt): Ruwais, Abu Dhabi, UAE
+- [WSP Office Capital Towers](https://menascogroup.com/projects/wsp-office-capital-towers/llms.txt): Dubai, UAE
+- [Industrial City Substation](https://menascogroup.com/projects/industrial-city-substation/llms.txt): Dubai, UAE
+- [Marina Wharf 1](https://menascogroup.com/projects/marina-wharf-1/llms.txt): Dubai Marina, UAE
+- [Paris Hilton Wahda Mall](https://menascogroup.com/projects/paris-hilton-wahda-mall/llms.txt): Al Wahda, Abu Dhabi, UAE
+- [Al Nabooda Showroom Fujairah](https://menascogroup.com/projects/al-nabooda-showroom-fujairah/llms.txt): Haleefat, Fujairah, UAE
+- [Jebel Ali Quay Substation](https://menascogroup.com/projects/jebel-ali-quay-substation/llms.txt): Jebel Ali, Dubai, UAE
+- [Kanpai Souk Al Bahar](https://menascogroup.com/projects/kanpai-souk-al-bahar/llms.txt): Downtown Dubai, UAE
+- [Claw BBQ Downtown Dubai](https://menascogroup.com/projects/claw-bbq-downtown-dubai/llms.txt): Downtown Dubai, UAE
+- [Doree Marina Mall](https://menascogroup.com/projects/doree-marina-mall/llms.txt): Dubai, UAE
+- [Omniyat Corporate Office](https://menascogroup.com/projects/omniyat-corporate-office/llms.txt): Dubai, UAE
+- [CBI Julphar Towers](https://menascogroup.com/projects/cbi-julphar-towers/llms.txt): Al Nakheel,, Ras Al Khaimah, UAE
+- [Palma Real Estate Office](https://menascogroup.com/projects/palma-real-estate-office/llms.txt): Dubai Marina, UAE
+- [Lincoln Park Sheffield](https://menascogroup.com/projects/lincoln-park-sheffield/llms.txt): Arjan, Dubai, UAE
+- [Cavalli Club Dubai](https://menascogroup.com/projects/cavalli-club-dubai/llms.txt): Trade Centre, Dubai, UAE
+- [World Trade Centre Substation](https://menascogroup.com/projects/world-trade-centre-substation/llms.txt): Trade Centre, Dubai, UAE
+- [M Residences](https://menascogroup.com/projects/m-residences/llms.txt): Al Mankhool, Dubai, UAE
+- [Burj Khalifa Substation](https://menascogroup.com/projects/burj-khalifa-substation/llms.txt): Downtown Dubai, UAE
+- [Safa First Substation](https://menascogroup.com/projects/safa-first-substation/llms.txt): Al Safa, Dubai, UAE
+- [California Pizza Kitchen Dubai](https://menascogroup.com/projects/california-pizza-kitchen-dubai/llms.txt): Downtown Dubai, UAE
+- [Mina Al Fajer Resort](https://menascogroup.com/projects/mina-al-fajer-resort/llms.txt): Dibba, Fujairah, UAE
+- [Fairmont Fujairah Beach Resort](https://menascogroup.com/projects/fairmont-fujairah-beach-resort/llms.txt): Dibba, Fujairah, UAE
+- [City Walk Substation](https://menascogroup.com/projects/city-walk-substation/llms.txt): Al Wasl, Dubai, UAE
+- [Baldi London Marina Mall](https://menascogroup.com/projects/baldi-london-marina-mall/llms.txt): Dubai Marina, UAE
+- [Dubai Design District Substation](https://menascogroup.com/projects/dubai-design-district-substation/llms.txt): Dubai Design District, UAE
+- [Silicon Oasis Residential Building](https://menascogroup.com/projects/silicon-oasis-residential-building/llms.txt): Dubai Silicon Oasis, UAE
+- [Jebel Ali Labour Substation](https://menascogroup.com/projects/jebel-ali-labour-substation/llms.txt): Jebel Ali, Dubai, UAE
+- [Downtown Dubai Substation](https://menascogroup.com/projects/downtown-dubai-substation/llms.txt): Downtown Dubai, UAE
+- [Mohammed Bin Zayed Substation](https://menascogroup.com/projects/mohammed-bin-zayed-substation/llms.txt): Dubai, UAE
+- [Dubai Creek Harbour Substation](https://menascogroup.com/projects/dubai-creek-harbour-substation/llms.txt): Dubai Creek Harbour, UAE
+- [Town Square Plot 35](https://menascogroup.com/projects/town-square-plot-35/llms.txt): Town Square, Dubai, UAE
+- [DIFC Office & Link Bridge](https://menascogroup.com/projects/difc-office-link-bridge/llms.txt): DIFC, Dubai, UAE
+- [Cavalli Tower](https://menascogroup.com/projects/cavalli-tower/llms.txt): Dubai Media City, UAE
+- [City Center Residences](https://menascogroup.com/projects/city-center-residences/llms.txt): Downtown Dubai, UAE
+- [Kifaf Plot 4](https://menascogroup.com/projects/kifaf-plot-4/llms.txt): Al Kifaf, Dubai, UAE
+- [Kifaf Plot 6](https://menascogroup.com/projects/kifaf-plot-6/llms.txt): Al Kifaf, Dubai, UAE
+- [Mangrove Residences](https://menascogroup.com/projects/mangrove-residences/llms.txt): Expo City Dubai, UAE
+- [Orla](https://menascogroup.com/projects/orla/llms.txt): Palm Jumeirah, Dubai, UAE
+- [Aeternitas Tower](https://menascogroup.com/projects/aeternitas-tower/llms.txt): Dubai Marina, UAE
+- [Volante Tower III](https://menascogroup.com/projects/volante-tower-iii/llms.txt): Business Bay, Dubai, UAE
+- [Damac Bay I](https://menascogroup.com/projects/damac-bay-i/llms.txt): Dubai Harbour, UAE
+- [Orla Infinity](https://menascogroup.com/projects/orla-infinity/llms.txt): Palm Jumeirah, Dubai, UAE
+- [Vanguard Residential Tower](https://menascogroup.com/projects/vanguard-residential-tower/llms.txt): Dubai Marina, UAE
+- [Qiddiya Speed Park](https://menascogroup.com/projects/qiddiya-speed-park/llms.txt): Qiddiya, Saudi Arabia
+- [Alamein Tower](https://menascogroup.com/projects/alamein-tower/llms.txt): El Alamein, Egypt
+- [Jumeirah Asora Bay](https://menascogroup.com/projects/jumeirah-asora-bay/llms.txt): La Mer South, Jumeirah, Dubai, UAE
+- [The Edge](https://menascogroup.com/projects/the-edge/llms.txt): Dubai Internet City, UAE
+- [IRIS AUH5 Data Centre](https://menascogroup.com/projects/iris-auh5-data-centre/llms.txt): KEZAD, Abu Dhabi, UAE
+- [Sparkle Towers](https://menascogroup.com/projects/sparkle-towers/llms.txt): Dubai Marina, UAE
+- [DAFZA Shed C-11](https://menascogroup.com/projects/dafza-shed-c-11/llms.txt): Dubai Airport Freezone, UAE
+- [The Hills](https://menascogroup.com/projects/the-hills/llms.txt): The Hills, Dubai, UAE
+- [Al Safa Dental Clinic](https://menascogroup.com/projects/al-safa-dental-clinic/llms.txt): Al Safa, Dubai, UAE
+- [Midtown Afnan & Dania](https://menascogroup.com/projects/midtown-afnan-dania/llms.txt): Dubai Production City, UAE
+- [Banyan Tree Residences Hillside](https://menascogroup.com/projects/banyan-tree-residences-hillside/llms.txt): Jumeirah Lake Towers, Dubai, UAE
+- [Bloom Heights](https://menascogroup.com/projects/bloom-heights/llms.txt): Jumeirah Village Circle, Dubai, UAE
+- [Noor Tower Business Bay](https://menascogroup.com/projects/noor-tower-business-bay/llms.txt): Business Bay, Dubai, UAE
+- [Bloom Towers](https://menascogroup.com/projects/bloom-towers/llms.txt): Jumeirah Village Circle, Dubai, UAE
+- [Avani Palm View Dubai](https://menascogroup.com/projects/avani-palm-view-dubai/llms.txt): Al Sufouh, Dubai, UAE
+- [Burj Royale](https://menascogroup.com/projects/burj-royale/llms.txt): Downtown Dubai, UAE
+- [Jafza Traders Market](https://menascogroup.com/projects/jafza-traders-market/llms.txt): Jebel Ali, Dubai, UAE
+- [PCFC HQ](https://menascogroup.com/projects/pcfc-hq/llms.txt): Dubai Maritime City, UAE
+- [Jadeel Madinat Jumeirah Living](https://menascogroup.com/projects/jadeel-madinat-jumeirah-living/llms.txt): Umm Suqeim, Dubai, UAE
+- [Volante Tower II](https://menascogroup.com/projects/volante-tower-ii/llms.txt): Business Bay, Dubai, UAE
+- [Bay Residences Phase I](https://menascogroup.com/projects/bay-residences-phase-i/llms.txt): Mina Al Arab, Ras Al Khaimah, UAE
+- [Marina Development Plot 4E](https://menascogroup.com/projects/marina-development-plot-4e/llms.txt): Dubai Marina, UAE
+- [DMCC Uptown Place Twin Towers](https://menascogroup.com/projects/dmcc-uptown-place-twin-towers/llms.txt): Uptown Dubai District, UAE
+- [Alba Residences](https://menascogroup.com/projects/alba-residences/llms.txt): Palm Jumeirah, Dubai, UAE
+- [Coastline Substation](https://menascogroup.com/projects/coastline-substation/llms.txt): Dubai, UAE
+- [Franck Muller Yachting](https://menascogroup.com/projects/franck-muller-yachting/llms.txt): Dubai Maritime City, UAE
+- [King's College Hospital Dubai](https://menascogroup.com/projects/king-s-college-hospital-dubai/llms.txt): Dubai Hills, UAE
 
 ---
 

@@ -14,17 +14,14 @@ export interface HomeSectionMeta {
  * src/lib/useBackdropTheme.ts) — so `theme` here is documentation only.
  */
 export const homeSections: HomeSectionMeta[] = [
-  { id: 'hero', theme: 'dark' }, // HomeHeroEditorial — bg-ink
-  { id: 'stats', theme: 'light' }, // CompanyStatistics — warmwhite
+  { id: 'hero', theme: 'dark' }, // HomeHeroEditorial — bg-ink (company stats strip along its bottom edge, id "stats")
+  { id: 'projects', theme: 'light' }, // FeaturedProjectsEditorial — warmwhite
   { id: 'data-center', theme: 'dark' }, // DataCenterFeature — bg-ink
-  { id: 'about', theme: 'light' }, // CompanyIntroduction — warmwhite
-  { id: 'services', theme: 'light' }, // ServicesShowcase — warmwhite
-  { id: 'projects', theme: 'light' }, // FeaturedProjectsEditorial — stone
-  { id: 'sectors', theme: 'light' }, // SectorsShowcase — warmwhite
-  { id: 'bim', theme: 'dark' }, // DigitalEngineering — charcoal
-  { id: 'manufacturing', theme: 'light' }, // PrefabricationFeature — warmwhite
-  { id: 'quality', theme: 'light' }, // QualityAndSafety — stone
+  { id: 'services', theme: 'light' }, // ServicesShowcase — warmwhite (About MENASCO intro + What we deliver)
+  { id: 'sectors', theme: 'light' }, // SectorsShowcase — stone
   { id: 'regional-presence', theme: 'light' }, // RegionalPresence — warmwhite
+  { id: 'bim', theme: 'light' }, // EngineeringDelivery — stone (BIM card; the manufacturing card carries id "manufacturing")
+  { id: 'quality', theme: 'light' }, // QualityAndSafety — stone
   { id: 'careers', theme: 'light' }, // CareersPreview — stone
 ];
 
