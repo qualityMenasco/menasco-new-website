@@ -3,6 +3,9 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE_URL, SITE_NAME, toAbsoluteUrl, articleJsonLd, serializeJsonLd } from './_lib/newsroomSeo.js';
+import { renderArticleBodyHtml, escapeHtml } from './_lib/newsroomArticleBody.js';
+import type { ArticleBodyImage, ArticleBodySection, ArticleBodyTag } from './_lib/newsroomArticleBody.js';
+import { isProductionLaunch } from './_lib/launchConfig.js';
 
 /**
  * GET /newsroom/:slug and /ar/newsroom/:slug (wired via vercel.json rewrites
@@ -45,13 +48,20 @@ import { SITE_URL, SITE_NAME, toAbsoluteUrl, articleJsonLd, serializeJsonLd } fr
  * are all built from SITE_URL (src/seo/constants.ts), same as every other
  * page on the site.
  *
- * The returned HTML is a metadata shell only, mirroring
- * scripts/generate-seo-html.ts's existing static-route technique: the same
- * built JS/CSS asset tags (captured at build time into
- * _generated/articleShellAssets.json, since Vite's output hashes change
- * every build) plus an empty `<div id="root">`, so the existing React
- * application boots and NewsDetailPage renders the real interactive article
- * exactly as it does today. No article body/UI is duplicated here.
+ * The returned HTML uses the same built JS/CSS asset tags
+ * scripts/generate-seo-html.ts's static routes use (captured at build time
+ * into _generated/newsroomArticlePageAssets.json, since Vite's output
+ * hashes change every build), so the existing React application still
+ * boots and NewsDetailPage mounts over this and renders the real
+ * interactive article exactly as it does today. Unlike the original
+ * version of this function, `<div id="root">` is no longer empty: it now
+ * also carries a hand-rendered, crawler-visible snapshot of the article's
+ * real body (category, date, title, subtitle, structured-content sections,
+ * related-topic links) via `renderArticleBodyHtml` — see
+ * api/_lib/newsroomArticleBody.ts's module comment for why that's a
+ * deliberate duplicate of ArticleStructuredContent.tsx's rendering logic
+ * rather than a reuse of the real component, and for the known
+ * flash-on-hydration trade-off this introduces for JS-enabled visitors.
  */
 
 type Locale = 'en' | 'ar';
@@ -64,13 +74,15 @@ interface PublicArticle {
   slug: string;
   title: string;
   subtitle: string | null;
+  category: string | null;
   publishedAt: string;
   primaryImage: PublicImage | null;
+  tags: ArticleBodyTag[];
+  structuredContent: { sections: ArticleBodySection[] };
+  images: ArticleBodyImage[];
 }
 
-export function escapeHtml(value: string): string {
-  return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
+export { escapeHtml };
 
 /** Same rule as src/seo/SEO.tsx / scripts/seo/routes.ts's fullTitle: a topic that already carries the site name is used verbatim. */
 function fullTitle(title: string): string {
@@ -87,7 +99,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const assetManifest = JSON.parse(readFileSync(join(__dirname, '_generated/newsroomArticlePageAssets.json'), 'utf8')) as { assetTags: string };
 const assetTags: string = assetManifest.assetTags;
 
-function htmlDocument(locale: Locale, head: string): string {
+function htmlDocument(locale: Locale, head: string, body: string = ''): string {
   const dir = locale === 'ar' ? 'rtl' : 'ltr';
   return `<!doctype html>
 <html lang="${locale}" dir="${dir}">
@@ -98,7 +110,7 @@ function htmlDocument(locale: Locale, head: string): string {
     ${assetTags}
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">${body}</div>
   </body>
 </html>
 `;
@@ -127,7 +139,13 @@ export function buildArticleHtml(article: PublicArticle, locale: Locale): string
   // deliberate (see doc comment above), not a bug.
   const canonicalUrl = enUrl;
   const absoluteImage = article.primaryImage ? toAbsoluteUrl(article.primaryImage.url) : undefined;
-  const robots = locale === 'ar' ? 'noindex, follow' : 'index, follow';
+  // A non-launched deployment (preview/branch/local — see
+  // api/_lib/launchConfig.ts) overrides even a normally-indexable English
+  // article to the strict `noindex, nofollow` every other page on such a
+  // deployment gets — this function's own request-time rendering means it
+  // would otherwise be the one surface that stays indexable while every
+  // static page on the same deployment is noindex.
+  const robots = !isProductionLaunch() ? 'noindex, nofollow' : locale === 'ar' ? 'noindex, follow' : 'index, follow';
 
   const jsonLd = articleJsonLd({
     title: article.title,
@@ -155,7 +173,17 @@ export function buildArticleHtml(article: PublicArticle, locale: Locale): string
     ${absoluteImage ? `<meta name="twitter:image" content="${escapeHtml(absoluteImage)}" />` : ''}
     <script type="application/ld+json">${serializeJsonLd(jsonLd)}</script>`;
 
-  return htmlDocument(locale, head);
+  const body = renderArticleBodyHtml({
+    title: article.title,
+    subtitle: article.subtitle,
+    category: article.category,
+    publishedAt: article.publishedAt,
+    tags: article.tags,
+    structuredContent: article.structuredContent,
+    images: article.images,
+  });
+
+  return htmlDocument(locale, head, body);
 }
 
 /** True 404 — no article title/body/JSON-LD leaked, regardless of whether the slug never existed or belongs to a not-yet-published article (the public API makes those indistinguishable, which is the point). */
@@ -196,7 +224,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const upstream = await fetch(`${PUBLIC_API_BASE}/api/newsroom/public/articles/${encodeURIComponent(slug)}`);
 
     if (upstream.status === 404) {
-      res.status(404).setHeader('Content-Type', 'text/html; charset=utf-8').setHeader('Cache-Control', 'public, s-maxage=60, must-revalidate').send(buildNotFoundHtml(locale));
+      res
+        .status(404)
+        .setHeader('Content-Type', 'text/html; charset=utf-8')
+        .setHeader('Cache-Control', 'public, s-maxage=60, must-revalidate')
+        .setHeader('X-Robots-Tag', 'noindex, nofollow')
+        .send(buildNotFoundHtml(locale));
       return;
     }
 
@@ -209,6 +242,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const article = (await upstream.json()) as PublicArticle;
     const html = buildArticleHtml(article, locale);
+    // Mirrors buildArticleHtml's own <meta name="robots"> value exactly —
+    // see that function for the full launch/AR-locale rationale.
+    const xRobotsTag = !isProductionLaunch() ? 'noindex, nofollow' : locale === 'ar' ? 'noindex, follow' : 'index, follow';
 
     // Conservative, non-stale-serving TTL: an unpublish must stop being
     // reflected here within roughly this window, not up to an hour later.
@@ -216,7 +252,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // MUST re-invoke this function after expiry rather than serve stale —
     // see the module doc comment for why the upstream fetch itself can't
     // introduce additional staleness on top of this.
-    res.status(200).setHeader('Content-Type', 'text/html; charset=utf-8').setHeader('Cache-Control', 'public, s-maxage=60, must-revalidate').send(html);
+    res
+      .status(200)
+      .setHeader('Content-Type', 'text/html; charset=utf-8')
+      .setHeader('Cache-Control', 'public, s-maxage=60, must-revalidate')
+      .setHeader('X-Robots-Tag', xRobotsTag)
+      .send(html);
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('[newsroom-render-article] unhandled error', err);

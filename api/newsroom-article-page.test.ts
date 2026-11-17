@@ -8,12 +8,40 @@ const article = {
   slug: 'advancing-mep-delivery-through-prefabrication',
   title: 'Advancing MEP Delivery Through Prefabrication',
   subtitle: 'MENASCO explores coordinated MEP prefabrication.',
+  category: 'company-news',
   publishedAt: '2026-09-15T12:18:51.000Z',
   primaryImage: { url: '/api/newsroom/public/images/e58cfbed-f651-4833-911c-416f85fe1e2c' },
+  tags: [{ name: 'MEP', slug: 'mep' }],
+  structuredContent: {
+    sections: [
+      {
+        blocks: [
+          { type: 'paragraph' as const, text: 'MENASCO has coordinated prefabricated MEP assemblies across several live sites this year.' },
+          { type: 'heading' as const, text: 'Scaling the approach', level: 2 as const },
+        ],
+      },
+    ],
+  },
+  images: [],
 };
 
 describe('buildArticleHtml — published article, English', () => {
-  const html = buildArticleHtml(article, 'en');
+  const originalVercelEnv = process.env.VERCEL_ENV;
+  const originalLaunchFlag = process.env.SEO_LAUNCH_INDEXING;
+  let html: string;
+  beforeEach(() => {
+    // These assertions are about this function's OWN indexability logic
+    // (locale/launch-state branching), not the launch gate itself — see the
+    // separate 'buildArticleHtml — not an explicitly launched production
+    // deployment' describe block below for that.
+    process.env.VERCEL_ENV = 'production';
+    process.env.SEO_LAUNCH_INDEXING = 'true';
+    html = buildArticleHtml(article, 'en');
+  });
+  afterEach(() => {
+    process.env.VERCEL_ENV = originalVercelEnv;
+    process.env.SEO_LAUNCH_INDEXING = originalLaunchFlag;
+  });
 
   it('has a real HTTP-response-shaped document with the built asset tags', () => {
     expect(html).toContain('<!doctype html>');
@@ -75,10 +103,38 @@ describe('buildArticleHtml — published article, English', () => {
   it('references the current Vite JS bundle so the existing React app still boots', () => {
     expect(html).toMatch(/<script type="module"[^>]*src="\/assets\/[^"]+\.js"/);
   });
+
+  it('renders the real article body — title (H1), subtitle, category, date, and structured-content sections as crawlable text inside #root', () => {
+    expect(html).toContain('<h1>Advancing MEP Delivery Through Prefabrication</h1>');
+    expect(html).toContain('<p>MENASCO explores coordinated MEP prefabrication.</p>');
+    expect(html).toContain('Company News');
+    expect(html).toMatch(/15 SEPT? 2026/);
+    expect(html).toContain('MENASCO has coordinated prefabricated MEP assemblies across several live sites this year.');
+    expect(html).toContain('<h3>Scaling the approach</h3>');
+  });
+
+  it('renders Related Topics as a real internal link to the Newsroom tag filter', () => {
+    expect(html).toContain('<a href="/newsroom?tag=mep">MEP</a>');
+  });
+
+  it('renders a real internal link back to the Newsroom listing', () => {
+    expect(html).toContain('<a href="/newsroom">Back to Newsroom</a>');
+  });
 });
 
 describe('buildArticleHtml — Arabic (no independent Arabic content yet)', () => {
-  const html = buildArticleHtml(article, 'ar');
+  const originalVercelEnv = process.env.VERCEL_ENV;
+  const originalLaunchFlag = process.env.SEO_LAUNCH_INDEXING;
+  let html: string;
+  beforeEach(() => {
+    process.env.VERCEL_ENV = 'production';
+    process.env.SEO_LAUNCH_INDEXING = 'true';
+    html = buildArticleHtml(article, 'ar');
+  });
+  afterEach(() => {
+    process.env.VERCEL_ENV = originalVercelEnv;
+    process.env.SEO_LAUNCH_INDEXING = originalLaunchFlag;
+  });
 
   it('is noindex, follow — not indexed as a separate translated page', () => {
     expect(html).toContain('<meta name="robots" content="noindex, follow" />');
@@ -102,6 +158,29 @@ describe('buildArticleHtml — Arabic (no independent Arabic content yet)', () =
   });
 });
 
+describe('buildArticleHtml — not an explicitly launched production deployment (preview/branch/local)', () => {
+  const originalVercelEnv = process.env.VERCEL_ENV;
+  const originalLaunchFlag = process.env.SEO_LAUNCH_INDEXING;
+  afterEach(() => {
+    process.env.VERCEL_ENV = originalVercelEnv;
+    process.env.SEO_LAUNCH_INDEXING = originalLaunchFlag;
+  });
+
+  it('forces noindex, nofollow for an English article when VERCEL_ENV is not "production"', () => {
+    process.env.VERCEL_ENV = 'preview';
+    process.env.SEO_LAUNCH_INDEXING = 'true';
+    const html = buildArticleHtml(article, 'en');
+    expect(html).toContain('<meta name="robots" content="noindex, nofollow" />');
+  });
+
+  it('forces noindex, nofollow for an English article when SEO_LAUNCH_INDEXING is not "true", even on VERCEL_ENV=production', () => {
+    process.env.VERCEL_ENV = 'production';
+    delete process.env.SEO_LAUNCH_INDEXING;
+    const html = buildArticleHtml(article, 'en');
+    expect(html).toContain('<meta name="robots" content="noindex, nofollow" />');
+  });
+});
+
 describe('buildNotFoundHtml — true 404, zero leakage', () => {
   const html = buildNotFoundHtml('en');
 
@@ -113,6 +192,8 @@ describe('buildNotFoundHtml — true 404, zero leakage', () => {
     expect(html).not.toContain(article.title);
     expect(html).not.toContain(article.subtitle);
     expect(html).not.toContain(article.slug);
+    expect(html).not.toContain(article.structuredContent.sections[0].blocks[0].text);
+    expect(html).not.toContain('Related Topics');
   });
 
   it('embeds no NewsArticle JSON-LD', () => {
@@ -184,6 +265,10 @@ describe('handler — network behavior (public API only, no RDS/admin access)', 
     expect(res._headers['Cache-Control']).toBe('public, s-maxage=60, must-revalidate');
     expect(res._headers['Cache-Control']).not.toContain('stale-while-revalidate');
     expect(String(res._body)).toContain(article.title);
+    // Not an explicitly launched production deployment in this test env
+    // (VERCEL_ENV/SEO_LAUNCH_INDEXING are unset here) — the X-Robots-Tag
+    // header must mirror the body's own <meta name="robots"> exactly.
+    expect(res._headers['X-Robots-Tag']).toBe('noindex, nofollow');
   });
 
   it('unpublished/nonexistent slug: public API 404 produces a real HTTP 404 with no article leakage', async () => {

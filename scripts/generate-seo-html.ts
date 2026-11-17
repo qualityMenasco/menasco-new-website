@@ -54,10 +54,16 @@ import { webPageJsonLd, breadcrumbJsonLd, serializeJsonLd } from '../src/seo/str
 import { LOCALES, routes, siteName, type Locale, type RouteMeta } from './seo/routes';
 import { buildSitemapXml } from './seo/sitemap';
 import { renderRouteBody, PRERENDER_PATHS, getModulePathsForRoute } from './seo/prerender';
+import { isProductionLaunch, buildRobotsTxt } from './seo/launchConfig';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const DIST = join(ROOT, 'dist');
+
+// See scripts/seo/launchConfig.ts — true only for an explicitly launched
+// Production deployment; every preview/branch deployment and every local
+// build defaults to noindex, regardless of each route's own `noIndex` flag.
+const PRODUCTION_LAUNCH = isProductionLaunch();
 
 // ---------------------------------------------------------------------------
 // Newsroom articles: individual article detail pages (/newsroom/:slug) are
@@ -194,7 +200,12 @@ function buildHead(route: RouteMeta, locale: Locale): string {
     mainEntity: route.mainEntity?.(locale),
   });
   const breadcrumbEntries = route.breadcrumb?.(locale);
-  const jsonLdEntities: Record<string, unknown>[] = route.noIndex
+  // A non-launched deployment (see PRODUCTION_LAUNCH above) is treated
+  // exactly like a noIndex route for JSON-LD purposes too — no point
+  // advertising entity/breadcrumb relationships for a page search engines
+  // are simultaneously being told not to index.
+  const effectiveNoIndex = route.noIndex || !PRODUCTION_LAUNCH;
+  const jsonLdEntities: Record<string, unknown>[] = effectiveNoIndex
     ? []
     : [
         pageJsonLd,
@@ -202,6 +213,16 @@ function buildHead(route: RouteMeta, locale: Locale): string {
         ...(route.extraJsonLd?.(locale) ?? []),
       ];
   const jsonLdScripts = jsonLdEntities.map((entry) => `<script type="application/ld+json">${serializeJsonLd(entry)}</script>`).join('\n    ');
+  // A non-launched deployment gets the stricter `noindex, nofollow` on every
+  // page, full stop — unlike a route's own `noIndex` (which sometimes
+  // deliberately keeps `follow` to preserve internal link flow for a
+  // structure-only page), a staging/preview build should neither be indexed
+  // NOR have its links followed, so it can never become a crawl entry point.
+  const robotsMeta = !PRODUCTION_LAUNCH
+    ? '\n    <meta name="robots" content="noindex, nofollow" />'
+    : route.noIndex
+      ? `\n    <meta name="robots" content="noindex, ${route.follow ? 'follow' : 'nofollow'}" />`
+      : '';
 
   return `
     <meta charset="UTF-8" />
@@ -211,7 +232,7 @@ function buildHead(route: RouteMeta, locale: Locale): string {
     <link rel="canonical" href="${escapeHtml(url)}" />
     <link rel="alternate" hreflang="en" href="${escapeHtml(enUrl)}" />
     <link rel="alternate" hreflang="ar" href="${escapeHtml(arUrl)}" />
-    <link rel="alternate" hreflang="x-default" href="${escapeHtml(enUrl)}" />${route.noIndex ? `\n    <meta name="robots" content="noindex, ${route.follow ? 'follow' : 'nofollow'}" />` : ''}
+    <link rel="alternate" hreflang="x-default" href="${escapeHtml(enUrl)}" />${robotsMeta}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="${escapeHtml(siteName(locale))}" />
     <meta property="og:title" content="${escapeHtml(title)}" />
@@ -352,15 +373,22 @@ console.log(`Generated dist/sitemap.xml (${sitemapUrlCount} URLs).`);
 
 // ---------------------------------------------------------------------------
 // dist/robots.txt — `public/robots.txt` (general crawler access, the
-// sitemap line, and the explicit AI-crawler allow rules) is the single
-// source of truth; `vite build` already copies it into dist/ verbatim, so
-// this step only verifies that copy happened rather than generating/
-// overwriting the file with a second, duplicated version.
+// sitemap lines, and the explicit AI-crawler allow rules) remains the
+// single authored source of truth; `vite build` already copies it into
+// dist/ verbatim. For an explicitly launched Production deployment
+// (PRODUCTION_LAUNCH, see scripts/seo/launchConfig.ts) that copy is kept
+// as-is. For every other deployment — every preview/branch build and every
+// local build, where VERCEL_ENV/SEO_LAUNCH_INDEXING aren't both set — this
+// step OVERWRITES that copy with a global `Disallow: /`, so a staging
+// deployment can never be crawled at all, not just left unindexed.
 // ---------------------------------------------------------------------------
 
-if (!existsSync(join(DIST, 'robots.txt'))) {
+const robotsPath = join(DIST, 'robots.txt');
+if (!existsSync(robotsPath)) {
   console.error('generate-seo-html: dist/robots.txt not found — expected vite build to copy it from public/robots.txt.');
   process.exit(1);
 }
+const copiedRobotsTxt = readFileSync(robotsPath, 'utf8');
+writeFileSync(robotsPath, buildRobotsTxt(copiedRobotsTxt, PRODUCTION_LAUNCH), 'utf8');
 // eslint-disable-next-line no-console
-console.log('Verified dist/robots.txt (copied from public/robots.txt by vite build).');
+console.log(PRODUCTION_LAUNCH ? 'Generated dist/robots.txt (production, launched — public/robots.txt verbatim).' : 'Generated dist/robots.txt (NOT launched — global Disallow).');

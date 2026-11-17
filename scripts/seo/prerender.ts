@@ -79,7 +79,11 @@ import { I18N_NAMESPACES } from '../../src/lib/i18n';
 import { PageLoadingFallback } from '../../src/app/PageLoadingFallback';
 import { HeaderTransparencyProvider } from '../../src/app/header-transparency';
 import { RootLayout } from '../../src/app/RootLayout';
+import { publishedProjects } from '../../src/data/projects';
 import type { Locale } from './routes';
+
+/** Project slugs deliberately excluded from body prerendering — see this file's module comment's "VELA and Qiddiya" paragraph (cinematic desktop treatment, GSAP/canvas risk). */
+const PRERENDER_EXCLUDED_PROJECT_SLUGS = new Set(['vela-by-omniyat', 'qiddiya']);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
@@ -230,7 +234,12 @@ const PATTERNS: { pattern: string; importer: Importer; modulePath: string; deskt
   // page. Excluded for now — see PRERENDER_PATHS and the final report.
 ];
 
-/** The exact, deliberately small set of canonical paths this build prerenders body HTML for. Every entry here must also exist as a real route in scripts/seo/routes.ts — checked at call time, not assumed. */
+/** Every published project's detail path, generated from the same `publishedProjects` source of truth the live site renders from — minus the deliberately excluded VELA/Qiddiya slugs. Adding a project to `src/data/projects.ts` automatically prerenders it on the next build; no hand-maintained slug list to fall out of date. */
+const PRERENDER_PROJECT_PATHS: string[] = publishedProjects
+  .filter((project) => !PRERENDER_EXCLUDED_PROJECT_SLUGS.has(project.slug))
+  .map((project) => `/projects/${project.slug}`);
+
+/** The exact set of canonical paths this build prerenders body HTML for — every non-project entry here must also exist as a real route in scripts/seo/routes.ts — checked at call time, not assumed. */
 export const PRERENDER_PATHS: string[] = [
   '/',
   '/about',
@@ -243,14 +252,7 @@ export const PRERENDER_PATHS: string[] = [
   '/services/manufacturing-prefabrication',
   '/services/data-centers',
   '/projects/categories',
-  '/projects/casa-cavalli',
-  '/projects/pcfc-headquarters-building',
-  '/projects/alamein-towers',
-  '/projects/town-square-development',
-  '/projects/data-centre-vii',
-  // /projects/vela-by-omniyat and /projects/qiddiya are deliberately
-  // excluded — see this file's module comment above (the "VELA and Qiddiya
-  // are deliberately NOT in PRERENDER_PATHS" paragraph) for why.
+  ...PRERENDER_PROJECT_PATHS,
 ];
 
 function matchPattern(path: string): { pattern: string; importer: Importer; modulePath: string; desktopModulePath?: string; desktopImporter?: Importer } | null {

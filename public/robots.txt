@@ -7,9 +7,10 @@
 User-agent: *
 Allow: /
 
-# Sitemap
+# Sitemaps
 
 Sitemap: https://menascogroup.com/sitemap.xml
+Sitemap: https://menascogroup.com/sitemap-newsroom.xml
 
 
 # AI-readable website information
