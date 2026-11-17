@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import MEPPage from './MEPPage';
@@ -13,38 +13,20 @@ class MockIntersectionObserver {
 }
 vi.stubGlobal('IntersectionObserver', MockIntersectionObserver);
 
-// Same passthrough pattern as EPCPage.test.tsx — this page uses
-// returnObjects for its capabilities/qualityHighlights/disciplines arrays.
+// Passthrough translator: keys render as-is; returnObjects arrays are stubbed.
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key: string, defaultValueOrOptions?: unknown) => {
       if (defaultValueOrOptions && typeof defaultValueOrOptions === 'object' && 'returnObjects' in defaultValueOrOptions) {
-        if (key === 'services:mepPage.capabilities') {
+        if (key === 'mepPage.disciplinesSection.items') {
           return [
-            { title: 'HVAC & Chilled-Water Systems', description: 'x' },
-            { title: 'Power Distribution & ELV Systems', description: 'x' },
-            { title: 'Water, Drainage & Plumbing Systems', description: 'x' },
-            { title: 'Fire Protection & Life Safety', description: 'x' },
-            { title: 'BIM Coordination & Design', description: 'x' },
-            { title: 'Testing, Commissioning & Handover', description: 'x' },
+            { label: 'Mechanical', title: 'Mechanical Systems', description: 'x', cta: 'Explore Mechanical', href: '/services/mechanical', imageAlt: '' },
+            { label: 'Electrical', title: 'Electrical & ELV', description: 'x', cta: 'Explore Electrical & ELV', href: '/services/electrical', imageAlt: '' },
+            { label: 'Water Systems', title: 'Plumbing, Water & Drainage', description: 'x', cta: 'Explore Water Systems', href: '/services/plumbing', imageAlt: '' },
+            { label: 'Life Safety', title: 'Fire Protection & Life Safety', description: 'x', cta: 'Explore Fire & Life Safety', href: '/services/fire-protection', imageAlt: '' },
           ];
         }
-        if (key === 'services:mepPage.qualityHighlights') {
-          return [
-            { title: 'Single-Source Accountability', description: 'x' },
-            { title: 'Code & Standards Compliance', description: 'x' },
-            { title: 'Integrated Testing & Commissioning', description: 'x' },
-            { title: 'Long-Term Reliability', description: 'x' },
-          ];
-        }
-        if (key === 'services:mepPage.disciplines.items') {
-          return [
-            { title: 'Mechanical', description: 'x', href: '/services/mechanical' },
-            { title: 'Electrical', description: 'x', href: '/services/electrical' },
-            { title: 'Plumbing', description: 'x', href: '/services/plumbing' },
-            { title: 'Fire Protection', description: 'x', href: '/services/fire-protection' },
-          ];
-        }
+        if (key === 'mepPage.integration.paragraphs') return ['p1', 'p2'];
         return [];
       }
       if (typeof defaultValueOrOptions === 'string') return defaultValueOrOptions;
@@ -65,13 +47,23 @@ function renderMEPPage() {
   );
 }
 
-describe('MEPPage (dedicated bespoke page)', () => {
-  it('renders the hero, capabilities, quality and discipline-link sections', () => {
+describe('MEPPage', () => {
+  it('renders the hero and links each discipline card to its page', () => {
     renderMEPPage();
-    expect(screen.getByRole('heading', { name: 'services:mepPage.hero.title' })).toBeInTheDocument();
-    expect(screen.getByText('HVAC & Chilled-Water Systems')).toBeInTheDocument();
-    expect(screen.getByText('Single-Source Accountability')).toBeInTheDocument();
-    const mechanicalLink = screen.getByRole('link', { name: /Mechanical/ });
-    expect(mechanicalLink).toHaveAttribute('href', '/services/mechanical');
+    expect(screen.getByRole('heading', { level: 2, name: 'mepPage.hero.title' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Mechanical Systems' })).toHaveAttribute('href', '/services/mechanical');
+    expect(screen.getByRole('link', { name: 'Fire Protection & Life Safety' })).toHaveAttribute('href', '/services/fire-protection');
+    expect(screen.getByRole('link', { name: /mepPage.hero.secondaryCta/ })).toHaveAttribute('href', '/projects/categories');
+  });
+
+  it('toggles discipline layers in the systems diagram', () => {
+    renderMEPPage();
+    const mechanical = screen.getByRole('switch', { name: 'mepPage.integration.layers.mechanical' });
+    expect(mechanical).toHaveAttribute('aria-checked', 'true');
+    fireEvent.click(mechanical);
+    expect(mechanical).toHaveAttribute('aria-checked', 'false');
+    fireEvent.click(mechanical);
+    expect(mechanical).toHaveAttribute('aria-checked', 'true');
+    expect(screen.getAllByRole('switch')).toHaveLength(4);
   });
 });

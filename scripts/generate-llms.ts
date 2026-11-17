@@ -101,7 +101,7 @@ function bullets(items: string[]) {
 }
 
 /** Live service pages described by their own page copy rather than a services.ts record. */
-const umbrellaPages: Record<string, { seo: { title: string; description: string }; hero: { description: string } }> = {
+const umbrellaPages: Record<string, { seo: { title: string; description: string }; hero: { description: string }; projects?: { eyebrow: string; intro: string; items: Record<string, { summary: string; fact: string }> }; faq?: { items: { question: string; answer: string }[] } }> = {
   '/services/mep': servicesCopy.mepPage,
   '/services/civil': servicesCopy.civilPage,
   '/services/turnkey-developments': servicesCopy.epcPage,
@@ -609,6 +609,23 @@ function generateUmbrellaPages() {
     const content = doc(
       h1(page.seo.title),
       bq(page.hero.description),
+      ...(page.projects
+        ? [
+            doc(
+              h2(page.projects.eyebrow),
+              page.projects.intro,
+              bullets(
+                Object.entries(page.projects.items).map(([slug, item]) => {
+                  const project = projects.find((p) => p.slug === slug);
+                  return linkLine(project?.title ?? slug, llmsUrl(`/projects/${slug}`), `${item.summary} (${item.fact})`);
+                }),
+              ),
+            ),
+          ]
+        : []),
+      ...(page.faq ? [doc(h2('Frequently Asked Questions'), ...page.faq.items.map((item) => `### ${item.question}
+
+${item.answer}`))] : []),
       {
         hr: true,
         text: doc(h2('Related Pages'), linkLine('All Services', llmsUrl('/services'))),

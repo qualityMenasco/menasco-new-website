@@ -216,6 +216,8 @@ export default function HomePage() {
 
       {/* 9. Regional presence — tablets get the desktop map + office card;
           phones keep the compact office grid + selected office details. */}
+      {/* Anchor target for "/#regional-presence" (e.g. the country tags on the Services/MEP heroes). */}
+      <div id="regional-presence" className="scroll-mt-16">
       <div className="hidden md:block">
         <RegionalPresence />
       </div>
@@ -225,6 +227,7 @@ export default function HomePage() {
           <RegionalOfficeGrid />
         </div>
       </section>
+      </div>
 
       {/* 10. QHSE — dark band: the pillars and one button to the Quality & Safety page. */}
       <section className="bg-ink px-4 py-8 md:px-8 md:py-12">

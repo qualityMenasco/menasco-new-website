@@ -10,22 +10,11 @@ import { SplitContent } from '../components/content/SplitContent';
 import { Statistic } from '../components/content/Statistic';
 import { ButtonLink } from '../components/ui/Button';
 import { Accordion } from '../components/ui/Accordion';
-import { publishedProjects } from '../data/projects';
+import { dataCenterProjects, totalDataCenterMw } from '../data/projects';
 import { SEO } from '../seo/SEO';
 import { useTransparentHeader } from '../app/header-transparency';
 import { serviceEntity } from '../seo/structuredData';
 import { SITE_URL } from '../seo/constants';
-
-/** Parses a capacity string like "12 MW IT" or "800 KW IT" into a plain MW number. */
-function parseCapacityInMw(capacity?: string): number {
-  const match = capacity?.match(/([\d.]+)\s*(MW|KW)/i);
-  if (!match) return 0;
-  const value = parseFloat(match[1]);
-  return match[2].toUpperCase() === 'KW' ? value / 1000 : value;
-}
-
-const dataCenterProjects = publishedProjects.filter((project) => project.category === 'advanced-technical-facilities');
-const totalDataCenterMw = Math.round(dataCenterProjects.reduce((sum, project) => sum + parseCapacityInMw(project.capacity), 0) * 10) / 10;
 
 interface FaqEntry {
   id: string;

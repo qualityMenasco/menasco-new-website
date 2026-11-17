@@ -122,7 +122,7 @@ const routeChildren: RouteObject[] = [
   // Dedicated bespoke pages (same pattern as Manufacturing & Prefabrication
   // and EPC above) rather than the structure-only PendingContentPages
   // placeholder — live and indexable since 2026-11-05.
-  { path: 'services/mep', element: responsivePage(() => import('../pages/services/MEPPage'), () => import('../mobile/pages/services/MEPPage')) },
+  { path: 'services/mep', element: lazyPage(() => import('../pages/services/MEPPage')) },
   { path: 'services/civil', element: responsivePage(() => import('../pages/services/CivilPage'), () => import('../mobile/pages/services/CivilPage')) },
   // Dedicated pages (2026-11-02) reusing the same hero + section-carousel
   // "cards" treatment as Mechanical/Electrical/Plumbing/Fire Protection

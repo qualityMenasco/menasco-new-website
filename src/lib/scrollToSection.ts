@@ -7,6 +7,7 @@ export function scrollToSection(id: string, behavior: ScrollBehavior = 'smooth')
 }
 
 const MAX_WAIT_ATTEMPTS = 60; // ~1s at 60fps — generous for a lazy-loaded route chunk to render
+const SETTLE_DELAY_MS = 600; // one re-alignment after late layout shifts above the target
 
 /**
  * Same as `scrollToSection`, but for landing on a target that may not exist
@@ -16,12 +17,22 @@ const MAX_WAIT_ATTEMPTS = 60; // ~1s at 60fps — generous for a lazy-loaded rou
  */
 export function scrollToSectionWhenReady(id: string, behavior: ScrollBehavior = 'smooth'): () => void {
   let frameId: number | null = null;
+  let settleId: ReturnType<typeof setTimeout> | null = null;
   let attempts = 0;
   let cancelled = false;
 
   const attempt = () => {
     if (cancelled) return;
-    if (scrollToSection(id, behavior)) return;
+    if (scrollToSection(id, behavior)) {
+      // Content above the target (lazy images, reveal animations) can still
+      // settle after the jump and push the target down. Re-align once, but
+      // only if the visitor hasn't scrolled in the meantime.
+      const landedAt = window.scrollY;
+      settleId = setTimeout(() => {
+        if (!cancelled && Math.abs(window.scrollY - landedAt) < 2) scrollToSection(id, 'auto');
+      }, SETTLE_DELAY_MS);
+      return;
+    }
     attempts += 1;
     if (attempts < MAX_WAIT_ATTEMPTS) frameId = requestAnimationFrame(attempt);
   };
@@ -31,5 +42,6 @@ export function scrollToSectionWhenReady(id: string, behavior: ScrollBehavior = 
   return () => {
     cancelled = true;
     if (frameId !== null) cancelAnimationFrame(frameId);
+    if (settleId !== null) clearTimeout(settleId);
   };
 }

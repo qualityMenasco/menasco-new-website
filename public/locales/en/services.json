@@ -1,9 +1,75 @@
 {
+  "operatingCountries": {
+    "label": "Delivering across",
+    "items": [
+      {
+        "label": "United Arab Emirates",
+        "href": "/#regional-presence"
+      },
+      {
+        "label": "Saudi Arabia",
+        "href": "/#regional-presence"
+      },
+      {
+        "label": "Egypt",
+        "href": "/#regional-presence"
+      },
+      {
+        "label": "United Kingdom",
+        "href": "/#regional-presence"
+      },
+      {
+        "label": "United States",
+        "href": "/#regional-presence"
+      },
+      {
+        "label": "Jordan",
+        "href": "/#regional-presence"
+      },
+      {
+        "label": "Syria",
+        "href": "/#regional-presence"
+      }
+    ]
+  },
   "listing": {
     "eyebrow": "What We Deliver",
     "heading": "Integrated MEP services",
     "description": "MEP works form the foundation of our expertise, supported by a broad range of complementary capabilities to meet complex project requirements. Strategic civil partnerships enable unified delivery of wider construction scopes, while established procurement networks and exclusive vendor relationships strengthen our EPC offering. With fabrication capabilities across three countries and specialized expertise in data centers and mission-critical infrastructure, we deliver projects ranging from modular MEP installations to highly redundant, technically demanding facilities.",
     "heroImageAlt": "Rooftop cooling towers and plant equipment above a city skyline at dusk",
+    "keywords": {
+      "label": "MENASCO services",
+      "items": [
+        {
+          "label": "MEP contractor in the UAE",
+          "href": "/services/mep"
+        },
+        {
+          "label": "Civil & structural works",
+          "href": "/services/civil"
+        },
+        {
+          "label": "EPC contracting",
+          "href": "/services/turnkey-developments"
+        },
+        {
+          "label": "Data center MEP",
+          "href": "/services/data-centers"
+        },
+        {
+          "label": "Modular MEP prefabrication",
+          "href": "/services/manufacturing-prefabrication/modular"
+        },
+        {
+          "label": "Custom MEP fabrication",
+          "href": "/services/manufacturing-prefabrication/custom"
+        },
+        {
+          "label": "BIM & digital engineering",
+          "href": "/services/bim-digital-engineering"
+        }
+      ]
+    },
     "sectorSolution": "Sector solution",
     "delivery": {
       "stepsLabel": "Delivery steps",
@@ -909,92 +975,203 @@
     }
   },
   "mepPage": {
-    "seo": {
-      "title": "MEP — Mechanical, Electrical & Plumbing",
-      "description": "MENASCO delivers integrated Mechanical, Electrical, Plumbing and Fire Protection engineering as one coordinated scope, from design through handover."
-    },
-    "hero": {
-      "title": "MEP",
-      "description": "MENASCO delivers integrated Mechanical, Electrical and Plumbing (MEP) engineering across every major building system — from HVAC and chilled-water plant to power distribution, water and drainage, and fire protection. Our in-house teams design, install, test and commission these systems as one coordinated scope, supported by BIM coordination from concept through handover."
-    },
-    "overview": {
-      "eyebrow": "Overview",
-      "heading": "One Team Across Every Building System",
-      "paragraph1": "MENASCO's MEP capability spans Mechanical, Electrical, Plumbing, and Fire Protection & Life Safety systems, delivered by in-house engineering and site teams rather than coordinated across separate specialist contractors. This keeps design intent, procurement and installation aligned across every discipline, reducing the interface risk that typically arises when MEP systems are delivered by multiple unconnected parties.",
-      "paragraph2": "From central plant and power distribution through to water systems and life-safety infrastructure, our teams work from a shared BIM model and a single project programme, supporting coordinated installation, testing and commissioning across the full building-services scope."
-    },
-    "capabilitiesSection": {
-      "eyebrow": "Our Capabilities",
-      "heading": "MEP Capabilities"
-    },
-    "capabilities": [
-      {
-        "title": "HVAC & Chilled-Water Systems",
-        "description": "Mechanical plant, ductwork and cooling systems engineered for regional climate loads."
-      },
-      {
-        "title": "Power Distribution & ELV Systems",
-        "description": "Medium- and low-voltage distribution, backup power and building management systems."
-      },
-      {
-        "title": "Water, Drainage & Plumbing Systems",
-        "description": "Water supply, drainage and treatment systems engineered for reliability and compliance."
-      },
-      {
-        "title": "Fire Protection & Life Safety",
-        "description": "Fire detection, suppression and life-safety systems designed to code and international standards."
-      },
-      {
-        "title": "BIM Coordination & Design",
-        "description": "Clash-free coordination across all four disciplines ahead of installation."
-      },
-      {
-        "title": "Testing, Commissioning & Handover",
-        "description": "Integrated testing and commissioning across every system before handover."
-      }
-    ],
-    "disciplines": {
-      "eyebrow": "Our Disciplines",
-      "heading": "Explore Each MEP Discipline",
-      "paragraph1": "Every MEP discipline is delivered by the same in-house MENASCO team, working from a shared design and programme rather than handed between separate specialist contractors.",
-      "items": [
-        { "title": "Mechanical", "description": "HVAC, chilled-water and plant systems.", "href": "/services/mechanical" },
-        { "title": "Electrical", "description": "Power distribution and ELV systems.", "href": "/services/electrical" },
-        { "title": "Plumbing", "description": "Water supply, drainage and treatment systems.", "href": "/services/plumbing" },
-        { "title": "Fire Protection", "description": "Fire detection, suppression and life safety.", "href": "/services/fire-protection" }
-      ]
-    },
-    "qualitySection": {
-      "eyebrow": "Quality Across the Full Scope",
-      "heading": "Quality Across the Full Scope",
-      "paragraph1": "Because mechanical, electrical, plumbing and fire protection are delivered by one coordinated team, quality control is applied consistently across every system rather than varying from one contractor to the next.",
-      "paragraph2": "MENASCO's MEP approach supports residential developments, hospitality projects, commercial buildings, data centers, healthcare facilities and other technically demanding infrastructure, with the same coordinated delivery model applied across every sector."
-    },
-    "qualityHighlights": [
-      {
-        "title": "Single-Source Accountability",
-        "description": "One team responsible for every MEP discipline, from design through handover."
-      },
-      {
-        "title": "Code & Standards Compliance",
-        "description": "Systems engineered and installed to UAE and international codes and standards."
-      },
-      {
-        "title": "Integrated Testing & Commissioning",
-        "description": "Every system tested and commissioned together before handover."
-      },
-      {
-        "title": "Long-Term Reliability",
-        "description": "Systems engineered for dependable performance in demanding regional conditions."
-      }
-    ],
-    "downloadCompanyProfile": "Download Company Profile",
-    "closing": {
-      "heading": "One Coordinated Team for Every Building System",
-      "description": "From HVAC and power distribution to water systems and fire protection, MENASCO delivers MEP engineering as a single, accountable scope across every sector we serve.",
-      "cta": "Explore Our Projects"
-    }
-  },
+     "seo": {
+       "title": "MEP Contractor in the UAE & GCC | Mechanical, Electrical, Plumbing & Fire | MENASCO",
+       "description": "MENASCO is an MEP contractor in the UAE and GCC delivering mechanical, electrical, plumbing and fire protection systems, BIM-coordinated from design to commissioning."
+     },
+     "hero": {
+       "eyebrow": "MEP Contractor · UAE & GCC",
+       "title": "Complex Building Systems. One Integrated Discipline.",
+       "description": "Mechanical, electrical, plumbing, and fire protection works form the foundation of MENASCO's expertise. From technically demanding infrastructure to large-scale commercial developments, each discipline is brought together through coordinated engineering, installation, testing, and commissioning.",
+       "primaryCta": "Explore capabilities",
+       "secondaryCta": "View projects",
+       "imageAlt": "MEP plant room with insulated chilled-water pipework, pumps and heat exchangers on a MENASCO project",
+       "keywords": {
+         "label": "MEP specialisms",
+         "items": [
+           {
+             "label": "MEP contracting in Dubai & Abu Dhabi",
+             "href": "/about"
+           },
+           {
+             "label": "HVAC & chilled water",
+             "href": "/services/mechanical"
+           },
+           {
+             "label": "Electrical & ELV systems",
+             "href": "/services/electrical"
+           },
+           {
+             "label": "Firefighting & fire alarm",
+             "href": "/services/fire-protection"
+           },
+           {
+             "label": "Plumbing & drainage",
+             "href": "/services/plumbing"
+           },
+           {
+             "label": "BIM coordination",
+             "href": "/services/bim-digital-engineering"
+           },
+           {
+             "label": "Testing & commissioning",
+             "href": "/quality-safety"
+           },
+           {
+             "label": "Shell & core and fit-out",
+             "href": "/services"
+           }
+         ]
+       }
+     },
+     "disciplinesSection": {
+       "eyebrow": "Technical disciplines",
+       "heading": "Specialized Expertise. Coordinated Delivery.",
+       "description": "Each discipline carries its own technical requirements, design interfaces, and construction methodologies. Together, they form the essential systems that support the operation, safety, and performance of the built environment.",
+       "items": [
+         {
+           "label": "Mechanical",
+           "title": "Mechanical Systems",
+           "description": "HVAC, ventilation, chilled-water networks, central cooling plants, and mechanical equipment installations.",
+           "cta": "Explore Mechanical",
+           "href": "/services/mechanical",
+           "imageAlt": "Air-cooled chiller plant serving a mission-critical facility"
+         },
+         {
+           "label": "Electrical",
+           "title": "Electrical & ELV",
+           "description": "Power distribution, lighting, backup power, low-current infrastructure, and integrated building technologies.",
+           "cta": "Explore Electrical & ELV",
+           "href": "/services/electrical",
+           "imageAlt": "Distribution board with miniature circuit breakers and wiring"
+         },
+         {
+           "label": "Water Systems",
+           "title": "Plumbing, Water & Drainage",
+           "description": "Water supply, treatment, pumping, drainage, and sanitary systems for complex developments.",
+           "cta": "Explore Water Systems",
+           "href": "/services/plumbing",
+           "imageAlt": "Pipework gallery with control valves and pumping equipment"
+         },
+         {
+           "label": "Life Safety",
+           "title": "Fire Protection & Life Safety",
+           "description": "Fire detection, alarms, suppression, firefighting infrastructure, and integrated life safety systems.",
+           "cta": "Explore Fire & Life Safety",
+           "href": "/services/fire-protection",
+           "imageAlt": "Fire pump set with gauges and valves in a pump room"
+         }
+       ]
+     },
+     "integration": {
+       "eyebrow": "Multidisciplinary coordination",
+       "heading": "Four Disciplines. One Coordinated Building.",
+       "paragraphs": [
+         "Complex developments require mechanical, electrical, plumbing, and life safety systems to operate within the same physical and technical environment. Effective delivery depends on understanding how these disciplines interact, from equipment requirements and spatial coordination to installation sequencing and commissioning.",
+         "Through multidisciplinary engineering teams, BIM coordination, and integrated construction management, technical interfaces are identified and resolved throughout project execution. This approach helps reduce conflicts between building systems, maintain alignment with architectural and structural requirements, and support efficient installation and reliable operation."
+       ],
+       "controlsLabel": "Discipline visibility",
+       "showAll": "Show all",
+       "hideAll": "Hide all",
+       "caption": "Illustrative coordinated model: a corridor ceiling void where all four disciplines overlap beneath the slab.",
+       "allVisible": "All four disciplines shown together, demonstrating the shared space and interfaces.",
+       "layers": {
+         "mechanical": "Mechanical",
+         "electrical": "Electrical",
+         "plumbing": "Plumbing",
+         "fire": "Fire"
+       },
+       "annotations": {
+         "slab": "Structural slab",
+         "beam": "Downstand beam",
+         "ceiling": "Suspended ceiling",
+         "supply": "Supply air duct",
+         "return": "Return air duct",
+         "chw": "Chilled water F/R",
+         "fcu": "Fan coil unit",
+         "lvTray": "LV cable tray",
+         "elvTray": "ELV cable tray",
+         "busbar": "Busbar trunking",
+         "water": "Domestic water CW/HW",
+         "drain": "Drainage (falls)",
+         "sprinklerMain": "Sprinkler main",
+         "alarm": "Fire alarm conduit"
+       }
+     },
+     "stats": {
+       "eyebrow": "Capability at scale",
+       "pending": "Pending confirmation",
+       "awaiting": "Awaiting verified figure",
+       "engineers": "Mechanical engineers",
+       "projects": "MEP projects delivered",
+       "contractValue": "Total MEP contract value"
+     },
+     "projects": {
+       "eyebrow": "Selected MEP projects",
+       "heading": "Proven Across Complex Developments.",
+       "intro": "From ultra-luxury residential towers and corporate headquarters to beachfront hospitality and high-voltage infrastructure, these completed projects show how MENASCO delivers coordinated mechanical, electrical, plumbing and fire protection systems across very different building types.",
+       "viewProject": "View project",
+       "viewAll": "View all projects",
+       "items": {
+         "volante-ii-tower": {
+           "summary": "Complete MEP engineering, supply, installation, testing and commissioning for an ultra-luxury residential tower, including advanced chilled-water and ventilation design, integrated low-current and automation systems, and fire and life safety to UAE Fire Code.",
+           "fact": "684,616 workforce hours · Zero LTI"
+         },
+         "pcfc-headquarters-building": {
+           "summary": "Shell-and-core and fit-out MEP for a corporate headquarters, combining electromechanical, plumbing and fire protection systems with smart building management designed around energy efficiency across flexible office floors.",
+           "fact": "798,393 workforce hours · Zero LTI"
+         },
+         "town-square-development": {
+           "summary": "Complete MEP engineering, supply, installation, testing and commissioning for a large-scale residential community, with energy-optimized systems, fire and life safety to UAE and international codes, and installations built for long-term operational reliability.",
+           "fact": "2,320,500 workforce hours · Zero LTI"
+         },
+         "sparkle-tower": {
+           "summary": "Complete HVAC, electrical, plumbing and firefighting systems for a luxury waterfront tower in Dubai Marina, using marine-grade installations for coastal durability alongside smart-building technology for automation and efficiency.",
+           "fact": "993,462 workforce hours · Zero LTI"
+         },
+         "radisson-blu-resort-fujairah": {
+           "summary": "MEP works for a beachfront resort on the Al Aqah coast of Fujairah, delivered as subcontractor to East Coast Contracting, with building services designed to serve guest rooms and suites reliably in a demanding coastal environment.",
+           "fact": "257 keys"
+         },
+         "burj-khalifa-substation": {
+           "summary": "MEP works for the building of a primary power substation in Downtown Dubai for Emaar Properties, providing the building services that support the safe and reliable operation of its high-voltage equipment.",
+           "fact": "132/11 kV"
+         }
+       },
+       "readAll": "Read all",
+       "showLess": "Show less"
+     },
+     "faq": {
+       "eyebrow": "MEP FAQ",
+       "heading": "Technical Questions, Answered.",
+       "items": [
+         {
+           "question": "How are mechanical, electrical, plumbing, and fire protection systems coordinated during construction?",
+           "answer": "Coordination begins with reviewing the spatial, technical, and operational requirements of each discipline against architectural and structural designs. Federated BIM models, coordinated shop drawings, and construction sequencing help identify system clashes, resolve installation conflicts, and maintain access for testing, operation, and future maintenance."
+         },
+         {
+           "question": "How does MENASCO manage MEP installations in buildings with limited service space?",
+           "answer": "Space constraints are addressed through detailed routing studies, equipment access reviews, multidisciplinary BIM coordination, and installation sequencing. Particular attention is given to congested ceiling voids, risers, plantrooms, and service corridors to ensure that systems can be installed, maintained, and operated within the available space."
+         },
+         {
+           "question": "How are MEP systems tested and commissioned before project handover?",
+           "answer": "Testing and commissioning follow discipline-specific procedures, beginning with installation inspections and pre-commissioning checks before progressing to equipment testing, system balancing, functional verification, and integrated systems testing where required. Results are documented against approved specifications, with outstanding observations addressed before final handover."
+         },
+         {
+           "question": "How are MEP installations coordinated with architectural finishes and design requirements?",
+           "answer": "MEP coordination considers architectural intent alongside the technical requirements of equipment, distribution networks, and building services. This is particularly important in luxury hospitality, landmark entertainment, and high-end residential developments, where systems must accommodate themed environments, complex interiors, concealed installations, and specialized lighting without compromising accessibility or system performance."
+         },
+         {
+           "question": "What measures are taken to ensure MEP systems remain accessible for maintenance?",
+           "answer": "Maintenance requirements are considered during technical coordination and equipment placement. Access clearances, service routes, isolation points, removable panels, and equipment replacement paths are reviewed against manufacturer recommendations and project requirements to support safe maintenance throughout the building's operational life."
+         },
+         {
+           "question": "At what stage should an MEP contractor be involved in a project?",
+           "answer": "Early MEP involvement can help identify plant space requirements, utility connections, equipment lead times, and installation constraints before construction begins. This is especially valuable on projects with complex system interfaces or demanding commissioning schedules."
+         }
+       ]
+     }
+   },
   "mepPageMobile": {
     "seo": {
       "title": "MEP — Mechanical, Electrical & Plumbing",

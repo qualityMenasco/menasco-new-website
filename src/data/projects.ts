@@ -109,6 +109,20 @@ export const projects: ProjectRecord[] = projectsData as ProjectRecord[];
  */
 export const publishedProjects: ProjectRecord[] = projects.filter((project) => project.publishState === 'published');
 
+/** Parses a capacity string like "12 MW IT" or "800 KW IT" into a plain MW number. */
+export function parseCapacityInMw(capacity?: string): number {
+  const match = capacity?.match(/([\d.]+)\s*(MW|KW)/i);
+  if (!match) return 0;
+  const value = parseFloat(match[1]);
+  return match[2].toUpperCase() === 'KW' ? value / 1000 : value;
+}
+
+/** Published data center projects (the Advanced Technical Facilities category). */
+export const dataCenterProjects: ProjectRecord[] = publishedProjects.filter((project) => project.category === 'advanced-technical-facilities');
+
+/** Total IT capacity (MW, one decimal) across published data center projects, delivered and in delivery. */
+export const totalDataCenterMw = Math.round(dataCenterProjects.reduce((sum, project) => sum + parseCapacityInMw(project.capacity), 0) * 10) / 10;
+
 /**
  * MENASCO is the main contractor on every project in this portfolio by
  * default — every current record's own `mainContractor` field is empty (see

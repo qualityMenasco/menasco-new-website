@@ -1,6 +1,43 @@
-# MEP — Mechanical, Electrical & Plumbing
+# MEP Contractor in the UAE & GCC | Mechanical, Electrical, Plumbing & Fire | MENASCO
 
-> MENASCO delivers integrated Mechanical, Electrical and Plumbing (MEP) engineering across every major building system — from HVAC and chilled-water plant to power distribution, water and drainage, and fire protection. Our in-house teams design, install, test and commission these systems as one coordinated scope, supported by BIM coordination from concept through handover.
+> Mechanical, electrical, plumbing, and fire protection works form the foundation of MENASCO's expertise. From technically demanding infrastructure to large-scale commercial developments, each discipline is brought together through coordinated engineering, installation, testing, and commissioning.
+
+## Selected MEP projects
+
+From ultra-luxury residential towers and corporate headquarters to beachfront hospitality and high-voltage infrastructure, these completed projects show how MENASCO delivers coordinated mechanical, electrical, plumbing and fire protection systems across very different building types.
+
+- [Volante II Tower](https://menascogroup.com/projects/volante-ii-tower/llms.txt): Complete MEP engineering, supply, installation, testing and commissioning for an ultra-luxury residential tower, including advanced chilled-water and ventilation design, integrated low-current and automation systems, and fire and life safety to UAE Fire Code. (684,616 workforce hours · Zero LTI)
+- [PCFC Headquarters Building](https://menascogroup.com/projects/pcfc-headquarters-building/llms.txt): Shell-and-core and fit-out MEP for a corporate headquarters, combining electromechanical, plumbing and fire protection systems with smart building management designed around energy efficiency across flexible office floors. (798,393 workforce hours · Zero LTI)
+- [Town Square Development](https://menascogroup.com/projects/town-square-development/llms.txt): Complete MEP engineering, supply, installation, testing and commissioning for a large-scale residential community, with energy-optimized systems, fire and life safety to UAE and international codes, and installations built for long-term operational reliability. (2,320,500 workforce hours · Zero LTI)
+- [Sparkle Tower](https://menascogroup.com/projects/sparkle-tower/llms.txt): Complete HVAC, electrical, plumbing and firefighting systems for a luxury waterfront tower in Dubai Marina, using marine-grade installations for coastal durability alongside smart-building technology for automation and efficiency. (993,462 workforce hours · Zero LTI)
+- [Radisson Blu Resort Fujairah](https://menascogroup.com/projects/radisson-blu-resort-fujairah/llms.txt): MEP works for a beachfront resort on the Al Aqah coast of Fujairah, delivered as subcontractor to East Coast Contracting, with building services designed to serve guest rooms and suites reliably in a demanding coastal environment. (257 keys)
+- [Burj Khalifa Substation](https://menascogroup.com/projects/burj-khalifa-substation/llms.txt): MEP works for the building of a primary power substation in Downtown Dubai for Emaar Properties, providing the building services that support the safe and reliable operation of its high-voltage equipment. (132/11 kV)
+
+## Frequently Asked Questions
+
+### How are mechanical, electrical, plumbing, and fire protection systems coordinated during construction?
+
+Coordination begins with reviewing the spatial, technical, and operational requirements of each discipline against architectural and structural designs. Federated BIM models, coordinated shop drawings, and construction sequencing help identify system clashes, resolve installation conflicts, and maintain access for testing, operation, and future maintenance.
+
+### How does MENASCO manage MEP installations in buildings with limited service space?
+
+Space constraints are addressed through detailed routing studies, equipment access reviews, multidisciplinary BIM coordination, and installation sequencing. Particular attention is given to congested ceiling voids, risers, plantrooms, and service corridors to ensure that systems can be installed, maintained, and operated within the available space.
+
+### How are MEP systems tested and commissioned before project handover?
+
+Testing and commissioning follow discipline-specific procedures, beginning with installation inspections and pre-commissioning checks before progressing to equipment testing, system balancing, functional verification, and integrated systems testing where required. Results are documented against approved specifications, with outstanding observations addressed before final handover.
+
+### How are MEP installations coordinated with architectural finishes and design requirements?
+
+MEP coordination considers architectural intent alongside the technical requirements of equipment, distribution networks, and building services. This is particularly important in luxury hospitality, landmark entertainment, and high-end residential developments, where systems must accommodate themed environments, complex interiors, concealed installations, and specialized lighting without compromising accessibility or system performance.
+
+### What measures are taken to ensure MEP systems remain accessible for maintenance?
+
+Maintenance requirements are considered during technical coordination and equipment placement. Access clearances, service routes, isolation points, removable panels, and equipment replacement paths are reviewed against manufacturer recommendations and project requirements to support safe maintenance throughout the building's operational life.
+
+### At what stage should an MEP contractor be involved in a project?
+
+Early MEP involvement can help identify plant space requirements, utility connections, equipment lead times, and installation constraints before construction begins. This is especially valuable on projects with complex system interfaces or demanding commissioning schedules.
 
 ---
 

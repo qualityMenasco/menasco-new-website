@@ -5,6 +5,7 @@ import { ServicesBento } from '../components/services/ServicesBento';
 import { ServicesFaq } from '../components/services/ServicesFaq';
 import { ServicesDelivery } from '../components/services/ServicesDelivery';
 import { PhotoTreatment } from '../components/media/TreatedPhoto';
+import { KeywordPills, type KeywordPill } from '../components/common/KeywordPills';
 import { servicesListingHeroImage } from '../data/services';
 import { SEO } from '../seo/SEO';
 
@@ -15,6 +16,10 @@ import { SEO } from '../seo/SEO';
  */
 export default function ServicesPage() {
   const { t } = useTranslation(['services', 'nav', 'common']);
+  const keywordList = t('services:listing.keywords.items', { returnObjects: true });
+  const keywords = (Array.isArray(keywordList) ? keywordList : []) as KeywordPill[];
+  const countryList = t('services:operatingCountries.items', { returnObjects: true });
+  const countries = (Array.isArray(countryList) ? countryList : []) as KeywordPill[];
 
   return (
     <>
@@ -36,13 +41,18 @@ export default function ServicesPage() {
               {t('services:listing.description')}
             </Text>
           </div>
-          <div className="relative col-span-5 aspect-[4/3] overflow-hidden rounded-md bg-gray-100">
-            <img
-              src={servicesListingHeroImage}
-              alt={t('services:listing.heroImageAlt')}
-              className="h-full w-full object-cover object-[70%_50%]"
-            />
-            <PhotoTreatment />
+          <div className="col-span-5">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-gray-100">
+              <img
+                src={servicesListingHeroImage}
+                alt={t('services:listing.heroImageAlt')}
+                className="h-full w-full object-cover object-[70%_50%]"
+              />
+              <PhotoTreatment />
+            </div>
+            {/* Service-area pills (desktop tree only); each links to its service page and is in the prerendered HTML. */}
+            <KeywordPills items={keywords} label={t('services:listing.keywords.label')} className="mt-4" />
+            <KeywordPills items={countries} label={t('services:operatingCountries.label')} showLabel className="mt-2" />
           </div>
         </div>
       </Section>
