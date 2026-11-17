@@ -29,14 +29,14 @@ describe('FeaturedStoryCard — image (default, unchanged behavior)', () => {
 });
 
 describe('FeaturedStoryCard — video', () => {
-  it('renders a real <video> that autoplays muted and loops, not an <img>', () => {
+  it('renders a real <video>, not an <img> — muted/inline so a browser could play it, but never autoplaying or looping on the card itself (it should sit on its first frame; the clip only plays once the article is opened)', () => {
     const { container } = renderCard({ image: '/mock/clip.mp4', mediaType: 'video' });
     const videoEl = container.querySelector('video');
     expect(videoEl).toBeInTheDocument();
     expect(videoEl).toHaveAttribute('src', '/mock/clip.mp4');
-    expect(videoEl).toHaveAttribute('autoplay');
+    expect(videoEl).not.toHaveAttribute('autoplay');
+    expect(videoEl).not.toHaveAttribute('loop');
     expect((videoEl as HTMLVideoElement).muted).toBe(true);
-    expect(videoEl).toHaveAttribute('loop');
     expect(container.querySelector('img')).not.toBeInTheDocument();
   });
 

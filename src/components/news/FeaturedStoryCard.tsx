@@ -27,6 +27,8 @@ export interface FeaturedStoryCardProps {
  * which is why the Featured grid itself uses `items-start` (see
  * NewsroomPage.tsx) instead of grid's default row-stretch: each panel's
  * height must stay its own, not forced to match its tallest sibling.
+ * A video panel never autoplays here — it sits on its first frame like a
+ * poster image; the clip only plays once the article itself is opened.
  */
 export function FeaturedStoryCard({ href, image, mediaType, categoryLabel, date, title, subtitle, readMoreLabel, className }: FeaturedStoryCardProps) {
   const { orientation, onVideoLoadedMetadata } = useMediaOrientation();
@@ -46,10 +48,9 @@ export function FeaturedStoryCard({ href, image, mediaType, categoryLabel, date,
         (isVideo ? (
           <video
             src={image}
-            autoPlay
             muted
-            loop
             playsInline
+            preload="metadata"
             onLoadedMetadata={onVideoLoadedMetadata}
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-slow ease-engineered group-hover:scale-[1.04]"
           />

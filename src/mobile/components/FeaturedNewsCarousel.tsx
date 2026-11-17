@@ -29,7 +29,9 @@ export interface FeaturedNewsCarouselProps {
  * instance of it. A video slide's aspect ratio adapts to the clip's real
  * orientation (landscape stays the shared `aspect-[4/3]`, portrait grows
  * taller rather than being cropped to a sliver); an image slide is
- * unaffected, keeping today's exact behavior.
+ * unaffected, keeping today's exact behavior. A video slide never
+ * autoplays — it sits on its first frame; the clip only plays once the
+ * article itself is opened.
  */
 function FeaturedStoryTile({
   story,
@@ -56,10 +58,9 @@ function FeaturedStoryTile({
           (isVideo ? (
             <video
               src={media.src}
-              autoPlay
               muted
-              loop
               playsInline
+              preload="metadata"
               onLoadedMetadata={onVideoLoadedMetadata}
               className="absolute inset-0 h-full w-full object-cover"
             />
