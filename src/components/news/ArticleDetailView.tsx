@@ -63,23 +63,36 @@ export function ArticleDetailView({ article, locale, onBackClick }: ArticleDetai
     <Section spacing="lg" background="warmwhite">
       <Container width="standard">
         {/*
-          One grid for the whole article, not two independently-sized
-          layouts stacked on top of each other — the left/right tracks
-          (3fr/2fr) stay identical from the header down through the body,
-          so the image and Related Topics genuinely share a column instead
-          of only visually resembling one. Every left-column child gets
-          `min-w-0`: a grid item's default min-width is `auto` (sized to
-          its content), which lets long unbroken text (a long title,
-          mid-word) overflow straight through the column boundary instead
-          of wrapping — `min-w-0` is what allows the width constraint from
-          the `3fr` track to actually apply to text sizing.
-          The image is placed at the title's row and spans through the
-          subtitle's row (`row-start-2` + `row-span-2`) — its top edge
-          lands exactly on the title row's top edge, i.e. the title's
-          first line, for any title length, with no fixed offset.
+          Two grid items only: the text column (back link through Related
+          Topics, all stacked together) and the media column (just the
+          gallery) — not one grid item per piece of content, the way this
+          used to be split into 6 explicitly row-placed items. That's a
+          deliberate choice for "sticky side media": a CSS Grid item only
+          keeps its `position: sticky` in effect for the full height of its
+          OWN row track, so the gallery has to be the sole occupant of a row
+          that's exactly as tall as the text column — splitting Related
+          Topics into a second item sharing the media column (the previous
+          layout) would carve that row into two shorter ones, and the
+          gallery would stop sticking almost immediately after it started.
+          Related Topics therefore moved into the text column, right after
+          the body — not the sidebar — which is also why `lg:items-start` on
+          the grid still matters: without it, the short gallery item would
+          stretch to match the much taller text column instead of sitting
+          at its natural height and sticking within the leftover space.
+          `min-w-0` goes on the text column wrapper only (not each child):
+          now that the column's children are plain block elements inside a
+          flex column rather than grid items themselves, the "a grid item's
+          default min-width is auto" quirk that let long unbroken text
+          overflow the column only needs fixing once, at the wrapper.
+          `order-first lg:order-none` on the gallery is for the narrow/
+          stacked fallback (this component only ever renders at desktop
+          widths — real phones use `src/mobile/components/ArticleDetailView`
+          — so this just covers a resized-narrow desktop window): showing
+          the hero media first there reads better than it landing after
+          Related Topics at the very bottom.
         */}
-        <div className="grid grid-cols-1 gap-x-12 gap-y-4 lg:grid-cols-[3fr_2fr] lg:items-start">
-          <div className="flex min-w-0 flex-col gap-6 lg:col-start-1 lg:row-start-1">
+        <div className="grid grid-cols-1 gap-x-12 gap-y-6 lg:grid-cols-[3fr_2fr] lg:items-start">
+          <div className="flex min-w-0 flex-col gap-6 lg:col-start-1">
             <SmartLink
               href="/newsroom"
               onClick={onBackClick}
@@ -95,17 +108,27 @@ export function ArticleDetailView({ article, locale, onBackClick }: ArticleDetai
                 <time dateTime={article.publishedAt}>{t('newsroom:publishedOn', { date: formatNewsDate(article.publishedAt, locale) })}</time>
               </Text>
             </div>
+
+            <Heading level="h1" as="h2" dir="auto">
+              {article.title}
+            </Heading>
+
+            {article.subtitle && (
+              <Text variant="body-lg" muted dir="auto" className="max-w-2xl">
+                {article.subtitle}
+              </Text>
+            )}
+
+            <Stack space="lg" as="article" className="max-w-2xl">
+              <ArticleStructuredContent sections={article.structuredContent.sections} images={article.images} />
+            </Stack>
+
+            {article.tags.length > 0 && (
+              <aside>
+                <ArticleTopics tags={article.tags} heading={t('newsroom:relatedTopics')} />
+              </aside>
+            )}
           </div>
-
-          <Heading level="h1" as="h2" dir="auto" className="min-w-0 lg:col-start-1 lg:row-start-2">
-            {article.title}
-          </Heading>
-
-          {article.subtitle && (
-            <Text variant="body-lg" muted dir="auto" className="min-w-0 max-w-2xl lg:col-start-1 lg:row-start-3">
-              {article.subtitle}
-            </Text>
-          )}
 
           {galleryImages.length > 0 && (
             <ArticleImageGallery
@@ -115,18 +138,8 @@ export function ArticleDetailView({ article, locale, onBackClick }: ArticleDetai
               positionLabel={(current, total) =>
                 t('newsroom:gallery.position', { current: String(current).padStart(2, '0'), total: String(total).padStart(2, '0') })
               }
-              className="mt-4 lg:col-start-2 lg:row-start-2 lg:row-span-2 lg:mt-0"
+              className="order-first min-w-0 lg:order-none lg:col-start-2 lg:sticky lg:top-28 lg:self-start"
             />
-          )}
-
-          <Stack space="lg" as="article" className="min-w-0 mt-4 max-w-2xl lg:col-start-1 lg:row-start-4">
-            <ArticleStructuredContent sections={article.structuredContent.sections} images={article.images} />
-          </Stack>
-
-          {article.tags.length > 0 && (
-            <aside className="min-w-0 mt-4 lg:col-start-2 lg:row-start-4">
-              <ArticleTopics tags={article.tags} heading={t('newsroom:relatedTopics')} />
-            </aside>
           )}
         </div>
       </Container>

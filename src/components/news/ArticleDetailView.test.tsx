@@ -41,58 +41,55 @@ function getTitle() {
 /**
  * jsdom doesn't compute real CSS layout, so these tests can't measure actual
  * pixel positions — instead they pin the structural contract (grid
- * placement + min-width reset classes) that implements both required fixes,
- * so a future change that silently drops `min-w-0` or the row placement
- * would fail a test instead of only being visible in a screenshot.
+ * placement, sticky classes, and which column Related Topics ends up in)
+ * that "sticky side media" actually depends on, so a future change that
+ * silently drops `lg:sticky` or moves Related Topics back into the media
+ * column would fail a test instead of only being visible in a screenshot.
  */
-describe('ArticleDetailView — desktop two-column grid', () => {
-  it('gives every left-column text element min-w-0 so long content wraps within its own column instead of overflowing into the image column', () => {
-    renderArticle();
-    expect(getTitle().className).toMatch(/\bmin-w-0\b/);
-
-    const subtitle = screen.getByText(baseArticle.subtitle as string);
-    expect(subtitle.className).toMatch(/\bmin-w-0\b/);
-  });
-
-  it("places the image at the title's grid row so its top edge aligns with the title's first line, not the back link or the published date", () => {
+describe('ArticleDetailView — sticky side media', () => {
+  it('gives the text column wrapper min-w-0 so long content wraps within its own column instead of overflowing into the media column', () => {
     renderArticle();
     const heading = getTitle();
-    const galleryContainer = screen.getByAltText('Hero image').closest('.group') as HTMLElement;
-
-    expect(heading.className).toMatch(/lg:row-start-2\b/);
-    expect(galleryContainer.className).toMatch(/lg:row-start-2\b/);
-
-    // Neither the back link nor the published-date row shares the title's row —
-    // confirms the image is anchored to the title specifically, not the header as a whole.
-    const backLink = screen.getByRole('link', { name: /backToNewsroom/i });
-    const metaRow = screen.getByText(/publishedOn/).closest('div') as HTMLElement;
-    expect(backLink.closest('div')?.className).not.toMatch(/lg:row-start-2\b/);
-    expect(metaRow.className).not.toMatch(/lg:row-start-2\b/);
+    const textColumn = heading.closest('.lg\\:col-start-1') as HTMLElement;
+    expect(textColumn).toBeTruthy();
+    expect(textColumn.className).toMatch(/\bmin-w-0\b/);
   });
 
-  it('spans the image down through the subtitle row so it sits beside both, and keeps it in the right-hand column', () => {
+  it('makes the gallery sticky, pinned near the top of the viewport, in its own right-hand column', () => {
     renderArticle();
     const galleryContainer = screen.getByAltText('Hero image').closest('.group') as HTMLElement;
     expect(galleryContainer.className).toMatch(/lg:col-start-2\b/);
-    expect(galleryContainer.className).toMatch(/lg:row-span-2\b/);
+    expect(galleryContainer.className).toMatch(/lg:sticky\b/);
+    expect(galleryContainer.className).toMatch(/lg:top-28\b/);
+    expect(galleryContainer.className).toMatch(/lg:self-start\b/);
   });
 
-  it('keeps Related Topics in the same right-hand column as the image, positioned below it', () => {
+  it("keeps Related Topics in the TEXT column (not the sticky media column) — splitting it into the media column would break the gallery's full-height sticky range", () => {
     renderArticle();
-    const heading = getTitle();
     const topics = screen.getByRole('navigation', { name: /relatedTopics/i }).closest('aside') as HTMLElement;
+    const textColumn = topics.closest('.lg\\:col-start-1') as HTMLElement;
+    expect(textColumn).toBeTruthy();
 
-    expect(topics.className).toMatch(/lg:col-start-2\b/);
-    // Same column-2 as the image, and never the title's row (row-start-2) — i.e. genuinely
-    // below the image, not beside the header.
-    expect(heading.className).toMatch(/lg:col-start-1\b/);
-    expect(topics.className).not.toMatch(/lg:row-start-2\b/);
+    const galleryContainer = screen.getByAltText('Hero image').closest('.group') as HTMLElement;
+    expect(galleryContainer.className).not.toBe(textColumn.className);
+    expect(topics.closest('.lg\\:col-start-2')).toBeNull();
   });
 
-  it('renders the title before the image in DOM order, so mobile (no lg: grid placement applies) stacks text above the image exactly as before', () => {
+  it('renders Related Topics after the article body in the text column', () => {
+    renderArticle();
+    const body = screen.getByText('Body paragraph.');
+    const topics = screen.getByRole('navigation', { name: /relatedTopics/i }).closest('aside') as HTMLElement;
+    // eslint-disable-next-line no-bitwise
+    expect(body.compareDocumentPosition(topics) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
+  it('visually leads with the gallery when stacked (order-first), but keeps it after the text column in real DOM/source order', () => {
     renderArticle();
     const heading = getTitle();
     const galleryContainer = screen.getByAltText('Hero image').closest('.group') as HTMLElement;
+
+    expect(galleryContainer.className).toMatch(/\border-first\b/);
+    expect(galleryContainer.className).toMatch(/lg:order-none\b/);
     // eslint-disable-next-line no-bitwise
     expect(heading.compareDocumentPosition(galleryContainer) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
