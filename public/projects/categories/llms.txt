@@ -4,9 +4,9 @@
 
 ## Sectors
 
-- Residential / Commercial (85): Integrated engineering solutions for residential, commercial, office, and mixed-use developments.
+- Residential / Commercial (84): Integrated engineering solutions for residential, commercial, office, and mixed-use developments.
 - Hospitality & Landmark Entertainment (15): High-performance MEP delivery for premium hospitality, resort, cultural landmark, and entertainment destination environments.
-- Advanced Technical Facilities (16): Specialist engineering for data centers, mission-critical, healthcare, energy, and technically demanding facilities.
+- Advanced Technical Facilities (14): Specialist engineering for data centers, mission-critical, healthcare, energy, and technically demanding facilities.
 - Infrastructure & Utilities (24): Category reserved for future projects — detailed scope has not yet been published.
 
 ---
@@ -36,9 +36,6 @@
 - [Data Centre V](https://menascogroup.com/projects/data-centre-v-800-kw-it/llms.txt): Dubai, UAE
 - [Data Centre VI](https://menascogroup.com/projects/data-centre-vi-12-mw-it/llms.txt): Abu Dhabi, UAE
 - [Data Centre VII](https://menascogroup.com/projects/data-centre-vii/llms.txt): Abu Dhabi, UAE
-- [TEST — Industrial Facility](https://menascogroup.com/projects/test-industrial-facility/llms.txt): Dubai, UAE
-- [TEST — Data Centre](https://menascogroup.com/projects/test-data-centre/llms.txt): Abu Dhabi, UAE
-- [TEST — Commercial Tower](https://menascogroup.com/projects/test-commercial-tower/llms.txt): Sharjah, UAE
 - [Fujairah Hospital Maternity Department](https://menascogroup.com/projects/fujairah-hospital-maternity-department/llms.txt): Fujairah, UAE
 - [NMC Hospital Fujairah](https://menascogroup.com/projects/nmc-hospital-fujairah/llms.txt): Fujairah, UAE
 - [NMC Hospital Fujairah](https://menascogroup.com/projects/nmc-hospital-fujairah-2/llms.txt): Fujairah, UAE

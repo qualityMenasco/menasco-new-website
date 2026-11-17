@@ -39,8 +39,6 @@ Powering the Future of Data Centers: MENASCO delivers integrated mission-critica
 - [Data Centre V](https://menascogroup.com/projects/data-centre-v-800-kw-it/llms.txt): Dubai, UAE | 800 KW IT
 - [Data Centre VI](https://menascogroup.com/projects/data-centre-vi-12-mw-it/llms.txt): Abu Dhabi, UAE | 12 MW IT
 - [Data Centre VII](https://menascogroup.com/projects/data-centre-vii/llms.txt): Abu Dhabi, UAE
-- [TEST — Industrial Facility](https://menascogroup.com/projects/test-industrial-facility/llms.txt): Dubai, UAE
-- [TEST — Data Centre](https://menascogroup.com/projects/test-data-centre/llms.txt): Abu Dhabi, UAE
 - [Fujairah Hospital Maternity Department](https://menascogroup.com/projects/fujairah-hospital-maternity-department/llms.txt): Fujairah, UAE
 - [NMC Hospital Fujairah](https://menascogroup.com/projects/nmc-hospital-fujairah/llms.txt): Fujairah, UAE
 - [NMC Hospital Fujairah](https://menascogroup.com/projects/nmc-hospital-fujairah-2/llms.txt): Fujairah, UAE

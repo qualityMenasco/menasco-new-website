@@ -1,9 +1,10 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ImageIcon } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { SmartLink } from '../../lib/SmartLink';
 import { useSectionTheme } from '../../lib/theme-context';
 import type { HeadingLevel, IconComponent, Theme } from '../../types';
 import { Heading, Text } from '../typography/Typography';
+import { PhotoTreatment } from '../media/TreatedPhoto';
 
 export interface ServiceCardProps {
   icon?: IconComponent;
@@ -17,6 +18,12 @@ export interface ServiceCardProps {
   headingAs?: HeadingLevel;
   theme?: Theme;
   className?: string;
+  /** Apply the listing photo treatment (gradient, hairline, accent bar). */
+  imageTreatment?: boolean;
+  /** Outlined background word over the photo (needs imageTreatment). */
+  imageWord?: string;
+  /** Show a neutral image placeholder tile (used when no fitting photo exists yet). */
+  imagePlaceholder?: boolean;
 }
 
 export function ServiceCard({
@@ -30,6 +37,9 @@ export function ServiceCard({
   headingAs = 'h3',
   theme,
   className,
+  imageTreatment = false,
+  imageWord,
+  imagePlaceholder = false,
 }: ServiceCardProps) {
   const resolvedTheme = useSectionTheme(theme);
   const isDark = resolvedTheme === 'dark';
@@ -51,7 +61,7 @@ export function ServiceCard({
       {featured && <span className="absolute inset-x-0 top-0 h-1 bg-brand-600" aria-hidden="true" />}
 
       {image ? (
-        <div className="-mx-7 -mt-7 aspect-[16/10] overflow-hidden bg-gray-100 md:-mx-8 md:-mt-8">
+        <div className="relative -mx-7 -mt-7 aspect-[16/10] overflow-hidden bg-gray-100 md:-mx-8 md:-mt-8">
           <img
             src={image}
             alt={imageAlt}
@@ -59,6 +69,15 @@ export function ServiceCard({
             decoding="async"
             className="h-full w-full object-cover transition-transform duration-slow ease-engineered group-hover:scale-[1.04]"
           />
+          {imageTreatment && <PhotoTreatment word={imageWord} />}
+        </div>
+      ) : imagePlaceholder ? (
+        <div
+          aria-hidden="true"
+          className="relative -mx-7 -mt-7 flex aspect-[16/10] items-center justify-center overflow-hidden bg-gray-100 text-gray-300 md:-mx-8 md:-mt-8"
+        >
+          <ImageIcon size={40} strokeWidth={1.25} />
+          {imageTreatment && <PhotoTreatment variant="thumb" />}
         </div>
       ) : (
         Icon && (

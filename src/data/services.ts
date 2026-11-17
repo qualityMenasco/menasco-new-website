@@ -311,3 +311,25 @@ export const showcaseDisplayGroups: ServiceShowcaseGroup[] = [
  */
 export const showcaseGroupChildren = (group: ServiceShowcaseGroup): ServiceShowcaseLeaf[] =>
   group.leaves.filter((leaf) => leaf.href !== group.href);
+
+/**
+ * Photos used ONLY on the /services listing page — the intro photo and one
+ * photo per umbrella tile in the bento grid (ServicesBento). Deliberately
+ * separate from each service's own `image` / servicePagePreviews so every
+ * individual service page (and the homepage) keeps its original photo.
+ * Tile photos keep their natural colour (only the intro photo is brand-graded)
+ * so the five tiles read as distinct images (public/services-listing/).
+ *
+ * NOTE: several are AI-generated stand-ins or third-party photos pending
+ * rights confirmation — replace with MENASCO project photography when
+ * available. Unused sub-service exports (mechanical/electrical/fire/custom)
+ * are kept in public/services-listing/ for later use.
+ */
+export const servicesListingHeroImage = '/services-listing/hero.webp';
+export const servicesListingUmbrellaImages: Record<string, string> = {
+  '/services/mep': '/services-listing/plumbing.webp',
+  '/services/civil': '/services-listing/bim.webp',
+  '/services/manufacturing-prefabrication': '/services-listing/modular.webp',
+  '/services/turnkey-developments': '/services-listing/epc.webp',
+  '/services/data-centers': '/services-listing/data-centers.webp',
+};

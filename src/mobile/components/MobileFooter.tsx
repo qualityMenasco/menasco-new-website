@@ -211,10 +211,10 @@ export function MobileFooter() {
         </div>
 
         {/* Certifications + legal — one band on tablets (no divider between them). */}
-        <div className="flex flex-wrap justify-center gap-2 border-t border-white/10 pt-6 sm:justify-start">
+        <div className="flex flex-wrap justify-start gap-2 border-t border-white/10 pt-6">
           {certifications.map((cert) => {
             const label = `${cert.name}${certificationKeys[cert.name] ? `, ${t(`common:certifications.${certificationKeys[cert.name]}`)}` : ''}`;
-            const badge = 'rounded-sm border border-white/15 px-2.5 py-1 text-caption text-gray-300';
+            const badge = 'rounded-sm border border-white/15 px-2.5 py-1 text-start text-caption text-gray-300';
             // Each badge opens its certificate PDF.
             return cert.fileUrl ? (
               <a key={cert.name} href={cert.fileUrl} target="_blank" rel="noopener noreferrer" className={`${badge} underline-offset-2 hover:text-warmwhite hover:underline`}>

@@ -33,6 +33,50 @@ Select a service area to see how MENASCO delivers it, or explore the dedicated p
 
 - [Data Centers](https://menascogroup.com/services/data-centers/llms.txt): MENASCO delivers mission-critical data center MEP and infrastructure solutions for uptime, reliability and future-ready digital operations.
 
+## How we deliver
+
+Join at any stage, from first drawing to handover.
+
+- Early engagement: Join during design for technical reviews, procurement planning and early constructability input.
+- BIM coordination: Federated models resolve clashes and validate every installation before work reaches site.
+- Strategic sourcing: Established supplier networks secure equipment and materials to specification and schedule.
+- Site installation: Components prefabricated across three countries are installed with less congestion and rework.
+- Testing & handover: Integrated systems are tested, commissioned and documented for a clean handover to operations.
+
+## Frequently Asked Questions
+
+### What services does MENASCO provide?
+
+MEP contracting forms the core of MENASCO's operations, supported by civil and structural partnerships, manufacturing and prefabrication, and integrated EPC delivery. Specialized capabilities also extend to data centers and mission-critical infrastructure, allowing clients to consolidate multiple technical and construction requirements under a coordinated delivery structure.
+
+### Can MENASCO deliver both MEP and civil works under a single contract?
+
+Yes. Through established partnerships with specialist civil contractors, MENASCO can coordinate and deliver combined civil and MEP scopes under a unified contracting arrangement. This approach simplifies project interfaces, improves coordination between disciplines, and provides clients with a clearer structure for project accountability.
+
+### What distinguishes MENASCO's EPC capabilities from traditional contracting?
+
+EPC delivery combines design management, procurement, construction, and commissioning under a single delivery framework. Established supplier networks, strategic vendor relationships, and multidisciplinary project management capabilities allow MENASCO to manage complex procurement requirements and coordinate specialist contractors while maintaining oversight of cost, schedule, and technical compliance.
+
+### Does MENASCO offer off-site manufacturing and prefabrication?
+
+Yes. Manufacturing capabilities across three countries support the fabrication and modular assembly of MEP components away from active construction sites. Prefabrication can reduce on-site installation requirements, improve production consistency, and support more predictable construction schedules, particularly on projects with repetitive or technically complex installations.
+
+### What data center infrastructure can MENASCO deliver?
+
+Capabilities include high-capacity substations, resilient electrical distribution, backup power infrastructure, precision cooling, fire protection, and specialized environmental systems. Cooling solutions can incorporate conventional air-cooled and chilled-water technologies alongside advanced direct-to-chip liquid cooling, depending on the facility's design and operational requirements.
+
+### Can MENASCO support Tier III and Tier IV data center developments?
+
+Yes. MENASCO supports greenfield and brownfield data center projects designed to meet Uptime Institute Tier III and Tier IV requirements. Delivery focuses on the integration of redundant power, cooling, and critical infrastructure systems, alongside the technical coordination, testing, and commissioning necessary to support the facility's certification objectives. Formal certification remains subject to independent assessment by Uptime Institute.
+
+### At what stage of a project can MENASCO become involved?
+
+Engagement can begin during design development, preconstruction, or the construction phase, depending on the contracting arrangement. Early involvement enables technical reviews, procurement planning, BIM coordination, constructability assessments, and identification of potential installation or system integration challenges before site execution.
+
+### Where does MENASCO operate?
+
+MENASCO maintains an international presence spanning the UAE, Saudi Arabia, Egypt, the United Kingdom, the United States, Jordan, and Syria. Engineering, procurement, fabrication, and project delivery resources are coordinated across these markets according to project requirements, local regulations, and client needs.
+
 ---
 
 ## Related Pages

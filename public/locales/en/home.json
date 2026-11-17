@@ -37,7 +37,49 @@
     "cta": "All services",
     "viewService": "View {{name}} services",
     "aboutService": "About {{name}}",
-    "mobileHeading": "Five service areas, one contractor"
+    "mobileHeading": "Five service areas, one contractor",
+    "previews": {
+      "mep": {
+        "description": "Mechanical, electrical, plumbing, and fire protection works form the core of our expertise and the foundation of our project delivery capabilities. Our experience spans the full project lifecycle, from engineering and BIM coordination through procurement, installation, testing, and commissioning, with particular strength in coordinating complex building systems across multiple disciplines and demanding project environments.",
+        "points": [
+          "HVAC, Ventilation & Chilled-Water Systems",
+          "Electrical Distribution, Lighting & ELV Systems",
+          "Water Supply, Drainage & Fire Protection Systems"
+        ]
+      },
+      "civil": {
+        "description": "Civil and structural works are delivered in collaboration with our specialist engineering partners, allowing us to coordinate building infrastructure and MEP systems within a unified project scope. Our involvement spans design coordination, site preparation, structural interfaces, and construction sequencing, with particular emphasis on resolving technical dependencies between civil and MEP disciplines throughout project execution.",
+        "points": [
+          "Site Preparation, Enabling & Civil Works",
+          "Structural Works & MEP Interface Coordination",
+          "BIM Coordination & Clash Resolution"
+        ]
+      },
+      "manufacturingPrefabrication": {
+        "description": "Our manufacturing and prefabrication capabilities, supported by specialized production partners in 3 countries, enable the off-site fabrication and assembly of MEP components under controlled conditions. By shifting selected construction activities away from the project site, we improve installation consistency, reduce on-site labor requirements, and support more predictable construction schedules through coordinated production, quality inspections, and delivery planning.",
+        "points": [
+          "Specialist Manufacturing Partnerships",
+          "Off-Site Fabrication & Modular Assembly",
+          "Quality Control & Production Coordination"
+        ]
+      },
+      "epc": {
+        "description": "EPC delivery provides a single point of responsibility for coordinating complex projects from initial design through construction and final handover. As the principal delivery contractor, MENASCO oversees technical coordination, specialist subcontractors, procurement, and site execution, aligning multiple disciplines under a unified project structure to maintain control over scope, cost, quality, and schedule.",
+        "points": [
+          "Multidisciplinary Design & BIM Coordination",
+          "Procurement, Supply Chain & Vendor Management",
+          "Construction, Project Management & Commissioning"
+        ]
+      },
+      "dataCenters": {
+        "description": "Data center delivery requires precise integration of critical power, cooling, fire protection, and environmental control systems to support uninterrupted operations. Our capabilities extend across greenfield and brownfield developments, including facilities designed to achieve Uptime Institute Tier III and Tier IV certification, with expertise in a broad range of cooling technologies, from traditional air-cooled and chilled-water systems to advanced direct-to-chip (DTC) liquid cooling.",
+        "points": [
+          "Tier III & Tier IV Data Center Infrastructure",
+          "Air-Cooled, Chilled-Water & Direct-to-Chip Liquid Cooling Systems",
+          "High-Capacity Substations, Resilient Power & Critical Infrastructure"
+        ]
+      }
+    }
   },
   "featuredProjects": {
     "eyebrow": "Portfolio",
@@ -135,7 +177,7 @@
   "careersPreview": {
     "eyebrow": "Careers",
     "heading": "Build Your Future with MENASCO",
-    "description": "Explore career, internship & graduate opportunities across MENASCO’s regional operations. Join a multicultural team delivering integrated MEP, infrastructure & specialized engineering solutions across challenging, high-impact projects.",
+    "description": "Explore career, internship & graduate opportunities across MENASCO’s global operations. Join a multicultural team delivering integrated MEP, infrastructure & specialized engineering solutions across challenging, high-impact projects.",
     "cta": "Open roles",
     "internships": {
       "title": "Internships",

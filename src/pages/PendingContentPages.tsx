@@ -140,24 +140,3 @@ export function TurnkeyDevelopmentsPage() {
     </>
   );
 }
-
-export function CertificationTrainingPage() {
-  const { t } = useTranslation(['nav', 'common']);
-  const title = t('nav:certificationTraining');
-  return (
-    <>
-      <SEO title={title} description={t('common:pendingContent.notice')} path="/certification-training" noIndex follow />
-      <PagePlaceholder
-        eyebrow={t('nav:about')}
-        title={title}
-        description={t('common:pendingContent.notice')}
-        actions={
-          <>
-            <ContactButton />
-            <ParentLink label={t('nav:qualitySafety')} href="/quality-safety" />
-          </>
-        }
-      />
-    </>
-  );
-}

@@ -19,6 +19,15 @@ const firstPreviewLeaf = (group: (typeof showcaseDisplayGroups)[number]) => grou
 /** Default right-panel content before the user expands/selects anything — the first group's umbrella page (today, MEP), not a hardcoded slug, so it stays correct if the taxonomy order ever changes. */
 const defaultLeafHref = showcaseDisplayGroups[0] ? firstPreviewLeaf(showcaseDisplayGroups[0])?.href ?? null : null;
 
+/** Home-specific preview copy (home:servicesShowcase.previews.*), keyed by each discipline's page. Takes precedence over the service pages' own SEO description/capabilities. */
+const homePreviewKeys: Record<string, string> = {
+  '/services/mep': 'mep',
+  '/services/civil': 'civil',
+  '/services/manufacturing-prefabrication': 'manufacturingPrefabrication',
+  '/services/turnkey-developments': 'epc',
+  '/services/data-centers': 'dataCenters',
+};
+
 export function ServicesShowcase() {
   const { t, i18n } = useTranslation(['home', 'services', 'nav', 'common']);
   const [expandedGroupKey, setExpandedGroupKey] = useState<string | null>(null);
@@ -45,6 +54,16 @@ export function ServicesShowcase() {
   const selectedUmbrellaCapabilities = selectedUmbrella && i18n.exists(`services:${selectedUmbrella.copyKey}.capabilities`)
     ? (t(`services:${selectedUmbrella.copyKey}.capabilities`, { returnObjects: true }) as { title: string }[])
     : [];
+
+  // The opened discipline's home preview copy, if it has one.
+  const previewGroup = selectedHref ? showcaseDisplayGroups.find((g) => g.leaves.some((leaf) => leaf.href === selectedHref)) : null;
+  const homePreviewKey = previewGroup?.href ? homePreviewKeys[previewGroup.href] : undefined;
+  const homePreview = homePreviewKey && i18n.exists(`home:servicesShowcase.previews.${homePreviewKey}.description`)
+    ? {
+        description: t(`home:servicesShowcase.previews.${homePreviewKey}.description`),
+        points: t(`home:servicesShowcase.previews.${homePreviewKey}.points`, { returnObjects: true }) as string[],
+      }
+    : null;
 
   const toggleGroup = (group: (typeof showcaseDisplayGroups)[number]) => {
     if (expandedGroupKey === group.key) {
@@ -180,7 +199,12 @@ export function ServicesShowcase() {
               {selectedLeaf && (
                 <Eyebrow className="mb-0 px-6 pt-6">{selectedName}</Eyebrow>
               )}
-              {!selectedLeaf ? (
+              {homePreview ? (
+                <div className="flex flex-1 flex-col gap-3 px-6 pb-6 pt-2">
+                  <Text>{homePreview.description}</Text>
+                  <ProfessionalList variant="divided" gap="sm" items={homePreview.points.map((point) => ({ title: point }))} />
+                </div>
+              ) : !selectedLeaf ? (
                 <div className="flex flex-1 flex-col justify-center gap-2 p-6">
                   <Text variant="body-lg">{t('home:servicesShowcase.description')}</Text>
                 </div>

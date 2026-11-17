@@ -158,7 +158,7 @@ const routeChildren: RouteObject[] = [
   // single hub for browsing by sector. This route only exists so old
   // bookmarks/links to the bare /sectors URL still land somewhere real.
   { path: 'sectors', element: <LocaleNavigate to="/projects/categories" /> },
-  { path: 'certification-training', element: lazyPage(() => import('../pages/PendingContentPages').then((m) => ({ default: m.CertificationTrainingPage }))) },
+  { path: 'certification-training', element: lazyPage(() => import('../pages/CertificationTrainingPage')) },
   { path: 'quality-safety', element: responsivePage(() => import('../pages/QualitySafetyPage'), () => import('../mobile/pages/QualitySafetyPage')) },
   { path: 'team', element: responsivePage(() => import('../pages/TeamPage'), () => import('../mobile/pages/TeamPage')) },
   { path: 'community-people', element: responsivePage(() => import('../pages/CommunityPeoplePage'), () => import('../mobile/pages/CommunityPeoplePage')) },

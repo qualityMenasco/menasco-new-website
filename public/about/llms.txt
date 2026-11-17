@@ -47,5 +47,6 @@ To be the MEP partner the world turns to when failure is not an option.
 - [Leadership & Team](https://menascogroup.com/team/llms.txt): MENASCO leadership and engineering management team.
 - [Quality, Health & Safety](https://menascogroup.com/quality-safety/llms.txt): MENASCO's QHSE approach and ISO certifications.
 - [Community & People](https://menascogroup.com/community-people/llms.txt): MENASCO blood drive, Culture Day and Training & Mentoring Centre.
+- [Certification & Training](https://menascogroup.com/certification-training/llms.txt): Workforce development, a free engineering education initiative in development, and university internships.
 - [Innovation & Technology](https://menascogroup.com/innovation-technology/llms.txt): MENASCO's digital and technology initiatives.
 - [Contact & Regional Presence](https://menascogroup.com/contact/llms.txt): Office locations and contact details.

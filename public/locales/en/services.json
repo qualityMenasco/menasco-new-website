@@ -2,7 +2,86 @@
   "listing": {
     "eyebrow": "What We Deliver",
     "heading": "Integrated MEP services",
-    "description": "MENASCO delivers mechanical, electrical, plumbing, fire protection, BIM coordination and MEP prefabrication as one integrated contractor, coordinated from concept through commissioning, across the UAE and GCC.",
+    "description": "MEP works form the foundation of our expertise, supported by a broad range of complementary capabilities to meet complex project requirements. Strategic civil partnerships enable unified delivery of wider construction scopes, while established procurement networks and exclusive vendor relationships strengthen our EPC offering. With fabrication capabilities across three countries and specialized expertise in data centers and mission-critical infrastructure, we deliver projects ranging from modular MEP installations to highly redundant, technically demanding facilities.",
+    "heroImageAlt": "Rooftop cooling towers and plant equipment above a city skyline at dusk",
+    "sectorSolution": "Sector solution",
+    "delivery": {
+      "stepsLabel": "Delivery steps",
+      "stepLabel": "Stage {{number}}",
+      "back": "Back",
+      "next": "Next",
+      "eyebrow": "How we deliver",
+      "heading": "Join at any stage, from first drawing to handover.",
+      "steps": [
+        {
+          "title": "Early engagement",
+          "body": "Join during design for technical reviews, procurement planning and early constructability input."
+        },
+        {
+          "title": "BIM coordination",
+          "body": "Federated models resolve clashes and validate every installation before work reaches site."
+        },
+        {
+          "title": "Strategic sourcing",
+          "body": "Established supplier networks secure equipment and materials to specification and schedule."
+        },
+        {
+          "title": "Site installation",
+          "body": "Components prefabricated across three countries are installed with less congestion and rework."
+        },
+        {
+          "title": "Testing & handover",
+          "body": "Integrated systems are tested, commissioned and documented for a clean handover to operations."
+        }
+      ]
+    },
+    "faq": {
+      "heading": "Frequently Asked Questions",
+      "intro": "Common questions about our technical capabilities, project delivery and how we bring multiple disciplines together.",
+      "viewMore": "View more questions",
+      "viewLess": "Show fewer questions",
+      "items": [
+        {
+          "question": "What services does MENASCO provide?",
+          "answer": "MEP contracting forms the core of MENASCO's operations, supported by civil and structural partnerships, manufacturing and prefabrication, and integrated EPC delivery. Specialized capabilities also extend to data centers and mission-critical infrastructure, allowing clients to consolidate multiple technical and construction requirements under a coordinated delivery structure."
+        },
+        {
+          "question": "Can MENASCO deliver both MEP and civil works under a single contract?",
+          "answer": "Yes. Through established partnerships with specialist civil contractors, MENASCO can coordinate and deliver combined civil and MEP scopes under a unified contracting arrangement. This approach simplifies project interfaces, improves coordination between disciplines, and provides clients with a clearer structure for project accountability."
+        },
+        {
+          "question": "What distinguishes MENASCO's EPC capabilities from traditional contracting?",
+          "answer": "EPC delivery combines design management, procurement, construction, and commissioning under a single delivery framework. Established supplier networks, strategic vendor relationships, and multidisciplinary project management capabilities allow MENASCO to manage complex procurement requirements and coordinate specialist contractors while maintaining oversight of cost, schedule, and technical compliance."
+        },
+        {
+          "question": "Does MENASCO offer off-site manufacturing and prefabrication?",
+          "answer": "Yes. Manufacturing capabilities across three countries support the fabrication and modular assembly of MEP components away from active construction sites. Prefabrication can reduce on-site installation requirements, improve production consistency, and support more predictable construction schedules, particularly on projects with repetitive or technically complex installations."
+        },
+        {
+          "question": "What data center infrastructure can MENASCO deliver?",
+          "answer": "Capabilities include high-capacity substations, resilient electrical distribution, backup power infrastructure, precision cooling, fire protection, and specialized environmental systems. Cooling solutions can incorporate conventional air-cooled and chilled-water technologies alongside advanced direct-to-chip liquid cooling, depending on the facility's design and operational requirements."
+        },
+        {
+          "question": "Can MENASCO support Tier III and Tier IV data center developments?",
+          "answer": "Yes. MENASCO supports greenfield and brownfield data center projects designed to meet Uptime Institute Tier III and Tier IV requirements. Delivery focuses on the integration of redundant power, cooling, and critical infrastructure systems, alongside the technical coordination, testing, and commissioning necessary to support the facility's certification objectives. Formal certification remains subject to independent assessment by Uptime Institute."
+        },
+        {
+          "question": "At what stage of a project can MENASCO become involved?",
+          "answer": "Engagement can begin during design development, preconstruction, or the construction phase, depending on the contracting arrangement. Early involvement enables technical reviews, procurement planning, BIM coordination, constructability assessments, and identification of potential installation or system integration challenges before site execution."
+        },
+        {
+          "question": "Where does MENASCO operate?",
+          "answer": "MENASCO maintains an international presence spanning the UAE, Saudi Arabia, Egypt, the United Kingdom, the United States, Jordan, and Syria. Engineering, procurement, fabrication, and project delivery resources are coordinated across these markets according to project requirements, local regulations, and client needs."
+        }
+      ]
+    },
+    "umbrellas": {
+      "mep": "Mechanical, electrical, plumbing and fire protection: the core of everything we deliver.",
+      "civil": "Civil works delivered through strategic partnerships.",
+      "manufacturingPrefabrication": "Modular and custom MEP assemblies, built off-site for faster, cleaner installation.",
+      "turnkeyDevelopments": "Single-point engineering, procurement and construction, from design to handover.",
+      "dataCenters": "Mission-critical MEP for high-performance, highly redundant data center environments."
+    },
     "exploreService": "Explore {{name}}",
     "mobileHeading": "Integrated MEP Services",
     "mobileCtaHeading": "Need a Specific Capability?",

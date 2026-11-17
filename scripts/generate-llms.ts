@@ -342,6 +342,7 @@ function generateAbout() {
           linkLine('Leadership & Team', llmsUrl('/team'), 'MENASCO leadership and engineering management team.'),
           linkLine('Quality, Health & Safety', llmsUrl('/quality-safety'), "MENASCO's QHSE approach and ISO certifications."),
           linkLine('Community & People', llmsUrl('/community-people'), 'MENASCO blood drive, Culture Day and Training & Mentoring Centre.'),
+          linkLine('Certification & Training', llmsUrl('/certification-training'), 'Workforce development, a free engineering education initiative in development, and university internships.'),
           linkLine('Innovation & Technology', llmsUrl('/innovation-technology'), "MENASCO's digital and technology initiatives."),
           linkLine('Contact & Regional Presence', llmsUrl('/contact'), 'Office locations and contact details.'),
         ]),
@@ -426,6 +427,37 @@ function generateQualitySafety() {
     },
   );
   write('/quality-safety', content);
+}
+
+function generateCertificationTraining() {
+  const c = about.certificationTrainingPage;
+  const content = doc(
+    h1('Certification & Training'),
+    bq(c.hero.description),
+
+    doc(h2(`${c.workforce.eyebrow} (active)`), `${c.workforce.heading}`, (c.workforce.paragraphs as string[]).join('\n\n')),
+    doc(
+      h2(`${c.initiative.eyebrow} (${c.initiative.status.toLowerCase()})`),
+      c.initiative.heading,
+      [c.initiative.lead, ...(c.initiative.paragraphs as string[])].join('\n\n'),
+      `### ${c.initiative.pathwayTitle}\n\n${bullets((c.initiative.steps as { title: string; body: string; detail: string }[]).map((step) => `${step.title}: ${step.body}. ${step.detail}`))}`,
+      `${c.initiative.disclaimer} Placement through industry partners is an intended pathway, not a guaranteed outcome. Enrolment is not yet open.`,
+    ),
+    doc(h2(`${c.internships.eyebrow} (active)`), c.internships.heading, (c.internships.paragraphs as string[]).join('\n\n'), linkLine('Careers', CAREERS_URL)),
+    doc(h2(c.closing.eyebrow), c.closing.body),
+    doc(h2('Frequently Asked Questions'), ...(c.faq.items as { question: string; answer: string }[]).map((item) => `### ${item.question}
+
+${item.answer}`)),
+
+    {
+      hr: true,
+      text: doc(
+        h2('Related Pages'),
+        bullets([linkLine('Innovation & Technology', llmsUrl('/innovation-technology'), 'MENASCO Connect and internal digital platforms.'), linkLine('Community & People', llmsUrl('/community-people')), linkLine('About MENASCO', llmsUrl('/about'))]),
+      ),
+    },
+  );
+  write('/certification-training', content);
 }
 
 function generateCommunity() {
@@ -525,6 +557,12 @@ function generateServicesIndex() {
       h2('Services'),
       ...groupedServiceBlocks(),
     ),
+    doc(
+      h2(servicesCopy.listing.delivery.eyebrow),
+      servicesCopy.listing.delivery.heading,
+      bullets((servicesCopy.listing.delivery.steps as { title: string; body: string }[]).map((step) => `${step.title}: ${step.body}`)),
+    ),
+    doc(h2('Frequently Asked Questions'), ...(servicesCopy.listing.faq.items as { question: string; answer: string }[]).map((item) => `### ${item.question}\n\n${item.answer}`)),
 
     {
       hr: true,
@@ -778,6 +816,7 @@ generateTeam();
 generateLeadershipProfiles();
 generateQualitySafety();
 generateCommunity();
+generateCertificationTraining();
 generateInnovation();
 generateContact();
 generateServicesIndex();

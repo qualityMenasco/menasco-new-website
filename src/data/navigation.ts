@@ -105,10 +105,8 @@ export const servicesNavigationGroups: NavGroupEntry[] = [
   },
 ];
 
-/** Structure-only routes awaiting approved content — rendered noindex and kept out of the sitemap and llms.txt. */
-export const pendingContentPaths = [
-  '/certification-training',
-] as const;
+/** Structure-only routes awaiting approved content — rendered noindex and kept out of the sitemap and llms.txt. (Empty since Certification & Training got its own page.) */
+export const pendingContentPaths: readonly string[] = [];
 
 /** Every Services destination (groups with their own page + their links), flattened in menu order — footer and active-state matching. */
 export const servicesNavigation: NavGroupLinkEntry[] = servicesNavigationGroups.flatMap((group) => [
@@ -134,9 +132,9 @@ export const aboutNavigation: NavGroupLinkEntry[] = [
   { label: 'About MENASCO', href: '/about', i18nKey: 'aboutMenasco' },
   { label: 'Leadership Team', href: '/team', i18nKey: 'leadershipTeam' },
   { label: 'Quality & Safety', href: '/quality-safety', i18nKey: 'qualitySafety' },
-  { label: 'MENASCO Certification & Training', href: '/certification-training', i18nKey: 'certificationTraining' },
   { label: 'Community & People', href: '/community-people', i18nKey: 'communityPeople' },
   { label: 'Innovation & Technology', href: '/innovation-technology', i18nKey: 'innovationTechnology' },
+  { label: 'MENASCO Certification & Training', href: '/certification-training', i18nKey: 'certificationTraining' },
 ];
 
 export const footerCompanyLinks: NavLinkEntry[] = [

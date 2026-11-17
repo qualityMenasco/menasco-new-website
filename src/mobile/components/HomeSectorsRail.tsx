@@ -18,7 +18,7 @@ import { sectorImages, sectorKeys } from '../../data/homeSectors';
  * - Pop on hover (mouse/trackpad): the card lifts with a deeper shadow and
  *   the photo eases in.
  * - Cards are sized so about 1.5-2.5 show at once from 480px up.
- * - Small phones (under 480px): no arrows; a scroll indicator instead.
+ * - Small phones (under 480px): no arrows; position dots instead.
  * - From 480px: prev/next arrows at the bottom right for mouse users; trackpads
  *   and touch scroll the row natively. Each arrow disables at its end, and
  *   in RTL "next" follows the content flow (scrollLeft runs negative).
@@ -29,8 +29,8 @@ export function HomeSectorsRail() {
   const railRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState<Set<string>>(() => new Set(sectors.map((s) => s.id)));
   const [edges, setEdges] = useState({ canPrev: false, canNext: true });
-  // Small phones: scroll indicator (thumb size = share of the row in view, position = how far along).
-  const [bar, setBar] = useState({ size: 1, offset: 0 });
+  // Small phones: position dots (same style as the Community & People photo rails).
+  const [active, setActive] = useState(0);
 
   const updateEdges = useCallback(() => {
     const rail = railRef.current;
@@ -41,8 +41,9 @@ export function HomeSectorsRail() {
       const next = { canPrev: travelled > 4, canNext: travelled < max - 4 };
       return prev.canPrev === next.canPrev && prev.canNext === next.canNext ? prev : next;
     });
-    const size = rail.scrollWidth ? rail.clientWidth / rail.scrollWidth : 1;
-    setBar({ size, offset: max > 0 ? (travelled / max) * (1 - size) : 0 });
+    const first = rail.firstElementChild as HTMLElement | null;
+    const index = travelled >= max - 4 ? sectors.length - 1 : first ? Math.round(travelled / (first.offsetWidth + 12)) : 0;
+    setActive(Math.min(sectors.length - 1, Math.max(0, index)));
   }, []);
 
   useEffect(() => {
@@ -123,15 +124,13 @@ export function HomeSectorsRail() {
           );
         })}
       </div>
-      {/* Small phones (under 480px): no arrows. Instead a scroll indicator
-          shows where you are in the row. */}
-      <div className="flex items-center px-4 pt-2 min-[480px]:hidden">
-        <div aria-hidden="true" className="relative h-1 flex-1 overflow-hidden rounded-full bg-gray-200">
-          <div
-            className="absolute inset-y-0 rounded-full bg-brand-600 transition-[inset-inline-start] duration-150 ease-out motion-reduce:transition-none"
-            style={{ width: `${bar.size * 100}%`, insetInlineStart: `${bar.offset * 100}%` }}
-          />
-        </div>
+      {/* Small phones (under 480px): no arrows. Instead one dot per sector,
+          the current one stretched into a short pill (same style as the
+          Community & People photo rails). */}
+      <div aria-hidden="true" className="flex justify-center gap-1.5 pt-3 min-[480px]:hidden">
+        {sectors.map((sector, index) => (
+          <span key={sector.id} className={cn('h-1.5 rounded-full transition-all duration-base', index === active ? 'w-5 bg-ink' : 'w-1.5 bg-gray-300')} />
+        ))}
       </div>
       {/* From 480px (large phones held sideways, tablets): arrows at the bottom
           right (bottom left in RTL). */}

@@ -74,7 +74,7 @@
   },
   "clients": {
     "heading": "Our Clients",
-    "description": "Established in 1994, MENASCO has earned a reputation as a trusted MEP partner for prominent developers, government authorities and utilities across the region."
+    "description": "Established in 1994, MENASCO has earned a reputation as a trusted MEP partner for prominent developers, government authorities and utilities across the globe."
   },
   "credentials": {
     "heading1": "Learn",
@@ -493,6 +493,212 @@
         "text": "Proactive inspections and centralized semantic analysis of our site WhatsApp communications catch issues earlier, delivering more quality for our clients."
       },
       "footnote": "As measured across all projects between 2022–2025."
+    }
+  },
+  "certificationTrainingPage": {
+    "seo": {
+      "title": "Certification & Training",
+      "description": "How MENASCO develops engineering talent: continuous workforce development through MENASCO Connect, a free engineering education initiative in development, and university internships on live projects."
+    },
+    "hero": {
+      "eyebrow": "Certification & Training",
+      "title": "Building Skills. Expanding Opportunity. Developing Engineers.",
+      "description": "Technical excellence begins with access to knowledge and meaningful practical experience. Through continuous employee development, accessible engineering education, and structured internships, MENASCO is creating pathways for individuals to build skills and pursue careers in the built environment.",
+      "imageAlt": "A MENASCO engineer in a branded high-visibility vest overlooking an active construction site at sunset"
+    },
+    "workforce": {
+      "eyebrow": "Continuing Education",
+      "heading": "Learning Doesn’t Stop at Employment.",
+      "paragraphs": [
+        "Engineering practices, regulations, and technologies continue to evolve. Ongoing training and professional development help employees strengthen technical competencies, develop new skills, and adapt to changing project requirements.",
+        "Through MENASCO Connect, employees can access internal training resources, organizational policies, professional development materials, and structured assessments within a unified workforce platform."
+      ],
+      "cta": "Explore Innovation & Technology",
+      "imageAlt": "Two MENASCO engineers in high-visibility vests reviewing work together on site",
+      "tab": "Continuing Education"
+    },
+    "initiative": {
+      "eyebrow": "MENASCO Academy",
+      "status": "In development",
+      "heading": "Engineering Education Shouldn’t Be Limited by Circumstance.",
+      "lead": "Talent and ambition exist everywhere, but access to quality technical education and practical industry experience is not equally available.",
+      "paragraphs": [
+        "A new MENASCO initiative, currently in development, aims to provide free engineering education to students from underserved communities, regardless of their financial circumstances or educational background. Combining academic instruction with practical training, the program will introduce participants to the technical demands of mechanical, electrical, plumbing, and fire protection engineering.",
+        "The initiative is being developed to provide a structured pathway toward MENASCO-issued certification, with opportunities to connect qualified graduates to potential employment pathways through industry placement partners across the GCC."
+      ],
+      "imageAlt": "Engineers in high-visibility vests reviewing drawings beside prefabricated MEP pipework in a fabrication hall",
+      "pathwayHeading": "The intended pathway",
+      "steps": [
+        {
+          "title": "Access",
+          "body": "Free entry to technical learning",
+          "detail": "Free engineering education for students from underserved communities, regardless of financial circumstances or educational background."
+        },
+        {
+          "title": "Learn",
+          "body": "Academic MEP fundamentals",
+          "detail": "MEP fundamentals, building systems, technical drawings, and construction methodologies."
+        },
+        {
+          "title": "Apply",
+          "body": "Practical skills and assessments",
+          "detail": "Hands-on activities that translate theoretical concepts into applied technical skills."
+        },
+        {
+          "title": "Progress",
+          "body": "Certification and career pathways",
+          "detail": "Competency assessments leading toward MENASCO-issued certification and potential GCC career opportunities."
+        }
+      ],
+      "tab": "MENASCO Academy",
+      "pathwayCta": "See the pathway",
+      "pathwayTitle": "From first lesson to certification.",
+      "prevStep": "Previous step",
+      "nextStep": "Next step",
+      "disclaimer": "MENASCO Academy is a free-of-charge, private training initiative run by MENASCO. Its certificates are company-issued and are not accredited by any government education body or third-party academic institution at this time.",
+      "disclaimerLabel": "Accreditation"
+    },
+    "internships": {
+      "eyebrow": "University Internships",
+      "heading": "Beyond the Classroom. Into the Field.",
+      "paragraphs": [
+        "University internships provide engineering students with firsthand exposure to the technical and operational realities of large-scale construction. Working alongside experienced site teams, participants observe how designs are coordinated, installed, inspected, and commissioned across complex landmark developments.",
+        "Internships help bridge academic learning and professional practice, introducing students to engineering disciplines, construction methodologies, site coordination, and the responsibilities involved in delivering major projects."
+      ],
+      "cta": "Explore Internship Opportunities",
+      "imageAlt": "The Alamein Towers, a landmark MENASCO project, on the Mediterranean coast",
+      "tab": "Internships"
+    },
+    "closing": {
+      "eyebrow": "A Long-Term Commitment",
+      "heading": "Developing Capability. Creating Opportunity.",
+      "body": "The future of engineering depends on the people entering and advancing within the profession. By investing in employees, opening access to technical education, and introducing students to real construction environments, MENASCO aims to strengthen the workforce of today while helping prepare the engineers of tomorrow.",
+      "imageAlt": "A young MENASCO engineer in a hard hat and branded high-visibility vest on site"
+    },
+    "programmes": {
+      "eyebrow": "Our Programmes",
+      "heading": "Three pathways into engineering.",
+      "tablistLabel": "Programmes"
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Questions about training at MENASCO.",
+      "intro": "Answers about Continuing Education, MENASCO Academy, and University Internships. For anything else, our team is happy to help.",
+      "contactCta": "Contact us",
+      "filterLabel": "Filter questions",
+      "all": "All",
+      "categories": {
+        "general": "General",
+        "continuing": "Continuing Education",
+        "academy": "MENASCO Academy",
+        "internships": "Internships"
+      },
+      "items": [
+        {
+          "category": "general",
+          "question": "What training and certification programmes does MENASCO offer?",
+          "answer": "MENASCO runs three programmes: Continuing Education for its own employees, MENASCO Academy, a free engineering education initiative currently in development, and University Internships that give engineering students real experience on live projects."
+        },
+        {
+          "category": "general",
+          "question": "Who are MENASCO’s training programmes for?",
+          "answer": "Continuing Education is for MENASCO employees. MENASCO Academy will be open to anyone aged 18 or over, with no previous education requirements. University Internships are for engineering students currently enrolled at university."
+        },
+        {
+          "category": "continuing",
+          "question": "How does MENASCO support continuing education for its employees?",
+          "answer": "Through MENASCO Connect, the company’s workforce platform, employees can access internal training resources, organisational policies, professional development materials, and structured assessments in one place.",
+          "link": {
+            "label": "Learn about MENASCO Connect",
+            "href": "/innovation-technology"
+          }
+        },
+        {
+          "category": "continuing",
+          "question": "Is Continuing Education open to people outside MENASCO?",
+          "answer": "No. Continuing Education is an internal programme for MENASCO employees. If you are not a MENASCO employee, MENASCO Academy and University Internships are the programmes open to you."
+        },
+        {
+          "category": "academy",
+          "question": "What is MENASCO Academy?",
+          "answer": "MENASCO Academy is a free-of-charge, private training initiative run by MENASCO and currently in development. It combines academic instruction with practical training to introduce participants to mechanical, electrical, plumbing, and fire protection engineering."
+        },
+        {
+          "category": "academy",
+          "question": "Is MENASCO Academy free?",
+          "answer": "Yes. MENASCO Academy is free of charge for participants, regardless of their financial circumstances or educational background."
+        },
+        {
+          "category": "academy",
+          "question": "Who can join MENASCO Academy?",
+          "answer": "Anyone aged 18 or over can join, and there are no previous education requirements. The countries where the programme will run are still to be announced."
+        },
+        {
+          "category": "academy",
+          "question": "What will MENASCO Academy students learn?",
+          "answer": "Students will cover MEP fundamentals, building systems, technical drawings, and construction methodologies, then apply them through hands-on practical training and competency assessments."
+        },
+        {
+          "category": "academy",
+          "question": "Is the MENASCO Academy certificate accredited?",
+          "answer": "Not at this time. MENASCO Academy certificates are private, company-issued certificates. They are not accredited by any government education body or third-party academic institution."
+        },
+        {
+          "category": "academy",
+          "question": "Will MENASCO Academy graduates be offered jobs?",
+          "answer": "The programme is being developed to connect qualified graduates with potential employment pathways through industry placement partners across the GCC. Employment is an intended pathway, not a guaranteed outcome."
+        },
+        {
+          "category": "academy",
+          "question": "When does MENASCO Academy enrolment open?",
+          "answer": "Enrolment has not been announced yet. You can register your interest through the Contact Us page on our website, which our team monitors consistently.",
+          "link": {
+            "label": "Register your interest",
+            "href": "/contact"
+          }
+        },
+        {
+          "category": "internships",
+          "question": "Does MENASCO offer engineering internships for university students?",
+          "answer": "Yes. University internships give engineering students first-hand exposure to large-scale construction, working alongside experienced site teams on complex landmark developments."
+        },
+        {
+          "category": "internships",
+          "question": "How long are MENASCO internships?",
+          "answer": "Internships run for 8 weeks (two months) and typically take place in the winter and summer, when students are on break. Some internships are also offered at other times of the year, so keep an eye on the careers portal. An internship is not a guarantee of permanent placement, but placing interns in permanent roles is our goal wherever possible.",
+          "link": {
+            "label": "Go to the careers portal",
+            "href": "/careers"
+          }
+        },
+        {
+          "category": "internships",
+          "question": "What do interns do during a MENASCO internship?",
+          "answer": "Most internships are a mix of on-site and in-office work. Interns see how designs are coordinated, installed, inspected, and commissioned, and gain exposure to engineering drawings, BIM coordination, technical submissions, and site quality procedures."
+        },
+        {
+          "category": "internships",
+          "question": "How do I apply for a MENASCO internship?",
+          "answer": "Apply through the MENASCO careers portal. You can also meet our HR and Marketing teams at career fairs near you; check the Newsroom for upcoming events we will be attending.",
+          "link": {
+            "label": "Go to the careers portal",
+            "href": "/careers"
+          },
+          "link2": {
+            "label": "See upcoming events",
+            "href": "/newsroom"
+          }
+        },
+        {
+          "category": "contact",
+          "question": "Does MENASCO accept training partnership enquiries?",
+          "answer": "Our training partners are already aligned internally, so we are not taking partnership enquiries at this time. If something other than training is of interest, please contact us.",
+          "link": {
+            "label": "Contact us",
+            "href": "/contact"
+          }
+        }
+      ]
     }
   }
 }

@@ -220,3 +220,21 @@ export function articleJsonLd({ title, description, path, datePublished, image }
     },
   };
 }
+
+export interface FaqEntry {
+  question: string;
+  answer: string;
+}
+
+/** schema.org FAQPage for a page's visible question-and-answer list (the answers must match what the page shows). */
+export function faqPageJsonLd(items: FaqEntry[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  };
+}

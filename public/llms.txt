@@ -67,7 +67,7 @@ Behind every complex development is an intricate network of systems working in h
 
 ## Projects & Sectors
 
-141 current projects across the UAE, Saudi Arabia, Egypt and the USA, organized into 4 sectors.
+138 current projects across the UAE, Saudi Arabia, Egypt and the USA, organized into 4 sectors.
 
 - Residential / Commercial: Integrated engineering solutions for residential, commercial, office, and mixed-use developments.
 - Hospitality & Landmark Entertainment: High-performance MEP delivery for premium hospitality, resort, cultural landmark, and entertainment destination environments.
@@ -84,7 +84,6 @@ Behind every complex development is an intricate network of systems working in h
 - [VELA by Omniyat](https://menascogroup.com/projects/vela-by-omniyat/llms.txt): Vela by Omniyat is an ultra-luxury waterfront residential development in Dubai. MENASCO delivered the complete MEP scope for this landmark Omniyat project.
 - [Seven Hotel](https://menascogroup.com/projects/seven-hotel/llms.txt): An exclusive beachfront hospitality development on Palm Jumeirah.
 - [Qiddiya](https://menascogroup.com/projects/qiddiya/llms.txt): MENASCO delivers specialized MEP engineering solutions for Qiddiya, one of Saudi Arabia's flagship Vision 2030 giga-projects.
-- [TEST — Industrial Facility](https://menascogroup.com/projects/test-industrial-facility/llms.txt): TEST DATA ONLY: Sample industrial facility project overview.
 - [Fujairah Hospital Maternity Department](https://menascogroup.com/projects/fujairah-hospital-maternity-department/llms.txt): The obstetrics and gynaecology department forms part of Al Fujairah Hospital, the largest government hospital in the United Arab Emirates' Eastern Region, which opened in 1984. The department provides maternity, antenatal and women's health services for the city and the surrounding east-coast communities. The wider hospital is internationally accredited and also offers emergency, cardiology, paediatric, surgical & diagnostic care.
 - [NMC Hospital Fujairah](https://menascogroup.com/projects/nmc-hospital-fujairah/llms.txt): NMC Hospital Fujairah is a private multi-speciality hospital serving Fujairah city and the surrounding east coast of the United Arab Emirates. Operating under the NMC Healthcare brand, one of the country's largest private healthcare networks, it offers outpatient clinics, inpatient wards, diagnostic imaging, laboratory services and emergency care. It complements the emirate's government hospitals and draws patients from across the Eastern Region. This staff accommodation building in Fujairah houses medical and support personnel working at a private hospital in the city. Purpose-built residential blocks of this kind are common across the United Arab Emirates healthcare sector, providing single and shared rooms together with communal dining, laundry and recreation space. Siting the building close to the hospital keeps staff within a short commute of shift work.
 - [NMC Hospital Fujairah](https://menascogroup.com/projects/nmc-hospital-fujairah-2/llms.txt): This staff accommodation building in Fujairah houses medical and support personnel working at a private hospital in the city. Purpose-built residential blocks of this kind are common across the United Arab Emirates healthcare sector, providing single and shared rooms together with communal dining, laundry and recreation space. Siting the building close to the hospital keeps staff within a short commute of shift work.
@@ -235,6 +234,6 @@ MENASCO operates through 7 strategically located offices across three continents
 
 ## Careers
 
-Explore career, internship & graduate opportunities across MENASCO’s regional operations. Join a multicultural team delivering integrated MEP, infrastructure & specialized engineering solutions across challenging, high-impact projects.
+Explore career, internship & graduate opportunities across MENASCO’s global operations. Join a multicultural team delivering integrated MEP, infrastructure & specialized engineering solutions across challenging, high-impact projects.
 
 - [Careers at MENASCO](https://main.d5ycnj71qvqrf.amplifyapp.com/)

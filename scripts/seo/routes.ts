@@ -29,6 +29,7 @@ import {
   websiteJsonLd,
   serviceEntity,
   personEntity,
+  faqPageJsonLd,
   type WebPageType,
   type BreadcrumbEntry,
 } from '../../src/seo/structuredData';
@@ -164,6 +165,18 @@ addRoute(
   (l) => fullTitle(l, tr(l, 'about', 'qualitySafetyPage.seo.title', 'Quality & Safety')),
   (l) => tr(l, 'about', 'qualitySafetyPage.seo.description', NS[l].seo.defaultDescription),
   { breadcrumb: () => [HOME, { label: 'Quality, Health & Safety', path: '/quality-safety' }] },
+);
+addRoute(
+  '/certification-training',
+  (l) => fullTitle(l, tr(l, 'about', 'certificationTrainingPage.seo.title', 'Certification & Training')),
+  (l) => tr(l, 'about', 'certificationTrainingPage.seo.description', NS[l].seo.defaultDescription),
+  {
+    breadcrumb: () => [HOME, { label: 'Certification & Training', path: '/certification-training' }],
+    extraJsonLd: (l) => {
+      const items = NS[l].about?.certificationTrainingPage?.faq?.items as { question: string; answer: string }[] | undefined;
+      return items?.length ? [faqPageJsonLd(items)] : undefined;
+    },
+  },
 );
 addRoute(
   '/community-people',
@@ -462,10 +475,4 @@ for (const project of projects) {
 // components' own <SEO> props.
 // ---------------------------------------------------------------------------
 
-const pendingDescription = (l: Locale) => tr(l, 'common', 'pendingContent.notice', NS[l].seo.defaultDescription);
-addRoute(
-  '/certification-training',
-  (l) => fullTitle(l, tr(l, 'nav', 'certificationTraining', 'MENASCO Certification & Training')),
-  pendingDescription,
-  { noIndex: true, follow: true },
-);
+// (none at present)
