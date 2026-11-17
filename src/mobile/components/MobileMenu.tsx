@@ -99,17 +99,25 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const aboutActive = aboutNavigation.some((item) => isActive(item.href));
   const servicesActive = isActive('/services');
 
-  // Slide direction (mirrored in RTL).
-  const offset = (dir: number) => `${(rtl ? -1 : 1) * dir * 28}%`;
+  // Panel slides, iOS-style: forward = the new panel slides in from the
+  // inline end while the old one drifts back; Back = the reverse. Direction is
+  // passed through AnimatePresence's `custom`, so the EXITING panel also uses
+  // the current direction (not the one it was rendered with). Mirrored in RTL.
+  const sign = rtl ? -1 : 1;
+  const panelVariants: Variants = {
+    enter: (dir: number) => ({ x: `${sign * (dir > 0 ? 100 : -30)}%`, opacity: dir > 0 ? 1 : 0 }),
+    center: { x: '0%', opacity: 1 },
+    // Leaving panels accelerate out and fade, so they never linger at the edge.
+    exit: (dir: number) =>
+      dir > 0
+        ? { x: `${sign * -30}%`, opacity: 0, transition: { duration: 0.26, ease: [0.4, 0, 1, 1] } }
+        : { x: `${sign * 100}%`, opacity: 0, transition: { duration: 0.24, ease: [0.4, 0, 1, 1] } },
+  };
   const panelMotion = reducedMotion
     ? {}
-    : {
-        initial: { opacity: 0, x: offset(direction) },
-        animate: { opacity: 1, x: '0%' },
-        exit: { opacity: 0, x: offset(-direction) },
-        transition: { duration: 0.24, ease: [0.22, 1, 0.36, 1] as const },
-      };
-  const stagger = reducedMotion ? {} : { variants: listVariants, initial: 'hidden', animate: 'show' };
+    : { custom: direction, variants: panelVariants, initial: 'enter', animate: 'center', exit: 'exit', transition: { duration: 0.34, ease: [0.32, 0.72, 0, 1] as const } };
+  // Links stagger in when the menu opens or a sub-panel opens — not when returning to the root.
+  const stagger = reducedMotion || direction < 0 ? {} : { variants: listVariants, initial: 'hidden', animate: 'show' };
   const item = reducedMotion ? {} : { variants: itemVariants };
 
   const topLink = (active: boolean) =>
@@ -177,7 +185,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             <div className="flex min-h-full flex-col px-5">
               {/* Navigation panels. */}
               <nav aria-label={t('nav:primaryNavigation')} className="relative pb-6 pt-4">
-                <AnimatePresence mode="wait" initial={false} custom={direction}>
+                <AnimatePresence mode="popLayout" initial={false} custom={direction}>
                   {panel === 'root' && (
                     <motion.div key="root" {...panelMotion}>
                       <motion.ul role="list" className="divide-y divide-gray-200" {...stagger}>

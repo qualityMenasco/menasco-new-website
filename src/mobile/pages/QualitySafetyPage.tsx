@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -141,7 +141,29 @@ function Hero() {
   const { t } = useTranslation(['about', 'common']);
   const reducedMotion = useReducedMotion();
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const panelRefs = [useRef<HTMLDivElement>(null), useRef<HTMLDivElement>(null)];
   const [panel, setPanel] = useState(0);
+  const [panelHeight, setPanelHeight] = useState<number | null>(null);
+
+  // Narrow phones: the two panels sit side by side in a swipe row, which would
+  // otherwise always be as tall as the taller (photo) panel. Size the row to
+  // the visible panel instead, and keep it in sync as content reflows.
+  useEffect(() => {
+    const measure = () => {
+      const narrow = window.matchMedia('(max-width: 439px)').matches;
+      const el = panelRefs[panel].current;
+      setPanelHeight(narrow && el ? el.offsetHeight : null);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    panelRefs.forEach((r) => r.current && ro.observe(r.current));
+    window.addEventListener('resize', measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [panel]);
   const tabs = [t('qualitySafetyPage.hero.tabs.overview'), t('qualitySafetyPage.hero.tabs.photo')];
 
   const onScroll = () => {
@@ -182,9 +204,10 @@ function Hero() {
       <div
         ref={scrollerRef}
         onScroll={onScroll}
-        className="no-scrollbar -mx-4 flex snap-x snap-mandatory items-start overflow-x-auto min-[440px]:items-center min-[440px]:mx-0 min-[440px]:grid min-[440px]:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] min-[440px]:gap-5 min-[440px]:overflow-visible sm:gap-6"
+        style={panelHeight ? { height: panelHeight } : undefined}
+        className="no-scrollbar -mx-4 flex snap-x snap-mandatory items-start overflow-x-auto overflow-y-hidden transition-[height] duration-300 ease-out motion-reduce:transition-none min-[440px]:items-center min-[440px]:mx-0 min-[440px]:grid min-[440px]:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] min-[440px]:gap-5 min-[440px]:overflow-visible sm:gap-6"
       >
-        <div id="qhse-hero-panel-0" role="tabpanel" aria-labelledby="qhse-hero-tab-0" className="w-full shrink-0 snap-start px-4 min-[440px]:w-auto min-[440px]:px-0">
+        <div ref={panelRefs[0]} id="qhse-hero-panel-0" role="tabpanel" aria-labelledby="qhse-hero-tab-0" className="w-full shrink-0 snap-start px-4 min-[440px]:w-auto min-[440px]:px-0">
           <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-400">{t('qualitySafetyPage.eyebrow')}</span>
           <h2 className="mt-2 font-display text-h1 font-semibold tracking-tight text-warmwhite text-balance min-[440px]:text-h2 sm:text-h1">{t('qualitySafetyPage.heading')}</h2>
           <p className="mt-3 text-body text-gray-300 min-[440px]:text-small sm:text-body">{t('qualitySafetyPage.description')}</p>
@@ -197,7 +220,7 @@ function Hero() {
             {t('qualitySafetyPage.downloadPolicy')}
           </a>
         </div>
-        <div id="qhse-hero-panel-1" role="tabpanel" aria-labelledby="qhse-hero-tab-1" className="w-full shrink-0 snap-start px-4 min-[440px]:w-auto min-[440px]:px-0">
+        <div ref={panelRefs[1]} id="qhse-hero-panel-1" role="tabpanel" aria-labelledby="qhse-hero-tab-1" className="w-full shrink-0 snap-start px-4 min-[440px]:w-auto min-[440px]:px-0">
           <HeroHotspots />
         </div>
       </div>
@@ -306,10 +329,10 @@ export default function QualitySafetyPage() {
 
       {/* What clients can expect, beside the site engineer's portrait at full length; the rest behind "Read more". */}
       <section className="px-4 py-10 md:grid md:grid-cols-2 md:items-center md:gap-8 md:px-8">
-        <div className="mx-auto aspect-[4/5] max-w-[22rem] overflow-hidden rounded-md bg-gray-100 md:order-2 md:max-w-none">
+        <div className="mx-auto aspect-[4/5] max-w-[22rem] overflow-hidden rounded-md bg-gray-100 md:col-start-2 md:row-start-1 md:max-w-none">
           <img src={qualitySafetyPhotos.portraits[0].src} alt={qualitySafetyPhotos.portraits[0].alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
         </div>
-        <div className="mt-6 md:mt-0">
+        <div className="mt-6 md:col-start-1 md:row-start-1 md:mt-0">
           <SectionHeader eyebrow={t('qualitySafetyPage.commitment.eyebrow')} heading={t('qualitySafetyPage.commitment.heading')} headingAs="h3" />
           <ExpandableText
             className="mt-4"
@@ -320,7 +343,7 @@ export default function QualitySafetyPage() {
           />
         </div>
         {/* The detail behind the overview: six expandable topics, the first open (full width on tablets). */}
-        <TopicAccordion topics={topics} idPrefix="qhse-topic-m" className="mt-8 md:col-span-2 md:mt-4" />
+        <TopicAccordion topics={topics} idPrefix="qhse-topic-m" className="mt-8 md:col-span-2 md:row-start-2 md:mt-4" />
       </section>
 
       {/* The three ISO certificates as one connected list. */}
