@@ -125,7 +125,7 @@ export interface BreadcrumbEntry {
  * schema.org BreadcrumbList for a route's breadcrumb trail. `locale`
  * defaults to 'en' (the canonical/unprefixed root) — pass the page's actual
  * locale so each `item` URL lands in the same locale's URL namespace as the
- * page itself (e.g. `/ar/services/mechanical`, not the English path),
+ * page itself (e.g. `/ar/services/mep`, not the English path),
  * using the same `withLocale` helper every other canonical/hreflang URL on
  * the site is built from — no second URL-building system.
  */

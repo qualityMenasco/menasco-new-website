@@ -49,13 +49,13 @@ export function SectorsShowcase() {
   const arrow = 'inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-300 text-ink transition-colors duration-base hover:border-ink disabled:cursor-default disabled:opacity-35';
 
   return (
-    <Section background="stone" spacing="md">
+    <Section background="stone" spacing="sm">
       <SectionHeader eyebrow={t('home:sectors.eyebrow')} heading={t('home:sectors.heading')} headingAs="h3" description={t('home:sectors.description')} className="max-w-2xl" />
       <div
         id="home-sectors-tiles"
         ref={railRef}
         onScroll={updateEdges}
-        className="no-scrollbar -mx-2 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-2 px-2 pb-4 pt-2 xl:mx-0 xl:grid xl:grid-cols-4 xl:overflow-visible xl:px-0"
+        className="no-scrollbar -mx-2 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-2 px-2 pb-4 pt-2 xl:mx-0 xl:grid xl:grid-cols-4 xl:overflow-visible xl:px-0"
       >
         {sectors.map((sector) => {
           const key = sectorKeys[sector.slug] ?? sector.slug;
@@ -66,7 +66,7 @@ export function SectorsShowcase() {
             <SmartLink
               key={sector.id}
               href={`/projects/categories?category=${sector.slug}`}
-              className="group relative block aspect-square w-[42%] shrink-0 snap-start overflow-hidden xl:aspect-[3/4] xl:w-auto rounded-md bg-ink shadow-sm transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl focus-visible:-translate-y-1.5 focus-visible:shadow-xl motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
+              className="group relative block aspect-square w-[42%] shrink-0 snap-start overflow-hidden xl:aspect-[4/5] xl:w-auto rounded-md bg-ink shadow-sm transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl focus-visible:-translate-y-1.5 focus-visible:shadow-xl motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
             >
               <img
                 src={sectorImages[sector.slug]}

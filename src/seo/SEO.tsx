@@ -8,7 +8,7 @@ import { webPageJsonLd, breadcrumbJsonLd, serializeJsonLd, type WebPageType, typ
 export interface SEOProps {
   title: string;
   description: string;
-  /** Canonical (English) path only, e.g. "/services/mechanical" — always unprefixed, regardless of current locale; this component derives the current locale's own canonical URL and the /ar hreflang alternate from it. */
+  /** Canonical (English) path only, e.g. "/services/mep" — always unprefixed, regardless of current locale; this component derives the current locale's own canonical URL and the /ar hreflang alternate from it. */
   path: string;
   ogImage?: string;
   noIndex?: boolean;

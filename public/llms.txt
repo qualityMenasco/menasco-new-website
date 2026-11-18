@@ -24,7 +24,7 @@ MENASCO Mechanical Contracting LLC is one of MENA's leading providers of integra
 - Dubai, UAE is MENASCO’s Head Office.
 - Regional offices in Riyadh (MENASCO KSA), Cairo (MENASCO Misr), London (United Kingdom), Denver (United States), Amman (Jordan), Damascus (Syria).
 - Serves sectors including Residential / Commercial, Hospitality & Landmark Entertainment, Advanced Technical Facilities, Infrastructure & Utilities.
-- Core service lines include Mechanical, Electrical, Plumbing, Fire Protection, BIM & Digital Engineering, Manufacturing & Prefabrication, EPC, alongside dedicated data center MEP delivery.
+- Core service lines include MEP, Civil, Manufacturing & Prefabrication, EPC, Data Centers, alongside dedicated data center MEP delivery.
 - Delivers specialist engineering for data centers, mission-critical, healthcare, energy, and other technically demanding facilities.
 - Project-delivery approach incorporates early project engagement, BIM-driven coordination, and disciplined execution.
 - Maintains a dedicated Innovation & Technology ecosystem spanning Automatic Tendering Logic Assessment System (ATLAS), LYNX, AI Engineering, MENASCO Connect.
@@ -39,21 +39,20 @@ Behind every complex development is an intricate network of systems working in h
 ### MEP
 
 - [MEP Contractor in the UAE & GCC | Mechanical, Electrical, Plumbing & Fire | MENASCO](https://menascogroup.com/services/mep/llms.txt): MENASCO is an MEP contractor in the UAE and GCC delivering mechanical, electrical, plumbing and fire protection systems, BIM-coordinated from design to commissioning.
-- [Mechanical](https://menascogroup.com/services/mechanical/llms.txt): HVAC, chilled-water and plant systems engineered for regional climate loads.
-- [Electrical](https://menascogroup.com/services/electrical/llms.txt): Power distribution, building management and low-current systems, coordinated end to end.
-- [Plumbing](https://menascogroup.com/services/plumbing/llms.txt): Water supply, drainage and sanitary systems built for long-term reliability.
-- [Fire Protection](https://menascogroup.com/services/fire-protection/llms.txt): MENASCO delivers integrated fire protection, firefighting, fire detection, and life safety systems for residential, commercial, hospitality, industrial, infrastructure & mission-critical projects across the UAE and the region.
+
+Covers: Mechanical Systems, Electrical & ELV Systems, Plumbing, Water & Drainage Systems, Fire Protection & Life Safety Systems.
 
 ### Civil
 
 - [Civil Works Coordination](https://menascogroup.com/services/civil/llms.txt): MENASCO coordinates civil and structural works with our MEP delivery through a trusted civil engineering partner, from design through handover.
-- [BIM & Digital Engineering](https://menascogroup.com/services/bim-digital-engineering/llms.txt): Federated coordination and clash detection that de-risk delivery before site works begin.
+
+Covers: BIM & Digital Engineering.
 
 ### Manufacturing & Prefabrication
 
 - [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt): Off-site production for faster, more consistent on-site installation.
-- [Modular MEP Solutions](https://menascogroup.com/services/manufacturing-prefabrication/modular/llms.txt): MENASCO delivers factory-built modular MEP assemblies, including modular data-center whitespace solutions, produced off-site for faster, higher-quality installation.
-- [Custom Engineered Components](https://menascogroup.com/services/manufacturing-prefabrication/custom/llms.txt): MENASCO delivers project-specific, custom-engineered MEP components for complex or non-standard installations, through our manufacturing partners.
+
+Covers: Modular, Custom.
 
 ### EPC
 
@@ -212,7 +211,7 @@ MENASCO is investing in proprietary technologies, artificial intelligence, enter
 
 ## Quality, Health, Safety & Environment
 
-MENASCO delivers electro-mechanical and MEP contracting services across three continents, built on quality management, health and safety, and engineering excellence. Our team is proudly governed by an integrated QHSE system certified to ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018.
+Quality, health, safety, and environmental responsibility are embedded in every stage of project delivery, guided by international standards and a commitment to continuous improvement. An integrated QHSE management system, certified to ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018, supports consistent practices, proactive risk management, and accountability across operations.
 
 - [Quality, Health & Safety](https://menascogroup.com/quality-safety/llms.txt)
 

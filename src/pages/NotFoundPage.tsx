@@ -1,24 +1,14 @@
-import { Compass } from 'lucide-react';
-import { Section } from '../components/layout/Section';
-import { Stack } from '../components/layout/Stack';
-import { EmptyState } from '../components/feedback/EmptyState';
+import { useTranslation } from 'react-i18next';
+import { StatusScreen } from '../components/feedback/StatusScreen';
 import { SEO } from '../seo/SEO';
 
+/** 404 page (the router's catch-all route) — shown inside the normal site header and footer. */
 export default function NotFoundPage() {
+  const { t } = useTranslation('common');
   return (
     <>
-      <SEO title="Page Not Found" description="The page you're looking for doesn't exist." path="/404" noIndex />
-      <Section spacing="lg" background="warmwhite">
-        <Stack space="lg">
-          <EmptyState
-            icon={Compass}
-            title="Page not found"
-            description="The page you're looking for may have moved or no longer exists."
-            action={{ label: 'Back to homepage', href: '/' }}
-            headingAs="h1"
-          />
-        </Stack>
-      </Section>
+      <SEO title={t('errorPages.notFound.seoTitle')} description={t('errorPages.notFound.description')} path="/404" noIndex />
+      <StatusScreen kind="notFound" />
     </>
   );
 }

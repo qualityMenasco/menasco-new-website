@@ -1,75 +1,10 @@
 {
-  "operatingCountries": {
-    "label": "Delivering across",
-    "items": [
-      {
-        "label": "United Arab Emirates",
-        "href": "/#regional-presence"
-      },
-      {
-        "label": "Saudi Arabia",
-        "href": "/#regional-presence"
-      },
-      {
-        "label": "Egypt",
-        "href": "/#regional-presence"
-      },
-      {
-        "label": "United Kingdom",
-        "href": "/#regional-presence"
-      },
-      {
-        "label": "United States",
-        "href": "/#regional-presence"
-      },
-      {
-        "label": "Jordan",
-        "href": "/#regional-presence"
-      },
-      {
-        "label": "Syria",
-        "href": "/#regional-presence"
-      }
-    ]
-  },
   "listing": {
     "eyebrow": "What We Deliver",
     "heading": "Integrated MEP services",
     "description": "MEP works form the foundation of our expertise, supported by a broad range of complementary capabilities to meet complex project requirements. Strategic civil partnerships enable unified delivery of wider construction scopes, while established procurement networks and exclusive vendor relationships strengthen our EPC offering. With fabrication capabilities across three countries and specialized expertise in data centers and mission-critical infrastructure, we deliver projects ranging from modular MEP installations to highly redundant, technically demanding facilities.",
     "heroImageAlt": "Rooftop cooling towers and plant equipment above a city skyline at dusk",
-    "keywords": {
-      "label": "MENASCO services",
-      "items": [
-        {
-          "label": "MEP contractor in the UAE",
-          "href": "/services/mep"
-        },
-        {
-          "label": "Civil & structural works",
-          "href": "/services/civil"
-        },
-        {
-          "label": "EPC contracting",
-          "href": "/services/turnkey-developments"
-        },
-        {
-          "label": "Data center MEP",
-          "href": "/services/data-centers"
-        },
-        {
-          "label": "Modular MEP prefabrication",
-          "href": "/services/manufacturing-prefabrication/modular"
-        },
-        {
-          "label": "Custom MEP fabrication",
-          "href": "/services/manufacturing-prefabrication/custom"
-        },
-        {
-          "label": "BIM & digital engineering",
-          "href": "/services/bim-digital-engineering"
-        }
-      ]
-    },
+    "heroPortraitImageAlt": "Fire suppression riser assembly with control valves and actuator stations in a MENASCO-installed plant room",
     "sectorSolution": "Sector solution",
     "delivery": {
       "stepsLabel": "Delivery steps",
@@ -318,75 +253,6 @@
         }
       ]
     },
-    "fireProtection": {
-      "name": "Fire Protection",
-      "seoTitle": "Fire Protection & Life Safety",
-      "seoDescription": "MENASCO delivers integrated fire protection and life safety systems, including firefighting, detection and suppression, for complex developments across the UAE.",
-      "shortDescription": "Detection, suppression and life-safety systems delivered to code.",
-      "introduction": "MENASCO delivers integrated fire protection, firefighting, fire detection, and life safety systems for residential, commercial, hospitality, industrial, infrastructure & mission-critical projects across the UAE and the region.",
-      "detailDescription": "",
-      "capabilitiesHeading": "Our Fire Protection and Life Safety Capabilities Include:",
-      "capabilities": [
-        "Automatic Fire Sprinkler Systems",
-        "Fire Hydrant & External Firefighting Systems",
-        "Fire Hose Reel & Landing-Valve Systems",
-        "Wet-Riser & Dry-Riser Systems",
-        "Firefighting Pump Rooms & Pump Sets",
-        "Fire-Water Storage & Distribution Systems",
-        "Fire Detection & Alarm Systems",
-        "Addressable and Conventional Fire Alarm Systems",
-        "Public Address & Voice-Alarm Systems (PAVA)",
-        "Emergency Voice-Evacuation Systems",
-        "Smoke Detection and Aspiration Systems",
-        "Gas and Flame Detection Systems",
-        "Clean-Agent Fire-Suppression Systems",
-        "CO₂ Fire-Suppression Systems",
-        "Foam & Water-Mist Fire-Suppression Systems",
-        "Kitchen-Hood & Wet-Chemical Suppression Systems",
-        "Fire Extinguishers & First-Aid Firefighting Equipment",
-        "Smoke-Control & Staircase-Pressurisation Systems",
-        "Fireman Intercom & Emergency Communication Systems",
-        "Fire Alarm Cause & Effect Programming",
-        "Testing, Commissioning, Integration & Handover"
-      ],
-      "sections": [
-        {
-          "heading": "Firefighting & Water-Based Suppression",
-          "paragraph": "MENASCO's fire protection scope covers automatic fire sprinkler systems, fire hydrant and external firefighting systems, and fire hose reel and landing-valve systems, supported by wet-riser and dry-riser systems, firefighting pump rooms and pump sets, and fire-water storage and distribution systems."
-        },
-        {
-          "heading": "Fire Detection & Alarm",
-          "paragraph": "Fire detection and alarm systems, in addressable and conventional configurations, are supported by smoke detection and aspiration systems and gas and flame detection systems, with fire alarm cause-and-effect programming coordinating the response of connected building systems."
-        },
-        {
-          "heading": "Life-Safety Communication & Evacuation",
-          "paragraph": "In an emergency, occupants and firefighting teams depend on dedicated communication and evacuation systems:",
-          "list": [
-            "Public Address & Voice-Alarm Systems (PAVA)",
-            "Emergency Voice-Evacuation Systems",
-            "Smoke-Control & Staircase-Pressurisation Systems",
-            "Fireman Intercom & Emergency Communication Systems"
-          ]
-        },
-        {
-          "heading": "Specialist Suppression & Handover",
-          "paragraph": "Beyond water-based suppression, MENASCO installs specialist systems suited to sensitive or high-value spaces, including clean-agent and CO₂ fire-suppression systems, foam and water-mist suppression, and kitchen-hood and wet-chemical suppression for commercial kitchens, together with fire extinguishers and first-aid firefighting equipment. Every system is tested, commissioned, integrated and handed over ready for use."
-        }
-      ]
-    },
-    "bimDigitalEngineering": {
-      "name": "BIM & Digital Engineering",
-      "shortDescription": "Federated coordination and clash detection that de-risk delivery before site works begin.",
-      "introduction": "MENASCO uses BIM-driven coordination to resolve multidisciplinary clashes, validate constructability, and keep delivery data-driven from design through handover.",
-      "capabilities": [
-        "BIM-driven coordination",
-        "Digital engineering",
-        "Clash detection",
-        "Constructability review",
-        "Multidisciplinary coordination",
-        "Data-driven project delivery"
-      ]
-    },
     "manufacturingPrefabrication": {
       "name": "Manufacturing & Prefabrication",
       "shortDescription": "Off-site production for faster, more consistent on-site installation.",
@@ -543,72 +409,6 @@
         "content": "Yes. MENASCO provides retrofit, upgrade & expansion solutions for existing data center facilities, including power upgrades, cooling optimization, infrastructure enhancement, and system modernization while minimizing operational disruption."
       }
     ]
-  },
-  "bimPage": {
-    "seo": {
-      "title": "BIM & MEP Coordination",
-      "description": "MENASCO's in-house BIM team delivers ISO 19650-aligned digital coordination for MEP engineering, reducing project risk and supporting facility management."
-    },
-    "serviceEyebrow": "Service",
-    "downloadCompanyProfile": "Download Company Profile",
-    "intro": {
-      "eyebrow": "BIM at MENASCO",
-      "heading": "Coordinated From Design to Handover",
-      "paragraph": "Building Information Modeling is central to how MENASCO designs, coordinates, and delivers complex MEP projects. Our in-house BIM team applies ISO 19650 principles to build intelligent, data-rich models that align every discipline and support informed decisions at every stage."
-    },
-    "capabilities": {
-      "eyebrow": "Core Capabilities",
-      "heading": "Core BIM Capabilities",
-      "items": [
-        {
-          "title": "Federated BIM Coordination",
-          "description": "Every engineering discipline is modeled together, so conflicts surface long before construction starts."
-        },
-        {
-          "title": "Clash Detection & Resolution",
-          "description": "Multidisciplinary clashes are identified and resolved before installation begins on site."
-        },
-        {
-          "title": "Constructability Review",
-          "description": "Sequencing and installation plans are reviewed against the model before mobilization."
-        },
-        {
-          "title": "Data-Driven Delivery",
-          "description": "Coordinated model data carries through procurement and fabrication to support long-term facility management."
-        }
-      ]
-    },
-    "workflow": {
-      "eyebrow": "Project Lifecycle",
-      "heading": "BIM Through Every Delivery Stage",
-      "steps": [
-        {
-          "eyebrow": "Design",
-          "title": "ISO 19650-Aligned Workflows",
-          "description": "Digital delivery is structured around ISO 19650 principles from the earliest design stage."
-        },
-        {
-          "eyebrow": "Coordination",
-          "title": "Multidisciplinary Coordination",
-          "description": "Mechanical, electrical, and plumbing systems are coordinated within one federated model."
-        },
-        {
-          "eyebrow": "Construction",
-          "title": "Model-Based Delivery",
-          "description": "Fabrication and installation are guided directly by the coordinated model."
-        },
-        {
-          "eyebrow": "Handover",
-          "title": "Asset Information & Handover",
-          "description": "As-built model data is handed over to support long-term facility management."
-        }
-      ]
-    },
-    "closing": {
-      "heading": "Bring Coordinated BIM Delivery to Your Project",
-      "description": "See how MENASCO's digital engineering approach supports projects across the region, from design through handover.",
-      "cta": "View Our Projects"
-    }
   },
   "manufacturingPage": {
     "seo": {
@@ -980,49 +780,12 @@
        "description": "MENASCO is an MEP contractor in the UAE and GCC delivering mechanical, electrical, plumbing and fire protection systems, BIM-coordinated from design to commissioning."
      },
      "hero": {
-       "eyebrow": "MEP Contractor · UAE & GCC",
-       "title": "Complex Building Systems. One Integrated Discipline.",
+       "eyebrow": "Global MEP Contractor",
+       "title": "Complexity Coordinated With Precision",
        "description": "Mechanical, electrical, plumbing, and fire protection works form the foundation of MENASCO's expertise. From technically demanding infrastructure to large-scale commercial developments, each discipline is brought together through coordinated engineering, installation, testing, and commissioning.",
        "primaryCta": "Explore capabilities",
        "secondaryCta": "View projects",
-       "imageAlt": "MEP plant room with insulated chilled-water pipework, pumps and heat exchangers on a MENASCO project",
-       "keywords": {
-         "label": "MEP specialisms",
-         "items": [
-           {
-             "label": "MEP contracting in Dubai & Abu Dhabi",
-             "href": "/about"
-           },
-           {
-             "label": "HVAC & chilled water",
-             "href": "/services/mechanical"
-           },
-           {
-             "label": "Electrical & ELV systems",
-             "href": "/services/electrical"
-           },
-           {
-             "label": "Firefighting & fire alarm",
-             "href": "/services/fire-protection"
-           },
-           {
-             "label": "Plumbing & drainage",
-             "href": "/services/plumbing"
-           },
-           {
-             "label": "BIM coordination",
-             "href": "/services/bim-digital-engineering"
-           },
-           {
-             "label": "Testing & commissioning",
-             "href": "/quality-safety"
-           },
-           {
-             "label": "Shell & core and fit-out",
-             "href": "/services"
-           }
-         ]
-       }
+       "imageAlt": "MEP plant room with insulated chilled-water pipework, pumps and heat exchangers on a MENASCO project"
      },
      "disciplinesSection": {
        "eyebrow": "Technical disciplines",
@@ -1033,32 +796,24 @@
            "label": "Mechanical",
            "title": "Mechanical Systems",
            "description": "HVAC, ventilation, chilled-water networks, central cooling plants, and mechanical equipment installations.",
-           "cta": "Explore Mechanical",
-           "href": "/services/mechanical",
            "imageAlt": "Air-cooled chiller plant serving a mission-critical facility"
          },
          {
            "label": "Electrical",
            "title": "Electrical & ELV",
            "description": "Power distribution, lighting, backup power, low-current infrastructure, and integrated building technologies.",
-           "cta": "Explore Electrical & ELV",
-           "href": "/services/electrical",
            "imageAlt": "Distribution board with miniature circuit breakers and wiring"
          },
          {
            "label": "Water Systems",
            "title": "Plumbing, Water & Drainage",
            "description": "Water supply, treatment, pumping, drainage, and sanitary systems for complex developments.",
-           "cta": "Explore Water Systems",
-           "href": "/services/plumbing",
            "imageAlt": "Pipework gallery with control valves and pumping equipment"
          },
          {
            "label": "Life Safety",
            "title": "Fire Protection & Life Safety",
            "description": "Fire detection, alarms, suppression, firefighting infrastructure, and integrated life safety systems.",
-           "cta": "Explore Fire & Life Safety",
-           "href": "/services/fire-protection",
            "imageAlt": "Fire pump set with gauges and valves in a pump room"
          }
        ]
@@ -1221,10 +976,10 @@
       "heading": "Explore Each MEP Discipline",
       "paragraph1": "Every MEP discipline is delivered by the same in-house MENASCO team, working from a shared design and programme.",
       "items": [
-        { "title": "Mechanical", "description": "HVAC, chilled-water and plant systems.", "href": "/services/mechanical" },
-        { "title": "Electrical", "description": "Power distribution and ELV systems.", "href": "/services/electrical" },
-        { "title": "Plumbing", "description": "Water supply, drainage and treatment systems.", "href": "/services/plumbing" },
-        { "title": "Fire Protection", "description": "Fire detection, suppression and life safety.", "href": "/services/fire-protection" }
+        { "title": "Mechanical", "description": "HVAC, chilled-water and plant systems." },
+        { "title": "Electrical", "description": "Power distribution and ELV systems." },
+        { "title": "Plumbing", "description": "Water supply, drainage and treatment systems." },
+        { "title": "Fire Protection", "description": "Fire detection, suppression and life safety." }
       ]
     },
     "qualitySection": {
@@ -1438,55 +1193,5 @@
       "description": "From site works through structural interfaces and building-services installation, MENASCO coordinates with our civil engineering partner to keep every discipline working from the same plan.",
       "primaryLabel": "Explore Our Projects"
     }
-  },
-  "modularPage": {
-    "seo": {
-      "title": "Modular MEP Solutions",
-      "description": "MENASCO delivers factory-built modular MEP assemblies, including modular data-center whitespace solutions, produced off-site for faster, higher-quality installation."
-    },
-    "name": "Modular MEP Solutions",
-    "hero": {
-      "description": "MENASCO's modular MEP capability delivers complete mechanical, electrical and plumbing assemblies as factory-built units, produced in controlled manufacturing environments before arriving on site. From prefabricated plant skids to modular data-center whitespace solutions, our modular approach reduces on-site installation time while maintaining the same engineering standards applied across every MENASCO project."
-    },
-    "sections": [
-      {
-        "heading": "What We Deliver",
-        "paragraph": "Our modular scope spans complete plant-room skids, prefabricated MEP modules and containerised building-services units, engineered and assembled off-site to project-specific requirements before being transported and installed as complete units."
-      },
-      {
-        "heading": "Modular Data Center Solutions",
-        "paragraph": "For data center and mission-critical projects, modular prefabrication extends to whitespace support solutions — factory-built mechanical and electrical plant modules that are tested before leaving the manufacturing environment and installed with minimal on-site work."
-      },
-      {
-        "heading": "Why Modular",
-        "paragraph": "Building complete assemblies off-site, ahead of installation, delivers measurable advantages over conventional on-site construction:",
-        "list": ["Faster on-site installation", "Reduced on-site labour and congestion", "Consistent factory-controlled quality", "Lower exposure to weather and site delays"]
-      }
-    ]
-  },
-  "customPage": {
-    "seo": {
-      "title": "Custom Engineered Components",
-      "description": "MENASCO delivers project-specific, custom-engineered MEP components for complex or non-standard installations, through our manufacturing partners."
-    },
-    "name": "Custom Engineered Components",
-    "hero": {
-      "description": "Not every project fits a standard specification. MENASCO's custom engineering capability, delivered through our manufacturing partners, produces project-specific MEP components engineered to the exact requirements of complex or non-standard installations — from bespoke plant assemblies to purpose-built containment and support systems."
-    },
-    "sections": [
-      {
-        "heading": "Engineered to Project Requirements",
-        "paragraph": "Where standard components don't fit a project's layout, loads or sequencing, MENASCO's engineering teams design custom MEP assemblies in close coordination with our manufacturing partners, translating project-specific requirements into fabricated components built to exact tolerances."
-      },
-      {
-        "heading": "Where Custom Fabrication Applies",
-        "paragraph": "Custom-engineered components are typically used where standard products cannot meet a project's specific constraints:",
-        "list": ["Non-standard plant-room layouts", "Complex structural or spatial constraints", "Purpose-built support and containment systems", "Specialist process or industrial requirements"]
-      },
-      {
-        "heading": "Quality & Coordination",
-        "paragraph": "Every custom component is coordinated through the same BIM-based design process applied across MENASCO's standard manufacturing scope, ensuring custom-fabricated elements integrate cleanly with the rest of the project's MEP systems before and during installation."
-      }
-    ]
   }
 }

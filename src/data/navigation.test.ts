@@ -5,9 +5,11 @@ import {
   aboutNavigation,
   dataCentreServiceLink,
   footerServiceLinks,
+  headerServiceLinks,
   pendingContentPaths,
-  servicesNavigation,
   servicesNavigationGroups,
+  subServiceHref,
+  umbrellaServiceLinks,
 } from './navigation';
 import { services } from './services';
 
@@ -17,9 +19,13 @@ const readLocale = (locale: 'en' | 'ar', ns: string) =>
 const lookup = (tree: Record<string, unknown>, dottedKey: string): unknown =>
   dottedKey.split('.').reduce<unknown>((node, part) => (node && typeof node === 'object' ? (node as Record<string, unknown>)[part] : undefined), tree);
 
+/** Every umbrella service page with a route in src/app/router.tsx. */
+const UMBRELLA_PAGES = ['/services/mep', '/services/civil', '/services/manufacturing-prefabrication', '/services/turnkey-developments', '/services/data-centers'];
+
 describe('navigation data', () => {
   const navKeys = [
     ...servicesNavigationGroups.flatMap((group) => [group.i18nKey, ...group.links.map((link) => link.i18nKey)]),
+    ...headerServiceLinks.map((link) => link.i18nKey),
     ...aboutNavigation.map((link) => link.i18nKey),
     dataCentreServiceLink.i18nKey,
   ];
@@ -30,14 +36,36 @@ describe('navigation data', () => {
     expect(missing).toEqual([]);
   });
 
-  it('keeps every existing service URL reachable from the Services navigation', () => {
-    const hrefs = servicesNavigation.map((link) => link.href);
-    for (const service of services) expect(hrefs).toContain(`/services/${service.slug}`);
+  it('header Services menu lists All Services and the umbrella pages only, in order', () => {
+    expect(headerServiceLinks.map((link) => link.href)).toEqual(['/services', ...UMBRELLA_PAGES]);
   });
 
-  it('has unique destinations', () => {
-    const hrefs = servicesNavigation.map((link) => link.href);
+  it('umbrella links are unique and each one is a real page', () => {
+    const hrefs = umbrellaServiceLinks.map((link) => link.href);
     expect(new Set(hrefs).size).toBe(hrefs.length);
+    expect(hrefs).toEqual(UMBRELLA_PAGES);
+  });
+
+  it('every sub-service links to its umbrella page, or a section of it', () => {
+    for (const group of servicesNavigationGroups) {
+      for (const link of group.links) {
+        expect(link.href).toBe(subServiceHref(group.href, link.sectionId));
+        expect(link.href === group.href || link.href.startsWith(`${group.href}#`)).toBe(true);
+      }
+    }
+  });
+
+  it('footer lists every umbrella and every sub-service, with no removed sub-service URLs', () => {
+    const labels = footerServiceLinks.map((link) => link.label);
+    for (const group of servicesNavigationGroups) {
+      expect(labels).toContain(group.label);
+      for (const link of group.links) expect(labels).toContain(link.label);
+    }
+    expect(labels).toContain(dataCentreServiceLink.label);
+    expect(new Set(labels).size).toBe(labels.length);
+    for (const link of footerServiceLinks) {
+      expect(UMBRELLA_PAGES.some((page) => link.href === page || link.href.startsWith(`${page}#`)), link.href).toBe(true);
+    }
   });
 
   it('keeps structure-only pages out of the footer', () => {
@@ -45,37 +73,7 @@ describe('navigation data', () => {
     for (const path of pendingContentPaths) expect(footerHrefs).not.toContain(path);
   });
 
-  it('only marks destinations that exist in the navigation as pending', () => {
-    const known = [...servicesNavigation, ...aboutNavigation].map((link) => link.href);
-    for (const path of pendingContentPaths) expect(known).toContain(path);
-  });
-
-  it('every service group href is either a live service page or explicitly pending', () => {
-    // MEP and Civil are live umbrella pages with their own dedicated page
-    // components (src/app/router.tsx) rather than a services.ts record.
-    const liveSlugs = new Set([...services.map((service) => `/services/${service.slug}`), '/services/mep', '/services/civil']);
-    for (const group of servicesNavigationGroups) {
-      if (!group.href) continue;
-      const isLiveService = liveSlugs.has(group.href);
-      const isPending = (pendingContentPaths as readonly string[]).includes(group.href);
-      expect(isLiveService || isPending, `${group.href} is neither a live service page nor registered as pending`).toBe(true);
-    }
-  });
-
-  it('no pending parent-category page collides with a services.ts slug', () => {
-    // Structure-only parent pages (mep, civil, ...) get their own explicit
-    // route ahead of services/:slug (src/app/router.tsx) — this only matters
-    // if their slug happens to also be a real service's slug, which would
-    // make the explicit route shadow it. Manufacturing & Prefabrication is
-    // exempt: its href IS the real live service page, by design.
-    const exemptFromCollisionCheck = new Set(['manufacturing-prefabrication']);
-    const pendingGroupSlugs = servicesNavigationGroups
-      .filter((g) => g.href && (pendingContentPaths as readonly string[]).includes(g.href))
-      .map((g) => g.href!.replace('/services/', ''))
-      .filter((slug) => !exemptFromCollisionCheck.has(slug));
-    for (const slug of pendingGroupSlugs) {
-      const matchesRealService = services.some((service) => service.slug === slug);
-      expect(matchesRealService, `${slug} collides with a real service slug`).toBe(false);
-    }
+  it('every services.ts record is an umbrella page', () => {
+    for (const service of services) expect(UMBRELLA_PAGES).toContain(`/services/${service.slug}`);
   });
 });

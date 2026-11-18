@@ -59,12 +59,11 @@ describe('buildSitemapXml', () => {
 
   it('includes EN/AR pairs for core pages', () => {
     for (const path of [
-      '/services/mechanical',
       '/services/mep',
       '/services/civil',
       '/services/turnkey-developments',
-      '/services/manufacturing-prefabrication/modular',
-      '/services/manufacturing-prefabrication/custom',
+      '/services/manufacturing-prefabrication',
+      '/services/data-centers',
       '/services',
       '/about',
     ]) {
@@ -73,6 +72,21 @@ describe('buildSitemapXml', () => {
     }
     expect(locs).toContain(`${SITE}/`);
     expect(locs).toContain(`${SITE}/ar`);
+  });
+
+  it('omits the removed sub-service pages (now sections of their umbrella page)', () => {
+    for (const path of [
+      '/services/mechanical',
+      '/services/electrical',
+      '/services/plumbing',
+      '/services/fire-protection',
+      '/services/bim-digital-engineering',
+      '/services/manufacturing-prefabrication/modular',
+      '/services/manufacturing-prefabrication/custom',
+    ]) {
+      expect(locs).not.toContain(`${SITE}${path}`);
+      expect(locs).not.toContain(`${SITE}/ar${path}`);
+    }
   });
 });
 

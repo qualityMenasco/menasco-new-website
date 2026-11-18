@@ -1,7 +1,5 @@
-import { ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { MobileVideo } from './MobileVideo';
-import { LocaleLink } from './LocaleLink';
 import { foundingYear } from '../../data/companyStats';
 
 /**
@@ -24,16 +22,6 @@ export function MobileHero() {
           {t('home:hero.eyebrow', { year: foundingYear })}
         </span>
         <h1 className="font-display text-h1 font-semibold leading-tight text-warmwhite">{t('home:hero.title')}</h1>
-        <p className="max-w-sm text-body text-gray-200">{t('home:hero.description')}</p>
-        <div className="mt-3">
-          <LocaleLink
-            to="/projects/categories"
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-md bg-brand-600 text-body font-semibold text-warmwhite md:inline-flex md:h-11 md:w-fit md:px-6 md:text-small"
-          >
-            {t('home:hero.ctaPrimary')}
-            <ArrowRight size={18} aria-hidden="true" className="rtl:rotate-180" />
-          </LocaleLink>
-        </div>
       </div>
     </section>
   );

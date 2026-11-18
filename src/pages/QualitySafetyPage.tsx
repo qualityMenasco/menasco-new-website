@@ -5,7 +5,8 @@ import { ButtonLink } from '../components/ui/Button';
 import { Eyebrow, Heading, Text } from '../components/typography/Typography';
 import { SectionHeader } from '../components/typography/SectionHeader';
 import { ScrollReveal } from '../components/common/ScrollReveal';
-import { TopicAccordion, type AccordionTopic } from '../components/sections/quality/TopicAccordion';
+import { type AccordionTopic } from '../components/sections/quality/TopicAccordion';
+import { TopicTabs } from '../components/sections/quality/TopicTabs';
 import { useTransparentHeader } from '../app/header-transparency';
 import { certifications } from '../data/certifications';
 import { qhseAnnotations, qhseHeroPhoto, qualitySafetyPhotos } from '../data/siteSafety';
@@ -154,8 +155,8 @@ function Commitment() {
           <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
         </div>
       </div>
-      {/* The detail behind the overview: six expandable topics, the first open. */}
-      <TopicAccordion topics={topics} idPrefix="qhse-topic" className="mt-16" />
+      {/* The detail behind the overview: six topics as tabs (titles left, selected topic right). */}
+      <TopicTabs topics={topics} idPrefix="qhse-topic" label={t('qualitySafetyPage.commitment.heading')} className="mt-14" />
     </Section>
   );
 }

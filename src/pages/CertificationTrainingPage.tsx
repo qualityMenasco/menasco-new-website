@@ -19,9 +19,6 @@ type Programme = (typeof PROGRAMMES)[number];
 type Step = { title: string; body: string; detail: string };
 type FaqLink = { label: string; href: string };
 type FaqItem = { category: string; question: string; answer: string; link?: FaqLink; link2?: FaqLink };
-// Filter pills. (The partnership question has its own 'contact' category but no pill; it shows under All.)
-const FAQ_CATEGORIES = ['general', 'continuing', 'academy', 'internships'] as const;
-
 /**
  * Certification & Training. Built from the site's existing patterns (About
  * hero, home tab pager, sector rail) with an Apple-like restraint:
@@ -35,7 +32,7 @@ const FAQ_CATEGORIES = ['general', 'continuing', 'academy', 'internships'] as co
  *      of four from 1280px.
  *   4. Closing statement (warm white): text beside a framed photo, no actions.
  *   5. FAQ (stone), at the very bottom: questions for the whole page,
- *      filterable by programme, in an accordion. Every answer stays in the
+ *      in an accordion. Every answer stays in the
  *      DOM (collapsed, not unmounted) and is mirrored in FAQPage JSON-LD.
  * One responsive page for every screen size; phone layout first, then tablet
  * (md), then desktop (lg).
@@ -152,7 +149,7 @@ function Programmes({ active, onChange }: { active: Programme; onChange: (p: Pro
     return (
       <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-10 lg:gap-16">
         <div>
-          <div className="mx-auto w-full aspect-[4/3] overflow-hidden rounded-md bg-gray-100 md:aspect-[4/5] lg:aspect-[5/4]">
+          <div className="mx-auto w-full aspect-[4/3] overflow-hidden rounded-md bg-gray-100 md:aspect-[4/5] xl:aspect-[10/9]">
             <img
               src={photos[key].src}
               alt={t(`${c}.imageAlt`)}
@@ -205,20 +202,21 @@ function Programmes({ active, onChange }: { active: Programme; onChange: (p: Pro
   return (
     <Section id={anchors.programmes} background="warmwhite" spacing="sm" className="scroll-mt-20">
       <ScrollReveal>
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        {/* Desktop: same two columns as the panel below, so the tabs span exactly the text column. */}
+        <div className="flex flex-col gap-6 lg:grid lg:grid-cols-2 lg:items-end lg:gap-16">
           <div>
             <Eyebrow>{t('certificationTrainingPage.programmes.eyebrow')}</Eyebrow>
             <Heading level="h1" as="h2" className="mt-3 text-balance">
               {t('certificationTrainingPage.programmes.heading')}
             </Heading>
           </div>
-          {/* Segmented control: full width on phones, compact pill from tablets up. */}
+          {/* Segmented control: full width of its column; from 640px each tab sizes to its label, on one line. */}
           <div
             ref={tabsRef}
             role="tablist"
             aria-label={t('certificationTrainingPage.programmes.tablistLabel')}
             onKeyDown={onKeyDown}
-            className="grid shrink-0 grid-cols-3 gap-1 rounded-full border border-gray-200 bg-stone p-1 md:inline-grid"
+            className="grid grid-cols-3 gap-1 rounded-full border border-gray-200 bg-stone p-1 sm:flex"
           >
             {PROGRAMMES.map((key) => (
               <button
@@ -232,7 +230,7 @@ function Programmes({ active, onChange }: { active: Programme; onChange: (p: Pro
                 tabIndex={active === key ? 0 : -1}
                 onClick={() => onChange(key)}
                 className={cn(
-                  'min-h-10 rounded-full border px-2 text-caption font-semibold leading-tight transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 sm:px-4 sm:text-small',
+                  'min-h-10 rounded-full border px-2 text-caption font-semibold leading-tight transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 sm:flex-auto sm:whitespace-nowrap sm:px-4 sm:text-small lg:px-3 lg:text-caption xl:px-4 xl:text-small',
                   active === key ? 'border-brand-600 bg-white text-brand-600 shadow-sm' : 'border-transparent text-gray-600 hover:text-ink',
                 )}
               >
@@ -278,6 +276,7 @@ function Pathway() {
   const steps = t('certificationTrainingPage.initiative.steps', { returnObjects: true }) as Step[];
   const railRef = useRef<HTMLOListElement>(null);
   const [active, setActive] = useState(0);
+  const [noticeOpen, setNoticeOpen] = useState(false);
   const [edges, setEdges] = useState({ canPrev: false, canNext: true });
 
   const update = useCallback(() => {
@@ -306,18 +305,21 @@ function Pathway() {
   const arrow = 'inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-warmwhite transition-colors duration-base hover:border-white disabled:cursor-default disabled:opacity-30';
 
   return (
-    <Section id={anchors.pathway} background="ink" spacing="sm" className="scroll-mt-20">
+    <Section id={anchors.pathway} background="ink" spacing="sm" className="scroll-mt-20 xl:py-10">
       <ScrollReveal>
         <div className="flex flex-wrap items-center gap-3">
           <Eyebrow className="mb-0">{t('certificationTrainingPage.initiative.eyebrow')}</Eyebrow>
           <StatusBadge label={t('certificationTrainingPage.initiative.status')} dark />
         </div>
-        <Heading level="display" as="h2" className="mt-5 max-w-3xl text-balance">
-          {t('certificationTrainingPage.initiative.pathwayTitle')}
-        </Heading>
-        <Text muted className="mt-5 max-w-2xl">
-          {(t('certificationTrainingPage.initiative.paragraphs', { returnObjects: true }) as string[])[1]}
-        </Text>
+        {/* 1280px+: title left, intro right (vertically centred) to save height. */}
+        <div className="lg:mt-4 xl:grid xl:grid-cols-12 xl:items-center xl:gap-10">
+          <Heading level="display" as="h2" className="mt-5 max-w-3xl text-balance lg:mt-0 xl:col-span-7">
+            {t('certificationTrainingPage.initiative.pathwayTitle')}
+          </Heading>
+          <Text muted className="mt-5 max-w-2xl lg:mt-3 xl:col-span-5 xl:mt-0">
+            {(t('certificationTrainingPage.initiative.paragraphs', { returnObjects: true }) as string[])[1]}
+          </Text>
+        </div>
       </ScrollReveal>
 
       {/* Phones: swipe rail (one card + a peek). Tablets: two at a time with arrows. Desktop: all four in a row. */}
@@ -325,46 +327,61 @@ function Pathway() {
         ref={railRef}
         onScroll={update}
         role="list"
-        className="no-scrollbar -mx-6 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 pb-2 md:-mx-10 md:scroll-px-10 md:px-10 lg:-mx-16 lg:mt-10 lg:scroll-px-16 lg:px-16 xl:mx-0 xl:grid xl:grid-cols-4 xl:overflow-visible xl:px-0"
+        className="no-scrollbar -mx-6 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain scroll-px-6 px-6 pb-2 md:-mx-10 md:scroll-px-10 md:px-10 lg:-mx-16 lg:mt-7 lg:scroll-px-16 xl:mt-6 lg:px-16 xl:mx-0 xl:grid xl:grid-cols-4 xl:overflow-visible xl:px-0"
       >
         {steps.map((s, i) => (
           <li key={s.title} className="w-[82%] shrink-0 snap-start min-[480px]:w-[60%] md:w-[42%] lg:w-[31%] xl:w-auto">
             <ScrollReveal delay={i * 0.1} className="h-full">
-              <div className="flex h-full flex-col rounded-md border border-white/10 bg-graphite p-6 lg:p-7">
+              <div className="flex h-full flex-col rounded-md border border-white/10 bg-graphite p-6 xl:px-6 xl:py-5">
                 <span className="font-display text-stat font-semibold tabular-nums text-brand-500">{String(i + 1).padStart(2, '0')}</span>
-                <p className="mt-6 font-display text-h3 font-semibold text-warmwhite">{s.title}</p>
+                <p className="mt-6 font-display xl:mt-3 text-h3 font-semibold text-warmwhite">{s.title}</p>
                 <p className="mt-1 text-small font-semibold text-brand-400">{s.body}</p>
-                <p className="mt-4 text-small text-gray-400">{s.detail}</p>
+                <p className="mt-4 text-small text-gray-400 xl:mt-3">{s.detail}</p>
               </div>
             </ScrollReveal>
           </li>
         ))}
       </ol>
 
-      {/* Small phones: position dots. From 480px up to 1279px: arrows at the bottom right. 1280px+: all four fit, no controls. */}
-      <div className="mt-6 flex items-center justify-center min-[480px]:justify-end xl:hidden">
-        <div aria-hidden="true" className="flex gap-1.5 min-[480px]:hidden">
-          {steps.map((s, i) => (
-            <span key={s.title} className={cn('h-1.5 rounded-full transition-all duration-base', i === active ? 'w-5 bg-warmwhite' : 'w-1.5 bg-white/25')} />
-          ))}
+      {/* One row under the rail: accreditation notice (start) + rail controls (end).
+          Small phones: dots above the notice. 1280px+: all four cards fit, so no controls. */}
+      <div className="mt-6 flex flex-col-reverse gap-5 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-8">
+        {/* Accreditation statement (also shown in the Academy tab): label above, text clamped to
+            one line until "Read more" — the full sentence stays in the DOM for crawlers. */}
+        <div className="min-w-0 max-w-3xl flex-1">
+          <div className="flex items-center gap-4">
+            <p className="text-eyebrow font-semibold uppercase tracking-widest text-brand-400">{t('certificationTrainingPage.initiative.disclaimerLabel')}</p>
+            <button
+              type="button"
+              aria-expanded={noticeOpen}
+              aria-controls="ct-accreditation-text"
+              onClick={() => setNoticeOpen((open) => !open)}
+              className="-my-2 inline-flex items-center gap-1 py-2 text-caption font-semibold text-gray-400 transition-colors duration-base hover:text-warmwhite"
+            >
+              {noticeOpen ? t('common:buttons.showLess') : t('common:buttons.readMore')}
+              <ChevronDown size={14} aria-hidden="true" className={cn('transition-transform duration-base', noticeOpen && 'rotate-180')} />
+            </button>
+          </div>
+          <p id="ct-accreditation-text" className={cn('mt-1.5 text-small text-gray-300', !noticeOpen && 'line-clamp-1')}>
+            {t('certificationTrainingPage.initiative.disclaimer')}
+          </p>
         </div>
-        <div className="hidden gap-2 min-[480px]:flex">
-          <button type="button" onClick={() => step(-1)} disabled={!edges.canPrev} aria-label={t('certificationTrainingPage.initiative.prevStep')} className={arrow}>
-            <ChevronLeft size={18} aria-hidden="true" className="rtl:rotate-180" />
-          </button>
-          <button type="button" onClick={() => step(1)} disabled={!edges.canNext} aria-label={t('certificationTrainingPage.initiative.nextStep')} className={arrow}>
-            <ChevronRight size={18} aria-hidden="true" className="rtl:rotate-180" />
-          </button>
+        <div className="flex shrink-0 items-center justify-center xl:hidden">
+          <div aria-hidden="true" className="flex gap-1.5 min-[480px]:hidden">
+            {steps.map((s, i) => (
+              <span key={s.title} className={cn('h-1.5 rounded-full transition-all duration-base', i === active ? 'w-5 bg-warmwhite' : 'w-1.5 bg-white/25')} />
+            ))}
+          </div>
+          <div className="hidden gap-2 min-[480px]:flex">
+            <button type="button" onClick={() => step(-1)} disabled={!edges.canPrev} aria-label={t('certificationTrainingPage.initiative.prevStep')} className={arrow}>
+              <ChevronLeft size={18} aria-hidden="true" className="rtl:rotate-180" />
+            </button>
+            <button type="button" onClick={() => step(1)} disabled={!edges.canNext} aria-label={t('certificationTrainingPage.initiative.nextStep')} className={arrow}>
+              <ChevronRight size={18} aria-hidden="true" className="rtl:rotate-180" />
+            </button>
+          </div>
         </div>
       </div>
-      {/* Accreditation statement (also shown in the Academy tab). */}
-      <ScrollReveal className="mt-6 xl:mt-8">
-        <div className="flex max-w-3xl flex-col gap-2 rounded-md border border-white/10 p-5 sm:flex-row sm:items-center sm:gap-5">
-          <span className="shrink-0 text-eyebrow font-semibold uppercase tracking-widest text-brand-400">{t('certificationTrainingPage.initiative.disclaimerLabel')}</span>
-          <p className="text-small text-gray-300">{t('certificationTrainingPage.initiative.disclaimer')}</p>
-        </div>
-      </ScrollReveal>
-
     </Section>
   );
 }
@@ -404,30 +421,15 @@ function Closing() {
 
 /* ------------------------------------------------------------------- FAQ */
 
-/** Questions shown (per filter) before "View more questions" — same pattern as the Services FAQ. */
+/** Questions shown before "View more questions" — same pattern as the Services FAQ. */
 const FAQ_INITIAL_VISIBLE = 6;
 
 function Faq() {
   const { t } = useTranslation(['about', 'services']);
   const items = t('certificationTrainingPage.faq.items', { returnObjects: true }) as FaqItem[];
-  const [filter, setFilter] = useState<string>('all');
-  const visible = items.map((item, i) => ({ item, i })).filter(({ item }) => filter === 'all' || item.category === filter);
   const [open, setOpen] = useState<number | null>(0);
   const [showAll, setShowAll] = useState(false);
-  const hasMore = visible.length > FAQ_INITIAL_VISIBLE;
-
-  const pick = (key: string) => {
-    setFilter(key);
-    setShowAll(false);
-    const first = items.findIndex((item) => key === 'all' || item.category === key);
-    setOpen(first >= 0 ? first : null);
-  };
-
-  const chip = (selected: boolean) =>
-    cn(
-      'min-h-10 shrink-0 rounded-full border px-4 text-small font-semibold transition-colors duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500',
-      selected ? 'border-brand-600 bg-white text-brand-600' : 'border-gray-300 text-gray-600 hover:border-gray-500 hover:text-ink',
-    );
+  const hasMore = items.length > FAQ_INITIAL_VISIBLE;
 
   return (
     // Stone: offset from the warm-white closing section above.
@@ -447,27 +449,11 @@ function Faq() {
           </ButtonLink>
         </ScrollReveal>
 
-        {/* Filters + questions. */}
+        {/* Questions. */}
         <div className="lg:col-span-8">
-          {/* Category pills stick under the site header (57px phones/tablets, 81px desktop); the questions scroll away behind them. */}
-          <div className="sticky top-[57px] z-10 -mx-6 bg-stone px-6 py-3 md:-mx-10 md:px-10 lg:top-[81px] lg:mx-0 lg:px-0 lg:py-4">
-          <div role="group" aria-label={t('certificationTrainingPage.faq.filterLabel')} className="no-scrollbar -mx-6 flex gap-2 overflow-x-auto px-6 md:mx-0 md:flex-wrap md:overflow-visible md:px-0">
-            <button type="button" aria-pressed={filter === 'all'} onClick={() => pick('all')} className={chip(filter === 'all')}>
-              {t('certificationTrainingPage.faq.all')}
-            </button>
-            {FAQ_CATEGORIES.map((key) => (
-              <button key={key} type="button" aria-pressed={filter === key} onClick={() => pick(key)} className={chip(filter === key)}>
-                {t(`certificationTrainingPage.faq.categories.${key}`)}
-              </button>
-            ))}
-          </div>
-
-          </div>
-
-          <div className="mt-3 border-t border-gray-200">
+          <div className="border-t border-gray-200">
             {items.map((item, i) => {
-              const position = visible.findIndex((v) => v.i === i);
-              const shown = position >= 0 && (showAll || position < FAQ_INITIAL_VISIBLE);
+              const shown = showAll || i < FAQ_INITIAL_VISIBLE;
               const isOpen = open === i;
               return (
                 <div key={item.question} hidden={!shown} className="relative border-b border-gray-200">
@@ -524,7 +510,7 @@ function Faq() {
               type="button"
               aria-expanded={showAll}
               onClick={() => {
-                if (showAll && open !== null && visible.findIndex((v) => v.i === open) >= FAQ_INITIAL_VISIBLE) setOpen(null);
+                if (showAll && open !== null && open >= FAQ_INITIAL_VISIBLE) setOpen(null);
                 setShowAll((value) => !value);
               }}
               className="mt-6 inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-brand-600 transition-colors duration-base hover:text-brand-700"

@@ -189,13 +189,7 @@ const PATTERNS: { pattern: string; importer: Importer; modulePath: string; deskt
     desktopImporter: () => import('../../src/pages/ServicesPage'),
   },
   { pattern: '/services/data-centers', importer: () => import('../../src/pages/services/DataCenterPage'), modulePath: 'src/pages/services/DataCenterPage.tsx' },
-  {
-    pattern: '/services/bim-digital-engineering',
-    importer: () => import('../../src/mobile/pages/services/BIMPage'),
-    modulePath: 'src/mobile/pages/services/BIMPage.tsx',
-    desktopModulePath: 'src/pages/services/BIMPage.tsx',
-    desktopImporter: () => import('../../src/pages/services/BIMPage'),
-  },
+
   {
     pattern: '/services/manufacturing-prefabrication',
     importer: () => import('../../src/mobile/pages/services/ManufacturingPrefabricationPage'),
@@ -203,7 +197,7 @@ const PATTERNS: { pattern: string; importer: Importer; modulePath: string; deskt
     desktopModulePath: 'src/pages/services/ManufacturingPrefabricationPage.tsx',
     desktopImporter: () => import('../../src/pages/services/ManufacturingPrefabricationPage'),
   },
-  // Service umbrella/sub pages and About sub pages (2026-11-18) — module paths are the exact
+  // Service umbrella pages and About sub pages (2026-11-18) — module paths are the exact
   // targets src/app/router.tsx dynamically imports (re-export stubs included), so the build
   // manifest lookup for modulepreload hints resolves.
   { pattern: '/services/mep', importer: () => import('../../src/pages/services/MEPPage'), modulePath: 'src/pages/services/MEPPage.tsx' },
@@ -221,20 +215,8 @@ const PATTERNS: { pattern: string; importer: Importer; modulePath: string; deskt
     desktopModulePath: 'src/pages/services/EPCPage.tsx',
     desktopImporter: () => import('../../src/pages/services/EPCPage'),
   },
-  {
-    pattern: '/services/manufacturing-prefabrication/modular',
-    importer: () => import('../../src/mobile/pages/ModularPage'),
-    modulePath: 'src/mobile/pages/ModularPage.tsx',
-    desktopModulePath: 'src/pages/ModularPage.tsx',
-    desktopImporter: () => import('../../src/pages/ModularPage'),
-  },
-  {
-    pattern: '/services/manufacturing-prefabrication/custom',
-    importer: () => import('../../src/mobile/pages/CustomPage'),
-    modulePath: 'src/mobile/pages/CustomPage.tsx',
-    desktopModulePath: 'src/pages/CustomPage.tsx',
-    desktopImporter: () => import('../../src/pages/CustomPage'),
-  },
+
+
   {
     pattern: '/team',
     importer: () => import('../../src/mobile/pages/TeamPage'),
@@ -266,13 +248,7 @@ const PATTERNS: { pattern: string; importer: Importer; modulePath: string; deskt
     desktopImporter: () => import('../../src/pages/InnovationTechnologyPage'),
   },
   { pattern: '/certification-training', importer: () => import('../../src/pages/CertificationTrainingPage'), modulePath: 'src/pages/CertificationTrainingPage.tsx' },
-  {
-    pattern: '/services/:slug',
-    importer: () => import('../../src/mobile/pages/ServiceDetailPage'),
-    modulePath: 'src/mobile/pages/ServiceDetailPage.tsx',
-    desktopModulePath: 'src/pages/ServiceDetailPage.tsx',
-    desktopImporter: () => import('../../src/pages/ServiceDetailPage'),
-  },
+
   {
     pattern: '/projects/categories',
     importer: () => import('../../src/mobile/pages/ProjectsSectorsPage'),
@@ -307,18 +283,11 @@ export const PRERENDER_PATHS: string[] = [
   '/',
   '/about',
   '/services',
-  '/services/mechanical',
-  '/services/electrical',
-  '/services/plumbing',
-  '/services/fire-protection',
-  '/services/bim-digital-engineering',
   '/services/manufacturing-prefabrication',
   '/services/data-centers',
   '/services/mep',
   '/services/civil',
   '/services/turnkey-developments',
-  '/services/manufacturing-prefabrication/modular',
-  '/services/manufacturing-prefabrication/custom',
   '/team',
   '/leadership/helmi-badawiyeh',
   '/leadership/bahaa-badawiyeh',

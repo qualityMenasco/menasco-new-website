@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { ArrowRight, ChevronDown } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import { useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { LocaleLink } from './LocaleLink';
 import { cn } from '../../lib/utils';
 import { foundingYear } from '../../data/companyStats';
-import { serviceI18nKeys, showcaseDisplayGroups, showcaseGroupChildren } from '../../data/services';
+import { umbrellaServiceLinks } from '../../data/navigation';
 
-const EASE = [0.22, 0.61, 0.36, 1] as const;
 const PAGES = ['about', 'services'] as const;
 
 /**
@@ -33,12 +32,6 @@ export function HomeIntroPager() {
   const targetRef = useRef<number | null>(null);
   const releaseTimer = useRef<number | undefined>(undefined);
   const frame = useRef<number | undefined>(undefined);
-
-  // Collapsed-by-default accordion, mirroring desktop ServicesShowcase. A
-  // subservice tap is a direct navigation; the umbrella page is reached via
-  // the "About" link inside each row. Collapsed panels stay in the DOM
-  // (hidden, not unmounted) so their links remain crawlable.
-  const [expandedGroupKey, setExpandedGroupKey] = useState<string | null>(null);
 
   const pageFromScroll = useCallback(() => {
     const rail = railRef.current;
@@ -166,60 +159,17 @@ export function HomeIntroPager() {
         <div id="home-intro-page-services" role="tabpanel" aria-labelledby="home-intro-tab-services" className="w-full shrink-0 snap-start px-4">
           <h3 className="font-display text-h3 font-semibold tracking-tight text-ink md:text-h2">{t('home:servicesShowcase.mobileHeading')}</h3>
           <nav aria-label={t('home:servicesShowcase.eyebrow')} className="mt-4 flex flex-col">
-            {showcaseDisplayGroups.map((group) => {
-              const children = showcaseGroupChildren(group);
-              const isExpanded = expandedGroupKey === group.key;
-              const groupName = t(`nav:${group.i18nKey}`);
-              const childrenId = `mobile-services-${group.key}`;
-              return (
-                <div key={group.key} className="border-t border-gray-200">
-                  <button
-                    type="button"
-                    aria-expanded={isExpanded}
-                    aria-controls={childrenId}
-                    onClick={() => setExpandedGroupKey(isExpanded ? null : group.key)}
-                    className="flex w-full items-center justify-between gap-4 py-3 text-start font-display text-h4 font-semibold text-ink"
-                  >
-                    <span className="min-w-0">{groupName}</span>
-                    <ChevronDown
-                      size={18}
-                      aria-hidden="true"
-                      className={cn('shrink-0 transition-transform duration-base', isExpanded && 'rotate-180')}
-                    />
-                  </button>
-
-                  <motion.div
-                    id={childrenId}
-                    initial={false}
-                    animate={isExpanded ? { height: 'auto', opacity: 1, visibility: 'visible' } : { height: 0, opacity: 0, transitionEnd: { visibility: 'hidden' } }}
-                    transition={{ duration: reducedMotion ? 0 : 0.25, ease: EASE }}
-                    className="overflow-hidden"
-                  >
-                    <div className="flex flex-col pb-1.5">
-                      <LocaleLink
-                        to={group.href!}
-                        className="flex min-h-11 items-center py-2 ps-4 text-body font-medium text-gray-600"
-                      >
-                        {t('home:servicesShowcase.aboutService', { name: groupName, defaultValue: 'About {{name}}' })}
-                      </LocaleLink>
-                      {children.map((leaf) => {
-                        const leafServiceKey = leaf.service ? (serviceI18nKeys[leaf.service.slug] ?? leaf.service.slug) : null;
-                        const leafName = leafServiceKey ? t(`services:items.${leafServiceKey}.name`) : t(`nav:${leaf.i18nKey}`);
-                        return (
-                          <LocaleLink
-                            key={leaf.href}
-                            to={leaf.href}
-                            className="flex min-h-11 items-center py-2 ps-4 text-body font-medium text-gray-600"
-                          >
-                            {leafName}
-                          </LocaleLink>
-                        );
-                      })}
-                    </div>
-                  </motion.div>
-                </div>
-              );
-            })}
+            {/* Umbrella pages only — each row links straight to its page (sub-services are sections there). */}
+            {umbrellaServiceLinks.map((link) => (
+              <LocaleLink
+                key={link.href}
+                to={link.href}
+                className="flex items-center justify-between gap-4 border-t border-gray-200 py-3 font-display text-h4 font-semibold text-gray-500 transition-colors duration-base hover:text-brand-600"
+              >
+                <span className="min-w-0">{t(`nav:${link.i18nKey}`)}</span>
+                <ArrowRight size={18} aria-hidden="true" className="shrink-0 rtl:rotate-180" />
+              </LocaleLink>
+            ))}
           </nav>
         </div>
       </div>

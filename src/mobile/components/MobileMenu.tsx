@@ -35,7 +35,7 @@ const itemVariants: Variants = {
  * The root panel is a short list in large type; About and Services slide in
  * as their own panels (with a Back control) instead of expanding into long
  * accordions. Services lists its five umbrella pages with a one-line
- * description, each umbrella's sub-pages as small inline links. A compact
+ * description (umbrella pages only; sub-services live in the footer). A compact
  * contact block (head office phone/email, company profile, socials, then
  * the Get in contact button) sits at the bottom. The menu is a drawer that
  * slides in from the inline end over a dimmed backdrop, so the current page
@@ -57,11 +57,10 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     { key: 'careers', href: '/careers' },
   ];
 
+  // Umbrella pages only — sub-services are sections of these pages (listed in the footer).
   const umbrellas = [
-    ...servicesNavigationGroups
-      .filter((group) => group.href)
-      .map((group) => ({ href: group.href!, i18nKey: group.i18nKey, key: group.i18nKey.replace('servicesGroups.', ''), links: group.links })),
-    { href: dataCentreServiceLink.href, i18nKey: dataCentreServiceLink.i18nKey, key: 'dataCenters', links: [] as typeof servicesNavigationGroups[number]['links'] },
+    ...servicesNavigationGroups.map((group) => ({ href: group.href, i18nKey: group.i18nKey, key: group.i18nKey.replace('servicesGroups.', '') })),
+    { href: dataCentreServiceLink.href, i18nKey: dataCentreServiceLink.i18nKey, key: 'dataCenters' },
   ];
 
   // Close (and reset to the root panel) the moment the route changes.
@@ -266,24 +265,6 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                               </span>
                               <ArrowRight size={16} aria-hidden="true" className="mt-1.5 shrink-0 text-gray-400 transition-colors duration-base group-hover:text-brand-600 rtl:rotate-180" />
                             </LocaleLink>
-                            {umbrella.links.length > 0 && (
-                              <ul role="list" className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-                                {umbrella.links.map((link) => (
-                                  <li key={link.href}>
-                                    <LocaleLink
-                                      to={link.href}
-                                      aria-current={isActive(link.href) ? 'page' : undefined}
-                                      className={cn(
-                                        'inline-flex min-h-8 items-center text-small font-medium underline-offset-4 transition-colors duration-base hover:underline',
-                                        isActive(link.href) ? 'text-brand-600' : 'text-gray-700 hover:text-brand-600',
-                                      )}
-                                    >
-                                      {t(link.i18nKey)}
-                                    </LocaleLink>
-                                  </li>
-                                ))}
-                              </ul>
-                            )}
                           </motion.li>
                         ))}
                       </motion.ul>

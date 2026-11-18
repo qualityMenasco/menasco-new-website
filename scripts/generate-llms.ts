@@ -35,7 +35,7 @@ import { fileURLToPath } from 'node:url';
 
 import { SITE_URL, SITE_TAGLINE } from '../src/seo/constants';
 import { services } from '../src/data/services';
-import { CAREERS_URL, pendingContentPaths, servicesNavigationGroups } from '../src/data/navigation';
+import { CAREERS_URL, pendingContentPaths, servicesNavigationGroups, umbrellaServiceLinks } from '../src/data/navigation';
 import { projects } from '../src/data/projects';
 import { projectCategoryList } from '../src/data/projectCategories';
 import { leadershipProfiles, executiveTeam } from '../src/data/leadership';
@@ -105,16 +105,14 @@ const umbrellaPages: Record<string, { seo: { title: string; description: string 
   '/services/mep': servicesCopy.mepPage,
   '/services/civil': servicesCopy.civilPage,
   '/services/turnkey-developments': servicesCopy.epcPage,
-  '/services/manufacturing-prefabrication/modular': servicesCopy.modularPage,
-  '/services/manufacturing-prefabrication/custom': servicesCopy.customPage,
 };
 
 /**
- * Services grouped the way the site's navigation and Services landing
- * group them (src/data/navigation.ts). Only live pages are listed —
- * structure-only pages awaiting approved content (`pendingContentPaths`)
- * are left out, and a group with no live pages is omitted entirely.
- * Data Centers follows as a sector solution rather than a fifth group.
+ * Services grouped the way the site's navigation groups them
+ * (src/data/navigation.ts): one line per umbrella page, followed by the
+ * sub-services it covers (sub-services are sections of the umbrella page,
+ * not pages of their own). Pages awaiting approved content
+ * (`pendingContentPaths`) are left out. Data Centers closes the list.
  */
 function groupedServiceBlocks(): string[] {
   const pending = pendingContentPaths as readonly string[];
@@ -125,9 +123,11 @@ function groupedServiceBlocks(): string[] {
     return s ? linkLine(s.name, llmsUrl(href), s.shortDescription) : undefined;
   };
   const blocks = servicesNavigationGroups.flatMap((group) => {
-    const hrefs = [...(group.href ? [group.href] : []), ...group.links.map((link) => link.href)].filter((href) => !pending.includes(href));
-    const lines = hrefs.map(serviceLine).filter((line): line is string => Boolean(line));
-    return lines.length > 0 ? [`### ${group.label}\n\n${bullets(lines)}`] : [];
+    if (pending.includes(group.href)) return [];
+    const line = serviceLine(group.href);
+    if (!line) return [];
+    const covers = group.links.length > 0 ? `\n\nCovers: ${group.links.map((link) => link.label).join(', ')}.` : '';
+    return [`### ${group.label}\n\n${bullets([line])}${covers}`];
   });
   return [
     ...blocks,
@@ -198,7 +198,7 @@ const publishedCategories = projectCategoryList.filter((c) => projects.some((p) 
 
 function buildCompanyKeyFacts(): string[] {
   const statLabels: Record<string, string> = home.stats;
-  const serviceNames = services.map((s) => s.name).join(', ');
+  const serviceNames = umbrellaServiceLinks.map((link) => link.label).join(', ');
   const sectorNames = publishedCategories.map((c) => c.title).join(', ');
   const innovationHeadings = Object.values(about.innovation.sections as Record<string, { heading: string }>).map((s) => s.heading);
   const certNames = certifications.map((c) => c.name).join(', ');

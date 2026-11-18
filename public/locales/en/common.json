@@ -119,5 +119,25 @@
   "pendingContent": {
     "notice": "Detailed information is being prepared. For current enquiries, please contact our team.",
     "detailsForthcoming": "Details coming soon"
+  },
+  "errorPages": {
+    "homeLabel": "MENASCO home",
+    "backHome": "Back to homepage",
+    "helpPrefix": "Need help finding something?",
+    "contactLink": "Contact our team",
+    "notFound": {
+      "seoTitle": "Page Not Found",
+      "eyebrow": "Page not found",
+      "title": "We couldn't find that page",
+      "description": "The page you're looking for may have moved, been renamed, or no longer exists. Try one of the links below to get back on track.",
+      "services": "Explore our services"
+    },
+    "error": {
+      "seoTitle": "Something Went Wrong",
+      "eyebrow": "Unexpected error",
+      "title": "Something went wrong on our side",
+      "description": "This page didn't load as expected. Please try again; if the problem continues, head back to the homepage or contact our team.",
+      "retry": "Try again"
+    }
   }
 }

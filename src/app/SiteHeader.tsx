@@ -7,7 +7,7 @@ import { HeaderShell } from '../components/navigation/HeaderShell';
 import { MenascoLogo } from '../components/brand/MenascoLogo';
 import { LanguageSwitch } from '../components/navigation/LanguageSwitch';
 import { SmartLink } from '../lib/SmartLink';
-import { aboutNavigation, dataCentreServiceLink, homeSectionNavigation, servicesNavigationGroups } from '../data/navigation';
+import { aboutNavigation, headerServiceLinks, homeSectionNavigation } from '../data/navigation';
 import type { NavItem } from '../components/navigation/types';
 import { useBackdropTheme } from '../lib/useBackdropTheme';
 import { useHeaderTransparencyState } from './header-transparency';
@@ -48,20 +48,8 @@ export function SiteHeader() {
           return { ...base, dropdown: aboutNavigation.map((link) => ({ label: t(`nav:${link.i18nKey}`), href: link.href })) };
         }
         if (item.label === 'Services') {
-          return {
-            ...base,
-            megaMenu: {
-              columns: servicesNavigationGroups.map((group) => ({
-                heading: t(`nav:${group.i18nKey}`),
-                href: group.href,
-                links: group.links.map((link) => ({ label: t(`nav:${link.i18nKey}`), href: link.href })),
-              })),
-              footerLinks: [
-                { label: t('nav:allServices'), href: '/services' },
-                { label: t(`nav:${dataCentreServiceLink.i18nKey}`), href: dataCentreServiceLink.href },
-              ],
-            },
-          };
+          // Umbrella pages only (sub-services are sections of those pages, listed in the footer).
+          return { ...base, dropdown: headerServiceLinks.map((link) => ({ label: t(`nav:${link.i18nKey}`), href: link.href })) };
         }
         return base;
       }),

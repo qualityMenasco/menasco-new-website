@@ -1,8 +1,8 @@
-import { ArrowRight, Download } from 'lucide-react';
+import { Download } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Container } from '../../../layout/Container';
-import { Eyebrow, Heading, Text } from '../../../typography/Typography';
+import { Eyebrow, Heading } from '../../../typography/Typography';
 import { ButtonLink } from '../../../ui/Button';
 import { companyStats, foundingYear } from '../../../../data/companyStats';
 import { Statistic } from '../../../content/Statistic';
@@ -52,7 +52,7 @@ export function HomeHeroEditorial() {
       <Container className="relative z-10 pb-10 pt-28 md:pt-32">
         <div className="max-w-3xl">
           <motion.div initial={rise.initial} animate={rise.animate} transition={{ duration: reducedMotion ? 0 : 0.6, ease: [0.22, 0.61, 0.36, 1] }}>
-            <Eyebrow theme="dark" className="text-warmwhite">{t('home:hero.eyebrow', { year: foundingYear })}</Eyebrow>
+            <Eyebrow theme="dark" className="text-brand-400">{t('home:hero.eyebrow', { year: foundingYear })}</Eyebrow>
           </motion.div>
           <motion.div
             initial={rise.initial}
@@ -67,23 +67,8 @@ export function HomeHeroEditorial() {
             initial={rise.initial}
             animate={rise.animate}
             transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 0.16, ease: [0.22, 0.61, 0.36, 1] }}
+            className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center"
           >
-            <Text variant="body-lg" theme="dark" className="mt-6 max-w-xl text-gray-200">
-              {t('home:hero.description')}
-            </Text>
-          </motion.div>
-          <motion.div
-            initial={rise.initial}
-            animate={rise.animate}
-            transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 0.24, ease: [0.22, 0.61, 0.36, 1] }}
-            className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center"
-          >
-            <ButtonLink href="/projects/categories" variant="primary" size="lg" trailingIcon={ArrowRight}>
-              {t('home:hero.ctaPrimary')}
-            </ButtonLink>
-            <ButtonLink href="/services" variant="outline" size="lg" theme="dark">
-              {t('home:hero.ctaSecondary')}
-            </ButtonLink>
             <ButtonLink
               href={COMPANY_PROFILE_PATH}
               download="MENASCO-Company-Profile.pdf"
@@ -91,6 +76,7 @@ export function HomeHeroEditorial() {
               size="lg"
               theme="dark"
               leadingIcon={Download}
+              className="!text-warmwhite hover:!text-gray-200"
             >
               {t('common:buttons.downloadCompanyProfile')}
             </ButtonLink>

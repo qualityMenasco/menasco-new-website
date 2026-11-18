@@ -105,8 +105,12 @@ function buildLocale(locale: Locale) {
           groups: servicesNavigationGroups.map((group) => ({
             id: group.i18nKey.replace(/^servicesGroups\./, ''),
             label: t(group.i18nKey),
-            ...(group.href ? { path: localisePath(group.href, locale), url: `${baseUrl}${localisePath(group.href, locale)}` } : {}),
-            links: group.links.map((entry) => link(entry.href, t(entry.i18nKey), locale)),
+            path: localisePath(group.href, locale),
+            url: `${baseUrl}${localisePath(group.href, locale)}`,
+            // The header shows umbrella pages only (sub-services are sections of
+            // those pages, 2026-11-19). `links` stays in the schema, empty, so
+            // the careers app's existing renderer keeps working.
+            links: [],
           })),
           // Row beneath the columns on desktop; on mobile "All Services" leads
           // the accordion and Data Centers closes it.

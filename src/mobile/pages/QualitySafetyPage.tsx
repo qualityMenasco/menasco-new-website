@@ -4,7 +4,8 @@ import { ArrowRight, Download } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../components/SectionHeader';
 import { ExpandableText } from '../components/ExpandableText';
-import { TopicAccordion, type AccordionTopic } from '../../components/sections/quality/TopicAccordion';
+import { type AccordionTopic } from '../../components/sections/quality/TopicAccordion';
+import { TopicTabs } from '../../components/sections/quality/TopicTabs';
 import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { SEO } from '../../seo/SEO';
 import {} from '../../seo/structuredData';
@@ -342,8 +343,8 @@ export default function QualitySafetyPage() {
             collapseLabel={t('common:buttons.showLess')}
           />
         </div>
-        {/* The detail behind the overview: six expandable topics, the first open (full width on tablets). */}
-        <TopicAccordion topics={topics} idPrefix="qhse-topic-m" className="mt-8 md:col-span-2 md:row-start-2 md:mt-4" />
+        {/* The detail behind the overview: six topics as tabs (pills on phones, a list beside the panel on tablets). */}
+        <TopicTabs topics={topics} idPrefix="qhse-topic-m" label={t('qualitySafetyPage.commitment.heading')} className="mt-8 md:col-span-2 md:row-start-2 md:mt-6" />
       </section>
 
       {/* The three ISO certificates as one connected list. */}

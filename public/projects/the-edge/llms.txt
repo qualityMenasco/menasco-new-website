@@ -17,10 +17,6 @@ The Edge is a seven-storey office building in Dubai Internet City, developed by 
 
 ## Related Services
 
-- [Mechanical](https://menascogroup.com/services/mechanical/llms.txt)
-- [Electrical](https://menascogroup.com/services/electrical/llms.txt)
-- [Plumbing](https://menascogroup.com/services/plumbing/llms.txt)
-- [Fire Protection](https://menascogroup.com/services/fire-protection/llms.txt)
 - [EPC](https://menascogroup.com/services/turnkey-developments/llms.txt)
 
 ---

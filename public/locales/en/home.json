@@ -19,6 +19,7 @@
     "heading": "Integrated MEP Solutions Built on Over Three Decades of Engineering Excellence",
     "description": "Established in the UAE in 1994, MENASCO is a multidisciplinary MEP contractor delivering integrated mechanical, electrical, plumbing, and fire protection systems for complex developments. With operations spanning seven countries, we combine decades of technical expertise with modern engineering practices to deliver reliable, high-performance infrastructure across diverse sectors.",
     "cta": "About MENASCO",
+    "exploreServices": "Explore services",
     "mobileHeading": "{{years}}+ years in the region",
     "mobileDescription": "Established in the UAE in {{foundingYear}}, MENASCO is a multidisciplinary MEP contractor delivering integrated mechanical, electrical, plumbing, and fire protection systems for complex developments. With operations spanning seven countries, we combine decades of technical expertise with modern engineering practices to deliver reliable, high-performance infrastructure across diverse sectors."
   },
@@ -72,6 +73,7 @@
         ]
       },
       "dataCenters": {
+        "linkLabel": "View Data Center services",
         "description": "Data center delivery requires precise integration of critical power, cooling, fire protection, and environmental control systems to support uninterrupted operations. Our capabilities extend across greenfield and brownfield developments, including facilities designed to achieve Uptime Institute Tier III and Tier IV certification, with expertise in a broad range of cooling technologies, from traditional air-cooled and chilled-water systems to advanced direct-to-chip (DTC) liquid cooling.",
         "points": [
           "Tier III & Tier IV Data Center Infrastructure",
@@ -88,7 +90,7 @@
     "mobileDescription": "A selection of MENASCO's landmark developments across the region."
   },
   "sectors": {
-    "eyebrow": "Where We Work",
+    "eyebrow": "Our Key Sectors",
     "heading": "Engineering Expertise Across Key Sectors",
     "description": "Integrated MEP & specialized engineering solutions tailored to the technical, operational & sustainability requirements of every sector.",
     "items": {
@@ -108,9 +110,10 @@
     },
     "viewProjects": "View projects"
   },
+  "engineeringLearnMore": "Learn More",
   "digitalEngineering": {
     "eyebrow": "BIM & DIGITAL ENGINEERING",
-    "heading": "Coordinated Before Construction Begins",
+    "heading": "Preemptive Clash Detection.",
     "description": "MENASCO's BIM & digital engineering unite every discipline in one model, identifying risks and resolving clashes before construction, and connecting design through to delivery.",
     "capabilities": {
       "federatedBim": {
@@ -134,7 +137,7 @@
   },
   "prefabrication": {
     "eyebrow": "Modular MEP Fabrication",
-    "heading": "Manufactured with Precision. Installed with Confidence.",
+    "heading": "Manufactured with Precision.",
     "description": "MENASCO’s off-site manufacturing & MEP prefabrication capabilities support faster, safer & more consistent project delivery. Through controlled production environments, we manufacture HVAC ductwork & prefabricate selected MEP components & modular assemblies in accordance with approved drawings, project specifications & quality standards.\n\nBy completing more work away from the construction site, we help improve quality control, reduce material waste and site congestion, minimize installation risks & accelerate on-site progress across large-scale and technically demanding projects.",
     "cta": "Explore manufacturing",
     "mobileDescription": "Off-site production of HVAC ductwork, prefabricated MEP components and modular assemblies in controlled environments, for faster, safer and more consistent delivery on site."
@@ -142,7 +145,7 @@
   "qualitySafety": {
     "eyebrow": "QUALITY, HEALTH, SAFETY & ENVIRONMENT",
     "heading": "Quality, Safety & Environmental Responsibility at Every Stage",
-    "description": "At MENASCO, quality, health, safety & environmental responsibility are built into every stage of project delivery, from engineering coordination & procurement through installation, testing, commissioning & final handover. Our QHSE management system defines clear procedures, responsibilities, inspections, risk controls & performance monitoring, driving consistent quality, safer workplaces, environmental compliance and continuous improvement across all our operations & project sites.",
+    "description": "Our internationally audited QHSE management system sets clear procedures, inspections and risk controls, driving consistent quality, safer sites and continuous improvement across every client engagement.",
     "pillars": {
       "qualityManagement": {
         "title": "Quality Management",
@@ -160,7 +163,7 @@
     "cta": "Explore quality & safety"
   },
   "regionalPresence": {
-    "eyebrow": "Regional Locations",
+    "eyebrow": "Where We Work",
     "heading": "{{count}} Global Hubs",
     "description": "MENASCO operates through 7 strategically located offices across three continents, supporting projects, clients, and teams with local expertise and international scale.",
     "headOffice": "Head Office",
@@ -190,6 +193,6 @@
   },
   "seo": {
     "title": "MENASCO | MEP Engineering & Contracting UAE",
-    "description": "MENASCO delivers integrated MEP engineering and contracting solutions across the UAE and GCC, spanning mechanical, electrical, plumbing and fire protection."
+    "description": "Established in the UAE in 1994, MENASCO is a multidisciplinary MEP contractor delivering integrated mechanical, electrical, plumbing, and fire protection systems for complex developments. With operations spanning seven countries, we combine decades of technical expertise with modern engineering practices to deliver reliable, high-performance infrastructure across diverse sectors."
   }
 }

@@ -9,7 +9,6 @@ import { SmartLink } from '../lib/SmartLink';
 import { ScrollReveal } from '../components/common/ScrollReveal';
 import { MepSystemsDiagram } from '../components/services/mep/MepSystemsDiagram';
 import { FaqAccordion, type FaqAccordionItem } from '../components/common/FaqAccordion';
-import { KeywordPills, type KeywordPill } from '../components/common/KeywordPills';
 import { publishedProjects } from '../data/projects';
 import { ProjectImage } from '../components/media/ProjectImage';
 import { sectorKeys } from '../data/homeSectors';
@@ -54,8 +53,9 @@ interface DisciplineItem {
   label: string;
   title: string;
   description: string;
-  cta: string;
-  href: string;
+  /** Optional: set (with `cta`) once this discipline has its own MEP-page section, e.g. "#mechanical-systems". */
+  cta?: string;
+  href?: string;
   imageAlt: string;
 }
 
@@ -100,10 +100,6 @@ function SectionH1() {
 
 function Hero() {
   const { t } = useTranslation('services');
-  const keywordList = t('mepPage.hero.keywords.items', { returnObjects: true });
-  const keywords = (Array.isArray(keywordList) ? keywordList : []) as KeywordPill[];
-  const countryList = t('operatingCountries.items', { returnObjects: true });
-  const countries = (Array.isArray(countryList) ? countryList : []) as KeywordPill[];
   const scrollToDisciplines = () =>
     document.getElementById(DISCIPLINES_ANCHOR)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
 
@@ -123,14 +119,11 @@ function Hero() {
             </ButtonLink>
           </div>
         </div>
-        {/* Photo + specialism pills only where text and image fit side by side (desktop); phones/tablets get text only.
-            The pills stay in the DOM at every size (hidden visually below desktop), so crawlers always see them. */}
-        <div className="hidden lg:col-span-6 lg:block">
-          <div className="aspect-[4/3] overflow-hidden rounded-md bg-gray-100">
-            <img src={HERO_IMAGE} alt={t('mepPage.hero.imageAlt')} className="h-full w-full object-cover" loading="eager" />
+        {/* Portrait (4:5) photo only where text and image fit side by side (desktop); phones/tablets get text only. */}
+        <div className="hidden lg:col-span-5 lg:col-start-8 lg:block">
+          <div className="aspect-[4/5] overflow-hidden rounded-md bg-gray-100">
+            <img src={HERO_IMAGE} alt={t('mepPage.hero.imageAlt')} className="h-full w-full object-cover object-[60%_50%]" loading="eager" />
           </div>
-          <KeywordPills items={keywords} label={t('mepPage.hero.keywords.label')} className="mt-4" />
-          <KeywordPills items={countries} label={t('operatingCountries.label')} showLabel className="mt-2" />
         </div>
       </div>
     </Section>
@@ -268,8 +261,11 @@ function Disciplines() {
       >
         {items.map((item, index) => (
           <article
-            key={item.href}
-            className="group relative flex w-[82vw] max-w-[22rem] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-gray-200 bg-white transition-shadow duration-base hover:shadow-lg focus-within:ring-2 focus-within:ring-brand-500 md:w-auto md:max-w-none md:shrink"
+            key={item.title}
+            className={cn(
+              'group relative flex w-[82vw] max-w-[22rem] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-gray-200 bg-white md:w-auto md:max-w-none md:shrink',
+              item.href && 'transition-shadow duration-base hover:shadow-lg focus-within:ring-2 focus-within:ring-brand-500',
+            )}
           >
             <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
               <img
@@ -277,29 +273,35 @@ function Disciplines() {
                 alt={item.imageAlt}
                 loading="lazy"
                 decoding="async"
-                className="h-full w-full object-cover transition-transform duration-slow ease-engineered group-hover:scale-[1.05] motion-reduce:transition-none"
+                className={cn('h-full w-full object-cover', item.href && 'transition-transform duration-slow ease-engineered group-hover:scale-[1.05] motion-reduce:transition-none')}
               />
             </div>
             <div className="flex flex-1 flex-col p-5 md:p-6">
               <span className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{item.label}</span>
               <h3 className="mt-2 font-display text-h3 font-semibold text-ink">
-                {/* Stretched link: the whole card opens the discipline page. */}
-                <SmartLink href={item.href} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
-                  {item.title}
-                </SmartLink>
+                {/* Informational card until the discipline has its own section; then a stretched link to it. */}
+                {item.href ? (
+                  <SmartLink href={item.href} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
+                    {item.title}
+                  </SmartLink>
+                ) : (
+                  item.title
+                )}
               </h3>
               <p className="mt-3 flex-1 text-body text-gray-600">{item.description}</p>
-              <span aria-hidden="true" className="mt-4 inline-flex items-center gap-1.5 text-small font-semibold text-ink transition-colors duration-base group-hover:text-brand-600">
-                {item.cta}
-                <ArrowRight size={16} className="transition-transform duration-base group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
-              </span>
+              {item.href && item.cta && (
+                <span aria-hidden="true" className="mt-4 inline-flex items-center gap-1.5 text-small font-semibold text-ink transition-colors duration-base group-hover:text-brand-600">
+                  {item.cta}
+                  <ArrowRight size={16} className="transition-transform duration-base group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
+                </span>
+              )}
             </div>
           </article>
         ))}
       </div>
       <div aria-hidden="true" className="flex justify-center gap-1.5 pt-4 md:hidden">
         {items.map((item, index) => (
-          <span key={item.href} className={cn('h-1.5 rounded-full transition-all duration-base', index === active ? 'w-5 bg-ink' : 'w-1.5 bg-gray-300')} />
+          <span key={item.title} className={cn('h-1.5 rounded-full transition-all duration-base', index === active ? 'w-5 bg-ink' : 'w-1.5 bg-gray-300')} />
         ))}
       </div>
     </Section>

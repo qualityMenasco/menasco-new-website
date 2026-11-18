@@ -1,15 +1,17 @@
 import { lazy, Suspense, useEffect } from 'react';
 import type { ComponentType, ReactNode } from 'react';
 import { createBrowserRouter, Navigate, useLocation } from 'react-router-dom';
+import { RouteErrorBoundary } from './RouteErrorBoundary';
 import type { RouteObject } from 'react-router-dom';
 import { RootLayout } from './RootLayout';
 import { PageLoadingFallback } from './PageLoadingFallback';
 import { getLocaleFromPath, withLocale } from '../lib/locale';
 import { CAREERS_URL } from '../data/navigation';
 import { useIsDesktopSettled } from '../lib/hooks';
+import { withStaleBuildRecovery } from '../lib/staleBuild';
 
 function lazyPage(importer: () => Promise<{ default: ComponentType }>): ReactNode {
-  const LazyComponent = lazy(importer);
+  const LazyComponent = lazy(withStaleBuildRecovery(importer));
   return (
     <Suspense fallback={<PageLoadingFallback />}>
       <LazyComponent />
@@ -66,8 +68,8 @@ function responsivePage(
   desktopImporter: () => Promise<{ default: ComponentType }>,
   mobileImporter: () => Promise<{ default: ComponentType }>,
 ): ReactNode {
-  const Desktop = lazy(desktopImporter);
-  const Mobile = lazy(mobileImporter);
+  const Desktop = lazy(withStaleBuildRecovery(desktopImporter));
+  const Mobile = lazy(withStaleBuildRecovery(mobileImporter));
   return (
     <Suspense fallback={<PageLoadingFallback />}>
       <ResponsiveSwitch Desktop={Desktop} Mobile={Mobile} />
@@ -96,6 +98,11 @@ function ExternalRedirect({ to }: { to: string }) {
   return <PageLoadingFallback />;
 }
 
+/** Throws during render so /dev/error-preview shows the router's real error screen. */
+function ErrorPreview(): never {
+  throw new Error('Error screen preview (/dev/error-preview)');
+}
+
 const routeChildren: RouteObject[] = [
   { index: true, element: responsivePage(() => import('../pages/HomePage'), () => import('../mobile/pages/HomePage')) },
   { path: 'about', element: responsivePage(() => import('../pages/AboutPage'), () => import('../mobile/pages/AboutPage')) },
@@ -108,7 +115,6 @@ const routeChildren: RouteObject[] = [
   // Desktop-only for now — no mobile Data Centres page exists yet.
   { path: 'services/data-centers', element: lazyPage(() => import('../pages/services/DataCenterPage')) },
   { path: 'services/data-centres', element: lazyPage(() => import('../pages/services/DataCenterPage')) },
-  { path: 'services/bim-digital-engineering', element: responsivePage(() => import('../pages/services/BIMPage'), () => import('../mobile/pages/services/BIMPage')) },
   {
     path: 'services/manufacturing-prefabrication',
     element: responsivePage(() => import('../pages/services/ManufacturingPrefabricationPage'), () => import('../mobile/pages/services/ManufacturingPrefabricationPage')),
@@ -124,19 +130,10 @@ const routeChildren: RouteObject[] = [
   // placeholder — live and indexable since 2026-11-05.
   { path: 'services/mep', element: lazyPage(() => import('../pages/services/MEPPage')) },
   { path: 'services/civil', element: responsivePage(() => import('../pages/services/CivilPage'), () => import('../mobile/pages/services/CivilPage')) },
-  // Dedicated pages (2026-11-02) reusing the same hero + section-carousel
-  // "cards" treatment as Mechanical/Electrical/Plumbing/Fire Protection
-  // (ServiceHero + ServiceSectionCarousel), rather than the structure-only
-  // PendingContentPages placeholder — live and indexable since 2026-11-05.
-  {
-    path: 'services/manufacturing-prefabrication/modular',
-    element: responsivePage(() => import('../pages/ModularPage'), () => import('../mobile/pages/ModularPage')),
-  },
-  {
-    path: 'services/manufacturing-prefabrication/custom',
-    element: responsivePage(() => import('../pages/CustomPage'), () => import('../mobile/pages/CustomPage')),
-  },
-  { path: 'services/:slug', element: responsivePage(() => import('../pages/ServiceDetailPage'), () => import('../mobile/pages/ServiceDetailPage')) },
+  // Sub-service pages (Mechanical, Electrical, Plumbing, Fire Protection, BIM,
+  // Modular, Custom) and the generic services/:slug template were removed on
+  // 2026-11-19 — sub-services are now sections of their umbrella page. Their
+  // old URLs fall through to the 404 page.
   // The old standalone Projects landing page (large VELA/Saudi F1 banners) is
   // retired — "Explore Our Projects" now scrolls to the homepage's own
   // Featured Projects section instead. This route only exists so that
@@ -183,11 +180,17 @@ const routeChildren: RouteObject[] = [
   { path: 'dev/projects-admin', element: lazyPage(() => import('../internal/projects/ProjectsAdminPage')) },
   // Desktop-only internal GitHub-backed Projects CMS — no mobile equivalent, not linked from the public site, noIndex.
   { path: 'dev/projects-cms', element: lazyPage(() => import('../internal/projects-cms/ProjectsCmsPage')) },
+  // Internal preview of the "something went wrong" screen: this route throws on
+  // purpose, so the real errorElement (RouteErrorBoundary) renders. Not linked
+  // anywhere; the error screen itself is noIndex.
+  { path: 'dev/error-preview', element: <ErrorPreview /> },
   { path: '404', element: lazyPage(() => import('../pages/NotFoundPage')) },
   { path: '*', element: lazyPage(() => import('../pages/NotFoundPage')) },
 ];
 
+// errorElement: the branded error/404 screen instead of React Router's default
+// "Unexpected Application Error" (render errors, failed loads, 404 responses).
 export const router = createBrowserRouter([
-  { path: '/', element: <RootLayout />, children: routeChildren },
-  { path: '/ar', element: <RootLayout />, children: routeChildren },
+  { path: '/', element: <RootLayout />, errorElement: <RouteErrorBoundary />, children: routeChildren },
+  { path: '/ar', element: <RootLayout />, errorElement: <RouteErrorBoundary />, children: routeChildren },
 ]);

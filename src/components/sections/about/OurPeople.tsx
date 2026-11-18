@@ -22,7 +22,7 @@ export function OurPeople() {
 
         {/* The photo is 4:5 at most widths; where the copy wraps taller (narrow laptops)
             it stretches to the text's height instead, cropping in from the sides. */}
-        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:items-stretch lg:gap-16">
+        <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:items-center md:gap-8 lg:items-stretch lg:gap-16">
           <div className="relative">
             <div className="aspect-[4/5] w-full overflow-hidden rounded-md bg-gray-100 lg:h-full">
               <img
@@ -35,7 +35,7 @@ export function OurPeople() {
             </div>
           </div>
 
-          <Stack space="md" as="article" className="lg:self-center">
+          <Stack space="md" as="article" className="md:self-center">
             {/* Set larger than body-lg on desktop (stepping up on wider screens) so the copy balances the portrait beside it. */}
             <Stack space="sm" className="lg:gap-7">
               <Text variant="body-lg" className="lg:text-[1.3125rem] lg:leading-[1.6] xl:text-[1.5rem]">{t('ourPeople.paragraph1')}</Text>

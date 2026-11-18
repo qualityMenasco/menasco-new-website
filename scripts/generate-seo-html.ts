@@ -256,7 +256,7 @@ function buildHead(route: RouteMeta, locale: Locale): string {
 const EMPTY_ROOT_DIV = '<div id="root"></div>';
 
 async function writeRoute(route: RouteMeta, locale: Locale) {
-  const localizedPath = withLocale(route.path, locale); // "/", "/services/mechanical", "/ar", "/ar/services/mechanical"
+  const localizedPath = withLocale(route.path, locale); // "/", "/services/mep", "/ar", "/ar/services/mep"
   const head = buildHead(route, locale);
   let html = template
     .replace(/<html[^>]*>/, `<html lang="${locale}" dir="${directionForLocale(locale)}">`)

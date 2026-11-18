@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { HomeHeroEditorial } from '../components/sections/home/hero/HomeHeroEditorial';
 import { DataCenterFeature } from '../components/sections/home/DataCenterFeature';
+import { CompanyIntro } from '../components/sections/home/CompanyIntro';
 import { ServicesShowcase } from '../components/sections/home/ServicesShowcase';
 import { FeaturedProjectsEditorial } from '../components/sections/home/projects/FeaturedProjectsEditorial';
 import { SectorsShowcase } from '../components/sections/home/SectorsShowcase';
@@ -28,9 +29,12 @@ export default function HomePage() {
   return (
     <>
       <SEO title={t('home:seo.title')} description={t('home:seo.description')} path="/" structuredData={[organizationJsonLd(), websiteJsonLd()]} />
-      {/* Visuals lead: hero (with stats) → projects → data centre, then the company story (About + services, one section).
+      {/* Hero (with stats) → About MENASCO → projects → data centre → What we deliver.
           Backgrounds alternate warm white / stone, with dark bands (hero, data centre, BIM) as anchors. */}
       <HomeHeroEditorial />
+      <ScrollReveal id="about-menasco">
+        <CompanyIntro />
+      </ScrollReveal>
       <ScrollReveal id="projects">
         <FeaturedProjectsEditorial />
       </ScrollReveal>

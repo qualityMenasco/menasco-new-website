@@ -8,6 +8,8 @@ import { PhotoWithVideo } from '../../components/sections/community/PhotoWithVid
 import { leadershipProfiles } from '../../data/leadership';
 import credentials, { type Credential } from '../../data/credentials';
 import { NavSectionH1 } from '../../components/typography/NavSectionH1';
+import { ClientsSection } from '../../components/sections/ClientsSection';
+import { OurPeople } from '../../components/sections/about/OurPeople';
 import { SEO } from '../../seo/SEO';
 import {} from '../../seo/structuredData';
 
@@ -142,6 +144,13 @@ export default function AboutPage() {
           </LocaleLink>
         </div>
       </section>
+
+      {/* Tablets only (md+), same order as desktop: the clients section and
+          "Our People". Phones keep the shorter page without them. */}
+      <div className="hidden md:block">
+        <ClientsSection />
+        <OurPeople />
+      </div>
 
       {/* Mirrors the desktop page's closing "Learn More" cards (same data and copy), as a swipeable row (three across on tablets). */}
       <section className="py-8 md:py-12">

@@ -3,6 +3,7 @@ import { createRoot, hydrateRoot } from 'react-dom/client';
 import App from './App';
 import { IS_PRERENDERED_HYDRATION } from './lib/prerenderHydration';
 import './styles/index.css';
+import { reloadForStaleBuild } from './lib/staleBuild';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) throw new Error('Root element not found');
@@ -18,19 +19,12 @@ if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
 }
 
-// Recover from a stale build. After a deploy, a page loaded from the previous
-// build still references that build's hashed chunks, which no longer exist —
-// loading one fails and the app would crash. Vite fires `vite:preloadError`
-// when a lazy chunk can't load; reload once to pick up the current build. The
-// timestamp guard stops a reload loop if the failure persists for another
-// reason (e.g. the network is down).
+// Recover from a stale build (see src/lib/staleBuild.ts). Vite fires
+// `vite:preloadError` when a lazy chunk's preloaded dependencies can't load;
+// the route chunks themselves are covered by `withStaleBuildRecovery` in
+// src/app/router.tsx. Both reload once onto the current build.
 window.addEventListener('vite:preloadError', (event) => {
-  const key = 'menasco:stale-build-reload';
-  const last = Number(sessionStorage.getItem(key) ?? 0);
-  if (Date.now() - last < 10_000) return;
-  sessionStorage.setItem(key, String(Date.now()));
-  event.preventDefault();
-  window.location.reload();
+  if (reloadForStaleBuild()) event.preventDefault();
 });
 
 const app = (

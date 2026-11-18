@@ -1,9 +1,0 @@
-# Custom Engineered Components
-
-> Not every project fits a standard specification. MENASCO's custom engineering capability, delivered through our manufacturing partners, produces project-specific MEP components engineered to the exact requirements of complex or non-standard installations — from bespoke plant assemblies to purpose-built containment and support systems.
-
----
-
-## Related Pages
-
-- [All Services](https://menascogroup.com/services/llms.txt)

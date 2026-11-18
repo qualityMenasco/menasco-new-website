@@ -20,10 +20,11 @@ vi.mock('react-i18next', () => ({
       if (defaultValueOrOptions && typeof defaultValueOrOptions === 'object' && 'returnObjects' in defaultValueOrOptions) {
         if (key === 'mepPage.disciplinesSection.items') {
           return [
-            { label: 'Mechanical', title: 'Mechanical Systems', description: 'x', cta: 'Explore Mechanical', href: '/services/mechanical', imageAlt: '' },
-            { label: 'Electrical', title: 'Electrical & ELV', description: 'x', cta: 'Explore Electrical & ELV', href: '/services/electrical', imageAlt: '' },
-            { label: 'Water Systems', title: 'Plumbing, Water & Drainage', description: 'x', cta: 'Explore Water Systems', href: '/services/plumbing', imageAlt: '' },
-            { label: 'Life Safety', title: 'Fire Protection & Life Safety', description: 'x', cta: 'Explore Fire & Life Safety', href: '/services/fire-protection', imageAlt: '' },
+            // Mechanical has a (hypothetical) MEP-page section; the others don't yet.
+            { label: 'Mechanical', title: 'Mechanical Systems', description: 'x', cta: 'Explore Mechanical', href: '/services/mep#mechanical-systems', imageAlt: '' },
+            { label: 'Electrical', title: 'Electrical & ELV', description: 'x', imageAlt: '' },
+            { label: 'Water Systems', title: 'Plumbing, Water & Drainage', description: 'x', imageAlt: '' },
+            { label: 'Life Safety', title: 'Fire Protection & Life Safety', description: 'x', imageAlt: '' },
           ];
         }
         if (key === 'mepPage.integration.paragraphs') return ['p1', 'p2'];
@@ -48,11 +49,12 @@ function renderMEPPage() {
 }
 
 describe('MEPPage', () => {
-  it('renders the hero and links each discipline card to its page', () => {
+  it('renders the hero; discipline cards link only when they have a section', () => {
     renderMEPPage();
     expect(screen.getByRole('heading', { level: 2, name: 'mepPage.hero.title' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Mechanical Systems' })).toHaveAttribute('href', '/services/mechanical');
-    expect(screen.getByRole('link', { name: 'Fire Protection & Life Safety' })).toHaveAttribute('href', '/services/fire-protection');
+    expect(screen.getByRole('link', { name: 'Mechanical Systems' })).toHaveAttribute('href', '/services/mep#mechanical-systems');
+    expect(screen.getByRole('heading', { level: 3, name: 'Fire Protection & Life Safety' })).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Fire Protection & Life Safety' })).not.toBeInTheDocument();
     expect(screen.getByRole('link', { name: /mepPage.hero.secondaryCta/ })).toHaveAttribute('href', '/projects/categories');
   });
 

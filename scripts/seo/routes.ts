@@ -19,7 +19,6 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { SITE_URL, SITE_NAME } from '../../src/seo/constants';
-import { services } from '../../src/data/services';
 import { projects } from '../../src/data/projects';
 import { projectCategories } from '../../src/data/projectCategories';
 import { leadershipProfiles } from '../../src/data/leadership';
@@ -73,7 +72,7 @@ function fullTitle(locale: Locale, topic: string): string {
 }
 
 export interface RouteMeta {
-  /** Canonical (English) path, e.g. "/services/mechanical". */
+  /** Canonical (English) path, e.g. "/services/mep". */
   path: string;
   title: (locale: Locale) => string;
   description: (locale: Locale) => string;
@@ -116,12 +115,6 @@ export interface AddRouteOptions {
   follow?: boolean;
 }
 
-const serviceKeys: Record<string, string> = {
-  mechanical: 'mechanical',
-  electrical: 'electrical',
-  plumbing: 'plumbing',
-  'fire-protection': 'fireProtection',
-};
 
 const categoryKeys: Record<string, string> = {
   'residential-commercial': 'residentialCommercial',
@@ -217,20 +210,6 @@ addRoute(
   },
 );
 addRoute(
-  '/services/bim-digital-engineering',
-  (l) => fullTitle(l, tr(l, 'services', 'bimPage.seo.title', 'BIM & MEP Coordination')),
-  (l) => tr(l, 'services', 'bimPage.seo.description', NS[l].seo.defaultDescription),
-  {
-    mainEntity: (l) =>
-      serviceEntity({
-        name: tr(l, 'services', 'bimPage.seo.title', 'BIM & MEP Coordination'),
-        description: tr(l, 'services', 'bimPage.seo.description', NS[l].seo.defaultDescription),
-        url: `${SITE_URL}/services/bim-digital-engineering`,
-      }),
-    breadcrumb: (l) => [HOME, { label: 'Services', path: '/services' }, { label: tr(l, 'services', 'items.bimDigitalEngineering.name', 'BIM & Digital Engineering'), path: '/services/bim-digital-engineering' }],
-  },
-);
-addRoute(
   '/services/mep',
   (l) => fullTitle(l, tr(l, 'services', 'mepPage.seo.title', 'MEP — Mechanical, Electrical & Plumbing')),
   (l) => tr(l, 'services', 'mepPage.seo.description', NS[l].seo.defaultDescription),
@@ -270,44 +249,6 @@ addRoute(
         url: `${SITE_URL}/services/turnkey-developments`,
       }),
     breadcrumb: () => [HOME, { label: 'Services', path: '/services' }, { label: 'EPC', path: '/services/turnkey-developments' }],
-  },
-);
-addRoute(
-  '/services/manufacturing-prefabrication/modular',
-  (l) => fullTitle(l, tr(l, 'services', 'modularPage.seo.title', 'Modular MEP Solutions')),
-  (l) => tr(l, 'services', 'modularPage.seo.description', NS[l].seo.defaultDescription),
-  {
-    mainEntity: (l) =>
-      serviceEntity({
-        name: tr(l, 'services', 'modularPage.seo.title', 'Modular MEP Solutions'),
-        description: tr(l, 'services', 'modularPage.seo.description', NS[l].seo.defaultDescription),
-        url: `${SITE_URL}/services/manufacturing-prefabrication/modular`,
-      }),
-    breadcrumb: (l) => [
-      HOME,
-      { label: 'Services', path: '/services' },
-      { label: 'Manufacturing & Prefabrication', path: '/services/manufacturing-prefabrication' },
-      { label: tr(l, 'services', 'modularPage.name', 'Modular'), path: '/services/manufacturing-prefabrication/modular' },
-    ],
-  },
-);
-addRoute(
-  '/services/manufacturing-prefabrication/custom',
-  (l) => fullTitle(l, tr(l, 'services', 'customPage.seo.title', 'Custom Engineered Components')),
-  (l) => tr(l, 'services', 'customPage.seo.description', NS[l].seo.defaultDescription),
-  {
-    mainEntity: (l) =>
-      serviceEntity({
-        name: tr(l, 'services', 'customPage.seo.title', 'Custom Engineered Components'),
-        description: tr(l, 'services', 'customPage.seo.description', NS[l].seo.defaultDescription),
-        url: `${SITE_URL}/services/manufacturing-prefabrication/custom`,
-      }),
-    breadcrumb: (l) => [
-      HOME,
-      { label: 'Services', path: '/services' },
-      { label: 'Manufacturing & Prefabrication', path: '/services/manufacturing-prefabrication' },
-      { label: tr(l, 'services', 'customPage.name', 'Custom'), path: '/services/manufacturing-prefabrication/custom' },
-    ],
   },
 );
 addRoute(
@@ -378,30 +319,6 @@ for (const profile of leadershipProfiles) {
         { label: 'Leadership', path: '/about' },
         { label: profile.fullName, path: `/leadership/${profile.slug}` },
       ],
-    },
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Services (generic :slug detail pages only — BIM/Manufacturing/Data Centers
-// have their own dedicated routes, added above)
-// ---------------------------------------------------------------------------
-
-for (const [slug, key] of Object.entries(serviceKeys)) {
-  const svc = services.find((s) => s.slug === slug);
-  if (!svc) continue;
-  addRoute(
-    `/services/${slug}`,
-    (l) => fullTitle(l, tr(l, 'services', `items.${key}.seoTitle`, tr(l, 'services', `items.${key}.name`, svc.name))),
-    (l) => tr(l, 'services', `items.${key}.seoDescription`, tr(l, 'services', `items.${key}.shortDescription`, svc.shortDescription)),
-    {
-      mainEntity: (l) =>
-        serviceEntity({
-          name: tr(l, 'services', `items.${key}.seoTitle`, tr(l, 'services', `items.${key}.name`, svc.name)),
-          description: tr(l, 'services', `items.${key}.seoDescription`, tr(l, 'services', `items.${key}.shortDescription`, svc.shortDescription)),
-          url: `${SITE_URL}/services/${slug}`,
-        }),
-      breadcrumb: (l) => [HOME, { label: 'Services', path: '/services' }, { label: tr(l, 'services', `items.${key}.name`, svc.name), path: `/services/${slug}` }],
     },
   );
 }

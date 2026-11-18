@@ -51,24 +51,41 @@ export interface NavGroupLinkEntry extends NavLinkEntry {
 }
 
 /**
- * A labelled group of links (the Services mega menu columns, the grouped
- * mobile Services accordion, the Services landing page). `href` is set only
- * when the group itself has a real page to land on.
+ * A sub-service listed under an umbrella. Sub-services no longer have their
+ * own pages (removed 2026-11-19) — they're sections of their umbrella page.
+ * `sectionId` is the anchor id of that section once it exists; until then
+ * the link resolves to the umbrella page itself (see `subServiceHref`).
+ */
+export interface SubServiceEntry extends NavGroupLinkEntry {
+  sectionId?: string;
+}
+
+/**
+ * An umbrella service (its own page) and the sub-services it covers.
  */
 export interface NavGroupEntry {
   label: string;
   i18nKey: string;
-  href?: string;
-  links: NavGroupLinkEntry[];
+  href: string;
+  links: SubServiceEntry[];
 }
 
+/** Where a sub-service link points: its umbrella-page section if one exists, else the umbrella page. */
+export const subServiceHref = (umbrellaHref: string, sectionId?: string) => (sectionId ? `${umbrellaHref}#${sectionId}` : umbrellaHref);
+
+const subService = (umbrellaHref: string, label: string, i18nKey: string, sectionId?: string): SubServiceEntry => ({
+  label,
+  i18nKey,
+  sectionId,
+  href: subServiceHref(umbrellaHref, sectionId),
+});
+
 /**
- * MENASCO's service structure — the single source for every grouped
- * Services surface (desktop mega menu, mobile menu, Services landing,
- * footer). Existing service URLs are deliberately unchanged; only the
- * grouping is new. Entries marked in `pendingContentPaths` exist as
- * structure-only pages (noindex, excluded from sitemap/llms.txt) until
- * approved content is supplied.
+ * MENASCO's service structure — the single source for every Services surface.
+ * The header (desktop dropdown + mobile drawer) shows only the umbrellas
+ * (`headerServiceLinks`); the footer lists every sub-service too
+ * (`footerServiceLinks`). To point a sub-service at its new section, add the
+ * section's id as the 4th argument of its `subService(...)` call.
  */
 export const servicesNavigationGroups: NavGroupEntry[] = [
   {
@@ -76,25 +93,25 @@ export const servicesNavigationGroups: NavGroupEntry[] = [
     i18nKey: 'servicesGroups.mep',
     href: '/services/mep',
     links: [
-      { label: 'Mechanical Systems', href: '/services/mechanical', i18nKey: 'servicesList.mechanical' },
-      { label: 'Electrical & ELV Systems', href: '/services/electrical', i18nKey: 'servicesList.electrical' },
-      { label: 'Plumbing, Water & Drainage Systems', href: '/services/plumbing', i18nKey: 'servicesList.plumbing' },
-      { label: 'Fire Protection & Life Safety Systems', href: '/services/fire-protection', i18nKey: 'servicesList.firesProtection' },
+      subService('/services/mep', 'Mechanical Systems', 'servicesList.mechanical'),
+      subService('/services/mep', 'Electrical & ELV Systems', 'servicesList.electrical'),
+      subService('/services/mep', 'Plumbing, Water & Drainage Systems', 'servicesList.plumbing'),
+      subService('/services/mep', 'Fire Protection & Life Safety Systems', 'servicesList.firesProtection'),
     ],
   },
   {
     label: 'Civil',
     i18nKey: 'servicesGroups.civil',
     href: '/services/civil',
-    links: [{ label: 'BIM & Digital Engineering', href: '/services/bim-digital-engineering', i18nKey: 'servicesList.bimDigitalEngineering' }],
+    links: [subService('/services/civil', 'BIM & Digital Engineering', 'servicesList.bimDigitalEngineering')],
   },
   {
     label: 'Manufacturing & Prefabrication',
     i18nKey: 'servicesGroups.manufacturingPrefabrication',
     href: '/services/manufacturing-prefabrication',
     links: [
-      { label: 'Modular', href: '/services/manufacturing-prefabrication/modular', i18nKey: 'servicesList.modular' },
-      { label: 'Custom', href: '/services/manufacturing-prefabrication/custom', i18nKey: 'servicesList.custom' },
+      subService('/services/manufacturing-prefabrication', 'Modular', 'servicesList.modular'),
+      subService('/services/manufacturing-prefabrication', 'Custom', 'servicesList.custom'),
     ],
   },
   {
@@ -108,22 +125,25 @@ export const servicesNavigationGroups: NavGroupEntry[] = [
 /** Structure-only routes awaiting approved content — rendered noindex and kept out of the sitemap and llms.txt. (Empty since Certification & Training got its own page.) */
 export const pendingContentPaths: readonly string[] = [];
 
-/** Every Services destination (groups with their own page + their links), flattened in menu order — footer and active-state matching. */
-export const servicesNavigation: NavGroupLinkEntry[] = servicesNavigationGroups.flatMap((group) => [
-  ...(group.href ? [{ label: group.label, href: group.href, i18nKey: group.i18nKey }] : []),
-  ...group.links,
-]);
-
-/** Data center MEP capability — not one of the four service groups, surfaced alongside them as a sector solution. */
+/** Data center MEP capability — not one of the four service groups, surfaced alongside them as its own umbrella page. */
 export const dataCentreServiceLink: NavGroupLinkEntry = {
   label: 'Data Centers',
   href: '/services/data-centers',
   i18nKey: 'dataCentres',
 };
 
-/** Footer Services column — live service pages only (structure-only pages join once they have approved content), plus Data Centers. */
+/** Every umbrella service page, in menu order (MEP, Civil, Manufacturing & Prefabrication, EPC, Data Centers). */
+export const umbrellaServiceLinks: NavGroupLinkEntry[] = [
+  ...servicesNavigationGroups.map((group) => ({ label: group.label, href: group.href, i18nKey: group.i18nKey })),
+  dataCentreServiceLink,
+];
+
+/** Header Services menu (desktop dropdown + mobile drawer): All Services, then the umbrella pages only. */
+export const headerServiceLinks: NavGroupLinkEntry[] = [{ label: 'All Services', href: '/services', i18nKey: 'allServices' }, ...umbrellaServiceLinks];
+
+/** Footer Services column — each umbrella followed by its sub-services (which link to the umbrella page or its section), then Data Centers. Hrefs can repeat, so key by label. */
 export const footerServiceLinks: NavGroupLinkEntry[] = [
-  ...servicesNavigation.filter((link) => !(pendingContentPaths as readonly string[]).includes(link.href)),
+  ...servicesNavigationGroups.flatMap((group) => [{ label: group.label, href: group.href, i18nKey: group.i18nKey }, ...group.links]),
   dataCentreServiceLink,
 ];
 
