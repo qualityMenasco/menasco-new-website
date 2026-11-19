@@ -229,21 +229,20 @@ function buildCompanyKeyFacts(): string[] {
 // Home — https://menascogroup.com/  →  public/llms.txt
 // ---------------------------------------------------------------------------
 
+
 function generateHome() {
   const featured = projects.filter((p) => p.featured);
 
   const content = doc(
     h1('MENASCO'),
-    bq(
-      `MENASCO is an integrated MEP (mechanical, electrical, plumbing & fire protection) engineering contractor, operating across the UAE, Saudi Arabia, Egypt, the United Kingdom and the USA.`,
-    ),
-    `${SITE_TAGLINE}. Established in ${foundingYear} in the UAE as MENASCO Mechanical Contracting L.L.C.`,
+    bq(home.seo.description),
+    `Established in ${foundingYear} in the UAE as MENASCO Mechanical Contracting L.L.C.`,
 
     {
       hr: true,
       text: doc(
         h2('About MENASCO'),
-        about.whoWeAre.paragraph1,
+        about.hero.description,
         linkLine('About MENASCO', llmsUrl('/about'), 'Company overview, approach, vision, mission and values.'),
       ),
     },
@@ -257,7 +256,7 @@ function generateHome() {
       hr: true,
       text: doc(
         h2('Services'),
-        home.hero.description,
+        servicesCopy.seo.description,
         ...groupedServiceBlocks(),
       ),
     },
@@ -266,7 +265,7 @@ function generateHome() {
       hr: true,
       text: doc(
         h2('Projects & Sectors'),
-        `${projects.length} current projects across the UAE, Saudi Arabia, Egypt and the USA, organized into ${publishedCategories.length} sectors.`,
+        `MENASCO delivers projects across all ${regionalCountries.length} of its countries of operation: ${regionalCountries.join(', ')}. The website features a selection of ${projects.length} of these projects, organized into ${publishedCategories.length} sectors.`,
         bullets(publishedCategories.map((c) => `${c.title}: ${c.description}`)),
         linkLine('All Projects & Sectors', llmsUrl('/projects/categories'), 'Full project portfolio, browsable by sector.'),
       ),
@@ -282,7 +281,7 @@ function generateHome() {
 
     {
       hr: true,
-      text: doc(h2('Innovation & Technology'), about.innovation.hero.description, linkLine('Innovation & Technology', llmsUrl('/innovation-technology'))),
+      text: doc(h2('Innovation & Technology'), bullets(innovationPlatformLines()), linkLine('Innovation & Technology', llmsUrl('/innovation-technology'))),
     },
 
     {
@@ -306,7 +305,7 @@ function generateHome() {
 
     {
       hr: true,
-      text: doc(h2('Careers'), home.careersPreview.description, linkLine('Careers at MENASCO', CAREERS_URL)),
+      text: doc(h2('Careers'), 'Career, internship and graduate opportunities at MENASCO.', linkLine('Careers at MENASCO', CAREERS_URL)),
     },
   );
 
@@ -325,7 +324,7 @@ function generateAbout() {
     h1('About MENASCO'),
     bq(about.hero.description),
 
-    doc(h2('Company Overview'), w.paragraph1, w.paragraph2, w.paragraph3),
+    doc(h2('Company Overview'), w.paragraph3),
     doc(h2('Key Facts'), bullets(buildCompanyKeyFacts())),
     doc(h2('Mission'), vmv.mission.description),
     doc(h2('Vision'), vmv.vision.description),
@@ -342,7 +341,7 @@ function generateAbout() {
           linkLine('Leadership & Team', llmsUrl('/team'), 'MENASCO leadership and engineering management team.'),
           linkLine('Quality, Health & Safety', llmsUrl('/quality-safety'), "MENASCO's QHSE approach and ISO certifications."),
           linkLine('Community & People', llmsUrl('/community-people'), 'MENASCO blood drive, Culture Day and Training & Mentoring Centre.'),
-          linkLine('Certification & Training', llmsUrl('/certification-training'), 'Workforce development, a free engineering education initiative in development, and university internships.'),
+          linkLine('Certification & Training', llmsUrl('/certification-training'), 'MENASCO Connect (internal workforce development), MENASCO Academy (a free engineering education programme in development, for external applicants) and internships for students.'),
           linkLine('Innovation & Technology', llmsUrl('/innovation-technology'), "MENASCO's digital and technology initiatives."),
           linkLine('Contact & Regional Presence', llmsUrl('/contact'), 'Office locations and contact details.'),
         ]),
@@ -353,20 +352,25 @@ function generateAbout() {
   write('/about', content);
 }
 
+/** A team member as a sub-section with their bio when the page has one, else a single line. */
+function memberBlock(m: { name: string; title: string; bio?: string[] }): string {
+  return m.bio?.length ? `### ${m.name}, ${m.title}\n\n${m.bio.join('\n\n')}` : `- ${m.name}, ${m.title}`;
+}
+
 function generateTeam() {
   const execGroup = executiveTeam.filter((m) => m.group === 'executive');
   const supportGroup = executiveTeam.filter((m) => m.group === 'engineering-support');
 
   const content = doc(
     h1('Leadership & Team'),
-    bq("MENASCO's founder, CEO, and corporate and technical leadership."),
+    bq(`MENASCO's leadership: ${leadershipProfiles.length} executive leaders, ${execGroup.length} corporate leaders and ${supportGroup.length} technical leaders.`),
 
     doc(
       h2('Executive Leadership'),
       bullets(leadershipProfiles.map((p) => linkLine(p.fullName, llmsUrl(`/leadership/${p.slug}`), p.fullRole))),
     ),
-    doc(h2('Corporate Leadership'), bullets(execGroup.map((m) => `${m.name}, ${m.title}`))),
-    doc(h2('Technical Leadership'), bullets(supportGroup.map((m) => `${m.name}, ${m.title}`))),
+    doc(h2('Corporate Leadership'), ...execGroup.map(memberBlock)),
+    doc(h2('Technical Leadership'), ...supportGroup.map(memberBlock)),
 
     {
       hr: true,
@@ -404,7 +408,7 @@ function generateQualitySafety() {
 
     doc(
       h2(q.commitment.heading),
-      (q.commitment.paragraphs as string[]).join('\n\n'),
+      (q.commitment.paragraphs as string[]).slice(1).join('\n\n'),
       ...(q.commitment.topics as { title: string; body: string[] }[]).map((topic) => `### ${topic.title}\n\n${topic.body.join('\n\n')}`),
     ),
     doc(
@@ -444,7 +448,6 @@ function generateCertificationTraining() {
       `${c.initiative.disclaimer} Placement through industry partners is an intended pathway, not a guaranteed outcome. Enrolment is not yet open.`,
     ),
     doc(h2(`${c.internships.eyebrow} (active)`), c.internships.heading, (c.internships.paragraphs as string[]).join('\n\n'), linkLine('Careers', CAREERS_URL)),
-    doc(h2(c.closing.eyebrow), c.closing.body),
     doc(h2('Frequently Asked Questions'), ...(c.faq.items as { question: string; answer: string }[]).map((item) => `### ${item.question}
 
 ${item.answer}`)),
@@ -480,6 +483,12 @@ function generateCommunity() {
   write('/community-people', content);
 }
 
+/** One line per technology platform: its name and the first sentence of its page description. */
+function innovationPlatformLines(): string[] {
+  const sections = Object.values(about.innovation.sections as Record<string, { heading: string; paragraph: string }>);
+  return sections.map((sec) => `${sec.heading}: ${sec.paragraph.split(/(?<=\.)\s/)[0]}`);
+}
+
 function generateInnovation() {
   const inn = about.innovation;
   const sectionEntries = Object.entries(
@@ -487,7 +496,7 @@ function generateInnovation() {
   );
   const content = doc(
     h1('Innovation & Technology'),
-    bq(inn.hero.description),
+    bq(`MENASCO's in-house construction technology: ${sectionEntries.map(([, sec]) => sec.heading).join(', ')}.`),
 
     ...sectionEntries.map(([key, sec]) =>
       doc(
@@ -496,7 +505,6 @@ function generateInnovation() {
         key === 'lynxqc' && sec.privacyPolicyLink ? linkLine(sec.privacyPolicyLink, llmsUrl('/lynxqc/privacy-policy')) : '',
       ),
     ),
-    doc(h2(inn.closing.heading), inn.closing.description),
 
     {
       hr: true,
@@ -550,13 +558,10 @@ function generateContact() {
 function generateServicesIndex() {
   const content = doc(
     h1('MENASCO Services'),
-    bq(home.hero.description),
-    home.servicesShowcase?.description ?? "Six disciplines, delivered independently or as a single design-build contract.",
+    bq(servicesCopy.seo.description),
+    servicesCopy.listing.description,
 
-    doc(
-      h2('Services'),
-      ...groupedServiceBlocks(),
-    ),
+    doc(h2('Services'), ...serviceAreaBlocks()),
     doc(
       h2(servicesCopy.listing.delivery.eyebrow),
       servicesCopy.listing.delivery.heading,
@@ -604,16 +609,61 @@ function generateServiceDetail() {
   }
 }
 
+/** The four MEP technical disciplines: introduction and full scope of works, at the given heading depth. */
+function mepDisciplineBlocks(depth: '###' | '####'): string[] {
+  const mep = servicesCopy.mepPage;
+  const items = servicesCopy.items as Record<string, { introduction: string; capabilities: string[] }>;
+  const disciplines = mep.disciplinesSection.items as { id: string; title: string }[];
+  return disciplines.map(
+    (d) => `${depth} ${d.title}\n\n${items[d.id].introduction}\n\n${mep.disciplinesSection.scopeLabel}:\n\n${bullets(items[d.id].capabilities)}`,
+  );
+}
+
+/** A service area's capability list as "Title: description" bullets. */
+function capabilityBullets(list: { title: string; description: string }[]): string {
+  return bullets(list.map((c) => `${c.title}: ${c.description}`));
+}
+
+/**
+ * Every service area with its real scope, in MENASCO's priority order
+ * (MEP, EPC, Data Centers, Civil & BIM, Manufacturing & Prefabrication).
+ */
+function serviceAreaBlocks(): string[] {
+  const sc = servicesCopy;
+  return [
+    doc(`### MEP`, linkLine(sc.mepPage.seo.title, llmsUrl('/services/mep'), sc.mepPage.seo.description), ...mepDisciplineBlocks('####')),
+    doc(`### EPC`, linkLine(sc.epcPage.seo.title, llmsUrl('/services/turnkey-developments'), sc.epcPage.seo.description), capabilityBullets(sc.epcPage.capabilities)),
+    doc(`### Data Centers`, linkLine(sc.dataCenter.seo.title, llmsUrl('/services/data-centers'), sc.dataCenter.seo.description), capabilityBullets(sc.dataCenter.capabilities)),
+    doc(`### Civil & BIM`, linkLine(sc.civilPage.seo.title, llmsUrl('/services/civil'), sc.civilPage.seo.description), capabilityBullets(sc.civilPage.capabilities)),
+    doc(
+      `### Manufacturing & Prefabrication`,
+      linkLine(sc.manufacturingPage.seo.title, llmsUrl('/services/manufacturing-prefabrication'), sc.manufacturingPage.seo.description),
+      capabilityBullets(sc.manufacturingPage.capabilities),
+    ),
+  ];
+}
+
+/** MEP-only sections, mirroring the page: coordination, key figures and the technical disciplines (intro + full scope). */
+function mepPageSections(): string[] {
+  const mep = servicesCopy.mepPage;
+  return [
+    doc(h2(mep.integration.heading), (mep.integration.paragraphs as string[]).join('\n\n')),
+    doc(h2('Key Figures'), bullets([`350+ ${mep.stats.projects}`, `140 ${mep.stats.bimEngineers}`, `6,000 ${mep.stats.workforce}`])),
+    doc(h2(mep.disciplinesSection.heading), ...mepDisciplineBlocks('###')),
+  ];
+}
+
 function generateUmbrellaPages() {
   for (const [path, page] of Object.entries(umbrellaPages)) {
     const content = doc(
       h1(page.seo.title),
       bq(page.hero.description),
+      ...(path === '/services/mep' ? mepPageSections() : []),
       ...(page.projects
         ? [
             doc(
               h2(page.projects.eyebrow),
-              page.projects.intro,
+              path === '/services/mep' ? '' : page.projects.intro,
               bullets(
                 Object.entries(page.projects.items).map(([slug, item]) => {
                   const project = projects.find((p) => p.slug === slug);
@@ -649,6 +699,7 @@ function generateDataCenters() {
       bullets((dc.capabilities as Array<{ title: string; description: string }>).map((c) => `${c.title}: ${c.description}`)),
     ),
     doc(h2('Prefabrication'), `${dc.prefab.description}\n\n${dc.prefab.closingStatement}`),
+    doc(h2('Frequently Asked Questions'), ...(dc.faq as { title: string; content: string }[]).map((item) => `### ${item.title}\n\n${item.content}`)),
 
     dcProjects.length > 0 && {
       hr: true,

@@ -1,20 +1,120 @@
-import { ArrowRight } from 'lucide-react';
+/*
+ * ============================================================================
+ * DATA CENTER PAGES — DESIGN RULES & DECISIONS (agreed with the client, Nov 2026)
+ * Read this before changing /services/data-centers or its sustainability tab.
+ * Applies to: this file, DataCenterSustainabilityPage.tsx,
+ * src/components/services/datacenter/*, src/data/dataCenter*.ts.
+ * ============================================================================
+ *
+ * STRUCTURE & SEO
+ * - Two real pages presented as tabs (sticky Technical | Sustainability switch,
+ *   DataCenterTabs): /services/data-centers and /services/data-centers/sustainability.
+ *   Separate pages (not in-page tabs) so each ranks for its own searches with its
+ *   own title, description, H1, breadcrumb, sitemap entry and llms.txt.
+ * - This is one of MENASCO's most important pages: everything must be in the HTML.
+ *   Toggled/hidden content is rendered and hidden (hidden attribute / CSS), never
+ *   conditionally unmounted.
+ * - One H1 per page = visible eyebrow + creative title (HeroH1). Visible titles stay
+ *   creative; keywords live in eyebrows, SEO titles and descriptions.
+ * - FAQPage JSON-LD on both pages (runtime SEO + scripts/seo/routes.ts for prerender).
+ *   The sustainability page also has TechArticle JSON-LD with its sources as citations.
+ * - Both pages are prerendered (scripts/seo/prerender.ts PRERENDER_PATHS).
+ *
+ * CONTENT RULES
+ * - Cite reputable sources inline with [[n]] markers (RichText -> superscript link) and a
+ *   numbered Sources list (src/data/dataCenterSources.ts). Every figure must be sourced.
+ * - Verified facts (2026-11-20): IEA "Key Questions on Energy and AI" (2026): 485 TWh
+ *   (2025) -> 950 TWh (2030). Germany EnEfG: PUE <= 1.2 for new sites from July 2026;
+ *   the 2026 amendment is PENDING (not law) — say so. EU Reg 2024/1364: 500 kW+ sites
+ *   report KPIs; EU A–G label grades PUE/WUE. LBNL: US 4.4% (2023) -> 6.7–12% (2028).
+ *   LEED Gold = 60–79 points. Estidama: 1 Pearl minimum, 2 Pearls for govt-funded.
+ * - Uptime Tiers: say "Tier III & Tier IV". Uptime certifies FACILITIES/designs only;
+ *   never claim MENASCO is Tier-certified. Phrase as delivering the MEP/topology the
+ *   design requires.
+ * - Technical page: no "How we deliver" section (client removed it; copy kept in
+ *   dataCenterTechnical.ts -> delivery, unused).
+ * - The existing FAQ (services:dataCenter.faq, EN + AR) stays unchanged.
+ * - Copy is English-only for now (src/data/dataCenterTechnical.ts, dataCenterSustainability.ts).
+ *   Arabic translation is DEFERRED: /ar routes show English plus the notice
+ *   "تم تأجيل الترجمة العربية" (ArabicDeferredNotice). Move copy into locales when translating.
+ * - Imagery: black placeholders only (PlaceholderImage) until final MENASCO photography.
+ *   Never reuse unrelated site images or stock/non-MENASCO content. Alt text deferred
+ *   until images are final.
+ * - Data center projects = published projects named "data center/centre" in the
+ *   advanced-technical-facilities sector (dataCenterProjects in src/data/projects.ts).
+ *
+ * NARRATIVE (technical page)
+ * - Told as chapters: industry context -> what matters -> "MENASCO's role" strip.
+ *   The MENASCO role is a thread through EVERY chapter (Role component).
+ * - Order: Hero -> 01 Local energy markets -> 02 Uptime Tiers -> 03 Power resilience
+ *   -> 04 Cooling (CRAC vs CRAH) -> 05 Greenfield & brownfield -> 06 Projects (proof)
+ *   -> 07 Sustainability teaser (LEED Gold & Estidama Pearl, links to the 2nd tab)
+ *   -> FAQ -> Sources.
+ * - Role lines marked "NEW copy" in dataCenterTechnical.ts were written for review;
+ *   confirm wording with the client before treating them as final.
+ * - Large display typography (chapter figures: 230 GW, N+1/2N, 18–27 °C) gives the
+ *   story animation something to strike and anchors each chapter.
+ *
+ * VISUALS
+ * - Only two drawings on the technical page: the hero server hall (HeroServerHall,
+ *   the story's origin point) and the electrical resilience simulation
+ *   (ResilienceDiagram). Everything else is typography + the story animation.
+ * - Design language follows the rest of the site: ink / warm-white / stone bands,
+ *   brand blue, Sora + Inter, thin linework.
+ *
+ * STORY ANIMATION (StoryFlow.tsx) — the page's signature
+ * - Four elements, each with its own look AND physics, and a fixed palette:
+ *     power  #E9B23A  lightning: faint stepped leader, then the bright return stroke
+ *                     with branches; falls from above.
+ *     water  #3B9EE6  separate raindrops (never a connected line) on gravity arcs with
+ *                     wind; splash on landing.
+ *     data   #3DBE7A  bit-packets on orthogonal circuit traces; unique route every
+ *                     time; leaves by a new route (never bounces back the same way).
+ *     heat   #E0765C  buoyant plumes that rise, widen and lean, then dissipate.
+ * - Semantic targets only: lightning strikes electricity/power text, water hits
+ *   cooling/water text, data hits data/metering/projects text, heat hits heat/
+ *   temperature text. Mark targets with <span data-flow-target="kind"> (T helper).
+ * - Text reactions (index.css): power = zap (flash + jolt); water = flood (blue rises
+ *   through the letters via a ::after copy — the original text is never hidden);
+ *   data = glitch; heat = shimmer. Lighting whole boxes is allowed but not preferred.
+ * - Motion is driven by scroll only (light easing settles it); nothing idles.
+ * - Timing: an episode starts as the reader finishes the previous section and strikes
+ *   as the target scrolls into view — never after the reader has passed it.
+ * - Pathways: mostly through the 2nd and 4th fifths of the page width; the centre
+ *   fifth as a strike point; the outer fifths as entry/exit. Lines enter and leave the
+ *   screen so only one or two are visible at a time; paths are seeded-random and unique.
+ * - Layering: lines travel UNDER text and cards (quieter), rise ABOVE them only for the
+ *   final approach and strike, then drop back under.
+ * - Hero: title words "Power" (zap), "Cooling" (flood), "Uptime" (glitch) are struck
+ *   from origin points in the server hall drawing (data-flow-origin: busway tap box,
+ *   chilled-water pipe, rack network port), staggered, while each word is in view.
+ * - Reduced motion: the whole story layer is hidden; content is unaffected.
+ *
+ * SUSTAINABILITY TAB (not yet aligned)
+ * - Still uses the earlier palette (data blue, water teal) and per-section diagrams;
+ *   the client has not yet asked for the story treatment there. Ask before changing.
+ * ============================================================================
+ */
+import { useRef, useState, type ReactNode } from 'react';
+import { ArrowRight, Check, Zap } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Section } from '../components/layout/Section';
-import { Stack } from '../components/layout/Stack';
 import { Container } from '../components/layout/Container';
-import { SectionHeader } from '../components/typography/SectionHeader';
-import { Eyebrow, Heading, Text } from '../components/typography/Typography';
-import { ProfessionalList } from '../components/content/ProfessionalList';
-import { SplitContent } from '../components/content/SplitContent';
-import { Statistic } from '../components/content/Statistic';
+import { Eyebrow } from '../components/typography/Typography';
+import { HeroH1 } from '../components/typography/HeroH1';
 import { ButtonLink } from '../components/ui/Button';
-import { Accordion } from '../components/ui/Accordion';
+import { FaqAccordion } from '../components/common/FaqAccordion';
+import { SmartLink } from '../lib/SmartLink';
 import { dataCenterProjects, totalDataCenterMw } from '../data/projects';
+import { dcTechnical as c } from '../data/dataCenterTechnical';
+import { TECHNICAL_SOURCES } from '../data/dataCenterSources';
+import { DC_SUSTAINABILITY_PATH, DC_TECHNICAL_PATH, ArabicDeferredNotice, DataCenterTabs, RichText } from '../components/services/datacenter/shared';
+import { PlaceholderImage, SourcesList } from '../components/services/datacenter/primitives';
+import { HeroServerHall, ResilienceDiagram } from '../components/services/datacenter/technicalDiagrams';
+import { StoryFlow, STORY_COLORS } from '../components/services/datacenter/StoryFlow';
 import { SEO } from '../seo/SEO';
-import { useTransparentHeader } from '../app/header-transparency';
-import { serviceEntity } from '../seo/structuredData';
+import { faqPageJsonLd, serviceEntity } from '../seo/structuredData';
 import { SITE_URL } from '../seo/constants';
+import { cn } from '../lib/utils';
 
 interface FaqEntry {
   id: string;
@@ -22,132 +122,407 @@ interface FaqEntry {
   content: string;
 }
 
+type Tone = 'dark' | 'light' | 'stone';
+type Kind = 'power' | 'water' | 'data' | 'heat';
+const TONE_BG: Record<Tone, string> = { dark: 'bg-ink', light: 'bg-warmwhite', stone: 'bg-stone' };
+
+/** A page band: its background sits under the story lines, its content between the two line layers. */
+function Band({ tone, children, className }: { tone: Tone; children: ReactNode; className?: string }) {
+  return (
+    <section className={cn('relative', TONE_BG[tone])}>
+      <Container className={cn('relative z-[2] py-20 md:py-28', className)}>{children}</Container>
+    </section>
+  );
+}
+
+/** Wraps text as a story target (see StoryFlow). `hero` launches it from the hero drawing's origin point. */
+const T = ({ k, hero, children }: { k?: Kind; hero?: boolean; children: ReactNode }) =>
+  k ? (
+    <span data-flow-target={k} data-flow-hero={hero ? '' : undefined}>
+      {children}
+    </span>
+  ) : (
+    <>{children}</>
+  );
+
+/** Chapter heading: numbered label, large heading, optional lead. */
+function ChapterHead({ n, eyebrow, title, lead, dark = false, target }: { n: number; eyebrow: string; title: string; lead?: ReactNode; dark?: boolean; target?: Kind }) {
+  return (
+    <div>
+      <p className={cn('flex items-center gap-3 font-display text-caption font-semibold uppercase tracking-widest', dark ? 'text-brand-400' : 'text-brand-600')}>
+        <span className={cn('tabular-nums', dark ? 'text-gray-500' : 'text-gray-400')}>
+          {c.chapter} {String(n).padStart(2, '0')}
+        </span>
+        <span aria-hidden="true" className={cn('h-px w-8', dark ? 'bg-white/20' : 'bg-gray-300')} />
+        {eyebrow}
+      </p>
+      <h2 className={cn('mt-5 font-display text-[clamp(2rem,1.4rem+2.4vw,3.25rem)] font-semibold leading-[1.06] tracking-tight text-balance', dark ? 'text-white' : 'text-ink')}>
+        <T k={target}>{title}</T>
+      </h2>
+      {lead && <p className={cn('mt-6 text-body-lg leading-relaxed', dark ? 'text-gray-300' : 'text-gray-600')}>{lead}</p>}
+    </div>
+  );
+}
+
+/** A large display figure with a caption. */
+function Figure({ value, label, target, dark = false }: { value: string; label: string; target?: Kind; dark?: boolean }) {
+  return (
+    <figure className="mt-10">
+      <p className={cn('font-display text-[clamp(3.5rem,2rem+6vw,6.5rem)] font-semibold leading-none tracking-tight', dark ? 'text-white' : 'text-ink')}>
+        <T k={target}>{value}</T>
+      </p>
+      <figcaption className={cn('mt-4 max-w-sm text-small leading-relaxed', dark ? 'text-gray-400' : 'text-gray-600')}>
+        <RichText text={label} />
+      </figcaption>
+    </figure>
+  );
+}
+
+/** The thread through every chapter: what MENASCO does about it. */
+function Role({ children, dark = false, title }: { children: ReactNode; dark?: boolean; title?: string }) {
+  return (
+    <aside className={cn('mt-10 rounded-lg border-s-4 border-brand-500 p-6 md:p-7', dark ? 'bg-white/[0.04]' : 'bg-white/80 backdrop-blur-sm')}>
+      <p className={cn('font-display text-caption font-semibold uppercase tracking-widest', dark ? 'text-brand-400' : 'text-brand-600')}>{c.roleLabel}</p>
+      {title && <h3 className={cn('mt-2 font-display text-h4 font-semibold', dark ? 'text-white' : 'text-ink')}>{title}</h3>}
+      <div className={cn('mt-3 text-body leading-relaxed', dark ? 'text-gray-200' : 'text-gray-700')}>{children}</div>
+    </aside>
+  );
+}
+
+/**
+ * Data Center technical page (/services/data-centers), the first of two
+ * tabs. Told as chapters: what is happening in the industry, what matters,
+ * and MENASCO's role in each. A scroll-driven story (StoryFlow) sends
+ * lightning, rain, data and heat through the page onto the words they relate
+ * to. Copy: src/data/dataCenterTechnical.ts (English; Arabic deferred). FAQ:
+ * services:dataCenter.faq (EN + AR), unchanged.
+ */
 export default function DataCenterPage() {
   const { t } = useTranslation('services');
-  // Full-bleed dark hero (content aligned to its bottom edge) — float the
-  // header over it like the other hero pages, so the glass sits on the hero.
-  useTransparentHeader(true);
-  const introParagraphs = t('dataCenter.introParagraphs', { returnObjects: true }) as string[];
-  const dataCenterCapabilities = t('dataCenter.capabilities', { returnObjects: true }) as { title: string; description: string }[];
-  const dataCenterFaqItems = t('dataCenter.faq', { returnObjects: true }) as FaqEntry[];
+  const pageRef = useRef<HTMLDivElement>(null);
+  const faq = t('dataCenter.faq', { returnObjects: true }) as FaqEntry[];
+  const faqItems = Array.isArray(faq) ? faq.map((f) => ({ question: f.title, answer: f.content })) : [];
+  const [failed, setFailed] = useState(false);
+  const heroWord = (w: string, i: number) => {
+    const k: Kind | undefined = /^Power/.test(w) ? 'power' : /^Cooling/.test(w) ? 'water' : /^Uptime/.test(w) ? 'data' : undefined;
+    return (
+      <span key={i}>
+        <T k={k} hero>
+          {w}
+        </T>{' '}
+      </span>
+    );
+  };
 
   return (
     <>
       <SEO
         title={t('dataCenter.seo.title')}
         description={t('dataCenter.seo.description')}
-        path="/services/data-centers"
-        mainEntity={serviceEntity({
-          name: t('dataCenter.seo.title'),
-          description: t('dataCenter.seo.description'),
-          url: `${SITE_URL}/services/data-centers`,
-        })}
+        path={DC_TECHNICAL_PATH}
+        mainEntity={serviceEntity({ name: t('dataCenter.seo.title'), description: t('dataCenter.seo.description'), url: `${SITE_URL}${DC_TECHNICAL_PATH}` })}
         breadcrumb={[
           { label: 'Home', path: '/' },
           { label: 'Services', path: '/services' },
-          { label: 'Data Centers', path: '/services/data-centers' },
+          { label: 'Data Centers', path: DC_TECHNICAL_PATH },
         ]}
+        structuredData={faqItems.length ? faqPageJsonLd(faqItems) : undefined}
       />
+      <DataCenterTabs active="technical" />
+      <ArabicDeferredNotice />
 
-      <section className="relative flex min-h-[46vh] w-full items-end overflow-hidden bg-ink md:min-h-[72vh]">
-        <video
-          className="absolute inset-0 h-full w-full object-cover object-center"
-          src="/data-center.mp4"
-          poster="/data-center-poster.jpg"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/35 to-transparent" />
+      <div ref={pageRef} className="relative isolate overflow-hidden">
+        <StoryFlow containerRef={pageRef} />
 
-        <Container className="relative z-10 max-md:!px-4 pb-10 pt-16 md:pb-24 md:pt-32">
-          <div className="max-w-3xl">
-            <Eyebrow theme="dark">{t('dataCenter.hero.eyebrow')}</Eyebrow>
-            <Heading level="h2" as="h2" theme="dark" className="mt-4 md:text-h1">
-              {t('dataCenter.hero.heading')}
-            </Heading>
-            <Text variant="body-lg" theme="dark" className="mt-6 max-w-2xl text-gray-200">
-              {t('dataCenter.hero.description')}
-            </Text>
+        {/* Hero: the three things a data center must never lose */}
+        <Band tone="dark" className="pb-24 pt-8 md:pb-32 md:pt-10">
+          {/* Slightly wider than the text column: bleeds into the side gutters. */}
+          <div className="-mx-6 md:-mx-14 lg:-mx-28">
+            <HeroServerHall />
           </div>
-        </Container>
-      </section>
-
-      <Section background="warmwhite" spacing="lg" className="max-md:!py-10" containerClassName="max-md:!px-4">
-        <Stack space="lg">
-          <SectionHeader
-            eyebrow={t('dataCenter.introHeading.eyebrow')}
-            heading={t('dataCenter.introHeading.heading')}
-            headingAs="h3"
-          />
-          <Stack space="sm" className="max-w-3xl">
-            {introParagraphs.map((paragraph) => (
-              <Text key={paragraph} variant="body-lg">
-                {paragraph}
-              </Text>
+          <div className="mt-4 max-w-5xl md:mt-2">
+            <HeroH1
+              eyebrow={
+                <Eyebrow as="span" theme="dark" className="block">
+                  {c.hero.eyebrow}
+                </Eyebrow>
+              }
+              title={
+                <span className="mt-6 block font-display text-[clamp(2.75rem,1.6rem+4.6vw,5.5rem)] font-semibold leading-[1.02] tracking-tight text-white text-balance">
+                  {c.hero.title.split(' ').map(heroWord)}
+                </span>
+              }
+            />
+            <p className="mt-10 max-w-2xl text-body-lg leading-relaxed text-gray-300">{c.hero.intro}</p>
+          </div>
+          <dl className="mt-16 grid max-w-3xl grid-cols-3 border-t border-white/10 pt-8">
+            {[
+              [String(dataCenterProjects.length), t('dataCenter.stats.featuredDataCenters')],
+              [`${totalDataCenterMw.toFixed(1)} MW`, t('dataCenter.stats.megawatts')],
+              [c.stats.tier, c.stats.tierLabel],
+            ].map(([value, label], i) => (
+              <div key={i} className={cn('flex flex-col pe-4', i > 0 && 'border-s border-white/10 ps-4 md:ps-8')}>
+                <dt className="mt-2 text-caption text-gray-400 md:text-small">{label}</dt>
+                <dd className="order-first font-display text-h3 font-semibold leading-tight text-white md:text-h2">{value}</dd>
+              </div>
             ))}
-          </Stack>
-          <ButtonLink
-            href="/projects/categories?category=advanced-technical-facilities"
-            variant="primary"
-            trailingIcon={ArrowRight}
-            className="w-fit"
-          >
-            {t('dataCenter.exploreProjectsCta')}
-          </ButtonLink>
-        </Stack>
-      </Section>
+          </dl>
+        </Band>
 
-      <Section background="ink" spacing="md" edgeFade className="max-md:!py-8" containerClassName="max-md:!px-4">
-        <Statistic
-          layout="grid"
-          columns={2}
-          size="lg"
-          theme="dark"
-          items={[
-            { value: String(dataCenterProjects.length), label: t('dataCenter.stats.featuredDataCenters'), animate: true, valueClassName: '!text-brand-500' },
-            { value: `${totalDataCenterMw.toFixed(1)} MW`, label: t('dataCenter.stats.megawatts'), animate: true, valueClassName: '!text-brand-500' },
-          ]}
-        />
-      </Section>
+        {/* 01 The energy constraint (industry → what matters → MENASCO) */}
+        <Band tone="light">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <ChapterHead n={1} eyebrow={c.energy.eyebrow} title={c.energy.heading} />
+              <Figure value={c.energy.figure.value} label={c.energy.figure.label} target="power" />
+            </div>
+            <div className="lg:col-span-7 lg:pt-14">
+              <p className="text-body-lg leading-relaxed text-gray-700">
+                <RichText text={c.energy.intro} />
+              </p>
+              <dl className="mt-10 grid grid-cols-1 gap-x-10 border-t border-gray-200 sm:grid-cols-2">
+                {c.energy.markets.map((m) => (
+                  <div key={m.id} className="border-b border-gray-200 py-6">
+                    <dt className="font-display text-body-lg font-semibold text-ink">
+                      <T k={m.id === 'usa' ? 'power' : undefined}>{m.name}</T>
+                    </dt>
+                    <dd className="mt-2 text-small leading-relaxed text-gray-700">
+                      <RichText text={m.body} />
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <Role title={c.energy.helpHeading}>
+                <ul className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
+                  {c.energy.help.map((h) => (
+                    <li key={h} className="flex gap-3 text-small leading-relaxed">
+                      <Check size={16} aria-hidden="true" className="mt-0.5 shrink-0 text-brand-600" />
+                      {/^Metering/.test(h) ? <T k="data">{h}</T> : h}
+                    </li>
+                  ))}
+                </ul>
+              </Role>
+            </div>
+          </div>
+        </Band>
 
-      <Section background="warmwhite" spacing="lg" className="max-md:!py-10" containerClassName="max-md:!px-4">
-        <Stack space="lg">
-          <SectionHeader
-            eyebrow={t('dataCenter.capabilitiesHeading.eyebrow')}
-            heading={t('dataCenter.capabilitiesHeading.heading')}
-            headingAs="h3"
-          />
-          <ProfessionalList items={dataCenterCapabilities} variant="arrow" columns={2} />
-        </Stack>
-      </Section>
+        {/* 02 Uptime Tiers */}
+        <Band tone="stone">
+          <div className="max-w-3xl">
+            <ChapterHead n={2} eyebrow={c.tiers.eyebrow} title={c.tiers.heading} lead={<RichText text={c.tiers.intro} />} />
+          </div>
+          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
+            {c.tiers.items.map((item) => (
+              <article key={item.id} className="rounded-lg border border-gray-200 bg-white p-8 md:p-10">
+                <div className="flex items-start justify-between gap-6">
+                  <div>
+                    <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600">{item.tagline}</p>
+                    <h3 className="mt-2 font-display text-h3 font-semibold text-ink">{item.name}</h3>
+                  </div>
+                  <p className="font-display text-[clamp(2.75rem,2rem+2.5vw,4rem)] font-semibold leading-none tracking-tight text-ink">
+                    <T k={item.id === 'tier-iv' ? 'power' : undefined}>{item.figure}</T>
+                  </p>
+                </div>
+                <ul className="mt-8 space-y-4">
+                  {item.points.map((p) => (
+                    <li key={p} className="flex gap-3 text-body leading-relaxed text-gray-700">
+                      <Check size={18} aria-hidden="true" className="mt-1 shrink-0 text-brand-600" />
+                      <span>
+                        <RichText text={p} />
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+          <div className="max-w-3xl">
+            <Role>
+              <RichText text={c.tiers.certificationNote} />
+            </Role>
+          </div>
+        </Band>
 
-      <Section background="warmwhite" spacing="lg" joinTop className="max-md:!pb-10" containerClassName="max-md:!px-4">
-        <SplitContent
-          image="/data-centre-prefabrication-mep.webp"
-          imageAlt="Data center MEP infrastructure with server racks, cooling systems, pipework and cable containment"
-          imageSide="right"
-          eyebrow={t('dataCenter.prefab.eyebrow')}
-          heading={t('dataCenter.prefab.heading')}
-          headingAs="h3"
-          description={t('dataCenter.prefab.description')}
-          closingStatement={t('dataCenter.prefab.closingStatement')}
-          stretch
-        />
-      </Section>
+        {/* 03 Power resilience */}
+        <Band tone="dark">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
+            <div className="lg:col-span-5">
+              <ChapterHead n={3} eyebrow={c.power.eyebrow} title={c.power.heading} lead={c.power.intro} dark target="power" />
+              <ul className="mt-8 space-y-3">
+                {c.power.points.map((p) => (
+                  <li key={p} className="flex gap-3 text-small leading-relaxed text-gray-300">
+                    <Zap size={15} aria-hidden="true" className="mt-0.5 shrink-0" style={{ color: STORY_COLORS.power }} />
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="lg:col-span-7 lg:pt-14">
+              <ResilienceDiagram failed={failed} />
+              <div className="mt-5 flex flex-wrap items-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => setFailed((f) => !f)}
+                  aria-pressed={failed}
+                  className={cn(
+                    'inline-flex min-h-10 items-center gap-2 rounded-full px-5 text-small font-semibold transition-colors duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400',
+                    failed ? 'bg-white text-ink hover:bg-gray-200' : 'bg-brand-600 text-white hover:bg-brand-700',
+                  )}
+                >
+                  <Zap size={16} aria-hidden="true" />
+                  {failed ? c.power.restore : c.power.simulate}
+                </button>
+                <p aria-live="polite" className="text-small text-gray-400">
+                  {failed ? c.power.states.failed : c.power.states.normal}
+                </p>
+              </div>
+              <Role dark>{c.power.role}</Role>
+            </div>
+          </div>
+        </Band>
 
-      <Section background="warmwhite" spacing="md" className="max-md:!py-8 max-md:!pb-14 md:pb-20" joinTop containerClassName="max-md:!px-4">
-        <Stack space="lg">
-          <SectionHeader eyebrow={t('dataCenter.faqHeading.eyebrow')} heading={t('dataCenter.faqHeading.heading')} headingAs="h3" />
-          <Accordion
-            items={dataCenterFaqItems}
-            defaultOpenIds={['what-does-a-data-center-contractor-provide']}
-            triggerClassName="font-normal"
-          />
-        </Stack>
-      </Section>
+        {/* 04 Cooling */}
+        <Band tone="light">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <ChapterHead n={4} eyebrow={c.cooling.eyebrow} title={c.cooling.heading} lead={c.cooling.intro} target="heat" />
+              <Figure value={c.cooling.figure.value} label={c.cooling.figure.label} target="heat" />
+            </div>
+            <div className="space-y-6 lg:col-span-7 lg:pt-14">
+              {c.cooling.items.map((item) => (
+                <article key={item.id} className="rounded-lg border border-gray-200 bg-white p-7 md:p-8">
+                  <h3 className="font-display text-h3 font-semibold text-ink">
+                    <T k={item.id === 'crah' ? 'water' : undefined}>{item.name}</T>
+                  </h3>
+                  <p className="mt-3 text-body leading-relaxed text-gray-700">{item.description}</p>
+                  <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <div>
+                      <p className="text-caption font-semibold uppercase tracking-widest text-brand-600">Strengths</p>
+                      <ul className="mt-2 space-y-1.5">
+                        {item.strengths.map((s) => (
+                          <li key={s} className="text-small leading-relaxed text-gray-700">
+                            {s}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="text-caption font-semibold uppercase tracking-widest text-gray-500">Considerations</p>
+                      <ul className="mt-2 space-y-1.5">
+                        {item.considerations.map((s) => (
+                          <li key={s} className="text-small leading-relaxed text-gray-700">
+                            {s}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </article>
+              ))}
+              <p className="text-body leading-relaxed text-gray-700">
+                <RichText text={c.cooling.ashrae} />
+              </p>
+              <Role>
+                <T k="water">{c.cooling.liquid}</T>
+              </Role>
+            </div>
+          </div>
+        </Band>
+
+        {/* 05 Greenfield and brownfield */}
+        <Band tone="stone">
+          <div className="max-w-3xl">
+            <ChapterHead n={5} eyebrow={c.sites.eyebrow} title={c.sites.heading} />
+          </div>
+          <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-0">
+            {c.sites.items.map((s, i) => (
+              <div key={s.id} className={cn(i === 1 && 'md:border-s md:border-gray-300 md:ps-12', i === 0 && 'md:pe-12')}>
+                <h3 className="font-display text-h3 font-semibold text-ink">{s.title}</h3>
+                <ul className="mt-6 divide-y divide-gray-300/70">
+                  {s.points.map((p) => (
+                    <li key={p} className="py-4 text-body leading-relaxed text-gray-700">
+                      <T k={/^Utility capacity/i.test(p) ? 'power' : /liquid-cooling/i.test(p) ? 'water' : undefined}>{p}</T>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="max-w-3xl">
+            <Role>{c.sites.role}</Role>
+          </div>
+        </Band>
+
+        {/* 06 Proof: projects */}
+        {dataCenterProjects.length > 0 && (
+          <Band tone="light">
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <div className="max-w-3xl">
+                <ChapterHead n={6} eyebrow={c.projects.eyebrow} title={c.projects.heading} lead={c.projects.role} target="data" />
+              </div>
+              <ButtonLink href="/projects/categories" variant="outline" trailingIcon={ArrowRight}>
+                {c.projects.viewAll}
+              </ButtonLink>
+            </div>
+            <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {dataCenterProjects.map((p) => (
+                <li key={p.slug} className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
+                  <PlaceholderImage className="aspect-[16/10] rounded-none" />
+                  <div className="p-6">
+                    <h3 className="font-display text-h4 font-semibold text-ink">
+                      <SmartLink href={`/projects/${p.slug}`} className="after:absolute after:inset-0 after:content-['']">
+                        {p.title}
+                      </SmartLink>
+                    </h3>
+                    <p className="mt-1 text-small text-gray-500">{[p.location, p.capacity].filter(Boolean).join(' · ')}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </Band>
+        )}
+
+        {/* 07 The next frontier: sustainability */}
+        <Band tone="dark">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-8">
+              <ChapterHead n={7} eyebrow={c.sustainabilityTeaser.eyebrow} title={c.sustainabilityTeaser.heading} lead={c.sustainabilityTeaser.body} dark target="water" />
+              <ButtonLink href={DC_SUSTAINABILITY_PATH} variant="primary" trailingIcon={ArrowRight} className="mt-10">
+                {c.sustainabilityTeaser.cta}
+              </ButtonLink>
+            </div>
+            <div className="flex gap-3 lg:col-span-4 lg:justify-end">
+              {['LEED Gold', 'Estidama Pearl'].map((name) => (
+                <span key={name} className="rounded-full border border-white/20 px-4 py-2 font-display text-small font-semibold text-white">
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </Band>
+
+        {/* FAQ (unchanged copy) */}
+        {faqItems.length > 0 && (
+          <Band tone="stone">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
+              <div className="lg:col-span-4">
+                <Eyebrow>{t('dataCenter.faqHeading.eyebrow')}</Eyebrow>
+                <h2 className="mt-4 font-display text-h2 font-semibold tracking-tight text-ink">
+                  <T k="data">{t('dataCenter.faqHeading.heading')}</T>
+                </h2>
+              </div>
+              <div className="lg:col-span-8">
+                <FaqAccordion items={faqItems} idPrefix="dc-faq" className="bg-stone" />
+              </div>
+            </div>
+          </Band>
+        )}
+
+        {/* Sources */}
+        <Band tone="light">
+          <SourcesList sources={TECHNICAL_SOURCES} heading={c.sources.heading} intro={c.sources.intro} />
+        </Band>
+      </div>
     </>
   );
 }

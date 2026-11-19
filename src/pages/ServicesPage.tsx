@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next';
+import { servicesFaqJsonLd } from '../seo/structuredData';
+import { HeroH1 } from '../components/typography/HeroH1';
 import { Section } from '../components/layout/Section';
 import { Eyebrow, Heading, Text } from '../components/typography/Typography';
 import { ServicesBento } from '../components/services/ServicesBento';
@@ -24,14 +26,23 @@ export default function ServicesPage() {
         path="/services"
         pageType="CollectionPage"
         breadcrumb={[{ label: 'Home', path: '/' }, { label: 'Services', path: '/services' }]}
+        structuredData={servicesFaqJsonLd(t('services:listing.faq.items', { returnObjects: true }))}
       />
       <Section background="warmwhite" spacing="lg" className="md:pt-12">
         <div className="grid grid-cols-12 items-center gap-12">
           <div className="col-span-7">
-            <Eyebrow>{t('services:listing.eyebrow')}</Eyebrow>
-            <Heading level="h1" as="h2" className="mt-3 text-balance !text-brand-600">
-              {t('services:listing.heading')}
-            </Heading>
+            <HeroH1
+              eyebrow={
+                <Eyebrow as="span" className="block">
+                  {t('services:listing.eyebrow')}
+                </Eyebrow>
+              }
+              title={
+                <Heading level="h1" as="span" className="mt-3 block text-balance !text-brand-600">
+                  {t('services:listing.heading')}
+                </Heading>
+              }
+            />
             <Text variant="body-lg" className="mt-5 leading-relaxed !text-gray-700">
               {t('services:listing.description')}
             </Text>

@@ -1,4 +1,5 @@
 import { ArrowRight, Download } from 'lucide-react';
+import { HeroH1 } from '../components/typography/HeroH1';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../components/layout/Section';
 import { ButtonLink } from '../components/ui/Button';
@@ -35,10 +36,18 @@ function Hero() {
     <Section spacing="lg" background="ink" className="pt-36 md:pt-40">
       <div className="grid grid-cols-12 gap-8">
         <div className="col-span-5 self-center">
-          <Eyebrow>{t('qualitySafetyPage.eyebrow')}</Eyebrow>
-          <Heading level="display" as="h2" className="mt-4">
-            {t('qualitySafetyPage.heading')}
-          </Heading>
+          <HeroH1
+            eyebrow={
+              <Eyebrow as="span" className="block">
+                {t('qualitySafetyPage.eyebrow')}
+              </Eyebrow>
+            }
+            title={
+              <Heading level="display" as="span" className="mt-4 block">
+                {t('qualitySafetyPage.heading')}
+              </Heading>
+            }
+          />
           <Text variant="body-lg" muted className="mt-6">
             {t('qualitySafetyPage.description')}
           </Text>

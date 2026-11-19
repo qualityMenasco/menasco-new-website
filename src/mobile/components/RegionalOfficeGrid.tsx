@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { OfficeDirectory } from '../../components/sections/home/OfficeDirectory';
 import { useTranslation } from 'react-i18next';
 import { OfficeDetailsPanel } from './OfficeDetailsPanel';
 import { officeLocations, primaryContact } from '../../data/locations';
@@ -39,6 +40,7 @@ export function RegionalOfficeGrid() {
       <div aria-live="polite" className="mt-4">
         <OfficeDetailsPanel office={selectedOffice} email={primaryContact.email} />
       </div>
+      <OfficeDirectory />
     </div>
   );
 }

@@ -37,6 +37,13 @@ export function MobileFeaturedLeaderCard({ profile, onReadFullProfile }: MobileF
       </div>
 
       <p className="line-clamp-2 px-4 text-small leading-relaxed text-gray-600">{summary}</p>
+      {/* The full message opens in a modal (mounted only when open); the rest is kept here, not displayed, so it's in the HTML. */}
+      <div hidden>
+        {profile.messageParagraphs.slice(1).map((paragraph, index) => (
+          <p key={index}>{paragraph}</p>
+        ))}
+        {profile.closingLine && <p>{profile.closingLine}</p>}
+      </div>
 
       <div className="mt-auto flex items-center justify-between gap-3 p-4 pt-3">
         <button

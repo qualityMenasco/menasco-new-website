@@ -1,14 +1,13 @@
 import { useRef, useState } from 'react';
+import { HeroH1 } from '../../components/typography/HeroH1';
 import { useTranslation } from 'react-i18next';
 import { PhotoRail } from '../components/PhotoRail';
 import { ExpandableText } from '../components/ExpandableText';
-import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { SEO } from '../../seo/SEO';
 import { innovationHeroFilm, innovationHeroPhotos } from '../../data/innovationPhotos';
 import { cn } from '../lib/utils';
 import { splitAcronym } from '../../lib/splitAcronym';
 import {} from '../../seo/structuredData';
-
 
 type Chapter = {
   key: 'atlas' | 'lynxqc' | 'ai' | 'connect';
@@ -115,19 +114,29 @@ function ChapterRail() {
           return (
             <article
               key={chapter.key}
-              className={cn('flex w-[84vw] max-w-[22rem] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-gray-200', theme.section, chapter.theme === 'dark' && 'border-transparent')}
+              className={cn(
+                'flex w-[84vw] max-w-[22rem] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-gray-200',
+                theme.section,
+                chapter.theme === 'dark' && 'border-transparent',
+              )}
             >
               <div className="aspect-[16/10] bg-gray-100">
                 <img src={chapter.image} alt={chapter.imageAlt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
               </div>
               <div className="p-5">
                 <div className="flex items-end gap-3">
-                  <span dir="ltr" aria-hidden="true" className={cn('font-sans text-[2rem] font-normal leading-[0.85] tracking-[-0.03em] tabular-nums', theme.accent)}>
+                  <span
+                    dir="ltr"
+                    aria-hidden="true"
+                    className={cn('font-sans text-[2rem] font-normal leading-[0.85] tracking-[-0.03em] tabular-nums', theme.accent)}
+                  >
                     {String(index + 1).padStart(2, '0')}
                   </span>
                   <span className={cn('pb-0.5 text-caption font-semibold uppercase tracking-widest', theme.accent)}>{copy('eyebrow')}</span>
                 </div>
-                <h3 className={cn('mt-3 font-display text-h2 font-bold uppercase leading-[0.95] tracking-[-0.03em]', theme.text)}>{acronym ? acronym.name : copy('heading')}</h3>
+                <h3 className={cn('mt-3 font-display text-h2 font-bold uppercase leading-[0.95] tracking-[-0.03em]', theme.text)}>
+                  {acronym ? acronym.name : copy('heading')}
+                </h3>
                 <LongText text={copy('paragraph')} className="mt-4" textClassName={cn('text-body', theme.muted)} buttonClassName={theme.accent} />
               </div>
             </article>
@@ -152,7 +161,6 @@ export default function InnovationPage() {
 
   return (
     <>
-      <NavSectionH1 section="about" />
       <SEO
         title={t('innovation.seo.title')}
         description={t('innovation.seo.description')}
@@ -165,21 +173,24 @@ export default function InnovationPage() {
 
       {/* Hero: the title as a poster, the intro, then the event photos (film behind the first). */}
       <section className="overflow-hidden px-4 pb-8 pt-6">
-        <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-600">{t('innovation.hero.eyebrow')}</span>
-        <h2 className="mt-3 font-display font-bold uppercase leading-[0.86] tracking-[-0.04em] text-ink">
-          {lineTwo ? (
-            <>
-              <span className="block text-[10vw]">{lineOne}</span>
-              <span className="block whitespace-nowrap text-[8.6vw]">
-                <span className="text-brand-600">&amp; {lineTwo}</span>
-              </span>
-            </>
-          ) : (
-            <span className="block text-balance text-[11vw] leading-[1.05]">{lineOne}</span>
-          )}
-        </h2>
-        <p className="mt-6 font-display text-body-lg font-semibold leading-snug text-ink">{t('innovation.hero.subheading')}</p>
-        <LongText text={t('innovation.hero.description')} className="mt-4 border-s-4 border-brand-500 ps-4" textClassName="text-body-lg text-gray-700" />
+        <HeroH1
+          eyebrow={<span className="block text-eyebrow font-semibold uppercase tracking-widest text-brand-600">{t('innovation.hero.eyebrow')}</span>}
+          title={
+            <span className="mt-3 block font-display font-bold uppercase leading-[0.86] tracking-[-0.04em] text-ink">
+              {lineTwo ? (
+                <>
+                  <span className="block text-[10vw]">{lineOne}</span>{' '}
+                  <span className="block whitespace-nowrap text-[8.6vw]">
+                    <span className="text-brand-600">&amp; {lineTwo}</span>
+                  </span>
+                </>
+              ) : (
+                <span className="block text-balance text-[11vw] leading-[1.05]">{lineOne}</span>
+              )}
+            </span>
+          }
+        />
+        <LongText text={t('innovation.hero.description')} className="mt-6 border-s-4 border-brand-500 ps-4" textClassName="text-body-lg text-gray-700" />
         <PhotoRail
           images={innovationHeroPhotos.map((photo, index) => (index === 0 ? { ...photo, video: innovationHeroFilm.src } : photo))}
           label={heading}
@@ -192,7 +203,10 @@ export default function InnovationPage() {
       {/* The AI efficiency figure as a type-only moment. */}
       <section className="overflow-hidden bg-charcoal px-4 py-10">
         <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-400">{t('innovation.stat.eyebrow')}</span>
-        <p dir="ltr" className="mt-2 font-sans text-[22vw] font-normal leading-[0.9] tracking-[-0.04em] tabular-nums text-brand-400 rtl:text-end md:text-[14vw]">
+        <p
+          dir="ltr"
+          className="mt-2 font-sans text-[22vw] font-normal leading-[0.9] tracking-[-0.04em] tabular-nums text-brand-400 rtl:text-end md:text-[14vw]"
+        >
           {t('innovation.stat.value')}
         </p>
         <p className="mt-4 max-w-md font-display text-h4 font-semibold leading-snug text-warmwhite">{t('innovation.stat.label')}</p>
@@ -209,13 +223,19 @@ export default function InnovationPage() {
         return (
           <section key={chapter.key} className={cn('hidden px-8 py-12 md:block', theme.section)}>
             <div className="flex items-end gap-3">
-              <span dir="ltr" aria-hidden="true" className={cn('font-sans text-[6vw] font-normal leading-[0.85] tracking-[-0.03em] tabular-nums', theme.accent)}>
+              <span
+                dir="ltr"
+                aria-hidden="true"
+                className={cn('font-sans text-[6vw] font-normal leading-[0.85] tracking-[-0.03em] tabular-nums', theme.accent)}
+              >
                 {String(index + 1).padStart(2, '0')}
               </span>
               <span className={cn('pb-1 text-eyebrow font-semibold uppercase tracking-widest', theme.accent)}>{copy('eyebrow')}</span>
             </div>
             {/* "Name (ACRONYM)" headings show the acronym alone, as on desktop. */}
-            <h3 className={cn('mt-4 font-display text-[7vw] font-bold uppercase leading-[0.9] tracking-[-0.04em]', theme.text)}>{acronym ? acronym.name : copy('heading')}</h3>
+            <h3 className={cn('mt-4 font-display text-[7vw] font-bold uppercase leading-[0.9] tracking-[-0.04em]', theme.text)}>
+              {acronym ? acronym.name : copy('heading')}
+            </h3>
             <div className={cn('mt-8 grid grid-cols-2 items-center gap-8', index % 2 === 1 && '[&>*:first-child]:order-2')}>
               <div className="aspect-[16/10] overflow-hidden rounded-md bg-gray-100">
                 <img src={chapter.image} alt={chapter.imageAlt} loading="lazy" decoding="async" className="h-full w-full object-cover" />

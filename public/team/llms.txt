@@ -1,6 +1,6 @@
 # Leadership & Team
 
-> MENASCO's founder, CEO, and corporate and technical leadership.
+> MENASCO's leadership: 2 executive leaders, 8 corporate leaders and 6 technical leaders.
 
 ## Executive Leadership
 
@@ -9,22 +9,76 @@
 
 ## Corporate Leadership
 
-- Mr. Hani Badawiyeh, Chief Financial Officer
-- Eng. Refad Al-Dwairi, Chief Operating Officer
-- Eng. Ihab Saadi, Manpower & Resourcing Division Manager
-- Eng. Mohamed Youssef, Commercial Director
+### Mr. Hani Badawiyeh, Chief Financial Officer
+
+Mr. Hani Badawiyeh is a seasoned financial leader with over 22 years of experience in financial management, accounting, and strategic analysis. He holds a Bachelor's Degree in Financial Management and Accounting from the University of Jordan and has been a cornerstone in MENASCO's administrative and financial framework.
+
+Throughout his distinguished career, Mr. Badawiyeh has demonstrated exceptional expertise in budget planning, financial reporting, and contract oversight, ensuring fiscal discipline and sustainable growth across all business operations.
+
+His analytical precision and strategic approach have been instrumental in implementing effective financial governance, enhancing transparency, and optimizing performance efficiency, key pillars that uphold MENASCO's values of Integrity, Innovation, and Excellence.
+
+### Eng. Refad Al-Dwairi, Chief Operating Officer
+
+Eng. Refad Al-Dwairi is a seasoned engineering and project management professional with over 20 years of experience delivering large-scale construction projects across regional and international markets. He holds a Bachelor of Science in Mechanical Engineering from the Jordan University of Science and Technology and an MBA from the University of Manchester, UK.
+
+Recognized for blending technical precision with strategic leadership, Eng. Refad has successfully led numerous high-profile projects to completion, consistently achieving exceptional results in time, cost, and quality performance while ensuring full compliance with contractual, safety, and international standards.
+
+As Chief Operating Officer of MENASCO, he plays a pivotal role in strengthening the company's operational capabilities and reinforcing its enduring commitment to Innovation, Integrity, and Excellence.
+
+### Eng. Ihab Saadi, Manpower & Resourcing Division Manager
+
+Eng. Ihab Saadi is a seasoned construction and workforce management leader with over 25 years of experience in large-scale project execution, resource planning, and operational leadership. He oversees strategic workforce initiatives, ensuring seamless coordination across diverse teams.
+
+Renowned for balancing strategic planning with on-the-ground execution, Eng. Saadi has successfully managed numerous high-profile and complex projects, demonstrating exceptional skill in resource optimization, budget control, and performance enhancement.
+
+His leadership philosophy centers on empowerment, precision, and teamwork, driving innovation and fostering collaboration across all departments.
+
+### Eng. Mohamed Youssef, Commercial Director
+
+Eng. Mohamed Youssef brings over 15 years of extensive experience in contract management, commercial operations, and project administration across major construction and infrastructure developments. He holds a Bachelor's Degree in Mechanical Engineering from Alexandria University.
+
+His credentials include membership of FIDIC (International Federation of Consulting Engineers), a Six Sigma certification in Leadership, Analysis & Project Management, and APC MRICS Certified Cost Specialist status.
+
+With a rare blend of engineering expertise and commercial acumen, he has demonstrated exceptional capability in leading complex negotiations and maximizing project value.
+
 - Eng. Sura Mustafa, Estimation & Procurement Manager
-- Mr. Ed Smith, Professional Services Manager
+
+### Mr. Ed Smith, Professional Services Manager
+
+With over two decades of international experience across the United States, India, and the Middle East, Ed Smith brings extensive leadership in quality assurance, infrastructure engineering, and project governance. Since joining MENASCO in 2017, he has led QA/QC operations across the UAE and KSA.
+
+Ed is responsible for establishing and maintaining MENASCO's corporate Quality Management Systems (QMS), inspection protocols, and audit frameworks, ensuring full compliance with ISO 9001 standards.
+
+A LEED Accredited Professional and Harvard Business School alumnus, Ed combines technical depth with strategic insight, fostering a culture of sustainability, accountability, and performance.
+
 - Eng. Victor Eze, HSE Manager
+
 - Eng. Motaz Abu Fada, Planning & Control Manager
 
 ## Technical Leadership
 
-- Eng. Zakaria Motawe, Engineering Head – Electrical
-- Eng. Rakan Abdullah, BIM Manager
+### Eng. Zakaria Motawe, Engineering Head – Electrical
+
+Eng. Zakaria Motawe is a seasoned Electrical Engineer with extensive experience in designing, managing, and executing large-scale electromechanical projects across commercial, residential, and industrial developments.
+
+He possesses deep technical expertise in electrical power distribution, ELV systems, and sustainable energy solutions, ensuring compliance with the highest engineering and safety standards.
+
+As Engineering Lead – Electrical at MENASCO, he oversees electrical engineering operations, mentors project teams, and drives technical excellence from design through commissioning.
+
+### Eng. Rakan Abdullah, BIM Manager
+
+With over a decade of experience managing large-scale construction projects, Eng. Rakan combines strong technical engineering expertise with advanced leadership in digital project management, dedicated to advancing Building Information Modelling (BIM).
+
+Starting his career as an Electrical Site Engineer, he built a solid foundation in design, installation, and execution before progressing into BIM Management, leading cross-functional teams and standardizing digital processes.
+
+He holds RICS-accredited certifications and ISO 19650 qualifications, reinforcing his pursuit of global best practices in BIM management and integrated engineering solutions.
+
 - Eng. Ahmed Abbas, IT Manager
+
 - Mr. Ammar Theeb, HR Manager
+
 - Eng. Ibrahim Rahmah, Design & Engineering Section Head
+
 - Eng. Basim Al Farouki, Chief Executive Officer (KSA)
 
 ---

@@ -9,7 +9,6 @@ import { ScrollReveal, ScrollRevealGroup } from '../components/common/ScrollReve
 import { LeadershipHero } from '../components/sections/leadership/LeadershipHero';
 import { NavSectionH1 } from '../components/typography/NavSectionH1';
 import { getLeadershipProfile } from '../data/leadership';
-import { placeholderImages } from '../data/images';
 import { SEO } from '../seo/SEO';
 import { personEntity } from '../seo/structuredData';
 import { SITE_URL } from '../seo/constants';
@@ -136,13 +135,8 @@ export default function BahaaBadawiyehPage() {
       </ScrollReveal>
 
       <ScrollReveal>
+        {/* Plain black band behind the pull quote (the stock skyline photo was removed). */}
         <section className="relative overflow-hidden bg-ink py-12 md:py-28">
-          <img
-            src={placeholderImages.dubaiSkylineNight}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover opacity-40"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/85 to-ink" />
           <Container className="relative z-10 max-md:!px-4">
             <div className="mx-auto max-w-3xl text-center">
               <span aria-hidden="true" className="mx-auto mb-4 block h-0.5 w-16 bg-brand-500" />

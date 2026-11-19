@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { servicesFaqJsonLd } from '../../seo/structuredData';
+import { HeroH1 } from '../../components/typography/HeroH1';
 import { ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { Eyebrow, Heading } from '../../components/typography/Typography';
 import { ServicesBento } from '../../components/services/ServicesBento';
 import { ServicesFaq } from '../../components/services/ServicesFaq';
@@ -22,22 +23,30 @@ export default function ServicesPage() {
 
   return (
     <>
-      <NavSectionH1 section="services" />
       <SEO
         title={t('services:seo.title')}
         description={t('services:seo.description')}
         path="/services"
         pageType="CollectionPage"
         breadcrumb={[{ label: 'Home', path: '/' }, { label: 'Services', path: '/services' }]}
+        structuredData={servicesFaqJsonLd(t('services:listing.faq.items', { returnObjects: true }))}
       />
 
       <section className="bg-warmwhite px-4 pt-8 md:px-6 md:pt-10">
         <div className="md:grid md:grid-cols-2 md:items-center md:gap-8">
           <div>
-            <Eyebrow>{t('services:listing.eyebrow')}</Eyebrow>
-            <Heading level="h2" as="h2" className="mt-2 text-balance !text-brand-600">
-              {t('services:listing.mobileHeading')}
-            </Heading>
+            <HeroH1
+              eyebrow={
+                <Eyebrow as="span" className="block">
+                  {t('services:listing.eyebrow')}
+                </Eyebrow>
+              }
+              title={
+                <Heading level="h2" as="span" className="mt-2 block text-balance !text-brand-600">
+                  {t('services:listing.mobileHeading')}
+                </Heading>
+              }
+            />
             {/* Clamped to three lines behind "Read more"; the full text stays in the DOM. */}
             <p id="services-intro" className={cn('mt-3 text-body text-gray-700', !introOpen && 'line-clamp-3')}>
               {t('services:listing.description')}

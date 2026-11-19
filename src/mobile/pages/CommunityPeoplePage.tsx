@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react';
+import { HeroH1 } from '../../components/typography/HeroH1';
 import { useTranslation } from 'react-i18next';
-import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { ButtonLink } from '../../components/ui/Button';
 import { AutoplayVideo } from '../../components/common/AutoplayVideo';
 import { PhotoWithVideo } from '../../components/sections/community/PhotoWithVideo';
@@ -53,7 +53,6 @@ export default function CommunityPeoplePage() {
 
   return (
     <>
-      <NavSectionH1 section="about" />
       <SEO
         title={t('community.seo.title')}
         description={t('community.seo.description')}
@@ -62,8 +61,10 @@ export default function CommunityPeoplePage() {
       />
 
       <section className="px-4 pb-2 pt-8 md:px-8 md:pt-12">
-        <p className="text-caption font-semibold uppercase tracking-wider text-brand-600">{t('community.intro.eyebrow')}</p>
-        <h2 className="mt-3 text-balance font-display text-h1 font-semibold text-ink">{t('community.intro.heading')}</h2>
+        <HeroH1
+          eyebrow={<span className="block text-caption font-semibold uppercase tracking-wider text-brand-600">{t('community.intro.eyebrow')}</span>}
+          title={<span className="mt-3 block text-balance font-display text-h1 font-semibold text-ink">{t('community.intro.heading')}</span>}
+        />
         <p className="mt-3 max-w-xl text-body-lg text-gray-600">{t('community.intro.description')}</p>
       </section>
 

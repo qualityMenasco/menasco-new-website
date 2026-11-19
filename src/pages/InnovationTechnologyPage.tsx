@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { HeroH1 } from '../components/typography/HeroH1';
 import { Section } from '../components/layout/Section';
 import { Eyebrow } from '../components/typography/Typography';
 import { ScrollReveal } from '../components/common/ScrollReveal';
@@ -39,23 +40,30 @@ function InnovationHero() {
   const [lineOne, lineTwo] = heading.includes(' & ') ? heading.split(' & ') : [heading, null];
   return (
     <Section spacing="lg" background="stone">
-      <Eyebrow>{t('innovation.hero.eyebrow')}</Eyebrow>
-      <h2 className="mt-4 font-display font-bold uppercase leading-[0.86] tracking-[-0.04em] text-ink">
-        {lineTwo ? (
-          <>
-            <span className="block text-[clamp(4rem,7vw,6.25rem)]">{lineOne}</span>
-            <span className="block whitespace-nowrap text-[clamp(3.25rem,5.8vw,5.25rem)]">
-              <span className="text-brand-600">&amp; {lineTwo}</span>
-            </span>
-          </>
-        ) : (
-          <span className="block text-[clamp(3.5rem,6vw,5.5rem)] leading-[1.05]">{lineOne}</span>
-        )}
-      </h2>
+      <HeroH1
+        eyebrow={
+          <Eyebrow as="span" className="block">
+            {t('innovation.hero.eyebrow')}
+          </Eyebrow>
+        }
+        title={
+          <span className="mt-4 block font-display font-bold uppercase leading-[0.86] tracking-[-0.04em] text-ink">
+            {lineTwo ? (
+              <>
+                <span className="block text-[clamp(4rem,7vw,6.25rem)]">{lineOne}</span>{' '}
+                <span className="block whitespace-nowrap text-[clamp(3.25rem,5.8vw,5.25rem)]">
+                  <span className="text-brand-600">&amp; {lineTwo}</span>
+                </span>
+              </>
+            ) : (
+              <span className="block text-[clamp(3.5rem,6vw,5.5rem)] leading-[1.05]">{lineOne}</span>
+            )}
+          </span>
+        }
+      />
       <div className="mt-12 grid grid-cols-12 gap-8">
         <div className="col-span-4 self-center">
-          <p className="font-display text-h4 font-semibold leading-snug text-ink">{t('innovation.hero.subheading')}</p>
-          <p className="mt-5 border-s-4 border-brand-500 ps-4 text-body-lg text-gray-700">{t('innovation.hero.description')}</p>
+          <p className="border-s-4 border-brand-500 ps-4 text-body-lg text-gray-700">{t('innovation.hero.description')}</p>
         </div>
         <AutoplayVideo
           src={innovationHeroFilm.src}
@@ -99,7 +107,10 @@ function EfficiencyStat() {
     <ScrollReveal>
       <Section spacing="lg" background="charcoal" className="overflow-hidden">
         <div className="grid grid-cols-12 items-end gap-8">
-          <p dir="ltr" className="col-span-5 font-sans text-[clamp(6rem,10vw,8.5rem)] font-normal leading-[0.9] tracking-[-0.04em] tabular-nums text-brand-400 rtl:text-end">
+          <p
+            dir="ltr"
+            className="col-span-5 font-sans text-[clamp(6rem,10vw,8.5rem)] font-normal leading-[0.9] tracking-[-0.04em] tabular-nums text-brand-400 rtl:text-end"
+          >
             {t('innovation.stat.value')}
           </p>
           <div className="col-span-6 col-start-7 pb-4">

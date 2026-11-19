@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { HeroH1 } from '../components/typography/HeroH1';
 import { ArrowDown, ArrowRight, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -93,14 +94,22 @@ function Hero() {
     <Section background="charcoal" spacing="sm" className="pt-8 md:pt-10 lg:pt-32">
       <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-12 md:gap-8 lg:gap-12">
         <div className="md:col-span-7">
-          <motion.div {...rise(0)}>
-            <Eyebrow>{t('certificationTrainingPage.hero.eyebrow')}</Eyebrow>
-          </motion.div>
-          <motion.div {...rise(0.08)}>
-            <Heading level="display" as="h2" className="mt-4 text-balance">
-              {t('certificationTrainingPage.hero.title')}
-            </Heading>
-          </motion.div>
+          <HeroH1
+            eyebrow={
+              <motion.span className="block" {...rise(0)}>
+                <Eyebrow as="span" className="block">
+                  {t('certificationTrainingPage.hero.eyebrow')}
+                </Eyebrow>
+              </motion.span>
+            }
+            title={
+              <motion.span className="block" {...rise(0.08)}>
+                <Heading level="display" as="span" className="mt-4 block text-balance">
+                  {t('certificationTrainingPage.hero.title')}
+                </Heading>
+              </motion.span>
+            }
+          />
           <motion.div {...rise(0.16)}>
             <Text muted className="mt-6 max-w-xl">
               {t('certificationTrainingPage.hero.description')}

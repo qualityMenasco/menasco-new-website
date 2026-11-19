@@ -1,10 +1,127 @@
-# MEP Contractor in the UAE & GCC | Mechanical, Electrical, Plumbing & Fire | MENASCO
+# MEP Services: Mechanical, Electrical & Plumbing
 
-> Mechanical, electrical, plumbing, and fire protection works form the foundation of MENASCO's expertise. From technically demanding infrastructure to large-scale commercial developments, each discipline is brought together through coordinated engineering, installation, testing, and commissioning.
+> Mechanical, electrical, and plumbing works form the foundation of MENASCO's expertise. From technically demanding infrastructure to large-scale commercial developments, each discipline is brought together through well-coordinated engineering.
+
+## Four Disciplines. One Coordinated Building.
+
+Complex developments require mechanical, electrical, plumbing, and life safety systems to operate within the same physical and technical environment. Effective delivery depends on understanding how these disciplines interact, from equipment requirements and spatial coordination to installation sequencing and commissioning.
+
+Through multidisciplinary engineering teams, BIM coordination, and integrated construction management, technical interfaces are identified and resolved throughout project execution. This approach helps reduce conflicts between building systems, maintain alignment with architectural and structural requirements, and support efficient installation and reliable operation.
+
+## Key Figures
+
+- 350+ MEP projects delivered
+- 140 BIM engineers
+- 6,000 Person workforce
+
+## Specialized Expertise. Coordinated Delivery.
+
+### Mechanical Systems
+
+Mechanical systems control the temperature, air quality and ventilation of a building. Typical scope includes chilled-water distribution and pumping, air handling units and fan coil units, supply, return and fresh-air ductwork, smoke extraction and stair pressurisation, and plant room installation. In hot climates, cooling loads drive much of the design, so pipework sizing, insulation and testing, adjusting and balancing (TAB) are critical to reliable, energy-efficient operation.
+
+Scope of works:
+
+- HVAC & Ventilation Systems
+- Chilled-Water & District Cooling Systems
+- Air-Cooled & Water-Cooled Chiller Systems
+- CRAC (Computer Room Air Conditioner)
+- CRAH (Computer Room Air Handler)
+- Mechanical Plant Rooms
+- Pumps, Heat Exchangers & Cooling Towers
+- Air Distribution & Ductwork Systems
+- Smoke Extraction & Staircase Pressurisation Systems
+- Building Management & HVAC Control Systems
+- Off-Site Prefabricated Modular MEP Solutions
+- Prefabricated Modular Mechanical Systems
+- Refrigeration & Cold-Room Systems
+- Compressed-Air Systems
+- Industrial, LPG & Medical Gas Systems
+- Cleanroom & Controlled-Environment Systems
+- Wastewater & Water-Treatment Systems
+- Steam & Boiler Systems
+- Testing, Adjusting & Balancing (TAB)
+- Testing and Commissioning
+
+### Electrical & ELV
+
+Electrical systems distribute power safely from the incoming supply to every outlet, light and piece of equipment. Typical scope covers MV and LV switchgear, main and sub-main distribution boards, busbar trunking, cable containment, standby generators and UPS, lighting and lighting control, and earthing and lightning protection. Extra-low-voltage (ELV) systems such as structured cabling, CCTV, access control and public address are installed alongside, then tested and integrated before handover.
+
+Scope of works:
+
+- Medium-Voltage & Low-Voltage Electrical Systems
+- Electrical Substations & Transformer Systems
+- Prefabricated Power E-Houses
+- MV and LV Switchgear & Distribution Panels
+- Main & Sub-Main Distribution Boards
+- Power Distribution & Containment Systems
+- Busbar & Busduct Systems
+- Standby Generators & Emergency Power Systems
+- Uninterruptible Power Supply (UPS) Systems
+- Automatic Transfer Switch (ATS) Systems
+- Small & Medium Reactors (SMR)
+- Microgrids & Resilient Power Structures
+- Lighting & Lighting-Control Systems
+- Emergency & Specialist Lighting Systems
+- Earthing, Grounding & Lightning Protection Systems
+- Power-Factor Correction & Harmonic-Filtration Systems
+- Building Management Systems (BMS)
+- Structured Cabling and ICT Infrastructure
+- CCTV and Video-Surveillance Systems
+- Access-Control & Intrusion-Detection Systems
+- Public Address & Voice-Alarm Systems (PAVA)
+- Voice-Evacuation Systems
+- Audio-Visual (AV) Systems
+- Instrumentation & Control Systems
+
+### Plumbing, Water & Drainage
+
+Plumbing and drainage systems supply clean water and remove wastewater and stormwater from a building. Typical scope includes cold and hot water distribution, water storage tanks and booster pump sets, soil, waste and vent pipework, rainwater drainage, sewage lifting stations, and water treatment such as reverse osmosis and greywater recycling. Pipe materials, falls and pressure zones are set during design, and every system is pressure tested, flushed and disinfected before use.
+
+Scope of works:
+
+- Domestic Cold & Hot Water Supply Systems
+- Water Storage & Distribution Systems
+- Water-Pressure Booster Pump Systems
+- Sanitary Drainage & Wastewater Systems
+- Soil, Waste & Vent Systems
+- Stormwater & Rainwater Drainage Systems
+- Sewage-Lifting & Transfer Pumping Stations
+- Sanitary Fixtures & Accessories Installation
+- PVC, PPR, HDPE, Copper & Stainless-Steel Pipework
+- Irrigation & Landscape Water Systems
+- Greywater & Blackwater Treatment Systems
+- Greywater Recycling & Reuse Systems
+- Reverse Osmosis (RO) Water-Treatment Systems
+- Water Filtration & Purification Systems
+- Sewage Treatment Plants (STP)
+- Grease, Oil & Sand Interceptor Systems
+- Hot-Water Generation & Circulation Systems
+- Solar Water-Heating Systems
+- Water Metering & Leak-Detection Systems
+- Swimming Pool, Fountain & Water-Feature Systems
+- Testing, Flushing, Disinfection & Commissioning
+
+### Fire Protection & Life Safety
+
+Fire protection and life safety systems detect a fire, alert occupants and control its spread. Typical scope includes addressable fire alarm and detection, wet and dry sprinkler systems, fire hydrant and hose reel networks, fire pump sets, clean-agent gas suppression for server and electrical rooms, and kitchen hood suppression. These systems interface with smoke control, emergency lighting and voice evacuation. In the UAE, they are designed, inspected and approved in line with Civil Defence requirements; in other markets, designs are fitted to the fire codes and standards of that country.
+
+Scope of works:
+
+- Fire Detection & Alarm Systems
+- Sprinkler Systems
+- Fire Hydrant & Hose Reel Systems
+- Fire Pump Sets & Water Storage
+- Clean-Agent & Gas Suppression Systems
+- Foam Suppression Systems
+- Kitchen Hood Suppression Systems
+- Smoke Control Interfaces
+- Emergency Lighting Interfaces
+- Voice Evacuation Interfaces
+- Fire Extinguishers & Fire Blankets
+- Testing, Witnessing & Civil Defence Approvals
 
 ## Selected MEP projects
-
-From ultra-luxury residential towers and corporate headquarters to beachfront hospitality and high-voltage infrastructure, these completed projects show how MENASCO delivers coordinated mechanical, electrical, plumbing and fire protection systems across very different building types.
 
 - [Volante II Tower](https://menascogroup.com/projects/volante-ii-tower/llms.txt): Complete MEP engineering, supply, installation, testing and commissioning for an ultra-luxury residential tower, including advanced chilled-water and ventilation design, integrated low-current and automation systems, and fire and life safety to UAE Fire Code. (684,616 workforce hours · Zero LTI)
 - [PCFC Headquarters Building](https://menascogroup.com/projects/pcfc-headquarters-building/llms.txt): Shell-and-core and fit-out MEP for a corporate headquarters, combining electromechanical, plumbing and fire protection systems with smart building management designed around energy efficiency across flexible office floors. (798,393 workforce hours · Zero LTI)

@@ -172,7 +172,7 @@ export default function TeamPage() {
             <SectionHeader
               eyebrow={t('team.featured.eyebrow')}
               heading={t('team.featured.heading')}
-              headingAs="h2"
+              headingAs="h1"
               description={t('team.featured.description')}
             />
           </Stack>

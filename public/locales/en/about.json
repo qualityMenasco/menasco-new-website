@@ -1,8 +1,8 @@
 {
   "hero": {
-    "eyebrow": "Engineering Excellence Since {{year}}",
+    "eyebrow": "MEP Contractor Since {{year}}",
     "title": "About MENASCO",
-    "description": "For more than three decades, MENASCO has delivered integrated mechanical, electrical, and plumbing (MEP) engineering solutions that power some of the region's most demanding developments, from Dubai's skyline to mission-critical facilities across the globe. Through technical expertise and disciplined project execution, we create reliable infrastructure that stands the test of time.",
+    "description": "Founded in the UAE in 1994, MENASCO is an MEP contractor delivering mechanical, electrical, plumbing and fire protection systems for high-rise, hospitality, infrastructure and mission-critical projects, with offices in seven countries.",
     "stats": {
       "established": "Established",
       "yearsOfExcellence": "Years of Engineering Excellence",
@@ -104,13 +104,13 @@
     "leadershipDescription": "Meet the founder and the corporate and technical leaders driving MENASCO forward."
   },
   "seo": {
-    "title": "About MENASCO | MEP Engineering UAE",
-    "description": "MENASCO has delivered integrated MEP engineering solutions across the Middle East since 1994. Learn about our approach, vision, values and quality standards."
+    "title": "About MENASCO | MEP Contractor in the UAE Since 1994",
+    "description": "Since 1994, MENASCO has engineered and installed MEP systems across the Middle East. Our history, approach, values and ISO-certified quality standards."
   },
   "team": {
     "seo": {
       "title": "Leadership Team",
-      "description": "MENASCO's leadership: founder, corporate leadership and technical leadership."
+      "description": "Meet MENASCO's leadership: founder Eng. Helmi Badawiyeh, CEO Eng. Bahaa H. Badawiyeh, and the corporate and technical leaders who guide our MEP projects."
     },
     "featured": {
       "eyebrow": "Leadership",
@@ -216,7 +216,7 @@
       ],
       "closingLine": "To build with integrity, innovate with purpose, and create a legacy of excellence that endures for generations.",
       "seoTitle": "Eng. Bahaa H. Badawiyeh, CEO",
-      "seoDescription": "Meet Eng. Bahaa H. Badawiyeh, CEO of MENASCO, and explore his leadership approach to innovation, regional growth, sustainability, and engineering excellence.",
+      "seoDescription": "Eng. Bahaa H. Badawiyeh, CEO of MENASCO, on leading an MEP contractor through innovation, regional growth, sustainability and engineering excellence.",
       "pageTitle": "Building MENASCO's Legacy of Engineering Excellence",
       "pullQuote": "True engineering leadership is not only about building systems. It is about building innovation, integrity, sustainability, and a better tomorrow.",
       "pillarsEyebrow": "Leadership Pillars",
@@ -247,19 +247,19 @@
         "As we look to the future, we remain committed to sustainable growth, continuous improvement & the adoption of innovative engineering solutions that create lasting value, guided by our values of Innovation, Integrity, Excellence, we will continue to strengthen our capabilities, exceed our clients' expectations & contribute to building resilient communities & cities for future generations.",
         "We look forward to creating new success stories, building enduring partnerships & continuing to transform innovation into reality."
       ],
-      "seoTitle": "Eng. Helmi Badawiyeh, Founder",
-      "seoDescription": "Learn about Eng. Helmi Badawiyeh, Founder and General Manager of MENASCO, and his vision for quality, long-term value, and engineering excellence."
+      "seoTitle": "Eng. Helmi Badawiyeh, Founder & General Manager",
+      "seoDescription": "Eng. Helmi Badawiyeh founded MENASCO in 1994. Read his message on quality, long-term value and engineering excellence, and the company he built."
     }
   },
   "community": {
     "seo": {
-      "title": "Community & People",
-      "description": "Life at MENASCO beyond the job site: our blood drive, healthcare partnership, Culture Day celebrations, Dubai Run, career fairs and the Training & Mentoring Centre developing our people."
+      "title": "Community & People | Life at MENASCO",
+      "description": "Life at MENASCO beyond the job site: our blood drive, healthcare partnership, Culture Day, Dubai Run, career fairs and the Training & Mentoring Centre."
     },
     "intro": {
       "eyebrow": "Community & People",
       "heading": "The people behind every project",
-      "description": "Moments from our team, beyond the job site."
+      "description": "Life at MENASCO beyond the job site: blood drives, a healthcare partnership, Culture Day, the Dubai Run, career fairs and our Training & Mentoring Centre."
     },
     "bloodDrive": {
       "eyebrow": "Blood Drive",
@@ -303,11 +303,11 @@
   },
   "innovation": {
     "seo": {
-      "title": "Innovation & Technology",
-      "description": "MENASCO advances construction technology through LYNX field quality management, an enterprise data platform, and intelligent automation across every project."
+      "title": "Construction Technology & Innovation",
+      "description": "How MENASCO applies construction technology to MEP delivery: LYNX field quality management, an enterprise data platform and intelligent automation."
     },
     "hero": {
-      "eyebrow": "About MENASCO",
+      "eyebrow": "Construction Technology for MEP",
       "heading": "Innovation & Technology",
       "subheading": "Engineering the Future Through Intelligent Technology",
       "description": "MENASCO is investing in proprietary technologies, artificial intelligence, enterprise data systems, automation, and digital engineering platforms to improve project delivery, operational efficiency, compliance, quality, and decision-making across the organization.",
@@ -349,10 +349,10 @@
   },
   "qualitySafetyPage": {
     "seo": {
-      "title": "Quality & Safety",
-      "description": "MENASCO is a leading MEP contractor in the UAE, delivering quality management, health, safety and environmental excellence through certified QHSE systems."
+      "title": "Quality, Health, Safety & Environment (QHSE)",
+      "description": "How MENASCO manages QHSE on MEP projects: ISO 9001, ISO 14001 and ISO 45001 certified systems, site inspections, risk controls and continuous improvement."
     },
-    "eyebrow": "QHSE",
+    "eyebrow": "ISO-Certified QHSE Management",
     "heading": "Quality, Health & Safety",
     "description": "Quality, health, safety, and environmental responsibility are embedded in every stage of project delivery, guided by international standards and a commitment to continuous improvement. An integrated QHSE management system, certified to ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018, supports consistent practices, proactive risk management, and accountability across operations.",
     "downloadPolicy": "Download full QHSE Policy",
@@ -497,8 +497,8 @@
   },
   "certificationTrainingPage": {
     "seo": {
-      "title": "Certification & Training",
-      "description": "How MENASCO develops engineering talent: continuous workforce development through MENASCO Connect, a free engineering education initiative in development, and university internships on live projects."
+      "title": "Engineering Training & Certification",
+      "description": "How MENASCO develops engineers: workforce training, MENASCO Academy (a free engineering education programme in development) and live-project internships."
     },
     "hero": {
       "eyebrow": "Certification & Training",

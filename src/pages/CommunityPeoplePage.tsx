@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { HeroH1 } from '../components/typography/HeroH1';
 import { ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../components/layout/Section';
@@ -9,6 +10,7 @@ import { AutoplayVideo } from '../components/common/AutoplayVideo';
 import { VideoPlaceholder } from '../components/sections/community/VideoPlaceholder';
 import { CERTIFICATION_TRAINING_PATH, communityMedia, type CommunityImage } from '../data/communityPeople';
 import { SEO } from '../seo/SEO';
+import { cn } from '../lib/utils';
 
 interface ChapterCopy {
   eyebrow: string;
@@ -16,8 +18,23 @@ interface ChapterCopy {
   caption: string;
 }
 
-/** Numbered chapter heading — the index, eyebrow and title on one line-up, caption beneath. */
-function ChapterHeader({ index, copy, theme = 'light', children }: { index: number; copy: ChapterCopy; theme?: 'light' | 'dark'; children?: ReactNode }) {
+/**
+ * Numbered chapter heading: index, eyebrow and title on the left, caption in a
+ * right-hand column. `balanceCaption` evens out the caption's line lengths.
+ */
+function ChapterHeader({
+  index,
+  copy,
+  theme = 'light',
+  balanceCaption = false,
+  children,
+}: {
+  index: number;
+  copy: ChapterCopy;
+  theme?: 'light' | 'dark';
+  balanceCaption?: boolean;
+  children?: ReactNode;
+}) {
   return (
     <div className="grid grid-cols-12 items-end gap-8">
       <div className="col-span-7">
@@ -32,7 +49,7 @@ function ChapterHeader({ index, copy, theme = 'light', children }: { index: numb
         </Heading>
       </div>
       <div className="col-span-5">
-        <Text variant="body-lg" theme={theme} muted={theme === 'light'} className={theme === 'dark' ? 'text-gray-300' : undefined}>
+        <Text variant="body-lg" theme={theme} muted={theme === 'light'} className={cn(theme === 'dark' && 'text-gray-300', balanceCaption && 'text-balance')}>
           {copy.caption}
         </Text>
         {children}
@@ -87,10 +104,18 @@ export default function CommunityPeoplePage() {
 
       <Section spacing="lg" background="warmwhite" className="!pb-12 md:!pb-16">
         <div className="max-w-4xl">
-          <Eyebrow>{t('community.intro.eyebrow')}</Eyebrow>
-          <Heading level="display" as="h2" className="mt-4 text-balance">
-            {t('community.intro.heading')}
-          </Heading>
+          <HeroH1
+            eyebrow={
+              <Eyebrow as="span" className="block">
+                {t('community.intro.eyebrow')}
+              </Eyebrow>
+            }
+            title={
+              <Heading level="display" as="span" className="mt-4 block text-balance">
+                {t('community.intro.heading')}
+              </Heading>
+            }
+          />
           <Text variant="body-lg" muted className="mt-6 max-w-xl">
             {t('community.intro.description')}
           </Text>
@@ -100,7 +125,7 @@ export default function CommunityPeoplePage() {
       {/* 01 — Blood drive: the group photo on its own card, the three donor photos in a row beneath. */}
       <ScrollReveal>
         <Section spacing="md" background="warmwhite" className="!pt-8">
-          <ChapterHeader index={1} copy={blood} />
+          <ChapterHeader index={1} copy={blood} balanceCaption />
           <div className="mt-10 flex flex-col gap-4">
             <Photo image={communityMedia.bloodDriveGroup} className="aspect-[2/1]" />
             <div className="grid grid-cols-3 gap-4">

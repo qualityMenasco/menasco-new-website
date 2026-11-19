@@ -117,6 +117,14 @@ export function LeadershipTeamCard({
             )}
           </div>
         </div>
+        {/* The bio opens in a modal (mounted only when open), so it's also kept here, not displayed, so it's in the HTML. */}
+        {bio && (
+          <div hidden>
+            {bio.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+          </div>
+        )}
       </article>
 
       {bio && (

@@ -1,14 +1,14 @@
 # MENASCO
 
-> MENASCO is an integrated MEP (mechanical, electrical, plumbing & fire protection) engineering contractor, operating across the UAE, Saudi Arabia, Egypt, the United Kingdom and the USA.
+> Founded in the UAE in 1994, MENASCO delivers integrated mechanical, electrical, plumbing and fire protection systems for complex projects in seven countries.
 
-Integrated MEP & Engineering Contractor. Established in 1994 in the UAE as MENASCO Mechanical Contracting L.L.C.
+Established in 1994 in the UAE as MENASCO Mechanical Contracting L.L.C.
 
 ---
 
 ## About MENASCO
 
-MENASCO Mechanical Contracting LLC is one of MENA's leading providers of integrated MEP engineering and contracting solutions, delivering high-performance building services across commercial, residential, hospitality, energy, healthcare, and mission-critical developments.
+Founded in the UAE in 1994, MENASCO is an MEP contractor delivering mechanical, electrical, plumbing and fire protection systems for high-rise, hospitality, infrastructure and mission-critical projects, with offices in seven countries.
 
 - [About MENASCO](https://menascogroup.com/about/llms.txt): Company overview, approach, vision, mission and values.
 
@@ -34,11 +34,11 @@ MENASCO Mechanical Contracting LLC is one of MENA's leading providers of integra
 
 ## Services
 
-Behind every complex development is an intricate network of systems working in harmony. MENASCO brings together engineering expertise, technical precision, and coordinated execution to transform complex requirements into reliable, high-performance environments.
+MENASCO services: MEP engineering and installation, EPC turnkey delivery, data centers, civil works and BIM, and off-site manufacturing and prefabrication.
 
 ### MEP
 
-- [MEP Contractor in the UAE & GCC | Mechanical, Electrical, Plumbing & Fire | MENASCO](https://menascogroup.com/services/mep/llms.txt): MENASCO is an MEP contractor in the UAE and GCC delivering mechanical, electrical, plumbing and fire protection systems, BIM-coordinated from design to commissioning.
+- [MEP Services: Mechanical, Electrical & Plumbing](https://menascogroup.com/services/mep/llms.txt): Mechanical, electrical, plumbing and fire protection by MENASCO: BIM-coordinated installation, testing and commissioning, with 350+ MEP projects delivered.
 
 Covers: Mechanical Systems, Electrical & ELV Systems, Plumbing, Water & Drainage Systems, Fire Protection & Life Safety Systems.
 
@@ -60,13 +60,13 @@ Covers: Modular, Custom.
 
 ### Data Centers
 
-- [Data Centers](https://menascogroup.com/services/data-centers/llms.txt): MENASCO delivers mission-critical data center MEP and infrastructure solutions for uptime, reliability and future-ready digital operations.
+- [Data Centers](https://menascogroup.com/services/data-centers/llms.txt): Data center MEP by MENASCO: Tier III and Tier IV topologies, CRAC and CRAH cooling, UPS and generator resilience, for greenfield and brownfield sites.
 
 ---
 
 ## Projects & Sectors
 
-138 current projects across the UAE, Saudi Arabia, Egypt and the USA, organized into 4 sectors.
+MENASCO delivers projects across all 7 of its countries of operation: United Arab Emirates, Saudi Arabia, Egypt, United Kingdom, United States, Jordan, Syria. The website features a selection of 138 of these projects, organized into 4 sectors.
 
 - Residential / Commercial: Integrated engineering solutions for residential, commercial, office, and mixed-use developments.
 - Hospitality & Landmark Entertainment: High-performance MEP delivery for premium hospitality, resort, cultural landmark, and entertainment destination environments.
@@ -203,7 +203,10 @@ Covers: Modular, Custom.
 
 ## Innovation & Technology
 
-MENASCO is investing in proprietary technologies, artificial intelligence, enterprise data systems, automation, and digital engineering platforms to improve project delivery, operational efficiency, compliance, quality, and decision-making across the organization.
+- Automatic Tendering Logic Assessment System (ATLAS): ATLAS is a MENASCO pilot project focussed on AI-powered compliance.
+- LYNX: LYNX is MENASCO's intelligent field quality management platform, built to make identifying, assigning, and resolving construction issues faster and more transparent.
+- AI Engineering: Using AI across engineering, quantity takeoffs, recruitment, payroll management and tenders, MENASCO has increased its workforce efficiency by 30%.
+- MENASCO Connect: MENASCO Connect is our proprietary workforce management platform, integrating recruitment, manpower planning, site attendance, leave management, employee assessments, and internal communications into a unified digital environment.
 
 - [Innovation & Technology](https://menascogroup.com/innovation-technology/llms.txt)
 
@@ -233,6 +236,6 @@ MENASCO operates through 7 strategically located offices across three continents
 
 ## Careers
 
-Explore career, internship & graduate opportunities across MENASCO’s global operations. Join a multicultural team delivering integrated MEP, infrastructure & specialized engineering solutions across challenging, high-impact projects.
+Career, internship and graduate opportunities at MENASCO.
 
 - [Careers at MENASCO](https://main.d5ycnj71qvqrf.amplifyapp.com/)

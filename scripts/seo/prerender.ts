@@ -189,6 +189,11 @@ const PATTERNS: { pattern: string; importer: Importer; modulePath: string; deskt
     desktopImporter: () => import('../../src/pages/ServicesPage'),
   },
   { pattern: '/services/data-centers', importer: () => import('../../src/pages/services/DataCenterPage'), modulePath: 'src/pages/services/DataCenterPage.tsx' },
+  {
+    pattern: '/services/data-centers/sustainability',
+    importer: () => import('../../src/pages/services/DataCenterSustainabilityPage'),
+    modulePath: 'src/pages/services/DataCenterSustainabilityPage.tsx',
+  },
 
   {
     pattern: '/services/manufacturing-prefabrication',
@@ -285,6 +290,7 @@ export const PRERENDER_PATHS: string[] = [
   '/services',
   '/services/manufacturing-prefabrication',
   '/services/data-centers',
+  '/services/data-centers/sustainability',
   '/services/mep',
   '/services/civil',
   '/services/turnkey-developments',

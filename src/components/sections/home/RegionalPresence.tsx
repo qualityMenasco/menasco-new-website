@@ -12,6 +12,7 @@ import { cn } from '../../../lib/utils';
 import { officeLocations, primaryContact, type OfficeLocation } from '../../../data/locations';
 import { ContactLink } from '../../ui/ContactLink';
 import { OfficeGlobe } from './OfficeGlobe';
+import { OfficeDirectory } from './OfficeDirectory';
 
 const locationKeys: Record<string, string> = { dubai: 'dubai', riyadh: 'riyadh', cairo: 'cairo', london: 'london', usa: 'usa', jordan: 'jordan', syria: 'syria' };
 /** Country code in each pin's tag — fixed technical notation, not translated prose, so it doesn't mix scripts under Arabic. */
@@ -219,6 +220,7 @@ export function RegionalPresence({ background = 'warmwhite' }: { background?: 'w
           <OfficeDetailCard office={activeOffice} onNavigate={goToOffice} />
         </div>
       </Stack>
+      <OfficeDirectory />
     </Section>
   );
 }

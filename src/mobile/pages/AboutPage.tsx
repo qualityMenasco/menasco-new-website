@@ -7,7 +7,6 @@ import { LocaleLink } from '../components/LocaleLink';
 import { PhotoWithVideo } from '../../components/sections/community/PhotoWithVideo';
 import { leadershipProfiles } from '../../data/leadership';
 import credentials, { type Credential } from '../../data/credentials';
-import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { ClientsSection } from '../../components/sections/ClientsSection';
 import { OurPeople } from '../../components/sections/about/OurPeople';
 import { SEO } from '../../seo/SEO';
@@ -23,7 +22,6 @@ export default function AboutPage() {
 
   return (
     <>
-      <NavSectionH1 section="about" />
       <SEO
         title={t('seo.title')}
         description={t('seo.description')}
@@ -35,7 +33,7 @@ export default function AboutPage() {
       {/* Phones stack heading, cover photo, copy. Tablets put the copy beside a
           portrait cover photo (same children, placed on a two-column grid). */}
       <section className="grid px-4 py-8 md:grid-cols-2 md:grid-rows-[auto_1fr] md:gap-x-8 md:py-12">
-        <SectionHeader eyebrow={t('whoWeAre.eyebrow')} heading={t('whoWeAre.heading')} headingAs="h2" />
+        <SectionHeader eyebrow={t('whoWeAre.eyebrow')} heading={t('whoWeAre.heading')} headingAs="h1" />
         {/* The desktop header's people film behind a cover photo: only the photo loads
             until it's tapped, then the film plays full screen (it's a silent clip). */}
         <PhotoWithVideo

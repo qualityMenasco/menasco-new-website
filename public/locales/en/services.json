@@ -94,17 +94,20 @@
       "seoTitle": "Mechanical & HVAC Systems",
       "seoDescription": "MENASCO delivers mechanical and HVAC systems for complex developments, including chilled-water, ventilation, air distribution and coordinated plant systems.",
       "shortDescription": "HVAC, chilled-water and plant systems engineered for regional climate loads.",
-      "introduction": "MENASCO delivers mechanical systems from concept through commissioning, including HVAC, chilled-water plant, ducting, and specialist gas and treatment systems for demanding, mission-critical environments.",
+      "introduction": "Mechanical systems control the temperature, air quality and ventilation of a building. Typical scope includes chilled-water distribution and pumping, air handling units and fan coil units, supply, return and fresh-air ductwork, smoke extraction and stair pressurisation, and plant room installation. In hot climates, cooling loads drive much of the design, so pipework sizing, insulation and testing, adjusting and balancing (TAB) are critical to reliable, energy-efficient operation.",
       "capabilities": [
         "HVAC & Ventilation Systems",
         "Chilled-Water & District Cooling Systems",
         "Air-Cooled & Water-Cooled Chiller Systems",
+        "CRAC (Computer Room Air Conditioner)",
+        "CRAH (Computer Room Air Handler)",
         "Mechanical Plant Rooms",
         "Pumps, Heat Exchangers & Cooling Towers",
         "Air Distribution & Ductwork Systems",
         "Smoke Extraction & Staircase Pressurisation Systems",
         "Building Management & HVAC Control Systems",
         "Off-Site Prefabricated Modular MEP Solutions",
+        "Prefabricated Modular Mechanical Systems",
         "Refrigeration & Cold-Room Systems",
         "Compressed-Air Systems",
         "Industrial, LPG & Medical Gas Systems",
@@ -143,10 +146,11 @@
       "seoTitle": "Electrical & ELV Systems",
       "seoDescription": "MENASCO provides integrated electrical and ELV systems for complex developments across the UAE and GCC, from power distribution to low-current systems.",
       "shortDescription": "Power distribution, building management and low-current systems, coordinated end to end.",
-      "introduction": "From medium-voltage distribution to structured cabling and building management systems, MENASCO delivers electrical infrastructure engineered for reliability and future load growth.",
+      "introduction": "Electrical systems distribute power safely from the incoming supply to every outlet, light and piece of equipment. Typical scope covers MV and LV switchgear, main and sub-main distribution boards, busbar trunking, cable containment, standby generators and UPS, lighting and lighting control, and earthing and lightning protection. Extra-low-voltage (ELV) systems such as structured cabling, CCTV, access control and public address are installed alongside, then tested and integrated before handover.",
       "capabilities": [
         "Medium-Voltage & Low-Voltage Electrical Systems",
         "Electrical Substations & Transformer Systems",
+        "Prefabricated Power E-Houses",
         "MV and LV Switchgear & Distribution Panels",
         "Main & Sub-Main Distribution Boards",
         "Power Distribution & Containment Systems",
@@ -154,11 +158,12 @@
         "Standby Generators & Emergency Power Systems",
         "Uninterruptible Power Supply (UPS) Systems",
         "Automatic Transfer Switch (ATS) Systems",
+        "Small & Medium Reactors (SMR)",
+        "Microgrids & Resilient Power Structures",
         "Lighting & Lighting-Control Systems",
         "Emergency & Specialist Lighting Systems",
         "Earthing, Grounding & Lightning Protection Systems",
         "Power-Factor Correction & Harmonic-Filtration Systems",
-        "Energy Metering, Monitoring & Management Systems",
         "Building Management Systems (BMS)",
         "Structured Cabling and ICT Infrastructure",
         "CCTV and Video-Surveillance Systems",
@@ -166,9 +171,7 @@
         "Public Address & Voice-Alarm Systems (PAVA)",
         "Voice-Evacuation Systems",
         "Audio-Visual (AV) Systems",
-        "Intercom & Master-Clock Systems",
-        "Instrumentation & Control Systems",
-        "Testing, Commissioning & System Integration"
+        "Instrumentation & Control Systems"
       ],
       "sections": [
         {
@@ -204,7 +207,7 @@
       "seoTitle": "Plumbing & Public Health Systems",
       "seoDescription": "MENASCO designs and installs complete plumbing and public health systems, including water supply, drainage, sanitary fixtures and irrigation, across the UAE.",
       "shortDescription": "Water supply, drainage and sanitary systems built for long-term reliability.",
-      "introduction": "MENASCO designs and installs complete plumbing systems (water supply, drainage, sanitary fixtures and irrigation), tested and commissioned to project specification.",
+      "introduction": "Plumbing and drainage systems supply clean water and remove wastewater and stormwater from a building. Typical scope includes cold and hot water distribution, water storage tanks and booster pump sets, soil, waste and vent pipework, rainwater drainage, sewage lifting stations, and water treatment such as reverse osmosis and greywater recycling. Pipe materials, falls and pressure zones are set during design, and every system is pressure tested, flushed and disinfected before use.",
       "capabilities": [
         "Domestic Cold & Hot Water Supply Systems",
         "Water Storage & Distribution Systems",
@@ -253,6 +256,24 @@
         }
       ]
     },
+    "fire": {
+      "name": "Fire Protection & Life Safety",
+      "introduction": "Fire protection and life safety systems detect a fire, alert occupants and control its spread. Typical scope includes addressable fire alarm and detection, wet and dry sprinkler systems, fire hydrant and hose reel networks, fire pump sets, clean-agent gas suppression for server and electrical rooms, and kitchen hood suppression. These systems interface with smoke control, emergency lighting and voice evacuation. In the UAE, they are designed, inspected and approved in line with Civil Defence requirements; in other markets, designs are fitted to the fire codes and standards of that country.",
+      "capabilities": [
+        "Fire Detection & Alarm Systems",
+        "Sprinkler Systems",
+        "Fire Hydrant & Hose Reel Systems",
+        "Fire Pump Sets & Water Storage",
+        "Clean-Agent & Gas Suppression Systems",
+        "Foam Suppression Systems",
+        "Kitchen Hood Suppression Systems",
+        "Smoke Control Interfaces",
+        "Emergency Lighting Interfaces",
+        "Voice Evacuation Interfaces",
+        "Fire Extinguishers & Fire Blankets",
+        "Testing, Witnessing & Civil Defence Approvals"
+      ]
+    },
     "manufacturingPrefabrication": {
       "name": "Manufacturing & Prefabrication",
       "shortDescription": "Off-site production for faster, more consistent on-site installation.",
@@ -279,13 +300,19 @@
     "nextSection": "Next"
   },
   "seo": {
-    "title": "MEP Engineering Services",
-    "description": "Mechanical, electrical, plumbing, fire protection, BIM & digital engineering, and manufacturing & prefabrication services from MENASCO."
+    "title": "MEP, EPC, Data Centers, Civil & Prefabrication",
+    "description": "MENASCO services: MEP engineering and installation, EPC turnkey delivery, data centers, civil works and BIM, and off-site manufacturing and prefabrication."
+  },
+  "dataCenterSustainability": {
+    "seo": {
+      "title": "Data Center Sustainability Strategies",
+      "description": "How to cut data center energy, water and carbon: liquid cooling, PUE, WUE and CUE, LEED Gold and Estidama Pearl, and priorities for the GCC, USA and Europe."
+    }
   },
   "dataCenter": {
     "seo": {
-      "title": "Data Center MEP Services",
-      "description": "MENASCO delivers mission-critical data center MEP and infrastructure solutions for uptime, reliability and future-ready digital operations."
+      "title": "Data Center MEP Contractor | Tier III & Tier IV",
+      "description": "Data center MEP by MENASCO: Tier III and Tier IV topologies, CRAC and CRAH cooling, UPS and generator resilience, for greenfield and brownfield sites."
     },
     "hero": {
       "eyebrow": "Data Center Infrastructure",
@@ -776,13 +803,13 @@
   },
   "mepPage": {
      "seo": {
-       "title": "MEP Contractor in the UAE & GCC | Mechanical, Electrical, Plumbing & Fire | MENASCO",
-       "description": "MENASCO is an MEP contractor in the UAE and GCC delivering mechanical, electrical, plumbing and fire protection systems, BIM-coordinated from design to commissioning."
+       "title": "MEP Services: Mechanical, Electrical & Plumbing",
+       "description": "Mechanical, electrical, plumbing and fire protection by MENASCO: BIM-coordinated installation, testing and commissioning, with 350+ MEP projects delivered."
      },
      "hero": {
        "eyebrow": "Global MEP Contractor",
        "title": "Complexity Coordinated With Precision",
-       "description": "Mechanical, electrical, plumbing, and fire protection works form the foundation of MENASCO's expertise. From technically demanding infrastructure to large-scale commercial developments, each discipline is brought together through coordinated engineering, installation, testing, and commissioning.",
+       "description": "Mechanical, electrical, and plumbing works form the foundation of MENASCO's expertise. From technically demanding infrastructure to large-scale commercial developments, each discipline is brought together through well-coordinated engineering.",
        "primaryCta": "Explore capabilities",
        "secondaryCta": "View projects",
        "imageAlt": "MEP plant room with insulated chilled-water pipework, pumps and heat exchangers on a MENASCO project"
@@ -790,31 +817,36 @@
      "disciplinesSection": {
        "eyebrow": "Technical disciplines",
        "heading": "Specialized Expertise. Coordinated Delivery.",
-       "description": "Each discipline carries its own technical requirements, design interfaces, and construction methodologies. Together, they form the essential systems that support the operation, safety, and performance of the built environment.",
+       "scopeLabel": "Scope of works",
+       "showAll": "Show all {{count}} systems",
+       "showLess": "Show fewer",
+       "titleBlock": {
+         "discipline": "Discipline",
+         "drawingRef": "Drawing ref.",
+         "systems": "Systems",
+         "coordination": "Coordination",
+         "coordinationValue": "Federated BIM"
+       },
        "items": [
          {
+           "id": "mechanical",
            "label": "Mechanical",
-           "title": "Mechanical Systems",
-           "description": "HVAC, ventilation, chilled-water networks, central cooling plants, and mechanical equipment installations.",
-           "imageAlt": "Air-cooled chiller plant serving a mission-critical facility"
+           "title": "Mechanical Systems"
          },
          {
+           "id": "electrical",
            "label": "Electrical",
-           "title": "Electrical & ELV",
-           "description": "Power distribution, lighting, backup power, low-current infrastructure, and integrated building technologies.",
-           "imageAlt": "Distribution board with miniature circuit breakers and wiring"
+           "title": "Electrical & ELV"
          },
          {
+           "id": "plumbing",
            "label": "Water Systems",
-           "title": "Plumbing, Water & Drainage",
-           "description": "Water supply, treatment, pumping, drainage, and sanitary systems for complex developments.",
-           "imageAlt": "Pipework gallery with control valves and pumping equipment"
+           "title": "Plumbing, Water & Drainage"
          },
          {
+           "id": "fire",
            "label": "Life Safety",
-           "title": "Fire Protection & Life Safety",
-           "description": "Fire detection, alarms, suppression, firefighting infrastructure, and integrated life safety systems.",
-           "imageAlt": "Fire pump set with gauges and valves in a pump room"
+           "title": "Fire Protection & Life Safety"
          }
        ]
      },
@@ -826,9 +858,10 @@
          "Through multidisciplinary engineering teams, BIM coordination, and integrated construction management, technical interfaces are identified and resolved throughout project execution. This approach helps reduce conflicts between building systems, maintain alignment with architectural and structural requirements, and support efficient installation and reliable operation."
        ],
        "controlsLabel": "Discipline visibility",
-       "showAll": "Show all",
-       "hideAll": "Hide all",
-       "caption": "Illustrative coordinated model: a corridor ceiling void where all four disciplines overlap beneath the slab.",
+       "allLayers": "All systems",
+       "explode": "Explode layers",
+       "assemble": "Assemble",
+       "caption": "Illustrative coordinated model",
        "allVisible": "All four disciplines shown together, demonstrating the shared space and interfaces.",
        "layers": {
          "mechanical": "Mechanical",
@@ -857,9 +890,9 @@
        "eyebrow": "Capability at scale",
        "pending": "Pending confirmation",
        "awaiting": "Awaiting verified figure",
-       "engineers": "Mechanical engineers",
        "projects": "MEP projects delivered",
-       "contractValue": "Total MEP contract value"
+       "bimEngineers": "BIM engineers",
+       "workforce": "Person workforce"
      },
      "projects": {
        "eyebrow": "Selected MEP projects",

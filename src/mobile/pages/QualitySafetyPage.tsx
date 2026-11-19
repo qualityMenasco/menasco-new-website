@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { HeroH1 } from '../../components/typography/HeroH1';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -6,7 +7,6 @@ import { SectionHeader } from '../components/SectionHeader';
 import { ExpandableText } from '../components/ExpandableText';
 import { type AccordionTopic } from '../../components/sections/quality/TopicAccordion';
 import { TopicTabs } from '../../components/sections/quality/TopicTabs';
-import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { SEO } from '../../seo/SEO';
 import {} from '../../seo/structuredData';
 import { certifications } from '../../data/certifications';
@@ -128,6 +128,14 @@ function HeroHotspots() {
           )}
         </AnimatePresence>
       </div>
+      {/* All four notes, not displayed (the slot above shows one at a time), so every note is in the HTML. */}
+      <ul hidden>
+        {qhseAnnotations.map((a) => (
+          <li key={a.key}>
+            {t(`qualitySafetyPage.hero.annotations.${a.key}.title`)}: {t(`qualitySafetyPage.hero.annotations.${a.key}.note`)}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -209,8 +217,14 @@ function Hero() {
         className="no-scrollbar -mx-4 flex snap-x snap-mandatory items-start overflow-x-auto overflow-y-hidden transition-[height] duration-300 ease-out motion-reduce:transition-none min-[440px]:items-center min-[440px]:mx-0 min-[440px]:grid min-[440px]:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] min-[440px]:gap-5 min-[440px]:overflow-visible sm:gap-6"
       >
         <div ref={panelRefs[0]} id="qhse-hero-panel-0" role="tabpanel" aria-labelledby="qhse-hero-tab-0" className="w-full shrink-0 snap-start px-4 min-[440px]:w-auto min-[440px]:px-0">
-          <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-400">{t('qualitySafetyPage.eyebrow')}</span>
-          <h2 className="mt-2 font-display text-h1 font-semibold tracking-tight text-warmwhite text-balance min-[440px]:text-h2 sm:text-h1">{t('qualitySafetyPage.heading')}</h2>
+          <HeroH1
+            eyebrow={<span className="block text-eyebrow font-semibold uppercase tracking-widest text-brand-400">{t('qualitySafetyPage.eyebrow')}</span>}
+            title={
+              <span className="mt-2 block font-display text-h1 font-semibold tracking-tight text-warmwhite text-balance min-[440px]:text-h2 sm:text-h1">
+                {t('qualitySafetyPage.heading')}
+              </span>
+            }
+          />
           <p className="mt-3 text-body text-gray-300 min-[440px]:text-small sm:text-body">{t('qualitySafetyPage.description')}</p>
           <a
             href="/certificates/qhse-policy.pdf"
@@ -243,7 +257,6 @@ export default function QualitySafetyPage() {
 
   return (
     <>
-      <NavSectionH1 section="about" />
       <SEO
         title={t('qualitySafetyPage.seo.title')}
         description={t('qualitySafetyPage.seo.description')}

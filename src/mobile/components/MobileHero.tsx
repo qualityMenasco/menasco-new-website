@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { HeroH1 } from '../../components/typography/HeroH1';
 import { MobileVideo } from './MobileVideo';
 import { foundingYear } from '../../data/companyStats';
 
@@ -18,10 +19,10 @@ export function MobileHero() {
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/30" />
 
       <div className="relative z-10 flex flex-col gap-4 px-4 pb-10 pt-24">
-        <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-400">
-          {t('home:hero.eyebrow', { year: foundingYear })}
-        </span>
-        <h1 className="font-display text-h1 font-semibold leading-tight text-warmwhite">{t('home:hero.title')}</h1>
+        <HeroH1
+          eyebrow={<span className="block text-eyebrow font-semibold uppercase tracking-widest text-brand-400">{t('home:hero.eyebrow', { year: foundingYear })}</span>}
+          title={<span className="block font-display text-h1 font-semibold leading-tight text-warmwhite">{t('home:hero.title')}</span>}
+        />
       </div>
     </section>
   );

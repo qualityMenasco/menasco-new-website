@@ -1,20 +1,23 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+import { HeroH1 } from '../components/typography/HeroH1';
 import { ArrowDown, ArrowRight, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../components/layout/Section';
-import { Container } from '../components/layout/Container';
 import { Eyebrow, Heading, Text } from '../components/typography/Typography';
 import { Button, ButtonLink } from '../components/ui/Button';
 import { SmartLink } from '../lib/SmartLink';
 import { ScrollReveal } from '../components/common/ScrollReveal';
 import { MepSystemsDiagram } from '../components/services/mep/MepSystemsDiagram';
+import { MepDisciplineSheets } from '../components/services/mep/MepDisciplineSheets';
+import { MEP_DISCIPLINE_ANCHORS } from '../data/mepDisciplines';
 import { FaqAccordion, type FaqAccordionItem } from '../components/common/FaqAccordion';
 import { publishedProjects } from '../data/projects';
 import { ProjectImage } from '../components/media/ProjectImage';
 import { sectorKeys } from '../data/homeSectors';
 import { SITE_URL } from '../seo/constants';
 import { SEO } from '../seo/SEO';
-import { serviceEntity } from '../seo/structuredData';
+import { useTransparentHeader } from '../app/header-transparency';
+import { serviceEntity, servicesFaqJsonLd } from '../seo/structuredData';
 import { cn } from '../lib/utils';
 
 /**
@@ -23,9 +26,9 @@ import { cn } from '../lib/utils';
  *   1. Hero — text left, real plant-room photograph right (photo on desktop only).
  *   2. Multidisciplinary coordination — the signature element: an isometric
  *      coordinated model with switchable discipline layers.
- *   3. Capability metrics — a slim row of compact cards (swipeable on phones).
- *   4. Technical disciplines — image-led cards linking to the four discipline
- *      pages (2×2 from tablets up; a swipeable row on phones).
+ *   3. Capability metrics — a row inside the coordination section.
+ *   4. Technical disciplines — the four disciplines as drawing sheets (folder
+ *      tabs from tablets up; stacked, unfolding rows on phones).
  *   5. Selected MEP projects — six completed projects linking to their pages.
  *   6. FAQ — six technical questions in a single-column accordion.
  */
@@ -33,31 +36,15 @@ import { cn } from '../lib/utils';
 /** Real MENASCO plant-room photograph (Volante mechanical floor). */
 const HERO_IMAGE = '/Mechanical_Floor_Volante-2-2-3.jpg';
 
-/** Discipline card photos — PLACEHOLDERS (AI-generated / stock) until dedicated MENASCO photography per discipline is supplied. */
-const DISCIPLINE_IMAGES = ['/mep/mechanical.webp', '/mep/electrical.webp', '/mep/plumbing.webp', '/mep/fire.webp'];
-
 const DISCIPLINES_ANCHOR = 'mep-disciplines';
 
-/**
- * Capability metrics. `value: null` = awaiting a verified figure (never
- * estimated or derived from the sample projects data); `pending` = a
- * user-provided figure still to be confirmed. Replace before launch.
- */
-const METRICS: { key: 'engineers' | 'projects' | 'contractValue'; value: string | null; pending?: boolean }[] = [
-  { key: 'engineers', value: '1,500+', pending: true }, // confirm employee classification and reporting period
-  { key: 'projects', value: null }, // verified completed MEP project count
-  { key: 'contractValue', value: null }, // cumulative awarded or completed value, clearly defined
+/** Capability metrics (company-confirmed figures). Labels: services `mepPage.stats.*`. */
+const METRICS: { key: 'projects' | 'bimEngineers' | 'workforce'; value: string }[] = [
+  { key: 'projects', value: '350+' },
+  { key: 'bimEngineers', value: '140' },
+  { key: 'workforce', value: '6,000' },
 ];
 
-interface DisciplineItem {
-  label: string;
-  title: string;
-  description: string;
-  /** Optional: set (with `cta`) once this discipline has its own MEP-page section, e.g. "#mechanical-systems". */
-  cta?: string;
-  href?: string;
-  imageAlt: string;
-}
 
 export default function MEPPage() {
   const { t } = useTranslation('services');
@@ -78,12 +65,10 @@ export default function MEPPage() {
           { label: 'Services', path: '/services' },
           { label: 'MEP', path: '/services/mep' },
         ]}
+        structuredData={servicesFaqJsonLd(t('mepPage.faq.items', { returnObjects: true }))}
       />
-      {/* Page h1 for phones/tablets; on desktop the active nav item is the h1 (DesktopNav). */}
-      <SectionH1 />
       <Hero />
       <Integration />
-      <Metrics />
       <Disciplines />
       <SelectedProjects />
       <Faq />
@@ -91,37 +76,41 @@ export default function MEPPage() {
   );
 }
 
-function SectionH1() {
-  const { t } = useTranslation('nav');
-  return <h1 className="sr-only min-[1025px]:hidden">{t('services')}</h1>;
-}
-
 /* ------------------------------------------------------------------ 1. Hero */
 
 function Hero() {
   const { t } = useTranslation('services');
+  // Desktop: the header floats over this dark hero, so it starts dark and then
+  // follows whatever section is behind it as the page scrolls.
+  useTransparentHeader(true);
   const scrollToDisciplines = () =>
     document.getElementById(DISCIPLINES_ANCHOR)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
 
   return (
-    <Section background="warmwhite" spacing="sm" className="md:pt-12">
+    <Section background="ink" spacing="sm" className="md:pt-12 desktop:pt-32">
       <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-6">
-          <Eyebrow>{t('mepPage.hero.eyebrow')}</Eyebrow>
-          <h2 className="mt-3 font-display text-h1 font-semibold text-ink text-balance">{t('mepPage.hero.title')}</h2>
-          <p className="mt-4 max-w-2xl text-body text-gray-600 md:text-body-lg">{t('mepPage.hero.description')}</p>
+          <HeroH1
+            eyebrow={
+              <Eyebrow as="span" theme="dark" className="block">
+                {t('mepPage.hero.eyebrow')}
+              </Eyebrow>
+            }
+            title={<span className="mt-3 block font-display text-h1 font-semibold text-white text-balance">{t('mepPage.hero.title')}</span>}
+          />
+          <p className="mt-4 max-w-2xl text-body text-gray-300 md:text-body-lg">{t('mepPage.hero.description')}</p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Button variant="primary" trailingIcon={ArrowDown} onClick={scrollToDisciplines}>
               {t('mepPage.hero.primaryCta')}
             </Button>
-            <ButtonLink href="/projects/categories" variant="outline" trailingIcon={ArrowRight}>
+            <ButtonLink href="/projects/categories" variant="outline" theme="dark" trailingIcon={ArrowRight}>
               {t('mepPage.hero.secondaryCta')}
             </ButtonLink>
           </div>
         </div>
         {/* Portrait (4:5) photo only where text and image fit side by side (desktop); phones/tablets get text only. */}
         <div className="hidden lg:col-span-5 lg:col-start-8 lg:block">
-          <div className="aspect-[4/5] overflow-hidden rounded-md bg-gray-100">
+          <div className="aspect-[4/5] overflow-hidden rounded-md bg-gray-900">
             <img src={HERO_IMAGE} alt={t('mepPage.hero.imageAlt')} className="h-full w-full object-cover object-[60%_50%]" loading="eager" />
           </div>
         </div>
@@ -138,27 +127,27 @@ function Integration() {
   const paragraphs = t('mepPage.integration.paragraphs', { returnObjects: true }) as string[];
 
   return (
-    <Section background="ink" spacing="sm">
-      {/* Phones/tablets: heading → model → paragraphs, so the model leads. Desktop: text left, model right. */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-x-12 lg:gap-y-5">
-        <ScrollReveal className="lg:col-span-5 lg:row-start-1 lg:self-end">
-          <Eyebrow theme="dark">{t('mepPage.integration.eyebrow')}</Eyebrow>
-          <Heading level="h2" as="h2" theme="dark" className="mt-3 text-balance">
+    <Section background="warmwhite" spacing="sm">
+      {/* Phones: heading → model → paragraphs, so the model leads. Tablet and desktop: text left, model right. */}
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-12 md:gap-x-8 md:gap-y-5 lg:gap-x-12">
+        <ScrollReveal className="md:col-span-5 md:row-start-1 md:self-end">
+          <Eyebrow>{t('mepPage.integration.eyebrow')}</Eyebrow>
+          <Heading level="h2" as="h2" className="mt-3 text-balance">
             {t('mepPage.integration.heading')}
           </Heading>
         </ScrollReveal>
-        <div className="lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1 lg:self-center">
+        <div className="md:col-span-7 md:col-start-6 md:row-span-2 md:row-start-1 md:self-center lg:row-span-3">
           <MepSystemsDiagram />
         </div>
-        {/* Collapsed behind "Read more" (full text stays in the DOM): phones/tablets show three lines;
+        {/* Collapsed behind "Read more" (full text stays in the DOM): phones and tablets show three lines;
             desktop shows the first paragraph in full, so the column stays readable without a long section. */}
-        <div className="lg:col-span-5 lg:row-start-2">
+        <div className="md:col-span-5 md:row-start-2">
           <div id="mep-coordination-text">
             {paragraphs.map((paragraph, i) => (
               <p
                 key={i}
                 className={cn(
-                  'text-body leading-relaxed text-gray-300',
+                  'text-body leading-relaxed text-gray-600',
                   i > 0 && 'mt-4',
                   !textOpen && (i === 0 ? 'line-clamp-3 lg:line-clamp-none' : 'hidden'),
                 )}
@@ -172,44 +161,37 @@ function Integration() {
             aria-expanded={textOpen}
             aria-controls="mep-coordination-text"
             onClick={() => setTextOpen((open) => !open)}
-            className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-brand-400 transition-colors duration-base hover:text-brand-300"
+            className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-brand-600 transition-colors duration-base hover:text-brand-700"
           >
             {textOpen ? t('common:buttons.showLess') : t('common:buttons.readMore')}
             <ChevronDown size={16} aria-hidden="true" className={cn('transition-transform duration-base', textOpen && 'rotate-180')} />
           </button>
         </div>
+        <MetricsRow />
       </div>
     </Section>
   );
 }
 
-/** Capability metrics — their own slim row of compact cards (swipeable on phones). */
-function Metrics() {
+/**
+ * Capability metrics, part of the coordination section's grid. Desktop: under
+ * the text column, beside the model. Tablet: full width beneath text and model.
+ * Phones: after the text. Large figures, short label beneath, hairline dividers.
+ */
+function MetricsRow() {
   const { t } = useTranslation('services');
   return (
-    <section aria-labelledby="mep-metrics-label" className="bg-warmwhite py-6 md:py-8">
-      <Container>
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-6">
-          <p id="mep-metrics-label" className="shrink-0 font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">
-            {t('mepPage.stats.eyebrow')}
-          </p>
-          <dl className="no-scrollbar -mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-6 px-6 md:mx-0 md:grid md:flex-1 md:grid-cols-3 md:overflow-visible md:px-0">
-            {METRICS.map((metric) => (
-              <div key={metric.key} className="flex min-w-[15.5rem] shrink-0 snap-start items-center gap-3 rounded-md border border-gray-200 bg-white px-4 py-3 md:min-w-0">
-                <dt className="min-w-0">
-                  <span className="block text-small font-semibold leading-tight text-ink">{t(`mepPage.stats.${metric.key}`)}</span>
-                  {(metric.pending || !metric.value) && (
-                    <span className="mt-0.5 block text-caption font-semibold text-warning">{metric.value ? t('mepPage.stats.pending') : t('mepPage.stats.awaiting')}</span>
-                  )}
-                </dt>
-                <dd className={cn('order-first shrink-0 font-display text-h3 font-semibold leading-none tracking-tight tabular-nums', metric.value ? 'text-brand-600' : 'text-gray-300')}>
-                  {metric.value ?? '—'}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </Container>
+    <section aria-label={t('mepPage.stats.eyebrow')} className="pt-3 md:col-span-12 md:row-start-3 md:pt-4 lg:col-span-5 lg:pt-6">
+      <dl className="grid grid-cols-3">
+        {METRICS.map((metric, i) => (
+          <div key={metric.key} className={cn('flex flex-col', i > 0 && 'border-s border-gray-300 ps-4 lg:ps-6', i < METRICS.length - 1 && 'pe-4 lg:pe-6')}>
+            <dt className="mt-2 text-small text-gray-600">{t(`mepPage.stats.${metric.key}`)}</dt>
+            <dd dir="ltr" className="order-first font-display text-h2 font-semibold leading-none tracking-tight text-ink tabular-nums rtl:text-end">
+              {metric.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
     </section>
   );
 }
@@ -218,91 +200,20 @@ function Metrics() {
 
 function Disciplines() {
   const { t } = useTranslation('services');
-  const items = t('mepPage.disciplinesSection.items', { returnObjects: true }) as DisciplineItem[];
-  const railRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
-
-  // Phones: which card the row is on (drives the dots). scrollLeft runs negative in RTL.
-  const updateActive = useCallback(() => {
-    const rail = railRef.current;
-    if (!rail) return;
-    const travelled = Math.abs(rail.scrollLeft);
-    const max = rail.scrollWidth - rail.clientWidth;
-    const first = rail.firstElementChild as HTMLElement | null;
-    const index = travelled >= max - 4 ? items.length - 1 : first ? Math.round(travelled / (first.offsetWidth + 16)) : 0;
-    setActive(Math.min(items.length - 1, Math.max(0, index)));
-  }, [items.length]);
-
-  useEffect(() => {
-    updateActive();
-    window.addEventListener('resize', updateActive);
-    return () => window.removeEventListener('resize', updateActive);
-  }, [updateActive]);
-
   return (
     <Section id={DISCIPLINES_ANCHOR} background="stone" spacing="sm" className="scroll-mt-20">
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-14">
-        <div>
-          <Eyebrow>{t('mepPage.disciplinesSection.eyebrow')}</Eyebrow>
-          <Heading level="h2" as="h2" className="mt-3 text-balance">
-            {t('mepPage.disciplinesSection.heading')}
-          </Heading>
-        </div>
-        <Text muted className="max-w-2xl">
-          {t('mepPage.disciplinesSection.description')}
-        </Text>
-      </div>
-
-      {/* Phones: swipeable row with dots. Tablets and up: 2×2 grid. */}
-      <div
-        ref={railRef}
-        onScroll={updateActive}
-        className="no-scrollbar -mx-6 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 pb-2 md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:mt-10 lg:gap-6"
-      >
-        {items.map((item, index) => (
-          <article
-            key={item.title}
-            className={cn(
-              'group relative flex w-[82vw] max-w-[22rem] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-gray-200 bg-white md:w-auto md:max-w-none md:shrink',
-              item.href && 'transition-shadow duration-base hover:shadow-lg focus-within:ring-2 focus-within:ring-brand-500',
-            )}
-          >
-            <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
-              <img
-                src={DISCIPLINE_IMAGES[index]}
-                alt={item.imageAlt}
-                loading="lazy"
-                decoding="async"
-                className={cn('h-full w-full object-cover', item.href && 'transition-transform duration-slow ease-engineered group-hover:scale-[1.05] motion-reduce:transition-none')}
-              />
-            </div>
-            <div className="flex flex-1 flex-col p-5 md:p-6">
-              <span className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{item.label}</span>
-              <h3 className="mt-2 font-display text-h3 font-semibold text-ink">
-                {/* Informational card until the discipline has its own section; then a stretched link to it. */}
-                {item.href ? (
-                  <SmartLink href={item.href} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
-                    {item.title}
-                  </SmartLink>
-                ) : (
-                  item.title
-                )}
-              </h3>
-              <p className="mt-3 flex-1 text-body text-gray-600">{item.description}</p>
-              {item.href && item.cta && (
-                <span aria-hidden="true" className="mt-4 inline-flex items-center gap-1.5 text-small font-semibold text-ink transition-colors duration-base group-hover:text-brand-600">
-                  {item.cta}
-                  <ArrowRight size={16} className="transition-transform duration-base group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
-                </span>
-              )}
-            </div>
-          </article>
+      {/* /services/mep#mechanical etc.: the site's hash scroll lands here (tablet/desktop); the sheets open that discipline. */}
+      <div className="relative hidden md:block" aria-hidden="true">
+        {Object.values(MEP_DISCIPLINE_ANCHORS).map((anchor) => (
+          <span key={anchor} id={anchor} className="absolute top-0 scroll-mt-28" />
         ))}
       </div>
-      <div aria-hidden="true" className="flex justify-center gap-1.5 pt-4 md:hidden">
-        {items.map((item, index) => (
-          <span key={item.title} className={cn('h-1.5 rounded-full transition-all duration-base', index === active ? 'w-5 bg-ink' : 'w-1.5 bg-gray-300')} />
-        ))}
+      <Eyebrow>{t('mepPage.disciplinesSection.eyebrow')}</Eyebrow>
+      <Heading level="h2" as="h2" className="mt-3 text-balance lg:whitespace-nowrap">
+        {t('mepPage.disciplinesSection.heading')}
+      </Heading>
+      <div className="mt-6 md:mt-8">
+        <MepDisciplineSheets />
       </div>
     </Section>
   );
@@ -331,15 +242,15 @@ function SelectedProjects() {
   const projects = FEATURED_PROJECT_SLUGS.map((slug) => publishedProjects.find((p) => p.slug === slug)).filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   return (
-    <Section id="mep-projects" background="warmwhite" spacing="sm" aria-labelledby="mep-projects-heading">
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-14">
+    <Section id="mep-projects" background="ink" spacing="sm" aria-labelledby="mep-projects-heading">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-14 desktop:grid-cols-1">
         <div>
-          <Eyebrow>{t('services:mepPage.projects.eyebrow')}</Eyebrow>
-          <h2 id="mep-projects-heading" className="mt-3 font-display text-h2 font-semibold text-ink text-balance">
+          <Eyebrow theme="dark">{t('services:mepPage.projects.eyebrow')}</Eyebrow>
+          <h2 id="mep-projects-heading" className="mt-3 font-display text-h2 font-semibold text-white text-balance desktop:whitespace-nowrap">
             {t('services:mepPage.projects.heading')}
           </h2>
         </div>
-        <Text muted className="max-w-2xl">
+        <Text theme="dark" className="max-w-2xl text-gray-300 desktop:hidden">
           {t('services:mepPage.projects.intro')}
         </Text>
       </div>
@@ -350,28 +261,28 @@ function SelectedProjects() {
           const key = `services:mepPage.projects.items.${project.slug}`;
           const sector = project.category ? t(`projects:categories.${sectorKeys[project.category] ?? project.category}.title`) : '';
           return (
-            <li key={project.slug} className="group relative flex w-[82vw] max-w-[22rem] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-gray-200 bg-white transition-shadow duration-base hover:shadow-lg focus-within:ring-2 focus-within:ring-brand-500 md:w-auto md:max-w-none md:shrink">
-              <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
+            <li key={project.slug} className="group relative flex w-[82vw] max-w-[22rem] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-white/10 bg-white/[0.04] transition-colors duration-base hover:border-white/25 hover:bg-white/[0.07] focus-within:ring-2 focus-within:ring-brand-400 md:w-auto md:max-w-none md:shrink">
+              <div className="relative aspect-[16/10] overflow-hidden bg-gray-900 md:aspect-[2/1] desktop:aspect-[16/10]">
                 <ProjectImage src={`/mep/projects/${project.slug}.webp`} alt="" imgClassName="transition-transform duration-slow ease-engineered group-hover:scale-[1.05] motion-reduce:transition-none" />
               </div>
               <div className="flex flex-1 flex-col p-5">
-                <span className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{sector}</span>
-                <h3 className="mt-2 font-display text-h4 font-semibold text-ink">
+                <span className="font-display text-caption font-semibold uppercase tracking-widest text-brand-400 rtl:tracking-normal">{sector}</span>
+                <h3 className="mt-2 font-display text-h4 font-semibold text-white">
                   {/* Stretched link: the whole card opens the project page. */}
                   <SmartLink href={`/projects/${project.slug}`} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
                     {project.title}
                   </SmartLink>
                 </h3>
-                <p className="mt-1 text-small text-gray-500">
+                <p className="mt-1 text-small text-gray-400">
                   {[project.location, project.year].filter(Boolean).join(' · ')}
                 </p>
-                {/* Desktop: summaries clamped to two lines until "Read all" (full text stays in the DOM). */}
-                <p id={`mep-project-summary-${project.slug}`} className={cn('mt-3 text-small leading-relaxed text-gray-600', !summariesOpen && 'lg:line-clamp-2')}>
+                {/* Desktop only: summaries clamped to two lines until "Read all". Hidden on phones and tablets. */}
+                <p id={`mep-project-summary-${project.slug}`} className={cn('mt-3 hidden text-small leading-relaxed text-gray-300', summariesOpen ? 'desktop:block' : 'desktop:line-clamp-2')}>
                   {t(`${key}.summary`)}
                 </p>
                 <div className="mt-auto flex items-center justify-between gap-3 pt-4">
-                  <span className="rounded-full bg-stone px-2.5 py-1 text-caption font-semibold text-ink tabular-nums">{t(`${key}.fact`)}</span>
-                  <ArrowRight size={16} aria-hidden="true" className="shrink-0 text-gray-400 transition-[transform,color] duration-base group-hover:translate-x-0.5 group-hover:text-brand-600 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
+                  <span className="rounded-full bg-white/10 px-2.5 py-1 text-caption font-semibold text-white tabular-nums">{t(`${key}.fact`)}</span>
+                  <ArrowRight size={16} aria-hidden="true" className="shrink-0 text-gray-500 transition-[transform,color] duration-base group-hover:translate-x-0.5 group-hover:text-brand-400 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
                 </div>
               </div>
             </li>
@@ -380,7 +291,7 @@ function SelectedProjects() {
       </ul>
 
       <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
-        <ButtonLink href="/projects/categories" variant="outline" trailingIcon={ArrowRight}>
+        <ButtonLink href="/projects/categories" variant="outline" theme="dark" trailingIcon={ArrowRight}>
           {t('services:mepPage.projects.viewAll')}
         </ButtonLink>
         <button
@@ -388,7 +299,7 @@ function SelectedProjects() {
           aria-expanded={summariesOpen}
           aria-controls={projects.map((project) => `mep-project-summary-${project.slug}`).join(' ')}
           onClick={() => setSummariesOpen((open) => !open)}
-          className="hidden min-h-11 items-center gap-1.5 text-small font-semibold text-brand-600 transition-colors duration-base hover:text-brand-700 lg:inline-flex"
+          className="hidden min-h-11 items-center gap-1.5 text-small font-semibold text-brand-400 transition-colors duration-base hover:text-brand-300 desktop:inline-flex"
         >
           {summariesOpen ? t('services:mepPage.projects.showLess') : t('services:mepPage.projects.readAll')}
           <ChevronDown size={16} aria-hidden="true" className={cn('transition-transform duration-base', summariesOpen && 'rotate-180')} />

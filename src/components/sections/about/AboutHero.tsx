@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
+import { HeroH1 } from '../../typography/HeroH1';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../../layout/Section';
 import { Eyebrow, Heading, Text } from '../../typography/Typography';
@@ -41,14 +42,22 @@ export function AboutHero() {
     <Section spacing="lg" background="charcoal" className="scroll-mt-24 pt-36 md:pt-40">
       <div className="grid grid-cols-12 gap-8">
         <div className="col-span-7 self-center">
-          <motion.div initial={rise.initial} animate={rise.animate} transition={step(0)}>
-            <Eyebrow>{t('hero.eyebrow', { year: foundingYear })}</Eyebrow>
-          </motion.div>
-          <motion.div initial={rise.initial} animate={rise.animate} transition={step(0.08)}>
-            <Heading level="display" as="h2" className="mt-4">
-              {t('hero.title')}
-            </Heading>
-          </motion.div>
+          <HeroH1
+            eyebrow={
+              <motion.span className="block" initial={rise.initial} animate={rise.animate} transition={step(0)}>
+                <Eyebrow as="span" className="block">
+                  {t('hero.eyebrow', { year: foundingYear })}
+                </Eyebrow>
+              </motion.span>
+            }
+            title={
+              <motion.span className="block" initial={rise.initial} animate={rise.animate} transition={step(0.08)}>
+                <Heading level="display" as="span" className="mt-4 block">
+                  {t('hero.title')}
+                </Heading>
+              </motion.span>
+            }
+          />
           <motion.div initial={rise.initial} animate={rise.animate} transition={step(0.16)}>
             <Text variant="body-lg" muted className="mt-6 max-w-xl">
               {t('hero.description')}

@@ -118,7 +118,13 @@ export function parseCapacityInMw(capacity?: string): number {
 }
 
 /** Published data center projects (the Advanced Technical Facilities category). */
-export const dataCenterProjects: ProjectRecord[] = publishedProjects.filter((project) => project.category === 'advanced-technical-facilities');
+/**
+ * Published data center projects. The Advanced Technical Facilities sector
+ * also holds hospitals and clinics, so match data centers by name too.
+ */
+export const dataCenterProjects: ProjectRecord[] = publishedProjects.filter(
+  (project) => project.category === 'advanced-technical-facilities' && /data\s*cent(er|re)/i.test(project.title),
+);
 
 /** Total IT capacity (MW, one decimal) across published data center projects, delivered and in delivery. */
 export const totalDataCenterMw = Math.round(dataCenterProjects.reduce((sum, project) => sum + parseCapacityInMw(project.capacity), 0) * 10) / 10;

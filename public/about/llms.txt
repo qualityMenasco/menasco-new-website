@@ -1,12 +1,8 @@
 # About MENASCO
 
-> For more than three decades, MENASCO has delivered integrated mechanical, electrical, and plumbing (MEP) engineering solutions that power some of the region's most demanding developments, from Dubai's skyline to mission-critical facilities across the globe. Through technical expertise and disciplined project execution, we create reliable infrastructure that stands the test of time.
+> Founded in the UAE in 1994, MENASCO is an MEP contractor delivering mechanical, electrical, plumbing and fire protection systems for high-rise, hospitality, infrastructure and mission-critical projects, with offices in seven countries.
 
 ## Company Overview
-
-MENASCO Mechanical Contracting LLC is one of MENA's leading providers of integrated MEP engineering and contracting solutions, delivering high-performance building services across commercial, residential, hospitality, energy, healthcare, and mission-critical developments.
-
-Founded in 1994, MENASCO has earned a reputation for engineering precision, technical excellence, and reliable project delivery. Today, our footprint spans seven global locations, allowing us to support clients across MENA, Europe, and North America with consistent quality, innovation, and operational excellence.
 
 Our multidisciplinary teams combine engineering expertise, advanced technologies, and collaborative project management to deliver complete lifecycle MEP solutions, from design coordination and BIM integration through installation, testing, commissioning, and handover.
 
@@ -47,6 +43,6 @@ To be the MEP partner the world turns to when failure is not an option.
 - [Leadership & Team](https://menascogroup.com/team/llms.txt): MENASCO leadership and engineering management team.
 - [Quality, Health & Safety](https://menascogroup.com/quality-safety/llms.txt): MENASCO's QHSE approach and ISO certifications.
 - [Community & People](https://menascogroup.com/community-people/llms.txt): MENASCO blood drive, Culture Day and Training & Mentoring Centre.
-- [Certification & Training](https://menascogroup.com/certification-training/llms.txt): Workforce development, a free engineering education initiative in development, and university internships.
+- [Certification & Training](https://menascogroup.com/certification-training/llms.txt): MENASCO Connect (internal workforce development), MENASCO Academy (a free engineering education programme in development, for external applicants) and internships for students.
 - [Innovation & Technology](https://menascogroup.com/innovation-technology/llms.txt): MENASCO's digital and technology initiatives.
 - [Contact & Regional Presence](https://menascogroup.com/contact/llms.txt): Office locations and contact details.

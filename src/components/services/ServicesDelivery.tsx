@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion, type Variants } from 'framer-motion';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Eyebrow } from '../typography/Typography';
@@ -97,7 +97,6 @@ function DeliveryStepper({ steps }: { steps: Step[] }) {
   const reducedMotion = useReducedMotion();
   const [active, setActive] = useState(0);
   const last = steps.length - 1;
-  const step = steps[active];
   const label = (index: number) => t('listing.delivery.stepLabel', { number: String(index + 1).padStart(2, '0') });
 
   const navButton =
@@ -138,19 +137,23 @@ function DeliveryStepper({ steps }: { steps: Step[] }) {
 
       {/* Current step — fades between steps; announced politely to screen readers. */}
       <div aria-live="polite" className="relative mt-6 min-h-[9rem]">
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={active}
-            initial={reducedMotion ? false : { opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reducedMotion ? undefined : { opacity: 0, y: -8 }}
-            transition={{ duration: 0.22, ease: 'easeOut' }}
-          >
-            <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{label(active)}</p>
-            <h3 className="mt-2 font-display text-h3 font-semibold text-ink">{step.title}</h3>
-            <p className="mt-3 max-w-xl text-body leading-relaxed text-gray-700">{step.body}</p>
-          </motion.div>
-        </AnimatePresence>
+        {/* Every step is in the HTML (SEO); only the current one is shown, fading in. */}
+        {steps.map((s, index) => {
+          const isCurrent = index === active;
+          return (
+            <motion.div
+              key={s.title}
+              hidden={!isCurrent}
+              initial={false}
+              animate={isCurrent ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+              transition={reducedMotion ? { duration: 0 } : { duration: 0.22, ease: 'easeOut' }}
+            >
+              <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{label(index)}</p>
+              <h3 className="mt-2 font-display text-h3 font-semibold text-ink">{s.title}</h3>
+              <p className="mt-3 max-w-xl text-body leading-relaxed text-gray-700">{s.body}</p>
+            </motion.div>
+          );
+        })}
       </div>
 
       <div className="mt-4 flex justify-end gap-2">

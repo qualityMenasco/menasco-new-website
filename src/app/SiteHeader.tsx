@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { pageHasOwnH1 } from '../seo/pageH1';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ButtonLink } from '../components/ui/Button';
@@ -120,7 +121,7 @@ export function SiteHeader() {
           <MenascoLogo className="h-9 sm:h-10" onDark={headerTheme === 'dark'} />
         </SmartLink>
       }
-      nav={<DesktopNav items={navItems} theme={headerTheme} gap="md" isItemActive={isItemActive} />}
+      nav={<DesktopNav items={navItems} theme={headerTheme} gap="md" isItemActive={isItemActive} activeAsH1={!pageHasOwnH1(location.pathname)} />}
       actions={
         <div className="flex items-center gap-2">
           <LanguageSwitch isDark={headerTheme === 'dark'} />

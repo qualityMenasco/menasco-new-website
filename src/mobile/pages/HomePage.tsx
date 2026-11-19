@@ -13,7 +13,6 @@ import { RegionalPresence } from '../../components/sections/home/RegionalPresenc
 import { officeLocations } from '../../data/locations';
 import { LocaleLink } from '../components/LocaleLink';
 import { cn } from '../../lib/utils';
-import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { SEO } from '../../seo/SEO';
 import { organizationJsonLd, websiteJsonLd } from '../../seo/structuredData';
 import { publishedProjects } from '../../data/projects';
@@ -75,7 +74,6 @@ export default function HomePage() {
 
   return (
     <>
-      <NavSectionH1 section="home" />
       <SEO title={t('home:seo.title')} description={t('home:seo.description')} path="/" structuredData={[organizationJsonLd(), websiteJsonLd()]} />
 
       {/* 1. Mobile hero */}

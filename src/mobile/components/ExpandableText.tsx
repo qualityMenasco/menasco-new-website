@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '../lib/utils';
 
 export interface ExpandableTextProps {
@@ -20,8 +20,8 @@ export interface ExpandableTextProps {
 /**
  * Progressive disclosure for long approved copy — shows a short summary
  * first, with the complete text (unedited) available one tap away. The full
- * text stays in the DOM even when collapsed (just visually hidden via
- * height animation), so it's still crawlable by search engines.
+ * text stays mounted in the DOM even when collapsed (zero height, inert),
+ * so it's in the HTML for search engines.
  */
 export function ExpandableText({
   summary,
@@ -38,25 +38,22 @@ export function ExpandableText({
   return (
     <div className={className}>
       <p className={textClassName}>{summary}</p>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={reducedMotion ? undefined : { height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={reducedMotion ? undefined : { height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 0.61, 0.36, 1] }}
-            className="overflow-hidden"
-          >
-            <div className="mt-3 flex flex-col gap-3">
-              {paragraphs.map((paragraph, index) => (
-                <p key={index} className={textClassName}>
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Always mounted (so the full text is in the HTML for search engines); collapsed to zero height and inert when closed. */}
+      <motion.div
+        initial={false}
+        animate={isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+        transition={reducedMotion ? { duration: 0 } : { duration: 0.3, ease: [0.22, 0.61, 0.36, 1] }}
+        className="overflow-hidden"
+        {...(isOpen ? {} : { inert: '' })}
+      >
+        <div className="mt-3 flex flex-col gap-3">
+          {paragraphs.map((paragraph, index) => (
+            <p key={index} className={textClassName}>
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      </motion.div>
       {paragraphs.length > 0 && (
         <button
           type="button"

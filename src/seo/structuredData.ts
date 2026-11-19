@@ -226,6 +226,11 @@ export interface FaqEntry {
   answer: string;
 }
 
+/** FAQPage JSON-LD from a translated `faq.items` value (whatever `t(..., { returnObjects: true })` returned); undefined when absent or empty. */
+export function servicesFaqJsonLd(items: unknown) {
+  return Array.isArray(items) && items.length ? faqPageJsonLd(items as FaqEntry[]) : undefined;
+}
+
 /** schema.org FAQPage for a page's visible question-and-answer list (the answers must match what the page shows). */
 export function faqPageJsonLd(items: FaqEntry[]) {
   return {

@@ -114,6 +114,7 @@ const routeChildren: RouteObject[] = [
   { path: 'services', element: responsivePage(() => import('../pages/ServicesPage'), () => import('../mobile/pages/ServicesPage')) },
   // Desktop-only for now — no mobile Data Centres page exists yet.
   { path: 'services/data-centers', element: lazyPage(() => import('../pages/services/DataCenterPage')) },
+  { path: 'services/data-centers/sustainability', element: lazyPage(() => import('../pages/services/DataCenterSustainabilityPage')) },
   { path: 'services/data-centres', element: lazyPage(() => import('../pages/services/DataCenterPage')) },
   {
     path: 'services/manufacturing-prefabrication',

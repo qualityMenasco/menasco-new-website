@@ -22,6 +22,7 @@ import { SITE_URL, SITE_NAME } from '../../src/seo/constants';
 import { projects } from '../../src/data/projects';
 import { projectCategories } from '../../src/data/projectCategories';
 import { leadershipProfiles } from '../../src/data/leadership';
+import { dcSustainability } from '../../src/data/dataCenterSustainability';
 import { buildProjectFallbackDescription, pickProjectSeoDescription, formatProjectLocation } from '../../src/seo/projectDescription';
 import {
   organizationJsonLd,
@@ -193,7 +194,14 @@ addRoute(
   '/services',
   (l) => fullTitle(l, tr(l, 'services', 'seo.title', 'MEP Engineering Services')),
   (l) => tr(l, 'services', 'seo.description', NS[l].seo.defaultDescription),
-  { pageType: 'CollectionPage', breadcrumb: () => [HOME, { label: 'Services', path: '/services' }] },
+  {
+    pageType: 'CollectionPage',
+    breadcrumb: () => [HOME, { label: 'Services', path: '/services' }],
+    extraJsonLd: (l) => {
+      const items = NS[l].services?.listing?.faq?.items as { question: string; answer: string }[] | undefined;
+      return items?.length ? [faqPageJsonLd(items)] : undefined;
+    },
+  },
 );
 addRoute(
   '/services/data-centers',
@@ -207,6 +215,24 @@ addRoute(
         url: `${SITE_URL}/services/data-centers`,
       }),
     breadcrumb: () => [HOME, { label: 'Services', path: '/services' }, { label: 'Data Centers', path: '/services/data-centers' }],
+    extraJsonLd: (l) => {
+      const items = NS[l].services?.dataCenter?.faq as { title: string; content: string }[] | undefined;
+      return items?.length ? [faqPageJsonLd(items.map((f) => ({ question: f.title, answer: f.content })))] : undefined;
+    },
+  },
+);
+addRoute(
+  '/services/data-centers/sustainability',
+  (l) => fullTitle(l, tr(l, 'services', 'dataCenterSustainability.seo.title', 'Data Center Sustainability Strategies')),
+  (l) => tr(l, 'services', 'dataCenterSustainability.seo.description', NS[l].seo.defaultDescription),
+  {
+    breadcrumb: () => [
+      HOME,
+      { label: 'Services', path: '/services' },
+      { label: 'Data Centers', path: '/services/data-centers' },
+      { label: 'Sustainability', path: '/services/data-centers/sustainability' },
+    ],
+    extraJsonLd: () => [faqPageJsonLd(dcSustainability.faq.items)],
   },
 );
 addRoute(
@@ -221,6 +247,10 @@ addRoute(
         url: `${SITE_URL}/services/mep`,
       }),
     breadcrumb: () => [HOME, { label: 'Services', path: '/services' }, { label: 'MEP', path: '/services/mep' }],
+    extraJsonLd: (l) => {
+      const items = NS[l].services?.mepPage?.faq?.items as { question: string; answer: string }[] | undefined;
+      return items?.length ? [faqPageJsonLd(items)] : undefined;
+    },
   },
 );
 addRoute(

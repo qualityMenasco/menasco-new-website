@@ -36,9 +36,11 @@ export interface DesktopNavProps {
   className?: string;
   /** Overrides the default pathname-matching active check — e.g. for scrollspy-driven homepage nav. */
   isItemActive?: (item: NavItem) => boolean;
+  /** Wrap the active item's label in the page <h1> (off on pages whose hero provides it — src/seo/pageH1.ts). */
+  activeAsH1?: boolean;
 }
 
-export function DesktopNav({ items, theme, gap = 'md', className, isItemActive }: DesktopNavProps) {
+export function DesktopNav({ items, theme, gap = 'md', className, isItemActive, activeAsH1 = true }: DesktopNavProps) {
   const resolvedTheme = useSectionTheme(theme);
   const isDark = resolvedTheme === 'dark';
   const [openLabel, setOpenLabel] = useState<string | null>(null);
@@ -131,7 +133,7 @@ export function DesktopNav({ items, theme, gap = 'md', className, isItemActive }
                 aria-haspopup={hasPanel ? 'true' : undefined}
                 onFocus={() => hasPanel && setOpenLabel(item.label)}
               >
-                {isActive ? <h1 className="contents">{item.label}</h1> : item.label}
+                {isActive && activeAsH1 ? <h1 className="contents">{item.label}</h1> : item.label}
                 {hasPanel && (
                   <ChevronDown size={15} aria-hidden="true" className={cn('transition-transform duration-base', isOpen && 'rotate-180')} />
                 )}

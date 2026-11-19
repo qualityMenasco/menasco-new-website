@@ -1,3 +1,5 @@
+import { MEP_DISCIPLINE_ANCHORS } from './mepDisciplines';
+
 export interface NavLinkEntry {
   label: string;
   href: string;
@@ -93,10 +95,10 @@ export const servicesNavigationGroups: NavGroupEntry[] = [
     i18nKey: 'servicesGroups.mep',
     href: '/services/mep',
     links: [
-      subService('/services/mep', 'Mechanical Systems', 'servicesList.mechanical'),
-      subService('/services/mep', 'Electrical & ELV Systems', 'servicesList.electrical'),
-      subService('/services/mep', 'Plumbing, Water & Drainage Systems', 'servicesList.plumbing'),
-      subService('/services/mep', 'Fire Protection & Life Safety Systems', 'servicesList.firesProtection'),
+      subService('/services/mep', 'Mechanical Systems', 'servicesList.mechanical', MEP_DISCIPLINE_ANCHORS.mechanical),
+      subService('/services/mep', 'Electrical & ELV Systems', 'servicesList.electrical', MEP_DISCIPLINE_ANCHORS.electrical),
+      subService('/services/mep', 'Plumbing, Water & Drainage Systems', 'servicesList.plumbing', MEP_DISCIPLINE_ANCHORS.plumbing),
+      subService('/services/mep', 'Fire Protection & Life Safety Systems', 'servicesList.firesProtection', MEP_DISCIPLINE_ANCHORS.fire),
     ],
   },
   {

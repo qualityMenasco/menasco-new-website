@@ -20,11 +20,10 @@ vi.mock('react-i18next', () => ({
       if (defaultValueOrOptions && typeof defaultValueOrOptions === 'object' && 'returnObjects' in defaultValueOrOptions) {
         if (key === 'mepPage.disciplinesSection.items') {
           return [
-            // Mechanical has a (hypothetical) MEP-page section; the others don't yet.
-            { label: 'Mechanical', title: 'Mechanical Systems', description: 'x', cta: 'Explore Mechanical', href: '/services/mep#mechanical-systems', imageAlt: '' },
-            { label: 'Electrical', title: 'Electrical & ELV', description: 'x', imageAlt: '' },
-            { label: 'Water Systems', title: 'Plumbing, Water & Drainage', description: 'x', imageAlt: '' },
-            { label: 'Life Safety', title: 'Fire Protection & Life Safety', description: 'x', imageAlt: '' },
+            { id: 'mechanical', label: 'Mechanical', title: 'Mechanical Systems' },
+            { id: 'electrical', label: 'Electrical', title: 'Electrical & ELV' },
+            { id: 'plumbing', label: 'Water Systems', title: 'Plumbing, Water & Drainage' },
+            { id: 'fire', label: 'Life Safety', title: 'Fire Protection & Life Safety' },
           ];
         }
         if (key === 'mepPage.integration.paragraphs') return ['p1', 'p2'];
@@ -49,23 +48,29 @@ function renderMEPPage() {
 }
 
 describe('MEPPage', () => {
-  it('renders the hero; discipline cards link only when they have a section', () => {
+  it('renders the hero and switches discipline sheets', () => {
     renderMEPPage();
-    expect(screen.getByRole('heading', { level: 2, name: 'mepPage.hero.title' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Mechanical Systems' })).toHaveAttribute('href', '/services/mep#mechanical-systems');
-    expect(screen.getByRole('heading', { level: 3, name: 'Fire Protection & Life Safety' })).toBeInTheDocument();
-    expect(screen.queryByRole('link', { name: 'Fire Protection & Life Safety' })).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: /^mepPage\.hero\.eyebrow:\s*mepPage\.hero\.title$/ })).toBeInTheDocument();
+    expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
+    expect(screen.getAllByRole('tab')).toHaveLength(4);
+    expect(screen.getByRole('tab', { name: /M-01/ })).toHaveAttribute('aria-selected', 'true');
+    fireEvent.click(screen.getByRole('tab', { name: /FP-04/ }));
+    expect(screen.getByRole('tab', { name: /FP-04/ })).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('tabpanel')).toHaveTextContent('items.fire.introduction');
     expect(screen.getByRole('link', { name: /mepPage.hero.secondaryCta/ })).toHaveAttribute('href', '/projects/categories');
   });
 
-  it('toggles discipline layers in the systems diagram', () => {
+  it('isolates a discipline and toggles the exploded view in the systems diagram', () => {
     renderMEPPage();
-    const mechanical = screen.getByRole('switch', { name: 'mepPage.integration.layers.mechanical' });
-    expect(mechanical).toHaveAttribute('aria-checked', 'true');
+    const all = screen.getByRole('radio', { name: 'mepPage.integration.allLayers' });
+    const mechanical = screen.getByRole('radio', { name: 'mepPage.integration.layers.mechanical' });
+    expect(all).toHaveAttribute('aria-checked', 'true');
+    expect(screen.getAllByRole('radio')).toHaveLength(5);
     fireEvent.click(mechanical);
-    expect(mechanical).toHaveAttribute('aria-checked', 'false');
-    fireEvent.click(mechanical);
     expect(mechanical).toHaveAttribute('aria-checked', 'true');
-    expect(screen.getAllByRole('switch')).toHaveLength(4);
+    expect(all).toHaveAttribute('aria-checked', 'false');
+    expect(screen.getByText(/mepPage.integration.annotations.supply/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'mepPage.integration.assemble' }));
+    expect(screen.getByRole('button', { name: 'mepPage.integration.explode' })).toBeInTheDocument();
   });
 });

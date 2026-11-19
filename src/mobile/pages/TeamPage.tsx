@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 import { SectionHeader } from '../components/SectionHeader';
 import { FeaturedLeadershipCarousel } from '../components/FeaturedLeadershipCarousel';
 import { MobileLeadershipCard } from '../components/MobileLeadershipCard';
-import { NavSectionH1 } from '../../components/typography/NavSectionH1';
 import { SEO } from '../../seo/SEO';
 import {} from '../../seo/structuredData';
 import { executiveTeam, leadershipProfiles, type LeadershipProfile } from '../../data/leadership';
@@ -46,7 +45,6 @@ export default function TeamPage() {
 
   return (
     <>
-      <NavSectionH1 section="about" />
       <SEO
         title={t('team.seo.title')}
         description={t('team.seo.description')}
@@ -59,7 +57,7 @@ export default function TeamPage() {
         <SectionHeader
           eyebrow={t('team.featured.eyebrow')}
           heading={t('team.featured.heading')}
-          headingAs="h2"
+          headingAs="h1"
           description={t('team.featured.description')}
         />
         <div className="mt-5">
