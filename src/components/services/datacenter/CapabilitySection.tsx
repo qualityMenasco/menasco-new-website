@@ -36,13 +36,13 @@ export function CapabilitySection() {
           {/* Heading sits in the upper part of the row: free space split 1 : 2 above / below. */}
           <div className="flex flex-col lg:col-span-5 lg:before:flex-[1] lg:before:content-[''] lg:after:flex-[2] lg:after:content-['']">
             <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.eyebrow}</p>
-            <h2 className="mt-5 font-display text-[clamp(2rem,1.4rem+2.4vw,3.25rem)] font-semibold leading-[1.06] tracking-tight text-ink text-balance">
+            <h2 className="mt-3 font-display text-[clamp(1.75rem,1.3rem+1.5vw,2.5rem)] font-semibold leading-[1.1] tracking-tight text-ink text-balance">
               {t('dataCenter.introHeading.heading')}
             </h2>
           </div>
           <div className="space-y-5 lg:col-span-7">
             {intro.slice(0, 1).map((p, i) => (
-              <p key={i} className={cn('leading-relaxed', i === 0 ? 'text-body-lg text-gray-700' : 'text-body text-gray-600')}>
+              <p key={i} className={cn('leading-relaxed', i === 0 ? 'text-small text-gray-700' : 'text-caption text-gray-600')}>
                 {p}
               </p>
             ))}
@@ -66,7 +66,7 @@ export function CapabilitySection() {
               >
                 <span className="font-display text-caption font-semibold tabular-nums text-gray-400">{String(i + 1).padStart(2, '0')}</span>
                 <h3 className="mt-3 font-display text-h4 font-semibold leading-snug text-ink">{cap.title}</h3>
-                <p className="mt-3 text-small leading-relaxed text-gray-600">{cap.description}</p>
+                <p className="mt-3 text-[0.8125rem] leading-relaxed text-gray-600">{cap.description}</p>
               </article>
             ))}
           </div>
@@ -113,16 +113,16 @@ export function PrefabSection() {
           {prefabGroups.map((group) => (
             <div key={group.label}>
               <h4 className="font-display text-caption font-semibold uppercase tracking-widest text-gray-500 rtl:tracking-normal">{group.label}</h4>
-              <ul className="mt-4 space-y-3">
+              <ul className="mt-4 space-y-2.5">
                 {group.items.map((item, i) => (
                   <li
                     key={item}
                     className={cn(
-                      'flex gap-3 text-small leading-snug text-gray-200',
+                      'flex gap-2.5 text-[0.8125rem] leading-snug text-gray-200',
                       !showAllPrefab && i >= PREFAB_PREVIEW && 'hidden lg:flex',
                     )}
                   >
-                    <span aria-hidden="true" className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" />
+                    <span aria-hidden="true" className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" />
                     {item}
                   </li>
                 ))}

@@ -32,14 +32,16 @@ export function stripCites(text: string) {
  * on the bar's hairline). Each tab is a real page (its own URL, title, H1).
  */
 export function DataCenterTabs({ active }: { active: 'technical' | 'sustainability' }) {
+  // The bar is white on the Sustainability page (its hero is white), dark on Technical.
+  const light = active === 'sustainability';
   const tabs = [
     { id: 'technical' as const, href: DC_TECHNICAL_PATH, label: dcTechnical.tabs.technical },
     { id: 'sustainability' as const, href: DC_SUSTAINABILITY_PATH, label: dcTechnical.tabs.sustainability },
   ];
   return (
-    <nav aria-label="Data centers" className="sticky top-14 z-30 border-b border-white/10 bg-charcoal desktop:top-20">
+    <nav aria-label="Data centers" className={cn('sticky top-14 z-30 border-b desktop:top-20', light ? 'border-gray-200 bg-white' : 'border-white/10 bg-charcoal')}>
       <Container className="flex h-12 items-stretch gap-8 md:h-14">
-        <span className="hidden items-center pe-8 font-display text-caption font-semibold uppercase tracking-widest text-gray-500 sm:flex sm:border-e sm:border-white/10 rtl:tracking-normal">
+        <span className={cn('hidden items-center pe-8 font-display text-caption font-semibold uppercase tracking-widest text-gray-500 sm:flex sm:border-e rtl:tracking-normal', light ? 'sm:border-gray-200' : 'sm:border-white/10')}>
           {dcTechnical.tabs.section}
         </span>
         <ul className="flex items-stretch gap-8">
@@ -52,12 +54,12 @@ export function DataCenterTabs({ active }: { active: 'technical' | 'sustainabili
                   aria-current={on ? 'page' : undefined}
                   className={cn(
                     'flex items-center font-display text-small font-semibold transition-colors duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-400 md:text-body',
-                    on ? 'text-white' : 'text-gray-400 hover:text-white',
+                    light ? (on ? 'text-ink' : 'text-gray-500 hover:text-ink') : on ? 'text-white' : 'text-gray-400 hover:text-white',
                   )}
                 >
                   {tab.label}
                 </SmartLink>
-                <span aria-hidden="true" className={cn('absolute inset-x-0 -bottom-px h-0.5 bg-brand-400 transition-opacity duration-base', on ? 'opacity-100' : 'opacity-0')} />
+                <span aria-hidden="true" className={cn('absolute inset-x-0 -bottom-px h-0.5 transition-opacity duration-base', light ? 'bg-brand-600' : 'bg-brand-400', on ? 'opacity-100' : 'opacity-0')} />
               </li>
             );
           })}
@@ -109,9 +111,9 @@ export function useRail() {
 }
 
 /** Position dots + "02 / 09" counter shown under a rail (phones only). */
-export function RailDots({ count, active }: { count: number; active: number }) {
+export function RailDots({ count, active, alwaysShow = false }: { count: number; active: number; /** Show at any width (caller decides, e.g. from measured overflow). */ alwaysShow?: boolean }) {
   return (
-    <div className="mt-5 flex items-center justify-between md:hidden">
+    <div className={cn('mt-5 flex items-center justify-between', !alwaysShow && 'md:hidden')}>
       <div aria-hidden="true" className="flex gap-1.5">
         {Array.from({ length: count }, (_, i) => (
           <span key={i} className={cn('h-1.5 rounded-full transition-all duration-base', i === active ? 'w-5 bg-ink' : 'w-1.5 bg-gray-300')} />

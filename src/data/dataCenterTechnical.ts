@@ -28,14 +28,14 @@ export const dcTechnical = {
     eyebrow: 'Uptime Tier Classification',
     heading: 'Tier III and Tier IV, translated into MEP design',
     intro:
-      'The Uptime Institute Tier Classification System defines data center infrastructure by how it behaves during maintenance and failure [[1]]. For the MEP contractor, each Tier is a set of non-negotiable rules for capacity components and distribution paths.',
+      "The Uptime Institute Tier Classification System defines data center infrastructure by how it behaves during maintenance and failure [[12]]. For MENASCO's work, each Tier is a set of non-negotiable rules for capacity components and distribution paths.",
     items: [
       {
         id: 'tier-iii',
         name: 'Tier III',
         tagline: 'Concurrently maintainable',
         points: [
-          'Every capacity component and distribution path can be removed for planned maintenance without shutting down IT equipment [[1]].',
+          'Every capacity component and distribution path can be removed for planned maintenance without shutting down IT equipment [[12]].',
           'Redundant capacity components, typically N+1, and at least two distribution paths, with one path active.',
           'Electrical and mechanical systems arranged so that isolating any single item never interrupts the critical load.',
         ],
@@ -46,7 +46,7 @@ export const dcTechnical = {
         name: 'Tier IV',
         tagline: 'Fault tolerant',
         points: [
-          'Builds on Tier III and adds fault tolerance: the facility rides through a single unplanned failure or event without impact to IT [[1]].',
+          'Builds on Tier III and adds fault tolerance: the facility rides through a single unplanned failure or event without impact to IT [[12]].',
           'Independent, physically isolated systems with simultaneously active distribution paths, typically 2N for power.',
           'Compartmentalisation so a fire or failure in one path cannot reach its partner, plus continuous cooling through every transfer.',
         ],
@@ -54,7 +54,7 @@ export const dcTechnical = {
       },
     ],
     certificationNote:
-      'Tier Certification of design documents and of constructed facilities is awarded exclusively by Uptime Institute, and only to facilities [[2]]. MENASCO engineers, installs and commissions MEP systems that deliver the Tier topology the design requires, so the constructed facility matches the certified design.',
+      'Tier Certification of design documents and of constructed facilities is awarded exclusively by Uptime Institute, and only to facilities [[13]]. MENASCO engineers, installs and commissions MEP systems that deliver the Tier topology the design requires, so the constructed facility matches the certified design.',
     diagramLabel: 'Illustrative Tier topology',
     pathA: 'Path A',
     pathB: 'Path B',
@@ -89,35 +89,61 @@ export const dcTechnical = {
   },
   cooling: {
     eyebrow: 'Precision cooling',
-    heading: 'CRAC vs CRAH: how the white space rejects heat',
+    heading: 'CRAC vs CRAH, and air vs direct-to-chip',
     intro:
-      'Both are precision air units serving the data hall. The difference is where the refrigeration happens, which shapes efficiency, plant layout and how far a facility can scale.',
-    toggleCrac: 'CRAC',
-    toggleCrah: 'CRAH',
-    items: [
+      'Two decisions shape how the white space rejects heat: which precision air units serve the hall, and whether high-density racks move to liquid cooling at the chip.',
+    // Comparison toggle (both comparisons stay in the HTML).
+    comparisons: [
       {
-        id: 'crac',
-        name: 'CRAC: Computer Room Air Conditioner',
-        description:
-          'A self-contained direct-expansion (DX) unit with its own compressor and refrigerant circuit, rejecting heat to an outdoor condenser. It suits smaller rooms, edge sites and facilities without a central chilled-water plant.',
-        strengths: ['Independent per unit, with no central plant', 'Quick to deploy and scale in small steps'],
-        considerations: ['A compressor in every unit lowers efficiency at scale', 'Refrigerant pipe runs limit layout distances'],
+        id: 'units',
+        label: 'CRAC vs CRAH',
+        items: [
+          {
+            id: 'crac',
+            name: 'CRAC: Computer Room Air Conditioner',
+            description:
+              'A self-contained direct-expansion (DX) unit with its own compressor and refrigerant circuit, rejecting heat to an outdoor condenser. It suits smaller rooms, edge sites and facilities without a central chilled-water plant.',
+            strengths: ['Independent per unit, with no central plant', 'Quick to deploy and scale in small steps'],
+            considerations: ['A compressor in every unit lowers efficiency at scale', 'Refrigerant pipe runs limit layout distances'],
+          },
+          {
+            id: 'crah',
+            name: 'CRAH: Computer Room Air Handler',
+            description:
+              'A fan and chilled-water coil served by a central chiller plant, with no compressor inside the unit. It is the standard for large and hyperscale data halls.',
+            strengths: ['Higher efficiency at scale with variable-speed fans', 'Enables free cooling and higher chilled-water temperatures'],
+            considerations: ['Requires a redundant chilled-water plant and piping', 'Water near the white space needs leak detection and containment'],
+          },
+        ],
       },
       {
-        id: 'crah',
-        name: 'CRAH: Computer Room Air Handler',
-        description:
-          'A fan and chilled-water coil served by a central chiller plant, with no compressor inside the unit. It is the standard for large and hyperscale data halls.',
-        strengths: ['Higher efficiency at scale with variable-speed fans', 'Enables free cooling and higher chilled-water temperatures'],
-        considerations: ['Requires a redundant chilled-water plant and piping', 'Water near the white space needs leak detection and containment'],
+        id: 'approach',
+        label: 'Air vs direct-to-chip',
+        items: [
+          {
+            id: 'air',
+            name: 'Traditional air cooling',
+            description:
+              'Room-level cooling from CRAC or CRAH units, with hot- or cold-aisle containment, moves conditioned air through the racks to carry heat away from every server component.',
+            strengths: ['Proven, familiar to operators and compatible with any server', 'Simpler fit-out, with no liquid inside the rack'],
+            considerations: ['Fan and air-handling energy rise steeply as rack density grows', 'Struggles to remove heat from high-density AI and HPC racks'],
+          },
+          {
+            id: 'dtc',
+            name: 'Direct-to-chip liquid cooling',
+            description:
+              'Cold plates on CPUs and GPUs carry a coolant loop, fed by coolant distribution units (CDUs) from the facility water system, removing most of the server heat at the chip before it reaches the room.',
+            strengths: ['Supports high-density AI and HPC racks', 'Warmer water temperatures extend free cooling and enable heat reuse'],
+            considerations: ['Needs CDUs, secondary loops and liquid-ready racks and servers', 'Residual heat still needs air cooling, plus leak detection and water quality control'],
+          },
+        ],
       },
     ],
+    strengthsLabel: 'Strengths',
+    considerationsLabel: 'Considerations',
     ashrae:
-      'Both are typically controlled to keep server inlet air within ASHRAE\'s recommended envelope of 18–27 °C [[3]]. Hot- or cold-aisle containment lets supply air run near the top of that range, cutting cooling energy.',
-    liquid:
-      'As AI racks densify, air cooling gives way to direct-to-chip liquid cooling and rear-door heat exchangers. MENASCO designs chilled-water and coolant distribution around these loads from the outset.',
-    figure: { value: '18–27 °C', label: "ASHRAE's recommended server inlet air range [[3]]" },
-    labels: { supply: 'Cold supply air', return: 'Hot return air', condenser: 'Outdoor condenser', chiller: 'Chiller plant', racks: 'IT racks', unit: 'Air unit' },
+      "Air-cooled equipment is typically controlled to keep server inlet air within ASHRAE's recommended envelope of 18–27 °C [[14]]. Hot- or cold-aisle containment lets supply air run near the top of that range, cutting cooling energy.",
+    figure: { value: '18–27 °C', label: "ASHRAE's recommended server inlet air range [[14]]" },
   },
   power: {
     eyebrow: 'Electrical resilience',
@@ -125,10 +151,10 @@ export const dcTechnical = {
     intro:
       'From medium-voltage intake to the rack, every stage is engineered so a utility failure becomes a non-event for the IT load.',
     points: [
-      'Medium-voltage intake, switchgear and transformers sized for the full campus and staged growth.',
-      'UPS systems that carry the critical load through the seconds before generators take over.',
-      'Standby generators with automatic transfer switching, fuel storage and load-bank testing.',
-      'A and B distribution paths to dual-corded IT, with static transfer switches for single-corded loads.',
+      'MV intake, switchgear and transformers for staged growth.',
+      'UPS systems carry the critical load until generators take over.',
+      'Generators with ATS, fuel storage and load-bank testing.',
+      'A/B paths to dual-corded IT, with STS for single-corded loads.',
     ],
     simulate: 'Simulate a utility failure',
     restore: 'Restore utility power',
@@ -139,37 +165,106 @@ export const dcTechnical = {
       failed: 'Utility lost: the UPS carries the load while generators start and the transfer switch closes.',
     },
     labels: { utility: 'Utility', mv: 'MV switchgear', tx: 'Transformer', ats: 'ATS', gen: 'Generator', ups: 'UPS', pdu: 'PDU', it: 'IT load' },
+    // Power chain diagram (PowerChainDiagram): panel title, header chip and per-node status chips.
+    diagramTitle: 'Single-line diagram',
+    legend: { energised: 'Energised conductor', deenergised: 'Lost supply', standby: 'Standby path' },
+    headerStatus: { normal: 'Utility supply', failed: 'Utility failure' },
+    status: {
+      online: 'Online',
+      lost: 'Lost',
+      energised: 'Energised',
+      deenergised: 'De-energised',
+      standby: 'Standby',
+      running: 'Running',
+      onUtility: 'On utility',
+      onGenerator: 'On generator',
+      onBattery: 'On battery',
+      uninterrupted: 'Uninterrupted',
+    },
   },
   energy: {
     eyebrow: 'Local energy markets',
     heading: 'Understanding local energy infrastructure is part of the engineering',
     intro:
-      'Power availability is now the main constraint on new capacity. Global data center electricity use is projected to more than double by 2030, to around 945 TWh, so grid connection, substation timing and on-site generation have to be planned from day one.',
+      'Power availability is now the main constraint on new capacity. Global data center electricity use is projected to more than double by 2030, to around 945 TWh, so grid connection, substation timing and on-site generation have to be planned from day one [[1]].',
+    constraintsLabel: 'Key market constraints',
+    helpLabel: 'How MENASCO helps',
+    /** Card headings (SEO: one unique, keyword-rich heading per face). */
+    frontTitlePrefix: 'Data centers in',
+    backTitlePrefix: "MENASCO's Data Center Advantage in",
+    backLabel: 'Market constraints',
+    advantageLabel: 'Competitive advantage',
     markets: [
       {
         id: 'uae',
+        slug: 'united-arab-emirates',
         name: 'United Arab Emirates',
-        body: 'Abu Dhabi is building dedicated generation and transmission for data centres, with power investment for the sector expected to exceed AED 37 billion [[4]]. Early alignment with the utility on connection capacity, substation timing and tariffs de-risks the programme.',
+        inName: 'the United Arab Emirates',
+        body: 'Rapid hyperscale expansion in Abu Dhabi and Dubai is placing new demands on power generation, transmission capacity, and utility infrastructure. Grid connection schedules, substation delivery, high ambient temperatures, and cooling efficiency must be addressed early, with electricity procurement and generation arrangements differing between the emirates [[2]] [[3]].',
+        constraints: [
+          'Utility capacity, substation approvals, and energization schedules',
+          'Cooling performance during extreme summer temperatures',
+          'Emirate-specific power procurement and self-generation arrangements',
+        ],
+        help: "With our international engineering, procurement, and project management teams headquartered in Dubai, MENASCO can coordinate utility requirements, electrical infrastructure design, and long-lead equipment sourcing from a single operational hub. Direct UAE construction capabilities, in-country manufacturing and established supplier relationships allow substation works, cooling infrastructure, and off-site modular prefabrication to progress in parallel, reducing dependencies between utility readiness, equipment delivery, and construction milestones.",
+        advantage: "MENASCO's headquarters brings engineering, global procurement, in-country fabrication, and construction management together in the UAE, enabling faster technical coordination and greater control over the procurement and delivery interfaces that commonly delay large-scale data center projects.",
       },
       {
         id: 'ksa',
+        slug: 'saudi-arabia',
         name: 'Saudi Arabia',
-        body: 'Fast-growing demand from giga-projects and new digital infrastructure makes early capacity agreements and phased energisation essential for data center schedules.',
+        inName: 'Saudi Arabia',
+        body: "Saudi Arabia's expanding data center market must balance large-scale AI infrastructure demand with extreme heat, water scarcity, and evolving regulatory requirements. Cooling architecture, electricity supply, and equipment procurement require early planning, while data center service providers must address registration and classification requirements under the Communications, Space and Technology Commission (CST) [[4]] [[5]].",
+        constraints: [
+          'Water-efficient cooling and high-temperature system performance',
+          'CST registration and applicable facility classification requirements',
+          'Utility planning and long-lead electrical equipment procurement',
+        ],
+        help: "Saudi Arabia's extreme temperatures and water scarcity demand cooling systems optimized for local conditions, while rapid data center expansion places pressure on specialist equipment supply chains. MENASCO is skilled in delivering closed loop direct-to-chip liquid cooling, as well as traditional configurations against project-specific PUE and WUE targets. Drawing on international suppliers and in-country fabrication to source equipment, dedicated construction teams adapt solutions to local codes, utility requirements, and minimize reliance on external delivery partners.",
+        advantage: "Direct-to-chip cooling expertise, in-country fabrication and a global sourcing network backed by directly managed Saudi construction teams.",
       },
       {
         id: 'egypt',
+        slug: 'egypt',
         name: 'Egypt',
-        body: 'A major landing point for subsea cables between Europe, Asia and Africa. Summer peaks and fuel supply have led to load-shedding in recent years, so on-site generation, fuel strategy and phased energisation are planned from the start.',
-      },
-      {
-        id: 'usa',
-        name: 'United States',
-        body: 'Data centers used about 4.4% of US electricity in 2023 and could reach 6.7–12% by 2028 [[5]], making phased energisation and on-site generation planning critical.',
+        inName: 'Egypt',
+        body: "Egypt's position as a regional connectivity hub offers opportunities for data center development, but investors face challenges involving land allocation, construction permits, telecom licensing, and infrastructure readiness. Coordinating power availability, fiber connectivity, regulatory approvals, and imported equipment procurement early is essential to establishing realistic construction and commissioning schedules [[6]] [[7]].",
+        constraints: [
+          'Land allocation, development permits, and telecom licensing',
+          'Power infrastructure and reliable carrier connectivity',
+          'Imported equipment procurement and customs coordination',
+        ],
+        help: "Egypt's reliance on imported specialist equipment and variable infrastructure readiness can delay data center construction. MENASCO addresses these constraints through Egyptian manufacturing facilities capable of producing modular data center white spaces, E-Houses and prefabricated MEP assemblies locally, reducing the need to import completed modules. International procurement teams source specialized components while local construction teams coordinate utility connections and civil works, allowing manufacturing and site development to progress in parallel.",
+        advantage: "Local Modular MEP units combined with international component sourcing reduces dependence on imported finished systems and creates opportunities to shorten construction schedules.",
       },
       {
         id: 'europe',
+        slug: 'europe',
         name: 'Europe',
-        body: 'EU data centres of 500 kW and above report energy and water KPIs annually [[6]], and Germany sets efficiency and heat-reuse requirements for new facilities [[7]].',
+        inName: 'Europe',
+        body: 'European data center development faces increasing grid connection delays, limited available power capacity, and tightening energy-efficiency requirements. Site selection must account for utility connection timelines, electricity costs, and national permitting rules, while cooling efficiency, waste heat recovery, and energy performance reporting play an increasingly important role in facility design [[8]] [[9]].',
+        constraints: [
+          'Grid connection queues and transmission capacity',
+          'EU energy-efficiency reporting and country-specific requirements',
+          'Waste heat recovery and low-carbon electricity sourcing',
+        ],
+        help: "Grid connection delays and increasingly demanding energy-efficiency regulations can limit the feasibility and timing of European data center developments. MENASCO's scale of international engineering resources support early assessment of electrical capacity, phased infrastructure requirements, and cooling configurations incorporating heat recovery where viable. UK-based teams coordinate technical development and global equipment sourcing, while qualified local partners address country-specific regulations and utility interfaces, allowing procurement and construction planning to respond to confirmed power availability.",
+        advantage: "Centralized technical resources and international procurement capacity help projects adapt to constrained grid access, with UK-led coordination and local regulatory support.",
+      },
+      {
+        id: 'usa',
+        slug: 'united-states',
+        name: 'United States',
+        inName: 'the United States',
+        body: "US data center development is increasingly constrained by utility interconnection delays, electrical equipment shortages, regional permitting requirements, and a growing shortage of skilled construction tradespeople. Limited availability of electricians, pipefitters, HVAC technicians, and other specialized workers places additional pressure on labor costs and construction schedules. With large power transformers facing multi-year lead times, early procurement, workforce planning, off-site prefabrication, and phased energization are essential to maintaining delivery schedules for hyperscale and AI infrastructure projects [[10]] [[11]].",
+        constraints: [
+          'Grid interconnection and utility service agreements',
+          'Long-lead transformers, switchgear, and electrical equipment',
+          'State and local permitting, with phased power availability',
+          'Skilled trade labor shortages and construction workforce staffing',
+        ],
+        help: "MENASCO's international procurement network expands access to qualified manufacturers beyond domestic suppliers, while centralized engineering teams coordinate alternative equipment specifications and modular fabrication opportunities. Direct US contracting partnerships enable civil works, prefabricated MEP installation, and phased electrical infrastructure to be aligned with equipment deliveries and utility energization milestones. Established relationships with staffing agencies across the United States also provide access to skilled construction tradespeople, helping address regional labor shortages, scale site workforces, and maintain construction schedules on large-scale data center developments.",
+        advantage: "Global procurement networks, centralized engineering expertise, and US construction capabilities provide greater flexibility in managing equipment shortages and utility delays, while nationwide staffing relationships help secure the skilled workforce needed to maintain construction schedules and scale delivery across multiple projects.",
       },
     ],
   },

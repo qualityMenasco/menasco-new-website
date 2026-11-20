@@ -21,7 +21,9 @@ import { useEffect, type RefObject } from 'react';
  *
  * Usage: wrap the words in <span data-flow-target="power|water|data|heat">
  * (the `T` helper in DataCenterPage). Add `data-flow-hero` for hero title
- * words: they react one after another on the first scroll. To change which
+ * words: they react one after another on page entry (HERO_START_MS, then one
+ * every HERO_GAP_MS), ONCE per page load/refresh, and then stay lit. Scrolling
+ * never triggers or replays them (client request 2026-11-20). To change which
  * text reacts, or with which element, only move/change these attributes.
  *
  * Timing: a target reacts as its top passes ~80% down the viewport (just as
@@ -36,13 +38,18 @@ import { useEffect, type RefObject } from 'react';
 export const ELEMENT_COLORS = { power: '#E9B23A', water: '#3B9EE6', data: '#3DBE7A', heat: '#E0765C' } as const;
 
 const GLYPHS = '01';
+/** Hero words on page entry: first reaction after HERO_START_MS, then one every HERO_GAP_MS. */
+const HERO_START_MS = 300;
+const HERO_GAP_MS = 620;
 /** Decode duration: slow enough to read as a system resolving, not a flicker. */
 const DECODE_MS = 2200;
+/** Hero title decode ("Uptime"): much quicker than in-page decodes (client request). */
+const HERO_DECODE_MS = 760;
 /** Each scrambled character holds for this long before changing. */
 const GLYPH_HOLD_MS = 110;
 
 /** Scrambles the overlay text and resolves it left to right. Returns a cancel function. */
-function decode(el: HTMLElement): () => void {
+function decode(el: HTMLElement, durationMs = DECODE_MS): () => void {
   const text = el.textContent ?? '';
   let raf = 0;
   let lastSwap = -Infinity;
@@ -50,7 +57,7 @@ function decode(el: HTMLElement): () => void {
   const start = performance.now();
   el.classList.add('dc-decoding');
   const step = (now: number) => {
-    const t = Math.min(1, (now - start) / DECODE_MS);
+    const t = Math.min(1, (now - start) / durationMs);
     const resolved = Math.floor(t * text.length);
     if (now - lastSwap >= GLYPH_HOLD_MS) {
       glyphs = [...text].map(() => GLYPHS[(Math.random() * GLYPHS.length) | 0]);
@@ -103,6 +110,15 @@ export function TextReactions({ containerRef }: { containerRef: RefObject<HTMLEl
     });
 
     const hero = targets.filter((el) => el.hasAttribute('data-flow-hero'));
+    // Hero words: lit once their timed slot in the entry sequence has passed, then
+    // stay lit for the rest of the visit (only a page load/refresh plays it again).
+    const heroReady = new Set<HTMLElement>();
+    const heroTimers = hero.map((el, k) =>
+      window.setTimeout(() => {
+        heroReady.add(el);
+        update();
+      }, reduced ? 0 : HERO_START_MS + k * HERO_GAP_MS),
+    );
     const cancels = new Map<HTMLElement, () => void>();
     let frame = 0;
     const update = () => {
@@ -111,11 +127,14 @@ export function TextReactions({ containerRef }: { containerRef: RefObject<HTMLEl
       targets.forEach((el) => {
         const r = el.getBoundingClientRect();
         const k = hero.indexOf(el);
-        const lit = k >= 0 ? window.scrollY >= 0.06 * vh + k * 0.06 * vh && r.top > 0.1 * vh : r.top < 0.8 * vh && r.bottom > 0.1 * vh;
+        // Words inside a hidden panel (e.g. the inactive cooling comparison) stay unlit until
+        // that panel is shown, so their animation starts when the visitor switches to it.
+        const hidden = !!el.closest('[inert], [aria-hidden="true"]');
+        const lit = k >= 0 ? heroReady.has(el) : !hidden && r.top < 0.8 * vh && r.bottom > 0.1 * vh;
         const kind = el.dataset.flowTarget!;
         if (lit && el.dataset.lit !== kind) {
           el.dataset.lit = kind;
-          if (kind === 'data' && !reduced) cancels.set(el, decode(el));
+          if (kind === 'data' && !reduced) cancels.set(el, decode(el, k >= 0 ? HERO_DECODE_MS : DECODE_MS));
         } else if (!lit && el.dataset.lit) {
           delete el.dataset.lit;
           cancels.get(el)?.();
@@ -127,12 +146,17 @@ export function TextReactions({ containerRef }: { containerRef: RefObject<HTMLEl
       if (!frame) frame = requestAnimationFrame(update);
     };
     update();
+    // Re-check when a panel is shown or hidden (tab/toggle switches don't scroll the page).
+    const panels = new MutationObserver(onScroll);
+    panels.observe(root, { subtree: true, attributes: true, attributeFilter: ['inert', 'aria-hidden'] });
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
+      panels.disconnect();
       cancelAnimationFrame(frame);
+      heroTimers.forEach(clearTimeout);
       cancels.forEach((c) => c());
       targets.forEach((el) => delete el.dataset.lit);
     };

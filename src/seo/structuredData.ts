@@ -232,6 +232,35 @@ export function servicesFaqJsonLd(items: unknown) {
 }
 
 /** schema.org FAQPage for a page's visible question-and-answer list (the answers must match what the page shows). */
+export interface RegionalServiceInput {
+  /** e.g. "Data center MEP and infrastructure delivery in Saudi Arabia". */
+  name: string;
+  description: string;
+  /** Absolute URL, ideally the region's deep link (page#region). */
+  url: string;
+  /** Country name, or a broader place such as "Europe". */
+  area: string;
+  areaType: 'Country' | 'Place';
+}
+
+/**
+ * Standalone `Service` entities, one per market region (Data Center page,
+ * Local energy markets section): tells search engines what MENASCO offers in
+ * each country, using the same copy that is on the page.
+ */
+export function regionalServicesJsonLd(items: RegionalServiceInput[]) {
+  return items.map((item) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: item.name,
+    serviceType: 'Data center MEP and infrastructure',
+    description: item.description,
+    url: item.url,
+    provider: { '@id': ORGANIZATION_ID },
+    areaServed: { '@type': item.areaType, name: item.area },
+  }));
+}
+
 export function faqPageJsonLd(items: FaqEntry[]) {
   return {
     '@context': 'https://schema.org',

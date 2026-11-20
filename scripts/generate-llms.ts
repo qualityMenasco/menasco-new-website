@@ -37,6 +37,8 @@ import { SITE_URL, SITE_TAGLINE } from '../src/seo/constants';
 import { services } from '../src/data/services';
 import { CAREERS_URL, pendingContentPaths, servicesNavigationGroups, umbrellaServiceLinks } from '../src/data/navigation';
 import { projects } from '../src/data/projects';
+import { dcTechnical } from '../src/data/dataCenterTechnical';
+import { TECHNICAL_SOURCES } from '../src/data/dataCenterSources';
 import { projectCategoryList } from '../src/data/projectCategories';
 import { leadershipProfiles, executiveTeam } from '../src/data/leadership';
 import { officeLocations, primaryContact, regionalCountries } from '../src/data/locations';
@@ -79,6 +81,11 @@ function h2(title: string) {
 }
 
 const HR = '---';
+
+/** Page copy cites sources as [[n]]; in llms.txt they read as plain [n] references to the Sources list. */
+function citeRefs(text: string) {
+  return text.replace(/\s*\[\[(\d+)\]\]/g, ' [$1]');
+}
 
 /** Canonical HTML page URL for a route (e.g. "/services/mechanical"), or the homepage if routePath is "". */
 function pageUrl(routePath: string) {
@@ -698,7 +705,29 @@ function generateDataCenters() {
       h2('Capabilities'),
       bullets((dc.capabilities as Array<{ title: string; description: string }>).map((c) => `${c.title}: ${c.description}`)),
     ),
-    doc(h2('Prefabrication'), `${dc.prefab.description}\n\n${dc.prefab.closingStatement}`),
+    doc(
+      h2(dc.prefab.heading),
+      dc.prefab.snippet,
+      ...(dc.prefab.groups as { label: string; items: string[] }[]).map((g) => `### ${g.label}\n\n${bullets(g.items)}`),
+    ),
+    // Local energy markets (the page's region tabs): every region's market context,
+    // constraints, how MENASCO helps and its competitive advantage, with sources.
+    doc(
+      h2(`${dcTechnical.energy.eyebrow}: ${dcTechnical.energy.heading}`),
+      citeRefs(dcTechnical.energy.intro),
+      ...dcTechnical.energy.markets.map((m) =>
+        doc(
+          `### ${dcTechnical.energy.frontTitlePrefix} ${m.inName}`,
+          citeRefs(m.body),
+          `**${dcTechnical.energy.constraintsLabel}:**\n\n${bullets(m.constraints)}`,
+          `#### ${dcTechnical.energy.backTitlePrefix} ${m.inName}`,
+          m.help,
+          `**${dcTechnical.energy.advantageLabel}:** ${m.advantage}`,
+          `Link: ${pageUrl('/services/data-centers')}#${m.slug}`,
+        ),
+      ),
+      `**Sources:**\n\n${TECHNICAL_SOURCES.map((src, i) => `${i + 1}. [${src.title}](${src.url}), ${src.publisher}, ${src.year}`).join('\n')}`,
+    ),
     doc(h2('Frequently Asked Questions'), ...(dc.faq as { title: string; content: string }[]).map((item) => `### ${item.title}\n\n${item.content}`)),
 
     dcProjects.length > 0 && {

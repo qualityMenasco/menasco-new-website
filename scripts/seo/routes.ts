@@ -23,6 +23,7 @@ import { projects } from '../../src/data/projects';
 import { projectCategories } from '../../src/data/projectCategories';
 import { leadershipProfiles } from '../../src/data/leadership';
 import { dcSustainability } from '../../src/data/dataCenterSustainability';
+import { dataCenterAreaServed, dataCenterRegionsJsonLd } from '../../src/seo/dataCenterRegionsJsonLd';
 import { buildProjectFallbackDescription, pickProjectSeoDescription, formatProjectLocation } from '../../src/seo/projectDescription';
 import {
   organizationJsonLd,
@@ -213,11 +214,13 @@ addRoute(
         name: tr(l, 'services', 'dataCenter.seo.title', 'Data Center MEP Services'),
         description: tr(l, 'services', 'dataCenter.seo.description', NS[l].seo.defaultDescription),
         url: `${SITE_URL}/services/data-centers`,
+        areaServed: dataCenterAreaServed,
       }),
     breadcrumb: () => [HOME, { label: 'Services', path: '/services' }, { label: 'Data Centers', path: '/services/data-centers' }],
     extraJsonLd: (l) => {
       const items = NS[l].services?.dataCenter?.faq as { title: string; content: string }[] | undefined;
-      return items?.length ? [faqPageJsonLd(items.map((f) => ({ question: f.title, answer: f.content })))] : undefined;
+      // FAQ + one Service per Local energy markets region (same builder as the page).
+      return [...(items?.length ? [faqPageJsonLd(items.map((f) => ({ question: f.title, answer: f.content })))] : []), ...dataCenterRegionsJsonLd()];
     },
   },
 );

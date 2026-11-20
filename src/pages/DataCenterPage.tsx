@@ -94,7 +94,7 @@
  *   heading (water); FAQ heading (data).
  * - Timing: a target reacts as it comes into view (top passes ~80% down the viewport),
  *   stays lit while on screen and resets when it leaves. Hero words (data-flow-hero)
- *   react one after another on the first scroll. Reduced motion: disabled.
+ *   react one after another on page entry (timed, not on scroll). Reduced motion: disabled.
  * - The hero server-hall drawing (HeroServerHall) stays as the hero visual (its old
  *   story-line start markers were removed).
  *
@@ -116,13 +116,17 @@ import { dataCenterProjects, totalDataCenterMw } from '../data/projects';
 import { dcTechnical as c } from '../data/dataCenterTechnical';
 import { TECHNICAL_SOURCES } from '../data/dataCenterSources';
 import { TopicTabs } from '../components/sections/quality/TopicTabs';
+import { MarketFlipCard } from '../components/services/datacenter/MarketFlipCard';
 import { DC_SUSTAINABILITY_PATH, DC_TECHNICAL_PATH, ArabicDeferredNotice, DataCenterTabs, RAIL_CLASS, RailDots, RichText, useRail } from '../components/services/datacenter/shared';
 import { PlaceholderImage, SourcesList } from '../components/services/datacenter/primitives';
-import { HeroServerHall, ResilienceDiagram } from '../components/services/datacenter/technicalDiagrams';
+import { HeroServerHall, Segmented } from '../components/services/datacenter/technicalDiagrams';
+import { PowerChainDiagram } from '../components/services/datacenter/PowerChainDiagram';
 import { TextReactions, ELEMENT_COLORS } from '../components/services/datacenter/TextReactions';
 import { CapabilitySection, PrefabSection } from '../components/services/datacenter/CapabilitySection';
 import { SEO } from '../seo/SEO';
 import { faqPageJsonLd, serviceEntity } from '../seo/structuredData';
+import { dataCenterAreaServed, dataCenterRegionsJsonLd } from '../seo/dataCenterRegionsJsonLd';
+import { orderForVisitor, visitorRegion } from '../lib/visitorRegion';
 import { SITE_URL } from '../seo/constants';
 import { cn } from '../lib/utils';
 
@@ -145,10 +149,11 @@ function Band({ tone, children, className }: { tone: Tone; children: ReactNode; 
   );
 }
 
-/** Wraps text as a reaction target (see TextReactions). `hero` = a hero title word (reacts on the first scroll, in order). */
-const T = ({ k, hero, children }: { k?: Kind; hero?: boolean; children: ReactNode }) =>
+/** Wraps text as a reaction target (see TextReactions). `hero` = a hero title word (reacts on page entry, one after another).
+ *  `slow` = a slower in-page animation (the cooling comparison titles). */
+const T = ({ k, hero, slow, children }: { k?: Kind; hero?: boolean; slow?: boolean; children: ReactNode }) =>
   k ? (
-    <span data-flow-target={k} data-flow-hero={hero ? '' : undefined}>
+    <span data-flow-target={k} data-flow-hero={hero ? '' : undefined} data-flow-slow={slow ? '' : undefined}>
       {children}
     </span>
   ) : (
@@ -179,17 +184,6 @@ function Figure({ value, label, target, dark = false }: { value: string; label: 
         <RichText text={label} />
       </figcaption>
     </figure>
-  );
-}
-
-/** The thread through every chapter: what MENASCO does about it. */
-function Role({ children, dark = false, title }: { children: ReactNode; dark?: boolean; title?: string }) {
-  return (
-    <aside className={cn('mt-10 rounded-lg border-s-4 border-brand-500 p-6 md:p-7', dark ? 'bg-white/[0.04]' : 'bg-white/80 backdrop-blur-sm')}>
-      <p className={cn('font-display text-caption font-semibold uppercase tracking-widest', dark ? 'text-brand-400' : 'text-brand-600')}>{c.roleLabel}</p>
-      {title && <h3 className={cn('mt-2 font-display text-h4 font-semibold', dark ? 'text-white' : 'text-ink')}>{title}</h3>}
-      <div className={cn('mt-3 text-body leading-relaxed', dark ? 'text-gray-200' : 'text-gray-700')}>{children}</div>
-    </aside>
   );
 }
 
@@ -258,7 +252,45 @@ export default function DataCenterPage() {
   const faq = t('dataCenter.faq', { returnObjects: true }) as FaqEntry[];
   const faqItems = Array.isArray(faq) ? faq.map((f) => ({ question: f.title, answer: f.content })) : [];
   const [failed, setFailed] = useState(false);
+  const [coolingView, setCoolingView] = useState<'units' | 'approach'>('units');
+  // Cooling cards: a swipe rail per comparison below md; switching starts the new rail at its first card.
+  const coolingRails = { units: useRail(), approach: useRail() };
+  const sitesRail = useRail();
+  const switchCooling = (v: string) => {
+    const id = v as 'units' | 'approach';
+    coolingRails[id].railRef.current?.scrollTo({ left: 0 });
+    setCoolingView(id);
+  };
   const portfolio = useRail();
+  // Tier cards: swipe row only while both cards can't fit side by side (measured).
+  const tiersRail = useRail();
+  const [tiersOverflow, setTiersOverflow] = useState(false);
+  useEffect(() => {
+    const el = tiersRail.railRef.current;
+    if (!el) return;
+    // Swipe while the row can't give every card its minimum width (16.5rem) plus the gaps.
+    // Measured against the available width, not scrollWidth, so widening the cards in
+    // swipe mode can't keep it stuck in swipe mode.
+    const measure = () => {
+      const cs = getComputedStyle(el);
+      const avail = el.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+      const n = el.children.length;
+      setTiersOverflow(avail + 0.5 < n * 16.5 * rem + (n - 1) * (parseFloat(cs.columnGap) || 0));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  // Local energy markets: UAE (HQ) first, then the visitor's own region (from the
+  // browser time zone), then the rest. Reordered after mount only, so the
+  // prerendered HTML (what search engines index) keeps the canonical order.
+  const [markets, setMarkets] = useState(c.energy.markets);
+  useEffect(() => {
+    setMarkets(orderForVisitor(c.energy.markets, visitorRegion()));
+  }, []);
   const heroWord = (w: string, i: number) => {
     const k: Kind | undefined = /^Power/.test(w) ? 'power' : /^Cooling/.test(w) ? 'water' : /^Uptime/.test(w) ? 'data' : undefined;
     return (
@@ -276,13 +308,22 @@ export default function DataCenterPage() {
         title={t('dataCenter.seo.title')}
         description={t('dataCenter.seo.description')}
         path={DC_TECHNICAL_PATH}
-        mainEntity={serviceEntity({ name: t('dataCenter.seo.title'), description: t('dataCenter.seo.description'), url: `${SITE_URL}${DC_TECHNICAL_PATH}` })}
+        mainEntity={serviceEntity({
+          name: t('dataCenter.seo.title'),
+          description: t('dataCenter.seo.description'),
+          url: `${SITE_URL}${DC_TECHNICAL_PATH}`,
+          areaServed: dataCenterAreaServed,
+        })}
         breadcrumb={[
           { label: 'Home', path: '/' },
           { label: 'Services', path: '/services' },
           { label: 'Data Centers', path: DC_TECHNICAL_PATH },
         ]}
-        structuredData={faqItems.length ? faqPageJsonLd(faqItems) : undefined}
+        structuredData={[
+          ...(faqItems.length ? [faqPageJsonLd(faqItems)] : []),
+          // One Service per market region, from the Local energy markets copy (SEO; shared with the prerender config).
+          ...dataCenterRegionsJsonLd(),
+        ]}
       />
       <DataCenterTabs active="technical" />
       <ArabicDeferredNotice />
@@ -335,54 +376,124 @@ export default function DataCenterPage() {
 
         {/* Local energy markets: heading + intro, then the markets as topic tabs
             (same component and behaviour as the Quality, Health & Safety page). */}
-        <Band tone="light" className="pb-14 pt-14 md:pb-20 md:pt-20">
+        <Band tone="light" className="pb-12 pt-12 md:pb-16 md:pt-16">
           {/* Eyebrow on its own row so the heading and intro start on the same line (wide screens). */}
           <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.energy.eyebrow}</p>
-          <div className="mt-5 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-start lg:gap-12">
-            <h2 className="font-display text-[clamp(2rem,1.4rem+2.4vw,3.25rem)] font-semibold leading-[1.06] tracking-tight text-ink text-balance lg:col-span-6">
+          {/* Smaller heading than the other sections (client request); intro centred against it on wide screens. */}
+          <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-12 lg:items-center lg:gap-12">
+            <h2 className="font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-ink text-balance lg:col-span-6">
               {c.energy.heading}
             </h2>
-            <p className="text-body-lg leading-relaxed text-gray-700 lg:col-span-6">
+            <p className="text-body leading-relaxed text-gray-700 lg:col-span-6">
               <RichText text={c.energy.intro} />
             </p>
           </div>
           <TopicTabs
             idPrefix="dc-energy-market"
             label={c.energy.eyebrow}
-            className="mt-10"
-            topics={c.energy.markets.map((m) => ({
+            className="mt-8"
+            bare
+            horizontal
+            mobileRail
+            topics={markets.map((m) => ({
               title: m.name,
+              hash: m.slug,
               body: [],
               extra: (
-                <p className="mt-3 max-w-3xl text-body leading-relaxed text-gray-700">
-                  <RichText text={m.body} />
-                </p>
+                <MarketFlipCard
+                  frontTitle={
+                    <>
+                      <T k="data">{c.energy.frontTitlePrefix.replace(/ in$/, '')}</T> in {m.inName}
+                    </>
+                  }
+                  backTitle={`${c.energy.backTitlePrefix} ${m.inName}`}
+                  flipLabel={c.energy.helpLabel}
+                  unflipLabel={c.energy.backLabel}
+                  backEyebrow={m.name}
+                  front={(button) => (
+                    // Two columns from lg: market context | key constraints (+ flip button at its foot, bottom-right).
+                    <div className="mt-2 grid flex-1 grid-cols-1 grid-rows-[auto_1fr] gap-4 md:mt-3 md:gap-6 lg:grid-cols-12 lg:grid-rows-1 lg:gap-10">
+                      <p className="text-[0.8125rem] leading-[1.55] md:text-small md:leading-relaxed text-gray-700 lg:col-span-7 lg:text-body">
+                        <RichText text={m.body} />
+                      </p>
+                      <div className="flex flex-col lg:col-span-5 lg:border-s lg:border-gray-200 lg:ps-8">
+                        <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.energy.constraintsLabel}</p>
+                        <ul className="mt-2 space-y-1.5 md:mt-3 md:space-y-2">
+                          {m.constraints.map((item) => (
+                            <li key={item} className="flex gap-2.5 text-[0.8125rem] leading-[1.55] md:text-small md:leading-relaxed text-gray-700 md:gap-3">
+                              <span aria-hidden="true" className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500 md:mt-2" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="mt-auto flex justify-end pt-4 md:pt-6">{button}</div>
+                      </div>
+                    </div>
+                  )}
+                  back={(button) => (
+                    // Two columns from lg: how MENASCO helps | competitive advantage (+ flip-back button at its foot).
+                    <div className="mt-2 grid flex-1 grid-cols-1 grid-rows-[auto_1fr] gap-4 md:mt-3 md:gap-6 lg:grid-cols-12 lg:grid-rows-1 lg:gap-10">
+                      <p className="text-[0.8125rem] leading-[1.55] md:text-small md:leading-relaxed text-gray-700 lg:col-span-7 lg:text-body">{m.help}</p>
+                      <div className="flex flex-col lg:col-span-5">
+                        <div className="rounded-md border-s-4 border-brand-500 bg-white p-3.5 md:p-5">
+                          <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.energy.advantageLabel}</p>
+                          <p className="mt-1.5 text-[0.8125rem] leading-[1.55] md:text-small md:leading-relaxed text-gray-700 md:mt-2">{m.advantage}</p>
+                        </div>
+                        <div className="mt-auto flex justify-end pt-4 md:pt-6">{button}</div>
+                      </div>
+                    </div>
+                  )}
+                />
               ),
             }))}
           />
         </Band>
 
-        {/* 02 Uptime Tiers */}
-        <Band tone="stone">
+        {/* 02 Uptime Tiers (tightened; no MENASCO role strip, client request) */}
+        <Band tone="stone" className="pb-12 pt-12 md:pb-16 md:pt-16">
+          {/* Smaller heading + lead than the default section head (client request); Uptime Institute logo top right. */}
+          <div className="flex flex-col-reverse gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
           <div className="max-w-3xl">
-            <ChapterHead eyebrow={c.tiers.eyebrow} title={c.tiers.heading} lead={<RichText text={c.tiers.intro} />} />
+            <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.tiers.eyebrow}</p>
+            <h2 className="mt-3 font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-ink text-balance">{c.tiers.heading}</h2>
+            <p className="mt-4 text-body leading-relaxed text-gray-600">
+              <RichText text={c.tiers.intro} />
+            </p>
           </div>
-          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
+            <img
+              src="/uptime-institute-logo.png"
+              alt="Uptime Institute"
+              width={968}
+              height={137}
+              loading="lazy"
+              decoding="async"
+              className="h-auto w-32 shrink-0 self-end sm:mt-0.5 sm:w-40 sm:self-auto lg:w-48"
+            />
+          </div>
+          {/* Tier cards: side by side while each can be at least ~16.5rem wide; when the row is
+              too narrow for both it becomes a snapping swipe row with position dots. */}
+          <div
+            ref={(el) => {
+              tiersRail.railRef.current = el;
+            }}
+            onScroll={tiersRail.onScroll}
+            className="no-scrollbar -mx-6 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 md:-mx-10 md:scroll-px-10 md:px-10 lg:mx-0 lg:gap-6 lg:overflow-visible lg:px-0"
+          >
             {c.tiers.items.map((item) => (
-              <article key={item.id} className="rounded-lg border border-gray-200 bg-white p-8 md:p-10">
-                <div className="flex items-start justify-between gap-6">
+              <article key={item.id} className={cn('flex flex-1 basis-0 snap-start flex-col rounded-lg border border-gray-200 bg-white p-5 sm:p-6 lg:p-8', tiersOverflow ? 'min-w-[86%]' : 'min-w-[min(16.5rem,86%)]')}>
+                <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600">{item.tagline}</p>
-                    <h3 className="mt-2 font-display text-h3 font-semibold text-ink">{item.name}</h3>
+                    <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{item.tagline}</p>
+                    <h3 className="mt-2 font-display text-h4 font-semibold text-ink">{item.name}</h3>
                   </div>
-                  <p className="font-display text-[clamp(2.75rem,2rem+2.5vw,4rem)] font-semibold leading-none tracking-tight text-ink">
+                  <p className="font-display text-[clamp(2.25rem,1.6rem+2vw,3.25rem)] font-semibold leading-none tracking-tight text-ink">
                     <T k={item.id === 'tier-iv' ? 'power' : undefined}>{item.figure}</T>
                   </p>
                 </div>
-                <ul className="mt-8 space-y-4">
+                <ul className="mt-6 space-y-3">
                   {item.points.map((p) => (
-                    <li key={p} className="flex gap-3 text-body leading-relaxed text-gray-700">
-                      <Check size={18} aria-hidden="true" className="mt-1 shrink-0 text-brand-600" />
+                    <li key={p} className="flex gap-3 text-small leading-relaxed text-gray-700">
+                      <Check size={16} aria-hidden="true" className="mt-0.5 shrink-0 text-brand-600" />
                       <span>
                         <RichText text={p} />
                       </span>
@@ -392,19 +503,21 @@ export default function DataCenterPage() {
               </article>
             ))}
           </div>
-          <div className="max-w-3xl">
-            <Role>
-              <RichText text={c.tiers.certificationNote} />
-            </Role>
-          </div>
+          {tiersOverflow && <RailDots count={c.tiers.items.length} active={tiersRail.active} alwaysShow />}
         </Band>
 
-        {/* 03 Power resilience */}
-        <Band tone="dark">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
+        {/* 03 Power resilience: text | single-line diagram, sized to roughly equal heights on desktop.
+            No MENASCO role strip (client request). Side by side from md (768px): the diagram picks a wide,
+            compact or vertical configuration from its own width; below md it stacks under the text. */}
+        <Band tone="dark" className="pb-12 pt-12 md:pb-16 md:pt-16">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] md:items-center md:gap-8 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-5">
-              <ChapterHead eyebrow={c.power.eyebrow} title={c.power.heading} lead={c.power.intro} dark target="power" />
-              <ul className="mt-8 space-y-3">
+              <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-400 rtl:tracking-normal">{c.power.eyebrow}</p>
+              <h2 className="mt-3 font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-white text-balance">
+                <T k="power">{c.power.heading}</T>
+              </h2>
+              <p className="mt-3 text-small leading-relaxed text-gray-300 lg:mt-4 lg:text-body">{c.power.intro}</p>
+              <ul className="mt-5 space-y-2.5 lg:mt-6 lg:space-y-3">
                 {c.power.points.map((p) => (
                   <li key={p} className="flex gap-3 text-small leading-relaxed text-gray-300">
                     <Zap size={15} aria-hidden="true" className="mt-0.5 shrink-0" style={{ color: ELEMENT_COLORS.power }} />
@@ -413,100 +526,143 @@ export default function DataCenterPage() {
                 ))}
               </ul>
             </div>
-            <div className="lg:col-span-7 lg:pt-14">
-              <ResilienceDiagram failed={failed} />
-              <div className="mt-5 flex flex-wrap items-center gap-4">
-                <button
-                  type="button"
-                  onClick={() => setFailed((f) => !f)}
-                  aria-pressed={failed}
+            <div className="lg:col-span-7">
+              <PowerChainDiagram failed={failed} onToggle={() => setFailed((f) => !f)} />
+            </div>
+          </div>
+        </Band>
+
+        {/* 04 Cooling: two comparisons behind a toggle (CRAC vs CRAH; air vs direct-to-chip).
+            Both comparisons stay in the HTML (stacked in one grid cell, so switching never
+            changes the section height). No MENASCO role strip (client request). */}
+        <Band tone="light" className="pb-12 pt-12 md:pb-16 md:pt-16">
+          <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.cooling.eyebrow}</p>
+          <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-12 lg:items-center lg:gap-12">
+            <h2 className="font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-ink text-balance lg:col-span-6">
+              {c.cooling.heading}
+            </h2>
+            <p className="text-body leading-relaxed text-gray-700 lg:col-span-6">{c.cooling.intro}</p>
+          </div>
+
+          <div className="mt-8">
+            <Segmented
+              label={c.cooling.eyebrow}
+              value={coolingView}
+              onChange={switchCooling}
+              options={c.cooling.comparisons.map((cmp) => ({ id: cmp.id, label: cmp.label }))}
+            />
+          </div>
+
+          <div className="mt-5 grid">
+            {c.cooling.comparisons.map((cmp) => {
+              const shown = cmp.id === coolingView;
+              return (
+                <div
+                  key={cmp.id}
+                  ref={(el) => {
+                    coolingRails[cmp.id as 'units' | 'approach'].railRef.current = el;
+                  }}
+                  onScroll={coolingRails[cmp.id as 'units' | 'approach'].onScroll}
+                  aria-hidden={!shown}
+                  {...(shown ? {} : { inert: '' })}
                   className={cn(
-                    'inline-flex min-h-10 items-center gap-2 rounded-full px-5 text-small font-semibold transition-colors duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400',
-                    failed ? 'bg-white text-ink hover:bg-gray-200' : 'bg-brand-600 text-white hover:bg-brand-700',
+                    'col-start-1 row-start-1 transition-opacity duration-300 motion-reduce:transition-none',
+                    RAIL_CLASS,
+                    'md:grid-cols-2 lg:gap-6',
+                    shown ? 'visible opacity-100' : 'invisible opacity-0',
                   )}
                 >
-                  <Zap size={16} aria-hidden="true" />
-                  {failed ? c.power.restore : c.power.simulate}
-                </button>
-                <p aria-live="polite" className="text-small text-gray-400">
-                  {failed ? c.power.states.failed : c.power.states.normal}
-                </p>
-              </div>
-              <Role dark>{c.power.role}</Role>
-            </div>
-          </div>
-        </Band>
-
-        {/* 04 Cooling */}
-        <Band tone="light">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-5">
-              <ChapterHead eyebrow={c.cooling.eyebrow} title={c.cooling.heading} lead={c.cooling.intro} target="heat" />
-              <Figure value={c.cooling.figure.value} label={c.cooling.figure.label} target="heat" />
-            </div>
-            <div className="space-y-6 lg:col-span-7 lg:pt-14">
-              {c.cooling.items.map((item) => (
-                <article key={item.id} className="rounded-lg border border-gray-200 bg-white p-7 md:p-8">
-                  <h3 className="font-display text-h3 font-semibold text-ink">
-                    <T k={item.id === 'crah' ? 'water' : undefined}>{item.name}</T>
-                  </h3>
-                  <p className="mt-3 text-body leading-relaxed text-gray-700">{item.description}</p>
-                  <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <div>
-                      <p className="text-caption font-semibold uppercase tracking-widest text-brand-600">Strengths</p>
-                      <ul className="mt-2 space-y-1.5">
-                        {item.strengths.map((s) => (
-                          <li key={s} className="text-small leading-relaxed text-gray-700">
-                            {s}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <p className="text-caption font-semibold uppercase tracking-widest text-gray-500">Considerations</p>
-                      <ul className="mt-2 space-y-1.5">
-                        {item.considerations.map((s) => (
-                          <li key={s} className="text-small leading-relaxed text-gray-700">
-                            {s}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </article>
-              ))}
-              <p className="text-body leading-relaxed text-gray-700">
-                <RichText text={c.cooling.ashrae} />
-              </p>
-              <Role>
-                <T k="water">{c.cooling.liquid}</T>
-              </Role>
-            </div>
-          </div>
-        </Band>
-
-        {/* 05 Greenfield and brownfield */}
-        <Band tone="stone">
-          <div className="max-w-3xl">
-            <ChapterHead eyebrow={c.sites.eyebrow} title={c.sites.heading} />
-          </div>
-          <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-0">
-            {c.sites.items.map((s, i) => (
-              <div key={s.id} className={cn(i === 1 && 'md:border-s md:border-gray-300 md:ps-12', i === 0 && 'md:pe-12')}>
-                <h3 className="font-display text-h3 font-semibold text-ink">{s.title}</h3>
-                <ul className="mt-6 divide-y divide-gray-300/70">
-                  {s.points.map((p) => (
-                    <li key={p} className="py-4 text-body leading-relaxed text-gray-700">
-                      <T k={/^Utility capacity/i.test(p) ? 'power' : /liquid-cooling/i.test(p) ? 'water' : undefined}>{p}</T>
-                    </li>
+                  {cmp.items.map((item) => (
+                    <article key={item.id} className="flex w-[86%] shrink-0 snap-start flex-col rounded-lg border border-gray-200 bg-white p-5 sm:w-[70%] sm:p-6 md:w-auto lg:p-7">
+                      <h3 className="font-display text-h4 font-semibold text-ink">
+                        <T k={item.id === 'crah' || item.id === 'dtc' ? 'water' : undefined} slow>
+                          {item.name}
+                        </T>
+                      </h3>
+                      <p className="mt-2 text-small leading-relaxed text-gray-700">{item.description}</p>
+                      <div className="mt-5 grid grid-cols-1 gap-4 border-t border-gray-100 pt-4 sm:grid-cols-2">
+                        <div>
+                          <p className="text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.cooling.strengthsLabel}</p>
+                          <ul className="mt-2 space-y-1.5">
+                            {item.strengths.map((s) => (
+                              <li key={s} className="flex gap-2 text-small leading-snug text-gray-700">
+                                <Check size={14} aria-hidden="true" className="mt-0.5 shrink-0 text-brand-600" />
+                                {s}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <p className="text-caption font-semibold uppercase tracking-widest text-gray-500 rtl:tracking-normal">{c.cooling.considerationsLabel}</p>
+                          <ul className="mt-2 space-y-1.5">
+                            {item.considerations.map((s) => (
+                              <li key={s} className="flex gap-2 text-small leading-snug text-gray-700">
+                                <span aria-hidden="true" className="mt-[0.45rem] h-1 w-2.5 shrink-0 rounded-full bg-gray-400" />
+                                {s}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </article>
                   ))}
-                </ul>
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
-          <div className="max-w-3xl">
-            <Role>{c.sites.role}</Role>
+          {/* Phones: position dots for the comparison on show. */}
+          <RailDots count={2} active={coolingRails[coolingView].active} />
+
+          {/* ASHRAE inlet range as a compact strip */}
+          <div className="mt-5 flex flex-col gap-3 rounded-lg border border-gray-200 bg-white/70 p-5 sm:flex-row sm:items-center sm:gap-6 lg:px-7">
+            <p className="shrink-0 font-display text-[clamp(1.75rem,1.4rem+1vw,2.25rem)] font-semibold leading-none tracking-tight text-ink">
+              <T k="heat">{c.cooling.figure.value}</T>
+            </p>
+            <p className="text-small leading-relaxed text-gray-700">
+              <RichText text={c.cooling.ashrae} />
+            </p>
           </div>
+        </Band>
+
+        {/* 05 Greenfield and brownfield: same pattern as Cooling (eyebrow, heading + intro row,
+            white cards, no text animation). Phones: a swipe rail with dots; side by side from md. The former role
+            line now serves as the intro (role strips were removed from the other sections). */}
+        <Band tone="stone" className="pb-12 pt-12 md:pb-16 md:pt-16">
+          <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.sites.eyebrow}</p>
+          <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-12 lg:items-center lg:gap-12">
+            <h2 className="font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-ink text-balance lg:col-span-6">
+              {c.sites.heading}
+            </h2>
+            <p className="text-body leading-relaxed text-gray-700 lg:col-span-6">{c.sites.role}</p>
+          </div>
+
+          <div
+            ref={(el) => {
+              sitesRail.railRef.current = el;
+            }}
+            onScroll={sitesRail.onScroll}
+            className={cn('mt-8', RAIL_CLASS, 'md:grid-cols-2 lg:gap-6')}
+          >
+            {c.sites.items.map((site) => {
+              const [label, ...rest] = site.title.split(': ');
+              const title = rest.join(': ');
+              return (
+                <article key={site.id} className="flex w-[86%] shrink-0 snap-start flex-col rounded-lg border border-gray-200 bg-white p-5 sm:w-[70%] sm:p-6 md:w-auto lg:p-7">
+                  <p className="text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{label}</p>
+                  <h3 className="mt-1.5 font-display text-h4 font-semibold text-ink">{title ? title.charAt(0).toUpperCase() + title.slice(1) : site.title}</h3>
+                  <ul className="mt-4 space-y-3 border-t border-gray-100 pt-4">
+                    {site.points.map((pt) => (
+                      <li key={pt} className="flex gap-2.5 text-small leading-relaxed text-gray-700">
+                        <Check size={14} aria-hidden="true" className="mt-1 shrink-0 text-brand-600" />
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              );
+            })}
+          </div>
+          <RailDots count={c.sites.items.length} active={sitesRail.active} />
         </Band>
 
         {/* 06 Proof: projects */}

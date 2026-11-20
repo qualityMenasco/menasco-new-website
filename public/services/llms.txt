@@ -130,12 +130,12 @@ Scope of works:
 
 - [Data Center MEP Contractor | Tier III & Tier IV](https://menascogroup.com/services/data-centers/llms.txt): Data center MEP by MENASCO: Tier III and Tier IV topologies, CRAC and CRAH cooling, UPS and generator resilience, for greenfield and brownfield sites.
 
-- Complete MEP & Infrastructure Solutions: MENASCO delivers integrated electromechanical & infrastructure solutions for mission-critical data center environments, covering complete MEP systems coordination, installation, testing & commissioning.
-- Critical Power Infrastructure: Installation of Medium Voltage (MV), Low Voltage (LV), generators, UPS systems & backup power solutions designed to ensure operational continuity & maximum uptime.
-- Cooling & Precision HVAC Systems: Design and execution of advanced HVAC systems, chilled water networks, precision cooling solutions & containment systems tailored for air cooled and direct-to-chip liquid cooled datacenter operations.
-- Automation & Smart Control Systems: Integration of BMS, PLC, monitoring systems & smart infrastructure technologies to support efficient facility management and real-time operational monitoring.
-- Security & ELV Systems: Implementation of integrated security, access control, surveillance & ELV solutions aligned with mission-critical operational and cybersecurity requirements.
-- Testing, Commissioning & Performance Validation: Comprehensive testing and commissioning processes ensuring system reliability, operational readiness, efficiency & compliance with international data center standards.
+- Complete MEP Solutions: Mechanical, electrical, plumbing and fire protection for white space, grey space and support areas, coordinated in a federated BIM model and commissioned as one package.
+- Critical Power Infrastructure: MV and LV switchgear, transformers, substations and power E-Houses, generators, UPS and A/B distribution to the rack, in N+1 and 2N topologies with provision for SMRs.
+- Cooling & Precision HVAC Systems: Chilled-water plant, CRAH/CRAC units and aisle containment, plus coolant distribution units and secondary loops for direct-to-chip liquid cooling, sized to ASHRAE conditions.
+- Modular Whitespace Fabrication: Prefabricated white space modules, pipe racks, corridor modules, plantroom skids and riser assemblies, built and tested off site, then delivered on a sequenced logistics plan.
+- BMS, Automation, Security & ELV: BMS, power monitoring (EPMS) and PLC controls with alarming and DCIM integration, plus structured cabling, access control, CCTV, intrusion detection and fire alarm interfaces.
+- Civil and Enabling Works: Site preparation, excavation, foundations, equipment plinths, cable trenches, duct banks, drainage and builder's works, sequenced with MEP installation to protect the programme.
 - Scalable & Future-Ready Infrastructure: Engineering flexible and scalable infrastructure solutions designed to support future expansion, technology upgrades & evolving operational demands.
 
 ### Civil & BIM

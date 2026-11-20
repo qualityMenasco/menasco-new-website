@@ -117,8 +117,30 @@
     opacity: 0;
   }
 }
+/* Power chain diagram: generator rotor spinning while the generator runs. */
+@keyframes dc-rotor {
+  to { transform: rotate(360deg); }
+}
+.dc-rotor {
+  animation: dc-rotor 0.9s linear infinite;
+}
 .dc-flow {
   animation: dc-flow var(--dc-flow-duration, 2.4s) linear infinite;
+}
+/* Sustainability hero: a soft pulse travelling out along the tree roots. */
+@keyframes dc-root-pulse {
+  0% { stroke-dashoffset: 1000; opacity: 0; }
+  15% { opacity: 0.7; }
+  70% { opacity: 0.45; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+.dc-root-pulse path {
+  stroke-dashoffset: 1000;
+  opacity: 0;
+  animation: dc-root-pulse 5.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dc-root-pulse { display: none; }
 }
 .dc-glow {
   animation: dc-glow 2.6s ease-in-out infinite;
@@ -127,6 +149,7 @@
   animation: dc-rise 2.8s ease-out infinite;
   transform-box: fill-box;
 }
+.dc-paused .dc-rotor,
 .dc-paused .dc-flow,
 .dc-paused .dc-glow,
 .dc-paused .dc-rise {
@@ -163,7 +186,7 @@
 [data-flow-target='power'][data-text]::after {
   content: attr(data-text);
   color: transparent;
-  background-image: linear-gradient(100deg, transparent 38%, rgba(255, 244, 214, 0.95) 47%, #f2b544 52%, rgba(242, 181, 68, 0.5) 56%, transparent 64%);
+  background-image: linear-gradient(100deg, transparent 36%, #fffaf0 46%, #ffd36b 51%, rgba(242, 181, 68, 0.75) 56%, transparent 64%);
   background-size: 260% 100%;
   background-position: 130% 0;
   -webkit-background-clip: text;
@@ -175,10 +198,11 @@
   85% { opacity: 1; }
   100% { background-position: -40% 0; opacity: 0; }
 }
+/* Brightness is the same for every power word (hero and in-page, client request). */
 @keyframes dc-energise-glow {
   0% { text-shadow: none; }
-  35% { text-shadow: 0 0 18px rgba(242, 181, 68, 0.45), 0 0 2px rgba(255, 244, 214, 0.5); }
-  100% { text-shadow: 0 0 10px rgba(242, 181, 68, 0.12); }
+  30% { text-shadow: 0 0 26px rgba(242, 181, 68, 0.75), 0 0 8px rgba(255, 226, 150, 0.7), 0 0 2px rgba(255, 250, 235, 0.9); }
+  100% { text-shadow: 0 0 14px rgba(242, 181, 68, 0.3), 0 0 3px rgba(255, 226, 150, 0.25); }
 }
 [data-flow-target='power'][data-lit='power'] {
   animation: dc-energise-glow 1.6s ease-out forwards;
@@ -204,6 +228,20 @@
 }
 [data-flow-target='water'][data-lit='water']::after {
   animation: dc-liquid-fill 2s cubic-bezier(0.25, 0.6, 0.3, 1) forwards;
+}
+/* Hero title words play faster than in-page reactions (client request). */
+[data-flow-hero][data-flow-target='power'][data-lit='power'] {
+  animation-duration: 1s;
+}
+[data-flow-hero][data-flow-target='power'][data-lit='power']::after {
+  animation-duration: 0.8s;
+}
+[data-flow-hero][data-flow-target='water'][data-lit='water']::after {
+  animation-duration: 1.2s;
+}
+/* Cooling comparison titles fill more slowly (client request). */
+[data-flow-slow][data-flow-target='water'][data-lit='water']::after {
+  animation-duration: 3.6s;
 }
 
 /* Data: decode overlay (JS cycles data-decode; the original text is transparent meanwhile). */
@@ -255,7 +293,7 @@
   [data-flow-target='power'][data-lit='power'] {
     animation: none !important;
     color: #fff1cf;
-    text-shadow: 0 0 14px rgba(242, 181, 68, 0.4);
+    text-shadow: 0 0 14px rgba(242, 181, 68, 0.55), 0 0 3px rgba(255, 226, 150, 0.4);
   }
   [data-flow-target='water'][data-lit='water']::after {
     background-position: 0 100%;

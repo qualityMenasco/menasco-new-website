@@ -34,6 +34,83 @@ const S = {
     year: '2026',
     url: 'https://iea.blob.core.windows.net/assets/3179f7f8-01f6-4dd6-bffa-c9f7b73f1dc9/KeyQuestionsonEnergyandAI.pdf',
   },
+  ieaEnergyAi: {
+    id: 'iea-energy-ai',
+    title: 'Energy and AI (World Energy Outlook Special Report): press release, 10 April 2025',
+    publisher: 'International Energy Agency',
+    year: '2025',
+    url: 'https://www.iea.org/news/ai-is-set-to-drive-surging-electricity-demand-from-data-centres-while-offering-the-potential-to-transform-how-the-energy-sector-works',
+  },
+  woodmacUae: {
+    id: 'woodmac-uae',
+    title: 'UAE data centre power demand to double by 2030 as regulatory gaps constrain clean energy procurement',
+    publisher: 'Wood Mackenzie',
+    year: '2026',
+    url: 'https://www.woodmac.com/press-releases/uae-data-centre-power-demand-to-double-by-2030-as-regulatory-gaps-constrain-clean-energy-procurement/',
+  },
+  dewaGuidelines: {
+    id: 'dewa-guidelines',
+    title: 'Power Supply Guidelines for Major Projects',
+    publisher: 'Dubai Electricity and Water Authority (DEWA)',
+    year: '2025',
+    url: 'https://dewa.gov.ae/-/media/Files/Major-Project-Guidelines-July-2025.ashx',
+  },
+  spglobalKsa: {
+    id: 'spglobal-ksa',
+    title: 'Data Center Frontiers: Saudi Arabia data center market',
+    publisher: 'S&P Global',
+    year: '2026',
+    url: 'https://www.spglobal.com/en/research-insights/special-reports/look-forward/data-center-frontiers/saudi-arabia-data-center-market',
+  },
+  cstDataCenter: {
+    id: 'cst-data-center',
+    title: 'Data Center Services Regulation',
+    publisher: 'Communications, Space and Technology Commission (CST), Saudi Arabia',
+    year: '2026',
+    url: 'https://www.cst.gov.sa/en/knowledge-center/digital-knowledge/data-center',
+  },
+  ebrdEgypt: {
+    id: 'ebrd-egypt',
+    title: 'Egypt Data Centre Investment Framework',
+    publisher: 'European Bank for Reconstruction and Development (EBRD)',
+    year: '2026',
+    url: 'https://www.ebrd.com/home/work-with-us/projects/tcpsd/data-centre-investment-framework.html',
+  },
+  mcitEgypt: {
+    id: 'mcit-egypt',
+    title: 'Data Center Development Strategy (press release)',
+    publisher: 'Ministry of Communications and Information Technology (MCIT), Egypt',
+    year: '2026',
+    url: 'https://mcit.gov.eg/en/Media_Center/Press_Room/Press_Releases/112250',
+  },
+  ecDataCentres: {
+    id: 'ec-data-centres-2026',
+    title: 'Communication on data centre energy policy, COM(2026) 501',
+    publisher: 'European Commission (EUR-Lex)',
+    year: '2026',
+    url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A52026DC0501',
+  },
+  eibInvestment: {
+    id: 'eib-investment-2025',
+    title: 'Investment Report 2025/2026, Chapter 6',
+    publisher: 'European Investment Bank',
+    year: '2026',
+    url: 'https://www.eib.org/files/publications/20250379-030326-investment-report-2025-chapter6-en.pdf',
+  },
+  reutersEquipment: {
+    id: 'reuters-equipment-2026',
+    title: 'US power companies scramble to secure equipment as surging data center demand strains supply',
+    publisher: 'Reuters',
+    year: '2026',
+    url: 'https://www.reuters.com/business/energy/us-power-companies-scramble-secure-equipment-surging-data-center-demand-strains-2026-07-09/',
+  },
+  usQueues: {
+    id: 'us-queues-2026',
+    title: 'US Interconnection Queues Analysis 2026',
+    publisher: 'Florida Municipal Electric Association (FMEA)',
+    year: '2026',
+    url: 'https://assets.noviams.com/novi-file-uploads/fmea/pdf/HLN/20260914_US_Interconnection_Queues_Analysis_2026__2_-compressed.pdf',
+  },
   taqa: {
     id: 'taqa',
     title: "Abu Dhabi's data centre industry power investments to exceed AED37 bn: TAQA CEO",
@@ -113,7 +190,23 @@ const S = {
   },
 } satisfies Record<string, SourceEntry>;
 
-export const TECHNICAL_SOURCES: SourceEntry[] = [S.uptimeTiers, S.uptimeCert, S.ashrae, S.taqa, S.lbnl, S.euReporting, S.enefg];
+/** Ordered by first appearance on the technical page, so citations read [1], [2], [3]… top to bottom. */
+export const TECHNICAL_SOURCES: SourceEntry[] = [
+  S.ieaEnergyAi, //       1  energy intro
+  S.woodmacUae, //        2  UAE
+  S.dewaGuidelines, //    3  UAE
+  S.spglobalKsa, //       4  Saudi Arabia
+  S.cstDataCenter, //     5  Saudi Arabia
+  S.ebrdEgypt, //         6  Egypt
+  S.mcitEgypt, //         7  Egypt
+  S.ecDataCentres, //     8  Europe
+  S.eibInvestment, //     9  Europe
+  S.reutersEquipment, // 10  United States
+  S.usQueues, //         11  United States
+  S.uptimeTiers, //      12  Tiers
+  S.uptimeCert, //       13  Tiers
+  S.ashrae, //           14  Cooling
+];
 
 export const SUSTAINABILITY_SOURCES: SourceEntry[] = [
   S.iea, //            1
