@@ -113,7 +113,7 @@ const S = {
   },
 } satisfies Record<string, SourceEntry>;
 
-export const TECHNICAL_SOURCES: SourceEntry[] = [S.uptimeTiers, S.uptimeCert, S.ashrae, S.iea, S.taqa, S.lbnl, S.euReporting, S.enefg];
+export const TECHNICAL_SOURCES: SourceEntry[] = [S.uptimeTiers, S.uptimeCert, S.ashrae, S.taqa, S.lbnl, S.euReporting, S.enefg];
 
 export const SUSTAINABILITY_SOURCES: SourceEntry[] = [
   S.iea, //            1

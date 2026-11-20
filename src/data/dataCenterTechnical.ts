@@ -7,18 +7,23 @@
  * stays in services:dataCenter.faq (EN + AR).
  */
 export const dcTechnical = {
-  tabs: { technical: 'Technical', sustainability: 'Sustainability' },
+  tabs: { section: 'Data Centers', technical: 'Technical', sustainability: 'Sustainability' },
   /** Narrative chapter labels and the "MENASCO's role" thread (role lines marked NEW are new copy, pending approval). */
-  chapter: 'Chapter',
+  /** "MENASCO in data centers" section below the hero. Heading, intro, capabilities and
+   *  prefab copy come from services:dataCenter (EN + AR). */
+  capability: {
+    eyebrow: 'MENASCO in data centers',
+  },
+
   roleLabel: "MENASCO's role",
   hero: {
     eyebrow: 'Data Center MEP Contractor',
     title: 'Power, Cooling and Uptime, Engineered as One System',
     intro:
-      'MENASCO engineers, installs, tests and commissions the mechanical, electrical and controls infrastructure behind mission-critical data centers, from greenfield hyperscale campuses to live brownfield upgrades, built to the redundancy each Uptime Tier requires.',
+      "With experience serving the world's leading hyperscale operators, our capabilities include greenfield and brownfield developments, Tier III and Tier IV redundant infrastructure, and projects targeting LEED Gold and Estidama Pearl sustainability ratings.",
     diagramLabel: 'Illustrative single-line: power, cooling and data paths',
   },
-  stats: { tier: 'Tier III & Tier IV', tierLabel: 'Redundancy topologies engineered' },
+  stats: { tier: 'Tier III–IV', tierLabel: 'Redundancy we build to', ratings: 'LEED & Estidama', ratingsLabel: 'Gold & Pearl alignment' },
   tiers: {
     eyebrow: 'Uptime Tier Classification',
     heading: 'Tier III and Tier IV, translated into MEP design',
@@ -139,12 +144,12 @@ export const dcTechnical = {
     eyebrow: 'Local energy markets',
     heading: 'Understanding local energy infrastructure is part of the engineering',
     intro:
-      'Power availability is increasingly the constraint on new capacity. The IEA reports that the Texas large-load connection queue, around three-quarters of it data centres, passed 230 GW by January 2026, against an all-time peak demand of 85 GW [[4]].',
+      'Power availability is now the main constraint on new capacity. Global data center electricity use is projected to more than double by 2030, to around 945 TWh, so grid connection, substation timing and on-site generation have to be planned from day one.',
     markets: [
       {
         id: 'uae',
         name: 'United Arab Emirates',
-        body: 'Abu Dhabi is building dedicated generation and transmission for data centres, with power investment for the sector expected to exceed AED 37 billion [[5]]. Early alignment with the utility on connection capacity, substation timing and tariffs de-risks the programme.',
+        body: 'Abu Dhabi is building dedicated generation and transmission for data centres, with power investment for the sector expected to exceed AED 37 billion [[4]]. Early alignment with the utility on connection capacity, substation timing and tariffs de-risks the programme.',
       },
       {
         id: 'ksa',
@@ -152,23 +157,20 @@ export const dcTechnical = {
         body: 'Fast-growing demand from giga-projects and new digital infrastructure makes early capacity agreements and phased energisation essential for data center schedules.',
       },
       {
+        id: 'egypt',
+        name: 'Egypt',
+        body: 'A major landing point for subsea cables between Europe, Asia and Africa. Summer peaks and fuel supply have led to load-shedding in recent years, so on-site generation, fuel strategy and phased energisation are planned from the start.',
+      },
+      {
         id: 'usa',
         name: 'United States',
-        body: 'Data centers used about 4.4% of US electricity in 2023 and could reach 6.7–12% by 2028 [[6]], making phased energisation and on-site generation planning critical.',
+        body: 'Data centers used about 4.4% of US electricity in 2023 and could reach 6.7–12% by 2028 [[5]], making phased energisation and on-site generation planning critical.',
       },
       {
         id: 'europe',
         name: 'Europe',
-        body: 'EU data centres of 500 kW and above report energy and water KPIs annually [[7]], and Germany sets efficiency and heat-reuse requirements for new facilities [[8]].',
+        body: 'EU data centres of 500 kW and above report energy and water KPIs annually [[6]], and Germany sets efficiency and heat-reuse requirements for new facilities [[7]].',
       },
-    ],
-    helpHeading: 'How MENASCO uses this',
-    figure: { value: '230 GW', label: 'Texas large-load connection queue in January 2026, against an all-time peak demand of 85 GW [[4]]' },
-    help: [
-      'Load profiling and staged energisation matched to the IT ramp-up.',
-      'Medium-voltage substation and switchgear interfaces coordinated with the utility from design stage.',
-      'On-site generation, storage and fuel strategies for resilience and grid support.',
-      'Metering at every level for PUE reporting and tariff optimisation.',
     ],
   },
   delivery: {

@@ -111,7 +111,7 @@ export default function DataCenterSustainabilityPage() {
       <ArabicDeferredNotice />
 
       {/* 1. Hero */}
-      <Section background="ink" spacing="sm" className="md:pt-12">
+      <Section background="charcoal" spacing="sm" className="md:pt-12">
         <div className="max-w-3xl">
           <HeroH1
             eyebrow={
@@ -229,7 +229,7 @@ export default function DataCenterSustainabilityPage() {
       </Section>
 
       {/* 5. Contractor impact */}
-      <Section background="ink" spacing="sm">
+      <Section background="charcoal" spacing="sm">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Eyebrow theme="dark">{c.contractor.eyebrow}</Eyebrow>
@@ -399,7 +399,7 @@ export default function DataCenterSustainabilityPage() {
       </Section>
 
       {/* 10. Back to technical + sources */}
-      <Section background="ink" spacing="sm">
+      <Section background="charcoal" spacing="sm">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div>
             <h2 className="font-display text-h3 font-semibold text-white">{c.technicalTeaser.heading}</h2>

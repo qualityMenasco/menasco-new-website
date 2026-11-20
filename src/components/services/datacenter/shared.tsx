@@ -1,6 +1,7 @@
-import { Fragment } from 'react';
+import { Fragment, useCallback, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { SmartLink } from '../../../lib/SmartLink';
+import { Container } from '../../layout/Container';
 import { cn } from '../../../lib/utils';
 import { getLocaleFromPath } from '../../../lib/locale';
 import { dcTechnical } from '../../../data/dataCenterTechnical';
@@ -25,8 +26,10 @@ export function stripCites(text: string) {
 }
 
 /**
- * The two Data Center pages presented as tabs: a sticky segmented switch
- * under the header. Each tab is a real page (its own URL, title and H1).
+ * The two Data Center pages presented as tabs: a slim, sticky editorial tab
+ * bar under the header, aligned to the page content (a "Data Centers" label,
+ * then text tabs; the active one is white with a brand-blue underline sitting
+ * on the bar's hairline). Each tab is a real page (its own URL, title, H1).
  */
 export function DataCenterTabs({ active }: { active: 'technical' | 'sustainability' }) {
   const tabs = [
@@ -34,31 +37,32 @@ export function DataCenterTabs({ active }: { active: 'technical' | 'sustainabili
     { id: 'sustainability' as const, href: DC_SUSTAINABILITY_PATH, label: dcTechnical.tabs.sustainability },
   ];
   return (
-    <nav aria-label="Data center" className="sticky top-14 z-30 border-b border-white/10 bg-ink/95 backdrop-blur-md desktop:top-20">
-      <div className="mx-auto flex max-w-container justify-center px-4 py-3 md:px-8">
-        <div className="relative grid w-full max-w-md grid-cols-2 rounded-full border border-white/15 bg-white/5 p-1">
-          <span
-            aria-hidden="true"
-            className={cn(
-              'absolute inset-y-1 w-[calc(50%-0.25rem)] rounded-full bg-brand-600 transition-transform duration-500 ease-out motion-reduce:transition-none',
-              active === 'technical' ? 'translate-x-1 rtl:-translate-x-1' : 'translate-x-[calc(100%+0.25rem)] rtl:-translate-x-[calc(100%+0.25rem)]',
-            )}
-          />
-          {tabs.map((tab) => (
-            <SmartLink
-              key={tab.id}
-              href={tab.href}
-              aria-current={active === tab.id ? 'page' : undefined}
-              className={cn(
-                'relative z-10 flex min-h-10 items-center justify-center rounded-full text-small font-semibold transition-colors duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400',
-                active === tab.id ? 'text-white' : 'text-gray-400 hover:text-white',
-              )}
-            >
-              {tab.label}
-            </SmartLink>
-          ))}
-        </div>
-      </div>
+    <nav aria-label="Data centers" className="sticky top-14 z-30 border-b border-white/10 bg-charcoal desktop:top-20">
+      <Container className="flex h-12 items-stretch gap-8 md:h-14">
+        <span className="hidden items-center pe-8 font-display text-caption font-semibold uppercase tracking-widest text-gray-500 sm:flex sm:border-e sm:border-white/10 rtl:tracking-normal">
+          {dcTechnical.tabs.section}
+        </span>
+        <ul className="flex items-stretch gap-8">
+          {tabs.map((tab) => {
+            const on = active === tab.id;
+            return (
+              <li key={tab.id} className="relative flex">
+                <SmartLink
+                  href={tab.href}
+                  aria-current={on ? 'page' : undefined}
+                  className={cn(
+                    'flex items-center font-display text-small font-semibold transition-colors duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-400 md:text-body',
+                    on ? 'text-white' : 'text-gray-400 hover:text-white',
+                  )}
+                >
+                  {tab.label}
+                </SmartLink>
+                <span aria-hidden="true" className={cn('absolute inset-x-0 -bottom-px h-0.5 bg-brand-400 transition-opacity duration-base', on ? 'opacity-100' : 'opacity-0')} />
+              </li>
+            );
+          })}
+        </ul>
+      </Container>
     </nav>
   );
 }
@@ -70,6 +74,52 @@ export function ArabicDeferredNotice() {
   return (
     <div lang="ar" dir="rtl" className="bg-warning-subtle px-4 py-2 text-center text-small font-semibold text-ink">
       {dcTechnical.arabicNotice}
+    </div>
+  );
+}
+
+/**
+ * Swipe-rail helpers for the Data Center pages. Below md (768px), card grids
+ * become a horizontal, snapping rail; this tracks which card is in view.
+ * Breakpoint rule (client): stay a full grid on tablet; collapse only below md.
+ */
+export const RAIL_CLASS =
+  'no-scrollbar -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 pb-1 md:mx-0 md:grid md:snap-none md:overflow-visible md:px-0 md:pb-0';
+
+export function useRail() {
+  const railRef = useRef<HTMLElement | null>(null);
+  const [active, setActive] = useState(0);
+  const onScroll = useCallback(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const pad = parseFloat(getComputedStyle(rail).scrollPaddingLeft || '0');
+    const left = rail.getBoundingClientRect().left + pad;
+    let best = 0;
+    let dist = Infinity;
+    [...rail.children].forEach((card, i) => {
+      const d = Math.abs((card as HTMLElement).getBoundingClientRect().left - left);
+      if (d < dist) {
+        dist = d;
+        best = i;
+      }
+    });
+    setActive(best);
+  }, []);
+  return { railRef, active, onScroll };
+}
+
+/** Position dots + "02 / 09" counter shown under a rail (phones only). */
+export function RailDots({ count, active }: { count: number; active: number }) {
+  return (
+    <div className="mt-5 flex items-center justify-between md:hidden">
+      <div aria-hidden="true" className="flex gap-1.5">
+        {Array.from({ length: count }, (_, i) => (
+          <span key={i} className={cn('h-1.5 rounded-full transition-all duration-base', i === active ? 'w-5 bg-ink' : 'w-1.5 bg-gray-300')} />
+        ))}
+      </div>
+      <p className="font-display text-caption font-semibold tabular-nums text-gray-500">
+        {String(active + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
+      </p>
     </div>
   );
 }

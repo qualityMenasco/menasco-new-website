@@ -324,15 +324,14 @@
       "heading": "Building the Backbone of the Digital Future"
     },
     "introParagraphs": [
-      "MENASCO is a trusted MEP & infrastructure partner delivering end-to-end mission-critical data center solutions across the UAE. We specialize in the design coordination, engineering, installation, testing & commissioning of high-performance data center environments built to support reliability, operational continuity & future scalability.",
-      "With extensive experience in complex & mission-critical projects, MENASCO delivers integrated solutions covering critical power infrastructure, precision cooling systems, automation, fire protection, ELV & smart building technologies all engineered to meet the demanding requirements of modern digital infrastructure.",
+      "MENASCO delivers integrated MEP and infrastructure solutions for mission-critical data centers across the UAE, Saudi Arabia, Egypt, the United Kingdom, and the United States. Beyond core MEP capabilities, our scope extends to civil works, modular data center white space manufacturing, and energy infrastructure. By combining these capabilities with in-house fabrication, established procurement networks, and strategic supplier relationships, we maintain greater control over the supply chain, reduce project dependencies, and protect quality and delivery schedules even under challenging market conditions. From initial concept to operational readiness, MENASCO brings complex data center developments to life.",
       "Our expertise extends across the full project lifecycle, from early-stage coordination & value engineering to final commissioning & operational readiness, ensuring efficient execution, optimized performance & long-term reliability.",
       "At MENASCO, we are committed to delivering resilient, scalable & future-ready infrastructure that supports the evolving needs of data-driven industries & the growing digital economy."
     ],
     "exploreProjectsCta": "Explore Our Data Center Projects",
     "stats": {
-      "featuredDataCenters": "Featured Data Centers",
-      "megawatts": "MegaWatts",
+      "featuredDataCenters": "Data centers featured",
+      "megawatts": "IT capacity delivered",
       "projectValue": "Project Value"
     },
     "capabilitiesHeading": {
@@ -341,28 +340,28 @@
     },
     "capabilities": [
       {
-        "title": "Complete MEP & Infrastructure Solutions",
-        "description": "MENASCO delivers integrated electromechanical & infrastructure solutions for mission-critical data center environments, covering complete MEP systems coordination, installation, testing & commissioning."
+        "title": "Complete MEP Solutions",
+        "description": "Mechanical, electrical, plumbing and fire protection for white space, grey space and support areas, coordinated in a federated BIM model and commissioned as one package."
       },
       {
         "title": "Critical Power Infrastructure",
-        "description": "Installation of Medium Voltage (MV), Low Voltage (LV), generators, UPS systems & backup power solutions designed to ensure operational continuity & maximum uptime."
+        "description": "MV and LV switchgear, transformers, substations and power E-Houses, generators, UPS and A/B distribution to the rack, in N+1 and 2N topologies with provision for SMRs."
       },
       {
         "title": "Cooling & Precision HVAC Systems",
-        "description": "Design and execution of advanced HVAC systems, chilled water networks, precision cooling solutions & containment systems tailored for air cooled and direct-to-chip liquid cooled datacenter operations."
+        "description": "Chilled-water plant, CRAH/CRAC units and aisle containment, plus coolant distribution units and secondary loops for direct-to-chip liquid cooling, sized to ASHRAE conditions."
       },
       {
-        "title": "Automation & Smart Control Systems",
-        "description": "Integration of BMS, PLC, monitoring systems & smart infrastructure technologies to support efficient facility management and real-time operational monitoring."
+        "title": "Modular Whitespace Fabrication",
+        "description": "Prefabricated white space modules, pipe racks, corridor modules, plantroom skids and riser assemblies, built and tested off site, then delivered on a sequenced logistics plan."
       },
       {
-        "title": "Security & ELV Systems",
-        "description": "Implementation of integrated security, access control, surveillance & ELV solutions aligned with mission-critical operational and cybersecurity requirements."
+        "title": "BMS, Automation, Security & ELV",
+        "description": "BMS, power monitoring (EPMS) and PLC controls with alarming and DCIM integration, plus structured cabling, access control, CCTV, intrusion detection and fire alarm interfaces."
       },
       {
-        "title": "Testing, Commissioning & Performance Validation",
-        "description": "Comprehensive testing and commissioning processes ensuring system reliability, operational readiness, efficiency & compliance with international data center standards."
+        "title": "Civil and Enabling Works",
+        "description": "Site preparation, excavation, foundations, equipment plinths, cable trenches, duct banks, drainage and builder's works, sequenced with MEP installation to protect the programme."
       },
       {
         "title": "Scalable & Future-Ready Infrastructure",
@@ -370,8 +369,11 @@
       }
     ],
     "prefab": {
+      "snippet": "In-house fabrication gives MENASCO direct control over complex and difficult supply chains. Critical MEP assemblies are built and tested under our own quality control, reducing reliance on third-party lead times and protecting the site programme.",
+      "groups": [{"label": "Modular & prefabricated", "items": ["Modular MEP white spaces", "Prefabricated E-Houses", "Pipe racks and vertical service risers", "Mechanical plant and equipment skid modules", "Duct and pipe assemblies"]}, {"label": "Power & controls", "items": ["Automatic transfer switch (ATS) panels", "PLC and electrical control panels", "LV main and sub-main distribution boards (MDB / SMDB)", "Motor control centres (MCC)", "Capacitor banks for power factor correction", "High-current feeder and plug-in tap-off busway"]}, {"label": "Air distribution", "items": ["Galvanised ductwork fabricated to SMACNA", "Phenolic and PIR pre-insulated duct panels", "Motorised and pressure-independent volume control dampers", "Curtain fire dampers", "Duct sound attenuators"]}], "showAll": "Show all {{count}} items", "showLess": "Show fewer",
+      "cta": "Explore more",
       "eyebrow": "Prefabrication",
-      "heading": "Integrated Prefabrication and Modular MEP Delivery for Data Centers",
+      "heading": "Modular MEP Fabrication for Data Centers",
       "description": "Menasco has the capability to develop and deliver fully coordinated prefabricated MEP solutions for data center projects, including modular pipe racks, corridor modules, plantroom skids, riser modules, valve assemblies, and support frames. These solutions are engineered through early BIM coordination, factory-controlled fabrication, pre-assembly, testing where applicable, and planned logistics to site.",
       "closingStatement": "Powering the Future of Data Centers: MENASCO delivers integrated mission-critical infrastructure solutions designed for maximum reliability, operational continuity & scalable performance."
     },

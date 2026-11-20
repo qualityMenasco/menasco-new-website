@@ -138,7 +138,7 @@ export function DiagramFrame({
     <div
       ref={ref}
       dir="ltr"
-      className={cn('relative overflow-hidden rounded-md border', dark ? 'border-white/10 bg-[#0E1216]' : 'border-gray-200 bg-white', !inView && 'dc-paused', className)}
+      className={cn('relative overflow-hidden rounded-md border', dark ? 'border-white/10 bg-graphite' : 'border-gray-200 bg-white', !inView && 'dc-paused', className)}
     >
       <div className={cn(minWidth && 'no-scrollbar overflow-x-auto')}>
         <div style={minWidth ? { minWidth } : undefined}>{children}</div>
