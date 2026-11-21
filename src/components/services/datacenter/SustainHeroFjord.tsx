@@ -1,4 +1,4 @@
-import fjordSvg from '../../../assets/sustain-hero-fjord.svg?raw';
+import { SUSTAIN_HERO_FJORD_SVG as fjordSvg } from '../../../assets/sustainHeroFjord';
 
 /**
  * Sustainability hero drawing: a fjord in one-point perspective, composed to
@@ -8,7 +8,7 @@ import fjordSvg from '../../../assets/sustain-hero-fjord.svg?raw';
  * MENASCO-blue data lines with pulses (staggered left to right on entry).
  * The water is pure white, like the hero around it.
  *
- * Inline SVG (static markup from src/assets/sustain-hero-fjord.svg) so its own
+ * Inline SVG (static markup from src/assets/sustainHeroFjord.ts) so its own
  * pulse animation runs; pulses are hidden for reduced-motion users.
  */
 export function SustainHeroFjord() {
