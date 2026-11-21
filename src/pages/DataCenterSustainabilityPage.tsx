@@ -264,7 +264,7 @@ export default function DataCenterSustainabilityPage() {
           <h2 className={H2}>GCC, USA and Europe</h2>
           <Segmented label="Region" value={region} onChange={setRegion} options={regions.map((r) => ({ id: r.id, label: r.label }))} />
         </div>
-        <div className="mt-8 grid">
+        <div className="mt-8 grid grid-cols-1">
           {regions.map((r) => {
             const shown = region === r.id;
             return (
@@ -272,7 +272,7 @@ export default function DataCenterSustainabilityPage() {
                 key={r.id}
                 aria-hidden={!shown}
                 {...(shown ? {} : { inert: '' })}
-                className={cn('col-start-1 row-start-1 transition-opacity duration-300 motion-reduce:transition-none', shown ? 'visible opacity-100' : 'invisible opacity-0')}
+                className={cn('col-start-1 row-start-1 min-w-0 transition-opacity duration-300 motion-reduce:transition-none', shown ? 'visible opacity-100' : 'invisible opacity-0')}
               >
                 <div className="grid grid-cols-1 gap-3 lg:grid-cols-12 lg:items-center lg:gap-12">
                   <div className="lg:col-span-5">
