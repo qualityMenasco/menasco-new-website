@@ -67,7 +67,11 @@ Rapid hyperscale expansion in Abu Dhabi and Dubai is placing new demands on powe
 
 With our international engineering, procurement, and project management teams headquartered in Dubai, MENASCO can coordinate utility requirements, electrical infrastructure design, and long-lead equipment sourcing from a single operational hub. Direct UAE construction capabilities, in-country manufacturing and established supplier relationships allow substation works, cooling infrastructure, and off-site modular prefabrication to progress in parallel, reducing dependencies between utility readiness, equipment delivery, and construction milestones.
 
-**Competitive advantage:** MENASCO's headquarters brings engineering, global procurement, in-country fabrication, and construction management together in the UAE, enabling faster technical coordination and greater control over the procurement and delivery interfaces that commonly delay large-scale data center projects.
+**Competitive advantage:**
+
+- Engineering, procurement, fabrication and construction management in one UAE headquarters
+- Faster technical coordination from a single operational hub
+- Tighter control of the procurement and delivery interfaces that delay projects
 
 Link: https://menascogroup.com/services/data-centers#united-arab-emirates
 
@@ -85,7 +89,11 @@ Saudi Arabia's expanding data center market must balance large-scale AI infrastr
 
 Saudi Arabia's extreme temperatures and water scarcity demand cooling systems optimized for local conditions, while rapid data center expansion places pressure on specialist equipment supply chains. MENASCO is skilled in delivering closed loop direct-to-chip liquid cooling, as well as traditional configurations against project-specific PUE and WUE targets. Drawing on international suppliers and in-country fabrication to source equipment, dedicated construction teams adapt solutions to local codes, utility requirements, and minimize reliance on external delivery partners.
 
-**Competitive advantage:** Direct-to-chip cooling expertise, in-country fabrication and a global sourcing network backed by directly managed Saudi construction teams.
+**Competitive advantage:**
+
+- Direct-to-chip liquid cooling expertise
+- In-country fabrication and a global sourcing network
+- Directly managed Saudi construction teams
 
 Link: https://menascogroup.com/services/data-centers#saudi-arabia
 
@@ -103,7 +111,11 @@ Egypt's position as a regional connectivity hub offers opportunities for data ce
 
 Egypt's reliance on imported specialist equipment and variable infrastructure readiness can delay data center construction. MENASCO addresses these constraints through Egyptian manufacturing facilities capable of producing modular data center white spaces, E-Houses and prefabricated MEP assemblies locally, reducing the need to import completed modules. International procurement teams source specialized components while local construction teams coordinate utility connections and civil works, allowing manufacturing and site development to progress in parallel.
 
-**Competitive advantage:** Local Modular MEP units combined with international component sourcing reduces dependence on imported finished systems and creates opportunities to shorten construction schedules.
+**Competitive advantage:**
+
+- Local manufacturing of modular MEP units
+- International sourcing of specialist components
+- Less reliance on imported finished systems, with scope to shorten schedules
 
 Link: https://menascogroup.com/services/data-centers#egypt
 
@@ -121,13 +133,17 @@ European data center development faces increasing grid connection delays, limite
 
 Grid connection delays and increasingly demanding energy-efficiency regulations can limit the feasibility and timing of European data center developments. MENASCO's scale of international engineering resources support early assessment of electrical capacity, phased infrastructure requirements, and cooling configurations incorporating heat recovery where viable. UK-based teams coordinate technical development and global equipment sourcing, while qualified local partners address country-specific regulations and utility interfaces, allowing procurement and construction planning to respond to confirmed power availability.
 
-**Competitive advantage:** Centralized technical resources and international procurement capacity help projects adapt to constrained grid access, with UK-led coordination and local regulatory support.
+**Competitive advantage:**
+
+- Centralized technical resources and international procurement capacity
+- Flexibility to adapt to constrained grid access
+- UK-led coordination with local regulatory support
 
 Link: https://menascogroup.com/services/data-centers#europe
 
 ### Data centers in the United States
 
-US data center development is increasingly constrained by utility interconnection delays, electrical equipment shortages, regional permitting requirements, and a growing shortage of skilled construction tradespeople. Limited availability of electricians, pipefitters, HVAC technicians, and other specialized workers places additional pressure on labor costs and construction schedules. With large power transformers facing multi-year lead times, early procurement, workforce planning, off-site prefabrication, and phased energization are essential to maintaining delivery schedules for hyperscale and AI infrastructure projects [10] [11].
+US data center development is increasingly constrained by electrical equipment supply and a growing shortage of skilled construction tradespeople. Availability of electricians, pipefitters, HVAC technicians, and other specialized workers place pressure on labor costs and schedules. With large power transformers facing multi-year lead times, early procurement, workforce planning, off-site prefabrication, and phased energization are essential for hyperscale and AI infrastructure projects [10] [11].
 
 **Key market constraints:**
 
@@ -140,7 +156,12 @@ US data center development is increasingly constrained by utility interconnectio
 
 MENASCO's international procurement network expands access to qualified manufacturers beyond domestic suppliers, while centralized engineering teams coordinate alternative equipment specifications and modular fabrication opportunities. Direct US contracting partnerships enable civil works, prefabricated MEP installation, and phased electrical infrastructure to be aligned with equipment deliveries and utility energization milestones. Established relationships with staffing agencies across the United States also provide access to skilled construction tradespeople, helping address regional labor shortages, scale site workforces, and maintain construction schedules on large-scale data center developments.
 
-**Competitive advantage:** Global procurement networks, centralized engineering expertise, and US construction capabilities provide greater flexibility in managing equipment shortages and utility delays, while nationwide staffing relationships help secure the skilled workforce needed to maintain construction schedules and scale delivery across multiple projects.
+**Competitive advantage:**
+
+- Global procurement networks to manage equipment shortages
+- Centralized engineering expertise
+- US construction capabilities that adapt to utility delays
+- Nationwide staffing relationships for skilled construction trades
 
 Link: https://menascogroup.com/services/data-centers#united-states
 

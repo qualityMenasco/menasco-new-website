@@ -1,5 +1,5 @@
 /** Design rules for the Data Center pages: see the header comment in src/pages/DataCenterPage.tsx. */
-import { useState, type ReactNode } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 import { ArrowLeft, ArrowRight, Check, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Container } from '../components/layout/Container';
@@ -12,7 +12,8 @@ import { SUSTAINABILITY_SOURCES } from '../data/dataCenterSources';
 import { DC_SUSTAINABILITY_PATH, DC_TECHNICAL_PATH, ArabicDeferredNotice, DataCenterTabs, RAIL_CLASS, RailDots, RichText, stripCites, useRail } from '../components/services/datacenter/shared';
 import { SourcesList } from '../components/services/datacenter/primitives';
 import { DirectionGauge, LevelBar, OutlookChart } from '../components/services/datacenter/sustainabilityDiagrams';
-import { SustainHeroRoots, SustainHeroTree } from '../components/services/datacenter/SustainHeroTree';
+import { SustainHeroFjord } from '../components/services/datacenter/SustainHeroFjord';
+import { TextReactions } from '../components/services/datacenter/TextReactions';
 import { TopicTabs } from '../components/sections/quality/TopicTabs';
 import { TopicAccordion } from '../components/sections/quality/TopicAccordion';
 import { Segmented } from '../components/services/datacenter/technicalDiagrams';
@@ -28,7 +29,7 @@ type Region = 'gcc' | 'usa' | 'europe';
 const EYEBROW_BASE = 'font-display text-caption font-semibold uppercase tracking-widest rtl:tracking-normal';
 const EYEBROW = `${EYEBROW_BASE} text-brand-600`;
 const H2 = 'font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-ink text-balance';
-const TONE_BG = { light: 'bg-warmwhite', stone: 'bg-stone', dark: 'bg-charcoal' } as const;
+const TONE_BG = { white: 'bg-white', light: 'bg-warmwhite', stone: 'bg-stone', dark: 'bg-charcoal' } as const;
 
 function Band({ tone, className, children }: { tone: keyof typeof TONE_BG; className?: string; children: ReactNode }) {
   return (
@@ -98,6 +99,7 @@ function PriorityTable({ rows }: { rows: { intervention: string; why: string }[]
 export default function DataCenterSustainabilityPage() {
   const { t } = useTranslation('services');
   const [region, setRegion] = useState<Region>('gcc');
+  const heroTextRef = useRef<HTMLElement>(null);
   const climateRail = useRail();
   const certRail = useRail();
   const title = t('dataCenterSustainability.seo.title');
@@ -142,21 +144,21 @@ export default function DataCenterSustainabilityPage() {
       <DataCenterTabs active="sustainability" />
       <ArabicDeferredNotice />
 
-      {/* 1. Hero: white, an illustrated tree on top whose blue roots run down behind the title. */}
-      <section className="relative overflow-hidden bg-white [--tree-h:clamp(190px,30vw,400px)]">
-        <div className="relative mt-6 h-[var(--tree-h)] md:mt-8">
-          <div className="absolute inset-y-0 left-1/2 w-[calc(var(--tree-h)*3.7209)] -translate-x-1/2">
-            <SustainHeroTree />
+      {/* 1. Hero: white, with the fjord drawing composed like the technical hero (same frame,
+          vanishing point and bleed into the side gutters), then the title. */}
+      <section className="relative overflow-hidden bg-white">
+        <Container className="relative pt-6 md:pt-8">
+          <div className="-mx-6 md:-mx-14 lg:-mx-28">
+            <SustainHeroFjord />
           </div>
-        </div>
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute bottom-0 left-1/2 top-[calc(var(--tree-h)+1.5rem)] md:top-[calc(var(--tree-h)+2rem)] w-[calc(var(--tree-h)*3.7209)] -translate-x-1/2 [mask-image:linear-gradient(to_bottom,#000_30%,rgba(0,0,0,0.35))]"
-        >
-          <SustainHeroRoots />
-        </div>
-        <Container className="relative z-[2] pb-14 pt-6 md:pb-20 md:pt-8">
-          <div className="max-w-4xl">
+        </Container>
+      </section>
+      {/* Hero text: white, the same as the drawing's water, so the drawing runs into it. */}
+      <section ref={heroTextRef} className="bg-white">
+        {/* Title words react on page entry, as on the technical hero. */}
+        <TextReactions containerRef={heroTextRef} />
+        <Container className="relative z-[2] pb-14 pt-4 md:pb-20 md:pt-2">  {/* same gap below the drawing as the technical hero (mt-4 md:mt-2) */}
+          <div className="max-w-5xl">
             <HeroH1
               eyebrow={
                 <Eyebrow as="span" className="block">
@@ -164,8 +166,17 @@ export default function DataCenterSustainabilityPage() {
                 </Eyebrow>
               }
               title={
-                <span className="mt-4 block font-display text-[clamp(2.25rem,1.5rem+3vw,4rem)] font-semibold leading-[1.05] tracking-tight text-ink text-balance">
-                  {c.hero.title}
+                <span className="mt-4 block font-display text-[clamp(2.75rem,1.6rem+4.6vw,5.5rem)] font-semibold leading-[1.02] tracking-tight text-ink text-balance">
+                  {/* Only "Water" reacts (liquid fill) on page entry, on the same timing as "Cooling" on the technical hero. */}
+                  {c.hero.title.split(/(Water)/).map((part, i) =>
+                    part === 'Water' ? (
+                      <span key={i} data-flow-target="water" data-flow-hero="">
+                        {part}
+                      </span>
+                    ) : (
+                      part
+                    ),
+                  )}
                 </span>
               }
             />
@@ -175,7 +186,7 @@ export default function DataCenterSustainabilityPage() {
       </section>
 
       {/* 2. Seven opportunities: tabs (vertical list beside the panel from md; a scrolling pill row on phones). */}
-      <Band tone="light">
+      <Band tone="white">
         <Head eyebrow={c.opportunities.eyebrow} title={c.opportunities.heading} />
         <TopicTabs
           idPrefix="dcs-opportunity"
@@ -196,7 +207,7 @@ export default function DataCenterSustainabilityPage() {
       </Band>
 
       {/* 3. Metrics */}
-      <Band tone="stone">
+      <Band tone="light">
         <Head
           eyebrow={c.metrics.eyebrow}
           title={c.metrics.heading}
@@ -247,7 +258,7 @@ export default function DataCenterSustainabilityPage() {
       </Band>
 
       {/* 4. Regional priorities: toggle; all three in the HTML, stacked in one cell (no height jump). */}
-      <Band tone="light">
+      <Band tone="white">
         <p className={EYEBROW}>Regional priorities</p>
         <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <h2 className={H2}>GCC, USA and Europe</h2>

@@ -45,6 +45,8 @@ const HERO_GAP_MS = 620;
 const DECODE_MS = 2200;
 /** Hero title decode ("Uptime"): much quicker than in-page decodes (client request). */
 const HERO_DECODE_MS = 760;
+/** In-page decodes marked data-flow-fast ("Mission-critical projects" heading, client request 2026-11-21). */
+const FAST_DECODE_MS = 900;
 /** Each scrambled character holds for this long before changing. */
 const GLYPH_HOLD_MS = 110;
 
@@ -134,7 +136,7 @@ export function TextReactions({ containerRef }: { containerRef: RefObject<HTMLEl
         const kind = el.dataset.flowTarget!;
         if (lit && el.dataset.lit !== kind) {
           el.dataset.lit = kind;
-          if (kind === 'data' && !reduced) cancels.set(el, decode(el, k >= 0 ? HERO_DECODE_MS : DECODE_MS));
+          if (kind === 'data' && !reduced) cancels.set(el, decode(el, k >= 0 ? HERO_DECODE_MS : el.hasAttribute('data-flow-fast') ? FAST_DECODE_MS : DECODE_MS));
         } else if (!lit && el.dataset.lit) {
           delete el.dataset.lit;
           cancels.get(el)?.();

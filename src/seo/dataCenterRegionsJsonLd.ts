@@ -17,7 +17,7 @@ export function dataCenterRegionsJsonLd() {
   return regionalServicesJsonLd(
     dcTechnical.energy.markets.map((m) => ({
       name: `Data center MEP and infrastructure delivery in ${m.inName}`,
-      description: `${m.help} ${m.advantage}`,
+      description: `${m.help} ${m.advantage.join('. ')}.`,
       url: `${SITE_URL}${PATH}#${m.slug}`,
       area: m.name,
       areaType: m.id === 'europe' ? ('Place' as const) : ('Country' as const),

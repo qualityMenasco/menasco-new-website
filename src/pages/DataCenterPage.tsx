@@ -104,7 +104,7 @@
  * ============================================================================
  */
 import { useEffect, useRef, useState, type ReactNode, type RefObject } from 'react';
-import { ArrowRight, Check, Zap } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Container } from '../components/layout/Container';
 import { Eyebrow } from '../components/typography/Typography';
@@ -120,8 +120,7 @@ import { MarketFlipCard } from '../components/services/datacenter/MarketFlipCard
 import { DC_SUSTAINABILITY_PATH, DC_TECHNICAL_PATH, ArabicDeferredNotice, DataCenterTabs, RAIL_CLASS, RailDots, RichText, useRail } from '../components/services/datacenter/shared';
 import { PlaceholderImage, SourcesList } from '../components/services/datacenter/primitives';
 import { HeroServerHall, Segmented } from '../components/services/datacenter/technicalDiagrams';
-import { PowerChainDiagram } from '../components/services/datacenter/PowerChainDiagram';
-import { TextReactions, ELEMENT_COLORS } from '../components/services/datacenter/TextReactions';
+import { TextReactions } from '../components/services/datacenter/TextReactions';
 import { CapabilitySection, PrefabSection } from '../components/services/datacenter/CapabilitySection';
 import { SEO } from '../seo/SEO';
 import { faqPageJsonLd, serviceEntity } from '../seo/structuredData';
@@ -149,11 +148,33 @@ function Band({ tone, children, className }: { tone: Tone; children: ReactNode; 
   );
 }
 
+/**
+ * "How MENASCO helps" paragraph (energy market card back): on phones (below md) clamped to 4 lines with a
+ * Read more / Show less toggle (client pick 2026-11-21, to shorten the cards).
+ * The full text is always in the HTML; tablets and desktop show it in full.
+ */
+function ClampPara({ children, className }: { children: ReactNode; className?: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={className}>
+      <p className={cn('text-[0.8125rem] leading-[1.55] text-gray-700 md:text-small md:leading-relaxed lg:text-body', !open && 'max-md:line-clamp-4')}>{children}</p>
+      <button
+        type="button"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        className="mt-1 font-display text-[0.8125rem] font-semibold text-brand-600 underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 md:hidden"
+      >
+        {open ? c.energy.readLess : c.energy.readMore}
+      </button>
+    </div>
+  );
+}
+
 /** Wraps text as a reaction target (see TextReactions). `hero` = a hero title word (reacts on page entry, one after another).
- *  `slow` = a slower in-page animation (the cooling comparison titles). */
-const T = ({ k, hero, slow, children }: { k?: Kind; hero?: boolean; slow?: boolean; children: ReactNode }) =>
+ *  `slow` = a slower in-page animation (the cooling comparison titles); `fast` = a quicker data decode. */
+const T = ({ k, hero, slow, fast, children }: { k?: Kind; hero?: boolean; slow?: boolean; fast?: boolean; children: ReactNode }) =>
   k ? (
-    <span data-flow-target={k} data-flow-hero={hero ? '' : undefined} data-flow-slow={slow ? '' : undefined}>
+    <span data-flow-target={k} data-flow-hero={hero ? '' : undefined} data-flow-slow={slow ? '' : undefined} data-flow-fast={fast ? '' : undefined}>
       {children}
     </span>
   ) : (
@@ -161,12 +182,14 @@ const T = ({ k, hero, slow, children }: { k?: Kind; hero?: boolean; slow?: boole
   );
 
 /** Section heading: eyebrow (no "Chapter" label, client request), large heading, optional lead. */
-function ChapterHead({ eyebrow, title, lead, dark = false, target }: { eyebrow: string; title: string; lead?: ReactNode; dark?: boolean; target?: Kind }) {
+function ChapterHead({ eyebrow, title, lead, dark = false, target, fast }: { eyebrow: string; title: string; lead?: ReactNode; dark?: boolean; target?: Kind; fast?: boolean }) {
   return (
     <div>
       <p className={cn('font-display text-caption font-semibold uppercase tracking-widest rtl:tracking-normal', dark ? 'text-brand-400' : 'text-brand-600')}>{eyebrow}</p>
       <h2 className={cn('mt-5 font-display text-[clamp(2rem,1.4rem+2.4vw,3.25rem)] font-semibold leading-[1.06] tracking-tight text-balance', dark ? 'text-white' : 'text-ink')}>
-        <T k={target}>{title}</T>
+        <T k={target} fast={fast}>
+          {title}
+        </T>
       </h2>
       {lead && <p className={cn('mt-6 text-body-lg leading-relaxed', dark ? 'text-gray-300' : 'text-gray-600')}>{lead}</p>}
     </div>
@@ -251,7 +274,6 @@ export default function DataCenterPage() {
   useSlowHeroScroll(heroRef);
   const faq = t('dataCenter.faq', { returnObjects: true }) as FaqEntry[];
   const faqItems = Array.isArray(faq) ? faq.map((f) => ({ question: f.title, answer: f.content })) : [];
-  const [failed, setFailed] = useState(false);
   const [coolingView, setCoolingView] = useState<'units' | 'approach'>('units');
   // Cooling cards: a swipe rail per comparison below md; switching starts the new rail at its first card.
   const coolingRails = { units: useRail(), approach: useRail() };
@@ -292,7 +314,8 @@ export default function DataCenterPage() {
     setMarkets(orderForVisitor(c.energy.markets, visitorRegion()));
   }, []);
   const heroWord = (w: string, i: number) => {
-    const k: Kind | undefined = /^Power/.test(w) ? 'power' : /^Cooling/.test(w) ? 'water' : /^Uptime/.test(w) ? 'data' : undefined;
+    // Only "Cooling" reacts (water); Power/Uptime reactions removed (client request), matching the sustainability hero.
+    const k: Kind | undefined = /^Cooling/.test(w) ? 'water' : undefined;
     return (
       <span key={i}>
         <T k={k} hero>
@@ -403,7 +426,7 @@ export default function DataCenterPage() {
                 <MarketFlipCard
                   frontTitle={
                     <>
-                      <T k="data">{c.energy.frontTitlePrefix.replace(/ in$/, '')}</T> in {m.inName}
+                      {c.energy.frontTitlePrefix.replace(/ in$/, '')} in {m.inName}
                     </>
                   }
                   backTitle={`${c.energy.backTitlePrefix} ${m.inName}`}
@@ -412,7 +435,7 @@ export default function DataCenterPage() {
                   backEyebrow={m.name}
                   front={(button) => (
                     // Two columns from lg: market context | key constraints (+ flip button at its foot, bottom-right).
-                    <div className="mt-2 grid flex-1 grid-cols-1 grid-rows-[auto_1fr] gap-4 md:mt-3 md:gap-6 lg:grid-cols-12 lg:grid-rows-1 lg:gap-10">
+                    <div className="mt-2 grid flex-1 grid-cols-1 grid-rows-[auto_1fr] gap-3 md:mt-3 md:gap-6 lg:grid-cols-12 lg:grid-rows-1 lg:gap-10">
                       <p className="text-[0.8125rem] leading-[1.55] md:text-small md:leading-relaxed text-gray-700 lg:col-span-7 lg:text-body">
                         <RichText text={m.body} />
                       </p>
@@ -426,20 +449,26 @@ export default function DataCenterPage() {
                             </li>
                           ))}
                         </ul>
-                        <div className="mt-auto flex justify-end pt-4 md:pt-6">{button}</div>
+                        <div className="mt-auto flex justify-end pt-3 md:pt-6">{button}</div>
                       </div>
                     </div>
                   )}
                   back={(button) => (
                     // Two columns from lg: how MENASCO helps | competitive advantage (+ flip-back button at its foot).
-                    <div className="mt-2 grid flex-1 grid-cols-1 grid-rows-[auto_1fr] gap-4 md:mt-3 md:gap-6 lg:grid-cols-12 lg:grid-rows-1 lg:gap-10">
-                      <p className="text-[0.8125rem] leading-[1.55] md:text-small md:leading-relaxed text-gray-700 lg:col-span-7 lg:text-body">{m.help}</p>
-                      <div className="flex flex-col lg:col-span-5">
-                        <div className="rounded-md border-s-4 border-brand-500 bg-white p-3.5 md:p-5">
-                          <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.energy.advantageLabel}</p>
-                          <p className="mt-1.5 text-[0.8125rem] leading-[1.55] md:text-small md:leading-relaxed text-gray-700 md:mt-2">{m.advantage}</p>
-                        </div>
-                        <div className="mt-auto flex justify-end pt-4 md:pt-6">{button}</div>
+                    <div className="mt-2 grid flex-1 grid-cols-1 grid-rows-[auto_1fr] gap-3 md:mt-3 md:gap-6 lg:grid-cols-12 lg:grid-rows-1 lg:gap-10">
+                      <ClampPara className="lg:col-span-7">{m.help}</ClampPara>
+                      {/* Competitive advantage: short bullets, formatted like the front's key constraints. */}
+                      <div className="flex flex-col lg:col-span-5 lg:border-s lg:border-brand-200 lg:ps-8">
+                        <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.energy.advantageLabel}</p>
+                        <ul className="mt-2 space-y-1.5 md:mt-3 md:space-y-2">
+                          {m.advantage.map((item) => (
+                            <li key={item} className="flex gap-2.5 text-[0.8125rem] leading-[1.55] md:text-small md:leading-relaxed text-gray-700 md:gap-3">
+                              <span aria-hidden="true" className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500 md:mt-2" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="mt-auto flex justify-end pt-3 md:pt-6">{button}</div>
                       </div>
                     </div>
                   )}
@@ -451,24 +480,13 @@ export default function DataCenterPage() {
 
         {/* 02 Uptime Tiers (tightened; no MENASCO role strip, client request) */}
         <Band tone="stone" className="pb-12 pt-12 md:pb-16 md:pt-16">
-          {/* Smaller heading + lead than the default section head (client request); Uptime Institute logo top right. */}
-          <div className="flex flex-col-reverse gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+          {/* Smaller heading + lead than the default section head (client request). Uptime Institute logo removed (client request 2026-11-21). */}
           <div className="max-w-3xl">
             <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.tiers.eyebrow}</p>
             <h2 className="mt-3 font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-ink text-balance">{c.tiers.heading}</h2>
             <p className="mt-4 text-body leading-relaxed text-gray-600">
               <RichText text={c.tiers.intro} />
             </p>
-          </div>
-            <img
-              src="/uptime-institute-logo.png"
-              alt="Uptime Institute"
-              width={968}
-              height={137}
-              loading="lazy"
-              decoding="async"
-              className="h-auto w-32 shrink-0 self-end sm:mt-0.5 sm:w-40 sm:self-auto lg:w-48"
-            />
           </div>
           {/* Tier cards: side by side while each can be at least ~16.5rem wide; when the row is
               too narrow for both it becomes a snapping swipe row with position dots. */}
@@ -506,28 +524,22 @@ export default function DataCenterPage() {
           {tiersOverflow && <RailDots count={c.tiers.items.length} active={tiersRail.active} alwaysShow />}
         </Band>
 
-        {/* 03 Power resilience: text | single-line diagram, sized to roughly equal heights on desktop.
-            No MENASCO role strip (client request). Side by side from md (768px): the diagram picks a wide,
-            compact or vertical configuration from its own width; below md it stacks under the text. */}
+        {/* 03 The next frontier: sustainability (replaces the Electrical resilience section, client request 2026-11-21).
+            Shown at every width. */}
         <Band tone="dark" className="pb-12 pt-12 md:pb-16 md:pt-16">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] md:items-center md:gap-8 lg:grid-cols-12 lg:gap-12">
-            <div className="lg:col-span-5">
-              <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-400 rtl:tracking-normal">{c.power.eyebrow}</p>
-              <h2 className="mt-3 font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-white text-balance">
-                <T k="power">{c.power.heading}</T>
-              </h2>
-              <p className="mt-3 text-small leading-relaxed text-gray-300 lg:mt-4 lg:text-body">{c.power.intro}</p>
-              <ul className="mt-5 space-y-2.5 lg:mt-6 lg:space-y-3">
-                {c.power.points.map((p) => (
-                  <li key={p} className="flex gap-3 text-small leading-relaxed text-gray-300">
-                    <Zap size={15} aria-hidden="true" className="mt-0.5 shrink-0" style={{ color: ELEMENT_COLORS.power }} />
-                    {p}
-                  </li>
-                ))}
-              </ul>
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-8">
+              <ChapterHead eyebrow={c.sustainabilityTeaser.eyebrow} title={c.sustainabilityTeaser.heading} lead={c.sustainabilityTeaser.body} dark target="water" />
+              <ButtonLink href={DC_SUSTAINABILITY_PATH} variant="primary" trailingIcon={ArrowRight} className="mt-10">
+                {c.sustainabilityTeaser.cta}
+              </ButtonLink>
             </div>
-            <div className="lg:col-span-7">
-              <PowerChainDiagram failed={failed} onToggle={() => setFailed((f) => !f)} />
+            <div className="flex gap-3 lg:col-span-4 lg:justify-end">
+              {['LEED Gold', 'Estidama Pearl'].map((name) => (
+                <span key={name} className="rounded-full border border-white/20 px-4 py-2 font-display text-small font-semibold text-white">
+                  {name}
+                </span>
+              ))}
             </div>
           </div>
         </Band>
@@ -670,7 +682,7 @@ export default function DataCenterPage() {
           <Band tone="light">
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-3xl">
-                <ChapterHead eyebrow={c.projects.eyebrow} title={c.projects.heading} lead={c.projects.role} target="data" />
+                <ChapterHead eyebrow={c.projects.eyebrow} title={c.projects.heading} lead={c.projects.role} target="data" fast />
               </div>
               <ButtonLink href="/projects/categories" variant="outline" trailingIcon={ArrowRight}>
                 {c.projects.viewAll}
@@ -705,25 +717,6 @@ export default function DataCenterPage() {
           </Band>
         )}
 
-        {/* 07 The next frontier: sustainability */}
-        <Band tone="dark">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-8">
-              <ChapterHead eyebrow={c.sustainabilityTeaser.eyebrow} title={c.sustainabilityTeaser.heading} lead={c.sustainabilityTeaser.body} dark target="water" />
-              <ButtonLink href={DC_SUSTAINABILITY_PATH} variant="primary" trailingIcon={ArrowRight} className="mt-10">
-                {c.sustainabilityTeaser.cta}
-              </ButtonLink>
-            </div>
-            <div className="flex gap-3 lg:col-span-4 lg:justify-end">
-              {['LEED Gold', 'Estidama Pearl'].map((name) => (
-                <span key={name} className="rounded-full border border-white/20 px-4 py-2 font-display text-small font-semibold text-white">
-                  {name}
-                </span>
-              ))}
-            </div>
-          </div>
-        </Band>
-
         {/* FAQ (unchanged copy) */}
         {faqItems.length > 0 && (
           <Band tone="stone">
@@ -731,7 +724,7 @@ export default function DataCenterPage() {
               <div className="lg:col-span-4">
                 <Eyebrow>{t('dataCenter.faqHeading.eyebrow')}</Eyebrow>
                 <h2 className="mt-4 font-display text-h2 font-semibold tracking-tight text-ink">
-                  <T k="data">{t('dataCenter.faqHeading.heading')}</T>
+                  {t('dataCenter.faqHeading.heading')}
                 </h2>
               </div>
               <div className="lg:col-span-8">

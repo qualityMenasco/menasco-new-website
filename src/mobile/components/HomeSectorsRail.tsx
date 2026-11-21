@@ -84,7 +84,7 @@ export function HomeSectorsRail() {
   const arrow = 'inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-300 text-ink transition-colors duration-base hover:border-ink disabled:cursor-default disabled:opacity-35';
 
   return (
-    <section className="py-8">
+    <section className="py-5 md:py-8">
       <div className="px-4 md:px-8">
         <SectionHeader eyebrow={t('home:sectors.eyebrow')} heading={t('home:sectors.heading')} headingAs="h3" />
       </div>
@@ -92,7 +92,7 @@ export function HomeSectorsRail() {
         id="home-sectors-rail"
         ref={railRef}
         onScroll={updateEdges}
-        className="no-scrollbar mt-2 flex snap-x snap-mandatory items-stretch gap-3 overflow-x-auto scroll-px-4 px-4 pb-4 pt-3 md:scroll-px-8 md:px-8"
+        className="no-scrollbar mt-1 flex snap-x snap-mandatory items-stretch gap-3 overflow-x-auto scroll-px-4 px-4 pb-2 pt-2 md:mt-2 md:scroll-px-8 md:px-8 md:pb-4 md:pt-3"
       >
         {sectors.map((sector) => {
           const key = sectorKeys[sector.slug] ?? sector.slug;
@@ -116,7 +116,7 @@ export function HomeSectorsRail() {
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
                 />
               </div>
-              <div className="flex flex-1 flex-col p-4">
+              <div className="flex flex-1 flex-col px-4 pb-3 pt-3 md:p-4">
                 <h4 className="font-display text-h4 font-semibold text-ink">{t(`home:sectors.items.${key}.title`, t(`projects:categories.${key}.title`))}</h4>
                 <p className="mt-2 line-clamp-4 text-small text-gray-600">{t(`home:sectors.items.${key}.description`, t('common:pendingContent.notice'))}</p>
               </div>
@@ -127,7 +127,7 @@ export function HomeSectorsRail() {
       {/* Small phones (under 480px): no arrows. Instead one dot per sector,
           the current one stretched into a short pill (same style as the
           Community & People photo rails). */}
-      <div aria-hidden="true" className="flex justify-center gap-1.5 pt-3 min-[480px]:hidden">
+      <div aria-hidden="true" className="flex justify-center gap-1.5 pt-1 min-[480px]:hidden">
         {sectors.map((sector, index) => (
           <span key={sector.id} className={cn('h-1.5 rounded-full transition-all duration-base', index === active ? 'w-5 bg-ink' : 'w-1.5 bg-gray-300')} />
         ))}

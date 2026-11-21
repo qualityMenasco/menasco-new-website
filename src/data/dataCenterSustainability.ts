@@ -9,9 +9,9 @@ export type OpportunityIcon = 'cooling' | 'clean-power' | 'electrical' | 'water'
 export const dcSustainability = {
   hero: {
     eyebrow: 'Data Center Sustainability',
-    title: 'Lower Energy, Water and Carbon, From the Plant Room Up',
+    title: 'Reducing Data Center Energy, Water and Carbon',
     intro:
-      'A sustainable data center is engineered, not claimed. This guide sets out the strategies that cut energy, water and carbon, how to measure them, and what to prioritise in the GCC, the USA and Europe.',
+      "A sustainable data center is engineered, not claimed. This guide sets out MENASCO's strategies to cut energy, water and carbon, how we measure, and what we prioritise in the GCC vs the USA and Europe.",
     diagramLabel: 'Illustrative: energy in, useful computing out, losses reduced',
   },
   opportunities: {

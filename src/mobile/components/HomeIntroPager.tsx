@@ -113,7 +113,7 @@ export function HomeIntroPager() {
   const tabLabel = (key: (typeof PAGES)[number]) => (key === 'about' ? t('home:companyIntro.eyebrow') : t('home:servicesShowcase.eyebrow'));
 
   return (
-    <section className="bg-stone py-8">
+    <section className="bg-stone pb-5 pt-8 md:py-8">
       {/* Tab switcher: plain pill; the selected tab is white with a blue outline. */}
       <div className="px-4">
         <div

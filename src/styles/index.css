@@ -142,6 +142,96 @@
 @media (prefers-reduced-motion: reduce) {
   .dc-root-pulse { display: none; }
 }
+/* Energy market flip card, back face: a gradient border that pulses lightly
+   (brightens and drifts along the edge). Drawn on ::before and masked to a ring. */
+.dc-pulse-border {
+  position: relative;
+}
+.dc-pulse-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(120deg, #0c76a3, #5cc2f2, #9fd3ee, #0c76a3);
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: dc-border-pulse 3.6s ease-in-out infinite;
+}
+@keyframes dc-border-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    background-position: 0% 50%;
+  }
+  50% {
+    opacity: 1;
+    background-position: 100% 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dc-pulse-border::before {
+    animation: none;
+    opacity: 0.85;
+  }
+}
+/* Energy market flip card, touch devices: a one-time peek (slight tilt) with the
+   bottom-right corner lifting to show the blue back. Never turns far enough to flip. */
+@keyframes dc-card-peek {
+  0%,
+  100% {
+    transform: perspective(1200px) rotateY(0deg);
+  }
+  45% {
+    transform: perspective(1200px) rotateY(-16deg);
+  }
+  65% {
+    transform: perspective(1200px) rotateY(-16deg);
+  }
+}
+.dc-card-peek {
+  animation: dc-card-peek 1.4s cubic-bezier(0.45, 0, 0.25, 1) 0.15s both;
+}
+.dc-peek-corner {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  /* Top-left half: the folded-up flap of the front; bottom-right half: the blue back showing. */
+  background: linear-gradient(135deg, #eef1f4 0%, #ffffff 46%, rgba(10, 11, 13, 0.12) 50%, #5cc2f2 50%, #0c76a3 100%);
+  filter: drop-shadow(-2px -2px 3px rgba(10, 11, 13, 0.14));
+}
+.dc-peek-corner.is-peeking {
+  animation: dc-peek-corner 1.4s cubic-bezier(0.45, 0, 0.25, 1) 0.15s both;
+}
+@keyframes dc-peek-corner {
+  0%,
+  100% {
+    width: 0;
+    height: 0;
+  }
+  45%,
+  65% {
+    width: 36px;
+    height: 36px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dc-card-peek,
+  .dc-peek-corner.is-peeking {
+    animation: none;
+  }
+  .dc-peek-corner {
+    width: 18px;
+    height: 18px;
+  }
+}
 .dc-glow {
   animation: dc-glow 2.6s ease-in-out infinite;
 }

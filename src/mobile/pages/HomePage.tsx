@@ -187,7 +187,7 @@ export default function HomePage() {
 
       {/* 8. Modular prefabrication: text set over the photo (phones + tablets),
           with a bottom gradient for legibility and one outlined button. */}
-      <section className="bg-stone px-4 py-8 md:px-8 md:py-12">
+      <section className="bg-stone px-4 pb-8 pt-5 md:px-8 md:py-12">
         <div className="relative flex min-h-[26rem] items-end overflow-hidden rounded-md bg-ink md:min-h-[24rem]">
           <img
             src="/manufacturing-prefab-hero.jpg"

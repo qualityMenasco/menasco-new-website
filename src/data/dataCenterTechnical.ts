@@ -61,7 +61,7 @@ export const dcTechnical = {
   },
   sites: {
     // NEW copy
-    role: 'On greenfield campuses MENASCO secures utility capacity and prefabricates plant early; on live sites it protects the critical load with rehearsed cut-overs and temporary plant.',
+    role: 'On greenfield campuses, early utility coordination and off-site fabrication helps accelerate construction. For live-facility upgrades, planned cutovers and temporary infrastructure protect operational continuity.',
     eyebrow: 'Greenfield and brownfield',
     heading: 'New campuses and live facilities demand different engineering',
     items: [
@@ -142,7 +142,7 @@ export const dcTechnical = {
     strengthsLabel: 'Strengths',
     considerationsLabel: 'Considerations',
     ashrae:
-      "Air-cooled equipment is typically controlled to keep server inlet air within ASHRAE's recommended envelope of 18–27 °C [[14]]. Hot- or cold-aisle containment lets supply air run near the top of that range, cutting cooling energy.",
+      "Air-cooled equipment is typically controlled to keep server inlet air within ASHRAE's recommended envelope of 18–27 °C [[14]]. Hot or cold-aisle containment lets supply air run near the top of that range, cutting cooling energy.",
     figure: { value: '18–27 °C', label: "ASHRAE's recommended server inlet air range [[14]]" },
   },
   power: {
@@ -194,6 +194,9 @@ export const dcTechnical = {
     backTitlePrefix: "MENASCO's Data Center Advantage in",
     backLabel: 'Market constraints',
     advantageLabel: 'Competitive advantage',
+    // Phones: the How MENASCO helps paragraph is clamped to 4 lines behind this toggle.
+    readMore: 'Read more',
+    readLess: 'Show less',
     markets: [
       {
         id: 'uae',
@@ -207,7 +210,11 @@ export const dcTechnical = {
           'Emirate-specific power procurement and self-generation arrangements',
         ],
         help: "With our international engineering, procurement, and project management teams headquartered in Dubai, MENASCO can coordinate utility requirements, electrical infrastructure design, and long-lead equipment sourcing from a single operational hub. Direct UAE construction capabilities, in-country manufacturing and established supplier relationships allow substation works, cooling infrastructure, and off-site modular prefabrication to progress in parallel, reducing dependencies between utility readiness, equipment delivery, and construction milestones.",
-        advantage: "MENASCO's headquarters brings engineering, global procurement, in-country fabrication, and construction management together in the UAE, enabling faster technical coordination and greater control over the procurement and delivery interfaces that commonly delay large-scale data center projects.",
+        advantage: [
+          'Engineering, procurement, fabrication and construction management in one UAE headquarters',
+          'Faster technical coordination from a single operational hub',
+          'Tighter control of the procurement and delivery interfaces that delay projects',
+        ],
       },
       {
         id: 'ksa',
@@ -221,7 +228,11 @@ export const dcTechnical = {
           'Utility planning and long-lead electrical equipment procurement',
         ],
         help: "Saudi Arabia's extreme temperatures and water scarcity demand cooling systems optimized for local conditions, while rapid data center expansion places pressure on specialist equipment supply chains. MENASCO is skilled in delivering closed loop direct-to-chip liquid cooling, as well as traditional configurations against project-specific PUE and WUE targets. Drawing on international suppliers and in-country fabrication to source equipment, dedicated construction teams adapt solutions to local codes, utility requirements, and minimize reliance on external delivery partners.",
-        advantage: "Direct-to-chip cooling expertise, in-country fabrication and a global sourcing network backed by directly managed Saudi construction teams.",
+        advantage: [
+          'Direct-to-chip liquid cooling expertise',
+          'In-country fabrication and a global sourcing network',
+          'Directly managed Saudi construction teams',
+        ],
       },
       {
         id: 'egypt',
@@ -235,7 +246,11 @@ export const dcTechnical = {
           'Imported equipment procurement and customs coordination',
         ],
         help: "Egypt's reliance on imported specialist equipment and variable infrastructure readiness can delay data center construction. MENASCO addresses these constraints through Egyptian manufacturing facilities capable of producing modular data center white spaces, E-Houses and prefabricated MEP assemblies locally, reducing the need to import completed modules. International procurement teams source specialized components while local construction teams coordinate utility connections and civil works, allowing manufacturing and site development to progress in parallel.",
-        advantage: "Local Modular MEP units combined with international component sourcing reduces dependence on imported finished systems and creates opportunities to shorten construction schedules.",
+        advantage: [
+          'Local manufacturing of modular MEP units',
+          'International sourcing of specialist components',
+          'Less reliance on imported finished systems, with scope to shorten schedules',
+        ],
       },
       {
         id: 'europe',
@@ -249,14 +264,18 @@ export const dcTechnical = {
           'Waste heat recovery and low-carbon electricity sourcing',
         ],
         help: "Grid connection delays and increasingly demanding energy-efficiency regulations can limit the feasibility and timing of European data center developments. MENASCO's scale of international engineering resources support early assessment of electrical capacity, phased infrastructure requirements, and cooling configurations incorporating heat recovery where viable. UK-based teams coordinate technical development and global equipment sourcing, while qualified local partners address country-specific regulations and utility interfaces, allowing procurement and construction planning to respond to confirmed power availability.",
-        advantage: "Centralized technical resources and international procurement capacity help projects adapt to constrained grid access, with UK-led coordination and local regulatory support.",
+        advantage: [
+          'Centralized technical resources and international procurement capacity',
+          'Flexibility to adapt to constrained grid access',
+          'UK-led coordination with local regulatory support',
+        ],
       },
       {
         id: 'usa',
         slug: 'united-states',
         name: 'United States',
         inName: 'the United States',
-        body: "US data center development is increasingly constrained by utility interconnection delays, electrical equipment shortages, regional permitting requirements, and a growing shortage of skilled construction tradespeople. Limited availability of electricians, pipefitters, HVAC technicians, and other specialized workers places additional pressure on labor costs and construction schedules. With large power transformers facing multi-year lead times, early procurement, workforce planning, off-site prefabrication, and phased energization are essential to maintaining delivery schedules for hyperscale and AI infrastructure projects [[10]] [[11]].",
+        body: "US data center development is increasingly constrained by electrical equipment supply and a growing shortage of skilled construction tradespeople. Availability of electricians, pipefitters, HVAC technicians, and other specialized workers place pressure on labor costs and schedules. With large power transformers facing multi-year lead times, early procurement, workforce planning, off-site prefabrication, and phased energization are essential for hyperscale and AI infrastructure projects [[10]] [[11]].",
         constraints: [
           'Grid interconnection and utility service agreements',
           'Long-lead transformers, switchgear, and electrical equipment',
@@ -264,7 +283,12 @@ export const dcTechnical = {
           'Skilled trade labor shortages and construction workforce staffing',
         ],
         help: "MENASCO's international procurement network expands access to qualified manufacturers beyond domestic suppliers, while centralized engineering teams coordinate alternative equipment specifications and modular fabrication opportunities. Direct US contracting partnerships enable civil works, prefabricated MEP installation, and phased electrical infrastructure to be aligned with equipment deliveries and utility energization milestones. Established relationships with staffing agencies across the United States also provide access to skilled construction tradespeople, helping address regional labor shortages, scale site workforces, and maintain construction schedules on large-scale data center developments.",
-        advantage: "Global procurement networks, centralized engineering expertise, and US construction capabilities provide greater flexibility in managing equipment shortages and utility delays, while nationwide staffing relationships help secure the skilled workforce needed to maintain construction schedules and scale delivery across multiple projects.",
+        advantage: [
+          'Global procurement networks to manage equipment shortages',
+          'Centralized engineering expertise',
+          'US construction capabilities that adapt to utility delays',
+          'Nationwide staffing relationships for skilled construction trades',
+        ],
       },
     ],
   },
@@ -283,7 +307,7 @@ export const dcTechnical = {
     ],
   },
   // NEW copy (role)
-  projects: { eyebrow: 'Data center portfolio', heading: 'Mission-critical projects', viewAll: 'View all projects', role: "Data centers from MENASCO's project portfolio across the UAE." },
+  projects: { eyebrow: 'Data center portfolio', heading: 'Mission-critical projects', viewAll: 'View all projects', role: "Data centers from MENASCO's project portfolio" },
   sustainabilityTeaser: {
     eyebrow: 'Sustainability',
     heading: 'Built to achieve LEED Gold and Estidama Pearl',

@@ -722,7 +722,7 @@ function generateDataCenters() {
           `**${dcTechnical.energy.constraintsLabel}:**\n\n${bullets(m.constraints)}`,
           `#### ${dcTechnical.energy.backTitlePrefix} ${m.inName}`,
           m.help,
-          `**${dcTechnical.energy.advantageLabel}:** ${m.advantage}`,
+          `**${dcTechnical.energy.advantageLabel}:**\n\n${bullets(m.advantage)}`,
           `Link: ${pageUrl('/services/data-centers')}#${m.slug}`,
         ),
       ),
