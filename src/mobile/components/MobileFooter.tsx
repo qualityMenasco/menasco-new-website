@@ -89,7 +89,7 @@ export function MobileFooter() {
   // of it at the end of every page. The fixed bottom tab bar this used to also clear was
   // removed site-wide; BackToTopButton is now the only fixed mobile chrome left to clear.
   return (
-    <footer className="bg-ink pb-[calc(4.5rem+env(safe-area-inset-bottom))] pt-10 text-warmwhite">
+    <footer className="bg-charcoal pb-[calc(4.5rem+env(safe-area-inset-bottom))] pt-10 text-warmwhite">
       {/* Phones: one stacked column. Tablets (sm+): four bands — brand +
           social, link columns, offices, then certifications + legal. */}
       <div className="flex flex-col gap-6 px-4">

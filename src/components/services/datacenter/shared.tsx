@@ -111,15 +111,15 @@ export function useRail() {
 }
 
 /** Position dots + "02 / 09" counter shown under a rail (phones only). */
-export function RailDots({ count, active, alwaysShow = false }: { count: number; active: number; /** Show at any width (caller decides, e.g. from measured overflow). */ alwaysShow?: boolean }) {
+export function RailDots({ count, active, alwaysShow = false, dark = false }: { count: number; active: number; /** Show at any width (caller decides, e.g. from measured overflow). */ alwaysShow?: boolean; /** Light dots for dark bands. */ dark?: boolean }) {
   return (
     <div className={cn('mt-5 flex items-center justify-between', !alwaysShow && 'md:hidden')}>
       <div aria-hidden="true" className="flex gap-1.5">
         {Array.from({ length: count }, (_, i) => (
-          <span key={i} className={cn('h-1.5 rounded-full transition-all duration-base', i === active ? 'w-5 bg-ink' : 'w-1.5 bg-gray-300')} />
+          <span key={i} className={cn('h-1.5 rounded-full transition-all duration-base', i === active ? cn('w-5', dark ? 'bg-white' : 'bg-ink') : cn('w-1.5', dark ? 'bg-white/25' : 'bg-gray-300'))} />
         ))}
       </div>
-      <p className="font-display text-caption font-semibold tabular-nums text-gray-500">
+      <p className={cn('font-display text-caption font-semibold tabular-nums', dark ? 'text-gray-400' : 'text-gray-500')}>
         {String(active + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
       </p>
     </div>

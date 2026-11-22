@@ -151,14 +151,14 @@ Scope of works:
 
 ### Manufacturing & Prefabrication
 
-- [MEP Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt): MENASCO delivers off-site MEP prefabrication, including ductwork, pipe fabrication and prefabricated modules, for faster, higher-quality construction.
+- [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt): In-house MEP manufacturing and prefabrication in the UAE, Saudi Arabia and Egypt: data center white spaces, E-Houses, switchgear, ductwork and modular assemblies, tested before dispatch.
 
-- HVAC Ductwork Fabrication: Precision-manufactured ductwork engineered for performance, efficiency, and seamless installation.
-- Prefabricated MEP Modules: Factory-built assemblies that improve coordination, quality, and construction speed.
-- Pipe Rack Systems: Integrated piping assemblies manufactured to reduce installation time and improve consistency.
-- Modular Data Center Solutions: Prefabricated support solutions for data center whitespaces.
-- Electrical Containment: Prefabricated containment systems produced for accurate installation and improved coordination.
-- Custom Engineered Components: Project-specific manufacturing solutions tailored to complex engineering requirements.
+- Data Center White Spaces: Cooling pipework, Electrical transfer, Cable trays, ELV, Ductwork
+- E-Houses: An E-House is a prefabricated electrical room: the enclosure, the power and control equipment inside it, and the building services that keep that equipment running.
+- Modular assemblies: Prefabricated vertical riser modules; Multi-service pipe rack modules; Plant and equipment skids with pumps, valves and controls; Pipe spools and duct assemblies
+- Power and controls: Main and sub-main distribution boards (MDB / SMDB); Motor control centres (MCC); Automatic transfer switch (ATS) panels; PLC and electrical control panels; Distribution boards and meter cabinets; Capacitor banks for power factor correction; Rising mains, high-current feeder and plug-in tap-off busway
+- Air distribution: Galvanised steel ductwork to SMACNA and BS standards; Phenolic and PIR pre-insulated ductwork; Volume control, non-return and fire dampers; Access doors and sound attenuators
+- Water and pumping: GRP sectional water tanks; Packaged pump sets and pump skids; Pressurisation units
 
 ## How we deliver
 

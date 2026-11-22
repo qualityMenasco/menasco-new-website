@@ -384,242 +384,363 @@
     "faq": [
       {
         "id": "what-does-a-data-center-contractor-provide",
-        "title": "What does a Data Center Contractor in the UAE provide?",
-        "content": "MENASCO, as a specialized Data Center MEP Contractor, delivers integrated engineering solutions including power infrastructure, cooling systems, fire protection, monitoring systems, and mission-critical MEP services designed to ensure reliability, scalability, operational continuity, and high-performance data center environments."
+        "title": "What does MENASCO deliver as a data center contractor in the UAE?",
+        "content": "Complete MEP and civil works, delivered as one package. MENASCO delivers the civil and structural works alongside power infrastructure, cooling systems, fire protection, monitoring systems and the supporting MEP services, all engineered together for reliability, scalability and continuous operation."
       },
       {
         "id": "how-do-menasco-solutions-ensure-reliability",
-        "title": "How do MENASCO's data center solutions ensure reliability?",
-        "content": "MENASCO ensures reliability through mission-critical MEP systems, redundant power infrastructure, precision cooling solutions, continuous monitoring, and engineered designs focused on uptime, operational continuity, and system stability. Our approach combines high-quality execution, advanced coordination, and performance-driven solutions to support resilient and future-ready data center environments."
+        "title": "How does MENASCO keep data centers reliable?",
+        "content": "Through redundancy and precision at every layer. MENASCO builds in redundant power, precision cooling and continuous monitoring, and designs every system around uptime and stability, backed by high-quality execution and close coordination on site."
       },
       {
         "id": "support-scalable-expansion",
-        "title": "Do you support scalable and future-ready data center expansion?",
-        "content": "Absolutely. MENASCO designs scalable and adaptable data center infrastructures built to support future growth and evolving operational demands. Our solutions are engineered for seamless expansion of power, cooling, and critical MEP systems, enabling long-term flexibility, technology integration, and efficient performance without major operational disruptions."
+        "title": "Can MENASCO build data centers that scale with future demand?",
+        "content": "Yes. MENASCO designs power, cooling and critical MEP systems for phased, seamless expansion, so capacity can grow with demand and new technology can be integrated without major disruption to live operations."
       },
       {
         "id": "what-is-involved-in-data-center-installation",
-        "title": "What is involved in MENASCO's Data Center Installation process?",
-        "content": "MENASCO provides end-to-end data center installation solutions, including site assessment, MEP coordination, installation of critical power and cooling systems, containment solutions, BMS integration, testing & commissioning, and final project handover. Our approach ensures efficient execution, operational readiness, compliance, and reliable long-term performance for mission-critical environments."
+        "title": "What does MENASCO's data center installation cover?",
+        "content": "Everything from site assessment to handover. MENASCO covers site assessment, MEP coordination, installation of critical power and cooling systems, containment, BMS integration, testing and commissioning, and final handover, so each facility is ready to operate from day one."
       },
       {
         "id": "what-industries-benefit",
-        "title": "What industries benefit from MENASCO's data center services?",
-        "content": "MENASCO delivers mission-critical data center solutions for a wide range of industries, including finance, healthcare, government, telecommunications, cloud services, technology providers, e-commerce, and large enterprises. Our expertise supports organizations that require secure, reliable, and high-availability digital infrastructure."
+        "title": "Which industries does MENASCO deliver data centers for?",
+        "content": "Any organisation that depends on always-on digital infrastructure. MENASCO delivers data centers for finance, healthcare, government, telecommunications, cloud and technology providers, e-commerce and large enterprises that need secure, high-availability facilities."
       },
       {
         "id": "why-choose-menasco-data-center-contractor",
-        "title": "Why choose MENASCO as a Data Center Contractor in the UAE?",
-        "content": "MENASCO combines advanced engineering expertise, mission-critical MEP capabilities, and high-performance project delivery to provide reliable and scalable data center solutions. Our focus on quality, precision, operational continuity, and future-ready infrastructure enables clients to achieve secure, efficient, and resilient digital environments."
+        "title": "Why do clients choose MENASCO as their data center contractor in the UAE?",
+        "content": "Because MENASCO combines engineering depth with dependable delivery. Clients rely on its mission-critical MEP capability, precision and focus on operational continuity to deliver data centers that are secure, efficient and ready for future growth."
       },
       {
         "id": "testing-and-commissioning",
-        "title": "Do you provide Testing & Commissioning for data centers?",
-        "content": "Yes. MENASCO delivers comprehensive Testing & Commissioning (T&C) services for mission-critical systems, ensuring all power, cooling, fire protection, and monitoring systems operate efficiently, safely, and according to international performance standards before handover."
+        "title": "Does MENASCO provide testing and commissioning for data centers?",
+        "content": "Yes. MENASCO tests and commissions every mission-critical system, including power, cooling, fire protection and monitoring, to confirm it performs efficiently, safely and to international standards before handover."
       },
       {
         "id": "mission-critical-mep-coordination",
-        "title": "Can MENASCO handle mission-critical MEP coordination for complex data center projects?",
-        "content": "Absolutely. MENASCO specializes in coordinated mission-critical MEP execution, integrating mechanical, electrical, plumbing, ELV, and fire protection systems with high precision to support uninterrupted operations and maximum efficiency."
+        "title": "Can MENASCO coordinate MEP on complex mission-critical data center projects?",
+        "content": "Yes. Mission-critical coordination is a MENASCO specialty: it integrates mechanical, electrical, plumbing, ELV and fire protection systems with high precision to support uninterrupted operation and maximum efficiency."
       },
       {
         "id": "energy-efficiency-sustainability",
-        "title": "Do your data center solutions support energy efficiency and sustainability?",
-        "content": "Yes. MENASCO integrates energy-efficient cooling systems, optimized power infrastructure, smart monitoring technologies, and sustainable engineering practices to support lower operational costs and environmentally responsible performance."
+        "title": "Does MENASCO make data centers more energy efficient and sustainable?",
+        "content": "Yes. MENASCO integrates energy-efficient cooling, optimised power infrastructure, smart monitoring and sustainable engineering practices that lower operating costs and reduce environmental impact."
       },
       {
         "id": "data-center-mep-different",
-        "title": "What makes data center MEP projects different from conventional projects?",
-        "content": "Data center projects require significantly higher levels of reliability, precision, redundancy, and operational continuity. MENASCO applies mission-critical engineering standards focused on uptime, thermal management, backup power, system resilience, and future scalability."
+        "title": "How does MENASCO approach data center MEP differently from conventional projects?",
+        "content": "With mission-critical standards throughout. Data centers demand far higher reliability, precision, redundancy and continuity, so MENASCO engineers every system around uptime, thermal management, backup power, resilience and future scalability."
       },
       {
         "id": "retrofit-and-upgrade-works",
-        "title": "Does MENASCO support retrofit and upgrade works for existing data centers?",
-        "content": "Yes. MENASCO provides retrofit, upgrade & expansion solutions for existing data center facilities, including power upgrades, cooling optimization, infrastructure enhancement, and system modernization while minimizing operational disruption."
+        "title": "Can MENASCO upgrade or retrofit an existing data center?",
+        "content": "Yes. MENASCO upgrades, retrofits and expands live facilities, from power upgrades and cooling optimisation to infrastructure enhancement and system modernisation, while keeping operational disruption to a minimum."
       }
     ]
   },
   "manufacturingPage": {
     "seo": {
-      "title": "MEP Prefabrication",
-      "description": "MENASCO delivers off-site MEP prefabrication, including ductwork, pipe fabrication and prefabricated modules, for faster, higher-quality construction."
+      "title": "Manufacturing & Prefabrication",
+      "description": "In-house MEP manufacturing and prefabrication in the UAE, Saudi Arabia and Egypt: data center white spaces, E-Houses, switchgear, ductwork and modular assemblies, tested before dispatch."
     },
+    "placeholder": "Image placeholder",
     "hero": {
-      "title": "MEP Prefabrication",
-      "description": "Manufacturing and prefabrication are integral to how MENASCO delivers high-performance Mechanical, Electrical, and Plumbing (MEP) solutions. Through established manufacturing partners, critical fabrication activities are carried out in controlled environments, supporting improved quality, faster project delivery, and reduced on-site complexity. These partner-led manufacturing capabilities are coordinated by MENASCO's engineering teams to enable greater precision, improved coordination, and consistent execution across every stage of construction."
+      "eyebrow": "Manufacturing & Prefabrication",
+      "title": "Built in Our Factories, Ready for Site",
+      "description": "MENASCO manufactures and prefabricates MEP systems in-house across the UAE, Saudi Arabia and Egypt. Data center white spaces, E-Houses, switchgear, ductwork and modular assemblies are built and tested under factory control, then delivered ready to install.",
+      "primaryCta": "View the product range",
+      "secondaryCta": "Explore Portfolio",
+      "placeholder": "Factory floor: modules in production",
+      "proofLabel": "At a glance",
+      "proof": [
+        {
+          "value": "3 countries",
+          "label": "UAE, Saudi Arabia and Egypt"
+        },
+        {
+          "value": "Factory tested",
+          "label": "Every assembly, before dispatch"
+        },
+        {
+          "value": "ISO certified",
+          "label": "9001, 14001 and 45001"
+        }
+      ]
     },
-    "overview": {
-      "eyebrow": "Overview",
-      "heading": "Advanced Manufacturing for Modern Construction",
-      "paragraph1": "Working closely with established manufacturing partners, MENASCO integrates a wide range of engineered MEP components and prefabricated assemblies into project delivery, produced under strict quality control before arriving on site. By coordinating critical building systems through controlled manufacturing environments, MENASCO delivers greater consistency, improved safety, reduced installation time, and enhanced project certainty.",
-      "paragraph2": "Every component is manufactured to project-specific requirements set by MENASCO's engineering teams, using advanced production processes that ensure dimensional accuracy, reliable performance, and installation readiness. This integrated approach reduces site labour, minimizes rework, and supports more efficient project delivery."
+    "whyOffsite": {
+      "eyebrow": "Why Off-Site",
+      "heading": "Less Work on Site, More Certainty in the Programme",
+      "intro": "Moving MEP fabrication off site changes what happens on site. Assemblies are built in parallel with civil works, arrive complete, and are installed by smaller crews in less time.",
+      "items": [
+        {
+          "title": "Shorter programmes",
+          "body": "Modules are built while the site is prepared, so fabrication and construction run side by side instead of one after the other."
+        },
+        {
+          "title": "Factory-controlled quality",
+          "body": "Jigs, repeatable processes and inspection at every stage hold tolerances that are hard to achieve in a congested building."
+        },
+        {
+          "title": "Safer, clearer sites",
+          "body": "Less work at height, less hot work and fewer trades competing for the same ceiling void or plant room."
+        },
+        {
+          "title": "Less reliance on site labour",
+          "body": "Skilled work moves into the factory, reducing exposure to labour shortages and productivity swings on site."
+        }
+      ]
     },
-    "capabilitiesSection": {
-      "eyebrow": "Our Capabilities",
-      "heading": "Manufacturing Capabilities"
+    "whiteSpaces": {
+      "eyebrow": "Data Center White Spaces",
+      "heading": "Prefabricated Cooling and Power for the Data Hall",
+      "body": [
+        "MENASCO prefabricates the services that run through a data hall: the cooling pipework that removes heat from the racks, and the electrical routes that deliver power to them.",
+        "Assemblies are built to the coordinated model, tested in the factory and delivered in installation sequence, so fitting out the hall becomes a matter of setting and connecting."
+      ],
+      "scopeLabel": "What we prefabricate",
+      "items": [
+        {
+          "title": "Cooling pipework",
+          "body": "Chilled-water and liquid-cooling headers, branches and connections to cooling units and CDUs, pressure tested before dispatch."
+        },
+        {
+          "title": "Electrical transfer",
+          "body": "Power routes, busway runs and distribution assemblies that carry power from the electrical rooms to the racks."
+        },
+        {
+          "title": "Cable trays",
+          "body": "Tray, ladder and basket systems prefabricated in sections that follow the hall layout."
+        },
+        {
+          "title": "ELV",
+          "body": "Pathways for monitoring, security and structured cabling, coordinated with power and cooling routes."
+        },
+        {
+          "title": "Ductwork",
+          "body": "Standard and pre-insulated ductwork for air-cooled halls and supporting spaces."
+        }
+      ],
+      "cta": "Data center capability",
+      "placeholder": "Prefabricated white space module"
     },
-    "capabilities": [
-      {
-        "title": "HVAC Ductwork Fabrication",
-        "description": "Precision-manufactured ductwork engineered for performance, efficiency, and seamless installation."
-      },
-      {
-        "title": "Prefabricated MEP Modules",
-        "description": "Factory-built assemblies that improve coordination, quality, and construction speed."
-      },
-      {
-        "title": "Pipe Rack Systems",
-        "description": "Integrated piping assemblies manufactured to reduce installation time and improve consistency."
-      },
-      {
-        "title": "Modular Data Center Solutions",
-        "description": "Prefabricated support solutions for data center whitespaces."
-      },
-      {
-        "title": "Electrical Containment",
-        "description": "Prefabricated containment systems produced for accurate installation and improved coordination."
-      },
-      {
-        "title": "Custom Engineered Components",
-        "description": "Project-specific manufacturing solutions tailored to complex engineering requirements."
-      }
-    ],
-    "offSite": {
-      "eyebrow": "Off-Site Manufacturing",
-      "heading": "Off-Site Prefabrication",
-      "paragraph1": "MENASCO's off-site prefabrication methodology, delivered through specialist manufacturing partners, allows complete MEP assemblies to be produced before arriving on site. By integrating ductwork, piping, electrical containment, supports, and associated services into modular factory-built components, MENASCO reduces on-site coordination, improves installation efficiency, and increases overall project quality.",
-      "paragraph2": "Manufacturing in controlled environments enables every assembly to undergo inspection before delivery, minimizing site modifications while supporting predictable project schedules and improved construction outcomes.",
-      "benefitsLabel": "Benefits"
+    "eHouses": {
+      "eyebrow": "E-Houses",
+      "heading": "Electrical Rooms, Delivered Complete",
+      "body": [
+        "An E-House is a prefabricated electrical room: the enclosure, the power and control equipment inside it, and the building services that keep that equipment running.",
+        "MENASCO builds and fits out each E-House in the factory, tests it as a complete unit and ships it ready to set on its foundation, connect and commission."
+      ],
+      "items": [
+        {
+          "title": "Power and control equipment",
+          "body": "Switchgear, distribution and control panels installed, wired and tested inside the enclosure."
+        },
+        {
+          "title": "Climate control",
+          "body": "HVAC sized to the equipment heat load and the site climate, so equipment stays within its rated temperatures."
+        },
+        {
+          "title": "Fire and safety systems",
+          "body": "Fire detection and suppression, lighting and earthing installed and tested with the room."
+        },
+        {
+          "title": "Tested as one unit",
+          "body": "The finished E-House is tested before shipping, so site work is limited to setting, connecting and commissioning."
+        }
+      ],
+      "note": "Suited to data centers, utilities, industrial plants and remote sites where a conventionally built electrical room would hold up the programme.",
+      "placeholder": "E-House on its transport frame"
     },
-    "benefits": [
-      "Faster installation",
-      "Improved quality control",
-      "Reduced on-site congestion",
-      "Greater programme certainty",
-      "Enhanced health and safety",
-      "Reduced material waste",
-      "Improved multidisciplinary coordination"
-    ],
-    "qualitySection": {
-      "eyebrow": "Quality Through Manufacturing",
-      "heading": "Quality Through Manufacturing",
-      "paragraph1": "Every manufactured component is produced using advanced fabrication technologies and controlled production processes to ensure precision, repeatability, and long-term performance.",
-      "paragraph2": "MENASCO's approach combines engineering expertise with specialist manufacturing partners' modern production techniques to deliver prefabricated MEP solutions that support residential developments, hospitality projects, commercial buildings, data centers, healthcare facilities, industrial developments, and other technically demanding infrastructure."
+    "range": {
+      "eyebrow": "Product Range",
+      "heading": "The Rest of What We Build In-House",
+      "intro": "Beyond white spaces and E-Houses, MENASCO's factories produce the components and assemblies that go into every MEP package, built to project specifications.",
+      "topics": [
+        {
+          "title": "Modular assemblies",
+          "body": "Multi-service modules built off site and lifted into place.",
+          "items": [
+            "Prefabricated vertical riser modules",
+            "Multi-service pipe rack modules",
+            "Plant and equipment skids with pumps, valves and controls",
+            "Pipe spools and duct assemblies"
+          ]
+        },
+        {
+          "title": "Power and controls",
+          "body": "Low-voltage panels and power distribution, engineered to each project's single-line diagram.",
+          "items": [
+            "Main and sub-main distribution boards (MDB / SMDB)",
+            "Motor control centres (MCC)",
+            "Automatic transfer switch (ATS) panels",
+            "PLC and electrical control panels",
+            "Distribution boards and meter cabinets",
+            "Capacitor banks for power factor correction",
+            "Rising mains, high-current feeder and plug-in tap-off busway"
+          ]
+        },
+        {
+          "title": "Air distribution",
+          "body": "Ductwork and air-side components fabricated on automated lines.",
+          "items": [
+            "Galvanised steel ductwork to SMACNA and BS standards",
+            "Phenolic and PIR pre-insulated ductwork",
+            "Volume control, non-return and fire dampers",
+            "Access doors and sound attenuators"
+          ]
+        },
+        {
+          "title": "Water and pumping",
+          "body": "Water storage and packaged pumping for buildings and infrastructure.",
+          "items": [
+            "GRP sectional water tanks",
+            "Packaged pump sets and pump skids",
+            "Pressurisation units"
+          ]
+        }
+      ]
     },
-    "qualityHighlights": [
-      {
-        "title": "Precision Engineering",
-        "description": "Advanced manufacturing processes delivering consistent dimensional accuracy."
-      },
-      {
-        "title": "Quality Assurance",
-        "description": "Every assembly undergoes rigorous inspection before installation."
-      },
-      {
-        "title": "Efficient Production",
-        "description": "Optimized workflows reduce project timelines while maintaining quality."
-      },
-      {
-        "title": "Reliable Delivery",
-        "description": "Factory-controlled manufacturing minimizes site risks and supports predictable execution."
-      }
-    ],
-    "downloadCompanyProfile": "Download Company Profile",
+    "testing": {
+      "eyebrow": "Testing & Quality",
+      "heading": "Tested Before It Leaves the Factory",
+      "intro": "Every assembly is inspected and tested in the factory, where problems are faster and cheaper to fix than on site. Each delivery ships with the records needed for installation and handover.",
+      "items": [
+        {
+          "title": "Pressure and leak testing",
+          "body": "Pipework and pipe assemblies are pressure tested to project requirements before they ship."
+        },
+        {
+          "title": "Electrical testing",
+          "body": "Panels and E-Houses go through insulation, continuity, functional and protection checks."
+        },
+        {
+          "title": "Factory acceptance testing",
+          "body": "Clients and consultants can witness tests on finished assemblies before dispatch."
+        },
+        {
+          "title": "Dimensional inspection",
+          "body": "Modules are checked against the coordinated model so they fit first time on site."
+        },
+        {
+          "title": "Documentation",
+          "body": "Test certificates, material traceability and as-built drawings accompany every delivery."
+        }
+      ],
+      "standardsLabel": "Certified management systems",
+      "standards": [
+        {
+          "code": "ISO 9001:2015",
+          "label": "Quality"
+        },
+        {
+          "code": "ISO 14001:2015",
+          "label": "Environmental"
+        },
+        {
+          "code": "ISO 45001:2018",
+          "label": "Occupational health and safety"
+        }
+      ],
+      "standardsNote": "Fabrication follows the SMACNA, BS and IEC standards specified for each project."
+    },
+    "factories": {
+      "eyebrow": "Our Factories",
+      "heading": "Manufacturing in Three Countries",
+      "intro": "MENASCO manufactures in the UAE, Saudi Arabia and Egypt. Producing close to the project shortens logistics, supports local content requirements and keeps capacity available when one market is busy.",
+      "figures": [
+        "Factory area",
+        "Manufacturing team"
+      ],
+      "countries": [
+        {
+          "name": "United Arab Emirates",
+          "body": "Serving projects across the UAE and the wider GCC.",
+          "values": [
+            "[ ] m²",
+            "[ ]"
+          ],
+          "imageAlt": "Palm Jumeirah and the Dubai coastline, photographed from the International Space Station"
+        },
+        {
+          "name": "Saudi Arabia",
+          "body": "Producing in the Kingdom for Saudi projects and local content requirements.",
+          "values": [
+            "[ ] m²",
+            "[ ]"
+          ],
+          "imageAlt": "Central Riyadh's street grid, photographed from the International Space Station"
+        },
+        {
+          "name": "Egypt",
+          "body": "Producing locally for Egyptian and regional projects, so finished modules do not need to be imported.",
+          "values": [
+            "[ ] m²",
+            "[ ]"
+          ],
+          "imageAlt": "The Giza pyramids beside Cairo and the Nile, photographed from the International Space Station"
+        }
+      ]
+    },
+    "sectors": {
+      "eyebrow": "Sectors",
+      "heading": "Where Our Prefabrication Goes",
+      "items": [
+        {
+          "title": "Data centers",
+          "body": "White spaces, E-Houses and power distribution for hyperscale and enterprise facilities."
+        },
+        {
+          "title": "Healthcare and pharmaceuticals",
+          "body": "Riser and plant modules for hospitals, clinics and controlled production environments."
+        },
+        {
+          "title": "Residential and hospitality",
+          "body": "Repeatable riser, ductwork and panel packages for towers, hotels and accommodation."
+        },
+        {
+          "title": "Industrial and energy",
+          "body": "Skids, E-Houses and control panels for plants, utilities and energy infrastructure."
+        },
+        {
+          "title": "Landmark and entertainment",
+          "body": "Engineered assemblies for complex venues where site access and time are tight."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Manufacturing and Prefabrication Questions",
+      "items": [
+        {
+          "question": "Does MENASCO manufacture in-house?",
+          "answer": "Yes. MENASCO manufactures and prefabricates MEP systems in its own factories in the UAE, Saudi Arabia and Egypt, so quality, capacity and lead times stay under its own control."
+        },
+        {
+          "question": "Can MENASCO prefabricate data center white spaces?",
+          "answer": "Yes. MENASCO prefabricates the cooling pipework, electrical transfer routes, cable trays, ELV pathways and standard or insulated ductwork for data halls, built to the coordinated model and tested before delivery."
+        },
+        {
+          "question": "Does MENASCO build E-Houses?",
+          "answer": "Yes. MENASCO builds E-Houses as complete, factory-built electrical rooms, with power and control equipment, HVAC, fire protection and lighting installed and tested before they ship."
+        },
+        {
+          "question": "How much time can prefabrication save?",
+          "answer": "It depends on the project. The saving comes from parallel working: modules are built while the site is prepared, and site work is reduced to setting, connecting and commissioning."
+        },
+        {
+          "question": "Can clients witness factory testing?",
+          "answer": "Yes. Clients and consultants can attend factory acceptance tests on finished assemblies before they are dispatched."
+        },
+        {
+          "question": "Does MENASCO install what it manufactures?",
+          "answer": "Yes. As an MEP contractor, MENASCO can manufacture, deliver, install and commission the same systems, giving one point of responsibility from the factory to handover."
+        }
+      ]
+    },
     "closing": {
-      "heading": "Manufacturing Built Around Engineering Excellence",
-      "description": "From concept to installation, MENASCO integrates engineering expertise with specialist manufacturing partners to deliver faster, safer, and higher-quality project outcomes across every sector we serve.",
-      "cta": "Explore Our Projects"
-    }
-  },
-  "manufacturingPageMobile": {
-    "seo": {
-      "title": "MEP Prefabrication",
-      "description": "MENASCO delivers off-site MEP prefabrication, including ductwork, pipe fabrication and prefabricated modules, for faster, higher-quality construction."
-    },
-    "eyebrow": "Manufacturing & Prefabrication",
-    "heading": "Engineering Precision Before Construction Begins",
-    "description": "Manufacturing and prefabrication are integral to how MENASCO delivers high-performance Mechanical, Electrical, and Plumbing (MEP) solutions. Through established manufacturing partners, critical fabrication activities are carried out in controlled environments, improving quality, accelerating delivery, and reducing on-site complexity.",
-    "overview": {
-      "eyebrow": "Overview",
-      "heading": "Advanced Manufacturing for Modern Construction",
-      "paragraph1": "Working closely with established manufacturing partners, MENASCO integrates a wide range of engineered MEP components and prefabricated assemblies into project delivery, produced under strict quality control before arriving on site. By coordinating critical building systems through controlled manufacturing environments, MENASCO delivers greater consistency, improved safety, reduced installation time, and enhanced project certainty.",
-      "paragraph2": "Every component is manufactured to project-specific requirements set by MENASCO's engineering teams, using advanced production processes that ensure dimensional accuracy, reliable performance, and installation readiness."
-    },
-    "capabilitiesSection": {
-      "eyebrow": "Our Capabilities",
-      "heading": "Manufacturing Capabilities"
-    },
-    "capabilities": [
-      {
-        "title": "HVAC Ductwork Fabrication",
-        "description": "Precision-manufactured ductwork engineered for performance, efficiency, and seamless installation."
-      },
-      {
-        "title": "Prefabricated MEP Modules",
-        "description": "Factory-built assemblies that improve coordination, quality, and construction speed."
-      },
-      {
-        "title": "Pipe Rack Systems",
-        "description": "Integrated piping assemblies manufactured to reduce installation time and improve consistency."
-      },
-      {
-        "title": "Mechanical Support Systems",
-        "description": "Engineered support solutions manufactured for structural integrity and long-term reliability."
-      },
-      {
-        "title": "Electrical Containment",
-        "description": "Prefabricated containment systems produced for accurate installation and improved coordination."
-      },
-      {
-        "title": "Custom Engineered Components",
-        "description": "Project-specific manufacturing solutions tailored to complex engineering requirements."
-      }
-    ],
-    "offSite": {
-      "eyebrow": "Off-Site Manufacturing",
-      "heading": "Off-Site Prefabrication",
-      "paragraph1": "MENASCO's off-site prefabrication methodology, delivered through specialist manufacturing partners, allows complete MEP assemblies to be produced before arriving on site. Integrating ductwork, piping, electrical containment, supports, and associated services into factory-built modules reduces on-site coordination and increases overall project quality.",
-      "paragraph2": "Manufacturing in controlled environments enables every assembly to undergo inspection before delivery, minimizing site modifications while supporting predictable project schedules.",
-      "benefitsLabel": "Benefits"
-    },
-    "benefits": [
-      "Faster installation",
-      "Improved quality control",
-      "Reduced on-site congestion",
-      "Greater programme certainty",
-      "Enhanced health and safety",
-      "Reduced material waste",
-      "Improved multidisciplinary coordination"
-    ],
-    "qualitySection": {
-      "eyebrow": "Quality Through Manufacturing",
-      "heading": "Quality Through Manufacturing",
-      "paragraph1": "Every manufactured component is produced using advanced fabrication technologies and controlled production processes to ensure precision, repeatability, and long-term performance.",
-      "paragraph2": "MENASCO's approach combines engineering expertise with specialist manufacturing partners' modern production techniques to deliver prefabricated MEP solutions across residential, hospitality, commercial, data center, healthcare, and industrial developments."
-    },
-    "qualityHighlights": [
-      {
-        "title": "Precision Engineering",
-        "description": "Advanced manufacturing processes delivering consistent dimensional accuracy."
-      },
-      {
-        "title": "Quality Assurance",
-        "description": "Every assembly undergoes rigorous inspection before installation."
-      },
-      {
-        "title": "Efficient Production",
-        "description": "Optimized workflows reduce project timelines while maintaining quality."
-      },
-      {
-        "title": "Reliable Delivery",
-        "description": "Factory-controlled manufacturing minimizes site risks and supports predictable execution."
-      }
-    ],
-    "downloadCompanyProfile": "Download Company Profile",
-    "cta": {
-      "heading": "Manufacturing Built Around Engineering Excellence",
-      "description": "From concept to installation, MENASCO integrates engineering expertise with specialist manufacturing partners to deliver faster, safer, and higher-quality project outcomes.",
-      "primaryLabel": "Explore Our Projects"
+      "heading": "Planning a Project With Prefabricated MEP?",
+      "description": "Bring MENASCO in early and the design can be shaped for modular manufacturing from the start."
     }
   },
   "epcPage": {

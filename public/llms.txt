@@ -50,7 +50,7 @@ Covers: BIM & Digital Engineering.
 
 ### Manufacturing & Prefabrication
 
-- [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt): Off-site production for faster, more consistent on-site installation.
+- [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt): In-house MEP manufacturing and prefabrication in the UAE, Saudi Arabia and Egypt: data center white spaces, E-Houses, switchgear, ductwork and modular assemblies, tested before dispatch.
 
 Covers: Modular, Custom.
 

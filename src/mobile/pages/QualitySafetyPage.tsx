@@ -188,7 +188,7 @@ function Hero() {
   };
 
   return (
-    <section className="bg-ink px-4 pb-10 pt-6 min-[440px]:pb-28 min-[440px]:pt-8 md:px-8">
+    <section className="bg-charcoal px-4 pb-10 pt-6 min-[440px]:pb-28 min-[440px]:pt-8 md:px-8">
       {/* Tab switcher, narrow phones only. */}
       <div role="tablist" aria-label={t('qualitySafetyPage.heading')} className="mb-6 grid grid-cols-2 rounded-full bg-white/10 p-1 min-[440px]:hidden">
         {tabs.map((label, i) => (

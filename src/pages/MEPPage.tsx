@@ -87,7 +87,7 @@ function Hero() {
     document.getElementById(DISCIPLINES_ANCHOR)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
 
   return (
-    <Section background="ink" spacing="sm" className="md:pt-12 desktop:pt-32">
+    <Section background="charcoal" spacing="sm" className="md:pt-12 desktop:pt-32">
       <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-6">
           <HeroH1
@@ -242,7 +242,7 @@ function SelectedProjects() {
   const projects = FEATURED_PROJECT_SLUGS.map((slug) => publishedProjects.find((p) => p.slug === slug)).filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   return (
-    <Section id="mep-projects" background="ink" spacing="sm" aria-labelledby="mep-projects-heading">
+    <Section id="mep-projects" background="charcoal" spacing="sm" aria-labelledby="mep-projects-heading">
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-14 desktop:grid-cols-1">
         <div>
           <Eyebrow theme="dark">{t('services:mepPage.projects.eyebrow')}</Eyebrow>

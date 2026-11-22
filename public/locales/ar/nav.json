@@ -47,10 +47,12 @@
   },
   "certificationTraining": "شهادات وتدريب ميناسكو",
   "dataCentres": "مراكز البيانات",
+  "dataCentreSustainability": "استدامة مراكز البيانات",
   "servicesGroups": {
     "mep": "الأعمال الكهروميكانيكية (MEP)",
     "civil": "الأعمال المدنية",
     "manufacturingPrefabrication": "التصنيع والتجميع المسبق",
+    "modularFabrication": "التصنيع المعياري",
     "turnkeyDevelopments": "الهندسة والمشتريات والإنشاءات"
   }
 }

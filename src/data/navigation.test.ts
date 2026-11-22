@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import {
   aboutNavigation,
   dataCentreServiceLink,
+  dataCentreSustainabilityLink,
   footerServiceLinks,
   headerServiceLinks,
   pendingContentPaths,
@@ -62,8 +63,10 @@ describe('navigation data', () => {
       for (const link of group.links) expect(labels).toContain(link.label);
     }
     expect(labels).toContain(dataCentreServiceLink.label);
+    expect(labels).toContain(dataCentreSustainabilityLink.label);
     expect(new Set(labels).size).toBe(labels.length);
     for (const link of footerServiceLinks) {
+      if (link === dataCentreSustainabilityLink) continue; // a sub-page of Data Centers, not an umbrella section
       expect(UMBRELLA_PAGES.some((page) => link.href === page || link.href.startsWith(`${page}#`)), link.href).toBe(true);
     }
   });

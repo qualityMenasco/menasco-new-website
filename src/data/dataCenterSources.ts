@@ -174,6 +174,13 @@ const S = {
     year: '2010–2012',
     url: 'https://www.thegreengrid.org/',
   },
+  doeDuckCurve: {
+    id: 'doe-duck-curve',
+    title: 'Confronting the Duck Curve: How to Address Over-Generation of Solar Energy',
+    publisher: 'U.S. Department of Energy',
+    year: '2017',
+    url: 'https://www.energy.gov/cmei/solar/articles/confronting-duck-curve-how-address-over-generation-solar-energy',
+  },
   leed: {
     id: 'leed',
     title: 'LEED rating system (including LEED BD+C: Data Centers)',
@@ -208,17 +215,13 @@ export const TECHNICAL_SOURCES: SourceEntry[] = [
   S.ashrae, //           14  Cooling
 ];
 
+// Numbered in the order each source is first cited on the page (top to bottom); only cited sources.
 export const SUSTAINABILITY_SOURCES: SourceEntry[] = [
-  S.iea, //            1
-  S.isoPue, //         2
-  S.greenGrid, //      3
-  S.euReporting, //    4
-  S.euLabel, //        5
-  S.enefg, //          6
-  S.enefgAmendment, // 7
-  S.cndcp, //          8
-  S.lbnl, //           9
-  S.leed, //           10
-  S.estidama, //       11
-  S.ashrae, //         12
+  S.doeDuckCurve, // 1  Seven opportunities (duck curve)
+  S.euLabel, //      2  Metrics
+  S.isoPue, //       3  Metrics
+  S.greenGrid, //    4  Metrics
+  S.leed, //         5  LEED and Estidama
+  S.estidama, //     6  LEED and Estidama
+  S.iea, //          7  Outlook
 ];

@@ -7,7 +7,7 @@ import { LocaleLink } from './LocaleLink';
 import { LanguageSwitch } from './LanguageSwitch';
 import { cn } from '../lib/utils';
 import { useScrollLock } from '../hooks/useScrollLock';
-import { aboutNavigation, dataCentreServiceLink, servicesNavigationGroups } from '../../data/navigation';
+import { aboutNavigation, dataCentreServiceLink, headerI18nKey, servicesNavigationGroups } from '../../data/navigation';
 import { primaryContact } from '../../data/locations';
 import { footerSocialLinks } from '../../data/socialLinks';
 import { SocialLinks } from '../../components/navigation';
@@ -59,7 +59,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
   // Umbrella pages only — sub-services are sections of these pages (listed in the footer).
   const umbrellas = [
-    ...servicesNavigationGroups.map((group) => ({ href: group.href, i18nKey: group.i18nKey, key: group.i18nKey.replace('servicesGroups.', '') })),
+    ...servicesNavigationGroups.map((group) => ({ href: group.href, i18nKey: headerI18nKey(group), key: group.i18nKey.replace('servicesGroups.', '') })),
     { href: dataCentreServiceLink.href, i18nKey: dataCentreServiceLink.i18nKey, key: 'dataCenters' },
   ];
 

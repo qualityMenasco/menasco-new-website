@@ -32,6 +32,10 @@ export interface TopicTabsProps {
    * Needs `horizontal`.
    */
   mobileRail?: boolean;
+  /** Tighter tab list and card (smaller tab text, less padding) for dense topic sets. */
+  compact?: boolean;
+  /** Phones (pill row): position dots + counter under the panel showing which topic is selected. */
+  dots?: boolean;
 }
 
 const DEFAULT_LAYOUT = 'md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-10 lg:grid-cols-[17rem_minmax(0,1fr)]';
@@ -47,7 +51,7 @@ const DEFAULT_LAYOUT = 'md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-10 lg:
  * the page jump; inactive panels are invisible, inert and hidden from
  * assistive tech. Arrow keys / Home / End move between tabs.
  */
-export function TopicTabs({ topics, idPrefix, label, className, layoutClassName, lead, footer, bare = false, horizontal = false, mobileRail = false }: TopicTabsProps) {
+export function TopicTabs({ topics, idPrefix, label, className, layoutClassName, lead, footer, bare = false, horizontal = false, mobileRail = false, compact = false, dots = false }: TopicTabsProps) {
   const [active, setActive] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const railRef = useRef<HTMLDivElement | null>(null);
@@ -91,6 +95,18 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
     setActive(i);
     const hash = topics[i]?.hash;
     if (hash) window.history.replaceState(window.history.state, '', `#${hash}`);
+    // Phones (scrolling pill row): bring the chosen pill to the front of the row, leaving a
+    // glimpse of the previous pill (except for the first). Scrolls only the row, never the page.
+    const list = tablistRef.current;
+    const tab = tabRefs.current[i];
+    if (list && tab && list.scrollWidth > list.clientWidth + 1) {
+      const pad = parseFloat(getComputedStyle(list).paddingInlineStart || '0');
+      const rtl = getComputedStyle(list).direction === 'rtl';
+      const peek = i > 0 ? 36 : 0;
+      const left = rtl ? -(list.scrollWidth - tab.offsetLeft - tab.offsetWidth - pad - peek) : tab.offsetLeft - list.offsetLeft - pad - peek;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      list.scrollTo({ left: rtl ? left : Math.max(0, left), behavior: reduce ? 'auto' : 'smooth' });
+    }
   };
 
   // Swipe mode: the panel nearest the rail's start edge is the active one.
@@ -117,8 +133,7 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
     const next = (index + topics.length) % topics.length;
     choose(next);
     const tab = tabRefs.current[next];
-    tab?.focus();
-    tab?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    tab?.focus({ preventScroll: true });
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
@@ -174,7 +189,7 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
               onKeyDown={onKeyDown}
               className={cn(
                 'shrink-0 whitespace-nowrap rounded-full border px-4 py-2 text-small font-semibold transition-colors duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-500',
-                !horizontal && 'md:-ms-px md:whitespace-normal md:rounded-none md:border-0 md:border-s-2 md:px-5 md:py-3 md:text-start md:text-body',
+                !horizontal && cn('md:-ms-px md:whitespace-normal md:rounded-none md:border-0 md:border-s-2 md:text-start', compact ? 'md:px-4 md:py-2 md:text-small md:leading-snug' : 'md:px-5 md:py-3 md:text-body'),
                 selected
                   ? cn('border-brand-600 bg-white text-brand-600', !horizontal && 'md:border-brand-600 md:bg-transparent md:text-ink')
                   : cn('border-gray-300 text-gray-600 hover:border-gray-500 hover:text-ink', !horizontal && 'md:border-transparent md:hover:border-gray-300'),
@@ -196,7 +211,7 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
         className={cn(
           rail ? 'no-scrollbar -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 md:-mx-10 md:scroll-px-10 md:px-10' : 'mt-5 grid',
           !horizontal && 'md:mt-0',
-          !bare && 'rounded-md border border-gray-200 bg-white p-6 md:p-8',
+          !bare && cn('rounded-md border border-gray-200 bg-white', compact ? 'p-5 md:p-6' : 'p-6 md:p-8'),
         )}
       >
         {topics.map((topic, i) => {
@@ -233,6 +248,18 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
           );
         })}
       </div>
+      {dots && !rail && (
+        <div className={cn('mt-4 flex items-center justify-between', !horizontal && 'md:hidden')}>
+          <div aria-hidden="true" className="flex gap-1.5">
+            {topics.map((topic, i) => (
+              <span key={topic.title} className={cn('h-1.5 rounded-full transition-all duration-base', i === active ? 'w-5 bg-ink' : 'w-1.5 bg-gray-300')} />
+            ))}
+          </div>
+          <p className="font-display text-caption font-semibold tabular-nums text-gray-500">
+            {String(active + 1).padStart(2, '0')} / {String(topics.length).padStart(2, '0')}
+          </p>
+        </div>
+      )}
       {rail && (
         <div className="mt-5 flex items-center justify-between">
           <div aria-hidden="true" className="flex gap-1.5">

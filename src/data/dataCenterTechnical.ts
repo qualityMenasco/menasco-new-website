@@ -22,6 +22,7 @@ export const dcTechnical = {
     intro:
       "With experience serving the world's leading hyperscale operators, our capabilities include greenfield and brownfield developments, Tier III and Tier IV redundant infrastructure, and projects targeting LEED Gold and Estidama Pearl sustainability ratings.",
     diagramLabel: 'Illustrative single-line: power, cooling and data paths',
+    cta: 'Explore Portfolio',
   },
   stats: { tier: 'Tier III–IV', tierLabel: 'Redundancy we build to', ratings: 'LEED & Estidama', ratingsLabel: 'Gold & Pearl alignment' },
   tiers: {

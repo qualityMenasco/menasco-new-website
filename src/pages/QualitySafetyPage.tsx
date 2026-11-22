@@ -33,7 +33,7 @@ function Hero() {
   const { t, i18n } = useTranslation(['about', 'common']);
   const rtl = i18n.dir() === 'rtl';
   return (
-    <Section spacing="lg" background="ink" className="pt-36 md:pt-40">
+    <Section spacing="lg" background="charcoal" className="pt-36 md:pt-40">
       <div className="grid grid-cols-12 gap-8">
         <div className="col-span-5 self-center">
           <HeroH1

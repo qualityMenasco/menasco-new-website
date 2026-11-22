@@ -12,9 +12,10 @@ export interface InnovationPhoto {
 }
 
 /**
- * Portrait film (768×1376, ~9.5 MB) of MENASCO at the Quality & Institutional
- * Excellence Conference: the Instagram reel's screen recording, trimmed to start
- * on the logo card, app overlay cropped out, upscaled 2x.
+ * Portrait film (768×1376) of MENASCO at the Quality & Institutional
+ * Excellence Conference: the Instagram reel's screen recording, app overlay cropped
+ * out, upscaled 2x. Starts on the first shot after the MENASCO logo card (the logo
+ * intro, frames 0-54 of the source, was cut 2026-11-22; ~9.2 MB, 54.1 s).
  */
 export const innovationHeroFilm = {
   src: '/innovation/innovation-film.mp4',

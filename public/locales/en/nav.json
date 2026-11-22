@@ -47,10 +47,12 @@
   },
   "certificationTraining": "MENASCO Certification & Training",
   "dataCentres": "Data Centers",
+  "dataCentreSustainability": "Data Center Sustainability",
   "servicesGroups": {
     "mep": "MEP",
     "civil": "Civil",
     "manufacturingPrefabrication": "Manufacturing & Prefabrication",
+    "modularFabrication": "Modular Fabrication",
     "turnkeyDevelopments": "EPC"
   }
 }

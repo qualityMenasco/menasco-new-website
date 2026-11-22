@@ -197,10 +197,8 @@ const PATTERNS: { pattern: string; importer: Importer; modulePath: string; deskt
 
   {
     pattern: '/services/manufacturing-prefabrication',
-    importer: () => import('../../src/mobile/pages/services/ManufacturingPrefabricationPage'),
-    modulePath: 'src/mobile/pages/services/ManufacturingPrefabricationPage.tsx',
-    desktopModulePath: 'src/pages/services/ManufacturingPrefabricationPage.tsx',
-    desktopImporter: () => import('../../src/pages/services/ManufacturingPrefabricationPage'),
+    importer: () => import('../../src/pages/services/ManufacturingPrefabricationPage'),
+    modulePath: 'src/pages/services/ManufacturingPrefabricationPage.tsx',
   },
   // Service umbrella pages and About sub pages (2026-11-18) — module paths are the exact
   // targets src/app/router.tsx dynamically imports (re-export stubs included), so the build

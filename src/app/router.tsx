@@ -116,10 +116,8 @@ const routeChildren: RouteObject[] = [
   { path: 'services/data-centers', element: lazyPage(() => import('../pages/services/DataCenterPage')) },
   { path: 'services/data-centers/sustainability', element: lazyPage(() => import('../pages/services/DataCenterSustainabilityPage')) },
   { path: 'services/data-centres', element: lazyPage(() => import('../pages/services/DataCenterPage')) },
-  {
-    path: 'services/manufacturing-prefabrication',
-    element: responsivePage(() => import('../pages/services/ManufacturingPrefabricationPage'), () => import('../mobile/pages/services/ManufacturingPrefabricationPage')),
-  },
+  // One responsive page for every screen size (rebuilt 2026-11-22, same pattern as MEP).
+  { path: 'services/manufacturing-prefabrication', element: lazyPage(() => import('../pages/services/ManufacturingPrefabricationPage')) },
   // Dedicated bespoke page (same pattern as Manufacturing & Prefabrication
   // above) rather than the generic services/:slug template — 2026-10-29.
   {

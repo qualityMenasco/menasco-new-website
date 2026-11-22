@@ -49,7 +49,7 @@ const chapters: Chapter[] = [
 const themeClasses: Record<Chapter['theme'], { section: string; text: string; muted: string; accent: string }> = {
   light: { section: 'bg-warmwhite', text: 'text-ink', muted: 'text-gray-600', accent: 'text-brand-600' },
   stone: { section: 'bg-stone', text: 'text-ink', muted: 'text-gray-600', accent: 'text-brand-600' },
-  dark: { section: 'bg-ink', text: 'text-warmwhite', muted: 'text-gray-300', accent: 'text-brand-400' },
+  dark: { section: 'bg-charcoal', text: 'text-warmwhite', muted: 'text-gray-300', accent: 'text-brand-400' },
 };
 
 /**
@@ -248,7 +248,7 @@ export default function InnovationPage() {
       })}
 
       {/* Closing statement, as on desktop, set as two poster lines. */}
-      <section className="overflow-hidden bg-ink px-4 py-12">
+      <section className="overflow-hidden bg-charcoal px-4 py-12">
         <h3 className="font-display text-[10vw] font-bold uppercase leading-[0.92] tracking-[-0.04em] text-warmwhite md:text-[7vw]">
           {t('innovation.closing.heading')
             .split(' ')

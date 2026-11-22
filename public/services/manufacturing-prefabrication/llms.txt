@@ -1,38 +1,140 @@
 # Manufacturing & Prefabrication
 
-> Off-site production for faster, more consistent on-site installation.
+> MENASCO manufactures and prefabricates MEP systems in-house across the UAE, Saudi Arabia and Egypt. Data center white spaces, E-Houses, switchgear, ductwork and modular assemblies are built and tested under factory control, then delivered ready to install.
 
-## Overview
+## Less Work on Site, More Certainty in the Programme
 
-Through established manufacturing partners, MENASCO integrates prefabricated MEP components into project delivery, reducing site congestion and installation time while improving consistency across large-scale projects.
+Moving MEP fabrication off site changes what happens on site. Assemblies are built in parallel with civil works, arrive complete, and are installed by smaller crews in less time.
 
-## Capabilities
+- Shorter programmes: Modules are built while the site is prepared, so fabrication and construction run side by side instead of one after the other.
+- Factory-controlled quality: Jigs, repeatable processes and inspection at every stage hold tolerances that are hard to achieve in a congested building.
+- Safer, clearer sites: Less work at height, less hot work and fewer trades competing for the same ceiling void or plant room.
+- Less reliance on site labour: Skilled work moves into the factory, reducing exposure to labour shortages and productivity swings on site.
 
-- Partner-led manufacturing capability
-- Off-site production
-- Quality inspection
-- Faster installation
-- Reduced site congestion
-- Improved consistency
-- Modular MEP solutions
+## Prefabricated Cooling and Power for the Data Hall
 
-## Related Sectors
+MENASCO prefabricates the services that run through a data hall: the cooling pipework that removes heat from the racks, and the electrical routes that deliver power to them.
 
-- Hospitality & Landmark Entertainment
-- Advanced Technical Facilities
+Assemblies are built to the coordinated model, tested in the factory and delivered in installation sequence, so fitting out the hall becomes a matter of setting and connecting.
 
----
+- Cooling pipework: Chilled-water and liquid-cooling headers, branches and connections to cooling units and CDUs, pressure tested before dispatch.
+- Electrical transfer: Power routes, busway runs and distribution assemblies that carry power from the electrical rooms to the racks.
+- Cable trays: Tray, ladder and basket systems prefabricated in sections that follow the hall layout.
+- ELV: Pathways for monitoring, security and structured cabling, coordinated with power and cooling routes.
+- Ductwork: Standard and pre-insulated ductwork for air-cooled halls and supporting spaces.
 
-## Relevant Projects
+## Electrical Rooms, Delivered Complete
 
-- [Vida Hotel](https://menascogroup.com/projects/vida-hotel/llms.txt): Sharjah, UAE
-- [Seven Hotel](https://menascogroup.com/projects/seven-hotel/llms.txt): Palm Jumeirah, Dubai, UAE
-- [Qiddiya](https://menascogroup.com/projects/qiddiya/llms.txt): Qiddiya City, Saudi Arabia
-- [Data Centre I](https://menascogroup.com/projects/data-centre-i-12-mw-it/llms.txt): Abu Dhabi, UAE
-- [Data Centre II](https://menascogroup.com/projects/data-centre-ii-24-mw-it/llms.txt): Abu Dhabi, UAE
-- [Data Centre III](https://menascogroup.com/projects/data-centre-iii-2-4-mw-it/llms.txt): Dubai, UAE
-- [Data Centre IV](https://menascogroup.com/projects/data-centre-iv-6-mw-it/llms.txt): Abu Dhabi, UAE
-- [Data Centre V](https://menascogroup.com/projects/data-centre-v-800-kw-it/llms.txt): Dubai, UAE
+An E-House is a prefabricated electrical room: the enclosure, the power and control equipment inside it, and the building services that keep that equipment running.
+
+MENASCO builds and fits out each E-House in the factory, tests it as a complete unit and ships it ready to set on its foundation, connect and commission.
+
+- Power and control equipment: Switchgear, distribution and control panels installed, wired and tested inside the enclosure.
+- Climate control: HVAC sized to the equipment heat load and the site climate, so equipment stays within its rated temperatures.
+- Fire and safety systems: Fire detection and suppression, lighting and earthing installed and tested with the room.
+- Tested as one unit: The finished E-House is tested before shipping, so site work is limited to setting, connecting and commissioning.
+
+Suited to data centers, utilities, industrial plants and remote sites where a conventionally built electrical room would hold up the programme.
+
+## The Rest of What We Build In-House
+
+Beyond white spaces and E-Houses, MENASCO's factories produce the components and assemblies that go into every MEP package, built to project specifications.
+
+### Modular assemblies
+
+Multi-service modules built off site and lifted into place.
+
+- Prefabricated vertical riser modules
+- Multi-service pipe rack modules
+- Plant and equipment skids with pumps, valves and controls
+- Pipe spools and duct assemblies
+
+### Power and controls
+
+Low-voltage panels and power distribution, engineered to each project's single-line diagram.
+
+- Main and sub-main distribution boards (MDB / SMDB)
+- Motor control centres (MCC)
+- Automatic transfer switch (ATS) panels
+- PLC and electrical control panels
+- Distribution boards and meter cabinets
+- Capacitor banks for power factor correction
+- Rising mains, high-current feeder and plug-in tap-off busway
+
+### Air distribution
+
+Ductwork and air-side components fabricated on automated lines.
+
+- Galvanised steel ductwork to SMACNA and BS standards
+- Phenolic and PIR pre-insulated ductwork
+- Volume control, non-return and fire dampers
+- Access doors and sound attenuators
+
+### Water and pumping
+
+Water storage and packaged pumping for buildings and infrastructure.
+
+- GRP sectional water tanks
+- Packaged pump sets and pump skids
+- Pressurisation units
+
+## Tested Before It Leaves the Factory
+
+Every assembly is inspected and tested in the factory, where problems are faster and cheaper to fix than on site. Each delivery ships with the records needed for installation and handover.
+
+- Pressure and leak testing: Pipework and pipe assemblies are pressure tested to project requirements before they ship.
+- Electrical testing: Panels and E-Houses go through insulation, continuity, functional and protection checks.
+- Factory acceptance testing: Clients and consultants can witness tests on finished assemblies before dispatch.
+- Dimensional inspection: Modules are checked against the coordinated model so they fit first time on site.
+- Documentation: Test certificates, material traceability and as-built drawings accompany every delivery.
+
+- ISO 9001:2015 (Quality)
+- ISO 14001:2015 (Environmental)
+- ISO 45001:2018 (Occupational health and safety)
+
+Fabrication follows the SMACNA, BS and IEC standards specified for each project.
+
+## Manufacturing in Three Countries
+
+MENASCO manufactures in the UAE, Saudi Arabia and Egypt. Producing close to the project shortens logistics, supports local content requirements and keeps capacity available when one market is busy.
+
+- United Arab Emirates: Serving projects across the UAE and the wider GCC.
+- Saudi Arabia: Producing in the Kingdom for Saudi projects and local content requirements.
+- Egypt: Producing locally for Egyptian and regional projects, so finished modules do not need to be imported.
+
+## Where Our Prefabrication Goes
+
+- Data centers: White spaces, E-Houses and power distribution for hyperscale and enterprise facilities.
+- Healthcare and pharmaceuticals: Riser and plant modules for hospitals, clinics and controlled production environments.
+- Residential and hospitality: Repeatable riser, ductwork and panel packages for towers, hotels and accommodation.
+- Industrial and energy: Skids, E-Houses and control panels for plants, utilities and energy infrastructure.
+- Landmark and entertainment: Engineered assemblies for complex venues where site access and time are tight.
+
+## Frequently Asked Questions
+
+### Does MENASCO manufacture in-house?
+
+Yes. MENASCO manufactures and prefabricates MEP systems in its own factories in the UAE, Saudi Arabia and Egypt, so quality, capacity and lead times stay under its own control.
+
+### Can MENASCO prefabricate data center white spaces?
+
+Yes. MENASCO prefabricates the cooling pipework, electrical transfer routes, cable trays, ELV pathways and standard or insulated ductwork for data halls, built to the coordinated model and tested before delivery.
+
+### Does MENASCO build E-Houses?
+
+Yes. MENASCO builds E-Houses as complete, factory-built electrical rooms, with power and control equipment, HVAC, fire protection and lighting installed and tested before they ship.
+
+### How much time can prefabrication save?
+
+It depends on the project. The saving comes from parallel working: modules are built while the site is prepared, and site work is reduced to setting, connecting and commissioning.
+
+### Can clients witness factory testing?
+
+Yes. Clients and consultants can attend factory acceptance tests on finished assemblies before they are dispatched.
+
+### Does MENASCO install what it manufactures?
+
+Yes. As an MEP contractor, MENASCO can manufacture, deliver, install and commission the same systems, giving one point of responsibility from the factory to handover.
 
 ---
 

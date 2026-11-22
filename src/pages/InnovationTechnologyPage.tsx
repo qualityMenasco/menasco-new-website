@@ -173,10 +173,10 @@ const chapters: Chapter[] = [
   },
 ];
 
-const themeClasses: Record<Chapter['theme'], { background: 'warmwhite' | 'stone' | 'ink'; text: string; muted: string; accent: string }> = {
+const themeClasses: Record<Chapter['theme'], { background: 'warmwhite' | 'stone' | 'charcoal'; text: string; muted: string; accent: string }> = {
   light: { background: 'warmwhite', text: 'text-ink', muted: 'text-gray-700', accent: 'text-brand-600' },
   stone: { background: 'stone', text: 'text-ink', muted: 'text-gray-700', accent: 'text-brand-600' },
-  dark: { background: 'ink', text: 'text-warmwhite', muted: 'text-gray-300', accent: 'text-brand-400' },
+  dark: { background: 'charcoal', text: 'text-warmwhite', muted: 'text-gray-300', accent: 'text-brand-400' },
 };
 
 interface TranslatedSection {
@@ -260,7 +260,7 @@ export default function InnovationTechnologyPage() {
 
       {/* Closing statement as two poster lines, the second word in brand blue. */}
       <ScrollReveal>
-        <Section spacing="lg" background="ink" className="overflow-hidden">
+        <Section spacing="lg" background="charcoal" className="overflow-hidden">
           <div>
             <h3 className="font-display text-[clamp(3.5rem,6vw,5.5rem)] font-bold uppercase leading-[0.92] tracking-[-0.04em] text-warmwhite">
               {t('innovation.closing.heading')

@@ -112,6 +112,7 @@ const umbrellaPages: Record<string, { seo: { title: string; description: string 
   '/services/mep': servicesCopy.mepPage,
   '/services/civil': servicesCopy.civilPage,
   '/services/turnkey-developments': servicesCopy.epcPage,
+  '/services/manufacturing-prefabrication': servicesCopy.manufacturingPage,
 };
 
 /**
@@ -645,8 +646,33 @@ function serviceAreaBlocks(): string[] {
     doc(
       `### Manufacturing & Prefabrication`,
       linkLine(sc.manufacturingPage.seo.title, llmsUrl('/services/manufacturing-prefabrication'), sc.manufacturingPage.seo.description),
-      capabilityBullets(sc.manufacturingPage.capabilities),
+      mfgScopeBullets(),
     ),
+  ];
+}
+
+/** Manufacturing & Prefabrication scope: the two featured lines, then each product range group. */
+function mfgScopeBullets(): string {
+  const m = servicesCopy.manufacturingPage;
+  return bullets([
+    `${m.whiteSpaces.eyebrow}: ${(m.whiteSpaces.items as { title: string }[]).map((i) => i.title).join(', ')}`,
+    `${m.eHouses.eyebrow}: ${m.eHouses.body[0]}`,
+    ...(m.range.topics as { title: string; items: string[] }[]).map((topic) => `${topic.title}: ${topic.items.join('; ')}`),
+  ]);
+}
+
+/** Manufacturing-only sections, mirroring the page. */
+function mfgPageSections(): string[] {
+  const m = servicesCopy.manufacturingPage;
+  const titled = (items: { title: string; body: string }[]) => bullets(items.map((i) => `${i.title}: ${i.body}`));
+  return [
+    doc(h2(m.whyOffsite.heading), m.whyOffsite.intro, titled(m.whyOffsite.items)),
+    doc(h2(m.whiteSpaces.heading), (m.whiteSpaces.body as string[]).join('\n\n'), titled(m.whiteSpaces.items)),
+    doc(h2(m.eHouses.heading), (m.eHouses.body as string[]).join('\n\n'), titled(m.eHouses.items), m.eHouses.note),
+    doc(h2(m.range.heading), m.range.intro, ...(m.range.topics as { title: string; body: string; items: string[] }[]).map((topic) => doc(`### ${topic.title}`, topic.body, bullets(topic.items)))),
+    doc(h2(m.testing.heading), m.testing.intro, titled(m.testing.items), bullets((m.testing.standards as { code: string; label: string }[]).map((s) => `${s.code} (${s.label})`)), m.testing.standardsNote),
+    doc(h2(m.factories.heading), m.factories.intro, bullets((m.factories.countries as { name: string; body: string }[]).map((c) => `${c.name}: ${c.body}`))),
+    doc(h2(m.sectors.heading), titled(m.sectors.items)),
   ];
 }
 
@@ -666,6 +692,7 @@ function generateUmbrellaPages() {
       h1(page.seo.title),
       bq(page.hero.description),
       ...(path === '/services/mep' ? mepPageSections() : []),
+      ...(path === '/services/manufacturing-prefabrication' ? mfgPageSections() : []),
       ...(page.projects
         ? [
             doc(

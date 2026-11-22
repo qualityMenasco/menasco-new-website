@@ -34,7 +34,7 @@ export function CredentialsSection() {
         {credentials.map((credential) => {
           const key = credential.key;
           return (
-            <div key={credential.title} className="flex flex-col p-8 md:p-10">
+            <div key={credential.title} className="flex flex-col p-8 md:p-7 xl:p-10">
               <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-sm bg-stone text-brand-600">
                 <CredentialIcon icon={credential.icon} />
               </div>
@@ -50,15 +50,15 @@ export function CredentialsSection() {
               </Text>
 
               {credential.buttonVariant === 'filled' ? (
-                <ButtonLink href={credential.href} download variant="outline" size="lg" fullWidth className="bg-white">
+                <ButtonLink href={credential.href} download variant="outline" size="md" fullWidth className="bg-white">
                   {t(`credentials.${key}.buttonLabel`, { defaultValue: credential.buttonLabel })}
                 </ButtonLink>
               ) : credential.internal ? (
-                <ButtonLink href={credential.href} variant="outline" size="lg" fullWidth>
+                <ButtonLink href={credential.href} variant="outline" size="md" fullWidth>
                   {t(`credentials.${key}.buttonLabel`, { defaultValue: credential.buttonLabel })}
                 </ButtonLink>
               ) : (
-                <ButtonLink href={credential.href} target="_blank" rel="noreferrer" variant="outline" size="lg" fullWidth>
+                <ButtonLink href={credential.href} target="_blank" rel="noreferrer" variant="outline" size="md" fullWidth>
                   {t(`credentials.${key}.buttonLabel`, { defaultValue: credential.buttonLabel })}
                 </ButtonLink>
               )}

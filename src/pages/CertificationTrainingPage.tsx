@@ -314,7 +314,7 @@ function Pathway() {
   const arrow = 'inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-warmwhite transition-colors duration-base hover:border-white disabled:cursor-default disabled:opacity-30';
 
   return (
-    <Section id={anchors.pathway} background="ink" spacing="sm" className="scroll-mt-20 xl:py-10">
+    <Section id={anchors.pathway} background="charcoal" spacing="sm" className="scroll-mt-20 xl:py-10">
       <ScrollReveal>
         <div className="flex flex-wrap items-center gap-3">
           <Eyebrow className="mb-0">{t('certificationTrainingPage.initiative.eyebrow')}</Eyebrow>

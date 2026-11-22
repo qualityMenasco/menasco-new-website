@@ -296,6 +296,10 @@ addRoute(
         url: `${SITE_URL}/services/manufacturing-prefabrication`,
       }),
     breadcrumb: () => [HOME, { label: 'Services', path: '/services' }, { label: 'Manufacturing & Prefabrication', path: '/services/manufacturing-prefabrication' }],
+    extraJsonLd: (l) => {
+      const items = NS[l].services?.manufacturingPage?.faq?.items as { question: string; answer: string }[] | undefined;
+      return items?.length ? [faqPageJsonLd(items)] : undefined;
+    },
   },
 );
 addRoute(

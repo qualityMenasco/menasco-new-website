@@ -112,8 +112,9 @@ export const servicesNavigationGroups: NavGroupEntry[] = [
     i18nKey: 'servicesGroups.manufacturingPrefabrication',
     href: '/services/manufacturing-prefabrication',
     links: [
-      subService('/services/manufacturing-prefabrication', 'Modular', 'servicesList.modular'),
-      subService('/services/manufacturing-prefabrication', 'Custom', 'servicesList.custom'),
+      // Modular → the data center white spaces section; Custom → the product range.
+      subService('/services/manufacturing-prefabrication', 'Modular', 'servicesList.modular', 'modular'),
+      subService('/services/manufacturing-prefabrication', 'Custom', 'servicesList.custom', 'custom'),
     ],
   },
   {
@@ -134,19 +135,42 @@ export const dataCentreServiceLink: NavGroupLinkEntry = {
   i18nKey: 'dataCentres',
 };
 
+/** Data center sustainability page: the second Data Centers tab, listed in the footer under Data Centers. */
+export const dataCentreSustainabilityLink: NavGroupLinkEntry = {
+  label: 'Data Center Sustainability',
+  href: '/services/data-centers/sustainability',
+  i18nKey: 'dataCentreSustainability',
+};
+
 /** Every umbrella service page, in menu order (MEP, Civil, Manufacturing & Prefabrication, EPC, Data Centers). */
 export const umbrellaServiceLinks: NavGroupLinkEntry[] = [
   ...servicesNavigationGroups.map((group) => ({ label: group.label, href: group.href, i18nKey: group.i18nKey })),
   dataCentreServiceLink,
 ];
 
-/** Header Services menu (desktop dropdown + mobile drawer): All Services, then the umbrella pages only. */
-export const headerServiceLinks: NavGroupLinkEntry[] = [{ label: 'All Services', href: '/services', i18nKey: 'allServices' }, ...umbrellaServiceLinks];
+/**
+ * Shorter labels used only in the site header (desktop dropdown + mobile menu).
+ * Everywhere else (footer, page titles, SEO) keeps the group's own label.
+ * Client request 2026-11-22: "Modular Fabrication" in the navigation bar only.
+ */
+const HEADER_LABEL_KEYS: Record<string, string> = {
+  '/services/manufacturing-prefabrication': 'servicesGroups.modularFabrication',
+};
 
-/** Footer Services column — each umbrella followed by its sub-services (which link to the umbrella page or its section), then Data Centers. Hrefs can repeat, so key by label. */
+/** The nav i18n key to show for a service in the header (override, else its own key). */
+export const headerI18nKey = (link: { href: string; i18nKey: string }) => HEADER_LABEL_KEYS[link.href] ?? link.i18nKey;
+
+/** Header Services menu (desktop dropdown + mobile drawer): All Services, then the umbrella pages only. */
+export const headerServiceLinks: NavGroupLinkEntry[] = [
+  { label: 'All Services', href: '/services', i18nKey: 'allServices' },
+  ...umbrellaServiceLinks.map((link) => ({ ...link, i18nKey: headerI18nKey(link) })),
+];
+
+/** Footer Services column — each umbrella followed by its sub-services (which link to the umbrella page or its section), then Data Centers and its Sustainability page. Hrefs can repeat, so key by label. */
 export const footerServiceLinks: NavGroupLinkEntry[] = [
   ...servicesNavigationGroups.flatMap((group) => [{ label: group.label, href: group.href, i18nKey: group.i18nKey }, ...group.links]),
   dataCentreServiceLink,
+  dataCentreSustainabilityLink,
 ];
 
 /** "About" dropdown — every entry carries its own `nav` translation key. */

@@ -340,7 +340,8 @@
 }
 [data-flow-target='data'][data-decode]::after {
   content: attr(data-decode);
-  white-space: nowrap;
+  /* pre: keeps the line breaks TextReactions copies from the rendered text. */
+  white-space: pre;
   overflow: hidden;
   color: #3dbe7a;
   text-shadow: 0 0 10px rgba(61, 190, 122, 0.5);

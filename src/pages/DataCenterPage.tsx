@@ -103,7 +103,7 @@
  *   the client has not yet asked for the story treatment there. Ask before changing.
  * ============================================================================
  */
-import { useEffect, useRef, useState, type ReactNode, type RefObject } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Container } from '../components/layout/Container';
@@ -112,7 +112,7 @@ import { HeroH1 } from '../components/typography/HeroH1';
 import { ButtonLink } from '../components/ui/Button';
 import { FaqAccordion } from '../components/common/FaqAccordion';
 import { SmartLink } from '../lib/SmartLink';
-import { dataCenterProjects, totalDataCenterMw } from '../data/projects';
+import { dataCenterProjects } from '../data/projects';
 import { dcTechnical as c } from '../data/dataCenterTechnical';
 import { TECHNICAL_SOURCES } from '../data/dataCenterSources';
 import { TopicTabs } from '../components/sections/quality/TopicTabs';
@@ -211,56 +211,6 @@ function Figure({ value, label, target, dark = false }: { value: string; label: 
 }
 
 /**
- * Slows mouse-wheel scrolling while the hero is on screen (client request), so
- * the hero drawing and title reactions are taken in. Desktop wheel only: touch,
- * keyboard and scrollbar scrolling stay native (hijacking touch momentum feels
- * broken on phones). Off for reduced-motion users.
- */
-function useSlowHeroScroll(heroRef: RefObject<HTMLElement>, factor = 0.4) {
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    let target = -1;
-    let raf = 0;
-    let expected = -1;
-    const stop = () => {
-      cancelAnimationFrame(raf);
-      raf = 0;
-      target = -1;
-      expected = -1;
-    };
-    const glide = () => {
-      // Someone else moved the page (scrollbar, keys, a link): drop the glide.
-      if (expected >= 0 && Math.abs(window.scrollY - expected) > 2) return stop();
-      const diff = target - window.scrollY;
-      if (Math.abs(diff) < 0.5) return stop();
-      expected = Math.round(window.scrollY + diff * 0.18);
-      window.scrollTo({ top: expected, behavior: 'instant' as ScrollBehavior });
-      raf = requestAnimationFrame(glide);
-    };
-    const onWheel = (e: WheelEvent) => {
-      const hero = heroRef.current;
-      if (!hero || e.ctrlKey) return;
-      const bottom = hero.getBoundingClientRect().bottom;
-      // Only while the hero still fills a good part of the screen.
-      if (bottom < window.innerHeight * 0.35) {
-        stop();
-        return;
-      }
-      e.preventDefault();
-      const base = target < 0 ? window.scrollY : target;
-      const delta = (e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY) * factor;
-      target = Math.max(0, base + delta);
-      if (!raf) raf = requestAnimationFrame(glide);
-    };
-    window.addEventListener('wheel', onWheel, { passive: false });
-    return () => {
-      window.removeEventListener('wheel', onWheel);
-      cancelAnimationFrame(raf);
-    };
-  }, [heroRef, factor]);
-}
-
-/**
  * Data Center technical page (/services/data-centers), the first of two
  * tabs. Told as chapters: what is happening in the industry, what matters,
  * and MENASCO's role in each. Key words react as they scroll into view
@@ -270,8 +220,6 @@ function useSlowHeroScroll(heroRef: RefObject<HTMLElement>, factor = 0.4) {
 export default function DataCenterPage() {
   const { t } = useTranslation('services');
   const pageRef = useRef<HTMLDivElement>(null);
-  const heroRef = useRef<HTMLDivElement>(null);
-  useSlowHeroScroll(heroRef);
   const faq = t('dataCenter.faq', { returnObjects: true }) as FaqEntry[];
   const faqItems = Array.isArray(faq) ? faq.map((f) => ({ question: f.title, answer: f.content })) : [];
   const [coolingView, setCoolingView] = useState<'units' | 'approach'>('units');
@@ -356,7 +304,6 @@ export default function DataCenterPage() {
 
         {/* Hero: the three things a data center must never lose */}
         <Band tone="dark" className="pb-14 pt-6 md:pb-20 md:pt-8">
-          <div ref={heroRef} aria-hidden="true" className="pointer-events-none absolute inset-0" />
           {/* Slightly wider than the text column: bleeds into the side gutters. */}
           <div className="-mx-6 md:-mx-14 lg:-mx-28">
             <HeroServerHall />
@@ -376,19 +323,20 @@ export default function DataCenterPage() {
             />
             <p className="mt-6 max-w-2xl text-body-lg leading-relaxed text-gray-300">{c.hero.intro}</p>
           </div>
-          <dl className="mt-10 grid grid-cols-2 gap-y-6 border-t border-white/10 pt-6 md:grid-cols-4 md:gap-y-0">
+          <dl className="mt-10 grid grid-cols-2 border-t border-white/10 pt-6 md:max-w-xl">
             {[
-              [String(dataCenterProjects.length), t('dataCenter.stats.featuredDataCenters')],
-              [`${totalDataCenterMw.toFixed(1)} MW`, t('dataCenter.stats.megawatts')],
               [c.stats.tier, c.stats.tierLabel],
               [c.stats.ratings, c.stats.ratingsLabel],
             ].map(([value, label], i) => (
-              <div key={i} className={cn('flex flex-col pe-4', i % 2 === 1 && 'border-s border-white/10 ps-4', i > 0 && 'md:border-s md:border-white/10 md:ps-6 lg:ps-8')}>
+              <div key={i} className={cn('flex flex-col pe-4', i === 1 && 'border-s border-white/10 ps-4 md:ps-6 lg:ps-8')}>
                 <dt className="mt-2 text-caption text-gray-400 md:text-small">{label}</dt>
                 <dd className="order-first whitespace-nowrap font-display text-[clamp(1rem,0.45rem+2.2vw,1.5rem)] font-semibold leading-tight text-white md:text-[clamp(1.125rem,0.35rem+1.5vw,1.875rem)]">{value}</dd>
               </div>
             ))}
           </dl>
+          <ButtonLink href="/projects/categories?category=advanced-technical-facilities" variant="outline" theme="dark" trailingIcon={ArrowRight} className="mt-10 !border-white">
+            {c.hero.cta}
+          </ButtonLink>
         </Band>
 
         {/* MENASCO's data center capability (directly below the hero) */}

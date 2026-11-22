@@ -50,9 +50,35 @@ const FAST_DECODE_MS = 900;
 /** Each scrambled character holds for this long before changing. */
 const GLYPH_HOLD_MS = 110;
 
+/**
+ * Character indices where the rendered text wraps onto a new line, so the
+ * single-block decode overlay can break in exactly the same places (otherwise a
+ * heading that wraps on mobile scrambles on one line, then jumps to two).
+ */
+function lineBreaks(el: HTMLElement): Set<number> {
+  const breaks = new Set<number>();
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  const range = document.createRange();
+  let index = 0;
+  let lastTop: number | null = null;
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    const len = node.textContent?.length ?? 0;
+    for (let i = 0; i < len; i++, index++) {
+      range.setStart(node, i);
+      range.setEnd(node, i + 1);
+      const rect = range.getClientRects()[0];
+      if (!rect || rect.width === 0) continue; // collapsed whitespace at a wrap
+      if (lastTop !== null && rect.top > lastTop + rect.height / 2) breaks.add(index);
+      lastTop = rect.top;
+    }
+  }
+  return breaks;
+}
+
 /** Scrambles the overlay text and resolves it left to right. Returns a cancel function. */
 function decode(el: HTMLElement, durationMs = DECODE_MS): () => void {
   const text = el.textContent ?? '';
+  const breaks = lineBreaks(el);
   let raf = 0;
   let lastSwap = -Infinity;
   let glyphs: string[] = [];
@@ -70,6 +96,7 @@ function decode(el: HTMLElement, durationMs = DECODE_MS): () => void {
     let out = '';
     for (let i = 0; i < text.length; i++) {
       const ch = text[i];
+      if (breaks.has(i)) out = out.replace(/ $/, '') + '\n';
       out += i < resolved || !/[A-Za-z0-9]/.test(ch) ? ch : glyphs[i];
     }
     el.dataset.decode = out;
