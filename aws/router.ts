@@ -45,6 +45,7 @@ export const routes: RouteDefinition[] = [
   { method: 'POST', pattern: '/articles/:id/images/reorder', load: () => import('../api/newsroom/articles/[id]/images/reorder') },
   { method: 'GET', pattern: '/articles/:id/images/:imageId/preview-url', load: () => import('../api/newsroom/articles/[id]/images/[imageId]/preview-url') },
   { method: 'PATCH', pattern: '/articles/:id/images/:imageId', load: () => import('../api/newsroom/articles/[id]/images/[imageId]/index') },
+  { method: 'DELETE', pattern: '/articles/:id/images/:imageId', load: () => import('../api/newsroom/articles/[id]/images/[imageId]/index') },
 
   { method: 'GET', pattern: '/articles/:id', load: () => import('../api/newsroom/articles/[id]/index') },
   { method: 'PATCH', pattern: '/articles/:id', load: () => import('../api/newsroom/articles/[id]/index') },

@@ -44,3 +44,36 @@ describe('aws/router — DELETE /articles/:id', () => {
     expect(pathHasAnyMethod('/articles/some-id')).toBe(true);
   });
 });
+
+/**
+ * Same class of bug, same fix, one route over: this route table initially
+ * registered PATCH for /articles/:id/images/:imageId when the per-image
+ * delete feature's DELETE handler was added to the handler module itself,
+ * but never got a matching DELETE entry here — reproducing the exact
+ * "Method DELETE not allowed" failure the describe block above already
+ * regression-tests for /articles/:id, just on the images sub-route instead.
+ */
+describe('aws/router — DELETE /articles/:id/images/:imageId', () => {
+  it('has exactly one DELETE route registered for /articles/:id/images/:imageId', () => {
+    const deleteRoutes = routes.filter((route) => route.method === 'DELETE' && route.pattern === '/articles/:id/images/:imageId');
+    expect(deleteRoutes).toHaveLength(1);
+  });
+
+  it('matches a DELETE request and extracts both the article id and image id', () => {
+    const matched = matchRoute('DELETE', '/articles/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa/images/bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb');
+    expect(matched).not.toBeNull();
+    expect(matched?.route.method).toBe('DELETE');
+    expect(matched?.params).toEqual({ id: 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', imageId: 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb' });
+  });
+
+  it('loads the same handler module PATCH /articles/:id/images/:imageId uses', async () => {
+    const matched = matchRoute('DELETE', '/articles/some-id/images/some-image-id');
+    expect(matched).not.toBeNull();
+    const mod = await matched!.route.load();
+    expect(typeof mod.default).toBe('function');
+  });
+
+  it('reports 405-worthy (path exists, method does not) rather than 404, same mechanism as the /articles/:id regression above', () => {
+    expect(pathHasAnyMethod('/articles/some-id/images/some-image-id')).toBe(true);
+  });
+});
