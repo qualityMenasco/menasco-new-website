@@ -1,7 +1,9 @@
-import { Children, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { Children, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { ArrowRight, ChevronDown, ImageIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { RailDots, useRail } from './datacenter/shared';
+import { Eyebrow, Heading } from '../typography/Typography';
+import { SmartLink } from '../../lib/SmartLink';
 import { cn } from '../../lib/utils';
 
 /**
@@ -132,6 +134,11 @@ export function ClampedParagraphs({ id, paragraphs, dark = false }: { id: string
  * the toggle is inert, so tablets/desktop read as a plain list (wrap it in
  * `md:hidden` when RowTabs takes over from md). Panels use the `hidden`
  * attribute (still in the DOM for crawlers).
+ *
+ * `boxed` (phone-only lists, dark sections): the open row becomes a card, a
+ * slightly lighter surface with a hairline border (shadows barely show on dark
+ * backgrounds), so it reads as one group; closed rows stay plain ruled lines.
+ * Opening a row also scrolls its title to the top of the screen.
  */
 export function DisclosureList({
   idPrefix,
@@ -139,28 +146,51 @@ export function DisclosureList({
   defaultOpen = null,
   numbered = true,
   dark = false,
+  boxed = false,
 }: {
   idPrefix: string;
   items: { title: string; content: ReactNode }[];
   defaultOpen?: number | null;
   numbered?: boolean;
   dark?: boolean;
+  boxed?: boolean;
 }) {
   const [open, setOpen] = useState<number | null>(defaultOpen);
+  const rowRefs = useRef<(HTMLLIElement | null)[]>([]);
   const rule = dark ? 'border-white/15' : 'border-gray-300';
+  const toggle = (i: number) => {
+    const opening = open !== i;
+    setOpen(opening ? i : null);
+    if (!boxed || !opening) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    requestAnimationFrame(() => rowRefs.current[i]?.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' }));
+  };
   return (
-    <ol className={cn('border-b', rule)}>
+    <ol className={cn('border-b', rule, boxed && open === items.length - 1 && 'border-b-transparent')}>
       {items.map((item, i) => {
         const isOpen = open === i;
+        const card = boxed && isOpen;
         return (
-          <li key={i} className={cn('border-t', rule)}>
+          <li
+            key={i}
+            ref={(el) => {
+              rowRefs.current[i] = el;
+            }}
+            className={cn(
+              'border-t',
+              rule,
+              boxed && 'scroll-mt-20 transition-colors duration-base',
+              card && cn('my-2 rounded-md border px-4', dark ? 'border-white/15 bg-white/[0.05]' : 'border-gray-200 bg-white'),
+              boxed && open === i - 1 && 'border-t-transparent',
+            )}
+          >
             <h3>
               <button
                 type="button"
                 id={`${idPrefix}-btn-${i}`}
                 aria-expanded={isOpen}
                 aria-controls={`${idPrefix}-panel-${i}`}
-                onClick={() => setOpen(isOpen ? null : i)}
+                onClick={() => toggle(i)}
                 className={cn(
                   'grid w-full items-baseline py-4 text-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 md:pointer-events-none md:pb-0',
                   numbered ? 'grid-cols-[2.5rem_minmax(0,1fr)_auto]' : 'grid-cols-[minmax(0,1fr)_auto]',
@@ -286,6 +316,49 @@ export function RowTabs({
         })}
       </div>
       </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------- Links & section heads */
+
+/** Smooth-scroll to an in-page section (instant with reduced motion). */
+export const scrollToId = (id: string) =>
+  document.getElementById(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+
+/** Inline text link with an arrow: the page's default way to point deeper. */
+export function TextLink({ href, children, dark = false, className }: { href: string; children: ReactNode; dark?: boolean; className?: string }) {
+  const inPage = href.startsWith('#');
+  const cls = cn(
+    'group inline-flex min-h-11 items-center gap-1.5 text-small font-semibold transition-colors duration-base',
+    dark ? 'text-brand-400 hover:text-brand-300' : 'text-brand-600 hover:text-brand-700',
+    className,
+  );
+  const arrow = <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-base group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />;
+  return inPage ? (
+    <button type="button" className={cls} onClick={() => scrollToId(href.slice(1))}>
+      {children}
+      {arrow}
+    </button>
+  ) : (
+    <SmartLink href={href} className={cls}>
+      {children}
+      {arrow}
+    </SmartLink>
+  );
+}
+
+/** Eyebrow + h2 on the left, intro on the right (stacked on phones). */
+export function SectionHead({ eyebrow, heading, intro, dark = false }: { eyebrow: string; heading: string; intro?: string; dark?: boolean }) {
+  return (
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:items-end lg:gap-12">
+      <div className="lg:col-span-6">
+        <Eyebrow theme={dark ? 'dark' : undefined}>{eyebrow}</Eyebrow>
+        <Heading level="h2" as="h2" theme={dark ? 'dark' : undefined} className="mt-3 text-balance">
+          {heading}
+        </Heading>
+      </div>
+      {intro && <p className={cn('text-body leading-relaxed lg:col-span-6', dark ? 'text-gray-300' : 'text-gray-600')}>{intro}</p>}
     </div>
   );
 }

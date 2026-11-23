@@ -125,7 +125,7 @@ const routeChildren: RouteObject[] = [
   // and EPC above) rather than the structure-only PendingContentPages
   // placeholder — live and indexable since 2026-11-05.
   { path: 'services/mep', element: lazyPage(() => import('../pages/services/MEPPage')) },
-  { path: 'services/civil', element: responsivePage(() => import('../pages/services/CivilPage'), () => import('../mobile/pages/services/CivilPage')) },
+  { path: 'services/civil', element: lazyPage(() => import('../pages/services/CivilPage')) },
   // Sub-service pages (Mechanical, Electrical, Plumbing, Fire Protection, BIM,
   // Modular, Custom) and the generic services/:slug template were removed on
   // 2026-11-19 — sub-services are now sections of their umbrella page. Their

@@ -44,7 +44,7 @@ Covers: Mechanical Systems, Electrical & ELV Systems, Plumbing, Water & Drainage
 
 ### Civil
 
-- [Civil Works Coordination](https://menascogroup.com/services/civil/llms.txt): MENASCO coordinates civil and structural works with our MEP delivery through a trusted civil engineering partner, from design through handover.
+- [Civil & Structural Works, Integrated with MEP](https://menascogroup.com/services/civil/llms.txt): MENASCO coordinates civil and structural works with its MEP delivery, working with established specialist civil partners: foundations, underground utilities and equipment infrastructure under one construction programme.
 
 Covers: BIM & Digital Engineering.
 

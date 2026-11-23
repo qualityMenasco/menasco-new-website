@@ -7,9 +7,8 @@ import { HeroH1 } from '../components/typography/HeroH1';
 import { Button, ButtonLink } from '../components/ui/Button';
 import { ScrollReveal } from '../components/common/ScrollReveal';
 import { FaqAccordion, type FaqAccordionItem } from '../components/common/FaqAccordion';
-import { BulletList, ClampedParagraphs, DisclosureList, ImagePlaceholder, RailList, RowTabs } from '../components/services/ServiceBlocks';
+import { BulletList, ClampedParagraphs, DisclosureList, ImagePlaceholder, RailList, RowTabs, SectionHead, TextLink, scrollToId as scrollTo } from '../components/services/ServiceBlocks';
 import { useTransparentHeader } from '../app/header-transparency';
-import { SmartLink } from '../lib/SmartLink';
 import { SITE_URL } from '../seo/constants';
 import { SEO } from '../seo/SEO';
 import { serviceEntity, servicesFaqJsonLd } from '../seo/structuredData';
@@ -77,9 +76,6 @@ interface TitleBody {
   body: string;
 }
 
-const scrollTo = (id: string) =>
-  document.getElementById(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
-
 export default function EPCPage() {
   const { t } = useTranslation('services');
   return (
@@ -109,43 +105,6 @@ export default function EPCPage() {
 }
 
 /* ------------------------------------------------------------ Shared bits */
-
-/** Inline text link with an arrow: the page's default way to point deeper. */
-function TextLink({ href, children, dark = false, className }: { href: string; children: ReactNode; dark?: boolean; className?: string }) {
-  const inPage = href.startsWith('#');
-  const cls = cn(
-    'group inline-flex min-h-11 items-center gap-1.5 text-small font-semibold transition-colors duration-base',
-    dark ? 'text-brand-400 hover:text-brand-300' : 'text-brand-600 hover:text-brand-700',
-    className,
-  );
-  const arrow = <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-base group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />;
-  return inPage ? (
-    <button type="button" className={cls} onClick={() => scrollTo(href.slice(1))}>
-      {children}
-      {arrow}
-    </button>
-  ) : (
-    <SmartLink href={href} className={cls}>
-      {children}
-      {arrow}
-    </SmartLink>
-  );
-}
-
-/** Eyebrow + h2 on the left, intro on the right (stacked on phones). */
-function SectionHead({ eyebrow, heading, intro, dark = false }: { eyebrow: string; heading: string; intro?: string; dark?: boolean }) {
-  return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:items-end lg:gap-12">
-      <div className="lg:col-span-6">
-        <Eyebrow theme={dark ? 'dark' : undefined}>{eyebrow}</Eyebrow>
-        <Heading level="h2" as="h2" theme={dark ? 'dark' : undefined} className="mt-3 text-balance">
-          {heading}
-        </Heading>
-      </div>
-      {intro && <p className={cn('text-body leading-relaxed lg:col-span-6', dark ? 'text-gray-300' : 'text-gray-600')}>{intro}</p>}
-    </div>
-  );
-}
 
 /* ------------------------------------------------------------------ 1. Hero */
 
@@ -380,15 +339,19 @@ function Advantage() {
           </p>
         ))
       )}
-      <p className="mt-5 font-display text-caption font-semibold uppercase tracking-widest text-brand-400 rtl:tracking-normal">{tab.listLabel}</p>
-      <ul role="list" className="mt-2 grid grid-cols-1 gap-x-6 lg:grid-cols-2">
-        {tab.items.map((item) => (
-          <li key={item.title} className="border-t border-white/10 py-3">
-            <p className="text-small font-semibold text-white">{item.title}</p>
-            <p className="mt-1 text-small leading-relaxed text-gray-400">{item.body}</p>
-          </li>
-        ))}
-      </ul>
+      {/* Phones: the priorities sit in an inset block (back to the charcoal page colour, blue start
+          line) inside the open row's lighter card, so they read apart from the intro text. */}
+      <div className={phone ? 'mt-5 rounded-md border-s-2 border-brand-400 bg-charcoal px-4 py-3' : undefined}>
+        <p className={cn('font-display text-caption font-semibold uppercase tracking-widest text-brand-400 rtl:tracking-normal', !phone && 'mt-5')}>{tab.listLabel}</p>
+        <ul role="list" className="mt-2 grid grid-cols-1 gap-x-6 lg:grid-cols-2">
+          {tab.items.map((item) => (
+            <li key={item.title} className={phone ? 'border-t border-white/10 py-2.5 first:border-t-0 first:pt-1' : 'border-t border-white/10 py-3'}>
+              <p className="text-small font-semibold text-white">{item.title}</p>
+              <p className={cn('text-small leading-relaxed text-gray-400', phone ? 'mt-0.5' : 'mt-1')}>{item.body}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
       {tabLinks[i].length > 0 && (
         <div className="mt-2 flex flex-wrap gap-x-5">
           {tabLinks[i].map((l) => (
@@ -404,7 +367,7 @@ function Advantage() {
   return (
     <Section id={ADVANTAGE_ANCHOR} background="charcoal" spacing="sm" className="scroll-mt-20">
       {/* Tablet/desktop: heading + tabs pinned together on the left, intro above the panel on the right.
-          Phones: heading, intro, then tap-to-open rows (first open). */}
+          Phones: heading, intro, then tap-to-open rows (all start closed). */}
       <RowTabs
         dark
         sticky
@@ -419,7 +382,7 @@ function Advantage() {
           </>
         }
         aside={<p className="text-body leading-relaxed text-gray-300">{t('epcPage.advantage.intro')}</p>}
-        phone={<DisclosureList dark numbered={false} idPrefix="epc-adv-m" defaultOpen={0} items={tabs.map((tab, i) => ({ title: tab.title, content: body(tab, i, true) }))} />}
+        phone={<DisclosureList dark boxed numbered={false} idPrefix="epc-adv-m" items={tabs.map((tab, i) => ({ title: tab.title, content: body(tab, i, true) }))} />}
         tabs={tabs.map((tab, i) => ({ title: tab.title, panel: body(tab, i, false) }))}
       />
     </Section>

@@ -137,14 +137,12 @@ Scope of works:
 
 ### Civil & BIM
 
-- [Civil Works Coordination](https://menascogroup.com/services/civil/llms.txt): MENASCO coordinates civil and structural works with our MEP delivery through a trusted civil engineering partner, from design through handover.
+- [Civil & Structural Works, Integrated with MEP](https://menascogroup.com/services/civil/llms.txt): MENASCO coordinates civil and structural works with its MEP delivery, working with established specialist civil partners: foundations, underground utilities and equipment infrastructure under one construction programme.
 
-- Site Works & Enabling Coordination: Groundworks, utilities and site infrastructure aligned with our civil partner ahead of construction.
-- Structural Interface Coordination: Structural penetrations, plant-room foundations and builder's work coordinated with MEP design.
-- BIM-Based Clash Detection: Civil and MEP models coordinated in a shared environment to resolve clashes before site works begin.
-- Underground Services Coordination: Drainage, water and electrical routing coordinated with civil infrastructure and utility works.
-- Project Scheduling & Progress Reporting: Civil and MEP programmes aligned and tracked together across the project.
-- Quality Assurance & HSE Compliance: Quality and HSE processes maintained consistently across civil and building-services scope.
+- Site preparation & enabling works: Site preparation sets the conditions for every later activity: clearing, grading, excavation, earthworks, temporary access and preparation for foundations and underground infrastructure.
+- Foundations & structural works: Foundations and structure support buildings, industrial equipment and critical infrastructure. They are coordinated with equipment loads, MEP requirements, architectural layouts and construction sequencing.
+- Underground utilities & external works: Utility corridors, cable duct banks, drainage, water connections and service chambers are planned around existing infrastructure, future capacity and authority specifications.
+- Infrastructure & equipment buildings: Critical electrical and mechanical plant often needs its own civil infrastructure: equipment buildings, transformer foundations, cooling plant structures and service yards.
 
 ### Manufacturing & Prefabrication
 

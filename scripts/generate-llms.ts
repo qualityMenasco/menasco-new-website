@@ -646,7 +646,11 @@ function serviceAreaBlocks(): string[] {
       bullets((sc.epcPage.capabilities.items as { title: string; subtitle: string; body: string }[]).map((c) => `${c.title} (${c.subtitle}): ${c.body}`)),
     ),
     doc(`### Data Centers`, linkLine(sc.dataCenter.seo.title, llmsUrl('/services/data-centers'), sc.dataCenter.seo.description), capabilityBullets(sc.dataCenter.capabilities)),
-    doc(`### Civil & BIM`, linkLine(sc.civilPage.seo.title, llmsUrl('/services/civil'), sc.civilPage.seo.description), capabilityBullets(sc.civilPage.capabilities)),
+    doc(
+      `### Civil & BIM`,
+      linkLine(sc.civilPage.seo.title, llmsUrl('/services/civil'), sc.civilPage.seo.description),
+      bullets((sc.civilPage.capabilities.tabs as { title: string; paragraphs: string[] }[]).map((c) => `${c.title}: ${c.paragraphs[0]}`)),
+    ),
     doc(
       `### Manufacturing & Prefabrication`,
       linkLine(sc.manufacturingPage.seo.title, llmsUrl('/services/manufacturing-prefabrication'), sc.manufacturingPage.seo.description),
@@ -686,6 +690,28 @@ function epcPageSections(): string[] {
   ];
 }
 
+/** Civil-only sections, mirroring the page. */
+function civilPageSections(): string[] {
+  const c = servicesCopy.civilPage;
+  const titled = (items: { title: string; body: string }[]) => bullets(items.map((i) => `${i.title}: ${i.body}`));
+  return [
+    doc(h2(c.approach.heading), (c.approach.paragraphs as string[]).join('\n\n'), titled(c.approach.items)),
+    doc(
+      h2(c.capabilities.heading),
+      c.capabilities.intro,
+      ...(c.capabilities.tabs as { heading: string; paragraphs: string[]; activities: string[] }[]).map((tab) => doc(`### ${tab.heading}`, tab.paragraphs.join('\n\n'), bullets(tab.activities))),
+    ),
+    doc(h2(c.integration.heading), (c.integration.paragraphs as string[]).join('\n\n'), titled(c.integration.points)),
+    doc(h2(c.bim.heading), (c.bim.paragraphs as string[]).join('\n\n'), titled(c.bim.items)),
+    doc(h2(c.missionCritical.heading), (c.missionCritical.paragraphs as string[]).join('\n\n'), titled(c.missionCritical.items)),
+    doc(
+      h2(c.delivery.heading),
+      c.delivery.intro,
+      ...(c.delivery.rows as { title: string; body: string; items: string[] }[]).map((row) => doc(`### ${row.title}`, row.body, bullets(row.items))),
+    ),
+  ];
+}
+
 /** Manufacturing-only sections, mirroring the page. */
 function mfgPageSections(): string[] {
   const m = servicesCopy.manufacturingPage;
@@ -719,6 +745,7 @@ function generateUmbrellaPages() {
       ...(path === '/services/mep' ? mepPageSections() : []),
       ...(path === '/services/manufacturing-prefabrication' ? mfgPageSections() : []),
       ...(path === '/services/turnkey-developments' ? epcPageSections() : []),
+      ...(path === '/services/civil' ? civilPageSections() : []),
       ...(page.projects
         ? [
             doc(

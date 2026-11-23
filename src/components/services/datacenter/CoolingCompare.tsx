@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Info } from 'lucide-react';
 import { cn } from '../../../lib/utils';
 import { dcSustainability as d } from '../../../data/dataCenterSustainability';
@@ -45,17 +45,53 @@ function Climates() {
 
 const TYPE: Record<string, string> = { chw: 'chilled water', hybrid: 'hybrid air / liquid', dlc: 'direct-to-chip' };
 
-/** Small "i" with a bubble: shows on hover and keyboard focus, toggles on tap. */
+/**
+ * Small "i" with a bubble: shows on mouse hover and keyboard focus, toggles on tap.
+ * Visibility is all state (no CSS :hover / :focus-within, which stick on touch
+ * screens), and an open bubble closes on any scroll, a tap or click elsewhere, or Escape.
+ */
 function InfoBubble({ text }: { text: string }) {
-  const [open, setOpen] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const [hover, setHover] = useState(false);
+  const wrapRef = useRef<HTMLSpanElement>(null);
+  const open = pinned || hover;
+
+  useEffect(() => {
+    if (!open) return;
+    const close = () => {
+      setPinned(false);
+      setHover(false);
+    };
+    const onPointerDown = (e: PointerEvent) => {
+      if (!wrapRef.current?.contains(e.target as Node)) close();
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') close();
+    };
+    window.addEventListener('scroll', close, { passive: true, capture: true });
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('scroll', close, { capture: true });
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
   return (
-    <span className="group relative inline-flex">
+    <span
+      ref={wrapRef}
+      className="relative inline-flex"
+      onPointerEnter={(e) => e.pointerType === 'mouse' && setHover(true)}
+      onPointerLeave={(e) => e.pointerType === 'mouse' && setHover(false)}
+    >
       <button
         type="button"
         aria-label={text}
         aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
-        onBlur={() => setOpen(false)}
+        onClick={() => setPinned((v) => !v)}
+        onFocus={(e) => e.currentTarget.matches(':focus-visible') && setPinned(true)}
+        onBlur={() => setPinned(false)}
         className="inline-flex h-4 w-4 items-center justify-center rounded-full text-gray-500 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
       >
         <Info size={14} aria-hidden="true" />
@@ -64,7 +100,7 @@ function InfoBubble({ text }: { text: string }) {
         role="tooltip"
         className={cn(
           'pointer-events-none absolute bottom-full right-0 z-20 mb-2 w-60 rounded-md bg-ink px-3 py-2 text-caption font-normal normal-case leading-snug tracking-normal text-white shadow-lg transition-opacity duration-150',
-          open ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 group-focus-within:opacity-100',
+          open ? 'opacity-100' : 'opacity-0',
         )}
       >
         {text}

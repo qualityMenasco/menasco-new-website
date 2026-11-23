@@ -1264,183 +1264,276 @@
   },
   "civilPage": {
     "seo": {
-      "title": "Civil Works Coordination",
-      "description": "MENASCO coordinates civil and structural works with our MEP delivery through a trusted civil engineering partner, from design through handover."
+      "title": "Civil & Structural Works, Integrated with MEP",
+      "description": "MENASCO coordinates civil and structural works with its MEP delivery, working with established specialist civil partners: foundations, underground utilities and equipment infrastructure under one construction programme."
     },
     "hero": {
-      "title": "Civil",
-      "description": "MENASCO's civil capability is delivered in close coordination with a trusted civil engineering partner, aligning structural and site works with our own MEP scope from design through handover. This integrated approach keeps civil and building-services interfaces coordinated from the outset, reducing rework and supporting a single, consistent project programme."
+      "eyebrow": "Civil & Structural Works",
+      "title": "Civil & Structural Works, Integrated with MEP Delivery",
+      "description": "MENASCO coordinates civil and structural construction with its MEP engineering and site execution under one project structure, working with established specialist civil partners. From site preparation and foundations to underground utilities and equipment infrastructure, clients deal with fewer contractual interfaces and clearer accountability.",
+      "primaryCta": "Explore civil capabilities",
+      "secondaryCta": "View Projects",
+      "placeholder": "Civil works: foundations and underground services in progress"
     },
-    "overview": {
-      "eyebrow": "Overview",
-      "heading": "Civil Works, Coordinated With Our Building-Services Scope",
-      "paragraph1": "Civil and structural works are delivered through MENASCO's established civil engineering partner, with our own engineering and site teams coordinating the interface between civil works and MEP systems from early design through construction. This keeps foundations, structure and site infrastructure aligned with the mechanical, electrical, plumbing and fire-protection systems that depend on them.",
-      "paragraph2": "Working from a shared BIM model, our teams identify and resolve civil–MEP interfaces, such as structural penetrations, plant-room foundations and underground service routing, before they become site issues, supporting a smoother, better-coordinated construction programme."
+    "approach": {
+      "eyebrow": "Our approach",
+      "heading": "One Construction Programme, Coordinated from the Ground Up",
+      "paragraphs": [
+        "MEP and civil works depend on each other throughout construction. Foundations must carry equipment loads, underground utilities must meet building services, and structural openings must be agreed before concrete is placed. Managed separately, even a small design change can mean delay, rework and disputes between contractors.",
+        "MENASCO brings its specialist civil partners into one delivery framework, coordinating technical requirements, sequencing and site responsibilities across disciplines. Structural and MEP decisions are developed together, from enabling works through handover."
+      ],
+      "items": [
+        {
+          "title": "Fewer contractual interfaces",
+          "body": "MEP and civil responsibilities sit within one defined management structure, so clients manage fewer interfaces."
+        },
+        {
+          "title": "Earlier technical coordination",
+          "body": "Structural requirements, service routes, equipment foundations and utility connections are reviewed before work depends on them."
+        },
+        {
+          "title": "Aligned sequencing",
+          "body": "Civil works are planned around equipment procurement, MEP installation, access and commissioning milestones."
+        },
+        {
+          "title": "Clearer accountability",
+          "body": "Design changes, technical conflicts and dependencies follow established lines of responsibility."
+        }
+      ],
+      "link": "How civil fits our EPC offering"
     },
-    "capabilitiesSection": {
-      "eyebrow": "Our Capabilities",
-      "heading": "Civil Coordination Capabilities"
+    "capabilities": {
+      "eyebrow": "Core capabilities",
+      "heading": "From Site Preparation to Structural Completion",
+      "intro": "Scope is defined for each project. Specialist civil partners are responsible for their technical disciplines, and MENASCO coordinates the interfaces with MEP and the wider project.",
+      "activitiesLabel": "Key activities",
+      "tabs": [
+        {
+          "title": "Site preparation & enabling works",
+          "heading": "Preparing the Site for Everything That Follows",
+          "paragraphs": [
+            "Site preparation sets the conditions for every later activity: clearing, grading, excavation, earthworks, temporary access and preparation for foundations and underground infrastructure.",
+            "Planning takes account of existing utilities, ground conditions, site access, logistics and the needs of major mechanical and electrical installations."
+          ],
+          "activities": [
+            "Site clearance, excavation and earthworks",
+            "Temporary access and enabling works",
+            "Ground preparation and grading",
+            "Identifying and coordinating existing underground utilities",
+            "Site logistics and construction access planning"
+          ]
+        },
+        {
+          "title": "Foundations & structural works",
+          "heading": "Structure Designed Around the Equipment It Carries",
+          "paragraphs": [
+            "Foundations and structure support buildings, industrial equipment and critical infrastructure. They are coordinated with equipment loads, MEP requirements, architectural layouts and construction sequencing.",
+            "Particular attention goes to equipment foundations, structural penetrations, vibration and the interfaces between structure and major mechanical or electrical plant."
+          ],
+          "activities": [
+            "Foundations and substructure",
+            "Reinforced concrete and structural steel",
+            "Equipment foundations and structural supports",
+            "Structural openings, penetrations and embedded items",
+            "Coordinating equipment loads and vibration requirements"
+          ]
+        },
+        {
+          "title": "Underground utilities & external works",
+          "heading": "Underground Networks Planned with the Systems They Serve",
+          "paragraphs": [
+            "Utility corridors, cable duct banks, drainage, water connections and service chambers are planned around existing infrastructure, future capacity and authority specifications.",
+            "Coordinated design sets proper service separation, maintenance access and reliable connections between external utilities and the building's own systems."
+          ],
+          "activities": [
+            "Utility corridors and service trenches",
+            "Electrical duct banks and cable infrastructure",
+            "Stormwater and drainage networks",
+            "Water supply and external service connections",
+            "Manholes, chambers and associated structures"
+          ]
+        },
+        {
+          "title": "Infrastructure & equipment buildings",
+          "heading": "Ready Before the Equipment Arrives",
+          "paragraphs": [
+            "Critical electrical and mechanical plant often needs its own civil infrastructure: equipment buildings, transformer foundations, cooling plant structures and service yards.",
+            "Coordinating these with equipment specifications means foundations, access routes, lifting provisions and maintenance clearances are in place before major equipment reaches site."
+          ],
+          "activities": [
+            "Substation buildings and associated civil works",
+            "Transformer and generator foundations",
+            "Cooling plant and mechanical equipment structures",
+            "Equipment yards, service platforms and access roads",
+            "Civil infrastructure for mission-critical installations"
+          ]
+        }
+      ]
     },
-    "capabilities": [
-      {
-        "title": "Site Works & Enabling Coordination",
-        "description": "Groundworks, utilities and site infrastructure aligned with our civil partner ahead of construction."
+    "integration": {
+      "eyebrow": "Civil & MEP integration",
+      "heading": "The Most Critical Interfaces Are Between Disciplines",
+      "paragraphs": [
+        "The relationship between MEP and civil works is set long before equipment reaches site. Plantroom sizes, structural loads, underground services, equipment access and vertical distribution routes all shape architectural and structural decisions.",
+        "MENASCO's MEP engineers review these dependencies with the civil partners in coordinated BIM reviews, so installation constraints are solved early, late structural changes are avoided and access is kept for operation and maintenance."
+      ],
+      "diagram": {
+        "label": "Cross-section of a building showing the four main civil and MEP coordination points",
+        "hint": "Select a point on the drawing"
       },
-      {
-        "title": "Structural Interface Coordination",
-        "description": "Structural penetrations, plant-room foundations and builder's work coordinated with MEP design."
-      },
-      {
-        "title": "BIM-Based Clash Detection",
-        "description": "Civil and MEP models coordinated in a shared environment to resolve clashes before site works begin."
-      },
-      {
-        "title": "Underground Services Coordination",
-        "description": "Drainage, water and electrical routing coordinated with civil infrastructure and utility works."
-      },
-      {
-        "title": "Project Scheduling & Progress Reporting",
-        "description": "Civil and MEP programmes aligned and tracked together across the project."
-      },
-      {
-        "title": "Quality Assurance & HSE Compliance",
-        "description": "Quality and HSE processes maintained consistently across civil and building-services scope."
-      }
-    ],
-    "integratedDelivery": {
-      "eyebrow": "Integrated Delivery",
-      "heading": "Fewer Interfaces, Better Outcomes",
-      "paragraph1": "Civil and MEP works are often delivered by separate, disconnected teams, leaving clash resolution and interface coordination to be worked out on site. MENASCO closes that gap by coordinating directly with our civil partner from early design, so structural and building-services decisions are made together rather than in isolation.",
-      "paragraph2": "This collaborative approach reduces rework, protects the project programme, and gives clients a single point of contact for how civil and MEP scopes come together on site.",
-      "benefitsLabel": "Benefits"
+      "points": [
+        {
+          "title": "Structural openings & MEP penetrations",
+          "body": "Ductwork, pipework and electrical containment need openings and embedded sleeves in slabs, walls and beams. Agreeing them early avoids drilling, cutting or modifying finished structure."
+        },
+        {
+          "title": "Equipment foundations & loading",
+          "body": "Transformers, generators, chillers and pumps bring specific loads, vibration and installation needs. The civil design accounts for them before foundations are built."
+        },
+        {
+          "title": "Underground utility coordination",
+          "body": "Duct banks, water networks and drainage are coordinated with foundations, roads, existing utilities and future development before anything is excavated."
+        },
+        {
+          "title": "Plantroom & service access",
+          "body": "Layouts allow for equipment installation, lifting, maintenance and eventual replacement, so the clearances last for the facility's whole operating life."
+        }
+      ],
+      "link": "Explore MEP services"
     },
-    "benefits": [
-      "Fewer on-site clashes",
-      "Coordinated civil and MEP programmes",
-      "Earlier resolution of structural interfaces",
-      "Reduced rework and abortive works",
-      "Clearer coordination across trades",
-      "Consistent quality and HSE standards"
-    ],
-    "qualitySection": {
-      "eyebrow": "Quality Across Civil and MEP",
-      "heading": "Quality Across Civil and MEP",
-      "paragraph1": "Because civil works are coordinated directly with our own building-services teams, quality and programme control are maintained consistently across both scopes rather than managed separately.",
-      "paragraph2": "This coordinated approach supports residential developments, hospitality projects, commercial buildings, data centers, healthcare facilities and other technically demanding infrastructure, wherever civil and MEP scopes need to work in step."
+    "bim": {
+      "eyebrow": "BIM & Digital Engineering",
+      "heading": "One Shared Model Before Anything Is Built",
+      "paragraphs": [
+        "MENASCO's BIM team models MEP systems alongside the civil and structural design in one coordinated environment. Clashes, openings and foundation requirements are resolved on screen, where a change costs hours rather than weeks on site."
+      ],
+      "items": [
+        {
+          "title": "Federated coordination model",
+          "body": "MEP, structural and civil models combined and reviewed together at agreed stages."
+        },
+        {
+          "title": "Clash detection",
+          "body": "Conflicts between services, structure and underground networks found and closed before site works."
+        },
+        {
+          "title": "Builder's work drawings",
+          "body": "Coordinated openings, sleeves, plinths and embedded items issued to the civil team before concrete."
+        },
+        {
+          "title": "As-built records",
+          "body": "Models and drawings updated through construction, handed over for operation and maintenance."
+        }
+      ],
+      "placeholder": "Coordinated BIM model: MEP services and structure"
     },
-    "qualityHighlights": [
-      {
-        "title": "Coordinated Planning",
-        "description": "Civil and MEP programmes planned and tracked together from the outset."
-      },
-      {
-        "title": "Clash-Free Design",
-        "description": "BIM coordination resolves civil–MEP interfaces before construction begins."
-      },
-      {
-        "title": "Consistent Standards",
-        "description": "The same quality and HSE processes applied across civil and building-services scope."
-      },
-      {
-        "title": "Single Point of Contact",
-        "description": "One MENASCO team coordinating civil and MEP delivery on your behalf."
-      }
-    ],
-    "downloadCompanyProfile": "Download Company Profile",
+    "missionCritical": {
+      "eyebrow": "Data centers & mission-critical",
+      "heading": "Civil Infrastructure for Facilities That Cannot Afford Downtime",
+      "paragraphs": [
+        "Data centers place heavy demands on civil works: high-capacity substations, backup generation, cooling plant and redundant utility networks all need coordinated foundations, yards, underground services and buildings.",
+        "Civil design has to allow for equipment loads, utility connections, physical separation of redundant systems, future expansion and equipment replacement. Coordinating this with MENASCO's electrical and mechanical engineering from the start protects the facility's intended resilience."
+      ],
+      "items": [
+        {
+          "title": "Substation & power infrastructure",
+          "body": "Transformer foundations, switchgear buildings, underground cable routes and utility connections."
+        },
+        {
+          "title": "Cooling plant infrastructure",
+          "body": "Chiller foundations, equipment supports, pipe trenches and plant structures."
+        },
+        {
+          "title": "Redundant utility distribution",
+          "body": "Physically separated service routes supporting redundant electrical and mechanical systems."
+        },
+        {
+          "title": "Hyperscale campus development",
+          "body": "Site preparation, internal roads, utility corridors, service yards and phased infrastructure for expansion."
+        },
+        {
+          "title": "Modular data center construction",
+          "body": "Foundations, structural interfaces, lifting access and utility connections for prefabricated white space modules."
+        }
+      ],
+      "link": "Explore Data Center capabilities"
+    },
+    "delivery": {
+      "eyebrow": "Delivery management",
+      "heading": "How Civil Delivery Is Managed",
+      "intro": "Three things keep a multi-partner civil scope working as one: sequencing around the whole project, consistent quality and safety at every interface, and a clear split between international engineering and local construction expertise.",
+      "rows": [
+        {
+          "title": "Sequencing & coordination",
+          "body": "Civil milestones decide when major equipment can be delivered, installed and commissioned, so they are planned with procurement commitments and MEP installation rather than as a separate workstream.",
+          "items": [
+            "Equipment sizes, weights and lifting needs fixed before civil works",
+            "Civil milestones aligned with MEP installation and commissioning",
+            "Access roads, lifting areas and laydown planned for large equipment",
+            "Civil and MEP effects of design changes assessed before issue",
+            "Enabling works phased around staged construction and expansion"
+          ],
+          "link": "Explore EPC delivery"
+        },
+        {
+          "title": "Quality & safety",
+          "body": "Civil works hide what matters once concrete is placed. Inspections, material approvals, testing and documented hold points confirm compliance before the next activity starts, with partners working under project-specific quality and safety requirements.",
+          "items": [
+            "Testing of concrete, reinforcement and structural steel",
+            "Pre-pour inspections of reinforcement, sleeves and embedded items",
+            "Controls for excavation, temporary works and lifting",
+            "Inspection and test plans, approvals and nonconformance records",
+            "Compliance with building codes, civil defence and local authorities"
+          ],
+          "link": "Quality & Safety"
+        },
+        {
+          "title": "International engineering, local delivery",
+          "body": "Ground conditions, codes, materials and approvals differ from market to market. MENASCO's international engineering and procurement resources coordinate the technical scope, while local civil partners bring construction methods and regulatory knowledge for each market.",
+          "items": [
+            "International engineering: design reviews and civil/MEP alignment",
+            "Local civil expertise: methods, ground knowledge and approvals",
+            "Central procurement of major equipment and materials",
+            "Shared reporting, scheduling and interface management"
+          ],
+          "link": "About MENASCO"
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Civil Works Questions",
+      "items": [
+        {
+          "question": "How does MENASCO coordinate civil and MEP works on one project?",
+          "answer": "Through one delivery structure. MENASCO's engineering and site teams work with specialist civil partners on shared schedules, coordinated BIM models and defined technical interfaces, aligning structure, utilities, equipment installation and sequencing to avoid conflicts."
+        },
+        {
+          "question": "What civil works does MENASCO coordinate for data centers?",
+          "answer": "The full civil scope around the critical systems: site preparation, foundations, equipment buildings, underground utilities, substation infrastructure, equipment yards and access roads. The exact scope depends on capacity, redundancy architecture, cooling system, utility connections and expansion plans."
+        },
+        {
+          "question": "How does MENASCO match structure to heavy mechanical and electrical equipment?",
+          "answer": "By fixing equipment data early. MENASCO's MEP engineers provide dimensions, static and dynamic loads, vibration limits, lifting needs and maintenance clearances, which inform foundation design, structural supports, access and installation sequence."
+        },
+        {
+          "question": "Can civil works and MEP installation run at the same time?",
+          "answer": "Yes, where sequencing and technical requirements allow. Once the relevant engineering and interfaces are developed, MENASCO runs civil construction, off-site MEP fabrication, equipment procurement and site installation in parallel."
+        },
+        {
+          "question": "How does MENASCO coordinate underground utilities with foundations?",
+          "answer": "In the coordinated model, before excavation. Routes are set around existing services, foundation positions, drainage, service separation and future access, and conflicts are resolved in drawings and BIM rather than on site."
+        },
+        {
+          "question": "Who is accountable when civil works are delivered by partners?",
+          "answer": "Responsibilities are defined in the contract. Civil partners work to project specifications and MENASCO's quality and safety requirements, while MENASCO's construction management, inspections, documentation and reporting oversee the interfaces between civil works, MEP and the rest of the project."
+        }
+      ]
+    },
     "closing": {
-      "heading": "Coordinated Civil & MEP Delivery for Your Next Project",
-      "description": "From site works through structural interfaces and building-services installation, MENASCO coordinates with our civil engineering partner to keep every discipline working from the same plan.",
-      "cta": "Explore Our Projects"
-    }
-  },
-  "civilPageMobile": {
-    "seo": {
-      "title": "Civil Works Coordination",
-      "description": "MENASCO coordinates civil and structural works with our MEP delivery through a trusted civil engineering partner, from design through handover."
-    },
-    "eyebrow": "Civil",
-    "heading": "Civil Works, Coordinated With Our Building-Services Scope",
-    "description": "MENASCO's civil capability is delivered in close coordination with a trusted civil engineering partner, aligning structural and site works with our own MEP scope from design through handover.",
-    "overview": {
-      "eyebrow": "Overview",
-      "heading": "Civil Works, Coordinated With Our Building-Services Scope",
-      "paragraph1": "Civil and structural works are delivered through MENASCO's established civil engineering partner, with our own engineering and site teams coordinating the interface between civil works and MEP systems from early design through construction.",
-      "paragraph2": "Working from a shared BIM model, our teams identify and resolve civil–MEP interfaces before they become site issues, supporting a smoother, better-coordinated construction programme."
-    },
-    "capabilitiesSection": {
-      "eyebrow": "Our Capabilities",
-      "heading": "Civil Coordination Capabilities"
-    },
-    "capabilities": [
-      {
-        "title": "Site Works & Enabling Coordination",
-        "description": "Groundworks, utilities and site infrastructure aligned with our civil partner ahead of construction."
-      },
-      {
-        "title": "Structural Interface Coordination",
-        "description": "Structural penetrations, plant-room foundations and builder's work coordinated with MEP design."
-      },
-      {
-        "title": "BIM-Based Clash Detection",
-        "description": "Civil and MEP models coordinated in a shared environment to resolve clashes before site works begin."
-      },
-      {
-        "title": "Underground Services Coordination",
-        "description": "Drainage, water and electrical routing coordinated with civil infrastructure and utility works."
-      },
-      {
-        "title": "Project Scheduling & Progress Reporting",
-        "description": "Civil and MEP programmes aligned and tracked together across the project."
-      },
-      {
-        "title": "Quality Assurance & HSE Compliance",
-        "description": "Quality and HSE processes maintained consistently across civil and building-services scope."
-      }
-    ],
-    "integratedDelivery": {
-      "eyebrow": "Integrated Delivery",
-      "heading": "Fewer Interfaces, Better Outcomes",
-      "paragraph1": "Civil and MEP works are often delivered by separate, disconnected teams, leaving clash resolution to be worked out on site. MENASCO closes that gap by coordinating directly with our civil partner from early design.",
-      "paragraph2": "This collaborative approach reduces rework, protects the project programme, and gives clients a single point of contact for how civil and MEP scopes come together on site.",
-      "benefitsLabel": "Benefits"
-    },
-    "benefits": [
-      "Fewer on-site clashes",
-      "Coordinated civil and MEP programmes",
-      "Earlier resolution of structural interfaces",
-      "Reduced rework and abortive works",
-      "Clearer coordination across trades",
-      "Consistent quality and HSE standards"
-    ],
-    "qualitySection": {
-      "eyebrow": "Quality Across Civil and MEP",
-      "heading": "Quality Across Civil and MEP",
-      "paragraph1": "Because civil works are coordinated directly with our own building-services teams, quality and programme control are maintained consistently across both scopes.",
-      "paragraph2": "This coordinated approach supports residential, hospitality, commercial, data center, healthcare and industrial developments, wherever civil and MEP scopes need to work in step."
-    },
-    "qualityHighlights": [
-      {
-        "title": "Coordinated Planning",
-        "description": "Civil and MEP programmes planned and tracked together from the outset."
-      },
-      {
-        "title": "Clash-Free Design",
-        "description": "BIM coordination resolves civil–MEP interfaces before construction begins."
-      },
-      {
-        "title": "Consistent Standards",
-        "description": "The same quality and HSE processes applied across civil and building-services scope."
-      },
-      {
-        "title": "Single Point of Contact",
-        "description": "One MENASCO team coordinating civil and MEP delivery on your behalf."
-      }
-    ],
-    "downloadCompanyProfile": "Download Company Profile",
-    "cta": {
-      "heading": "Coordinated Civil & MEP Delivery for Your Next Project",
-      "description": "From site works through structural interfaces and building-services installation, MENASCO coordinates with our civil engineering partner to keep every discipline working from the same plan.",
-      "primaryLabel": "Explore Our Projects"
+      "heading": "Bring MEP and Civil Works Under One Coordinated Scope",
+      "description": "For developments where structure, utilities and complex building systems must come together, MENASCO's integrated approach, backed by established civil partners, gives you fewer interfaces and clearer control over scope, schedule and quality.",
+      "cta": "Discuss your project"
     }
   }
 }

@@ -215,6 +215,7 @@ export default function DataCenterSustainabilityPage() {
           layoutClassName="md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:items-center md:gap-10 lg:grid-cols-[17rem_minmax(0,1fr)]"
           compact
           dots
+          swipe
           topics={c.opportunities.items.map((o) => ({
             title: o.title,
             body: [],

@@ -204,13 +204,7 @@ const PATTERNS: { pattern: string; importer: Importer; modulePath: string; deskt
   // targets src/app/router.tsx dynamically imports (re-export stubs included), so the build
   // manifest lookup for modulepreload hints resolves.
   { pattern: '/services/mep', importer: () => import('../../src/pages/services/MEPPage'), modulePath: 'src/pages/services/MEPPage.tsx' },
-  {
-    pattern: '/services/civil',
-    importer: () => import('../../src/mobile/pages/services/CivilPage'),
-    modulePath: 'src/mobile/pages/services/CivilPage.tsx',
-    desktopModulePath: 'src/pages/services/CivilPage.tsx',
-    desktopImporter: () => import('../../src/pages/services/CivilPage'),
-  },
+  { pattern: '/services/civil', importer: () => import('../../src/pages/services/CivilPage'), modulePath: 'src/pages/services/CivilPage.tsx' },
   {
     pattern: '/services/turnkey-developments',
     importer: () => import('../../src/pages/services/EPCPage'),

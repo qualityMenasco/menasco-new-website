@@ -105,7 +105,7 @@ export const servicesNavigationGroups: NavGroupEntry[] = [
     label: 'Civil',
     i18nKey: 'servicesGroups.civil',
     href: '/services/civil',
-    links: [subService('/services/civil', 'BIM & Digital Engineering', 'servicesList.bimDigitalEngineering')],
+    links: [subService('/services/civil', 'BIM & Digital Engineering', 'servicesList.bimDigitalEngineering', 'bim-digital-engineering')],
   },
   {
     label: 'Manufacturing & Prefabrication',

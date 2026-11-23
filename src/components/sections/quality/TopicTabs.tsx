@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode, type TouchEvent } from 'react';
 import { cn } from '../../../lib/utils';
 import type { AccordionTopic } from './TopicAccordion';
 
@@ -36,6 +36,8 @@ export interface TopicTabsProps {
   compact?: boolean;
   /** Phones (pill row): position dots + counter under the panel showing which topic is selected. */
   dots?: boolean;
+  /** Touch: a horizontal swipe anywhere on the panel card moves to the next / previous topic. */
+  swipe?: boolean;
 }
 
 const DEFAULT_LAYOUT = 'md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-10 lg:grid-cols-[17rem_minmax(0,1fr)]';
@@ -51,11 +53,12 @@ const DEFAULT_LAYOUT = 'md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-10 lg:
  * the page jump; inactive panels are invisible, inert and hidden from
  * assistive tech. Arrow keys / Home / End move between tabs.
  */
-export function TopicTabs({ topics, idPrefix, label, className, layoutClassName, lead, footer, bare = false, horizontal = false, mobileRail = false, compact = false, dots = false }: TopicTabsProps) {
+export function TopicTabs({ topics, idPrefix, label, className, layoutClassName, lead, footer, bare = false, horizontal = false, mobileRail = false, compact = false, dots = false, swipe = false }: TopicTabsProps) {
   const [active, setActive] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const railRef = useRef<HTMLDivElement | null>(null);
   const tablistRef = useRef<HTMLDivElement | null>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
   // mobileRail: swipe mode is on while the pills cannot all fit on one row.
   const [rail, setRail] = useState(false);
 
@@ -136,6 +139,26 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
     tab?.focus({ preventScroll: true });
   };
 
+  // `swipe`: a mostly horizontal finger swipe on the card (not a tap, not a vertical scroll)
+  // steps one topic in reading direction, stopping at the first and last.
+  const swipeOn = swipe && !rail;
+  const onTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    touchStart.current = event.touches.length === 1 ? { x: touch.clientX, y: touch.clientY } : null;
+  };
+  const onTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    const start = touchStart.current;
+    touchStart.current = null;
+    const touch = event.changedTouches[0];
+    if (!start || !touch) return;
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    const rtl = getComputedStyle(event.currentTarget).direction === 'rtl';
+    const next = active + ((dx < 0) !== rtl ? 1 : -1);
+    if (next >= 0 && next < topics.length) choose(next);
+  };
+
   const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
     const rtl = getComputedStyle(event.currentTarget).direction === 'rtl';
     const forward = ['ArrowDown', rtl ? 'ArrowLeft' : 'ArrowRight'];
@@ -208,7 +231,10 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
       <div
         ref={railRef}
         onScroll={rail ? onRailScroll : undefined}
+        onTouchStart={swipeOn ? onTouchStart : undefined}
+        onTouchEnd={swipeOn ? onTouchEnd : undefined}
         className={cn(
+          swipeOn && 'touch-pan-y',
           rail ? 'no-scrollbar -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 md:-mx-10 md:scroll-px-10 md:px-10' : 'mt-5 grid',
           !horizontal && 'md:mt-0',
           !bare && cn('rounded-md border border-gray-200 bg-white', compact ? 'p-5 md:p-6' : 'p-6 md:p-8'),
