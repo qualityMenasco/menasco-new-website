@@ -1,4 +1,4 @@
-import { S3Client, HeadObjectCommand, PutObjectCommand, GetObjectCommand, ListObjectsV2Command, DeleteObjectsCommand } from '@aws-sdk/client-s3';
+import { S3Client, HeadObjectCommand, PutObjectCommand, GetObjectCommand, ListObjectsV2Command, DeleteObjectCommand, DeleteObjectsCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 /**
@@ -117,6 +117,11 @@ export async function getObjectWithContentType(key: string): Promise<ObjectWithC
  * S3 failure as success is exactly what would leave orphaned files behind
  * with nothing left to signal that they need cleanup.
  */
+/** Permanently deletes a single object. Used for removing one article image's underlying S3 object without touching the rest of the article's prefix (see deleteObjectsWithPrefix for the whole-article case). */
+export async function deleteObject(key: string): Promise<void> {
+  await getS3Client().send(new DeleteObjectCommand({ Bucket: getNewsroomBucket(), Key: key }));
+}
+
 export async function deleteObjectsWithPrefix(prefix: string): Promise<number> {
   const client = getS3Client();
   const bucket = getNewsroomBucket();

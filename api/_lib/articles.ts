@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import type { RowDataPacket } from 'mysql2';
 import { getPool, isDuplicateEntryError, withTransaction } from './db';
 import { HttpError } from './http';
-import { deleteObjectsWithPrefix } from './s3';
+import { deleteObject, deleteObjectsWithPrefix } from './s3';
 import { articlePrefix } from './s3Keys';
 import type { ArticleTag } from './validation';
 
@@ -415,6 +415,64 @@ export async function reorderArticleImages(articleId: string, orderedImageIds: s
         position: i,
       });
     }
+  });
+}
+
+/**
+ * Permanently deletes one image from an article: its S3 object and its
+ * `news_article_images` row, then compacts the remaining images' `position`
+ * values down to close the gap the deletion left (the same
+ * `(article_id, position)` unique index `reorderArticleImages` has to
+ * respect).
+ *
+ * Ordering mirrors deleteArticle's reasoning exactly: S3 delete runs FIRST,
+ * so a failure there leaves the DB row (and therefore the admin UI's image
+ * list) untouched and the whole delete safe to retry — never DB-first, which
+ * would leave an orphaned S3 object with no row left to rediscover it from.
+ *
+ * The position compaction happens in the same withTransaction as the row
+ * DELETE, with SELECT ... FOR UPDATE locking the article's image rows first
+ * — same locking shape reorderArticleImages uses — so a concurrent
+ * reorder/delete on this article can't race this one. Unlike
+ * reorderArticleImages, no temporary-offset dance is needed: deleting a row
+ * only ever frees a position, so decrementing every remaining row whose
+ * position was greater than the deleted row's, in increasing order, can
+ * never collide with a position another surviving row still occupies.
+ */
+export async function deleteArticleImage(articleId: string, imageId: string): Promise<void> {
+  const [rows] = await getPool().query<ImageRow[]>(
+    `SELECT * FROM news_article_images WHERE id = :imageId AND article_id = :articleId LIMIT 1`,
+    { imageId, articleId },
+  );
+  const image = rows[0];
+  if (!image) throw new HttpError(404, 'Image not found on this article');
+
+  try {
+    await deleteObject(image.s3_key);
+  } catch (err) {
+    throw new HttpError(
+      502,
+      `Failed to delete this image's stored file: ${(err as Error).message}. The image was NOT deleted — it is safe to try again.`,
+    );
+  }
+
+  await withTransaction(async (conn) => {
+    await conn.query(`SELECT id FROM news_article_images WHERE article_id = :articleId FOR UPDATE`, { articleId });
+
+    const [deleteResult] = await conn.query(`DELETE FROM news_article_images WHERE id = :imageId AND article_id = :articleId`, {
+      imageId,
+      articleId,
+    });
+    if ((deleteResult as { affectedRows: number }).affectedRows === 0) {
+      // Deleted by a concurrent request between the SELECT above and here — the end
+      // state (image gone) is exactly what was asked for, so this isn't a failure.
+      return;
+    }
+
+    await conn.query(
+      `UPDATE news_article_images SET \`position\` = \`position\` - 1 WHERE article_id = :articleId AND \`position\` > :deletedPosition`,
+      { articleId, deletedPosition: image.position },
+    );
   });
 }
 

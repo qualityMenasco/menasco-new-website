@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowDown, ArrowUp, ExternalLink } from 'lucide-react';
+import { ArrowDown, ArrowUp, ExternalLink, Trash2 } from 'lucide-react';
 import { TextField } from '../../components/forms/TextField';
 import { Button, IconButton } from '../../components/ui/Button';
 import { newsroomAdminApi } from './newsroomAdminApi';
@@ -37,6 +37,25 @@ export function ImageManager({ articleId, images, onImagesChanged }: ImageManage
     try {
       await newsroomAdminApi.updateImageMeta(articleId, imageId, update);
       onImagesChanged(images.map((img) => (img.id === imageId ? { ...img, ...('altText' in update ? { altText: update.altText ?? null } : {}), ...('caption' in update ? { caption: update.caption ?? null } : {}) } : img)));
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setBusyId(null);
+    }
+  }
+
+  async function removeImage(imageId: string, mediaType: 'image' | 'video') {
+    if (!window.confirm(`Delete this ${mediaType}? This permanently removes its stored file and cannot be undone.`)) return;
+    setBusyId(imageId);
+    setError(null);
+    try {
+      await newsroomAdminApi.deleteImage(articleId, imageId);
+      const removedPosition = images.find((img) => img.id === imageId)?.position ?? 0;
+      onImagesChanged(
+        images
+          .filter((img) => img.id !== imageId)
+          .map((img) => (img.position > removedPosition ? { ...img, position: img.position - 1 } : img)),
+      );
     } catch (err) {
       setError((err as Error).message);
     } finally {
@@ -105,6 +124,13 @@ export function ImageManager({ articleId, images, onImagesChanged }: ImageManage
                 onClick={() => window.open(previewUrls[image.id], '_blank', 'noopener')}
               />
             )}
+            <IconButton
+              icon={Trash2}
+              label={image.mediaType === 'video' ? 'Delete video' : 'Delete image'}
+              size="sm"
+              onClick={() => removeImage(image.id, image.mediaType)}
+              disabled={busyId === image.id}
+            />
           </div>
         </div>
       ))}

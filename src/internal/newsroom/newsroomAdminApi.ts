@@ -123,6 +123,10 @@ export const newsroomAdminApi = {
   updateImageMeta: (articleId: string, imageId: string, update: { altText?: string | null; caption?: string | null }) =>
     request<{ id: string }>(`/articles/${articleId}/images/${imageId}`, { method: 'PATCH', body: update }),
 
+  /** Permanently deletes this one image (its S3 object and row) and compacts the remaining images' positions. */
+  deleteImage: (articleId: string, imageId: string) =>
+    request<{ deleted: true; id: string }>(`/articles/${articleId}/images/${imageId}`, { method: 'DELETE' }),
+
   reorderImages: (articleId: string, orderedImageIds: string[]) =>
     request<{ id: string; position: number }[]>(`/articles/${articleId}/images/reorder`, {
       method: 'POST',
