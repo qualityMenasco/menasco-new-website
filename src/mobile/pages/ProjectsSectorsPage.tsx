@@ -57,6 +57,25 @@ export default function ProjectsSectorsPage() {
     [activeCategory],
   );
 
+  const selectedProjects = activeCategory ? visibleProjects.filter((project) => project.category === activeCategory) : visibleProjects;
+  const otherProjects = activeCategory ? visibleProjects.filter((project) => project.category !== activeCategory) : [];
+  const renderGrid = (list: typeof visibleProjects, offset: number) => (
+    <div className="mt-4 grid grid-cols-2 gap-3">
+      {list.map((project, index) => (
+        <MobileProjectCard
+          key={project.id}
+          title={project.title}
+          location={translateProjectLocation(t, project.location)}
+          href={`/projects/${project.slug}`}
+          priority={offset + index < PRIORITY_IMAGE_COUNT}
+          {...(project.category === ADVANCED_TECHNICAL_FACILITIES_SLUG
+            ? { variant: 'icon' as const }
+            : { image: getProjectImage(project.heroImage || undefined, project.slug) })}
+        />
+      ))}
+    </div>
+  );
+
   return (
     <>
       <NavSectionH1 section="projectsSectors" />
@@ -72,13 +91,10 @@ export default function ProjectsSectorsPage() {
       />
 
       <section className="px-4 py-8">
-        <SectionHeader
-          eyebrow={t('nav:projectsSectors')}
-          heading={t('projects:categoriesPage.title')}
-          headingAs="h2"
-        />
+        {/* No intro line on phones and tablets (client request 2026-11-23); desktop keeps it. */}
+        <SectionHeader eyebrow={t('nav:projectsSectors')} heading={t('projects:categoriesPage.title')} headingAs="h2" />
 
-        <div className="mt-5">
+        <div className="mt-4">
           <SectorFilterChips
             options={projectCategoryList.map((category) => ({ slug: category.slug, title: categoryTitle(category.slug) }))}
             activeSlug={activeCategory}
@@ -86,7 +102,7 @@ export default function ProjectsSectorsPage() {
           />
         </div>
 
-        <p className="mt-4 text-small text-gray-500">
+        <p className="mt-3 text-small text-gray-500">
           {activeCategory
             ? categoryHasNoMatches(activeCategory)
               ? t('common:pendingContent.notice')
@@ -102,21 +118,15 @@ export default function ProjectsSectorsPage() {
             : ''}
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-3">
-          {visibleProjects.map((project, index) => (
-            <MobileProjectCard
-              key={project.id}
-              title={project.title}
-              categoryLabel={categoryTitle(project.category!)}
-              location={translateProjectLocation(t, project.location)}
-              href={`/projects/${project.slug}`}
-              priority={index < PRIORITY_IMAGE_COUNT}
-              {...(project.category === ADVANCED_TECHNICAL_FACILITIES_SLUG
-                ? { variant: 'icon' as const }
-                : { image: getProjectImage(project.heroImage || undefined, project.slug) })}
-            />
-          ))}
-        </div>
+        {/* Selected sector first, then a labelled divider and the other projects (client request 2026-11-23). */}
+        {renderGrid(selectedProjects, 0)}
+        {activeCategory && otherProjects.length > 0 && selectedProjects.length > 0 && (
+          <div className="mt-6 flex items-center gap-3">
+            <span className="shrink-0 text-caption font-semibold uppercase tracking-widest text-gray-500 rtl:tracking-normal">{t('projects:categoriesPage.otherProjects')}</span>
+            <span aria-hidden="true" className="h-px flex-1 bg-gray-300" />
+          </div>
+        )}
+        {otherProjects.length > 0 && renderGrid(otherProjects, selectedProjects.length)}
       </section>
     </>
   );

@@ -640,7 +640,11 @@ function serviceAreaBlocks(): string[] {
   const sc = servicesCopy;
   return [
     doc(`### MEP`, linkLine(sc.mepPage.seo.title, llmsUrl('/services/mep'), sc.mepPage.seo.description), ...mepDisciplineBlocks('####')),
-    doc(`### EPC`, linkLine(sc.epcPage.seo.title, llmsUrl('/services/turnkey-developments'), sc.epcPage.seo.description), capabilityBullets(sc.epcPage.capabilities)),
+    doc(
+      `### EPC`,
+      linkLine(sc.epcPage.seo.title, llmsUrl('/services/turnkey-developments'), sc.epcPage.seo.description),
+      bullets((sc.epcPage.capabilities.items as { title: string; subtitle: string; body: string }[]).map((c) => `${c.title} (${c.subtitle}): ${c.body}`)),
+    ),
     doc(`### Data Centers`, linkLine(sc.dataCenter.seo.title, llmsUrl('/services/data-centers'), sc.dataCenter.seo.description), capabilityBullets(sc.dataCenter.capabilities)),
     doc(`### Civil & BIM`, linkLine(sc.civilPage.seo.title, llmsUrl('/services/civil'), sc.civilPage.seo.description), capabilityBullets(sc.civilPage.capabilities)),
     doc(
@@ -661,6 +665,27 @@ function mfgScopeBullets(): string {
   ]);
 }
 
+/** EPC-only sections, mirroring the page. */
+function epcPageSections(): string[] {
+  const e = servicesCopy.epcPage;
+  const titled = (items: { title: string; body: string }[]) => bullets(items.map((i) => `${i.title}: ${i.body}`));
+  return [
+    doc(h2(e.approach.heading), (e.approach.paragraphs as string[]).join('\n\n')),
+    doc(
+      h2(e.capabilities.heading),
+      e.capabilities.intro,
+      ...(e.capabilities.items as { title: string; subtitle: string; body: string; activities: string[] }[]).map((c) => doc(`### ${c.title}: ${c.subtitle}`, c.body, bullets(c.activities))),
+    ),
+    doc(
+      h2(e.advantage.heading),
+      e.advantage.intro,
+      ...(e.advantage.tabs as { heading: string; paragraphs: string[]; items: { title: string; body: string }[] }[]).map((tab) => doc(`### ${tab.heading}`, tab.paragraphs.join('\n\n'), titled(tab.items))),
+    ),
+    doc(h2(e.controls.heading), (e.controls.paragraphs as string[]).join('\n\n'), titled(e.controls.items)),
+    doc(h2(e.industries.heading), e.industries.intro, titled(e.industries.items)),
+  ];
+}
+
 /** Manufacturing-only sections, mirroring the page. */
 function mfgPageSections(): string[] {
   const m = servicesCopy.manufacturingPage;
@@ -670,7 +695,7 @@ function mfgPageSections(): string[] {
     doc(h2(m.whiteSpaces.heading), (m.whiteSpaces.body as string[]).join('\n\n'), titled(m.whiteSpaces.items)),
     doc(h2(m.eHouses.heading), (m.eHouses.body as string[]).join('\n\n'), titled(m.eHouses.items), m.eHouses.note),
     doc(h2(m.range.heading), m.range.intro, ...(m.range.topics as { title: string; body: string; items: string[] }[]).map((topic) => doc(`### ${topic.title}`, topic.body, bullets(topic.items)))),
-    doc(h2(m.testing.heading), m.testing.intro, titled(m.testing.items), bullets((m.testing.standards as { code: string; label: string }[]).map((s) => `${s.code} (${s.label})`)), m.testing.standardsNote),
+    doc(h2(m.testing.heading), m.testing.intro, titled(m.testing.items), bullets((m.testing.standards as { code: string; label: string }[]).map((s) => `${s.code} (${s.label})`))),
     doc(h2(m.factories.heading), m.factories.intro, bullets((m.factories.countries as { name: string; body: string }[]).map((c) => `${c.name}: ${c.body}`))),
     doc(h2(m.sectors.heading), titled(m.sectors.items)),
   ];
@@ -693,6 +718,7 @@ function generateUmbrellaPages() {
       bq(page.hero.description),
       ...(path === '/services/mep' ? mepPageSections() : []),
       ...(path === '/services/manufacturing-prefabrication' ? mfgPageSections() : []),
+      ...(path === '/services/turnkey-developments' ? epcPageSections() : []),
       ...(page.projects
         ? [
             doc(

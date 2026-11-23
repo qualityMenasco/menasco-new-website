@@ -56,7 +56,7 @@ Covers: Modular, Custom.
 
 ### EPC
 
-- [EPC — Engineering, Procurement & Construction](https://menascogroup.com/services/turnkey-developments/llms.txt): MENASCO delivers integrated Engineering, Procurement and Construction (EPC) services, providing a single point of accountability from design through handover.
+- [EPC — Engineering, Procurement & Construction](https://menascogroup.com/services/turnkey-developments/llms.txt): MENASCO delivers EPC for complex infrastructure: multidisciplinary engineering, global equipment procurement, civil and MEP construction and in-house manufacturing under one accountable contract.
 
 ### Data Centers
 

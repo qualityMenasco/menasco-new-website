@@ -117,14 +117,11 @@ Scope of works:
 
 ### EPC
 
-- [EPC — Engineering, Procurement & Construction](https://menascogroup.com/services/turnkey-developments/llms.txt): MENASCO delivers integrated Engineering, Procurement and Construction (EPC) services, providing a single point of accountability from design through handover.
+- [EPC — Engineering, Procurement & Construction](https://menascogroup.com/services/turnkey-developments/llms.txt): MENASCO delivers EPC for complex infrastructure: multidisciplinary engineering, global equipment procurement, civil and MEP construction and in-house manufacturing under one accountable contract.
 
-- Engineering Design & BIM Coordination: In-house MEP design and model coordination establishing a clash-free technical basis before construction begins.
-- Procurement & Supply-Chain Coordination: Equipment and materials procurement coordinated against the project programme to keep delivery on schedule.
-- Site Mobilisation & Construction Management: On-site teams and subcontractors mobilised and managed under a single point of accountability.
-- Installation, Testing & Commissioning: MEP systems installed, tested and commissioned against project specifications and standards.
-- Project Scheduling & Progress Reporting: Programme management and transparent progress reporting throughout delivery.
-- Quality Assurance & HSE Compliance: Quality and HSE processes embedded across design, procurement and site execution.
+- Engineering (Coordinated design and technical development): Architectural, structural, mechanical, electrical and specialist design are aligned with procurement and construction constraints. Technical reviews, BIM coordination and constructability checks resolve interfaces before they reach site.
+- Procurement (Global sourcing and supply chain management): International supplier relationships and centralised procurement source major equipment, specialist materials and construction packages across markets, with delivery matched to the construction programme.
+- Construction (Multidisciplinary site execution): MENASCO's core MEP capability works with specialist civil and structural partners under one project management team, from installation sequencing and quality control through testing, commissioning and handover.
 
 ### Data Centers
 
@@ -153,7 +150,7 @@ Scope of works:
 
 - [Manufacturing & Prefabrication](https://menascogroup.com/services/manufacturing-prefabrication/llms.txt): In-house MEP manufacturing and prefabrication in the UAE, Saudi Arabia and Egypt: data center white spaces, E-Houses, switchgear, ductwork and modular assemblies, tested before dispatch.
 
-- Data Center White Spaces: Cooling pipework, Electrical transfer, Cable trays, ELV, Ductwork
+- Data Center White Spaces: Ductwork, Pipework, Electrical transfer, Cable trays, ELV
 - E-Houses: An E-House is a prefabricated electrical room: the enclosure, the power and control equipment inside it, and the building services that keep that equipment running.
 - Modular assemblies: Prefabricated vertical riser modules; Multi-service pipe rack modules; Plant and equipment skids with pumps, valves and controls; Pipe spools and duct assemblies
 - Power and controls: Main and sub-main distribution boards (MDB / SMDB); Motor control centres (MCC); Automatic transfer switch (ATS) panels; PLC and electrical control panels; Distribution boards and meter cabinets; Capacitor banks for power factor correction; Rising mains, high-current feeder and plug-in tap-off busway

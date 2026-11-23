@@ -20,8 +20,8 @@
     }
   },
   "categoriesPage": {
-    "title": "فئات المشاريع",
-    "description": "مجموعة مختارة من مشاريعنا المميزة. اختر فئة أو موقعًا لإبرازه أعلى قائمة الأعمال.",
+    "title": "محفظة المشاريع",
+    "description": "مجموعة مختارة من المشاريع المميزة عبر القطاعات الأربعة الرئيسية لميناسكو",
     "projectCount_zero": "لا توجد مشاريع",
     "projectCount_one": "مشروع واحد",
     "projectCount_two": "مشروعان",
@@ -29,6 +29,7 @@
     "projectCount_many": "{{count}} مشروعًا",
     "projectCount_other": "{{count}} مشروع",
     "projectsComingSoon": "مشاريع قريبًا",
+    "otherProjects": "مشاريع أخرى",
     "allProjects": "جميع المشاريع",
     "projectLocations": "مواقع المشاريع",
     "showingAll": "عرض {{count}} مشروع",
@@ -36,7 +37,13 @@
     "countryFirst": "مشاريع {{country}} أولاً، بإجمالي {{count}}",
     "categoryAndCountryFirst": "مشاريع {{category}} أولاً، مع إبراز {{country}}، بإجمالي {{count}}",
     "categoryProjects": "مشاريع {{category}}",
-    "exploreMore": "اعرف المزيد"
+    "exploreMore": "اعرف المزيد",
+    "featuredCount_zero": "لا توجد مشاريع مميزة",
+    "featuredCount_one": "مشروع مميز واحد",
+    "featuredCount_two": "مشروعان مميزان",
+    "featuredCount_few": "{{count}} مشاريع مميزة",
+    "featuredCount_many": "{{count}} مشروعًا مميزًا",
+    "featuredCount_other": "{{count}} مشروع مميز"
   },
   "seo": {
     "title": "المشاريع والقطاعات",

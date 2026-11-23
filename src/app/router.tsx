@@ -120,10 +120,7 @@ const routeChildren: RouteObject[] = [
   { path: 'services/manufacturing-prefabrication', element: lazyPage(() => import('../pages/services/ManufacturingPrefabricationPage')) },
   // Dedicated bespoke page (same pattern as Manufacturing & Prefabrication
   // above) rather than the generic services/:slug template — 2026-10-29.
-  {
-    path: 'services/turnkey-developments',
-    element: responsivePage(() => import('../pages/services/EPCPage'), () => import('../mobile/pages/services/EPCPage')),
-  },
+  { path: 'services/turnkey-developments', element: lazyPage(() => import('../pages/services/EPCPage')) },
   // Dedicated bespoke pages (same pattern as Manufacturing & Prefabrication
   // and EPC above) rather than the structure-only PendingContentPages
   // placeholder — live and indexable since 2026-11-05.

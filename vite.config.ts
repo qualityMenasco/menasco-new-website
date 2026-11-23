@@ -29,6 +29,27 @@ function devSitemapPlugin(): Plugin {
   };
 }
 
+/**
+ * Dev only: translation JSON lives in public/locales and is fetched once per
+ * page load by i18next, so Vite's hot update swaps in new component code while
+ * the open tab keeps the old copy. That mismatch (new layout, stale text) is
+ * confusing, so any change under public/locales triggers a full page reload.
+ */
+function localesFullReloadPlugin(): Plugin {
+  return {
+    name: 'menasco-locales-full-reload',
+    apply: 'serve',
+    configureServer(server) {
+      const onChange = (file: string) => {
+        const normalised = file.split('\\').join('/');
+        if (normalised.includes('/public/locales/')) server.ws.send({ type: 'full-reload' });
+      };
+      server.watcher.on('change', onChange);
+      server.watcher.on('add', onChange);
+    },
+  };
+}
+
 export default defineConfig(({ mode }) => {
   // Not VITE_-prefixed on purpose — this is the same server-side var
   // api/newsroom-article-page.ts and scripts/newsroom-public-data.ts already
@@ -39,7 +60,7 @@ export default defineConfig(({ mode }) => {
   const newsroomPublicApiBaseUrl = env.NEWSROOM_PUBLIC_API_BASE_URL;
 
   return {
-    plugins: [react(), devSitemapPlugin()],
+    plugins: [react(), devSitemapPlugin(), localesFullReloadPlugin()],
     // Emits dist/.vite/manifest.json, mapping each source module (including
     // lazy-loaded page components) to its built, hashed chunk file.
     // scripts/generate-seo-html.ts reads this to inject `<link

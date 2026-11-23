@@ -1,4 +1,7 @@
 {
+  "placeholders": {
+    "image": "مكان مخصص لصورة"
+  },
   "skipToContent": "تخطَّ إلى المحتوى",
   "languageSwitch": {
     "label": "اختيار اللغة",
@@ -6,6 +9,8 @@
     "ar": "العربية"
   },
   "buttons": {
+    "previous": "السابق",
+    "next": "التالي",
     "exploreProjects": "استكشف مشاريعنا",
     "ourCapabilities": "قدراتنا",
     "downloadCompanyProfile": "تحميل الملف التعريفي للشركة",

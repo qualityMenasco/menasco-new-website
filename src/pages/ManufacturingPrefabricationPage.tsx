@@ -1,7 +1,6 @@
-import { Children, useState, type KeyboardEvent, type ReactNode } from 'react';
-import { ArrowDown, ArrowRight, ChevronDown, ImageIcon } from 'lucide-react';
+import { ArrowDown, ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { RailDots, useRail } from '../components/services/datacenter/shared';
+import { BulletList, ClampedParagraphs, DisclosureList, ImagePlaceholder, RailList, RowTabs } from '../components/services/ServiceBlocks';
 import { Section } from '../components/layout/Section';
 import { Eyebrow, Heading } from '../components/typography/Typography';
 import { HeroH1 } from '../components/typography/HeroH1';
@@ -92,139 +91,6 @@ export default function ManufacturingPrefabricationPage() {
   );
 }
 
-/* ------------------------------------------------------- Image placeholder */
-
-/** Neutral stand-in until real photography is supplied; the caption says what goes here. */
-function ImagePlaceholder({ label, dark = false, className }: { label: string; dark?: boolean; className?: string }) {
-  const { t } = useTranslation('services');
-  return (
-    <div
-      role="img"
-      aria-label={`${t('manufacturingPage.placeholder')}: ${label}`}
-      className={cn(
-        'flex flex-col items-center justify-center gap-2 rounded-md border border-dashed p-6 text-center',
-        dark ? 'border-white/20 bg-white/[0.04] text-gray-400' : 'border-gray-300 bg-gray-100 text-gray-500',
-        className,
-      )}
-    >
-      <ImageIcon size={28} aria-hidden="true" />
-      <span className="text-caption font-semibold uppercase tracking-widest rtl:tracking-normal">{t('manufacturingPage.placeholder')}</span>
-      <span className="text-small">{label}</span>
-    </div>
-  );
-}
-
-/* ------------------------------------------------- Phone-only collapsing */
-
-/**
- * Phones (below sm): a swipeable, snapping row with position dots, so a list of
- * cards costs one card's height instead of the whole stack. From sm up: the
- * grid given in `gridClassName`. Children are the <li> items.
- */
-function RailList({ children, gridClassName, dark = false }: { children: ReactNode; gridClassName: string; dark?: boolean }) {
-  const rail = useRail();
-  const count = Children.count(children);
-  return (
-    <>
-      <ul
-        role="list"
-        ref={(el) => {
-          rail.railRef.current = el;
-        }}
-        onScroll={rail.onScroll}
-        className={cn(
-          'no-scrollbar -mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-6 px-6 sm:mx-0 sm:grid sm:snap-none sm:overflow-visible sm:px-0',
-          '[&>li]:w-[78vw] [&>li]:max-w-[20rem] [&>li]:shrink-0 [&>li]:snap-start sm:[&>li]:w-auto sm:[&>li]:max-w-none',
-          gridClassName,
-        )}
-      >
-        {children}
-      </ul>
-      <div className="sm:hidden">
-        <RailDots count={count} active={rail.active} dark={dark} />
-      </div>
-    </>
-  );
-}
-
-/**
- * Body copy that shows its first paragraph clamped to three lines on phones,
- * behind "Read more" (same pattern as the MEP page). Full text from md up.
- * Everything stays in the DOM, so search engines read all of it.
- */
-function ClampedParagraphs({ id, paragraphs, dark = false }: { id: string; paragraphs: string[]; dark?: boolean }) {
-  const { t } = useTranslation('common');
-  const [open, setOpen] = useState(false);
-  return (
-    <>
-      <div id={id}>
-        {paragraphs.map((p, i) => (
-          <p
-            key={i}
-            className={cn(
-              'mt-4 text-body leading-relaxed',
-              dark ? 'text-gray-300' : 'text-gray-600',
-              !open && (i === 0 ? 'line-clamp-3 md:line-clamp-none' : 'hidden md:block'),
-            )}
-          >
-            {p}
-          </p>
-        ))}
-      </div>
-      <button
-        type="button"
-        aria-expanded={open}
-        aria-controls={id}
-        onClick={() => setOpen((v) => !v)}
-        className={cn(
-          'mt-1 inline-flex min-h-11 items-center gap-1.5 text-small font-semibold transition-colors duration-base md:hidden',
-          dark ? 'text-brand-400 hover:text-brand-300' : 'text-brand-600 hover:text-brand-700',
-        )}
-      >
-        {open ? t('buttons.showLess') : t('buttons.readMore')}
-        <ChevronDown size={16} aria-hidden="true" className={cn('transition-transform duration-base', open && 'rotate-180')} />
-      </button>
-    </>
-  );
-}
-
-/**
- * Numbered rows whose detail opens on tap on phones; from md up every row is
- * open and the toggle is inert, so tablets/desktop read as a plain list.
- * Panels use the `hidden` attribute (still in the DOM for crawlers).
- */
-function DisclosureList({ idPrefix, items, defaultOpen = null }: { idPrefix: string; items: { title: string; content: ReactNode }[]; defaultOpen?: number | null }) {
-  const [open, setOpen] = useState<number | null>(defaultOpen);
-  return (
-    <ol className="border-b border-gray-300">
-      {items.map((item, i) => {
-        const isOpen = open === i;
-        return (
-          <li key={i} className="border-t border-gray-300">
-            <h3>
-              <button
-                type="button"
-                id={`${idPrefix}-btn-${i}`}
-                aria-expanded={isOpen}
-                aria-controls={`${idPrefix}-panel-${i}`}
-                onClick={() => setOpen(isOpen ? null : i)}
-                className="grid w-full grid-cols-[2.5rem_minmax(0,1fr)_auto] items-baseline py-4 text-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 md:pointer-events-none md:pb-0"
-              >
-                <span className="font-display text-caption font-semibold tabular-nums text-brand-600">{String(i + 1).padStart(2, '0')}</span>
-                <span className="font-display text-body font-semibold text-ink">{item.title}</span>
-                <ChevronDown size={18} aria-hidden="true" className={cn('self-center text-gray-500 transition-transform duration-base md:hidden', isOpen && 'rotate-180')} />
-              </button>
-            </h3>
-            <div id={`${idPrefix}-panel-${i}`} role="region" aria-labelledby={`${idPrefix}-btn-${i}`} hidden={!isOpen} className="pb-4 ps-10 md:block md:pt-1">
-              {item.content}
-            </div>
-          </li>
-        );
-      })}
-    </ol>
-  );
-}
-
 /* --------------------------------------------------------------- 1. Hero */
 
 function Hero() {
@@ -289,9 +155,10 @@ function WhyOffsite() {
         <p className="text-body leading-relaxed text-gray-600 lg:hidden">{t('manufacturingPage.whyOffsite.intro')}</p>
       </ScrollReveal>
       <div className="mt-8 md:mt-10">
-        <RailList gridClassName="sm:grid-cols-2 sm:gap-x-8 sm:gap-y-0 lg:grid-cols-4">
+{/* Cards on phones and desktop; plain ruled columns on tablet (client request 2026-11-23). */}
+        <RailList gridClassName="sm:grid-cols-2 sm:gap-x-8 sm:gap-y-0 lg:grid-cols-4 lg:gap-5">
           {items.map((item, i) => (
-            <li key={i} className="border-t border-gray-300 pt-5 sm:pb-5">
+            <li key={i} className="rounded-md border border-gray-200 bg-white p-5 sm:rounded-none sm:border-0 sm:border-t sm:border-gray-300 sm:bg-transparent sm:px-0 sm:pb-5 sm:pt-5 lg:rounded-md lg:border lg:border-gray-200 lg:bg-white lg:p-6">
               <span className="font-display text-caption font-semibold tabular-nums text-brand-600">{String(i + 1).padStart(2, '0')}</span>
               <h3 className="mt-2 font-display text-h4 font-semibold text-ink">{item.title}</h3>
               <p className="mt-2 text-small leading-relaxed text-gray-600">{item.body}</p>
@@ -334,9 +201,10 @@ function WhiteSpaces() {
         {t('manufacturingPage.whiteSpaces.scopeLabel')}
       </h3>
       <div className="mt-4">
-        <RailList dark gridClassName="sm:grid-cols-2 sm:gap-x-6 sm:gap-y-0 lg:grid-cols-5">
+{/* Cards on phones and desktop; plain ruled columns on tablet (client request 2026-11-23). */}
+        <RailList dark gridClassName="sm:grid-cols-2 sm:gap-x-6 sm:gap-y-0 lg:grid-cols-5 lg:gap-4">
           {items.map((item, i) => (
-            <li key={i} className="border-t border-white/15 pt-4 sm:pb-4">
+            <li key={i} className="rounded-md border border-white/10 bg-white/[0.04] p-5 sm:rounded-none sm:border-0 sm:border-t sm:border-white/15 sm:bg-transparent sm:px-0 sm:pb-4 sm:pt-4 lg:rounded-md lg:border lg:border-white/10 lg:bg-white/[0.04] lg:p-5">
               <h4 className="font-display text-body font-semibold text-white">{item.title}</h4>
               <p className="mt-1.5 text-small leading-relaxed text-gray-400">{item.body}</p>
             </li>
@@ -369,9 +237,10 @@ function EHouses() {
         </div>
       </div>
       <div className="mt-8 md:mt-12">
-        <RailList gridClassName="sm:grid-cols-2 sm:gap-x-8 sm:gap-y-0 lg:grid-cols-4">
+{/* Cards on phones and desktop; plain ruled columns on tablet (client request 2026-11-23). */}
+        <RailList gridClassName="sm:grid-cols-2 sm:gap-x-8 sm:gap-y-0 lg:grid-cols-4 lg:gap-5">
           {items.map((item, i) => (
-            <li key={i} className="border-t border-gray-300 pt-4 sm:pb-4">
+            <li key={i} className="rounded-md border border-gray-200 bg-white p-5 sm:rounded-none sm:border-0 sm:border-t sm:border-gray-300 sm:bg-transparent sm:px-0 sm:pb-4 sm:pt-4 lg:rounded-md lg:border lg:border-gray-200 lg:bg-white lg:p-6">
               <h3 className="font-display text-body font-semibold text-ink">{item.title}</h3>
               <p className="mt-1.5 text-small leading-relaxed text-gray-600">{item.body}</p>
             </li>
@@ -389,116 +258,55 @@ function ProductRange() {
   const { t } = useTranslation('services');
   const topics = t('manufacturingPage.range.topics', { returnObjects: true }) as { title: string; body: string; items: string[] }[];
   return (
-    <Section id={RANGE_ANCHOR} background="stone" spacing="sm" className="scroll-mt-20">
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:items-end lg:gap-12">
-        <div className="lg:col-span-6">
-          <Eyebrow>{t('manufacturingPage.range.eyebrow')}</Eyebrow>
-          <Heading level="h2" as="h2" className="mt-3 text-balance">
-            {t('manufacturingPage.range.heading')}
-          </Heading>
-        </div>
-        <p className="text-body leading-relaxed text-gray-600 lg:col-span-6">{t('manufacturingPage.range.intro')}</p>
-      </div>
-      {/* Phones: tap-to-open rows (first open). Tablet and desktop: tabs. */}
-      <div className="mt-6 md:hidden">
-        <DisclosureList
-          idPrefix="mfg-range-m"
-          defaultOpen={0}
-          items={topics.map((topic) => ({
-            title: topic.title,
-            content: (
-              <>
-                <p className="text-small leading-relaxed text-gray-600">{topic.body}</p>
-                <ul role="list" className="mt-2">
-                  {topic.items.map((item) => (
-                    <li key={item} className="flex gap-3 py-1.5 text-small text-gray-700">
-                      <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </>
-            ),
-          }))}
-        />
-      </div>
-      <RangeTabs label={t('manufacturingPage.range.heading')} topics={topics} />
+    <Section id={RANGE_ANCHOR} background="stone" spacing="sm" className="scroll-mt-20 pb-6 md:pb-8">
+      {/* Compact layout (client request 2026-11-23): heading sits above the tabs and the intro above
+          the panel, so there is no separate header row; the panel drops its repeated title and uses
+          tight single-line rows. Phones: heading, intro, then tap-to-open rows (first open). */}
+      <RowTabs
+        idPrefix="mfg-range"
+        label={t('manufacturingPage.range.heading')}
+        lead={
+          <>
+            <Eyebrow>{t('manufacturingPage.range.eyebrow')}</Eyebrow>
+            <Heading level="h2" as="h2" className="mt-3 text-balance">
+              {t('manufacturingPage.range.heading')}
+            </Heading>
+          </>
+        }
+        aside={<p className="text-body leading-relaxed text-gray-600">{t('manufacturingPage.range.intro')}</p>}
+        phone={
+          <DisclosureList
+            idPrefix="mfg-range-m"
+            defaultOpen={0}
+            items={topics.map((topic) => ({
+              title: topic.title,
+              content: (
+                <>
+                  <p className="text-small leading-relaxed text-gray-600">{topic.body}</p>
+                  <ul role="list" className="mt-2">
+                    {topic.items.map((item) => (
+                      <li key={item} className="flex gap-3 py-1.5 text-small text-gray-700">
+                        <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ),
+            }))}
+          />
+        }
+        tabs={topics.map((topic) => ({
+          title: topic.title,
+          panel: (
+            <>
+              <p className="text-body leading-relaxed text-gray-600">{topic.body}</p>
+              <BulletList items={topic.items} className="mt-3 [&>li]:py-2" />
+            </>
+          ),
+        }))}
+      />
     </Section>
-  );
-}
-
-/**
- * Tablet/desktop product range tabs: large rows on the left (ruled like the
- * testing list, no numbers) and the selected group's panel on the right, on
- * the same two-column grid as the section header, so the tabs carry as much
- * visual weight as the panel. Every panel stays in the DOM (crawlable); they
- * share one grid cell so switching never changes the height. Arrow keys move
- * between tabs.
- */
-function RangeTabs({ label, topics }: { label: string; topics: { title: string; body: string; items: string[] }[] }) {
-  const [active, setActive] = useState(0);
-  const onKey = (e: KeyboardEvent<HTMLButtonElement>, i: number) => {
-    const next = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? (i + 1) % topics.length : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? (i - 1 + topics.length) % topics.length : null;
-    if (next === null) return;
-    e.preventDefault();
-    setActive(next);
-    document.getElementById(`mfg-range-tab-${next}`)?.focus();
-  };
-  return (
-    <div className="mt-8 hidden md:grid md:grid-cols-[17rem_minmax(0,1fr)] md:gap-10 lg:grid-cols-2 lg:gap-12">
-      <div role="tablist" aria-label={label} aria-orientation="vertical" className="self-start border-b border-gray-300">
-        {topics.map((topic, i) => {
-          const on = i === active;
-          return (
-            <button
-              key={topic.title}
-              type="button"
-              role="tab"
-              id={`mfg-range-tab-${i}`}
-              aria-selected={on}
-              aria-controls={`mfg-range-panel-${i}`}
-              tabIndex={on ? 0 : -1}
-              onClick={() => setActive(i)}
-              onKeyDown={(e) => onKey(e, i)}
-              className={cn(
-                'group grid w-full grid-cols-[minmax(0,1fr)_auto] items-center border-t border-gray-300 py-5 text-start transition-colors duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-500',
-                on ? 'text-ink' : 'text-gray-500 hover:text-ink',
-              )}
-            >
-              <span className="font-display text-h4 font-semibold">{topic.title}</span>
-              <ArrowRight size={18} aria-hidden="true" className={cn('transition-[opacity,transform] duration-base rtl:rotate-180', on ? 'text-brand-600 opacity-100' : 'opacity-0 group-hover:opacity-60')} />
-            </button>
-          );
-        })}
-      </div>
-      <div className="grid">
-        {topics.map((topic, i) => {
-          const on = i === active;
-          return (
-            <div
-              key={topic.title}
-              role="tabpanel"
-              id={`mfg-range-panel-${i}`}
-              aria-labelledby={`mfg-range-tab-${i}`}
-              aria-hidden={!on}
-              {...(on ? {} : { inert: '' })}
-              className={cn('rounded-md border border-gray-200 bg-white p-6 transition-opacity duration-base [grid-area:1/1] lg:p-8', on ? 'opacity-100' : 'pointer-events-none opacity-0')}
-            >
-              <h3 className="font-display text-h4 font-semibold text-ink">{topic.title}</h3>
-              <p className="mt-2 text-body leading-relaxed text-gray-600">{topic.body}</p>
-              <ul role="list" className="mt-4">
-                {topic.items.map((item) => (
-                  <li key={item} className="flex gap-3 border-t border-gray-200 py-2.5 text-small text-gray-700">
-                    <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          );
-        })}
-      </div>
-    </div>
   );
 }
 
@@ -509,15 +317,18 @@ function Testing() {
   const items = t('manufacturingPage.testing.items', { returnObjects: true }) as TitleBody[];
   const standards = t('manufacturingPage.testing.standards', { returnObjects: true }) as { code: string; label: string }[];
   return (
-    <Section background="warmwhite" spacing="sm">
+    <Section background="warmwhite" spacing="sm" className="pt-8 md:pt-10">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
-        <ScrollReveal className="lg:col-span-5">
-          <Eyebrow>{t('manufacturingPage.testing.eyebrow')}</Eyebrow>
-          <Heading level="h2" as="h2" className="mt-3 text-balance">
-            {t('manufacturingPage.testing.heading')}
-          </Heading>
-          <p className="mt-4 text-body leading-relaxed text-gray-600">{t('manufacturingPage.testing.intro')}</p>
-        </ScrollReveal>
+        {/* Heading column pins below the site header while the tests and ISO list scroll past (same as EPC). */}
+        <div className="lg:sticky lg:top-20 lg:col-span-5 lg:self-start desktop:top-28">
+          <ScrollReveal>
+            <Eyebrow>{t('manufacturingPage.testing.eyebrow')}</Eyebrow>
+            <Heading level="h2" as="h2" className="mt-3 text-balance">
+              {t('manufacturingPage.testing.heading')}
+            </Heading>
+            <p className="mt-4 text-body leading-relaxed text-gray-600">{t('manufacturingPage.testing.intro')}</p>
+          </ScrollReveal>
+        </div>
         {/* The factory tests first, then the certifications beneath them (client request). */}
         <div className="lg:col-span-7">
           <DisclosureList idPrefix="mfg-test" items={items.map((item) => ({ title: item.title, content: <p className="text-small leading-relaxed text-gray-600">{item.body}</p> }))} />
@@ -534,7 +345,6 @@ function Testing() {
               </li>
             ))}
           </ul>
-          <p className="mt-4 text-small text-gray-500">{t('manufacturingPage.testing.standardsNote')}</p>
         </div>
       </div>
     </Section>
@@ -600,9 +410,11 @@ function Sectors() {
         {t('manufacturingPage.sectors.heading')}
       </Heading>
       <div className="mt-8">
-        <RailList gridClassName="sm:grid-cols-2 sm:gap-x-6 sm:gap-y-0 lg:grid-cols-5">
+        {/* Two columns on tablet and desktop alike (client request 2026-11-23). */}
+        <RailList gridClassName="sm:grid-cols-2 sm:gap-x-6 sm:gap-y-0">
           {items.map((item, i) => (
-            <li key={i} className="border-t-2 border-brand-600 pt-4 sm:pb-6">
+            // Phones: white card like the other rails (client request 2026-11-23). From sm: the brand-ruled columns.
+            <li key={i} className="rounded-md border border-gray-200 bg-white p-5 sm:rounded-none sm:border-0 sm:border-t-2 sm:border-brand-600 sm:bg-transparent sm:px-0 sm:pb-6 sm:pt-4">
               <h3 className="font-display text-body font-semibold text-ink">{item.title}</h3>
               <p className="mt-1.5 text-small leading-relaxed text-gray-600">{item.body}</p>
             </li>

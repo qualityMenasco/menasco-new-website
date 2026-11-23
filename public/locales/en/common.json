@@ -1,4 +1,7 @@
 {
+  "placeholders": {
+    "image": "Image placeholder"
+  },
   "skipToContent": "Skip to content",
   "languageSwitch": {
     "label": "Language selection",
@@ -6,6 +9,8 @@
     "ar": "AR"
   },
   "buttons": {
+    "previous": "Previous",
+    "next": "Next",
     "exploreProjects": "Explore Our Projects",
     "ourCapabilities": "Our Capabilities",
     "downloadCompanyProfile": "Download Company Profile",

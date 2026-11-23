@@ -1,9 +1,9 @@
-import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '../../lib/utils';
-import { Heading } from '../typography/Typography';
 
 export interface SectorFilterCardProps {
   title: string;
+  /** e.g. "84 Featured Projects", shown under the title. */
+  count?: string;
   isActive: boolean;
   isDimmed: boolean;
   onHoverStart: () => void;
@@ -11,26 +11,16 @@ export interface SectorFilterCardProps {
   onSelect: () => void;
 }
 
-const EASE = [0.22, 0.61, 0.36, 1] as const;
-
 /**
- * Frosted-glass prioritization control for the project gallery below it
- * (selecting a category reorders the gallery, it never hides other
- * projects) — neutral ink titles on a refined glass panel, with MENASCO
- * blue reserved for the active card (blue marks state, not decoration).
+ * One sector tab in the Project Portfolio filter row (desktop/tablet).
+ * Selecting it reorders the gallery below (it never hides other projects).
+ * Plain text tab, no box: sector name with its featured-project count beneath,
+ * and its own underline: grey for each sector, MENASCO blue for the selected
+ * one (client request 2026-11-23). Separate lines per tab, no full-width rule.
  */
-export function SectorFilterCard({
-  title,
-  isActive,
-  isDimmed,
-  onHoverStart,
-  onHoverEnd,
-  onSelect,
-}: SectorFilterCardProps) {
-  const reducedMotion = useReducedMotion();
-
+export function SectorFilterCard({ title, count, isActive, isDimmed, onHoverStart, onHoverEnd, onSelect }: SectorFilterCardProps) {
   return (
-    <motion.button
+    <button
       type="button"
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
@@ -38,33 +28,16 @@ export function SectorFilterCard({
       onBlur={onHoverEnd}
       onClick={onSelect}
       aria-pressed={isActive}
-      initial={false}
-      whileHover={reducedMotion ? undefined : { y: -3 }}
-      transition={{ duration: 0.28, ease: EASE }}
       className={cn(
-        'group relative flex h-24 w-full flex-col items-center justify-center gap-1 overflow-hidden rounded-md border px-6 text-center backdrop-blur-md transition-[background-color,border-color,box-shadow] duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 sm:h-28',
-        isActive
-          ? 'border-brand-500/60 bg-white/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_10px_28px_-10px_rgba(28,183,240,0.35)]'
-          : 'border-black/[0.08] bg-white/40 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_1px_3px_rgba(10,11,13,0.04)] hover:border-brand-400/50 hover:bg-white/60 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_10px_24px_-12px_rgba(10,11,13,0.12)]',
-        isDimmed && 'opacity-60',
+        'group relative flex w-full flex-col items-start gap-1 border-b-2 pb-4 pt-2 text-start transition-[color,border-color,opacity] duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2',
+        isActive ? 'border-brand-600' : 'border-gray-300 hover:border-gray-400',
+        isDimmed && !isActive && 'opacity-60',
       )}
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-black/[0.03]"
-      />
-
-      <Heading
-        level="h4"
-        as="h3"
-        className={cn(
-          'relative z-10 max-w-[22ch] transition-colors duration-300',
-          // `!` so the active accent beats Heading's own theme text color.
-          isActive ? '!text-brand-600' : 'text-ink group-hover:text-brand-700',
-        )}
-      >
+      <span className={cn('font-display text-body font-semibold leading-snug transition-colors duration-base', isActive ? 'text-brand-600' : 'text-ink group-hover:text-brand-700')}>
         {title}
-      </Heading>
-    </motion.button>
+      </span>
+      {count && <span className="text-small text-gray-500">{count}</span>}
+    </button>
   );
 }

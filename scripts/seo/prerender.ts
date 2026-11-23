@@ -213,10 +213,8 @@ const PATTERNS: { pattern: string; importer: Importer; modulePath: string; deskt
   },
   {
     pattern: '/services/turnkey-developments',
-    importer: () => import('../../src/mobile/pages/services/EPCPage'),
-    modulePath: 'src/mobile/pages/services/EPCPage.tsx',
-    desktopModulePath: 'src/pages/services/EPCPage.tsx',
-    desktopImporter: () => import('../../src/pages/services/EPCPage'),
+    importer: () => import('../../src/pages/services/EPCPage'),
+    modulePath: 'src/pages/services/EPCPage.tsx',
   },
 
 

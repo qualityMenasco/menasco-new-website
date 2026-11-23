@@ -1,30 +1,31 @@
 {
   "categories": {
     "residentialCommercial": {
-      "title": "RESIDENTIAL / COMMERCIAL DEVELOPMENTS",
+      "title": "Residential / Commercial Developments",
       "description": "Integrated MEP solutions for residential towers, offices, retail destinations, mixed-use developments & large-scale commercial properties.",
       "seoTitle": "Residential & Commercial MEP Projects"
     },
     "hospitalityLandmarkEntertainment": {
-      "title": "HOSPITALITY & LANDMARK ENTERTAINMENT",
+      "title": "Hospitality & Landmark Entertainment",
       "description": "High-performance MEP and life-safety engineering for luxury hotels, resorts, serviced residences, and leisure destinations, alongside cultural landmarks, entertainment venues, and iconic destination developments with high-occupancy, integrated systems.",
       "seoTitle": "Hospitality & Landmark Entertainment MEP Projects"
     },
     "advancedTechnicalFacilities": {
-      "title": "MISSION-CRITICAL & TECHNICAL FACILITIES",
+      "title": "Mission-Critical & Technical Facilities",
       "description": "Resilient MEP engineering (cooling, electrical continuity and fire protection) for data centers, healthcare facilities and other mission-critical environments.",
       "seoTitle": "Mission-Critical & Data Center MEP Projects"
     },
     "infrastructureUtilities": {
-      "title": "INFRASTRUCTURE & UTILITIES"
+      "title": "Infrastructure & Utilities"
     }
   },
   "categoriesPage": {
-    "title": "Project Categories",
-    "description": "Some of our feature projects. Select a category or location to bring it to the top of the portfolio.",
+    "title": "Project Portfolio",
+    "description": "A selection of featured projects across MENASCO's four key sectors",
     "projectCount_one": "{{count}} Project",
     "projectCount_other": "{{count}} Projects",
     "projectsComingSoon": "Projects coming soon",
+    "otherProjects": "Other projects",
     "allProjects": "All Projects",
     "projectLocations": "Project Locations",
     "showingAll": "Showing {{count}} projects",
@@ -32,7 +33,9 @@
     "countryFirst": "{{country}} projects first, {{count}} total",
     "categoryAndCountryFirst": "{{category}} projects first, {{country}} prioritized, {{count}} total",
     "categoryProjects": "{{category}} Projects",
-    "exploreMore": "Explore More"
+    "exploreMore": "Explore More",
+    "featuredCount_one": "{{count}} Featured Project",
+    "featuredCount_other": "{{count}} Featured Projects"
   },
   "seo": {
     "title": "Projects & Sectors",

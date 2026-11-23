@@ -8,7 +8,7 @@ Moving MEP fabrication off site changes what happens on site. Assemblies are bui
 
 - Shorter programmes: Modules are built while the site is prepared, so fabrication and construction run side by side instead of one after the other.
 - Factory-controlled quality: Jigs, repeatable processes and inspection at every stage hold tolerances that are hard to achieve in a congested building.
-- Safer, clearer sites: Less work at height, less hot work and fewer trades competing for the same ceiling void or plant room.
+- Safer, less congested sites: Less work at height, less hot work and fewer trades competing for the same ceiling void or plant room.
 - Less reliance on site labour: Skilled work moves into the factory, reducing exposure to labour shortages and productivity swings on site.
 
 ## Prefabricated Cooling and Power for the Data Hall
@@ -17,11 +17,11 @@ MENASCO prefabricates the services that run through a data hall: the cooling pip
 
 Assemblies are built to the coordinated model, tested in the factory and delivered in installation sequence, so fitting out the hall becomes a matter of setting and connecting.
 
-- Cooling pipework: Chilled-water and liquid-cooling headers, branches and connections to cooling units and CDUs, pressure tested before dispatch.
-- Electrical transfer: Power routes, busway runs and distribution assemblies that carry power from the electrical rooms to the racks.
-- Cable trays: Tray, ladder and basket systems prefabricated in sections that follow the hall layout.
-- ELV: Pathways for monitoring, security and structured cabling, coordinated with power and cooling routes.
-- Ductwork: Standard and pre-insulated ductwork for air-cooled halls and supporting spaces.
+- Ductwork: Standard and pre-insulated ductwork for air-cooled halls, plant rooms and the supporting technical spaces.
+- Pipework: Chilled-water and liquid-cooling headers and branches, connected to CDUs and pressure tested before dispatch.
+- Electrical transfer: Busway runs and distribution assemblies that carry power from the electrical rooms out to every rack.
+- Cable trays: Tray, ladder and basket systems, prefabricated in sections that follow the exact layout of each data hall.
+- ELV: Pathways for monitoring, security and structured cabling, coordinated with the power and cooling routes.
 
 ## Electrical Rooms, Delivered Complete
 
@@ -91,8 +91,6 @@ Every assembly is inspected and tested in the factory, where problems are faster
 - ISO 9001:2015 (Quality)
 - ISO 14001:2015 (Environmental)
 - ISO 45001:2018 (Occupational health and safety)
-
-Fabrication follows the SMACNA, BS and IEC standards specified for each project.
 
 ## Manufacturing in Three Countries
 

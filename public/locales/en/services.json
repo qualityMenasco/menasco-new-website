@@ -469,7 +469,7 @@
       ]
     },
     "whyOffsite": {
-      "eyebrow": "Why Off-Site",
+      "eyebrow": "Why Modular Systems",
       "heading": "Less Work on Site, More Certainty in the Programme",
       "intro": "Moving MEP fabrication off site changes what happens on site. Assemblies are built in parallel with civil works, arrive complete, and are installed by smaller crews in less time.",
       "items": [
@@ -482,7 +482,7 @@
           "body": "Jigs, repeatable processes and inspection at every stage hold tolerances that are hard to achieve in a congested building."
         },
         {
-          "title": "Safer, clearer sites",
+          "title": "Safer, less congested sites",
           "body": "Less work at height, less hot work and fewer trades competing for the same ceiling void or plant room."
         },
         {
@@ -501,24 +501,24 @@
       "scopeLabel": "What we prefabricate",
       "items": [
         {
-          "title": "Cooling pipework",
-          "body": "Chilled-water and liquid-cooling headers, branches and connections to cooling units and CDUs, pressure tested before dispatch."
+          "title": "Ductwork",
+          "body": "Standard and pre-insulated ductwork for air-cooled halls, plant rooms and the supporting technical spaces."
+        },
+        {
+          "title": "Pipework",
+          "body": "Chilled-water and liquid-cooling headers and branches, connected to CDUs and pressure tested before dispatch."
         },
         {
           "title": "Electrical transfer",
-          "body": "Power routes, busway runs and distribution assemblies that carry power from the electrical rooms to the racks."
+          "body": "Busway runs and distribution assemblies that carry power from the electrical rooms out to every rack."
         },
         {
           "title": "Cable trays",
-          "body": "Tray, ladder and basket systems prefabricated in sections that follow the hall layout."
+          "body": "Tray, ladder and basket systems, prefabricated in sections that follow the exact layout of each data hall."
         },
         {
           "title": "ELV",
-          "body": "Pathways for monitoring, security and structured cabling, coordinated with power and cooling routes."
-        },
-        {
-          "title": "Ductwork",
-          "body": "Standard and pre-insulated ductwork for air-cooled halls and supporting spaces."
+          "body": "Pathways for monitoring, security and structured cabling, coordinated with the power and cooling routes."
         }
       ],
       "cta": "Data center capability",
@@ -641,8 +641,7 @@
           "code": "ISO 45001:2018",
           "label": "Occupational health and safety"
         }
-      ],
-      "standardsNote": "Fabrication follows the SMACNA, BS and IEC standards specified for each project."
+      ]
     },
     "factories": {
       "eyebrow": "Our Factories",
@@ -746,182 +745,276 @@
   "epcPage": {
     "seo": {
       "title": "EPC — Engineering, Procurement & Construction",
-      "description": "MENASCO delivers integrated Engineering, Procurement and Construction (EPC) services, providing a single point of accountability from design through handover."
+      "description": "MENASCO delivers EPC for complex infrastructure: multidisciplinary engineering, global equipment procurement, civil and MEP construction and in-house manufacturing under one accountable contract."
     },
     "hero": {
-      "title": "EPC",
-      "description": "MENASCO delivers integrated Engineering, Procurement and Construction (EPC) solutions, providing a single point of responsibility from early-stage design through procurement, installation and handover. Our EPC capability combines in-house MEP engineering, coordinated procurement and on-site execution, so a project's building services are delivered as one accountable scope rather than a series of separate contracts to coordinate."
+      "eyebrow": "Engineering, Procurement & Construction",
+      "title": "Integrated EPC Delivery for Complex Infrastructure",
+      "description": "MENASCO brings multidisciplinary design, global equipment sourcing, MEP and civil works and construction management together under one delivery structure, managing the interfaces between MEP and civil from the start. From early technical planning to handover, a single contract gives clients clear accountability and control over design as well as execution.",
+      "primaryCta": "Explore EPC capabilities",
+      "secondaryCta": "View Projects",
+      "placeholder": "EPC site: civil and MEP works in progress"
     },
-    "overview": {
-      "eyebrow": "Overview",
-      "heading": "A Single Point of Responsibility, From Design to Handover",
-      "paragraph1": "Rather than splitting a project's building services across multiple contracts and interfaces, MENASCO's EPC model brings engineering, procurement and construction under one accountable scope. Our in-house design and BIM teams establish the technical basis for the works, our procurement function coordinates materials and equipment against the project programme, and our site teams carry the design through to installation, testing and commissioning.",
-      "paragraph2": "This integrated structure reduces the coordination burden on clients and consultants, shortens the path between design decisions and site execution, and gives a single team accountability for cost, schedule and quality across the full scope of works."
-    },
-    "capabilitiesSection": {
-      "eyebrow": "Our Capabilities",
-      "heading": "EPC Capabilities"
-    },
-    "capabilities": [
-      {
-        "title": "Engineering Design & BIM Coordination",
-        "description": "In-house MEP design and model coordination establishing a clash-free technical basis before construction begins."
-      },
-      {
-        "title": "Procurement & Supply-Chain Coordination",
-        "description": "Equipment and materials procurement coordinated against the project programme to keep delivery on schedule."
-      },
-      {
-        "title": "Site Mobilisation & Construction Management",
-        "description": "On-site teams and subcontractors mobilised and managed under a single point of accountability."
-      },
-      {
-        "title": "Installation, Testing & Commissioning",
-        "description": "MEP systems installed, tested and commissioned against project specifications and standards."
-      },
-      {
-        "title": "Project Scheduling & Progress Reporting",
-        "description": "Programme management and transparent progress reporting throughout delivery."
-      },
-      {
-        "title": "Quality Assurance & HSE Compliance",
-        "description": "Quality and HSE processes embedded across design, procurement and site execution."
+    "approach": {
+      "eyebrow": "The MENASCO EPC Approach",
+      "heading": "One Contract. Multiple Disciplines. Clear Accountability.",
+      "paragraphs": [
+        "Complex developments involve many technical and commercial interfaces between designers, equipment manufacturers, suppliers, MEP specialists and civil contractors. When those responsibilities are split across separate contracts, coordination gets harder and the schedule starts to depend on decisions no single contractor controls.",
+        "Under one EPC framework, design and execution are managed together: engineering decisions, procurement commitments, construction sequencing and budget sit in one plan. As principal delivery contractor, MENASCO coordinates its own teams and specialist partners against the agreed requirements, reducing interface risk and giving the client one point of responsibility for both design and execution."
+      ],
+      "diagram": {
+        "label": "How contract structure changes who manages the interfaces",
+        "fragmented": "Separate contracts",
+        "integrated": "MENASCO EPC",
+        "client": "Client",
+        "menasco": "MENASCO",
+        "nodes": [
+          "Design",
+          "Procurement",
+          "Manufacturing",
+          "Civil",
+          "MEP",
+          "Execution"
+        ],
+        "fragmentedNote": "Six contracts: every interface between them is left for the client to manage.",
+        "integratedNote": "One contract: MENASCO manages the interfaces and answers for the whole delivery."
       }
-    ],
-    "integratedDelivery": {
-      "eyebrow": "Integrated Delivery",
-      "heading": "One Team, One Point of Accountability",
-      "paragraph1": "Traditional delivery models split a project's MEP scope across separate design consultants, suppliers and contractors, each with their own interfaces to manage. MENASCO's EPC approach removes those handover points by keeping design, procurement and construction within a single coordinated team.",
-      "paragraph2": "That structure gives clients one point of contact for cost, schedule and technical decisions throughout the project, with engineering and site delivery working from the same model and the same programme from day one.",
-      "benefitsLabel": "Benefits"
     },
-    "benefits": [
-      "Single point of accountability",
-      "Fewer interfaces to coordinate",
-      "Design and site teams aligned from day one",
-      "Clearer cost and schedule control",
-      "Faster resolution of technical issues",
-      "Consistent quality across design, procurement and construction"
-    ],
-    "qualitySection": {
-      "eyebrow": "Quality Across the Full Scope",
-      "heading": "Quality Across the Full Scope",
-      "paragraph1": "Because engineering, procurement and construction sit within one team, quality control is applied consistently from early design decisions through to final commissioning, rather than being re-established at each handover.",
-      "paragraph2": "MENASCO's EPC approach supports residential developments, hospitality projects, commercial buildings, data centers, healthcare facilities and other technically demanding infrastructure, with the same accountable delivery model applied across every sector."
+    "capabilities": {
+      "eyebrow": "Core EPC Capabilities",
+      "heading": "From Engineering Decisions to Constructed Assets",
+      "intro": "Three connected functions, each managed alongside the others so technical requirements, procurement decisions and site execution stay aligned.",
+      "activitiesLabel": "Key activities",
+      "items": [
+        {
+          "title": "Engineering",
+          "subtitle": "Coordinated design and technical development",
+          "body": "Architectural, structural, mechanical, electrical and specialist design are aligned with procurement and construction constraints. Technical reviews, BIM coordination and constructability checks resolve interfaces before they reach site.",
+          "activities": [
+            "Multidisciplinary design management",
+            "BIM coordination and technical reviews",
+            "Constructability assessments",
+            "Equipment specifications and technical approvals",
+            "Design coordination with specialist contractors"
+          ],
+          "links": [
+            "MEP services"
+          ]
+        },
+        {
+          "title": "Procurement",
+          "subtitle": "Global sourcing and supply chain management",
+          "body": "International supplier relationships and centralised procurement source major equipment, specialist materials and construction packages across markets, with delivery matched to the construction programme.",
+          "activities": [
+            "Global manufacturer and supplier sourcing",
+            "Vendor qualification and technical evaluation",
+            "Equipment procurement and purchasing",
+            "Manufacturing progress tracking and expediting",
+            "International logistics and delivery coordination"
+          ],
+          "links": [
+            "How procurement shapes the programme"
+          ]
+        },
+        {
+          "title": "Construction",
+          "subtitle": "Multidisciplinary site execution",
+          "body": "MENASCO's core MEP capability works with specialist civil and structural partners under one project management team, from installation sequencing and quality control through testing, commissioning and handover.",
+          "activities": [
+            "Civil and structural construction coordination",
+            "Mechanical, electrical, plumbing and fire protection works",
+            "Construction planning and site management",
+            "Subcontractor and specialist contractor management",
+            "Testing, commissioning and handover"
+          ],
+          "links": [
+            "Civil services",
+            "MEP services"
+          ]
+        }
+      ]
     },
-    "qualityHighlights": [
-      {
-        "title": "Coordinated Engineering",
-        "description": "Design and BIM coordination carried out in-house, ahead of procurement and construction."
-      },
-      {
-        "title": "Managed Procurement",
-        "description": "Materials and equipment procured and tracked against the project programme."
-      },
-      {
-        "title": "Disciplined Execution",
-        "description": "Site delivery managed against the same technical basis established at design stage."
-      },
-      {
-        "title": "Full Accountability",
-        "description": "One team responsible for cost, schedule and quality from design to handover."
+    "advantage": {
+      "eyebrow": "What Sets MENASCO EPC Apart",
+      "heading": "Engineering, Supply, Manufacturing and Site, Run as One System",
+      "intro": "Many contractors offer one contract. MENASCO combines MEP specialisation, international procurement, established civil partnerships and manufacturing in three countries, so supplier commitments, off-site production and the site programme are planned together.",
+      "tabs": [
+        {
+          "title": "Procurement",
+          "heading": "Procurement That Shapes the Programme, Not Just the Purchase",
+          "paragraphs": [
+            "Major equipment often sets the critical path. Transformers, generators, chillers, switchgear and specialist mechanical plant can need long manufacturing periods, technical approvals and complex international logistics.",
+            "MENASCO's procurement teams work with engineers and construction managers to check availability, qualify suppliers and set purchasing strategy before installation dates are fixed. International sourcing gives options when local supply is stretched, and technical review keeps every selection compliant with the design and local regulations."
+          ],
+          "listLabel": "Procurement priorities",
+          "items": [
+            {
+              "title": "Manufacturer access",
+              "body": "Early engagement with manufacturers worldwide to secure production capacity and suitable products."
+            },
+            {
+              "title": "Technical qualification",
+              "body": "Specifications, approved alternatives, compliance and compatibility with the wider design."
+            },
+            {
+              "title": "Supply chain coordination",
+              "body": "Manufacturing schedules, logistics and customs aligned with construction milestones."
+            },
+            {
+              "title": "Commercial control",
+              "body": "Purchasing commitments, costs, vendor performance and procurement risk managed within the budget."
+            }
+          ]
+        },
+        {
+          "title": "Civil & MEP integration",
+          "heading": "Civil and MEP Delivery, Managed Together",
+          "paragraphs": [
+            "Civil and structural works set the conditions critical systems are installed and operated in. Foundations, utility corridors, equipment buildings, structural openings and plant room layouts all shape the mechanical and electrical design.",
+            "Through established civil engineering partnerships, MENASCO brings both scopes under one EPC arrangement. Managing them in the same structure resolves design dependencies early, sequences work around equipment deliveries and removes conflicts between specialist contractors."
+          ],
+          "listLabel": "Areas of integration",
+          "items": [
+            {
+              "title": "Foundations and equipment infrastructure",
+              "body": "Foundations, structural supports, equipment loads and major plant installations coordinated as one."
+            },
+            {
+              "title": "Utility and site interfaces",
+              "body": "Underground utilities, electrical distribution, drainage networks and site infrastructure aligned."
+            },
+            {
+              "title": "Construction sequencing",
+              "body": "Civil and MEP activities scheduled around deliveries, access and installation dependencies."
+            }
+          ]
+        },
+        {
+          "title": "Manufacturing",
+          "heading": "Manufacturing Before Site Readiness",
+          "paragraphs": [
+            "On a conventional project, much of the MEP work waits for civil works, structural access and installation areas. Off-site fabrication lets selected systems be built in parallel, so less of the programme depends on site readiness.",
+            "With in-house manufacturing in the UAE, Saudi Arabia and Egypt, MENASCO produces modular pipework, equipment skids, prefabricated MEP assemblies and data center white space components under factory control, wherever modularisation makes technical and commercial sense."
+          ],
+          "listLabel": "Manufacturing applications",
+          "items": [
+            {
+              "title": "Modular MEP assemblies",
+              "body": "Mechanical and electrical service modules built to travel and install as coordinated units."
+            },
+            {
+              "title": "Equipment skids and packaged systems",
+              "body": "Factory-assembled plant that removes most site assembly."
+            },
+            {
+              "title": "Modular data center infrastructure",
+              "body": "Prefabricated white space components and supporting MEP for mission-critical sites."
+            },
+            {
+              "title": "Tested before delivery",
+              "body": "Assemblies inspected and tested in the factory, cutting corrective work on site."
+            }
+          ]
+        }
+      ],
+      "links": {
+        "civil": "Civil services",
+        "mep": "MEP services",
+        "manufacturing": "Manufacturing & Prefabrication"
       }
-    ],
-    "downloadCompanyProfile": "Download Company Profile",
+    },
+    "controls": {
+      "eyebrow": "Project Controls",
+      "heading": "One Programme. Defined Responsibilities. Measurable Progress.",
+      "paragraphs": [
+        "EPC execution needs technical decisions, procurement commitments, construction progress and contract milestones in one reporting structure, so schedule risks, cost commitments, design changes and open interfaces surface early.",
+        "Progress is tracked through engineering deliverables, procurement status, construction milestones, inspection records and commissioning requirements, giving clients a clear view of what affects delivery and the information to decide quickly when conditions change."
+      ],
+      "items": [
+        {
+          "title": "Integrated scheduling",
+          "body": "Engineering, procurement, construction and commissioning managed against one programme."
+        },
+        {
+          "title": "Cost and commercial management",
+          "body": "Procurement commitments, progress, variations and cost forecasts monitored throughout."
+        },
+        {
+          "title": "Quality and safety management",
+          "body": "Structured inspections, safety procedures, compliance checks and documented quality control."
+        },
+        {
+          "title": "Risk and interface management",
+          "body": "Technical, commercial, procurement and construction dependencies identified and resolved."
+        },
+        {
+          "title": "Commissioning and handover",
+          "body": "System testing, functional verification, documentation and completion requirements coordinated."
+        }
+      ],
+      "link": "Quality & Safety"
+    },
+    "industries": {
+      "eyebrow": "Industry Applications",
+      "heading": "EPC Delivery Across Technically Demanding Sectors",
+      "intro": "Power, mechanical systems, construction method, procurement priorities and commissioning all change with the sector. MENASCO shapes each EPC delivery around the operational goals of the facility.",
+      "items": [
+        {
+          "title": "Data centers and mission-critical",
+          "body": "Civil works, critical power, advanced cooling and modular white spaces for hyperscale campuses, enterprise data centers and specialist technical facilities with demanding redundancy and commissioning.",
+          "link": "Mission-critical projects"
+        },
+        {
+          "title": "Energy and utilities",
+          "body": "Substations, power distribution facilities and utility networks, with a focus on utility interfaces, major equipment procurement, sequencing and energisation.",
+          "link": "Infrastructure & utilities projects"
+        },
+        {
+          "title": "Hospitality and landmark entertainment",
+          "body": "Hotels, resorts and destination venues with complex services, demanding finishes and fixed opening dates, coordinated from design to handover.",
+          "link": "Hospitality & landmark projects"
+        },
+        {
+          "title": "Commercial and residential",
+          "body": "Towers, offices, retail and mixed-use developments where architecture, structure and dense building services must meet performance, quality and completion targets.",
+          "link": "Commercial & residential projects"
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "EPC Questions",
+      "items": [
+        {
+          "question": "Does MENASCO deliver projects under a single EPC contract?",
+          "answer": "Yes. MENASCO acts as principal delivery contractor, managing engineering, procurement and construction under one contract, with a single point of responsibility from design to handover."
+        },
+        {
+          "question": "Can MENASCO include civil and structural works in an EPC package?",
+          "answer": "Yes. Through established civil engineering partnerships, civil and structural works sit within the same EPC structure as the MEP scope, coordinated from design through construction."
+        },
+        {
+          "question": "How does MENASCO manage long-lead equipment such as transformers and chillers?",
+          "answer": "By procuring early. MENASCO engages manufacturers during design, qualifies suppliers and secures production before installation dates are fixed, using international sourcing when local supply is constrained."
+        },
+        {
+          "question": "Does MENASCO manufacture any EPC components itself?",
+          "answer": "Yes. MENASCO manufactures modular MEP assemblies, equipment skids and data center white space components in its own facilities in the UAE, Saudi Arabia and Egypt."
+        },
+        {
+          "question": "Which sectors does MENASCO deliver EPC projects for?",
+          "answer": "Technically demanding ones: data centers and mission-critical facilities, energy and utilities, industrial and technical facilities, and complex commercial, residential and hospitality developments."
+        },
+        {
+          "question": "How do clients track progress on a MENASCO EPC project?",
+          "answer": "Against one integrated programme. Engineering deliverables, procurement status, construction milestones, inspections and commissioning are reported together, with cost and risk tracked alongside."
+        }
+      ]
+    },
     "closing": {
-      "heading": "A Single Accountable Partner for Your Next Project",
-      "description": "From early design through procurement, construction and handover, MENASCO's EPC model gives clients one coordinated team and one point of accountability for their building services scope.",
-      "cta": "Explore Our Projects"
-    }
-  },
-  "epcPageMobile": {
-    "seo": {
-      "title": "EPC — Engineering, Procurement & Construction",
-      "description": "MENASCO delivers integrated Engineering, Procurement and Construction (EPC) services, providing a single point of accountability from design through handover."
-    },
-    "eyebrow": "EPC",
-    "heading": "A Single Point of Responsibility, From Design to Handover",
-    "description": "MENASCO delivers integrated Engineering, Procurement and Construction (EPC) solutions, providing a single point of responsibility from early-stage design through procurement, installation and handover. Our EPC capability combines in-house MEP engineering, coordinated procurement and on-site execution.",
-    "overview": {
-      "eyebrow": "Overview",
-      "heading": "One Accountable Scope",
-      "paragraph1": "Rather than splitting a project's building services across multiple contracts and interfaces, MENASCO's EPC model brings engineering, procurement and construction under one accountable scope. Our in-house design and BIM teams establish the technical basis for the works, and our site teams carry the design through to installation, testing and commissioning.",
-      "paragraph2": "This integrated structure reduces the coordination burden on clients and consultants, and gives a single team accountability for cost, schedule and quality across the full scope of works."
-    },
-    "capabilitiesSection": {
-      "eyebrow": "Our Capabilities",
-      "heading": "EPC Capabilities"
-    },
-    "capabilities": [
-      {
-        "title": "Engineering Design & BIM Coordination",
-        "description": "In-house MEP design and model coordination establishing a clash-free technical basis before construction begins."
-      },
-      {
-        "title": "Procurement & Supply-Chain Coordination",
-        "description": "Equipment and materials procurement coordinated against the project programme to keep delivery on schedule."
-      },
-      {
-        "title": "Site Mobilisation & Construction Management",
-        "description": "On-site teams and subcontractors mobilised and managed under a single point of accountability."
-      },
-      {
-        "title": "Installation, Testing & Commissioning",
-        "description": "MEP systems installed, tested and commissioned against project specifications and standards."
-      },
-      {
-        "title": "Project Scheduling & Progress Reporting",
-        "description": "Programme management and transparent progress reporting throughout delivery."
-      },
-      {
-        "title": "Quality Assurance & HSE Compliance",
-        "description": "Quality and HSE processes embedded across design, procurement and site execution."
-      }
-    ],
-    "integratedDelivery": {
-      "eyebrow": "Integrated Delivery",
-      "heading": "One Team, One Point of Accountability",
-      "paragraph1": "Traditional delivery models split a project's MEP scope across separate design consultants, suppliers and contractors, each with their own interfaces to manage. MENASCO's EPC approach removes those handover points by keeping design, procurement and construction within a single coordinated team.",
-      "paragraph2": "That structure gives clients one point of contact for cost, schedule and technical decisions throughout the project.",
-      "benefitsLabel": "Benefits"
-    },
-    "benefits": [
-      "Single point of accountability",
-      "Fewer interfaces to coordinate",
-      "Design and site teams aligned from day one",
-      "Clearer cost and schedule control",
-      "Faster resolution of technical issues",
-      "Consistent quality across design, procurement and construction"
-    ],
-    "qualitySection": {
-      "eyebrow": "Quality Across the Full Scope",
-      "heading": "Quality Across the Full Scope",
-      "paragraph1": "Because engineering, procurement and construction sit within one team, quality control is applied consistently from early design decisions through to final commissioning.",
-      "paragraph2": "MENASCO's EPC approach supports residential, hospitality, commercial, data center, healthcare and industrial developments, with the same accountable delivery model applied across every sector."
-    },
-    "qualityHighlights": [
-      {
-        "title": "Coordinated Engineering",
-        "description": "Design and BIM coordination carried out in-house, ahead of procurement and construction."
-      },
-      {
-        "title": "Managed Procurement",
-        "description": "Materials and equipment procured and tracked against the project programme."
-      },
-      {
-        "title": "Disciplined Execution",
-        "description": "Site delivery managed against the same technical basis established at design stage."
-      },
-      {
-        "title": "Full Accountability",
-        "description": "One team responsible for cost, schedule and quality from design to handover."
-      }
-    ],
-    "downloadCompanyProfile": "Download Company Profile",
-    "cta": {
-      "heading": "A Single Accountable Partner for Your Next Project",
-      "description": "From early design through procurement, construction and handover, MENASCO's EPC model gives clients one coordinated team and one point of accountability.",
-      "primaryLabel": "Explore Our Projects"
+      "heading": "Bring Every Discipline Under One Delivery Structure",
+      "description": "For projects that need coordinated engineering, specialist procurement, civil works and MEP execution, MENASCO gives you one team accountable for cost, schedule, quality and performance, from early development to handover.",
+      "cta": "Discuss your EPC project"
     }
   },
   "mepPage": {
