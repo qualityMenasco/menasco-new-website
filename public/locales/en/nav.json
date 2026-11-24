@@ -53,6 +53,7 @@
     "civil": "Civil",
     "manufacturingPrefabrication": "Manufacturing & Prefabrication",
     "modularFabrication": "Modular Fabrication",
+    "modularShort": "Modular",
     "turnkeyDevelopments": "EPC"
   }
 }

@@ -17,6 +17,9 @@ import { sectorKeys } from '../data/homeSectors';
 import { SITE_URL } from '../seo/constants';
 import { SEO } from '../seo/SEO';
 import { useTransparentHeader } from '../app/header-transparency';
+import { ServiceSwitcher } from '../components/services/ServiceSwitcher';
+import { RailDots, useRail } from '../components/services/datacenter/shared';
+import { ServiceHeroFrame } from '../components/services/ServiceHeroFrame';
 import { serviceEntity, servicesFaqJsonLd } from '../seo/structuredData';
 import { cn } from '../lib/utils';
 
@@ -29,7 +32,9 @@ import { cn } from '../lib/utils';
  *   3. Capability metrics — a row inside the coordination section.
  *   4. Technical disciplines — the four disciplines as drawing sheets (folder
  *      tabs from tablets up; stacked, unfolding rows on phones).
- *   5. Selected MEP projects — six completed projects linking to their pages.
+ *   5. Selected MEP projects — six completed projects linking to their pages, as a snapping
+ *      rail at every size (1 / 2 / 3 cards in view) with position dots, plus previous / next
+ *      arrows except on real phones (client request 2026-11-24).
  *   6. FAQ — six technical questions in a single-column accordion.
  */
 
@@ -67,6 +72,7 @@ export default function MEPPage() {
         ]}
         structuredData={servicesFaqJsonLd(t('mepPage.faq.items', { returnObjects: true }))}
       />
+      <ServiceSwitcher tone="dark" />
       <Hero />
       <Integration />
       <Disciplines />
@@ -87,34 +93,37 @@ function Hero() {
     document.getElementById(DISCIPLINES_ANCHOR)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
 
   return (
-    <Section background="charcoal" spacing="sm" className="md:pt-12 desktop:pt-32">
-      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-6">
-          <HeroH1
-            eyebrow={
-              <Eyebrow as="span" theme="dark" className="block">
-                {t('mepPage.hero.eyebrow')}
-              </Eyebrow>
-            }
-            title={<span className="mt-3 block font-display text-h1 font-semibold text-white text-balance">{t('mepPage.hero.title')}</span>}
-          />
-          <p className="mt-4 max-w-2xl text-body text-gray-300 md:text-body-lg">{t('mepPage.hero.description')}</p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Button variant="primary" trailingIcon={ArrowDown} onClick={scrollToDisciplines}>
-              {t('mepPage.hero.primaryCta')}
-            </Button>
-            <ButtonLink href="/projects/categories" variant="outline" theme="dark" trailingIcon={ArrowRight}>
-              {t('mepPage.hero.secondaryCta')}
-            </ButtonLink>
+    <Section background="charcoal" spacing="sm" className="pb-6 pt-3 md:pb-8 md:pt-4 desktop:pb-14 desktop:pt-32">
+      {/* Phones and tablets: the hero sits in a bordered frame (ServiceHeroFrame). */}
+      <ServiceHeroFrame tone="dark">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-6">
+            <HeroH1
+              eyebrow={
+                <Eyebrow as="span" theme="dark" className="block">
+                  {t('mepPage.hero.eyebrow')}
+                </Eyebrow>
+              }
+              title={<span className="mt-3 block font-display text-h1 font-semibold text-white text-balance">{t('mepPage.hero.title')}</span>}
+            />
+            <p className="mt-4 max-w-2xl text-body text-gray-300 md:text-body-lg">{t('mepPage.hero.description')}</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Button variant="primary" trailingIcon={ArrowDown} onClick={scrollToDisciplines}>
+                {t('mepPage.hero.primaryCta')}
+              </Button>
+              <ButtonLink href="/projects/categories" variant="outline" theme="dark" trailingIcon={ArrowRight}>
+                {t('mepPage.hero.secondaryCta')}
+              </ButtonLink>
+            </div>
+          </div>
+          {/* Portrait (4:5) photo only where text and image fit side by side (desktop); phones/tablets get text only. */}
+          <div className="hidden lg:col-span-5 lg:col-start-8 lg:block">
+            <div className="aspect-[4/5] overflow-hidden rounded-md bg-gray-900">
+              <img src={HERO_IMAGE} alt={t('mepPage.hero.imageAlt')} className="h-full w-full object-cover object-[60%_50%]" loading="eager" />
+            </div>
           </div>
         </div>
-        {/* Portrait (4:5) photo only where text and image fit side by side (desktop); phones/tablets get text only. */}
-        <div className="hidden lg:col-span-5 lg:col-start-8 lg:block">
-          <div className="aspect-[4/5] overflow-hidden rounded-md bg-gray-900">
-            <img src={HERO_IMAGE} alt={t('mepPage.hero.imageAlt')} className="h-full w-full object-cover object-[60%_50%]" loading="eager" />
-          </div>
-        </div>
-      </div>
+      </ServiceHeroFrame>
     </Section>
   );
 }
@@ -237,9 +246,10 @@ const FEATURED_PROJECT_SLUGS = [
 ];
 
 function SelectedProjects() {
-  const { t } = useTranslation(['services', 'projects']);
+  const { t } = useTranslation(['services', 'projects', 'common']);
   const [summariesOpen, setSummariesOpen] = useState(false);
   const projects = FEATURED_PROJECT_SLUGS.map((slug) => publishedProjects.find((p) => p.slug === slug)).filter((p): p is NonNullable<typeof p> => Boolean(p));
+  const rail = useRail();
 
   return (
     <Section id="mep-projects" background="charcoal" spacing="sm" aria-labelledby="mep-projects-heading">
@@ -255,13 +265,22 @@ function SelectedProjects() {
         </Text>
       </div>
 
-      {/* Phones: swipeable row. Tablets: 2 columns. Desktop: 3 columns. */}
-      <ul role="list" className="no-scrollbar -mx-6 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 pb-2 md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3">
+      {/* Snapping rail at every size: phones one card (with a peek of the next), tablets two,
+          desktop three. Dots + arrows below (RailDots). */}
+      <ul
+        id="mep-projects-rail"
+        role="list"
+        ref={(el) => {
+          rail.railRef.current = el;
+        }}
+        onScroll={rail.onScroll}
+        className="no-scrollbar -mx-6 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden scroll-px-6 px-6 pb-1 md:mx-0 md:gap-6 md:scroll-px-0 md:px-0"
+      >
         {projects.map((project) => {
           const key = `services:mepPage.projects.items.${project.slug}`;
           const sector = project.category ? t(`projects:categories.${sectorKeys[project.category] ?? project.category}.title`) : '';
           return (
-            <li key={project.slug} className="group relative flex w-[82vw] max-w-[22rem] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-white/10 bg-white/[0.04] transition-colors duration-base hover:border-white/25 hover:bg-white/[0.07] focus-within:ring-2 focus-within:ring-brand-400 md:w-auto md:max-w-none md:shrink">
+            <li key={project.slug} className="group relative flex w-[82vw] max-w-[22rem] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-white/10 bg-white/[0.04] transition-colors duration-base hover:border-white/25 hover:bg-white/[0.07] focus-within:ring-2 focus-within:ring-inset focus-within:ring-brand-400 md:w-[calc((100%-1.5rem)/2)] md:max-w-none lg:w-[calc((100%-3rem)/3)]">
               <div className="relative aspect-[16/10] overflow-hidden bg-gray-900 md:aspect-[2/1] desktop:aspect-[16/10]">
                 <ProjectImage src={`/mep/projects/${project.slug}.webp`} alt="" imgClassName="transition-transform duration-slow ease-engineered group-hover:scale-[1.05] motion-reduce:transition-none" />
               </div>
@@ -289,6 +308,15 @@ function SelectedProjects() {
           );
         })}
       </ul>
+      <RailDots
+        count={rail.positions || projects.length}
+        active={rail.position}
+        alwaysShow
+        dark
+        rail={rail}
+        controls="mep-projects-rail"
+        labels={{ previous: t('common:buttons.previousProjects'), next: t('common:buttons.nextProjects') }}
+      />
 
       <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
         <ButtonLink href="/projects/categories" variant="outline" theme="dark" trailingIcon={ArrowRight}>

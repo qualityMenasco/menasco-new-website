@@ -9,6 +9,8 @@ import { ScrollReveal } from '../components/common/ScrollReveal';
 import { FaqAccordion, type FaqAccordionItem } from '../components/common/FaqAccordion';
 import { BulletList, ClampedParagraphs, DisclosureList, ImagePlaceholder, RailList, RowTabs, SectionHead, TextLink, scrollToId as scrollTo } from '../components/services/ServiceBlocks';
 import { useTransparentHeader } from '../app/header-transparency';
+import { ServiceSwitcher } from '../components/services/ServiceSwitcher';
+import { ServiceHeroFrame } from '../components/services/ServiceHeroFrame';
 import { SITE_URL } from '../seo/constants';
 import { SEO } from '../seo/SEO';
 import { serviceEntity, servicesFaqJsonLd } from '../seo/structuredData';
@@ -27,7 +29,8 @@ import { sectorImages } from '../data/homeSectors';
  *   3. Core capabilities: Engineering / Procurement / Construction cards.
  *   4. What sets MENASCO EPC apart: procurement, civil & MEP integration and
  *      manufacturing as tabs (the page's central message, stated once).
- *   5. Project controls: five controls as rows.
+ *   5. Project controls: heading, text and the Quality & Safety link (the five control rows
+ *      were removed on all screen sizes, client request 2026-11-25).
  *   6. Industry applications: four sectors, each linking to its projects.
  *   7. FAQ, then the closing enquiry (the page's one closing CTA: contact).
  *
@@ -89,6 +92,7 @@ export default function EPCPage() {
         ]}
         structuredData={servicesFaqJsonLd(t('epcPage.faq.items', { returnObjects: true }))}
       />
+      <ServiceSwitcher tone="light" />
       <Hero />
       <Approach />
       <Capabilities />
@@ -110,32 +114,35 @@ function Hero() {
   useTransparentHeader(true);
   return (
     // Warm white hero (client request 2026-11-23); the transparent header follows it.
-    <Section background="warmwhite" spacing="sm" className="md:pt-12 desktop:pt-32">
-      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-6">
-          <HeroH1
-            eyebrow={
-              <Eyebrow as="span" className="block">
-                {t('epcPage.hero.eyebrow')}
-              </Eyebrow>
-            }
-            title={<span className="mt-3 block font-display text-h1 font-semibold text-ink text-balance">{t('epcPage.hero.title')}</span>}
-          />
-          <p className="mt-4 max-w-2xl text-body text-gray-600 md:text-body-lg">{t('epcPage.hero.description')}</p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Button variant="primary" trailingIcon={ArrowDown} onClick={() => scrollTo(CAPABILITIES_ANCHOR)}>
-              {t('epcPage.hero.primaryCta')}
-            </Button>
-            <ButtonLink href={LINKS.projects} variant="outline" theme="light" trailingIcon={ArrowRight}>
-              {t('epcPage.hero.secondaryCta')}
-            </ButtonLink>
+    <Section background="warmwhite" spacing="sm" className="pb-6 pt-3 md:pb-8 md:pt-4 desktop:pb-14 desktop:pt-32">
+      {/* Phones and tablets: the hero sits in a bordered frame (ServiceHeroFrame). */}
+      <ServiceHeroFrame tone="light">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-6">
+            <HeroH1
+              eyebrow={
+                <Eyebrow as="span" className="block">
+                  {t('epcPage.hero.eyebrow')}
+                </Eyebrow>
+              }
+              title={<span className="mt-3 block font-display text-h1 font-semibold text-ink text-balance">{t('epcPage.hero.title')}</span>}
+            />
+            <p className="mt-4 max-w-2xl text-body text-gray-600 md:text-body-lg">{t('epcPage.hero.description')}</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Button variant="primary" trailingIcon={ArrowDown} onClick={() => scrollTo(CAPABILITIES_ANCHOR)}>
+                {t('epcPage.hero.primaryCta')}
+              </Button>
+              <ButtonLink href={LINKS.projects} variant="outline" theme="light" trailingIcon={ArrowRight}>
+                {t('epcPage.hero.secondaryCta')}
+              </ButtonLink>
+            </div>
+          </div>
+          {/* Portrait placeholder only where text and image sit side by side (desktop). */}
+          <div className="hidden lg:col-span-5 lg:col-start-8 lg:block">
+            <ImagePlaceholder label={t('epcPage.hero.placeholder')} className="aspect-[4/5]" />
           </div>
         </div>
-        {/* Portrait placeholder only where text and image sit side by side (desktop). */}
-        <div className="hidden lg:col-span-5 lg:col-start-8 lg:block">
-          <ImagePlaceholder label={t('epcPage.hero.placeholder')} className="aspect-[4/5]" />
-        </div>
-      </div>
+      </ServiceHeroFrame>
     </Section>
   );
 }
@@ -391,11 +398,10 @@ function Advantage() {
 function Controls() {
   const { t } = useTranslation('services');
   const paragraphs = t('epcPage.controls.paragraphs', { returnObjects: true }) as string[];
-  const items = t('epcPage.controls.items', { returnObjects: true }) as TitleBody[];
   return (
     <Section background="warmwhite" spacing="sm">
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
-        <ScrollReveal className="lg:col-span-5">
+      <div>
+        <ScrollReveal className="max-w-3xl">
           <Eyebrow>{t('epcPage.controls.eyebrow')}</Eyebrow>
           <Heading level="h2" as="h2" className="mt-3 text-balance">
             {t('epcPage.controls.heading')}
@@ -406,9 +412,6 @@ function Controls() {
             <TextLink href={LINKS.quality}>{t('epcPage.controls.link')}</TextLink>
           </div>
         </ScrollReveal>
-        <div className="lg:col-span-7">
-          <DisclosureList idPrefix="epc-ctrl" items={items.map((item) => ({ title: item.title, content: <p className="text-small leading-relaxed text-gray-600">{item.body}</p> }))} />
-        </div>
       </div>
     </Section>
   );

@@ -323,7 +323,8 @@
       "heading": "Integrated Systems for an Always-On World"
     },
     "introParagraphs": [
-      "MENASCO delivers integrated MEP and infrastructure solutions for mission-critical data centers across the UAE, Saudi Arabia, Egypt, the United Kingdom, and the United States. Beyond core MEP capabilities, our scope extends to civil works, modular data center white space manufacturing, and energy infrastructure. By combining these capabilities with in-house fabrication, established procurement networks, and strategic supplier relationships, we maintain greater control over the supply chain, reduce project dependencies, and protect quality and delivery schedules even under challenging market conditions. From initial concept to operational readiness, MENASCO brings complex data center developments to life.",
+      "MENASCO delivers integrated MEP and infrastructure solutions for mission-critical data centers across the UAE, Saudi Arabia, Egypt, the United Kingdom, and the United States. Beyond core MEP capabilities, our scope extends to civil works, modular data center white space manufacturing, and energy infrastructure.",
+      "By combining these capabilities with in-house fabrication, established procurement networks, and strategic supplier relationships, we maintain greater control over the supply chain, reduce project dependencies, and protect quality and delivery schedules even under challenging market conditions. From initial concept to operational readiness, MENASCO brings complex data center developments to life.",
       "Our expertise extends across the full project lifecycle, from early-stage coordination & value engineering to final commissioning & operational readiness, ensuring efficient execution, optimized performance & long-term reliability.",
       "At MENASCO, we are committed to delivering resilient, scalable & future-ready infrastructure that supports the evolving needs of data-driven industries & the growing digital economy."
     ],
@@ -445,7 +446,7 @@
     },
     "placeholder": "Image placeholder",
     "hero": {
-      "eyebrow": "Manufacturing & Prefabrication",
+      "eyebrow": "Modular Fabrication",
       "title": "Built in Our Factories, Ready for Site",
       "description": "MENASCO manufactures and prefabricates MEP systems in-house across the UAE, Saudi Arabia and Egypt. Data center white spaces, E-Houses, switchgear, ductwork and modular assemblies are built and tested under factory control, then delivered ready to install.",
       "primaryCta": "View the product range",
@@ -924,28 +925,6 @@
       "paragraphs": [
         "EPC execution needs technical decisions, procurement commitments, construction progress and contract milestones in one reporting structure, so schedule risks, cost commitments, design changes and open interfaces surface early.",
         "Progress is tracked through engineering deliverables, procurement status, construction milestones, inspection records and commissioning requirements, giving clients a clear view of what affects delivery and the information to decide quickly when conditions change."
-      ],
-      "items": [
-        {
-          "title": "Integrated scheduling",
-          "body": "Engineering, procurement, construction and commissioning managed against one programme."
-        },
-        {
-          "title": "Cost and commercial management",
-          "body": "Procurement commitments, progress, variations and cost forecasts monitored throughout."
-        },
-        {
-          "title": "Quality and safety management",
-          "body": "Structured inspections, safety procedures, compliance checks and documented quality control."
-        },
-        {
-          "title": "Risk and interface management",
-          "body": "Technical, commercial, procurement and construction dependencies identified and resolved."
-        },
-        {
-          "title": "Commissioning and handover",
-          "body": "System testing, functional verification, documentation and completion requirements coordinated."
-        }
       ],
       "link": "Quality & Safety"
     },

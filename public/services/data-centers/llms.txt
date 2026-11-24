@@ -4,7 +4,9 @@
 
 ## Overview
 
-MENASCO delivers integrated MEP and infrastructure solutions for mission-critical data centers across the UAE, Saudi Arabia, Egypt, the United Kingdom, and the United States. Beyond core MEP capabilities, our scope extends to civil works, modular data center white space manufacturing, and energy infrastructure. By combining these capabilities with in-house fabrication, established procurement networks, and strategic supplier relationships, we maintain greater control over the supply chain, reduce project dependencies, and protect quality and delivery schedules even under challenging market conditions. From initial concept to operational readiness, MENASCO brings complex data center developments to life.
+MENASCO delivers integrated MEP and infrastructure solutions for mission-critical data centers across the UAE, Saudi Arabia, Egypt, the United Kingdom, and the United States. Beyond core MEP capabilities, our scope extends to civil works, modular data center white space manufacturing, and energy infrastructure.
+
+By combining these capabilities with in-house fabrication, established procurement networks, and strategic supplier relationships, we maintain greater control over the supply chain, reduce project dependencies, and protect quality and delivery schedules even under challenging market conditions. From initial concept to operational readiness, MENASCO brings complex data center developments to life.
 
 Our expertise extends across the full project lifecycle, from early-stage coordination & value engineering to final commissioning & operational readiness, ensuring efficient execution, optimized performance & long-term reliability.
 
@@ -51,11 +53,9 @@ In-house fabrication gives MENASCO direct control over complex and difficult sup
 
 ## Local energy markets: Understanding local energy infrastructure is part of the engineering
 
-Power availability is now the main constraint on new capacity. Global data center electricity use is projected to more than double by 2030, to around 945 TWh, so grid connection, substation timing and on-site generation have to be planned from day one [1].
-
 ### Data centers in the United Arab Emirates
 
-Rapid hyperscale expansion in Abu Dhabi and Dubai is placing new demands on power generation, transmission capacity, and utility infrastructure. Grid connection schedules, substation delivery, high ambient temperatures, and cooling efficiency must be addressed early, with electricity procurement and generation arrangements differing between the emirates [2] [3].
+Rapid hyperscale expansion in Abu Dhabi and Dubai is placing new demands on power generation, transmission capacity, and utility infrastructure. Grid connection schedules, substation delivery, high ambient temperatures, and cooling efficiency must be addressed early, with electricity procurement and generation arrangements differing between the emirates [1] [2].
 
 **Key market constraints:**
 
@@ -67,7 +67,7 @@ Rapid hyperscale expansion in Abu Dhabi and Dubai is placing new demands on powe
 
 With our international engineering, procurement, and project management teams headquartered in Dubai, MENASCO can coordinate utility requirements, electrical infrastructure design, and long-lead equipment sourcing from a single operational hub. Direct UAE construction capabilities, in-country manufacturing and established supplier relationships allow substation works, cooling infrastructure, and off-site modular prefabrication to progress in parallel, reducing dependencies between utility readiness, equipment delivery, and construction milestones.
 
-**Competitive advantage:**
+**MENASCO's Competitive Advantage:**
 
 - Engineering, procurement, fabrication and construction management in one UAE headquarters
 - Faster technical coordination from a single operational hub
@@ -77,7 +77,7 @@ Link: https://menascogroup.com/services/data-centers#united-arab-emirates
 
 ### Data centers in Saudi Arabia
 
-Saudi Arabia's expanding data center market must balance large-scale AI infrastructure demand with extreme heat, water scarcity, and evolving regulatory requirements. Cooling architecture, electricity supply, and equipment procurement require early planning, while data center service providers must address registration and classification requirements under the Communications, Space and Technology Commission (CST) [4] [5].
+Saudi Arabia's expanding data center market must balance large-scale AI infrastructure demand with extreme heat, water scarcity, and evolving regulatory requirements. Cooling architecture, electricity supply, and equipment procurement require early planning, while data center service providers must address registration and classification requirements under the Communications, Space and Technology Commission (CST) [3] [4].
 
 **Key market constraints:**
 
@@ -89,7 +89,7 @@ Saudi Arabia's expanding data center market must balance large-scale AI infrastr
 
 Saudi Arabia's extreme temperatures and water scarcity demand cooling systems optimized for local conditions, while rapid data center expansion places pressure on specialist equipment supply chains. MENASCO is skilled in delivering closed loop direct-to-chip liquid cooling, as well as traditional configurations against project-specific PUE and WUE targets. Drawing on international suppliers and in-country fabrication to source equipment, dedicated construction teams adapt solutions to local codes, utility requirements, and minimize reliance on external delivery partners.
 
-**Competitive advantage:**
+**MENASCO's Competitive Advantage:**
 
 - Direct-to-chip liquid cooling expertise
 - In-country fabrication and a global sourcing network
@@ -99,7 +99,7 @@ Link: https://menascogroup.com/services/data-centers#saudi-arabia
 
 ### Data centers in Egypt
 
-Egypt's position as a regional connectivity hub offers opportunities for data center development, but investors face challenges involving land allocation, construction permits, telecom licensing, and infrastructure readiness. Coordinating power availability, fiber connectivity, regulatory approvals, and imported equipment procurement early is essential to establishing realistic construction and commissioning schedules [6] [7].
+Egypt's position as a regional connectivity hub offers opportunities for data center development, but investors face challenges involving land allocation, construction permits, telecom licensing, and infrastructure readiness. Coordinating power availability, fiber connectivity, regulatory approvals, and imported equipment procurement early is essential to establishing realistic construction and commissioning schedules [5] [6].
 
 **Key market constraints:**
 
@@ -111,7 +111,7 @@ Egypt's position as a regional connectivity hub offers opportunities for data ce
 
 Egypt's reliance on imported specialist equipment and variable infrastructure readiness can delay data center construction. MENASCO addresses these constraints through Egyptian manufacturing facilities capable of producing modular data center white spaces, E-Houses and prefabricated MEP assemblies locally, reducing the need to import completed modules. International procurement teams source specialized components while local construction teams coordinate utility connections and civil works, allowing manufacturing and site development to progress in parallel.
 
-**Competitive advantage:**
+**MENASCO's Competitive Advantage:**
 
 - Local manufacturing of modular MEP units
 - International sourcing of specialist components
@@ -121,7 +121,7 @@ Link: https://menascogroup.com/services/data-centers#egypt
 
 ### Data centers in Europe
 
-European data center development faces increasing grid connection delays, limited available power capacity, and tightening energy-efficiency requirements. Site selection must account for utility connection timelines, electricity costs, and national permitting rules, while cooling efficiency, waste heat recovery, and energy performance reporting play an increasingly important role in facility design [8] [9].
+European data center development faces increasing grid connection delays, limited available power capacity, and tightening energy-efficiency requirements. Site selection must account for utility connection timelines, electricity costs, and national permitting rules, while cooling efficiency, waste heat recovery, and energy performance reporting play an increasingly important role in facility design [7] [8].
 
 **Key market constraints:**
 
@@ -133,7 +133,7 @@ European data center development faces increasing grid connection delays, limite
 
 Grid connection delays and increasingly demanding energy-efficiency regulations can limit the feasibility and timing of European data center developments. MENASCO's scale of international engineering resources support early assessment of electrical capacity, phased infrastructure requirements, and cooling configurations incorporating heat recovery where viable. UK-based teams coordinate technical development and global equipment sourcing, while qualified local partners address country-specific regulations and utility interfaces, allowing procurement and construction planning to respond to confirmed power availability.
 
-**Competitive advantage:**
+**MENASCO's Competitive Advantage:**
 
 - Centralized technical resources and international procurement capacity
 - Flexibility to adapt to constrained grid access
@@ -143,7 +143,7 @@ Link: https://menascogroup.com/services/data-centers#europe
 
 ### Data centers in the United States
 
-US data center development is increasingly constrained by electrical equipment supply and a growing shortage of skilled construction tradespeople. Availability of electricians, pipefitters, HVAC technicians, and other specialized workers place pressure on labor costs and schedules. With large power transformers facing multi-year lead times, early procurement, workforce planning, off-site prefabrication, and phased energization are essential for hyperscale and AI infrastructure projects [10] [11].
+US data center development is increasingly constrained by electrical equipment supply and a growing shortage of skilled construction tradespeople. Availability of electricians, pipefitters, HVAC technicians, and other specialized workers place pressure on labor costs and schedules. With large power transformers facing multi-year lead times, early procurement, workforce planning, off-site prefabrication, and phased energization are essential for hyperscale and AI infrastructure projects [9] [10].
 
 **Key market constraints:**
 
@@ -156,7 +156,7 @@ US data center development is increasingly constrained by electrical equipment s
 
 MENASCO's international procurement network expands access to qualified manufacturers beyond domestic suppliers, while centralized engineering teams coordinate alternative equipment specifications and modular fabrication opportunities. Direct US contracting partnerships enable civil works, prefabricated MEP installation, and phased electrical infrastructure to be aligned with equipment deliveries and utility energization milestones. Established relationships with staffing agencies across the United States also provide access to skilled construction tradespeople, helping address regional labor shortages, scale site workforces, and maintain construction schedules on large-scale data center developments.
 
-**Competitive advantage:**
+**MENASCO's Competitive Advantage:**
 
 - Global procurement networks to manage equipment shortages
 - Centralized engineering expertise
@@ -167,20 +167,19 @@ Link: https://menascogroup.com/services/data-centers#united-states
 
 **Sources:**
 
-1. [Energy and AI (World Energy Outlook Special Report): press release, 10 April 2025](https://www.iea.org/news/ai-is-set-to-drive-surging-electricity-demand-from-data-centres-while-offering-the-potential-to-transform-how-the-energy-sector-works), International Energy Agency, 2025
-2. [UAE data centre power demand to double by 2030 as regulatory gaps constrain clean energy procurement](https://www.woodmac.com/press-releases/uae-data-centre-power-demand-to-double-by-2030-as-regulatory-gaps-constrain-clean-energy-procurement/), Wood Mackenzie, 2026
-3. [Power Supply Guidelines for Major Projects](https://dewa.gov.ae/-/media/Files/Major-Project-Guidelines-July-2025.ashx), Dubai Electricity and Water Authority (DEWA), 2025
-4. [Data Center Frontiers: Saudi Arabia data center market](https://www.spglobal.com/en/research-insights/special-reports/look-forward/data-center-frontiers/saudi-arabia-data-center-market), S&P Global, 2026
-5. [Data Center Services Regulation](https://www.cst.gov.sa/en/knowledge-center/digital-knowledge/data-center), Communications, Space and Technology Commission (CST), Saudi Arabia, 2026
-6. [Egypt Data Centre Investment Framework](https://www.ebrd.com/home/work-with-us/projects/tcpsd/data-centre-investment-framework.html), European Bank for Reconstruction and Development (EBRD), 2026
-7. [Data Center Development Strategy (press release)](https://mcit.gov.eg/en/Media_Center/Press_Room/Press_Releases/112250), Ministry of Communications and Information Technology (MCIT), Egypt, 2026
-8. [Communication on data centre energy policy, COM(2026) 501](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A52026DC0501), European Commission (EUR-Lex), 2026
-9. [Investment Report 2025/2026, Chapter 6](https://www.eib.org/files/publications/20250379-030326-investment-report-2025-chapter6-en.pdf), European Investment Bank, 2026
-10. [US power companies scramble to secure equipment as surging data center demand strains supply](https://www.reuters.com/business/energy/us-power-companies-scramble-secure-equipment-surging-data-center-demand-strains-2026-07-09/), Reuters, 2026
-11. [US Interconnection Queues Analysis 2026](https://assets.noviams.com/novi-file-uploads/fmea/pdf/HLN/20260914_US_Interconnection_Queues_Analysis_2026__2_-compressed.pdf), Florida Municipal Electric Association (FMEA), 2026
-12. [Explaining the Uptime Institute's Tier Classification System](https://journal.uptimeinstitute.com/?p=3737), Uptime Institute Journal, 2021
-13. [Tier Certification Overview](https://uptimeinstitute.com/tier-certification), Uptime Institute, 2026
-14. [Thermal Guidelines for Data Processing Environments (5th ed.) and TC 9.9 resources](https://www.ashrae.org/datacenters), ASHRAE, 2021
+1. [UAE data centre power demand to double by 2030 as regulatory gaps constrain clean energy procurement](https://www.woodmac.com/press-releases/uae-data-centre-power-demand-to-double-by-2030-as-regulatory-gaps-constrain-clean-energy-procurement/), Wood Mackenzie, 2026
+2. [Power Supply Guidelines for Major Projects](https://dewa.gov.ae/-/media/Files/Major-Project-Guidelines-July-2025.ashx), Dubai Electricity and Water Authority (DEWA), 2025
+3. [Data Center Frontiers: Saudi Arabia data center market](https://www.spglobal.com/en/research-insights/special-reports/look-forward/data-center-frontiers/saudi-arabia-data-center-market), S&P Global, 2026
+4. [Data Center Services Regulation](https://www.cst.gov.sa/en/knowledge-center/digital-knowledge/data-center), Communications, Space and Technology Commission (CST), Saudi Arabia, 2026
+5. [Egypt Data Centre Investment Framework](https://www.ebrd.com/home/work-with-us/projects/tcpsd/data-centre-investment-framework.html), European Bank for Reconstruction and Development (EBRD), 2026
+6. [Data Center Development Strategy (press release)](https://mcit.gov.eg/en/Media_Center/Press_Room/Press_Releases/112250), Ministry of Communications and Information Technology (MCIT), Egypt, 2026
+7. [Communication on data centre energy policy, COM(2026) 501](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A52026DC0501), European Commission (EUR-Lex), 2026
+8. [Investment Report 2025/2026, Chapter 6](https://www.eib.org/files/publications/20250379-030326-investment-report-2025-chapter6-en.pdf), European Investment Bank, 2026
+9. [US power companies scramble to secure equipment as surging data center demand strains supply](https://www.reuters.com/business/energy/us-power-companies-scramble-secure-equipment-surging-data-center-demand-strains-2026-07-09/), Reuters, 2026
+10. [US Interconnection Queues Analysis 2026](https://assets.noviams.com/novi-file-uploads/fmea/pdf/HLN/20260914_US_Interconnection_Queues_Analysis_2026__2_-compressed.pdf), Florida Municipal Electric Association (FMEA), 2026
+11. [Explaining the Uptime Institute's Tier Classification System](https://journal.uptimeinstitute.com/?p=3737), Uptime Institute Journal, 2021
+12. [Tier Certification Overview](https://uptimeinstitute.com/tier-certification), Uptime Institute, 2026
+13. [Thermal Guidelines for Data Processing Environments (5th ed.) and TC 9.9 resources](https://www.ashrae.org/datacenters), ASHRAE, 2021
 
 ## Frequently Asked Questions
 

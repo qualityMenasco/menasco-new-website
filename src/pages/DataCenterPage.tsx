@@ -103,8 +103,8 @@
  *   the client has not yet asked for the story treatment there. Ask before changing.
  * ============================================================================
  */
-import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { ArrowRight, Check } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Container } from '../components/layout/Container';
 import { Eyebrow } from '../components/typography/Typography';
@@ -115,8 +115,6 @@ import { SmartLink } from '../lib/SmartLink';
 import { dataCenterProjects } from '../data/projects';
 import { dcTechnical as c } from '../data/dataCenterTechnical';
 import { TECHNICAL_SOURCES } from '../data/dataCenterSources';
-import { TopicTabs } from '../components/sections/quality/TopicTabs';
-import { MarketFlipCard } from '../components/services/datacenter/MarketFlipCard';
 import { DC_SUSTAINABILITY_PATH, DC_TECHNICAL_PATH, ArabicDeferredNotice, DataCenterTabs, RAIL_CLASS, RailDots, RichText, useRail } from '../components/services/datacenter/shared';
 import { PlaceholderImage, SourcesList } from '../components/services/datacenter/primitives';
 import { HeroServerHall, Segmented } from '../components/services/datacenter/technicalDiagrams';
@@ -128,6 +126,7 @@ import { dataCenterAreaServed, dataCenterRegionsJsonLd } from '../seo/dataCenter
 import { orderForVisitor, visitorRegion } from '../lib/visitorRegion';
 import { SITE_URL } from '../seo/constants';
 import { cn } from '../lib/utils';
+import { SECTION_SCROLL_MARGIN, type JumpSection } from '../components/services/SectionJumpMenu';
 
 interface FaqEntry {
   id: string;
@@ -140,33 +139,11 @@ type Kind = 'power' | 'water' | 'data' | 'heat';
 const TONE_BG: Record<Tone, string> = { dark: 'bg-charcoal', light: 'bg-warmwhite', stone: 'bg-stone' };
 
 /** A page band: its background sits under the story lines, its content between the two line layers. */
-function Band({ tone, children, className }: { tone: Tone; children: ReactNode; className?: string }) {
+function Band({ tone, children, className, id }: { tone: Tone; children: ReactNode; className?: string; id?: string }) {
   return (
-    <section className={cn('relative', TONE_BG[tone])}>
+    <section id={id} className={cn('relative', TONE_BG[tone], id && SECTION_SCROLL_MARGIN)}>
       <Container className={cn('relative z-[2] py-20 md:py-28', className)}>{children}</Container>
     </section>
-  );
-}
-
-/**
- * "How MENASCO helps" paragraph (energy market card back): on phones (below md) clamped to 4 lines with a
- * Read more / Show less toggle (client pick 2026-11-21, to shorten the cards).
- * The full text is always in the HTML; tablets and desktop show it in full.
- */
-function ClampPara({ children, className }: { children: ReactNode; className?: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className={className}>
-      <p className={cn('text-[0.8125rem] leading-[1.55] text-gray-700 md:text-small md:leading-relaxed lg:text-body', !open && 'max-md:line-clamp-4')}>{children}</p>
-      <button
-        type="button"
-        aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
-        className="mt-1 font-display text-[0.8125rem] font-semibold text-brand-600 underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 md:hidden"
-      >
-        {open ? c.energy.readLess : c.energy.readMore}
-      </button>
-    </div>
   );
 }
 
@@ -226,6 +203,9 @@ export default function DataCenterPage() {
   // Cooling cards: a swipe rail per comparison below md; switching starts the new rail at its first card.
   const coolingRails = { units: useRail(), approach: useRail() };
   const sitesRail = useRail();
+  // Local energy markets comparison: phone swipe rail + which market's detail is open.
+  const marketsRail = useRail();
+  const [openMarket, setOpenMarket] = useState<string | null>(null);
   const switchCooling = (v: string) => {
     const id = v as 'units' | 'approach';
     coolingRails[id].railRef.current?.scrollTo({ left: 0 });
@@ -261,6 +241,23 @@ export default function DataCenterPage() {
   useEffect(() => {
     setMarkets(orderForVisitor(c.energy.markets, visitorRegion()));
   }, []);
+  // "On this page" section switcher in the sticky tab bar (client keeps this, 2026-11-24).
+  const sections = useMemo<JumpSection[]>(
+    () => [
+      { id: 'dc-capability', label: c.capability.eyebrow },
+      { id: 'dc-prefab', label: t('dataCenter.prefab.eyebrow') },
+      { id: 'dc-energy', label: c.energy.eyebrow },
+      { id: 'dc-tiers', label: c.tiers.eyebrow },
+      { id: 'dc-sustainability', label: c.sustainabilityTeaser.eyebrow },
+      { id: 'dc-cooling', label: c.cooling.eyebrow },
+      { id: 'dc-sites', label: c.sites.eyebrow },
+      ...(dataCenterProjects.length > 0 ? [{ id: 'dc-projects', label: c.projects.eyebrow }] : []),
+      ...(faqItems.length > 0 ? [{ id: 'dc-faq', label: t('dataCenter.faqHeading.eyebrow') }] : []),
+      { id: 'dc-sources', label: c.sources.heading },
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [t, faqItems.length],
+  );
   const heroWord = (w: string, i: number) => {
     // Only "Cooling" reacts (water); Power/Uptime reactions removed (client request), matching the sustainability hero.
     const k: Kind | undefined = /^Cooling/.test(w) ? 'water' : undefined;
@@ -296,7 +293,7 @@ export default function DataCenterPage() {
           ...dataCenterRegionsJsonLd(),
         ]}
       />
-      <DataCenterTabs active="technical" />
+      <DataCenterTabs active="technical" sections={sections} />
       <ArabicDeferredNotice />
 
       <div ref={pageRef} className="relative isolate overflow-hidden">
@@ -340,94 +337,114 @@ export default function DataCenterPage() {
         </Band>
 
         {/* MENASCO's data center capability (directly below the hero) */}
-        <CapabilitySection />
+        <div id="dc-capability" className={SECTION_SCROLL_MARGIN}>
+          <CapabilitySection />
+        </div>
 
         {/* Prefabrication: its own full-width section */}
-        <PrefabSection />
+        <div id="dc-prefab" className={SECTION_SCROLL_MARGIN}>
+          <PrefabSection />
+        </div>
 
-        {/* Local energy markets: heading + intro, then the markets as topic tabs
-            (same component and behaviour as the Quality, Health & Safety page). */}
-        <Band tone="light" className="pb-12 pt-12 md:pb-16 md:pt-16">
-          {/* Eyebrow on its own row so the heading and intro start on the same line (wide screens). */}
+        {/* Local energy markets: heading, then the markets as one comparison (below). Intro paragraph removed (client request 2026-11-24). */}
+        <Band id="dc-energy" tone="light" className="pb-12 pt-12 md:pb-16 md:pt-16">
           <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.energy.eyebrow}</p>
-          {/* Smaller heading than the other sections (client request); intro centred against it on wide screens. */}
-          <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-12 lg:items-center lg:gap-12">
-            <h2 className="font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-ink text-balance lg:col-span-6">
-              {c.energy.heading}
-            </h2>
-            <p className="text-body leading-relaxed text-gray-700 lg:col-span-6">
-              <RichText text={c.energy.intro} />
-            </p>
+          {/* Smaller heading than the other sections (client request). */}
+          <h2 className="mt-3 max-w-2xl font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-ink text-balance">
+            {c.energy.heading}
+          </h2>
+          {/* Client-approved 2026-11-24: the markets as one comparison instead of five
+              flip cards. Tablets/desktop: a table-like grid (market | constraints | MENASCO
+              advantage), so markets can be compared at a glance. Phones: the same rows as a
+              swipeable card rail with dots, so the section stays one card tall. Each market's
+              full prose (market context + how MENASCO helps) sits in a per-row "Market detail"
+              expander, always in the HTML (hidden attribute). Row ids keep the #slug anchors
+              used by the structured data and llms.txt. */}
+          <div className="mt-8 hidden grid-cols-[11rem_minmax(0,1fr)_minmax(0,1fr)] gap-x-8 border-b border-gray-300 pb-3 md:grid lg:grid-cols-[13rem_minmax(0,1fr)_minmax(0,1fr)] lg:gap-x-10">
+            <span className="font-display text-caption font-semibold uppercase tracking-widest text-gray-500 rtl:tracking-normal">{c.energy.marketLabel}</span>
+            <span className="font-display text-caption font-semibold uppercase tracking-widest text-gray-500 rtl:tracking-normal">{c.energy.constraintsLabel}</span>
+            <span className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.energy.advantageLabel}</span>
           </div>
-          <TopicTabs
-            idPrefix="dc-energy-market"
-            label={c.energy.eyebrow}
-            className="mt-8"
-            bare
-            horizontal
-            mobileRail
-            topics={markets.map((m) => ({
-              title: m.name,
-              hash: m.slug,
-              body: [],
-              extra: (
-                <MarketFlipCard
-                  frontTitle={
-                    <>
-                      {c.energy.frontTitlePrefix.replace(/ in$/, '')} in {m.inName}
-                    </>
-                  }
-                  backTitle={`${c.energy.backTitlePrefix} ${m.inName}`}
-                  flipLabel={c.energy.helpLabel}
-                  unflipLabel={c.energy.backLabel}
-                  backEyebrow={m.name}
-                  front={(button) => (
-                    // Two columns from lg: market context | key constraints (+ flip button at its foot, bottom-right).
-                    <div className="mt-2 grid flex-1 grid-cols-1 grid-rows-[auto_1fr] gap-3 md:mt-3 md:gap-6 lg:grid-cols-12 lg:grid-rows-1 lg:gap-10">
-                      <p className="text-[0.8125rem] leading-[1.55] md:text-small md:leading-relaxed text-gray-700 lg:col-span-7 lg:text-body">
-                        <RichText text={m.body} />
-                      </p>
-                      <div className="flex flex-col lg:col-span-5 lg:border-s lg:border-gray-200 lg:ps-8">
-                        <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.energy.constraintsLabel}</p>
-                        <ul className="mt-2 space-y-1.5 md:mt-3 md:space-y-2">
-                          {m.constraints.map((item) => (
-                            <li key={item} className="flex gap-2.5 text-[0.8125rem] leading-[1.55] md:text-small md:leading-relaxed text-gray-700 md:gap-3">
-                              <span aria-hidden="true" className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500 md:mt-2" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="mt-auto flex justify-end pt-3 md:pt-6">{button}</div>
+          <ul
+            ref={(el) => {
+              marketsRail.railRef.current = el;
+            }}
+            onScroll={marketsRail.onScroll}
+            className="no-scrollbar -mx-6 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 pb-1 md:mx-0 md:mt-0 md:block md:snap-none md:overflow-visible md:px-0 md:pb-0"
+          >
+            {markets.map((m) => {
+              const isOpen = openMarket === m.id;
+              const bullets = (items: string[], tone: 'gray' | 'brand') => (
+                <ul className="mt-2 space-y-1.5 md:mt-0">
+                  {items.map((item) => (
+                    <li key={item} className="flex gap-2.5 text-[0.8125rem] leading-[1.55] text-gray-700 md:text-small md:leading-relaxed">
+                      <span aria-hidden="true" className={cn('mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full md:mt-2', tone === 'brand' ? 'bg-brand-500' : 'bg-gray-400')} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              );
+              return (
+                <li
+                  key={m.id}
+                  id={m.slug}
+                  className={cn(
+                    SECTION_SCROLL_MARGIN,
+                    'flex w-[86%] max-w-md shrink-0 snap-start flex-col rounded-lg border border-gray-200 bg-white p-5',
+                    'md:grid md:w-auto md:max-w-none md:grid-cols-[11rem_minmax(0,1fr)_minmax(0,1fr)] md:grid-rows-[auto_1fr_auto] md:gap-x-8 md:rounded-none md:border-0 md:border-b md:border-gray-200 md:bg-transparent md:px-0 md:py-5',
+                    'lg:grid-cols-[13rem_minmax(0,1fr)_minmax(0,1fr)] lg:gap-x-10',
+                  )}
+                >
+                  {/* Tablet/desktop placement: name + detail toggle in column 1, bullets in columns 2-3, detail across the row. */}
+                  <h3 className="font-display text-h4 font-semibold leading-snug text-ink md:col-start-1 md:row-start-1">{m.name}</h3>
+                  <div className="mt-4 md:col-start-2 md:row-span-2 md:row-start-1 md:mt-0">
+                    <p className="font-display text-caption font-semibold uppercase tracking-widest text-gray-500 md:hidden rtl:tracking-normal">{c.energy.constraintsLabel}</p>
+                    {bullets(m.constraints, 'gray')}
+                  </div>
+                  <div className="mt-4 md:col-start-3 md:row-span-2 md:row-start-1 md:mt-0">
+                    <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 md:hidden rtl:tracking-normal">{c.energy.advantageLabel}</p>
+                    {bullets(m.advantage, 'brand')}
+                  </div>
+                  <div className="mt-auto pt-4 md:col-start-1 md:row-start-2 md:mt-0 md:self-start md:pt-2">
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={`dc-market-detail-${m.id}`}
+                      onClick={() => setOpenMarket(isOpen ? null : m.id)}
+                      className="inline-flex min-h-10 items-center gap-1.5 font-display text-small font-semibold text-brand-600 transition-colors duration-base hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+                    >
+                      {c.energy.detailLabel}
+                      <ChevronDown size={16} aria-hidden="true" className={cn('transition-transform duration-base', isOpen && 'rotate-180')} />
+                    </button>
+                  </div>
+                  {/* The hidden attribute sits on a wrapper with no display utility (a `grid` class would override it). */}
+                  <div id={`dc-market-detail-${m.id}`} hidden={!isOpen} className="md:col-span-3 md:col-start-1 md:row-start-3">
+                    <div className="mt-2 grid gap-5 border-t border-gray-100 pt-4 lg:grid-cols-2 lg:gap-10">
+                      <div>
+                        <p className="font-display text-caption font-semibold uppercase tracking-widest text-gray-500 rtl:tracking-normal">{c.energy.contextLabel}</p>
+                        <p className="mt-2 text-[0.8125rem] leading-[1.6] text-gray-700 md:text-small md:leading-relaxed">
+                          <RichText text={m.body} />
+                        </p>
+                      </div>
+                      <div>
+                        <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.energy.helpLabel}</p>
+                        <p className="mt-2 text-[0.8125rem] leading-[1.6] text-gray-700 md:text-small md:leading-relaxed">
+                          <RichText text={m.help} />
+                        </p>
                       </div>
                     </div>
-                  )}
-                  back={(button) => (
-                    // Two columns from lg: how MENASCO helps | competitive advantage (+ flip-back button at its foot).
-                    <div className="mt-2 grid flex-1 grid-cols-1 grid-rows-[auto_1fr] gap-3 md:mt-3 md:gap-6 lg:grid-cols-12 lg:grid-rows-1 lg:gap-10">
-                      <ClampPara className="lg:col-span-7">{m.help}</ClampPara>
-                      {/* Competitive advantage: short bullets, formatted like the front's key constraints. */}
-                      <div className="flex flex-col lg:col-span-5 lg:border-s lg:border-brand-200 lg:ps-8">
-                        <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.energy.advantageLabel}</p>
-                        <ul className="mt-2 space-y-1.5 md:mt-3 md:space-y-2">
-                          {m.advantage.map((item) => (
-                            <li key={item} className="flex gap-2.5 text-[0.8125rem] leading-[1.55] md:text-small md:leading-relaxed text-gray-700 md:gap-3">
-                              <span aria-hidden="true" className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500 md:mt-2" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="mt-auto flex justify-end pt-3 md:pt-6">{button}</div>
-                      </div>
-                    </div>
-                  )}
-                />
-              ),
-            }))}
-          />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+          <div className="md:hidden">
+            <RailDots count={markets.length} active={marketsRail.active} rail={marketsRail} />
+          </div>
         </Band>
 
         {/* 02 Uptime Tiers (tightened; no MENASCO role strip, client request) */}
-        <Band tone="stone" className="pb-12 pt-12 md:pb-16 md:pt-16">
+        <Band id="dc-tiers" tone="stone" className="pb-12 pt-12 md:pb-16 md:pt-16">
           {/* Smaller heading + lead than the default section head (client request). Uptime Institute logo removed (client request 2026-11-21). */}
           <div className="max-w-3xl">
             <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.tiers.eyebrow}</p>
@@ -459,7 +476,7 @@ export default function DataCenterPage() {
                 <ul className="mt-6 space-y-3">
                   {item.points.map((p) => (
                     <li key={p} className="flex gap-3 text-small leading-relaxed text-gray-700">
-                      <Check size={16} aria-hidden="true" className="mt-0.5 shrink-0 text-brand-600" />
+                      <span aria-hidden="true" className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-gray-400" />
                       <span>
                         <RichText text={p} />
                       </span>
@@ -469,12 +486,12 @@ export default function DataCenterPage() {
               </article>
             ))}
           </div>
-          {tiersOverflow && <RailDots count={c.tiers.items.length} active={tiersRail.active} alwaysShow />}
+          {tiersOverflow && <RailDots count={c.tiers.items.length} active={tiersRail.active} alwaysShow rail={tiersRail} />}
         </Band>
 
         {/* 03 The next frontier: sustainability (replaces the Electrical resilience section, client request 2026-11-21).
             Shown at every width. */}
-        <Band tone="dark" className="pb-12 pt-12 md:pb-16 md:pt-16">
+        <Band id="dc-sustainability" tone="dark" className="pb-12 pt-12 md:pb-16 md:pt-16">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-8">
               <ChapterHead eyebrow={c.sustainabilityTeaser.eyebrow} title={c.sustainabilityTeaser.heading} lead={c.sustainabilityTeaser.body} dark target="water" />
@@ -495,7 +512,7 @@ export default function DataCenterPage() {
         {/* 04 Cooling: two comparisons behind a toggle (CRAC vs CRAH; air vs direct-to-chip).
             Both comparisons stay in the HTML (stacked in one grid cell, so switching never
             changes the section height). No MENASCO role strip (client request). */}
-        <Band tone="light" className="pb-12 pt-12 md:pb-16 md:pt-16">
+        <Band id="dc-cooling" tone="light" className="pb-12 pt-12 md:pb-16 md:pt-16">
           <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.cooling.eyebrow}</p>
           <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-12 lg:items-center lg:gap-12">
             <h2 className="font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-ink text-balance lg:col-span-6">
@@ -546,7 +563,7 @@ export default function DataCenterPage() {
                           <ul className="mt-2 space-y-1.5">
                             {item.strengths.map((s) => (
                               <li key={s} className="flex gap-2 text-small leading-snug text-gray-700">
-                                <Check size={14} aria-hidden="true" className="mt-0.5 shrink-0 text-brand-600" />
+                                <span aria-hidden="true" className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-gray-400" />
                                 {s}
                               </li>
                             ))}
@@ -571,7 +588,7 @@ export default function DataCenterPage() {
             })}
           </div>
           {/* Phones: position dots for the comparison on show. */}
-          <RailDots count={2} active={coolingRails[coolingView].active} />
+          <RailDots count={2} active={coolingRails[coolingView].active} rail={coolingRails[coolingView]} />
 
           {/* ASHRAE inlet range as a compact strip */}
           <div className="mt-5 flex flex-col gap-3 rounded-lg border border-gray-200 bg-white/70 p-5 sm:flex-row sm:items-center sm:gap-6 lg:px-7">
@@ -587,7 +604,7 @@ export default function DataCenterPage() {
         {/* 05 Greenfield and brownfield: same pattern as Cooling (eyebrow, heading + intro row,
             white cards, no text animation). Phones: a swipe rail with dots; side by side from md. The former role
             line now serves as the intro (role strips were removed from the other sections). */}
-        <Band tone="stone" className="pb-12 pt-12 md:pb-16 md:pt-16">
+        <Band id="dc-sites" tone="stone" className="pb-12 pt-12 md:pb-16 md:pt-16">
           <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.sites.eyebrow}</p>
           <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-12 lg:items-center lg:gap-12">
             <h2 className="font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-ink text-balance lg:col-span-6">
@@ -613,7 +630,7 @@ export default function DataCenterPage() {
                   <ul className="mt-4 space-y-3 border-t border-gray-100 pt-4">
                     {site.points.map((pt) => (
                       <li key={pt} className="flex gap-2.5 text-small leading-relaxed text-gray-700">
-                        <Check size={14} aria-hidden="true" className="mt-1 shrink-0 text-brand-600" />
+                        <span aria-hidden="true" className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-gray-400" />
                         <span>{pt}</span>
                       </li>
                     ))}
@@ -622,12 +639,12 @@ export default function DataCenterPage() {
               );
             })}
           </div>
-          <RailDots count={c.sites.items.length} active={sitesRail.active} />
+          <RailDots count={c.sites.items.length} active={sitesRail.active} rail={sitesRail} />
         </Band>
 
         {/* 06 Proof: projects */}
         {dataCenterProjects.length > 0 && (
-          <Band tone="light">
+          <Band id="dc-projects" tone="light">
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-3xl">
                 <ChapterHead eyebrow={c.projects.eyebrow} title={c.projects.heading} lead={c.projects.role} target="data" fast />
@@ -661,13 +678,13 @@ export default function DataCenterPage() {
                 </li>
               ))}
             </ul>
-            <RailDots count={dataCenterProjects.length} active={portfolio.active} />
+            <RailDots count={dataCenterProjects.length} active={portfolio.active} rail={portfolio} />
           </Band>
         )}
 
         {/* FAQ (unchanged copy) */}
         {faqItems.length > 0 && (
-          <Band tone="stone">
+          <Band id="dc-faq" tone="stone">
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
               <div className="lg:col-span-4">
                 <Eyebrow>{t('dataCenter.faqHeading.eyebrow')}</Eyebrow>
@@ -683,7 +700,7 @@ export default function DataCenterPage() {
         )}
 
         {/* Sources */}
-        <Band tone="light">
+        <Band id="dc-sources" tone="light">
           <SourcesList sources={TECHNICAL_SOURCES} heading={c.sources.heading} intro={c.sources.intro} />
         </Band>
       </div>

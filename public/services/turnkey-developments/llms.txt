@@ -84,12 +84,6 @@ EPC execution needs technical decisions, procurement commitments, construction p
 
 Progress is tracked through engineering deliverables, procurement status, construction milestones, inspection records and commissioning requirements, giving clients a clear view of what affects delivery and the information to decide quickly when conditions change.
 
-- Integrated scheduling: Engineering, procurement, construction and commissioning managed against one programme.
-- Cost and commercial management: Procurement commitments, progress, variations and cost forecasts monitored throughout.
-- Quality and safety management: Structured inspections, safety procedures, compliance checks and documented quality control.
-- Risk and interface management: Technical, commercial, procurement and construction dependencies identified and resolved.
-- Commissioning and handover: System testing, functional verification, documentation and completion requirements coordinated.
-
 ## EPC Delivery Across Technically Demanding Sectors
 
 Power, mechanical systems, construction method, procurement priorities and commissioning all change with the sector. MENASCO shapes each EPC delivery around the operational goals of the facility.

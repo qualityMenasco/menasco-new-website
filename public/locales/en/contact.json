@@ -2,18 +2,18 @@
   "hero": {
     "eyebrow": "Get in Contact",
     "title": "Connect with MENASCO",
-    "description": "Whether you're looking to discuss a project, explore a career opportunity, or make a general enquiry, connect with the appropriate MENASCO team."
+    "description": "Whether you're looking to discuss a project, explore a career opportunity, or make a general inquiry, connect with the appropriate MENASCO team."
   },
   "selectOffice": "Regional Locations",
   "getDirections": "Get Directions",
   "requiredNote": "Fields marked * are required.",
-  "selectTypePrompt": "Please select an enquiry type above to enable the form.",
+  "selectTypePrompt": "Please select an inquiry type above to enable the form.",
   "tabs": {
     "general": "General",
     "career": "Career",
     "project": "Project",
     "descriptions": {
-      "general": "General enquiries",
+      "general": "General inquiries",
       "career": "Join our team",
       "project": "Discuss a project"
     }
@@ -24,7 +24,7 @@
     "companyDetails": "Company Details",
     "careerDetails": "Career Details",
     "projectDetails": "Project Details",
-    "enquiry": "Enquiry"
+    "enquiry": "Inquiry"
   },
   "fields": {
     "fullName": "Full Name",
@@ -34,7 +34,7 @@
     "company": "Company / Organization",
     "jobTitle": "Job Title / Position",
     "subject": "Subject",
-    "message": "Message / Enquiry",
+    "message": "Message / Inquiry",
     "jobCode": "Job Code",
     "jobCodeHelper": "Enter the job code shown on the MENASCO Careers page.",
     "cv": "CV / Résumé",
@@ -76,30 +76,30 @@
     "projectDescription": "Please describe your project."
   },
   "submit": {
-    "general": "Send Enquiry",
-    "career": "Submit Career Enquiry",
-    "project": "Submit Project Enquiry",
+    "general": "Send Inquiry",
+    "career": "Submit Career Inquiry",
+    "project": "Submit Project Inquiry",
     "sending": "Sending…"
   },
-  "submitError": "Something went wrong sending your enquiry. Please try again, or reach us directly via the office details below.",
+  "submitError": "Something went wrong sending your inquiry. Please try again, or reach us directly via the office details below.",
   "success": {
     "general": {
       "title": "Thank You",
-      "description": "Your enquiry has been received by MENASCO. The appropriate team will review your submission and contact you where required."
+      "description": "Your inquiry has been received by MENASCO. The appropriate team will review your submission and contact you where required."
     },
     "career": {
       "title": "Thank You",
-      "description": "Your career enquiry has been received."
+      "description": "Your career inquiry has been received."
     },
     "project": {
       "title": "Thank You",
-      "description": "Your project enquiry has been received."
+      "description": "Your project inquiry has been received."
     },
-    "sendAnother": "Send Another Enquiry",
+    "sendAnother": "Send Another Inquiry",
     "backToHome": "Back to Home"
   },
   "seo": {
     "title": "Contact MENASCO | UAE & Regional Offices",
-    "description": "Get in touch with MENASCO for general enquiries, career opportunities, or project discussions, or select your regional office to reach the right team directly."
+    "description": "Get in touch with MENASCO for general inquiries, career opportunities, or project discussions, or select your regional office to reach the right team directly."
   }
 }

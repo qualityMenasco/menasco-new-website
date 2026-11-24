@@ -26,7 +26,8 @@ export function CapabilitySection() {
   const caps = t('dataCenter.capabilities', { returnObjects: true }) as Capability[];
   const c = dcTechnical.capability;
   // Below md the capabilities are a swipe rail (shared helper).
-  const { railRef, active, onScroll: onRailScroll } = useRail();
+  const capRail = useRail();
+  const { railRef, active, onScroll: onRailScroll } = capRail;
 
   return (
     <section className="relative bg-warmwhite">
@@ -41,8 +42,10 @@ export function CapabilitySection() {
             </h2>
           </div>
           <div className="space-y-5 lg:col-span-7">
-            {intro.slice(0, 1).map((p, i) => (
-              <p key={i} className={cn('leading-relaxed', i === 0 ? 'text-small text-gray-700' : 'text-caption text-gray-600')}>
+            {/* The lead text is two paragraphs (what MENASCO delivers; how it protects the
+                programme), split in the copy, EN + AR, 2026-11-24. */}
+            {intro.slice(0, 2).map((p, i) => (
+              <p key={i} className="text-small leading-relaxed text-gray-700">
                 {p}
               </p>
             ))}
@@ -70,7 +73,7 @@ export function CapabilitySection() {
               </article>
             ))}
           </div>
-          <RailDots count={Math.min(6, caps.length)} active={active} />
+          <RailDots count={Math.min(6, caps.length)} active={active} rail={capRail} />
         </div>
       </Container>
     </section>

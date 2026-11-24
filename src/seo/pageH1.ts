@@ -18,7 +18,12 @@ export const PAGES_WITH_OWN_H1: readonly string[] = [
   '/community-people',
   '/services',
   '/services/mep',
+  '/services/civil',
+  '/services/manufacturing-prefabrication',
+  '/services/turnkey-developments',
   '/services/data-centers',
+  // Alias route that renders the Data Centers page.
+  '/services/data-centres',
   '/services/data-centers/sustainability',
 ];
 

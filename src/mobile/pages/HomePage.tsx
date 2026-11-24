@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowRight, BookOpen, Briefcase, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, BookOpen, Briefcase } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { MobileHero } from '../components/MobileHero';
+import { RailDots, useRail } from '../../components/services/datacenter/shared';
 import { SectionHeader } from '../components/SectionHeader';
-import { MobileStatsGrid } from '../components/MobileStatsGrid';
 import { MobileProjectCard } from '../components/MobileProjectCard';
 import { RegionalOfficeGrid } from '../components/RegionalOfficeGrid';
 import { HomeIntroPager } from '../components/HomeIntroPager';
@@ -28,7 +28,8 @@ const categoryKeys: Record<string, string> = {
   'infrastructure-utilities': 'infrastructureUtilities',
 };
 
-const featuredProjects = publishedProjects.filter((project) => project.featured);
+// Home rail: the first five featured projects only (client request 2026-11-24).
+const featuredProjects = publishedProjects.filter((project) => project.featured).slice(0, 5);
 
 const qhsePillars = [
   { key: 'qualityManagement', iso: 'ISO 9001:2015' },
@@ -46,31 +47,9 @@ export default function HomePage() {
   const reducedMotion = useReducedMotion();
   const { t } = useTranslation(['home', 'services', 'nav', 'projects', 'common']);
 
-  // Featured projects rail — tablet arrows step one card at a time; each
-  // arrow disables at its end of the rail. Direction-aware, so in RTL "next"
-  // moves the way the content flows (scrollLeft runs negative there).
-  const projectRailRef = useRef<HTMLDivElement>(null);
-  const [projectScroll, setProjectScroll] = useState({ canPrev: false, canNext: true });
-  const updateProjectScroll = useCallback(() => {
-    const rail = projectRailRef.current;
-    if (!rail) return;
-    const travelled = Math.abs(rail.scrollLeft);
-    const max = rail.scrollWidth - rail.clientWidth;
-    setProjectScroll({ canPrev: travelled > 4, canNext: travelled < max - 4 });
-  }, []);
-  const scrollProjects = (step: 1 | -1) => {
-    const rail = projectRailRef.current;
-    if (!rail) return;
-    const card = rail.firstElementChild as HTMLElement | null;
-    const distance = card ? card.getBoundingClientRect().width + 12 : rail.clientWidth * 0.8;
-    const rtl = getComputedStyle(rail).direction === 'rtl';
-    rail.scrollBy({ left: step * distance * (rtl ? -1 : 1), behavior: reducedMotion ? 'auto' : 'smooth' });
-  };
-  useEffect(() => {
-    updateProjectScroll();
-    window.addEventListener('resize', updateProjectScroll);
-    return () => window.removeEventListener('resize', updateProjectScroll);
-  }, [updateProjectScroll]);
+  // Featured projects rail: dots everywhere, previous / next arrows below it except on real
+  // phones (RailDots; same pattern as the MEP and Data Center rails, client request 2026-11-24).
+  const projectRail = useRail();
 
   // Data-centre band: mount its video only when the section comes within ~600px of the screen.
   const dataCenterRef = useRef<HTMLElement>(null);
@@ -87,15 +66,11 @@ export default function HomePage() {
     <>
       <SEO title={t('home:seo.title')} description={t('home:seo.description')} path="/" structuredData={[organizationJsonLd(), websiteJsonLd()]} />
 
-      {/* 1. Mobile hero */}
+      {/* 1. Mobile hero, with the key statistics along its bottom edge (2026-11-24; they were a
+          separate strip under it). */}
       <MobileHero />
 
-      {/* 2. Key statistics straight under the hero — numbers before paragraphs. */}
-      <section className="px-4 py-6">
-        <MobileStatsGrid compact />
-      </section>
-
-      {/* 3. Portfolio — featured projects, right after the stats (stone). */}
+      {/* 3. Portfolio — featured projects, right after the hero (stone). */}
       <section className="bg-stone py-8">
         <div className="flex items-end justify-between gap-4 px-4">
           <SectionHeader
@@ -104,35 +79,14 @@ export default function HomePage() {
             headingAs="h3"
             description={t('home:featuredProjects.mobileDescription')}
           />
-          {/* Tablets: arrows to step through the cards. Phones stay swipe-only. */}
-          <div className="hidden shrink-0 gap-2 md:flex">
-            <button
-              type="button"
-              onClick={() => scrollProjects(-1)}
-              disabled={!projectScroll.canPrev}
-              aria-label={t('common:buttons.previousProjects')}
-              aria-controls="home-featured-projects"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-300 text-ink transition-colors duration-base hover:border-ink disabled:cursor-default disabled:opacity-35"
-            >
-              <ChevronLeft size={18} aria-hidden="true" className="rtl:rotate-180" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollProjects(1)}
-              disabled={!projectScroll.canNext}
-              aria-label={t('common:buttons.nextProjects')}
-              aria-controls="home-featured-projects"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-300 text-ink transition-colors duration-base hover:border-ink disabled:cursor-default disabled:opacity-35"
-            >
-              <ChevronRight size={18} aria-hidden="true" className="rtl:rotate-180" />
-            </button>
-          </div>
         </div>
         <div
           id="home-featured-projects"
-          ref={projectRailRef}
-          onScroll={updateProjectScroll}
-          className="no-scrollbar mt-4 flex gap-3 overflow-x-auto scroll-smooth px-4 pb-1"
+          ref={(el) => {
+            projectRail.railRef.current = el;
+          }}
+          onScroll={projectRail.onScroll}
+          className="no-scrollbar mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-4 px-4 pb-1"
         >
           {featuredProjects.map((project) => (
             <MobileProjectCard
@@ -146,9 +100,19 @@ export default function HomePage() {
               }
               location={translateProjectLocation(t, project.location)}
               href={`/projects/${project.slug}`}
-              className="w-[78vw] max-w-[20rem] shrink-0"
+              className="w-[78vw] max-w-[20rem] shrink-0 snap-start"
             />
           ))}
+        </div>
+        <div className="px-4">
+          <RailDots
+            count={projectRail.positions || featuredProjects.length}
+            active={projectRail.position}
+            alwaysShow
+            rail={projectRail}
+            controls="home-featured-projects"
+            labels={{ previous: t('common:buttons.previousProjects'), next: t('common:buttons.nextProjects') }}
+          />
         </div>
       </section>
 

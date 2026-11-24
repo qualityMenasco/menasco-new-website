@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { ChevronDown } from 'lucide-react';
 import { cn } from '../../../lib/utils';
+import { SECTION_SCROLL_MARGIN } from '../SectionJumpMenu';
 
 /**
  * Shared building blocks for the Data Center pages' animated diagrams:
@@ -178,15 +180,74 @@ export function Cite({ n }: { n: number }) {
   );
 }
 
-/** The numbered sources list (anchors match `Cite`). */
-export function SourcesList({ sources, heading, intro }: { sources: SourceEntry[]; heading: string; intro?: string }) {
+/**
+ * The numbered sources list (anchors match `Cite`). Collapsed by default behind a
+ * "Show all sources (N)" toggle (client request 2026-11-24); the list is always in the HTML
+ * (hidden attribute, never unmounted). Following a citation link ([n] anywhere on the page,
+ * or a #source-n URL) opens the list and scrolls to that source.
+ */
+export function SourcesList({
+  sources,
+  heading,
+  intro,
+  showLabel = 'Show all sources',
+  hideLabel = 'Hide sources',
+}: {
+  sources: SourceEntry[];
+  heading: string;
+  intro?: string;
+  showLabel?: string;
+  hideLabel?: string;
+}) {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const reveal = (hash: string, smooth: boolean) => {
+      if (!/^#source-\d+$/.test(hash)) return false;
+      setOpen(true);
+      // After the list has rendered visible, bring the source under the sticky bars.
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          document.getElementById(hash.slice(1))?.scrollIntoView({ block: 'start', behavior: smooth && !reduce ? 'smooth' : 'auto' });
+        }),
+      );
+      return true;
+    };
+    reveal(window.location.hash, false);
+    const onClick = (e: MouseEvent) => {
+      const link = (e.target as Element | null)?.closest?.('a[href^="#source-"]');
+      if (!link) return;
+      const hash = link.getAttribute('href') ?? '';
+      if (reveal(hash, true)) {
+        e.preventDefault();
+        window.history.replaceState(window.history.state, '', hash);
+      }
+    };
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
+
   return (
     <div>
       <h2 className="font-display text-h3 font-semibold tracking-tight text-ink">{heading}</h2>
       {intro && <p className="mt-2 max-w-2xl text-small text-gray-600">{intro}</p>}
-      <ol className="mt-6 grid grid-cols-1 gap-x-10 gap-y-3 md:grid-cols-2">
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls="sources-list"
+        onClick={() => setOpen((v) => !v)}
+        className="mt-4 inline-flex min-h-10 items-center gap-1.5 font-display text-small font-semibold text-brand-600 transition-colors duration-base hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+      >
+        {open ? hideLabel : showLabel}
+        <span className="tabular-nums text-gray-500">({sources.length})</span>
+        <ChevronDown size={16} aria-hidden="true" className={cn('transition-transform duration-base', open && 'rotate-180')} />
+      </button>
+      {/* The hidden attribute sits on a wrapper with no display utility (a `grid` class would override it). */}
+      <div id="sources-list" hidden={!open}>
+      <ol className="mt-4 grid grid-cols-1 gap-x-10 gap-y-3 md:grid-cols-2">
         {sources.map((s, i) => (
-          <li key={s.id} id={`source-${i + 1}`} className="flex scroll-mt-28 gap-3 text-small text-gray-700">
+          <li key={s.id} id={`source-${i + 1}`} className={cn('flex gap-3 text-small text-gray-700', SECTION_SCROLL_MARGIN)}>
             <span className="w-6 shrink-0 font-semibold tabular-nums text-brand-600">[{i + 1}]</span>
             <span>
               <a href={s.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-ink underline-offset-4 hover:underline">
@@ -200,6 +261,7 @@ export function SourcesList({ sources, heading, intro }: { sources: SourceEntry[
           </li>
         ))}
       </ol>
+      </div>
     </div>
   );
 }

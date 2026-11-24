@@ -53,6 +53,7 @@
     "civil": "الأعمال المدنية",
     "manufacturingPrefabrication": "التصنيع والتجميع المسبق",
     "modularFabrication": "التصنيع المعياري",
+    "modularShort": "التصنيع المعياري",
     "turnkeyDevelopments": "الهندسة والمشتريات والإنشاءات"
   }
 }

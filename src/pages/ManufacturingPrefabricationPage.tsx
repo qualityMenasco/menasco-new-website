@@ -8,6 +8,8 @@ import { Button, ButtonLink } from '../components/ui/Button';
 import { ScrollReveal } from '../components/common/ScrollReveal';
 import { FaqAccordion, type FaqAccordionItem } from '../components/common/FaqAccordion';
 import { useTransparentHeader } from '../app/header-transparency';
+import { ServiceSwitcher } from '../components/services/ServiceSwitcher';
+import { ServiceHeroFrame } from '../components/services/ServiceHeroFrame';
 import { SITE_URL } from '../seo/constants';
 import { SEO } from '../seo/SEO';
 import { serviceEntity, servicesFaqJsonLd } from '../seo/structuredData';
@@ -22,9 +24,11 @@ import { cn } from '../lib/utils';
  *   3. Data center white spaces (featured, #modular): cooling pipework and electrical transfer.
  *   4. E-Houses (featured): complete prefabricated electrical rooms.
  *   5. Product range (#custom): the rest of the in-house range as tabs.
- *   6. Testing & quality: factory tests and certified management systems.
- *   7. Factories in the UAE, Saudi Arabia and Egypt: one figure per card, factory area in sq ft
+ *   6. Factories in the UAE, Saudi Arabia and Egypt: one figure per card, factory area in sq ft
  *      (UAE 281,000 sq ft; Saudi Arabia and Egypt pending). Manufacturing team removed 2026-11-24.
+ *      Moved above Testing & quality (client request 2026-11-24).
+ *   7. Testing & quality: factory tests and certified management systems. Stone, so it differs
+ *      from Sectors (warm white) right after it (client request 2026-11-24).
  *   8. Sectors served.
  *   9. FAQ, then a short closing band.
  *
@@ -91,13 +95,14 @@ export default function ManufacturingPrefabricationPage() {
         ]}
         structuredData={servicesFaqJsonLd(t('manufacturingPage.faq.items', { returnObjects: true }))}
       />
+      <ServiceSwitcher tone="dark" />
       <Hero />
       <WhyOffsite />
       <WhiteSpaces />
       <EHouses />
       <ProductRange />
-      <Testing />
       <Factories />
+      <Testing />
       <Sectors />
       <Faq />
       <Closing />
@@ -113,42 +118,45 @@ function Hero() {
   const proof = t('manufacturingPage.hero.proof', { returnObjects: true }) as { value: string; label: string }[];
 
   return (
-    <Section background="charcoal" spacing="sm" className="md:pt-12 desktop:pt-32">
-      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-6">
-          <HeroH1
-            eyebrow={
-              <Eyebrow as="span" theme="dark" className="block">
-                {t('manufacturingPage.hero.eyebrow')}
-              </Eyebrow>
-            }
-            title={<span className="mt-3 block font-display text-h1 font-semibold text-white text-balance">{t('manufacturingPage.hero.title')}</span>}
-          />
-          <p className="mt-4 max-w-2xl text-body text-gray-300 md:text-body-lg">{t('manufacturingPage.hero.description')}</p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Button variant="primary" trailingIcon={ArrowDown} onClick={() => scrollTo(RANGE_ANCHOR)}>
-              {t('manufacturingPage.hero.primaryCta')}
-            </Button>
-            <ButtonLink href="/projects/categories" variant="outline" theme="dark" trailingIcon={ArrowRight} className="!border-white">
-              {t('manufacturingPage.hero.secondaryCta')}
-            </ButtonLink>
+    <Section background="charcoal" spacing="sm" className="pb-6 pt-3 md:pb-8 md:pt-4 desktop:pb-14 desktop:pt-32">
+      {/* Phones and tablets: the hero sits in a bordered frame (ServiceHeroFrame). */}
+      <ServiceHeroFrame tone="dark">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-6">
+            <HeroH1
+              eyebrow={
+                <Eyebrow as="span" theme="dark" className="block">
+                  {t('manufacturingPage.hero.eyebrow')}
+                </Eyebrow>
+              }
+              title={<span className="mt-3 block font-display text-h1 font-semibold text-white text-balance">{t('manufacturingPage.hero.title')}</span>}
+            />
+            <p className="mt-4 max-w-2xl text-body text-gray-300 md:text-body-lg">{t('manufacturingPage.hero.description')}</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Button variant="primary" trailingIcon={ArrowDown} onClick={() => scrollTo(RANGE_ANCHOR)}>
+                {t('manufacturingPage.hero.primaryCta')}
+              </Button>
+              <ButtonLink href="/projects/categories" variant="outline" theme="dark" trailingIcon={ArrowRight} className="!border-white">
+                {t('manufacturingPage.hero.secondaryCta')}
+              </ButtonLink>
+            </div>
+            <dl aria-label={t('manufacturingPage.hero.proofLabel')} className="mt-10 grid grid-cols-3 border-t border-white/10 pt-6">
+              {proof.map((item, i) => (
+                <div key={i} className={cn('flex flex-col', i > 0 && 'border-s border-white/10 ps-3 sm:ps-5', i < proof.length - 1 && 'pe-3 sm:pe-5')}>
+                  <dt className="mt-1.5 text-caption text-gray-400 md:text-small">{item.label}</dt>
+                  <dd className="order-first font-display text-[clamp(0.95rem,0.6rem+1.4vw,1.375rem)] font-semibold leading-tight text-white">{item.value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
-          <dl aria-label={t('manufacturingPage.hero.proofLabel')} className="mt-10 grid grid-cols-3 border-t border-white/10 pt-6">
-            {proof.map((item, i) => (
-              <div key={i} className={cn('flex flex-col', i > 0 && 'border-s border-white/10 ps-3 sm:ps-5', i < proof.length - 1 && 'pe-3 sm:pe-5')}>
-                <dt className="mt-1.5 text-caption text-gray-400 md:text-small">{item.label}</dt>
-                <dd className="order-first font-display text-[clamp(0.95rem,0.6rem+1.4vw,1.375rem)] font-semibold leading-tight text-white">{item.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-        {/* Portrait photo only where text and image sit side by side (desktop), as on the MEP page. */}
-        <div className="hidden lg:col-span-5 lg:col-start-8 lg:block">
-          <div className="aspect-[4/5] overflow-hidden rounded-md bg-gray-900">
-            <img src={PHOTOS.hero} alt={t('manufacturingPage.hero.imageAlt')} className="h-full w-full object-cover" loading="eager" decoding="async" />
+          {/* Portrait photo only where text and image sit side by side (desktop), as on the MEP page. */}
+          <div className="hidden lg:col-span-5 lg:col-start-8 lg:block">
+            <div className="aspect-[4/5] overflow-hidden rounded-md bg-gray-900">
+              <img src={PHOTOS.hero} alt={t('manufacturingPage.hero.imageAlt')} className="h-full w-full object-cover" loading="eager" decoding="async" />
+            </div>
           </div>
         </div>
-      </div>
+      </ServiceHeroFrame>
     </Section>
   );
 }
@@ -330,14 +338,14 @@ function ProductRange() {
   );
 }
 
-/* --------------------------------------------------- 6. Testing & quality */
+/* --------------------------------------------------- 7. Testing & quality */
 
 function Testing() {
   const { t } = useTranslation('services');
   const items = t('manufacturingPage.testing.items', { returnObjects: true }) as TitleBody[];
   const standards = t('manufacturingPage.testing.standards', { returnObjects: true }) as { code: string; label: string }[];
   return (
-    <Section background="warmwhite" spacing="sm" className="pt-8 md:pt-10">
+    <Section background="stone" spacing="sm" className="pt-8 md:pt-10">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
         {/* Heading column pins below the site header while the tests and ISO list scroll past (same as EPC). */}
         <div className="lg:sticky lg:top-20 lg:col-span-5 lg:self-start desktop:top-28">
@@ -371,7 +379,7 @@ function Testing() {
   );
 }
 
-/* ----------------------------------------------------------- 7. Factories */
+/* ----------------------------------------------------------- 6. Factories */
 
 function Factories() {
   const { t } = useTranslation('services');

@@ -397,3 +397,12 @@
     color: #e0765c;
   }
 }
+
+/* Real phones (touch screen, phone-sized, either orientation): swipe rails show only their
+   position dots, so the arrow buttons (RailArrows) hide. Tablets, and laptop / desktop windows
+   at any width, keep them. */
+@media (pointer: coarse) and (max-width: 599.98px), (pointer: coarse) and (max-height: 499.98px) {
+  .phone-hide {
+    display: none !important;
+  }
+}

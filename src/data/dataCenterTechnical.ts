@@ -7,7 +7,7 @@
  * stays in services:dataCenter.faq (EN + AR).
  */
 export const dcTechnical = {
-  tabs: { section: 'Data Centers', technical: 'Technical', sustainability: 'Sustainability' },
+  tabs: { section: 'Data Centers', technical: 'Technical', sustainability: 'Sustainability', onThisPage: 'On this page', sections: 'Section', previous: 'Previous', next: 'Next' },
   /** Narrative chapter labels and the "MENASCO's role" thread (role lines marked NEW are new copy, pending approval). */
   /** "MENASCO in data centers" section below the hero. Heading, intro, capabilities and
    *  prefab copy come from services:dataCenter (EN + AR). */
@@ -29,14 +29,14 @@ export const dcTechnical = {
     eyebrow: 'Uptime Tier Classification',
     heading: 'Tier III and Tier IV, translated into MEP design',
     intro:
-      "The Uptime Institute Tier Classification System defines data center infrastructure by how it behaves during maintenance and failure [[12]]. For MENASCO's work, each Tier is a set of non-negotiable rules for capacity components and distribution paths.",
+      "The Uptime Institute Tier Classification System defines data center infrastructure by how it behaves during maintenance and failure [[11]]. For MENASCO's work, each Tier is a set of non-negotiable rules for capacity components and distribution paths.",
     items: [
       {
         id: 'tier-iii',
         name: 'Tier III',
         tagline: 'Concurrently maintainable',
         points: [
-          'Every capacity component and distribution path can be removed for planned maintenance without shutting down IT equipment [[12]].',
+          'Every capacity component and distribution path can be removed for planned maintenance without shutting down IT equipment [[11]].',
           'Redundant capacity components, typically N+1, and at least two distribution paths, with one path active.',
           'Electrical and mechanical systems arranged so that isolating any single item never interrupts the critical load.',
         ],
@@ -47,7 +47,7 @@ export const dcTechnical = {
         name: 'Tier IV',
         tagline: 'Fault tolerant',
         points: [
-          'Builds on Tier III and adds fault tolerance: the facility rides through a single unplanned failure or event without impact to IT [[12]].',
+          'Builds on Tier III and adds fault tolerance: the facility rides through a single unplanned failure or event without impact to IT [[11]].',
           'Independent, physically isolated systems with simultaneously active distribution paths, typically 2N for power.',
           'Compartmentalisation so a fire or failure in one path cannot reach its partner, plus continuous cooling through every transfer.',
         ],
@@ -55,7 +55,7 @@ export const dcTechnical = {
       },
     ],
     certificationNote:
-      'Tier Certification of design documents and of constructed facilities is awarded exclusively by Uptime Institute, and only to facilities [[13]]. MENASCO engineers, installs and commissions MEP systems that deliver the Tier topology the design requires, so the constructed facility matches the certified design.',
+      'Tier Certification of design documents and of constructed facilities is awarded exclusively by Uptime Institute, and only to facilities [[12]]. MENASCO engineers, installs and commissions MEP systems that deliver the Tier topology the design requires, so the constructed facility matches the certified design.',
     diagramLabel: 'Illustrative Tier topology',
     pathA: 'Path A',
     pathB: 'Path B',
@@ -143,8 +143,8 @@ export const dcTechnical = {
     strengthsLabel: 'Strengths',
     considerationsLabel: 'Considerations',
     ashrae:
-      "Air-cooled equipment is typically controlled to keep server inlet air within ASHRAE's recommended envelope of 18–27 °C [[14]]. Hot or cold-aisle containment lets supply air run near the top of that range, cutting cooling energy.",
-    figure: { value: '18–27 °C', label: "ASHRAE's recommended server inlet air range [[14]]" },
+      "Air-cooled equipment is typically controlled to keep server inlet air within ASHRAE's recommended envelope of 18–27 °C [[13]]. Hot or cold-aisle containment lets supply air run near the top of that range, cutting cooling energy.",
+    figure: { value: '18–27 °C', label: "ASHRAE's recommended server inlet air range [[13]]" },
   },
   power: {
     eyebrow: 'Electrical resilience',
@@ -186,15 +186,17 @@ export const dcTechnical = {
   energy: {
     eyebrow: 'Local energy markets',
     heading: 'Understanding local energy infrastructure is part of the engineering',
-    intro:
-      'Power availability is now the main constraint on new capacity. Global data center electricity use is projected to more than double by 2030, to around 945 TWh, so grid connection, substation timing and on-site generation have to be planned from day one [[1]].',
     constraintsLabel: 'Key market constraints',
-    helpLabel: 'How MENASCO helps',
+    // Comparison layout (2026-11-24).
+    marketLabel: 'Market',
+    detailLabel: 'Market detail',
+    contextLabel: 'Market context',
+    helpLabel: 'How we help',
     /** Card headings (SEO: one unique, keyword-rich heading per face). */
     frontTitlePrefix: 'Data centers in',
     backTitlePrefix: "MENASCO's Data Center Advantage in",
     backLabel: 'Market constraints',
-    advantageLabel: 'Competitive advantage',
+    advantageLabel: "MENASCO's Competitive Advantage",
     // Phones: the How MENASCO helps paragraph is clamped to 4 lines behind this toggle.
     readMore: 'Read more',
     readLess: 'Show less',
@@ -204,7 +206,7 @@ export const dcTechnical = {
         slug: 'united-arab-emirates',
         name: 'United Arab Emirates',
         inName: 'the United Arab Emirates',
-        body: 'Rapid hyperscale expansion in Abu Dhabi and Dubai is placing new demands on power generation, transmission capacity, and utility infrastructure. Grid connection schedules, substation delivery, high ambient temperatures, and cooling efficiency must be addressed early, with electricity procurement and generation arrangements differing between the emirates [[2]] [[3]].',
+        body: 'Rapid hyperscale expansion in Abu Dhabi and Dubai is placing new demands on power generation, transmission capacity, and utility infrastructure. Grid connection schedules, substation delivery, high ambient temperatures, and cooling efficiency must be addressed early, with electricity procurement and generation arrangements differing between the emirates [[1]] [[2]].',
         constraints: [
           'Utility capacity, substation approvals, and energization schedules',
           'Cooling performance during extreme summer temperatures',
@@ -222,7 +224,7 @@ export const dcTechnical = {
         slug: 'saudi-arabia',
         name: 'Saudi Arabia',
         inName: 'Saudi Arabia',
-        body: "Saudi Arabia's expanding data center market must balance large-scale AI infrastructure demand with extreme heat, water scarcity, and evolving regulatory requirements. Cooling architecture, electricity supply, and equipment procurement require early planning, while data center service providers must address registration and classification requirements under the Communications, Space and Technology Commission (CST) [[4]] [[5]].",
+        body: "Saudi Arabia's expanding data center market must balance large-scale AI infrastructure demand with extreme heat, water scarcity, and evolving regulatory requirements. Cooling architecture, electricity supply, and equipment procurement require early planning, while data center service providers must address registration and classification requirements under the Communications, Space and Technology Commission (CST) [[3]] [[4]].",
         constraints: [
           'Water-efficient cooling and high-temperature system performance',
           'CST registration and applicable facility classification requirements',
@@ -240,7 +242,7 @@ export const dcTechnical = {
         slug: 'egypt',
         name: 'Egypt',
         inName: 'Egypt',
-        body: "Egypt's position as a regional connectivity hub offers opportunities for data center development, but investors face challenges involving land allocation, construction permits, telecom licensing, and infrastructure readiness. Coordinating power availability, fiber connectivity, regulatory approvals, and imported equipment procurement early is essential to establishing realistic construction and commissioning schedules [[6]] [[7]].",
+        body: "Egypt's position as a regional connectivity hub offers opportunities for data center development, but investors face challenges involving land allocation, construction permits, telecom licensing, and infrastructure readiness. Coordinating power availability, fiber connectivity, regulatory approvals, and imported equipment procurement early is essential to establishing realistic construction and commissioning schedules [[5]] [[6]].",
         constraints: [
           'Land allocation, development permits, and telecom licensing',
           'Power infrastructure and reliable carrier connectivity',
@@ -258,7 +260,7 @@ export const dcTechnical = {
         slug: 'europe',
         name: 'Europe',
         inName: 'Europe',
-        body: 'European data center development faces increasing grid connection delays, limited available power capacity, and tightening energy-efficiency requirements. Site selection must account for utility connection timelines, electricity costs, and national permitting rules, while cooling efficiency, waste heat recovery, and energy performance reporting play an increasingly important role in facility design [[8]] [[9]].',
+        body: 'European data center development faces increasing grid connection delays, limited available power capacity, and tightening energy-efficiency requirements. Site selection must account for utility connection timelines, electricity costs, and national permitting rules, while cooling efficiency, waste heat recovery, and energy performance reporting play an increasingly important role in facility design [[7]] [[8]].',
         constraints: [
           'Grid connection queues and transmission capacity',
           'EU energy-efficiency reporting and country-specific requirements',
@@ -276,7 +278,7 @@ export const dcTechnical = {
         slug: 'united-states',
         name: 'United States',
         inName: 'the United States',
-        body: "US data center development is increasingly constrained by electrical equipment supply and a growing shortage of skilled construction tradespeople. Availability of electricians, pipefitters, HVAC technicians, and other specialized workers place pressure on labor costs and schedules. With large power transformers facing multi-year lead times, early procurement, workforce planning, off-site prefabrication, and phased energization are essential for hyperscale and AI infrastructure projects [[10]] [[11]].",
+        body: "US data center development is increasingly constrained by electrical equipment supply and a growing shortage of skilled construction tradespeople. Availability of electricians, pipefitters, HVAC technicians, and other specialized workers place pressure on labor costs and schedules. With large power transformers facing multi-year lead times, early procurement, workforce planning, off-site prefabrication, and phased energization are essential for hyperscale and AI infrastructure projects [[9]] [[10]].",
         constraints: [
           'Grid interconnection and utility service agreements',
           'Long-lead transformers, switchgear, and electrical equipment',

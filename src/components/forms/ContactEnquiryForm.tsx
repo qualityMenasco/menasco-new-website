@@ -22,6 +22,9 @@ function SectionLabel({ children }: { children: ReactNode }) {
 }
 
 const twoCol = 'grid grid-cols-1 gap-3 sm:grid-cols-2';
+// Short fields sit side by side on phones too (a tighter, bento-style grid; client request 2026-11-25).
+// Bottom-aligned, so the two inputs stay level when one label wraps to two lines.
+const pair = 'grid grid-cols-2 items-end gap-3';
 
 /**
  * The full General / Career / Project enquiry form — shared verbatim by the
@@ -29,7 +32,9 @@ const twoCol = 'grid grid-cols-1 gap-3 sm:grid-cols-2';
  * fields, validation, and copy can never drift between breakpoints. Layout
  * is pure responsive Tailwind (`sm:grid-cols-2`), not a separate
  * desktop/mobile implementation, since the only real difference between
- * breakpoints here is column count.
+ * breakpoints here is column count. Phones pair the short fields (phone +
+ * country, company + job title, project name + location); long ones (name,
+ * email, subject, messages) stay full width.
  *
  * The enquiry type genuinely starts unselected (see useContactForm) — the
  * visitor must deliberately pick General/Career/Project from the tabs. The
@@ -78,7 +83,7 @@ export function ContactEnquiryForm() {
   const isProject = displayType === 'project';
 
   return (
-    <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-6">
+    <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-5 sm:gap-6">
       {/* Honeypot — hidden from sighted and screen-reader users alike; a real visitor never fills this in. */}
       <div className="sr-only" aria-hidden="true">
         <label htmlFor="company-website">Company Website</label>
@@ -107,7 +112,7 @@ export function ContactEnquiryForm() {
         initial={reducedMotion ? undefined : { opacity: 0, y: 8 }}
         animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.2, ease: 'easeOut' }}
-        className="flex flex-col gap-6"
+        className="flex flex-col gap-5 sm:gap-6"
       >
         <div className="flex flex-col gap-3">
           <SectionLabel>{displayType === 'general' ? t('sections.personalDetails') : t('sections.contactDetails')}</SectionLabel>
@@ -115,7 +120,7 @@ export function ContactEnquiryForm() {
             <FormField disabled={locked} label={t('fields.fullName')} name="fullName" autoComplete="name" required value={fields.fullName} onChange={(e) => fields.setFullName(e.target.value)} error={errors.fullName} />
             <FormField disabled={locked} type="email" dir="ltr" label={t('fields.email')} name="email" autoComplete="email" required value={fields.email} onChange={(e) => fields.setEmail(e.target.value)} error={errors.email} />
           </div>
-          <div className={twoCol}>
+          <div className={pair}>
             <FormField
               disabled={locked}
               type="tel"
@@ -143,7 +148,7 @@ export function ContactEnquiryForm() {
           </div>
 
           {displayType === 'general' && (
-            <div className={twoCol}>
+            <div className={pair}>
               <FormField disabled={locked} label={t('fields.company')} name="company" autoComplete="organization" optional={t('fields.optional')} value={fields.company} onChange={(e) => fields.setCompany(e.target.value)} />
               <FormField disabled={locked} label={t('fields.jobTitle')} name="jobTitle" autoComplete="organization-title" required value={fields.jobTitle} onChange={(e) => fields.setJobTitle(e.target.value)} error={errors.jobTitle} />
             </div>
@@ -191,7 +196,7 @@ export function ContactEnquiryForm() {
 
             <div className="flex flex-col gap-3">
               <SectionLabel>{t('sections.projectDetails')}</SectionLabel>
-              <div className={twoCol}>
+              <div className={pair}>
                 <FormField disabled={locked} label={t('fields.projectName')} name="projectName" required value={fields.projectName} onChange={(e) => fields.setProjectName(e.target.value)} error={errors.projectName} />
                 <FormField disabled={locked} label={t('fields.projectLocation')} name="projectLocation" required value={fields.projectLocation} onChange={(e) => fields.setProjectLocation(e.target.value)} error={errors.projectLocation} />
               </div>

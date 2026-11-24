@@ -1,6 +1,6 @@
 /** Design rules for the Data Center pages: see the header comment in src/pages/DataCenterPage.tsx. */
 import { useRef, useState, type ReactNode } from 'react';
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Check, ChevronDown } from 'lucide-react';
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Container } from '../components/layout/Container';
 import { Eyebrow } from '../components/typography/Typography';
@@ -9,6 +9,7 @@ import { ButtonLink } from '../components/ui/Button';
 import { FaqAccordion } from '../components/common/FaqAccordion';
 import { dcSustainability as c } from '../data/dataCenterSustainability';
 import { SUSTAINABILITY_SOURCES } from '../data/dataCenterSources';
+import { dcTechnical } from '../data/dataCenterTechnical';
 import { DC_SUSTAINABILITY_PATH, DC_TECHNICAL_PATH, ArabicDeferredNotice, DataCenterTabs, RAIL_CLASS, RailDots, RichText, stripCites, useRail } from '../components/services/datacenter/shared';
 import { SourcesList } from '../components/services/datacenter/primitives';
 import { SustainHeroFjord } from '../components/services/datacenter/SustainHeroFjord';
@@ -21,6 +22,7 @@ import { SEO } from '../seo/SEO';
 import { faqPageJsonLd } from '../seo/structuredData';
 import { SITE_URL } from '../seo/constants';
 import { cn } from '../lib/utils';
+import { SECTION_SCROLL_MARGIN, type JumpSection } from '../components/services/SectionJumpMenu';
 
 
 /** One lever in the Seven opportunities tabs: grey sub-heading, first paragraph, the second
@@ -96,9 +98,9 @@ const EYEBROW = `${EYEBROW_BASE} text-brand-600`;
 const H2 = 'font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-ink text-balance';
 const TONE_BG = { white: 'bg-white', light: 'bg-warmwhite', stone: 'bg-stone', dark: 'bg-charcoal' } as const;
 
-function Band({ tone, className, children }: { tone: keyof typeof TONE_BG; className?: string; children: ReactNode }) {
+function Band({ tone, className, children, id }: { tone: keyof typeof TONE_BG; className?: string; children: ReactNode; id?: string }) {
   return (
-    <section className={TONE_BG[tone]}>
+    <section id={id} className={cn(TONE_BG[tone], id && SECTION_SCROLL_MARGIN)}>
       <Container className={cn('py-12 md:py-16', className)}>{children}</Container>
     </section>
   );
@@ -130,6 +132,18 @@ export default function DataCenterSustainabilityPage() {
   const title = t('dataCenterSustainability.seo.title');
   const description = t('dataCenterSustainability.seo.description');
   const url = `${SITE_URL}${DC_SUSTAINABILITY_PATH}`;
+  // "On this page" section switcher in the sticky tab bar (same as the Technical page, 2026-11-24).
+  const sections: JumpSection[] = [
+    { id: 'dcs-opportunities', label: c.opportunities.eyebrow },
+    { id: 'dcs-metrics', label: c.metrics.eyebrow },
+    { id: 'dcs-ratings', label: c.certifications.eyebrow },
+    { id: 'dcs-cooling', label: c.cooling.eyebrow },
+    { id: 'dcs-regional', label: c.regional.eyebrow },
+    { id: 'dcs-contractor', label: c.contractor.eyebrow },
+    { id: 'dcs-outlook', label: c.outlook.eyebrow },
+    { id: 'dcs-faq', label: c.faq.eyebrow },
+    { id: 'dcs-sources', label: c.sources.heading },
+  ];
 
   return (
     <>
@@ -161,7 +175,7 @@ export default function DataCenterSustainabilityPage() {
           faqPageJsonLd(c.faq.items.map((f) => ({ question: f.question, answer: stripCites(f.answer) }))),
         ]}
       />
-      <DataCenterTabs active="sustainability" />
+      <DataCenterTabs active="sustainability" sections={sections} />
       <ArabicDeferredNotice />
 
       {/* 1. Hero: white, with the fjord drawing composed like the technical hero (same frame,
@@ -206,7 +220,7 @@ export default function DataCenterSustainabilityPage() {
       </section>
 
       {/* 2. Seven opportunities: tabs (vertical list beside the panel from md; a scrolling pill row on phones). */}
-      <Band tone="light" className="py-10 md:py-12">
+      <Band id="dcs-opportunities" tone="light" className="py-10 md:py-12">
         <Head eyebrow={c.opportunities.eyebrow} title={c.opportunities.heading} />
         <TopicTabs
           idPrefix="dcs-opportunity"
@@ -216,6 +230,7 @@ export default function DataCenterSustainabilityPage() {
           compact
           dots
           swipe
+          arrows={{ previous: dcTechnical.tabs.previous, next: dcTechnical.tabs.next }}
           topics={c.opportunities.items.map((o) => ({
             title: o.title,
             body: [],
@@ -225,7 +240,7 @@ export default function DataCenterSustainabilityPage() {
       </Band>
 
       {/* 3. Metrics */}
-      <Band tone="stone">
+      <Band id="dcs-metrics" tone="stone">
         <Head
           eyebrow={c.metrics.eyebrow}
           title={c.metrics.heading}
@@ -265,7 +280,7 @@ export default function DataCenterSustainabilityPage() {
       </Band>
 
       {/* 4. LEED Gold and Estidama Pearl (dark): two cards (swipe on phones) and a collapsible contribution list. */}
-      <Band tone="dark">
+      <Band id="dcs-ratings" tone="dark">
         <Head dark eyebrow={c.certifications.eyebrow} title={c.certifications.heading} intro={c.certifications.intro} />
         <div
           ref={(el) => {
@@ -293,7 +308,7 @@ export default function DataCenterSustainabilityPage() {
             </article>
           ))}
         </div>
-        <RailDots dark count={c.certifications.items.length} active={certRail.active} />
+        <RailDots dark count={c.certifications.items.length} active={certRail.active} rail={certRail} />
         <details className="group mt-5 rounded-lg border border-white/10 bg-white/[0.04] [&_summary::-webkit-details-marker]:hidden">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-500 lg:px-7">
             <span className="font-display text-body-lg font-semibold text-white">{c.certifications.contributionHeading}</span>
@@ -311,18 +326,18 @@ export default function DataCenterSustainabilityPage() {
       </Band>
 
       {/* 5. Cooling comparison (qualitative): configuration switch + scorecard, then climate notes. */}
-      <Band tone="light">
+      <Band id="dcs-cooling" tone="light">
         <Head eyebrow={c.cooling.eyebrow} title={c.cooling.heading} />
         <CoolingCompare />
       </Band>
 
       {/* 6. Regional priorities: region switch, intro, numbered priorities (RegionalPriorities). */}
-      <Band tone="white" className="py-10 md:py-12">
+      <Band id="dcs-regional" tone="white" className="py-10 md:py-12">
         <RegionalPriorities />
       </Band>
 
       {/* 7. Contractor impact (dark): heading, intro and a link to the MEP disciplines. */}
-      <Band tone="dark" className="py-10 md:py-14">
+      <Band id="dcs-contractor" tone="dark" className="py-10 md:py-14">
         <p className={`${EYEBROW_BASE} text-brand-400`}>{c.contractor.eyebrow}</p>
         <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-12 lg:items-center lg:gap-12">
           <h2 className={cn(H2, 'text-white lg:col-span-6')}>{c.contractor.heading}</h2>
@@ -336,7 +351,7 @@ export default function DataCenterSustainabilityPage() {
       </Band>
 
       {/* 8. Outlook: heading | intro, then challenges and developments side by side (chart removed). */}
-      <Band tone="white">
+      <Band id="dcs-outlook" tone="white">
         <Head eyebrow={c.outlook.eyebrow} title={c.outlook.heading} intro={<RichText text={c.outlook.intro} />} />
         <div className="mt-6 grid grid-cols-1 gap-5 border-t border-gray-200 pt-5 sm:grid-cols-2 lg:mt-8">
           <div>
@@ -355,7 +370,7 @@ export default function DataCenterSustainabilityPage() {
             <ul className="mt-2 space-y-1.5">
               {c.outlook.developments.map((x) => (
                 <li key={x} className="flex gap-2 text-small leading-snug text-gray-700">
-                  <Check size={14} aria-hidden="true" className="mt-0.5 shrink-0 text-brand-600" />
+                  <span aria-hidden="true" className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-gray-400" />
                   {x}
                 </li>
               ))}
@@ -365,7 +380,7 @@ export default function DataCenterSustainabilityPage() {
       </Band>
 
       {/* 9. FAQ */}
-      <Band tone="stone">
+      <Band id="dcs-faq" tone="stone">
         <p className={EYEBROW}>{c.faq.eyebrow}</p>
         <h2 className={cn(H2, 'mt-3')}>{c.faq.heading}</h2>
         <FaqAccordion items={c.faq.items} idPrefix="dcs-faq" className="mt-6" />
@@ -383,7 +398,7 @@ export default function DataCenterSustainabilityPage() {
           </ButtonLink>
         </div>
       </Band>
-      <Band tone="light" className="py-10 md:py-12">
+      <Band id="dcs-sources" tone="light" className="py-10 md:py-12">
         <SourcesList sources={SUSTAINABILITY_SOURCES} heading={c.sources.heading} intro={c.sources.intro} />
       </Band>
     </>

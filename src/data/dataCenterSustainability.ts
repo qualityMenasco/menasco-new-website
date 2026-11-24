@@ -102,6 +102,8 @@ export const dcSustainability = {
       "The EU's new data centre rating scheme grades PUE and WUE from A to G: A requires a PUE of 1.15 or lower and a WUE of 0.10 l/kWh or lower, while G covers a PUE above 1.90 or a WUE above 1.00 l/kWh [[2]].",
   },
   regional: {
+    // Label for the section switcher (the RegionalPriorities component shows the same eyebrow).
+    eyebrow: 'Regional priorities',
     intro:
       "Data center sustainability strategies must respond to regional climate, resource availability, and energy infrastructure. For MENASCO's hyperscale developments, different regional conditions demand a different set of engineering priorities.",
   },

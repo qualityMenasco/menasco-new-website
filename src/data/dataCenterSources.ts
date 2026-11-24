@@ -199,20 +199,19 @@ const S = {
 
 /** Ordered by first appearance on the technical page, so citations read [1], [2], [3]… top to bottom. */
 export const TECHNICAL_SOURCES: SourceEntry[] = [
-  S.ieaEnergyAi, //       1  energy intro
-  S.woodmacUae, //        2  UAE
-  S.dewaGuidelines, //    3  UAE
-  S.spglobalKsa, //       4  Saudi Arabia
-  S.cstDataCenter, //     5  Saudi Arabia
-  S.ebrdEgypt, //         6  Egypt
-  S.mcitEgypt, //         7  Egypt
-  S.ecDataCentres, //     8  Europe
-  S.eibInvestment, //     9  Europe
-  S.reutersEquipment, // 10  United States
-  S.usQueues, //         11  United States
-  S.uptimeTiers, //      12  Tiers
-  S.uptimeCert, //       13  Tiers
-  S.ashrae, //           14  Cooling
+  S.woodmacUae, //        1  UAE
+  S.dewaGuidelines, //    2  UAE
+  S.spglobalKsa, //       3  Saudi Arabia
+  S.cstDataCenter, //     4  Saudi Arabia
+  S.ebrdEgypt, //         5  Egypt
+  S.mcitEgypt, //         6  Egypt
+  S.ecDataCentres, //     7  Europe
+  S.eibInvestment, //     8  Europe
+  S.reutersEquipment, //  9  United States
+  S.usQueues, //         10  United States
+  S.uptimeTiers, //      11  Tiers
+  S.uptimeCert, //       12  Tiers
+  S.ashrae, //           13  Cooling
 ];
 
 // Numbered in the order each source is first cited on the page (top to bottom); only cited sources.

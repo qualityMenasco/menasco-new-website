@@ -9,6 +9,8 @@ import { ScrollReveal } from '../components/common/ScrollReveal';
 import { FaqAccordion, type FaqAccordionItem } from '../components/common/FaqAccordion';
 import { BulletList, ClampedParagraphs, DisclosureList, ImagePlaceholder, RailList, RowTabs, SectionHead, TextLink, scrollToId } from '../components/services/ServiceBlocks';
 import { useTransparentHeader } from '../app/header-transparency';
+import { ServiceSwitcher } from '../components/services/ServiceSwitcher';
+import { ServiceHeroFrame } from '../components/services/ServiceHeroFrame';
 import { SITE_URL } from '../seo/constants';
 import { SEO } from '../seo/SEO';
 import { serviceEntity, servicesFaqJsonLd } from '../seo/structuredData';
@@ -85,6 +87,7 @@ export default function CivilPage() {
         ]}
         structuredData={servicesFaqJsonLd(t('civilPage.faq.items', { returnObjects: true }))}
       />
+      <ServiceSwitcher tone="light" />
       <Hero />
       <Approach />
       <Capabilities />
@@ -108,42 +111,45 @@ function Hero() {
   const { t } = useTranslation('services');
   useTransparentHeader(true);
   return (
-    <Section background="warmwhite" spacing="sm" className="md:pt-12 desktop:pt-32">
-      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-6">
-          <HeroH1
-            eyebrow={
-              <Eyebrow as="span" className="block">
-                {t('civilPage.hero.eyebrow')}
-              </Eyebrow>
-            }
-            title={<span className="mt-3 block font-display text-h1 font-semibold text-ink text-balance">{t('civilPage.hero.title')}</span>}
-          />
-          <p className="mt-4 max-w-2xl text-body text-gray-600 md:text-body-lg">{t('civilPage.hero.description')}</p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Button variant="primary" trailingIcon={ArrowDown} onClick={() => scrollToId(CAPABILITIES_ANCHOR)}>
-              {t('civilPage.hero.primaryCta')}
-            </Button>
-            <ButtonLink href={LINKS.projects} variant="outline" theme="light" trailingIcon={ArrowRight}>
-              {t('civilPage.hero.secondaryCta')}
-            </ButtonLink>
-          </div>
-        </div>
-        {/* Photo only where text and image sit side by side (desktop); phones and tablets keep the hero short. */}
-        <div className="hidden lg:col-span-5 lg:col-start-8 lg:block">
-          <div className="aspect-[4/5] overflow-hidden rounded-md bg-gray-100">
-            <img
-              src={HERO_IMAGE}
-              srcSet={`${HERO_IMAGE_800} 800w, ${HERO_IMAGE} 1200w`}
-              sizes="(min-width: 1280px) 490px, 40vw"
-              alt={t('civilPage.hero.imageAlt')}
-              className="h-full w-full object-cover"
-              loading="eager"
-              decoding="async"
+    <Section background="warmwhite" spacing="sm" className="pb-6 pt-3 md:pb-8 md:pt-4 desktop:pb-14 desktop:pt-32">
+      {/* Phones and tablets: the hero sits in a bordered frame (ServiceHeroFrame). */}
+      <ServiceHeroFrame tone="light">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-6">
+            <HeroH1
+              eyebrow={
+                <Eyebrow as="span" className="block">
+                  {t('civilPage.hero.eyebrow')}
+                </Eyebrow>
+              }
+              title={<span className="mt-3 block font-display text-h1 font-semibold text-ink text-balance">{t('civilPage.hero.title')}</span>}
             />
+            <p className="mt-4 max-w-2xl text-body text-gray-600 md:text-body-lg">{t('civilPage.hero.description')}</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Button variant="primary" trailingIcon={ArrowDown} onClick={() => scrollToId(CAPABILITIES_ANCHOR)}>
+                {t('civilPage.hero.primaryCta')}
+              </Button>
+              <ButtonLink href={LINKS.projects} variant="outline" theme="light" trailingIcon={ArrowRight}>
+                {t('civilPage.hero.secondaryCta')}
+              </ButtonLink>
+            </div>
+          </div>
+          {/* Photo only where text and image sit side by side (desktop); phones and tablets keep the hero short. */}
+          <div className="hidden lg:col-span-5 lg:col-start-8 lg:block">
+            <div className="aspect-[4/5] overflow-hidden rounded-md bg-gray-100">
+              <img
+                src={HERO_IMAGE}
+                srcSet={`${HERO_IMAGE_800} 800w, ${HERO_IMAGE} 1200w`}
+                sizes="(min-width: 1280px) 490px, 40vw"
+                alt={t('civilPage.hero.imageAlt')}
+                className="h-full w-full object-cover"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </ServiceHeroFrame>
     </Section>
   );
 }

@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode, type TouchEvent } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { cn } from '../../../lib/utils';
+import { RailArrows } from '../../common/RailArrows';
 import type { AccordionTopic } from './TopicAccordion';
 
 /** A topic, optionally with extra content rendered under its body (lists, links). */
@@ -36,8 +37,15 @@ export interface TopicTabsProps {
   compact?: boolean;
   /** Phones (pill row): position dots + counter under the panel showing which topic is selected. */
   dots?: boolean;
-  /** Touch: a horizontal swipe anywhere on the panel card moves to the next / previous topic. */
+  /**
+   * The panel card is a native horizontal scroller, one topic per slide: a finger (or a
+   * two-finger touchpad swipe) drags the card and it snaps to the next / previous topic,
+   * one topic per swipe. Clicking a tab slides to that topic; the tab follows the slide.
+   */
   swipe?: boolean;
+  /** With `dots`: previous / next arrows (labels given) instead of the "02 / 07" counter;
+   *  hidden on real phones, which keep just the dots (Data Center pages). */
+  arrows?: { previous: string; next: string };
 }
 
 const DEFAULT_LAYOUT = 'md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-10 lg:grid-cols-[17rem_minmax(0,1fr)]';
@@ -53,14 +61,32 @@ const DEFAULT_LAYOUT = 'md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-10 lg:
  * the page jump; inactive panels are invisible, inert and hidden from
  * assistive tech. Arrow keys / Home / End move between tabs.
  */
-export function TopicTabs({ topics, idPrefix, label, className, layoutClassName, lead, footer, bare = false, horizontal = false, mobileRail = false, compact = false, dots = false, swipe = false }: TopicTabsProps) {
+export function TopicTabs({ topics, idPrefix, label, className, layoutClassName, lead, footer, bare = false, horizontal = false, mobileRail = false, compact = false, dots = false, swipe = false, arrows }: TopicTabsProps) {
   const [active, setActive] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const railRef = useRef<HTMLDivElement | null>(null);
   const tablistRef = useRef<HTMLDivElement | null>(null);
-  const touchStart = useRef<{ x: number; y: number } | null>(null);
   // mobileRail: swipe mode is on while the pills cannot all fit on one row.
   const [rail, setRail] = useState(false);
+  // `swipe`: the card scrolls sideways natively (see the prop). While a tab click slides the
+  // card across several topics, the in-between topics must not light up their tabs.
+  const slide = swipe && !rail;
+  const slideTarget = useRef<number | null>(null);
+  const slideTimer = useRef(0);
+
+  /** Scrolls the panel row (rail or swipe card) so panel i sits at its start edge. Never the page. */
+  const scrollToPanel = (i: number, behavior: ScrollBehavior) => {
+    const row = railRef.current;
+    const panel = row?.children[i] as HTMLElement | undefined;
+    if (!row || !panel) return;
+    const style = getComputedStyle(row);
+    const rtl = style.direction === 'rtl';
+    const pad = parseFloat(style.scrollPaddingInlineStart) || 0;
+    const r = row.getBoundingClientRect();
+    const p = panel.getBoundingClientRect();
+    const delta = rtl ? p.right - (r.right - row.clientLeft - pad) : p.left - (r.left + row.clientLeft + pad);
+    row.scrollTo({ left: row.scrollLeft + delta, behavior });
+  };
 
   useEffect(() => {
     const list = tablistRef.current;
@@ -84,9 +110,8 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
       const i = hash ? topics.findIndex((t) => t.hash === hash) : -1;
       if (i < 0) return;
       setActive(i);
-      const rail = railRef.current;
-      const panel = rail?.children[i] as HTMLElement | undefined;
-      if (rail && panel && getComputedStyle(rail).display === 'flex') rail.scrollTo({ left: panel.offsetLeft - rail.offsetLeft - parseFloat(getComputedStyle(rail).paddingLeft || '0'), behavior: 'instant' as ScrollBehavior });
+      const row = railRef.current;
+      if (row && getComputedStyle(row).display === 'flex') scrollToPanel(i, 'instant' as ScrollBehavior);
     };
     apply();
     window.addEventListener('hashchange', apply);
@@ -94,12 +119,9 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hashKey]);
 
-  const choose = (i: number) => {
-    setActive(i);
-    const hash = topics[i]?.hash;
-    if (hash) window.history.replaceState(window.history.state, '', `#${hash}`);
-    // Phones (scrolling pill row): bring the chosen pill to the front of the row, leaving a
-    // glimpse of the previous pill (except for the first). Scrolls only the row, never the page.
+  // Phones (scrolling pill row): bring pill i to the front of the row, leaving a glimpse of the
+  // previous pill (except for the first). Scrolls only the row, never the page.
+  const revealPill = (i: number) => {
     const list = tablistRef.current;
     const tab = tabRefs.current[i];
     if (list && tab && list.scrollWidth > list.clientWidth + 1) {
@@ -112,16 +134,36 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
     }
   };
 
-  // Swipe mode: the panel nearest the rail's start edge is the active one.
+  const syncHash = (i: number) => {
+    const hash = topics[i]?.hash;
+    if (hash) window.history.replaceState(window.history.state, '', `#${hash}`);
+  };
+
+  const choose = (i: number) => {
+    setActive(i);
+    syncHash(i);
+    revealPill(i);
+    if (slide) {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      slideTarget.current = i;
+      window.clearTimeout(slideTimer.current);
+      slideTimer.current = window.setTimeout(() => {
+        slideTarget.current = null;
+      }, 1200);
+      scrollToPanel(i, reduce ? 'auto' : 'smooth');
+    }
+  };
+
+  // Rail / swipe card: the panel nearest the row's start edge is the active one.
   const onRailScroll = () => {
-    const rail = railRef.current;
-    if (!rail) return;
-    const rtl = getComputedStyle(rail).direction === 'rtl';
-    const pad = parseFloat(getComputedStyle(rail).scrollPaddingInlineStart || '0');
-    const edge = rtl ? rail.getBoundingClientRect().right - pad : rail.getBoundingClientRect().left + pad;
+    const row = railRef.current;
+    if (!row) return;
+    const rtl = getComputedStyle(row).direction === 'rtl';
+    const pad = parseFloat(getComputedStyle(row).scrollPaddingInlineStart) || 0;
+    const edge = rtl ? row.getBoundingClientRect().right - pad : row.getBoundingClientRect().left + pad;
     let best = 0;
     let dist = Infinity;
-    [...rail.children].forEach((panel, i) => {
+    [...row.children].forEach((panel, i) => {
       const r = (panel as HTMLElement).getBoundingClientRect();
       const d = Math.abs((rtl ? r.right : r.left) - edge);
       if (d < dist) {
@@ -129,7 +171,21 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
         best = i;
       }
     });
-    if (best !== active) setActive(best);
+    // A tab click is sliding the card: keep the clicked tab lit until the card arrives.
+    if (slideTarget.current !== null) {
+      if (best === slideTarget.current) slideTarget.current = null;
+      return;
+    }
+    if (best === active) return;
+    setActive(best);
+    if (slide) {
+      syncHash(best);
+      revealPill(best);
+    }
+  };
+  // The visitor takes over (finger, touchpad or wheel): their scroll position decides again.
+  const releaseSlide = () => {
+    slideTarget.current = null;
   };
 
   const select = (index: number) => {
@@ -137,26 +193,6 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
     choose(next);
     const tab = tabRefs.current[next];
     tab?.focus({ preventScroll: true });
-  };
-
-  // `swipe`: a mostly horizontal finger swipe on the card (not a tap, not a vertical scroll)
-  // steps one topic in reading direction, stopping at the first and last.
-  const swipeOn = swipe && !rail;
-  const onTouchStart = (event: TouchEvent<HTMLDivElement>) => {
-    const touch = event.touches[0];
-    touchStart.current = event.touches.length === 1 ? { x: touch.clientX, y: touch.clientY } : null;
-  };
-  const onTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
-    const start = touchStart.current;
-    touchStart.current = null;
-    const touch = event.changedTouches[0];
-    if (!start || !touch) return;
-    const dx = touch.clientX - start.x;
-    const dy = touch.clientY - start.y;
-    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-    const rtl = getComputedStyle(event.currentTarget).direction === 'rtl';
-    const next = active + ((dx < 0) !== rtl ? 1 : -1);
-    if (next >= 0 && next < topics.length) choose(next);
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
@@ -227,17 +263,24 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
       </div>
 
       {/* Panels stacked in one cell: the box sizes to the longest topic.
-          Swipe mode (mobileRail + pills don't fit): panels sit side by side in a snapping row. */}
+          Rail mode (mobileRail + pills don't fit): panels sit side by side in a snapping row.
+          Swipe card (`swipe`): one card, its topics side by side as full-width slides in a native
+          snapping scroller (stops at every topic; no back/forward swipe navigation at the ends).
+          Flex rows stretch, so the card is still as tall as the longest topic. */}
       <div
         ref={railRef}
-        onScroll={rail ? onRailScroll : undefined}
-        onTouchStart={swipeOn ? onTouchStart : undefined}
-        onTouchEnd={swipeOn ? onTouchEnd : undefined}
+        onScroll={rail || slide ? onRailScroll : undefined}
+        onPointerDown={slide ? releaseSlide : undefined}
+        onTouchStart={slide ? releaseSlide : undefined}
+        onWheel={slide ? releaseSlide : undefined}
         className={cn(
-          swipeOn && 'touch-pan-y',
-          rail ? 'no-scrollbar -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 md:-mx-10 md:scroll-px-10 md:px-10' : 'mt-5 grid',
+          slide
+            ? 'no-scrollbar mt-5 flex snap-x snap-mandatory overflow-x-auto overflow-y-hidden overscroll-x-contain'
+            : rail
+              ? 'no-scrollbar -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 md:-mx-10 md:scroll-px-10 md:px-10'
+              : 'mt-5 grid',
           !horizontal && 'md:mt-0',
-          !bare && cn('rounded-md border border-gray-200 bg-white', compact ? 'p-5 md:p-6' : 'p-6 md:p-8'),
+          !bare && cn('rounded-md border border-gray-200 bg-white', !slide && (compact ? 'p-5 md:p-6' : 'p-6 md:p-8')),
         )}
       >
         {topics.map((topic, i) => {
@@ -252,9 +295,11 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
               {...(selected ? {} : { inert: '' })}
               className={cn(
                 'transition-opacity duration-300 ease-out motion-reduce:transition-none',
-                rail
-                  ? 'flex w-[91%] max-w-xl shrink-0 snap-start flex-col'
-                  : cn('col-start-1 row-start-1', selected ? 'visible opacity-100' : 'invisible opacity-0'),
+                slide
+                  ? cn('w-full shrink-0 snap-start snap-always', !bare && (compact ? 'p-5 md:p-6' : 'p-6 md:p-8'))
+                  : rail
+                    ? 'flex w-[91%] max-w-xl shrink-0 snap-start flex-col'
+                    : cn('col-start-1 row-start-1', selected ? 'visible opacity-100' : 'invisible opacity-0'),
               )}
             >
               {/* Anchor for /page#hash (scroll-mt clears the fixed header + section tabs). */}
@@ -281,9 +326,23 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
               <span key={topic.title} className={cn('h-1.5 rounded-full transition-all duration-base', i === active ? 'w-5 bg-ink' : 'w-1.5 bg-gray-300')} />
             ))}
           </div>
-          <p className="font-display text-caption font-semibold tabular-nums text-gray-500">
-            {String(active + 1).padStart(2, '0')} / {String(topics.length).padStart(2, '0')}
-          </p>
+          {arrows ? (
+            <RailArrows
+              onStep={(dir) => {
+                const next = active + dir;
+                if (next >= 0 && next < topics.length) choose(next);
+              }}
+              canPrev={active > 0}
+              canNext={active < topics.length - 1}
+              prevLabel={arrows.previous}
+              nextLabel={arrows.next}
+              controls={`${idPrefix}-panel-${active}`}
+            />
+          ) : (
+            <p className="font-display text-caption font-semibold tabular-nums text-gray-500">
+              {String(active + 1).padStart(2, '0')} / {String(topics.length).padStart(2, '0')}
+            </p>
+          )}
         </div>
       )}
       {rail && (

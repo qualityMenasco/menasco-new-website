@@ -685,7 +685,7 @@ function epcPageSections(): string[] {
       e.advantage.intro,
       ...(e.advantage.tabs as { heading: string; paragraphs: string[]; items: { title: string; body: string }[] }[]).map((tab) => doc(`### ${tab.heading}`, tab.paragraphs.join('\n\n'), titled(tab.items))),
     ),
-    doc(h2(e.controls.heading), (e.controls.paragraphs as string[]).join('\n\n'), titled(e.controls.items)),
+    doc(h2(e.controls.heading), (e.controls.paragraphs as string[]).join('\n\n')),
     doc(h2(e.industries.heading), e.industries.intro, titled(e.industries.items)),
   ];
 }
@@ -721,8 +721,9 @@ function mfgPageSections(): string[] {
     doc(h2(m.whiteSpaces.heading), (m.whiteSpaces.body as string[]).join('\n\n'), titled(m.whiteSpaces.items)),
     doc(h2(m.eHouses.heading), (m.eHouses.body as string[]).join('\n\n'), titled(m.eHouses.items), m.eHouses.note),
     doc(h2(m.range.heading), m.range.intro, ...(m.range.topics as { title: string; body: string; items: string[] }[]).map((topic) => doc(`### ${topic.title}`, topic.body, bullets(topic.items)))),
-    doc(h2(m.testing.heading), m.testing.intro, titled(m.testing.items), bullets((m.testing.standards as { code: string; label: string }[]).map((s) => `${s.code} (${s.label})`))),
+    // Page order: Factories above Testing & quality (2026-11-24).
     doc(h2(m.factories.heading), m.factories.intro, bullets((m.factories.countries as { name: string; body: string }[]).map((c) => `${c.name}: ${c.body}`))),
+    doc(h2(m.testing.heading), m.testing.intro, titled(m.testing.items), bullets((m.testing.standards as { code: string; label: string }[]).map((s) => `${s.code} (${s.label})`))),
     doc(h2(m.sectors.heading), titled(m.sectors.items)),
   ];
 }
@@ -794,7 +795,6 @@ function generateDataCenters() {
     // constraints, how MENASCO helps and its competitive advantage, with sources.
     doc(
       h2(`${dcTechnical.energy.eyebrow}: ${dcTechnical.energy.heading}`),
-      citeRefs(dcTechnical.energy.intro),
       ...dcTechnical.energy.markets.map((m) =>
         doc(
           `### ${dcTechnical.energy.frontTitlePrefix} ${m.inName}`,
