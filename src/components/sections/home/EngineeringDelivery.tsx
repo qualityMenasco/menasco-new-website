@@ -3,12 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { Section } from '../../layout/Section';
 import { Eyebrow, Heading, Text } from '../../typography/Typography';
 import { SmartLink } from '../../../lib/SmartLink';
+import { ImagePlaceholder } from '../../services/ServiceBlocks';
 
 interface CardProps {
   id: string;
-  image: string;
-  alt: string;
-  position: string;
+  /** Omit to show a placeholder (captioned with `placeholder`) until a photo is supplied. */
+  image?: string;
+  alt?: string;
+  placeholder?: string;
+  position?: string;
   eyebrow: string;
   heading: string;
   description: string;
@@ -22,20 +25,25 @@ interface CardProps {
  * link to the service page and eases in on hover; the body text sits below
  * the image.
  */
-function OverlayCard({ id, image, alt, position, eyebrow, heading, description, href, linkLabel }: CardProps) {
+function OverlayCard({ id, image, alt = '', placeholder = '', position = 'object-center', eyebrow, heading, description, href, linkLabel }: CardProps) {
   return (
     <article id={id} className="flex flex-col">
       <SmartLink
         href={href}
         className="group relative flex aspect-[16/10] items-end overflow-hidden rounded-md bg-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
       >
-        <img
-          src={image}
-          alt={alt}
-          loading="lazy"
-          decoding="async"
-          className={`absolute inset-0 h-full w-full object-cover ${position} transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-reduce:transition-none`}
-        />
+        {image ? (
+          <img
+            src={image}
+            alt={alt}
+            loading="lazy"
+            decoding="async"
+            className={`absolute inset-0 h-full w-full object-cover ${position} transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-reduce:transition-none`}
+          />
+        ) : (
+          // Caption sits in the upper part of the frame, clear of the heading at the bottom.
+          <ImagePlaceholder dark label={placeholder} className="absolute inset-0 !justify-start !rounded-none !border-0 !pt-10" />
+        )}
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/40 to-ink/0" />
         {/* Top corner (end side): small "Learn More" on a soft dark chip so it reads over any photo. */}
         <span className="absolute end-5 top-5 inline-flex items-center gap-1.5 rounded-full bg-ink/45 px-3 py-1.5 text-small font-semibold text-warmwhite backdrop-blur-sm xl:end-6 xl:top-6">
@@ -70,7 +78,7 @@ export function EngineeringDelivery() {
       <div className="grid grid-cols-2 gap-6">
         <OverlayCard
           id="bim"
-          image="/home-bim-coordination.jpg"
+          image="/Menasco_Engineers_Reviewing_BIM_Model.jpg"
           alt="Two Menasco engineers reviewing a coordinated 3D MEP model on a large display"
           position="object-[60%_35%]"
           eyebrow={t('digitalEngineering.eyebrow')}
@@ -81,9 +89,9 @@ export function EngineeringDelivery() {
         />
         <OverlayCard
           id="manufacturing"
-          image="/manufacturing-prefab-hero.jpg"
-          alt="Ductwork fabrication on the MENASCO manufacturing floor"
-          position="object-center"
+          // Client-supplied pump-skid module photo (2026-11-24), with the Modular Fabrication page's photo finish.
+          image="/home/Menasco_Pump_Skid_Module_Factory_Floor.jpg"
+          alt={t('prefabrication.imageAlt')}
           eyebrow={t('prefabrication.eyebrow')}
           heading={t('prefabrication.heading')}
           description={t('prefabrication.mobileDescription')}

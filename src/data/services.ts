@@ -35,7 +35,7 @@ export const services: ServiceDefinition[] = [
       'Modular MEP solutions',
     ],
     relatedSectors: ['hospitality-landmark-entertainment', 'advanced-technical-facilities'],
-    image: '/manufacturing-prefab-service-hero.jpg',  },
+    image: '/Menasco_Engineer_At_Construction_Site_Sunset.jpg',  },
   // Default/placeholder content (2026-10-29, image updated) — the user
   // explicitly asked for draft text here, to be replaced once real EPC copy
   // and project-specific photography are approved. This entry now only
@@ -63,7 +63,7 @@ export const services: ServiceDefinition[] = [
       'Handover & Close-Out Documentation',
     ],
     relatedSectors: ['residential-commercial', 'hospitality-landmark-entertainment', 'advanced-technical-facilities'],
-    image: '/Mechanical_Floor_Volante-2-2-3.jpg',
+    image: '/Menasco_Volante_Mechanical_Floor_Plant_Room.jpg',
   },
 ];
 
@@ -80,13 +80,16 @@ export const services: ServiceDefinition[] = [
  * available. Unused sub-service photos (mechanical/electrical/fire/custom)
  * are kept in public/services-listing/ for later use.
  */
-export const servicesListingHeroImage = '/services-listing/hero.webp';
-/** Desktop /services hero (portrait 4:5). The mobile hero keeps the landscape image above. */
-export const servicesListingHeroPortraitImage = '/about-hero-fire-suppression.jpg';
+/**
+ * /services hero photo, the same image on desktop (native 4:5 portrait) and tablets
+ * (landscape 4:3 crop): gloved hands wiring contactors in an electrical control
+ * panel, supplied by the client (2026-11-24).
+ */
+export const servicesListingHeroImage = '/services-listing/Menasco_Services_Hero_Electrical_Panel_Wiring.jpg';
 export const servicesListingUmbrellaImages: Record<string, string> = {
-  '/services/mep': '/services-listing/plumbing.webp',
-  '/services/civil': '/services-listing/bim.webp',
-  '/services/manufacturing-prefabrication': '/services-listing/modular.webp',
-  '/services/turnkey-developments': '/services-listing/epc.webp',
-  '/services/data-centers': '/services-listing/data-centers.webp',
+  '/services/mep': '/services-listing/Menasco_Service_MEP_Plant_Room.jpg',
+  '/services/civil': '/services-listing/Menasco_Service_BIM_Coordination_Office.jpg',
+  '/services/manufacturing-prefabrication': '/services-listing/Menasco_Service_Modular_Prefabrication_Hall.jpg',
+  '/services/turnkey-developments': '/services-listing/Menasco_Service_EPC_Plant_Room_Pipework.jpg',
+  '/services/data-centers': '/services-listing/Menasco_Service_Data_Center_Server_Hall.jpg',
 };

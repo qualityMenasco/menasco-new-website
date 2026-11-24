@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import { SITE_NAME, SITE_URL } from './constants';
+import { DEFAULT_SHARE_IMAGE, SITE_NAME, SITE_URL, toAbsoluteUrl } from './constants';
 import { getLocaleFromPath, directionForLocale, withLocale, stripLocale } from '../lib/locale';
 import { webPageJsonLd, breadcrumbJsonLd, serializeJsonLd, type WebPageType, type BreadcrumbEntry } from './structuredData';
 
@@ -77,12 +77,16 @@ export function SEO({ title, description, path, ogImage, noIndex = false, follow
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
       <meta property="og:locale" content={locale === 'ar' ? 'ar_AE' : 'en_US'} />
-      {ogImage && <meta property="og:image" content={ogImage} />}
+      {/* A page's own image (newsroom articles) or the default MENASCO logo share image. */}
+      <meta property="og:image" content={ogImage ?? toAbsoluteUrl(DEFAULT_SHARE_IMAGE.path)} />
+      {!ogImage && <meta property="og:image:width" content={String(DEFAULT_SHARE_IMAGE.width)} />}
+      {!ogImage && <meta property="og:image:height" content={String(DEFAULT_SHARE_IMAGE.height)} />}
+      {!ogImage && <meta property="og:image:alt" content={DEFAULT_SHARE_IMAGE.alt} />}
 
-      <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
-      {ogImage && <meta name="twitter:image" content={ogImage} />}
+      <meta name="twitter:image" content={ogImage ?? toAbsoluteUrl(DEFAULT_SHARE_IMAGE.path)} />
 
       {jsonLd.map((entry, index) => (
         <script key={index} type="application/ld+json">

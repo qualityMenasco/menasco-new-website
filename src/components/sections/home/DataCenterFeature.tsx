@@ -5,7 +5,7 @@ import { Container } from '../../layout/Container';
 import { Eyebrow, Heading } from '../../typography/Typography';
 import { SmartLink } from '../../../lib/SmartLink';
 
-const POSTER = '/data-center-poster.jpg';
+const POSTER = '/Menasco_Data_Center_Server_Racks_Film_Poster.jpg';
 
 export function DataCenterFeature() {
   const { t } = useTranslation('home');

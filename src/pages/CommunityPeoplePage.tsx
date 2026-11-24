@@ -172,7 +172,7 @@ export default function CommunityPeoplePage() {
       {/* 03 — Culture Day: a dark, cinematic band. The film is portrait (9:16), so it
           stands beside the copy rather than spanning the width. */}
       <ScrollReveal>
-        <Section spacing="lg" background="ink">
+        <Section spacing="lg" background="charcoal">
           <div className="grid grid-cols-12 items-center gap-8">
             <div className="col-span-6">
               <div className="flex items-center gap-4">

@@ -10,7 +10,15 @@ export const SITE_TAGLINE = 'Integrated MEP & Engineering Contractor';
  * production domain ever changes, update it in this one place only.
  */
 export const SITE_URL = 'https://menascogroup.com';
-export const SITE_LOGO_PATH = '/Menasco-Logo.png';
+export const SITE_LOGO_PATH = '/Menasco_Logo.png';
+/**
+ * Default link-preview image (og:image / twitter:image) for every page: the MENASCO logo
+ * (client-supplied dark logo, its black recomposited onto charcoal #15181c) centred on a
+ * charcoal PNG, 1200 x 630 (the size WhatsApp, LinkedIn, Facebook and X expect).
+ * Newsroom articles use their own photo instead and fall back to this (client decision
+ * 2026-11-24). Mirrored in api/_lib/newsroomSeo.ts — change both together.
+ */
+export const DEFAULT_SHARE_IMAGE = { path: '/Menasco_Share_Logo_Charcoal.png', width: 1200, height: 630, alt: 'MENASCO' } as const;
 
 /**
  * Social-sharing metadata (`og:image`, `twitter:image`, `NewsArticle.image`)

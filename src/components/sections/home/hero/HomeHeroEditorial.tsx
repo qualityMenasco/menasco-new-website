@@ -40,7 +40,7 @@ export function HomeHeroEditorial() {
       <video
         className="absolute inset-0 h-full w-full object-cover object-center"
         src="/menasco-landing-clean.mp4"
-        poster="/menasco-landing-clean-poster.jpg"
+        poster="/Menasco_Home_Hero_Ceiling_Services_Film_Poster.jpg"
         autoPlay
         muted
         loop

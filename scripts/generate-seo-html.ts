@@ -45,7 +45,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { SITE_URL } from '../src/seo/constants';
+import { DEFAULT_SHARE_IMAGE, SITE_URL, toAbsoluteUrl } from '../src/seo/constants';
 import { withLocale, directionForLocale } from '../src/lib/locale';
 import { webPageJsonLd, breadcrumbJsonLd, serializeJsonLd } from '../src/seo/structuredData';
 // The route registry (every addRoute call, locale loading, title helpers)
@@ -239,9 +239,14 @@ function buildHead(route: RouteMeta, locale: Locale): string {
     <meta property="og:description" content="${escapeHtml(description)}" />
     <meta property="og:url" content="${escapeHtml(url)}" />
     <meta property="og:locale" content="${locale === 'ar' ? 'ar_AE' : 'en_US'}" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content="${escapeHtml(toAbsoluteUrl(DEFAULT_SHARE_IMAGE.path))}" />
+    <meta property="og:image:width" content="${DEFAULT_SHARE_IMAGE.width}" />
+    <meta property="og:image:height" content="${DEFAULT_SHARE_IMAGE.height}" />
+    <meta property="og:image:alt" content="${escapeHtml(DEFAULT_SHARE_IMAGE.alt)}" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
+    <meta name="twitter:image" content="${escapeHtml(toAbsoluteUrl(DEFAULT_SHARE_IMAGE.path))}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

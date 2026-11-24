@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SITE_URL, SITE_NAME, toAbsoluteUrl, articleJsonLd, serializeJsonLd } from './_lib/newsroomSeo.js';
+import { SITE_URL, SITE_NAME, DEFAULT_SHARE_IMAGE_PATH, toAbsoluteUrl, articleJsonLd, serializeJsonLd } from './_lib/newsroomSeo.js';
 import { renderArticleBodyHtml, escapeHtml } from './_lib/newsroomArticleBody.js';
 import type { ArticleBodyImage, ArticleBodySection, ArticleBodyTag } from './_lib/newsroomArticleBody.js';
 import { isProductionLaunch } from './_lib/launchConfig.js';
@@ -139,6 +139,8 @@ export function buildArticleHtml(article: PublicArticle, locale: Locale): string
   // deliberate (see doc comment above), not a bug.
   const canonicalUrl = enUrl;
   const absoluteImage = article.primaryImage ? toAbsoluteUrl(article.primaryImage.url) : undefined;
+  // Link previews: the article's own photo, else the site-wide MENASCO logo share image.
+  const shareImage = absoluteImage ?? toAbsoluteUrl(DEFAULT_SHARE_IMAGE_PATH);
   // A non-launched deployment (preview/branch/local — see
   // api/_lib/launchConfig.ts) overrides even a normally-indexable English
   // article to the strict `noindex, nofollow` every other page on such a
@@ -166,11 +168,11 @@ export function buildArticleHtml(article: PublicArticle, locale: Locale): string
     <meta property="og:title" content="${escapeHtml(title)}" />
     <meta property="og:description" content="${escapeHtml(description)}" />
     <meta property="og:url" content="${escapeHtml(localeUrl)}" />
-    ${absoluteImage ? `<meta property="og:image" content="${escapeHtml(absoluteImage)}" />` : ''}
-    <meta name="twitter:card" content="${absoluteImage ? 'summary_large_image' : 'summary'}" />
+    <meta property="og:image" content="${escapeHtml(shareImage)}" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
-    ${absoluteImage ? `<meta name="twitter:image" content="${escapeHtml(absoluteImage)}" />` : ''}
+    <meta name="twitter:image" content="${escapeHtml(shareImage)}" />
     <script type="application/ld+json">${serializeJsonLd(jsonLd)}</script>`;
 
   const body = renderArticleBodyHtml({

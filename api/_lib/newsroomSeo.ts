@@ -20,6 +20,8 @@
 
 export const SITE_NAME = 'MENASCO';
 export const SITE_URL = 'https://menascogroup.com';
+/** Mirrors src/seo/constants.ts's DEFAULT_SHARE_IMAGE.path (logo on charcoal, 1200 x 630). */
+export const DEFAULT_SHARE_IMAGE_PATH = '/Menasco_Share_Logo_Charcoal.png';
 
 /** Mirrors src/seo/constants.ts's toAbsoluteUrl exactly. */
 export function toAbsoluteUrl(path: string): string {
@@ -50,7 +52,7 @@ export function articleJsonLd({ title, description, path, datePublished, image }
       name: SITE_NAME,
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_URL}/Menasco-Logo.png`,
+        url: `${SITE_URL}/Menasco_Logo.png`,
       },
     },
   };

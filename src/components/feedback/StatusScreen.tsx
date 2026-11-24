@@ -32,10 +32,10 @@ export function StatusScreen({ kind, standalone = false, onRetry }: StatusScreen
       <div className="flex w-full max-w-xl flex-col items-center text-center">
         {standalone ? (
           <SmartLink href="/" aria-label={t('errorPages.homeLabel')}>
-            <img src="/Menasco-Logo.png" alt="MENASCO" className="h-10 w-auto md:h-12" />
+            <img src="/Menasco_Logo.png" alt="MENASCO" className="h-10 w-auto md:h-12" />
           </SmartLink>
         ) : (
-          <img src="/Menasco-Logo.png" alt="MENASCO" className="h-10 w-auto md:h-12" />
+          <img src="/Menasco_Logo.png" alt="MENASCO" className="h-10 w-auto md:h-12" />
         )}
 
         <p className="mt-10 font-display text-[clamp(4.5rem,3.5rem+4vw,7rem)] font-semibold leading-none tracking-tight text-brand-600/15" aria-hidden="true">

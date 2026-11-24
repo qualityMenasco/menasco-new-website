@@ -38,7 +38,7 @@ export const mepSubServiceDrafts: ServiceDefinition[] = [
       'Testing and Commissioning',
     ],
     relatedSectors: ['residential-commercial', 'hospitality-landmark-entertainment', 'advanced-technical-facilities'],
-    image: '/mechanical.jpg',
+    image: '/Menasco_Mechanical_Plant_Room_Panorama.jpg',
   },
   {
     id: 'electrical',
@@ -74,7 +74,7 @@ export const mepSubServiceDrafts: ServiceDefinition[] = [
       'Testing, Commissioning & System Integration',
     ],
     relatedSectors: ['residential-commercial', 'hospitality-landmark-entertainment', 'advanced-technical-facilities'],
-    image: '/electrical.jpg',
+    image: '/Menasco_Electrical_Services_Room_Panorama.jpg',
   },
   {
     id: 'plumbing',
@@ -107,6 +107,6 @@ export const mepSubServiceDrafts: ServiceDefinition[] = [
       'Testing, Flushing, Disinfection & Commissioning',
     ],
     relatedSectors: ['residential-commercial', 'hospitality-landmark-entertainment', 'advanced-technical-facilities'],
-    image: '/plumbing.jpg',
+    image: '/Menasco_Bathroom_Fit_Out_Panorama.jpg',
   },
 ];

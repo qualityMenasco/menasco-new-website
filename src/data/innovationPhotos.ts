@@ -19,10 +19,10 @@ export interface InnovationPhoto {
  */
 export const innovationHeroFilm = {
   src: '/innovation/innovation-film.mp4',
-  poster: '/innovation/innovation-film-poster.jpg',
+  poster: '/innovation/Menasco_Innovation_Film_Poster.jpg',
 };
 
 export const innovationHeroPhotos: InnovationPhoto[] = [
-  { src: '/innovation/robot-sponsor.jpg', alt: 'A humanoid robot waving beside the MENASCO Silver Sponsor logo at a technology event', focus: '50% 0%' },
-  { src: '/innovation/robot-closeup.jpg', alt: 'A humanoid robot with a glowing blue visor on display at a technology event' },
+  { src: '/innovation/Menasco_Humanoid_Robot_Silver_Sponsor.jpg', alt: 'A humanoid robot waving beside the MENASCO Silver Sponsor logo at a technology event', focus: '50% 0%' },
+  { src: '/innovation/Menasco_Humanoid_Robot_Closeup.jpg', alt: 'A humanoid robot with a glowing blue visor on display at a technology event' },
 ];

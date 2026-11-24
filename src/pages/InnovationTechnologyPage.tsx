@@ -140,7 +140,7 @@ type Chapter = {
 const chapters: Chapter[] = [
   {
     key: 'atlas',
-    image: '/innovation/atlas.jpg',
+    image: '/innovation/Menasco_ATLAS_Tender_Platform_Engineers.jpg',
     imageAlt: 'MENASCO engineers reviewing tender documents at a desk, with the word ATLAS and compliance-scan markers',
     // Applies to the short name "ATLAS"; its full meaning is set small beneath.
     titleClass: 'text-[clamp(3.25rem,5.6vw,5rem)]',
@@ -149,7 +149,7 @@ const chapters: Chapter[] = [
   },
   {
     key: 'lynxqc',
-    image: '/innovation/lynx.jpg',
+    image: '/innovation/Menasco_LYNX_QA_QC_Managers_On_Site.jpg',
     imageAlt: "MENASCO's QA/QC manager and an engineer inspecting ductwork on site, with the word LYNX and issue markers",
     titleClass: 'text-[clamp(3.25rem,5.6vw,5rem)]',
     theme: 'dark',
@@ -157,7 +157,7 @@ const chapters: Chapter[] = [
   },
   {
     key: 'ai',
-    image: '/innovation/ai.jpg',
+    image: '/innovation/Menasco_AI_Quantity_Takeoff_Drawings.jpg',
     imageAlt: 'MENASCO engineers working over MEP drawings, with the letters AI and quantity markers on the fixtures',
     titleClass: 'text-[clamp(3.25rem,5.6vw,5rem)]',
     theme: 'stone',
@@ -165,7 +165,7 @@ const chapters: Chapter[] = [
   },
   {
     key: 'connect',
-    image: '/innovation/connect.jpg',
+    image: '/innovation/Menasco_Connect_Site_Workforce_Check_In.jpg',
     imageAlt: 'MENASCO site workforce walking onto a construction site, with the word CONNECT and check-in markers',
     titleClass: 'text-[clamp(3.25rem,5.6vw,5rem)]',
     theme: 'light',

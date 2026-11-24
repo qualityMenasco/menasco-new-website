@@ -3,8 +3,7 @@
     "eyebrow": "What We Deliver",
     "heading": "Integrated MEP services",
     "description": "MEP works form the foundation of our expertise, supported by a broad range of complementary capabilities to meet complex project requirements. Strategic civil partnerships enable unified delivery of wider construction scopes, while established procurement networks and exclusive vendor relationships strengthen our EPC offering. With fabrication capabilities across three countries and specialized expertise in data centers and mission-critical infrastructure, we deliver projects ranging from modular MEP installations to highly redundant, technically demanding facilities.",
-    "heroImageAlt": "Rooftop cooling towers and plant equipment above a city skyline at dusk",
-    "heroPortraitImageAlt": "Fire suppression riser assembly with control valves and actuator stations in a MENASCO-installed plant room",
+    "heroImageAlt": "Gloved hands working on contactors and colour-coded wiring inside an electrical control panel",
     "sectorSolution": "Sector solution",
     "delivery": {
       "stepsLabel": "Delivery steps",
@@ -451,7 +450,7 @@
       "description": "MENASCO manufactures and prefabricates MEP systems in-house across the UAE, Saudi Arabia and Egypt. Data center white spaces, E-Houses, switchgear, ductwork and modular assemblies are built and tested under factory control, then delivered ready to install.",
       "primaryCta": "View the product range",
       "secondaryCta": "Explore Portfolio",
-      "placeholder": "Factory floor: modules in production",
+      "imageAlt": "A prefabricated pump skid with large-bore pipework and valves on the fabrication floor",
       "proofLabel": "At a glance",
       "proof": [
         {
@@ -522,7 +521,7 @@
         }
       ],
       "cta": "Data center capability",
-      "placeholder": "Prefabricated white space module"
+      "imageAlt": "A prefabricated pipe-rack module with insulated pipework on the factory floor"
     },
     "eHouses": {
       "eyebrow": "E-Houses",
@@ -550,7 +549,7 @@
         }
       ],
       "note": "Suited to data centers, utilities, industrial plants and remote sites where a conventionally built electrical room would hold up the programme.",
-      "placeholder": "E-House on its transport frame"
+      "imageAlt": "Rows of white electrical switchgear cabinets under overhead lighting in an electrical room"
     },
     "range": {
       "eyebrow": "Product Range",
@@ -648,25 +647,22 @@
       "heading": "Manufacturing in Three Countries",
       "intro": "MENASCO manufactures in the UAE, Saudi Arabia and Egypt. Producing close to the project shortens logistics, supports local content requirements and keeps capacity available when one market is busy.",
       "figures": [
-        "Factory area",
-        "Manufacturing team"
+        "Factory area"
       ],
       "countries": [
         {
           "name": "United Arab Emirates",
           "body": "Serving projects across the UAE and the wider GCC.",
           "values": [
-            "[ ] m²",
-            "[ ]"
+            "281,000 sq ft"
           ],
-          "imageAlt": "Palm Jumeirah and the Dubai coastline, photographed from the International Space Station"
+          "imageAlt": "Palm Jumeirah and The World islands off the Dubai coast, photographed from space"
         },
         {
           "name": "Saudi Arabia",
           "body": "Producing in the Kingdom for Saudi projects and local content requirements.",
           "values": [
-            "[ ] m²",
-            "[ ]"
+            "[ ] sq ft"
           ],
           "imageAlt": "Central Riyadh's street grid, photographed from the International Space Station"
         },
@@ -674,8 +670,7 @@
           "name": "Egypt",
           "body": "Producing locally for Egyptian and regional projects, so finished modules do not need to be imported.",
           "values": [
-            "[ ] m²",
-            "[ ]"
+            "[ ] sq ft"
           ],
           "imageAlt": "The Giza pyramids beside Cairo and the Nile, photographed from the International Space Station"
         }
@@ -1273,7 +1268,7 @@
       "description": "MENASCO coordinates civil and structural construction with its MEP engineering and site execution under one project structure, working with established specialist civil partners. From site preparation and foundations to underground utilities and equipment infrastructure, clients deal with fewer contractual interfaces and clearer accountability.",
       "primaryCta": "Explore civil capabilities",
       "secondaryCta": "View Projects",
-      "placeholder": "Civil works: foundations and underground services in progress"
+      "imageAlt": "Aerial view into a foundation excavation, with rebar, formwork, an excavator and tower cranes"
     },
     "approach": {
       "eyebrow": "Our approach",

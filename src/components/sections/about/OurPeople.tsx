@@ -4,7 +4,7 @@ import { Stack } from '../../layout/Stack';
 import { Eyebrow, Heading, Text } from '../../typography/Typography';
 
 // Portrait frame, anchored to the bottom so both his face and the MENASCO logo on the vest show.
-const OUR_PEOPLE_IMAGE = '/about-our-people.jpg';
+const OUR_PEOPLE_IMAGE = '/Menasco_Our_People_Engineer_Portrait.jpg';
 
 /** "Our People" — alternates image-left against WhoWeAre's image-right above. */
 export function OurPeople() {

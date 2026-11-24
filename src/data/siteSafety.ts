@@ -3,9 +3,10 @@
  * desktop and mobile trees.
  *
  * The portraits are frames from MENASCO's site safety reel, cropped above
- * their burned-in captions and upscaled 2x. The landscape is the
- * Manufacturing page's sunset site photo, colour-matched to the portraits
- * as its own file so that page keeps the original.
+ * their burned-in captions and upscaled 2x. The landscape (Safety column) is hard hats
+ * in yellow storage cages, supplied by the client 2026-11-24 and colour-matched to the
+ * Quality portrait: lifted blacks, capped highlights, chroma reduced to ~63% and a cool
+ * highlight tint, all measured from that photo.
  */
 export interface FeaturedPhoto {
   src: string;
@@ -14,15 +15,15 @@ export interface FeaturedPhoto {
 
 export const qualitySafetyPhotos: { portraits: [FeaturedPhoto, FeaturedPhoto]; landscape: FeaturedPhoto } = {
   portraits: [
-    { src: '/safety/site-safety-engineer.jpg', alt: 'A MENASCO site engineer in full PPE on a rebar deck' },
-    { src: '/safety/site-safety-team.jpg', alt: 'Two MENASCO safety team members in hard hats and high-visibility vests reviewing work on site' },
+    { src: '/safety/Menasco_Site_Engineer_Full_PPE_Rebar_Deck.jpg', alt: 'A MENASCO site engineer in full PPE on a rebar deck' },
+    { src: '/safety/Menasco_Site_Engineers_Reviewing_Work.jpg', alt: 'Two MENASCO safety team members in hard hats and high-visibility vests reviewing work on site' },
   ],
-  landscape: { src: '/safety/site-sunset-graded.jpg', alt: 'A MENASCO site engineer overlooking an active construction site at sunset' },
+  landscape: { src: '/safety/Menasco_Safety_Hard_Hats_In_Storage_Cages.jpg', alt: 'Rows of safety hard hats stored in yellow mesh cages' },
 };
 
 /** Hero photo (753×1280, portrait), shown in black and white under the technical annotations. */
 export const qhseHeroPhoto: FeaturedPhoto = {
-  src: '/about/quality-site.jpg',
+  src: '/about/Menasco_QA_QC_Inspection_Completed_Building.jpg',
   alt: "MENASCO's QA/QC manager and an engineer in high-visibility vests inspecting a completed building",
 };
 

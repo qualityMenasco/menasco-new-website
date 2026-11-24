@@ -36,7 +36,7 @@ import { sectorImages } from '../data/homeSectors';
  * No "Selected EPC projects" section until EPC project scopes are verified
  * (client decision 2026-11-23). Copy: services `epcPage.*` (EN + AR).
  * Images are placeholders until photography is supplied, except the sector cards,
- * which reuse the home page sector photos.
+ * which use the site-wide sector photo set.
  */
 
 const PATH = '/services/turnkey-developments';
@@ -57,16 +57,13 @@ const LINKS = {
 const CAPABILITY_LINKS = [[LINKS.mep], [`#${ADVANTAGE_ANCHOR}`], [LINKS.civil, LINKS.mep]];
 /**
  * Sector cards, in the order of `industries.items` (photo + onward link).
- * Photos read live from the home page's "Where we work" tiles
- * (src/data/homeSectors.ts), so changing a home tile photo changes the matching
- * EPC card too, except Energy & utilities, which shows a DEWA substation project
- * photo (dewa-substations-5 hero, self-hosted: the Drive original is 738px wide).
- * Client decisions 2026-11-23.
+ * Photos come from the site-wide sector set (src/data/homeSectors.ts), the same
+ * four used on the home page, with no per-page exceptions (client request 2026-11-24).
  */
 // Every card opens the project portfolio with its own sector filter selected (client request 2026-11-23).
 const INDUSTRIES: { image: string; href: string }[] = [
   { image: sectorImages['advanced-technical-facilities'], href: `${LINKS.projects}?category=advanced-technical-facilities` },
-  { image: '/epc/energy-substation.webp', href: `${LINKS.projects}?category=infrastructure-utilities` },
+  { image: sectorImages['infrastructure-utilities'], href: `${LINKS.projects}?category=infrastructure-utilities` },
   { image: sectorImages['hospitality-landmark-entertainment'], href: `${LINKS.projects}?category=hospitality-landmark-entertainment` },
   { image: sectorImages['residential-commercial'], href: `${LINKS.projects}?category=residential-commercial` },
 ];

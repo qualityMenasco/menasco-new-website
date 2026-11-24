@@ -8,7 +8,7 @@ import { PhotoPlaceholder } from './PhotoPlaceholder';
 
 /** Site photo (753×1280) shown in the 4:5 slot, framed low to keep both vests in view. Without a `src` the slot shows a placeholder. */
 const photo: { src?: string; alt?: string } = {
-  src: '/about/quality-site.jpg',
+  src: '/about/Menasco_QA_QC_Inspection_Completed_Building.jpg',
   alt: "MENASCO's QA/QC manager and an engineer in high-visibility vests inspecting a completed building",
 };
 

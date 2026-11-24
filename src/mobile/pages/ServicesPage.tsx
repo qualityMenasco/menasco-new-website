@@ -66,7 +66,7 @@ export default function ServicesPage() {
             <img
               src={servicesListingHeroImage}
               alt={t('services:listing.heroImageAlt')}
-              className="h-full w-full object-cover object-[70%_50%]"
+              className="h-full w-full object-cover object-[50%_45%]"
             />
             <PhotoTreatment />
           </div>

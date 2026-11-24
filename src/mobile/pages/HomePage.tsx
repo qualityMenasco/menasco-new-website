@@ -189,9 +189,10 @@ export default function HomePage() {
           with a bottom gradient for legibility and one outlined button. */}
       <section className="bg-stone px-4 pb-8 pt-5 md:px-8 md:py-12">
         <div className="relative flex min-h-[26rem] items-end overflow-hidden rounded-md bg-ink md:min-h-[24rem]">
+          {/* Client-supplied pump-skid module photo (2026-11-24), with the Modular Fabrication page's photo finish. */}
           <img
-            src="/manufacturing-prefab-hero.jpg"
-            alt="Ductwork fabrication on the MENASCO manufacturing floor"
+            src="/home/Menasco_Pump_Skid_Module_Factory_Floor.jpg"
+            alt={t('home:prefabrication.imageAlt')}
             loading="lazy"
             decoding="async"
             className="absolute inset-0 h-full w-full object-cover"
@@ -228,7 +229,7 @@ export default function HomePage() {
       </div>
 
       {/* 10. QHSE — dark band: the pillars and one button to the Quality & Safety page. */}
-      <section className="bg-ink px-4 py-8 md:px-8 md:py-12">
+      <section className="bg-charcoal px-4 py-8 md:px-8 md:py-12">
         <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-400">{t('home:qualitySafety.eyebrow')}</span>
         <h3 className="mt-2 font-display text-h2 font-semibold tracking-tight text-warmwhite text-balance">{t('home:qualitySafety.heading')}</h3>
         <ul role="list" className="mt-5 divide-y divide-white/10 border-y border-white/10 md:grid md:grid-cols-3 md:gap-6 md:divide-y-0">

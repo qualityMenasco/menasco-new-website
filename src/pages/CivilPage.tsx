@@ -35,11 +35,19 @@ import { cn } from '../lib/utils';
  * Calls to action: buttons only in the hero and the closing band; elsewhere one
  * contextual text link where it helps the reader go deeper. No projects or
  * statistics section until civil scopes and figures are verified (client
- * decision 2026-11-23). Images are placeholders. Copy: services `civilPage.*`.
+ * decision 2026-11-23). Hero is a CC0 photo; other images are placeholders. Copy: services `civilPage.*`.
  */
 
 const PATH = '/services/civil';
 const CAPABILITIES_ANCHOR = 'civil-capabilities';
+/**
+ * Hero photo: aerial view into a foundation excavation (rebar, formwork, cranes).
+ * "View Above Construction Site" by chuttersnap (Unsplash, 2017), CC0 public domain
+ * dedication via Wikimedia Commons: no attribution required. Cropped to 4:5
+ * (1200 x 1500, plus an 800 px copy). Added 2026-11-24, client request.
+ */
+const HERO_IMAGE = '/civil/Menasco_Civil_Foundation_Excavation_Aerial.jpg';
+const HERO_IMAGE_800 = '/civil/Menasco_Civil_Foundation_Excavation_Aerial_800.jpg';
 /** Anchor for the "BIM & Digital Engineering" item in the Services menu (src/data/navigation.ts). */
 const BIM_ANCHOR = 'bim-digital-engineering';
 
@@ -121,9 +129,19 @@ function Hero() {
             </ButtonLink>
           </div>
         </div>
-        {/* Placeholder only where text and image sit side by side (desktop); phones and tablets keep the hero short. */}
+        {/* Photo only where text and image sit side by side (desktop); phones and tablets keep the hero short. */}
         <div className="hidden lg:col-span-5 lg:col-start-8 lg:block">
-          <ImagePlaceholder label={t('civilPage.hero.placeholder')} className="aspect-[4/5]" />
+          <div className="aspect-[4/5] overflow-hidden rounded-md bg-gray-100">
+            <img
+              src={HERO_IMAGE}
+              srcSet={`${HERO_IMAGE_800} 800w, ${HERO_IMAGE} 1200w`}
+              sizes="(min-width: 1280px) 490px, 40vw"
+              alt={t('civilPage.hero.imageAlt')}
+              className="h-full w-full object-cover"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
         </div>
       </div>
     </Section>

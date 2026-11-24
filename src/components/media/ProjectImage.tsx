@@ -41,7 +41,7 @@ export function ProjectImage({ src, alt, priority = false, imgClassName }: Proje
 
       {status === 'error' ? (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-          <img src="/Menasco-Logo.png" alt="" aria-hidden="true" className="w-[36%] opacity-15" />
+          <img src="/Menasco_Logo.png" alt="" aria-hidden="true" className="w-[36%] opacity-15" />
         </div>
       ) : (
         <img

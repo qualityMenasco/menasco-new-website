@@ -101,7 +101,7 @@
         "description": "Electrical, mechanical and utility systems for substations, pumping stations and essential networks."
       },
       "residentialCommercial": {
-        "title": "RESIDENTIAL & COMMERCIAL DEVELOPMENTS",
+        "title": "Residential & Commercial Developments",
         "description": "Integrated MEP for residential communities, commercial towers and mixed-use developments."
       },
       "hospitalityLandmarkEntertainment": {
@@ -140,6 +140,7 @@
     "heading": "Manufactured with Precision.",
     "description": "MENASCO’s off-site manufacturing & MEP prefabrication capabilities support faster, safer & more consistent project delivery. Through controlled production environments, we manufacture HVAC ductwork & prefabricate selected MEP components & modular assemblies in accordance with approved drawings, project specifications & quality standards.\n\nBy completing more work away from the construction site, we help improve quality control, reduce material waste and site congestion, minimize installation risks & accelerate on-site progress across large-scale and technically demanding projects.",
     "cta": "Explore manufacturing",
+    "imageAlt": "A prefabricated pump skid module with pumps, valves and pipework in its steel frame on the factory floor",
     "mobileDescription": "Off-site production of HVAC ductwork, prefabricated MEP components and modular assemblies in controlled environments, for faster, safer and more consistent delivery on site."
   },
   "qualitySafety": {

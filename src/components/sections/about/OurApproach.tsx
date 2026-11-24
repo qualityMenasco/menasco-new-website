@@ -5,11 +5,11 @@ import { Eyebrow, Heading, Text } from '../../typography/Typography';
 import { AutoplayVideo } from '../../common/AutoplayVideo';
 
 /** "What drives every milestone" reel, trimmed and cleaned of its Instagram overlay. 768×1104 portrait. */
-const FILM = { src: '/about/what-drives-every-milestone.mp4', poster: '/about/what-drives-every-milestone-poster.jpg' };
+const FILM = { src: '/about/what-drives-every-milestone.mp4', poster: '/about/Menasco_What_Drives_Every_Milestone_Film_Poster.jpg' };
 
 /** Photo beside the film, with the approach statement beneath it. */
 const PHOTO = {
-  src: '/about/approach-engineer.jpg',
+  src: '/about/Menasco_Engineer_Reviewing_Drawings.jpg',
   alt: 'A MENASCO engineer in a hard hat and high-visibility vest reviewing drawings, under the MENASCO name',
 };
 

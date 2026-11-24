@@ -64,7 +64,7 @@ export function QualityAndSafety() {
   useEyebrowFitToHeading(lockupRef);
 
   return (
-    <Section background="ink" spacing="md">
+    <Section background="charcoal" spacing="md">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center lg:gap-x-10">
         <div ref={lockupRef} className="flex flex-col gap-4 lg:col-span-5 xl:col-span-4">
           <Eyebrow theme="dark">{t('qualitySafety.eyebrow')}</Eyebrow>

@@ -10,7 +10,7 @@ import { regionalCountries } from '../../../data/locations';
 import { useTransparentHeader } from '../../../app/header-transparency';
 
 /** Silent portrait film of MENASCO's people on site (768×1332): Instagram reel, app overlay cropped out, upscaled 2x, audio removed. */
-const FILM = { src: '/about/about-hero-film.mp4', poster: '/about/about-hero-film-poster.jpg' };
+const FILM = { src: '/about/about-hero-film.mp4', poster: '/about/Menasco_Engineer_Hard_Hat_On_Site_Film_Poster.jpg' };
 
 /**
  * About page opener: title, introduction and headline stats beside a silent

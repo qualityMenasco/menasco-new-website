@@ -37,7 +37,7 @@ export default function AboutPage() {
         {/* The desktop header's people film behind a cover photo: only the photo loads
             until it's tapped, then the film plays full screen (it's a silent clip). */}
         <PhotoWithVideo
-          image={{ src: '/about/approach-engineer.jpg', alt: t('hero.filmAlt') }}
+          image={{ src: '/about/Menasco_Engineer_Reviewing_Drawings.jpg', alt: t('hero.filmAlt') }}
           video="/about/about-hero-film.mp4"
           hasAudio={false}
           className="mt-5 aspect-[4/3] md:col-start-2 md:row-span-2 md:row-start-1 md:mt-0 md:aspect-[4/5] [&_img]:object-[50%_38%]"
@@ -117,7 +117,7 @@ export default function AboutPage() {
       <section className="grid px-4 py-8 md:grid-cols-2 md:items-center md:gap-x-8 md:py-12">
         <div className="aspect-[4/3] overflow-hidden rounded-md bg-gray-100 md:order-2 md:aspect-[4/5]">
           <img
-            src="/about/quality-site.jpg"
+            src="/about/Menasco_QA_QC_Inspection_Completed_Building.jpg"
             alt="MENASCO's QA/QC manager and an engineer in high-visibility vests inspecting a completed building"
             loading="lazy"
             decoding="async"

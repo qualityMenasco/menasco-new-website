@@ -1,6 +1,6 @@
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { BulletList, ClampedParagraphs, DisclosureList, ImagePlaceholder, RailList, RowTabs } from '../components/services/ServiceBlocks';
+import { BulletList, ClampedParagraphs, DisclosureList, RailList, RowTabs } from '../components/services/ServiceBlocks';
 import { Section } from '../components/layout/Section';
 import { Eyebrow, Heading } from '../components/typography/Typography';
 import { HeroH1 } from '../components/typography/HeroH1';
@@ -23,7 +23,8 @@ import { cn } from '../lib/utils';
  *   4. E-Houses (featured): complete prefabricated electrical rooms.
  *   5. Product range (#custom): the rest of the in-house range as tabs.
  *   6. Testing & quality: factory tests and certified management systems.
- *   7. Factories in the UAE, Saudi Arabia and Egypt (ISS night photos; figures pending from the client).
+ *   7. Factories in the UAE, Saudi Arabia and Egypt: one figure per card, factory area in sq ft
+ *      (UAE 281,000 sq ft; Saudi Arabia and Egypt pending). Manufacturing team removed 2026-11-24.
  *   8. Sectors served.
  *   9. FAQ, then a short closing band.
  *
@@ -40,14 +41,27 @@ const PATH = '/services/manufacturing-prefabrication';
  * Factory cards, in the order of `factories.countries` (UAE, Saudi Arabia, Egypt):
  * NASA daytime photographs from the International Space Station (telephoto
  * lenses), public domain, no attribution required (images.nasa.gov):
- *   uae          iss074e0825656  Palm Jumeirah and the Dubai coast (560 mm), centred on the Palm
+ *   uae          Palm Jumeirah and The World islands off the Dubai coast, supplied by the client
+ *                2026-11-24 (replaced iss074e0825656); top of the open sea trimmed to 16:10
  *   saudi-arabia iss069e004755   central Riyadh street grid (400 mm)
  *   egypt        iss032e009123   Giza pyramids beside Cairo and the Nile (1200 mm)
  * Tight 16:10 crops (about 2,300–2,700 px of the original each, so the cards show near-native
  * detail), haze and colour cast removed with per-channel levels, sharpened after the final
  * resize; 1200×750 plus 800×500 (-800). Swap for real factory photography when supplied.
  */
-const FACTORY_IMAGES = ['/manufacturing/factories/uae.webp', '/manufacturing/factories/saudi-arabia.webp', '/manufacturing/factories/egypt.webp'];
+const FACTORY_IMAGES = ['/manufacturing/factories/Menasco_UAE_Palm_Jumeirah_Aerial.jpg', '/manufacturing/factories/Menasco_Saudi_Arabia_Riyadh_Aerial.jpg', '/manufacturing/factories/Menasco_Egypt_Giza_Cairo_Aerial.jpg'];
+
+/**
+ * Hero, White Spaces and E-Houses photos (2026-11-24), all supplied by the client. The
+ * E-Houses photo is a 4:5 portrait shown in a landscape frame, framed on the cabinet rows.
+ * All three share one finish baked into the files so they read as a set: partial grey-world white
+ * balance, median luminance 0.46, contrast 1.08, saturation 0.90, 22% corner vignette.
+ */
+const PHOTOS = {
+  hero: '/manufacturing/Menasco_Prefabricated_Pump_Skid.jpg',
+  whiteSpaces: '/manufacturing/Menasco_White_Space_Pipe_Rack_Module.jpg',
+  eHouses: '/manufacturing/Menasco_E_House_Switchgear_Cabinets.jpg',
+};
 
 interface TitleBody {
   title: string;
@@ -128,9 +142,11 @@ function Hero() {
             ))}
           </dl>
         </div>
-        {/* Portrait placeholder only where text and image sit side by side (desktop), as on the MEP page. */}
+        {/* Portrait photo only where text and image sit side by side (desktop), as on the MEP page. */}
         <div className="hidden lg:col-span-5 lg:col-start-8 lg:block">
-          <ImagePlaceholder dark label={t('manufacturingPage.hero.placeholder')} className="aspect-[4/5]" />
+          <div className="aspect-[4/5] overflow-hidden rounded-md bg-gray-900">
+            <img src={PHOTOS.hero} alt={t('manufacturingPage.hero.imageAlt')} className="h-full w-full object-cover" loading="eager" decoding="async" />
+          </div>
         </div>
       </div>
     </Section>
@@ -194,7 +210,9 @@ function WhiteSpaces() {
           </div>
         </ScrollReveal>
         <div className="md:col-span-5">
-          <ImagePlaceholder dark label={t('manufacturingPage.whiteSpaces.placeholder')} className="aspect-[16/9] md:aspect-[4/3]" />
+          <div className="aspect-[16/9] overflow-hidden rounded-md bg-gray-900 md:aspect-[4/3]">
+            <img src={PHOTOS.whiteSpaces} alt={t('manufacturingPage.whiteSpaces.imageAlt')} className="h-full w-full object-cover" loading="lazy" decoding="async" />
+          </div>
         </div>
       </div>
       <h3 className="mt-10 font-display text-caption font-semibold uppercase tracking-widest text-brand-400 rtl:tracking-normal md:mt-12">
@@ -233,7 +251,9 @@ function EHouses() {
           <ClampedParagraphs id="mfg-ehouse-text" paragraphs={body} />
         </ScrollReveal>
         <div className="md:col-span-5">
-          <ImagePlaceholder label={t('manufacturingPage.eHouses.placeholder')} className="aspect-[16/9] md:aspect-[4/3]" />
+          <div className="aspect-[16/9] overflow-hidden rounded-md bg-gray-100 md:aspect-[4/3]">
+            <img src={PHOTOS.eHouses} alt={t('manufacturingPage.eHouses.imageAlt')} className="h-full w-full object-cover object-[50%_58%]" loading="lazy" decoding="async" />
+          </div>
         </div>
       </div>
       <div className="mt-8 md:mt-12">
@@ -374,12 +394,12 @@ function Factories() {
         {countries.map((country, index) => (
           <li key={country.name} className="flex flex-col overflow-hidden rounded-md border border-white/10 bg-white/[0.04]">
             <div className="aspect-[16/10] overflow-hidden border-b border-white/10 bg-gray-900">
-              <img src={FACTORY_IMAGES[index]} srcSet={`${FACTORY_IMAGES[index].replace('.webp', '-800.webp')} 800w, ${FACTORY_IMAGES[index]} 1200w`} sizes="(min-width: 768px) 33vw, 82vw" alt={country.imageAlt} loading="lazy" decoding="async" width={1200} height={750} className="h-full w-full object-cover" />
+              <img src={FACTORY_IMAGES[index]} srcSet={`${FACTORY_IMAGES[index].replace('.jpg', '_800.jpg')} 800w, ${FACTORY_IMAGES[index]} 1200w`} sizes="(min-width: 768px) 33vw, 82vw" alt={country.imageAlt} loading="lazy" decoding="async" width={1200} height={750} className="h-full w-full object-cover" />
             </div>
             <div className="flex flex-1 flex-col p-5">
               <h3 className="font-display text-h4 font-semibold text-white">{country.name}</h3>
               <p className="mt-2 text-small leading-relaxed text-gray-300">{country.body}</p>
-              <dl className="mt-auto grid grid-cols-2 gap-4 border-t border-white/10 pt-4">
+              <dl className="mt-auto border-t border-white/10 pt-4">
                 {figures.map((label, i) => (
                   <div key={label}>
                     <dt className="text-caption text-gray-400">{label}</dt>

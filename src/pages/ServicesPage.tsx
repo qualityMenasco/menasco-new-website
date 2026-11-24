@@ -7,7 +7,7 @@ import { ServicesBento } from '../components/services/ServicesBento';
 import { ServicesFaq } from '../components/services/ServicesFaq';
 import { ServicesDelivery } from '../components/services/ServicesDelivery';
 import { PhotoTreatment } from '../components/media/TreatedPhoto';
-import { servicesListingHeroPortraitImage } from '../data/services';
+import { servicesListingHeroImage } from '../data/services';
 import { SEO } from '../seo/SEO';
 
 /**
@@ -51,9 +51,9 @@ export default function ServicesPage() {
             {/* Portrait (4:5) hero photo. */}
             <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-gray-100">
               <img
-                src={servicesListingHeroPortraitImage}
-                alt={t('services:listing.heroPortraitImageAlt')}
-                className="h-full w-full object-cover"
+                src={servicesListingHeroImage}
+                alt={t('services:listing.heroImageAlt')}
+                className="h-full w-full object-cover object-center"
               />
               <PhotoTreatment />
             </div>

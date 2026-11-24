@@ -34,7 +34,7 @@ import { cn } from '../lib/utils';
  */
 
 /** Real MENASCO plant-room photograph (Volante mechanical floor). */
-const HERO_IMAGE = '/Mechanical_Floor_Volante-2-2-3.jpg';
+const HERO_IMAGE = '/Menasco_Volante_Mechanical_Floor_Plant_Room.jpg';
 
 const DISCIPLINES_ANCHOR = 'mep-disciplines';
 

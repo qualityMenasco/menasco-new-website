@@ -8,7 +8,7 @@ import { foundingYear } from '../../../data/companyStats';
 
 /**
  * About MENASCO (desktop home): the company introduction beside a static
- * plant-room photo, directly under the hero. "What we deliver" is its own
+ * photo of a MENASCO technician at a control panel, directly under the hero. "What we deliver" is its own
  * section further down (ServicesShowcase).
  */
 export function CompanyIntro() {
@@ -39,15 +39,17 @@ export function CompanyIntro() {
         {/* Desktop: a short brand-blue rule between the text and the photo (decorative). */}
         <span aria-hidden="true" className="hidden h-3/5 w-0.5 self-center justify-self-center bg-brand-600/40 lg:col-start-7 lg:row-start-1 lg:block" />
 
-        {/* Right: one static portrait photo, centred in the last five columns. */}
+        {/* Right: one static portrait photo, centred in the last five columns: a MENASCO
+            technician at an electrical control panel (supplied by the client 2026-11-24;
+            720 x 1280 source, framed to keep the hard hat and the MENASCO logo on the coveralls). */}
         <div className="md:col-span-5 lg:col-start-8 lg:row-start-1">
           <div className="aspect-[4/5] overflow-hidden rounded-md bg-gray-100 lg:mx-auto lg:max-w-[22rem]">
             <img
-              src="/about/quality-site.jpg"
-              alt="MENASCO's QA/QC manager and an engineer in high-visibility vests inspecting a completed building"
+              src="/about/Menasco_Technician_At_Electrical_Control_Panel.jpg"
+              alt="A MENASCO technician in a yellow hard hat and branded coveralls working on an electrical control panel"
               loading="lazy"
               decoding="async"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover object-[50%_78%]"
             />
           </div>
         </div>

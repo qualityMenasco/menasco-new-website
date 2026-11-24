@@ -83,11 +83,12 @@ export default function CommunityPeoplePage() {
           portrait video full screen (no tall video stacked under the photo). */}
       <section className="bg-stone px-4 py-8 md:px-8">
         <ChapterHeader index={2} copy={healthcare} />
-        <PhotoWithVideo image={communityMedia.healthcare.image} video={communityMedia.healthcare.video} className="mt-5 aspect-[16/10]" />
+        {/* Square signing photo with the Watch the video button over it (client request 2026-11-24). */}
+        <PhotoWithVideo image={communityMedia.healthcare.mobileImage} video={communityMedia.healthcare.video} className="mt-5 aspect-square md:aspect-[4/3] [&_img]:object-[50%_60%]" />
       </section>
 
       {/* 03 — Culture Day. */}
-      <section className="bg-ink px-4 py-8 md:px-8">
+      <section className="bg-charcoal px-4 py-8 md:px-8">
         <ChapterHeader index={3} copy={culture} dark />
         <AutoplayVideo
           src={communityMedia.cultureDay.video}
