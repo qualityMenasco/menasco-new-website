@@ -13,6 +13,7 @@ import { projectCategoryList, resolveCategorySlug } from '../data/projectCategor
 import { publishedProjects, deriveCapacityBadge } from '../data/projects';
 import { getProjectImage } from '../data/images';
 import { prioritizeProjectsByCategory } from '../lib/projectOrdering';
+import { useIncrementalList } from '../lib/useIncrementalList';
 import { translateProjectLocation } from '../lib/projectLocation';
 import { SEO } from '../seo/SEO';
 import {} from '../seo/structuredData';
@@ -110,6 +111,13 @@ export default function ProjectCategoriesPage() {
   // under a divider; with none selected, everything is one group.
   const selectedProjects = activeCategory ? visibleProjects.filter((project) => project.category === activeCategory) : visibleProjects;
   const otherProjects = activeCategory ? visibleProjects.filter((project) => project.category !== activeCategory) : [];
+
+  // Batched rendering: the first 12 cards (4 rows) on load, 12 more each time the visitor
+  // nears the end (within 400px); a new sector starts over at 12. Keeps the page light on phones and
+  // avoids building 100+ animated cards up front (2026-11-24, page-speed work).
+  const { shown, done, showMore, sentinelRef } = useIncrementalList(visibleProjects.length, activeCategory);
+  const shownSelected = selectedProjects.slice(0, shown);
+  const shownOther = otherProjects.slice(0, Math.max(0, shown - selectedProjects.length));
 
   const renderGrid = (list: typeof visibleProjects, offset: number) => (
     <Grid variant="three" gap="md">
@@ -213,8 +221,8 @@ export default function ProjectCategoriesPage() {
 
               {/* Selected sector first, then a labelled divider and every other project
                   (client request 2026-11-23); with no sector selected, one grid. */}
-              {renderGrid(selectedProjects, 0)}
-              {activeCategory && otherProjects.length > 0 && selectedProjects.length > 0 && (
+              {renderGrid(shownSelected, 0)}
+              {activeCategory && shownOther.length > 0 && selectedProjects.length > 0 && (
                 <div className="flex items-center gap-4 pt-4 md:pt-6">
                   <span className="shrink-0 font-display text-caption font-semibold uppercase tracking-widest text-gray-500 rtl:tracking-normal">
                     {t('categoriesPage.otherProjects')}
@@ -222,7 +230,18 @@ export default function ProjectCategoriesPage() {
                   <span aria-hidden="true" className="h-px flex-1 bg-gray-300" />
                 </div>
               )}
-              {otherProjects.length > 0 && renderGrid(otherProjects, selectedProjects.length)}
+              {shownOther.length > 0 && renderGrid(shownOther, selectedProjects.length)}
+              {!done && (
+                <div ref={sentinelRef} className="flex justify-center pt-2">
+                  <button
+                    type="button"
+                    onClick={showMore}
+                    className="inline-flex min-h-11 items-center rounded-md border border-gray-300 px-5 text-small font-semibold text-ink transition-colors duration-base hover:border-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+                  >
+                    {t('categoriesPage.showMore')}
+                  </button>
+                </div>
+              )}
             </Stack>
           </div>
       </Section>
