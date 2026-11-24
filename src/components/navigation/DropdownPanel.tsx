@@ -1,7 +1,10 @@
 import { motion, useReducedMotion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 import { SmartLink } from '../../lib/SmartLink';
 import { useSectionTheme } from '../../lib/theme-context';
+import { stripLocale } from '../../lib/locale';
+import { isNavLinkActive } from '../../lib/navActive';
 import type { Theme } from '../../types';
 import type { NavLink } from './types';
 
@@ -16,6 +19,12 @@ export function DropdownPanel({ links, theme, className }: DropdownPanelProps) {
   const resolvedTheme = useSectionTheme(theme);
   const isDark = resolvedTheme === 'dark';
   const reducedMotion = useReducedMotion();
+  // The page you're on (or a page nested under it) is highlighted in the panel. When several
+  // links match (All Services /services and Civil /services/civil), only the most specific wins.
+  const path = stripLocale(useLocation().pathname);
+  const currentHref = links
+    .filter((link) => isNavLinkActive(path, link.href))
+    .sort((a, b) => b.href.split('#')[0].length - a.href.split('#')[0].length)[0]?.href;
 
   return (
     <motion.div
@@ -30,13 +39,22 @@ export function DropdownPanel({ links, theme, className }: DropdownPanelProps) {
       )}
     >
       <ul role="list" className="flex flex-col">
-        {links.map((link) => (
+        {links.map((link) => {
+          const current = link.href === currentHref;
+          return (
           <li key={link.label}>
             <SmartLink
               href={link.href}
+              aria-current={current ? 'page' : undefined}
               className={cn(
                 'block rounded-sm px-4 py-3 text-small font-medium transition-colors duration-base',
-                isDark ? 'text-gray-300 hover:bg-white/5 hover:text-warmwhite' : 'text-gray-700 hover:bg-stone hover:text-ink',
+                current
+                  ? isDark
+                    ? 'bg-white/5 font-semibold text-brand-400'
+                    : 'bg-stone font-semibold text-brand-600'
+                  : isDark
+                    ? 'text-gray-300 hover:bg-white/5 hover:text-warmwhite'
+                    : 'text-gray-700 hover:bg-stone hover:text-ink',
               )}
             >
               {link.label}
@@ -47,7 +65,8 @@ export function DropdownPanel({ links, theme, className }: DropdownPanelProps) {
               )}
             </SmartLink>
           </li>
-        ))}
+          );
+        })}
       </ul>
     </motion.div>
   );

@@ -13,6 +13,7 @@ import type { NavItem } from '../components/navigation/types';
 import { useBackdropTheme } from '../lib/useBackdropTheme';
 import { useHeaderTransparencyState } from './header-transparency';
 import { stripLocale } from '../lib/locale';
+import { isNavLinkActive } from '../lib/navActive';
 
 const REQUEST_QUOTE_HREF = '/contact?type=project';
 
@@ -94,7 +95,7 @@ export function SiteHeader() {
         ...(item.megaMenu?.columns.flatMap((column) => [...(column.href ? [{ href: column.href }] : []), ...column.links]) ?? []),
         ...(item.megaMenu?.footerLinks ?? []),
       ];
-      return childLinks.some((link) => path === link.href || path.startsWith(`${link.href}/`));
+      return childLinks.some((link) => isNavLinkActive(path, link.href));
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isHomePage, location.pathname, t]);

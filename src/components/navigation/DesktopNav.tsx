@@ -83,9 +83,13 @@ export function DesktopNav({ items, theme, gap = 'md', className, isItemActive, 
         const anchorToNav = Boolean(item.megaMenu);
         const defaultActive = hasPanel && !item.href ? panelLinks.some((link) => isRouteActive(pathname, link.href)) : isRouteActive(pathname, item.href);
         const isActive = isItemActive ? isItemActive(item) : defaultActive;
+        // Visual highlight: the parent shows as current only while its panel is closed;
+        // with the panel open, the current sub-page inside it carries the highlight instead
+        // (client request 2026-11-24). aria-current stays on the parent either way.
+        const showActive = isActive && !isOpen;
         const linkClasses = cn(
           'group relative inline-flex items-center gap-1.5 whitespace-nowrap text-small font-semibold tracking-normal transition-[color,letter-spacing] duration-base hover:tracking-wide',
-          isActive
+          showActive
             ? isDark
               ? 'text-brand-400'
               : 'text-brand-600'
@@ -102,8 +106,8 @@ export function DesktopNav({ items, theme, gap = 'md', className, isItemActive, 
             aria-hidden="true"
             className={cn(
               'pointer-events-none absolute -bottom-1.5 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-base ease-engineered group-hover:scale-x-100',
-              isActive && 'scale-x-100',
-              isActive ? (isDark ? 'bg-brand-400' : 'bg-brand-600') : isDark ? 'bg-warmwhite' : 'bg-ink',
+              showActive && 'scale-x-100',
+              showActive ? (isDark ? 'bg-brand-400' : 'bg-brand-600') : isDark ? 'bg-warmwhite' : 'bg-ink',
             )}
           />
         );

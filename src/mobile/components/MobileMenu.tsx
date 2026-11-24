@@ -12,7 +12,8 @@ import { primaryContact } from '../../data/locations';
 import { footerSocialLinks } from '../../data/socialLinks';
 import { SocialLinks } from '../../components/navigation';
 import { COMPANY_PROFILE_PATH } from '../../seo/constants';
-import { getLocaleFromPath, withLocale } from '../../lib/locale';
+import { getLocaleFromPath, stripLocale, withLocale } from '../../lib/locale';
+import { isNavLinkActive } from '../../lib/navActive';
 
 export interface MobileMenuProps {
   isOpen: boolean;
@@ -91,10 +92,8 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   };
 
   const isExact = (href: string) => location.pathname === withLocale(href, locale);
-  const isActive = (href: string) => {
-    const target = withLocale(href, locale);
-    return location.pathname === target || (target !== withLocale('/', locale) && location.pathname.startsWith(`${target}/`));
-  };
+  // Current page or a page nested under it (same rule as the desktop dropdowns).
+  const isActive = (href: string) => isNavLinkActive(stripLocale(location.pathname), href);
   const aboutActive = aboutNavigation.some((item) => isActive(item.href));
   const servicesActive = isActive('/services');
 
@@ -122,17 +121,17 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const topLink = (active: boolean) =>
     cn(
       'group flex min-h-[56px] w-full items-center justify-between gap-3 py-3 text-start font-display text-h3 font-semibold transition-colors duration-base',
-      active ? 'text-brand-600' : 'text-ink hover:text-brand-600',
+      active ? 'text-brand-600' : 'text-ink [@media(hover:hover)]:hover:text-brand-600',
     );
   const activeDot = <span aria-hidden="true" className="ms-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600 align-middle" />;
   const subLink = (active: boolean) =>
-    cn('flex min-h-[48px] items-center justify-between gap-3 py-2.5 text-body-lg font-medium transition-colors duration-base', active ? 'text-brand-600' : 'text-ink hover:text-brand-600');
+    cn('flex min-h-[48px] items-center justify-between gap-3 py-2.5 text-body-lg font-medium transition-colors duration-base', active ? 'text-brand-600' : 'text-ink [@media(hover:hover)]:hover:text-brand-600');
 
   const PanelHeader = ({ title }: { title: string }) => (
     <button
       type="button"
       onClick={() => goTo('root')}
-      className="mb-2 inline-flex min-h-11 items-center gap-1 text-small font-semibold text-gray-600 transition-colors duration-base hover:text-ink"
+      className="mb-2 inline-flex min-h-11 items-center gap-1 text-small font-semibold text-gray-600 transition-colors duration-base [@media(hover:hover)]:hover:text-ink"
     >
       <ChevronLeft size={18} aria-hidden="true" className="rtl:rotate-180" />
       {t('menuBack')}
@@ -173,7 +172,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 type="button"
                 onClick={onClose}
                 aria-label={t('closeMenu')}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-md text-ink hover:bg-ink/5 active:bg-ink/10"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-md text-ink [@media(hover:hover)]:hover:bg-ink/5 active:bg-ink/10"
               >
                 <X size={22} aria-hidden="true" />
               </button>
@@ -205,7 +204,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                                   {t(key)}
                                   {active && activeDot}
                                 </span>
-                                <ChevronRight size={22} aria-hidden="true" className="shrink-0 text-gray-400 transition-transform duration-base group-hover:translate-x-0.5 group-hover:text-brand-600 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
+                                <ChevronRight size={22} aria-hidden="true" className="shrink-0 text-gray-400 transition-transform duration-base [@media(hover:hover)]:group-hover:translate-x-0.5 [@media(hover:hover)]:group-hover:text-brand-600 rtl:rotate-180 rtl:[@media(hover:hover)]:group-hover:-translate-x-0.5" />
                               </button>
                             </motion.li>
                           );
@@ -231,7 +230,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       <motion.ul role="list" className="mt-3 divide-y divide-gray-200 border-t border-gray-200" {...stagger}>
                         {aboutNavigation.map((link) => (
                           <motion.li key={link.href} {...item}>
-                            <LocaleLink to={link.href} aria-current={isExact(link.href) ? 'page' : undefined} className={subLink(isExact(link.href))}>
+                            <LocaleLink to={link.href} aria-current={isActive(link.href) ? 'page' : undefined} className={subLink(isActive(link.href))}>
                               <span>{link.href === '/about' ? t('menuOverview') : t(link.i18nKey)}</span>
                               <ArrowRight size={16} aria-hidden="true" className="shrink-0 text-gray-400 rtl:rotate-180" />
                             </LocaleLink>
@@ -256,14 +255,14 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                           <motion.li key={umbrella.href} className="py-3" {...item}>
                             <LocaleLink
                               to={umbrella.href}
-                              aria-current={isExact(umbrella.href) ? 'page' : undefined}
-                              className={cn('group flex items-start justify-between gap-3', isExact(umbrella.href) ? 'text-brand-600' : 'text-ink')}
+                              aria-current={isActive(umbrella.href) ? 'page' : undefined}
+                              className={cn('group flex items-start justify-between gap-3', isActive(umbrella.href) ? 'text-brand-600' : 'text-ink')}
                             >
                               <span className="min-w-0">
-                                <span className="block font-display text-body-lg font-semibold transition-colors duration-base group-hover:text-brand-600">{t(umbrella.i18nKey)}</span>
+                                <span className="block font-display text-body-lg font-semibold transition-colors duration-base [@media(hover:hover)]:group-hover:text-brand-600">{t(umbrella.i18nKey)}</span>
                                 <span className="mt-0.5 block text-small leading-snug text-gray-500">{t(`services:listing.umbrellas.${umbrella.key}`)}</span>
                               </span>
-                              <ArrowRight size={16} aria-hidden="true" className="mt-1.5 shrink-0 text-gray-400 transition-colors duration-base group-hover:text-brand-600 rtl:rotate-180" />
+                              <ArrowRight size={16} aria-hidden="true" className="mt-1.5 shrink-0 text-gray-400 transition-colors duration-base [@media(hover:hover)]:group-hover:text-brand-600 rtl:rotate-180" />
                             </LocaleLink>
                           </motion.li>
                         ))}
@@ -278,19 +277,19 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 <p className="font-display text-caption font-semibold uppercase tracking-widest text-gray-500 rtl:tracking-normal">{t('menuHeadOffice')}</p>
                 <ul role="list" className="mt-3 space-y-1.5">
                   <li>
-                    <a href={`tel:${primaryContact.dubaiPhonePrimary.replace(/\s/g, '')}`} dir="ltr" className="inline-flex min-h-10 items-center gap-2.5 text-body font-medium text-ink hover:text-brand-600">
+                    <a href={`tel:${primaryContact.dubaiPhonePrimary.replace(/\s/g, '')}`} dir="ltr" className="inline-flex min-h-10 items-center gap-2.5 text-body font-medium text-ink [@media(hover:hover)]:hover:text-brand-600">
                       <Phone size={16} aria-hidden="true" className="text-brand-600" />
                       {primaryContact.dubaiPhonePrimary}
                     </a>
                   </li>
                   <li>
-                    <a href={`mailto:${primaryContact.email}`} className="inline-flex min-h-10 items-center gap-2.5 text-body font-medium text-ink hover:text-brand-600">
+                    <a href={`mailto:${primaryContact.email}`} className="inline-flex min-h-10 items-center gap-2.5 text-body font-medium text-ink [@media(hover:hover)]:hover:text-brand-600">
                       <Mail size={16} aria-hidden="true" className="text-brand-600" />
                       {primaryContact.email}
                     </a>
                   </li>
                   <li>
-                    <a href={COMPANY_PROFILE_PATH} download="MENASCO-Company-Profile.pdf" className="inline-flex min-h-10 items-center gap-2.5 text-body font-medium text-ink hover:text-brand-600">
+                    <a href={COMPANY_PROFILE_PATH} download="MENASCO-Company-Profile.pdf" className="inline-flex min-h-10 items-center gap-2.5 text-body font-medium text-ink [@media(hover:hover)]:hover:text-brand-600">
                       <Download size={16} aria-hidden="true" className="text-brand-600" />
                       {t('services:detail.downloadCompanyProfile')}
                     </a>
@@ -299,7 +298,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 <SocialLinks links={footerSocialLinks} theme="light" className="mt-4" />
                 <LocaleLink
                   to="/contact?type=project"
-                  className="mt-5 flex h-12 w-full items-center justify-center rounded-md bg-brand-600 text-body font-semibold text-warmwhite transition-colors duration-base hover:bg-brand-700"
+                  className="mt-5 flex h-12 w-full items-center justify-center rounded-md bg-brand-600 text-body font-semibold text-warmwhite transition-colors duration-base [@media(hover:hover)]:hover:bg-brand-700"
                 >
                   {t('common:buttons.requestQuote')}
                 </LocaleLink>
