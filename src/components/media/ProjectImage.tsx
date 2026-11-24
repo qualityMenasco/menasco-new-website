@@ -9,14 +9,32 @@ export interface ProjectImageProps {
   priority?: boolean;
   /** Applied to the <img> itself — e.g. the hover scale-up transform the desktop card already uses. */
   imgClassName?: string;
+  /**
+   * Rendered width hint for self-hosted project heroes (see heroSrcSet): defaults to a
+   * grid card; full-width heroes and carousels pass "100vw".
+   */
+  sizes?: string;
 }
+
+/**
+ * Self-hosted project heroes (public/assets/projects/<slug>/<slug>-hero.jpg, max 1600 px)
+ * have an 800 px sibling (-hero-800.jpg), so cards download the small one and full-width
+ * heroes the large one. Any other src (gallery frames, MEP photos) gets no srcset.
+ */
+function heroSrcSet(src: string): string | undefined {
+  if (!/^\/assets\/projects\/[^/]+\/[^/]+-hero\.jpg$/.test(src)) return undefined;
+  return `${src.replace(/\.jpg$/, '-800.jpg')} 800w, ${src} 1600w`;
+}
+
+const CARD_SIZES = '(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw';
 
 /**
  * Fills its parent — the parent owns the aspect-ratio/rounded/background
  * container (unchanged across desktop and mobile project cards) so this
  * component only manages the skeleton → image → error states inside it.
  */
-export function ProjectImage({ src, alt, priority = false, imgClassName }: ProjectImageProps) {
+export function ProjectImage({ src, alt, priority = false, imgClassName, sizes = CARD_SIZES }: ProjectImageProps) {
+  const srcSet = heroSrcSet(src);
   const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -47,6 +65,8 @@ export function ProjectImage({ src, alt, priority = false, imgClassName }: Proje
         <img
           ref={imgRef}
           src={src}
+          srcSet={srcSet}
+          sizes={srcSet ? sizes : undefined}
           alt={alt}
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"

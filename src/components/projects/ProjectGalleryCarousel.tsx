@@ -79,7 +79,7 @@ export function ProjectGalleryCarousel({ images, previousLabel, nextLabel, dotLa
        * `key` forces a remount (and so a reset of ProjectImage's own
        * loading/error state) whenever the active slide changes.
        */}
-      <ProjectImage key={current.src} src={current.src} alt={current.alt} />
+      <ProjectImage key={current.src} src={current.src} alt={current.alt} sizes="100vw" />
 
       {isMultiple && (
         <>

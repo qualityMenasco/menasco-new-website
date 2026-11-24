@@ -1,20 +1,20 @@
 // Real portraits supplied directly by the user (2026-07-27).
-const HELMI_PHOTO = '/Menasco_Portrait_Helmi_Badawiyeh.png';
-const BAHAA_PHOTO = '/Menasco_Portrait_Bahaa_Badawiyeh.png';
-const HANI_PHOTO = '/Menasco_Portrait_Hani_Badawiyeh.png';
-const REFAD_PHOTO = '/Menasco_Portrait_Refad_Al_Dwairi.png';
-const IHAB_PHOTO = '/Menasco_Portrait_Ihab_Saadi.png';
-const MOHAMED_PHOTO = '/Menasco_Portrait_Mohamed_Youssef.png';
-const MOTAZ_PHOTO = '/Menasco_Portrait_Motaz_Abu_Fada.png';
-const SURA_PHOTO = '/Menasco_Portrait_Sura_Mustafa.png';
-const VICTOR_PHOTO = '/Menasco_Portrait_Victor_Eze.png';
-const IBRAHIM_PHOTO = '/Menasco_Portrait_Ibrahim_Rahmah.png';
-const ZAKARIA_PHOTO = '/Menasco_Portrait_Zakaria_Motawe.png';
-const ED_PHOTO = '/Menasco_Portrait_Ed_Smith.png';
-const RAKAN_PHOTO = '/Menasco_Portrait_Rakan_Abdullah.png';
-const AHMED_PHOTO = '/Menasco_Portrait_Ahmed_Abbas.png';
-const AMMAR_PHOTO = '/Menasco_Portrait_Ammar_Theeb.png';
-const BASIM_PHOTO = '/Menasco_Portrait_Basim_Al_Farouki.png';
+const HELMI_PHOTO = '/Menasco_Portrait_Helmi_Badawiyeh.jpg';
+const BAHAA_PHOTO = '/Menasco_Portrait_Bahaa_Badawiyeh.jpg';
+const HANI_PHOTO = '/Menasco_Portrait_Hani_Badawiyeh.jpg';
+const REFAD_PHOTO = '/Menasco_Portrait_Refad_Al_Dwairi.jpg';
+const IHAB_PHOTO = '/Menasco_Portrait_Ihab_Saadi.jpg';
+const MOHAMED_PHOTO = '/Menasco_Portrait_Mohamed_Youssef.jpg';
+const MOTAZ_PHOTO = '/Menasco_Portrait_Motaz_Abu_Fada.jpg';
+const SURA_PHOTO = '/Menasco_Portrait_Sura_Mustafa.jpg';
+const VICTOR_PHOTO = '/Menasco_Portrait_Victor_Eze.jpg';
+const IBRAHIM_PHOTO = '/Menasco_Portrait_Ibrahim_Rahmah.jpg';
+const ZAKARIA_PHOTO = '/Menasco_Portrait_Zakaria_Motawe.jpg';
+const ED_PHOTO = '/Menasco_Portrait_Ed_Smith.jpg';
+const RAKAN_PHOTO = '/Menasco_Portrait_Rakan_Abdullah.jpg';
+const AHMED_PHOTO = '/Menasco_Portrait_Ahmed_Abbas.jpg';
+const AMMAR_PHOTO = '/Menasco_Portrait_Ammar_Theeb.jpg';
+const BASIM_PHOTO = '/Menasco_Portrait_Basim_Al_Farouki.jpg';
 
 // Supplied directly by the user (2026-07-24) — not sourced from published
 // material.

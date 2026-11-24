@@ -72,6 +72,17 @@ export default function HomePage() {
     return () => window.removeEventListener('resize', updateProjectScroll);
   }, [updateProjectScroll]);
 
+  // Data-centre band: mount its video only when the section comes within ~600px of the screen.
+  const dataCenterRef = useRef<HTMLElement>(null);
+  const [dataCenterNear, setDataCenterNear] = useState(false);
+  useEffect(() => {
+    const el = dataCenterRef.current;
+    if (!el || dataCenterNear) return;
+    const observer = new IntersectionObserver(([entry]) => entry.isIntersecting && setDataCenterNear(true), { rootMargin: '600px 0px' });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [dataCenterNear]);
+
   return (
     <>
       <SEO title={t('home:seo.title')} description={t('home:seo.description')} path="/" structuredData={[organizationJsonLd(), websiteJsonLd()]} />
@@ -142,16 +153,21 @@ export default function HomePage() {
       </section>
 
       {/* 4. Data Centre Infrastructure — compact featured highlight, not a full service section */}
-      <section className="relative overflow-hidden px-4 py-12">
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          src="/data-center.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
-        />
+      <section ref={dataCenterRef} className="relative overflow-hidden bg-ink px-4 py-12">
+        {/* Mounted (and so downloaded) only once the section is near the screen; autoPlay
+            would otherwise start the download on page load despite preload="none". */}
+        {dataCenterNear && (
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            src="/data-center.mp4"
+            poster="/Menasco_Data_Center_Server_Racks_Film_Poster.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="none"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/75 to-ink/90" />
 
         <motion.div

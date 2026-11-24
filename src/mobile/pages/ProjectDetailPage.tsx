@@ -150,7 +150,7 @@ export default function ProjectDetailPage() {
            * shared; this shows the same graceful placeholder the project
            * grid cards already fall back to.
            */}
-          <ProjectImage src={getProjectImage(project.heroImage || undefined, project.slug)} alt={project.title} priority />
+          <ProjectImage src={getProjectImage(project.heroImage || undefined, project.slug)} alt={project.title} priority sizes="100vw" />
           {project.verificationStatus === 'pending' && (
             <div className="absolute start-3 top-3">
               <Badge variant="status" theme="dark">

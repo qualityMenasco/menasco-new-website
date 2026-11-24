@@ -3,6 +3,8 @@ import { cn } from '../lib/utils';
 
 export interface MobileVideoProps {
   src: string;
+  /** Lighter encode for phones (max-width 767px); tablets keep `src`. */
+  smallSrc?: string;
   poster: string;
   alt: string;
   className?: string;
@@ -14,7 +16,7 @@ export interface MobileVideoProps {
  * media) for users who've asked for it, and always ships `preload="metadata"`
  * so mobile connections aren't forced to buffer the whole file up front.
  */
-export function MobileVideo({ src, poster, alt, className }: MobileVideoProps) {
+export function MobileVideo({ src, smallSrc, poster, alt, className }: MobileVideoProps) {
   const reducedMotion = useReducedMotion();
 
   if (reducedMotion) {
@@ -22,11 +24,11 @@ export function MobileVideo({ src, poster, alt, className }: MobileVideoProps) {
   }
 
   return (
-    // No poster on the video itself — it flashed the unrelated placeholder
-    // photo before the first real frame painted; `poster` above still backs
-    // the prefers-reduced-motion still-image branch, which needs it.
+    // The poster is a real frame from the video, so it paints instantly (it's the page's
+    // largest image) without the mismatched flash an unrelated placeholder used to cause.
     <video
       className={cn('h-full w-full object-cover', className)}
+      poster={poster}
       autoPlay
       muted
       loop
@@ -37,6 +39,7 @@ export function MobileVideo({ src, poster, alt, className }: MobileVideoProps) {
       controlsList="nodownload noplaybackrate"
       aria-label={alt}
     >
+      {smallSrc && <source src={smallSrc} type="video/mp4" media="(max-width: 767px)" />}
       <source src={src} type="video/mp4" />
     </video>
   );

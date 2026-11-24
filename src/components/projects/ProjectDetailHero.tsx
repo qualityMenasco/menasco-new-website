@@ -52,7 +52,7 @@ export function ProjectDetailHero({
        * project grid cards already fall back to, instead of a raw
        * broken-image icon.
        */}
-      {image && <ProjectImage src={image} alt="" priority />}
+      {image && <ProjectImage src={image} alt="" priority sizes="100vw" />}
       {/*
        * Strengthened from the original from-ink/85 via-ink/15 — the title
        * block's full height (eyebrow + h1 + location, taller still when the

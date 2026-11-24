@@ -14,7 +14,8 @@ export function MobileHero() {
   return (
     <section className="relative flex min-h-[62svh] w-full items-end overflow-hidden bg-ink">
       <div className="absolute inset-0">
-        <MobileVideo src="/menasco-landing-clean.mp4" poster="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=70" alt="" />
+        {/* 720p (6.6 MB) for tablets, 480p (2.9 MB) for phones; poster is a frame from the film. */}
+        <MobileVideo src="/menasco-landing-clean.mp4" smallSrc="/menasco-landing-clean-480.mp4" poster="/Menasco_Home_Hero_Ceiling_Services_Film_Poster.jpg" alt="" />
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/30" />
 

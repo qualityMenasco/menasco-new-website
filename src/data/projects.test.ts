@@ -22,7 +22,8 @@ describe('projects.json migration integrity', () => {
   it('spot-checks a known verified value survived the migration unchanged', () => {
     const casaCavalli = projects.find((p) => p.slug === 'casa-cavalli');
     expect(casaCavalli?.keyMetrics).toContainEqual({ label: 'Workforce Hours', value: '1,661,538 hours' });
-    expect(casaCavalli?.heroImage).toBe('https://menascouae.com/wp-content/uploads/2025/12/Casa-Cavalli-scaled.png');
+    // Self-hosted since 2026-11-24 (was hotlinked full-size from the old WordPress site).
+    expect(casaCavalli?.heroImage).toBe('/assets/projects/casa-cavalli/casa-cavalli-hero.jpg');
   });
 });
 
