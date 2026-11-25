@@ -501,7 +501,8 @@ function Delivery() {
   );
   return (
     <Section background="warmwhite" spacing="sm">
-      <SectionHead eyebrow={t('civilPage.delivery.eyebrow')} heading={t('civilPage.delivery.heading')} intro={t('civilPage.delivery.intro')} />
+      {/* Intro line removed (client request 2026-11-25). */}
+      <SectionHead eyebrow={t('civilPage.delivery.eyebrow')} heading={t('civilPage.delivery.heading')} />
       {/* Phones: boxed tap-to-open rows (all closed). Tablets: the same rows, all open. Desktop: three cards. */}
       <div className="mt-8 lg:hidden">
         <DisclosureList boxed numbered={false} idPrefix="civil-delivery" items={rows.map((row, i) => ({ title: row.title, content: content(row, i) }))} />

@@ -84,7 +84,8 @@ export function EngineeringDelivery() {
           eyebrow={t('digitalEngineering.eyebrow')}
           heading={t('digitalEngineering.heading')}
           description={t('digitalEngineering.description')}
-          href="/services/civil"
+          // Straight to the BIM section of the Civil page (same anchor as the Services menu's BIM link).
+          href="/services/civil#bim-digital-engineering"
           linkLabel={t('engineeringLearnMore')}
         />
         <OverlayCard

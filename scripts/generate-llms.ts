@@ -706,7 +706,6 @@ function civilPageSections(): string[] {
     doc(h2(c.missionCritical.heading), (c.missionCritical.paragraphs as string[]).join('\n\n'), titled(c.missionCritical.items)),
     doc(
       h2(c.delivery.heading),
-      c.delivery.intro,
       ...(c.delivery.rows as { title: string; body: string; items: string[] }[]).map((row) => doc(`### ${row.title}`, row.body, bullets(row.items))),
     ),
   ];

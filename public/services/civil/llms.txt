@@ -99,8 +99,6 @@ Civil design has to allow for equipment loads, utility connections, physical sep
 
 ## How Civil Delivery Is Managed
 
-Three things keep a multi-partner civil scope working as one: sequencing around the whole project, consistent quality and safety at every interface, and a clear split between international engineering and local construction expertise.
-
 ### Sequencing & coordination
 
 Civil milestones decide when major equipment can be delivered, installed and commissioned, so they are planned with procurement commitments and MEP installation rather than as a separate workstream.
