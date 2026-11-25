@@ -209,7 +209,16 @@ export default function InnovationPage() {
         >
           {t('innovation.stat.value')}
         </p>
-        <p className="mt-4 max-w-md font-display text-h4 font-semibold leading-snug text-warmwhite">{t('innovation.stat.label')}</p>
+        {/* One line at every width (client request 2026-11-25): the h4 size, scaled down only where the
+            phone is too narrow for it (the line is ~19.5 em long, EN and AR). */}
+        <p
+          className="mt-4 whitespace-nowrap font-display text-h4 font-semibold leading-snug text-warmwhite"
+          style={{ fontSize: 'min(clamp(1.125rem, 1.05rem + 0.3vw, 1.375rem), calc((100vw - 2rem) / 19.6))' }}
+        >
+          {t('innovation.stat.label')}
+        </p>
+        {/* How the figure is measured, directly under the label (client request 2026-11-25). */}
+        <p className="mt-2 text-caption text-gray-400">{t('innovation.stat.footnote')}</p>
       </section>
 
       {/* Phones: the four initiatives as a swipeable row of cards. */}

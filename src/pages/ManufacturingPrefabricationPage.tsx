@@ -25,7 +25,7 @@ import { cn } from '../lib/utils';
  *   4. E-Houses (featured): complete prefabricated electrical rooms.
  *   5. Product range (#custom): the rest of the in-house range as tabs.
  *   6. Factories in the UAE, Saudi Arabia and Egypt: one figure per card, factory area in sq ft
- *      (UAE 281,000 sq ft; Saudi Arabia and Egypt pending). Manufacturing team removed 2026-11-24.
+ *      (UAE 281,000 sq ft; Saudi Arabia 23,575 sq ft; Egypt 68,716 sq ft). Manufacturing team removed 2026-11-24.
  *      Moved above Testing & quality (client request 2026-11-24).
  *   7. Testing & quality: factory tests and certified management systems. Stone, so it differs
  *      from Sectors (warm white) right after it (client request 2026-11-24).

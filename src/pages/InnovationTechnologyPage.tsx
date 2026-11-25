@@ -113,9 +113,12 @@ function EfficiencyStat() {
           >
             {t('innovation.stat.value')}
           </p>
-          <div className="col-span-6 col-start-7 pb-4">
+          {/* Seven columns wide so the label stays on one line at every desktop width (client request 2026-11-25). */}
+          <div className="col-span-7 col-start-6 pb-4">
             <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-400">{t('innovation.stat.eyebrow')}</span>
-            <p className="mt-3 font-display text-h3 font-semibold leading-tight tracking-tight text-warmwhite">{t('innovation.stat.label')}</p>
+            <p className="mt-3 whitespace-nowrap font-display text-h3 font-semibold leading-tight tracking-tight text-warmwhite">{t('innovation.stat.label')}</p>
+            {/* How the figure is measured, directly under the label (client request 2026-11-25). */}
+            <p className="mt-3 text-small text-gray-400">{t('innovation.stat.footnote')}</p>
           </div>
         </div>
       </Section>
