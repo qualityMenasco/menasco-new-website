@@ -3,6 +3,8 @@ import { HeroH1 } from '../../components/typography/HeroH1';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { ReadMoreText } from '../../components/common/ReadMoreText';
+import { useEqualHeights } from '../../lib/useEqualHeights';
 import { SectionHeader } from '../components/SectionHeader';
 import { ExpandableText } from '../components/ExpandableText';
 import { type AccordionTopic } from '../../components/sections/quality/TopicAccordion';
@@ -246,6 +248,7 @@ function Hero() {
 export default function QualitySafetyPage() {
   const { t } = useTranslation(['about', 'common']);
   const commitment = t('qualitySafetyPage.commitment.paragraphs', { returnObjects: true }) as string[];
+  const resultStats = useEqualHeights<HTMLDListElement>();
   const topics = t('qualitySafetyPage.commitment.topics', { returnObjects: true }) as AccordionTopic[];
   const railRef = useRef<HTMLDivElement>(null);
   const [activeCard, setActiveCard] = useState(0);
@@ -313,8 +316,10 @@ export default function QualitySafetyPage() {
       <section className="bg-charcoal px-4 py-10 md:px-8">
         <span className="text-eyebrow font-semibold uppercase tracking-widest text-brand-400">{t('qualitySafetyPage.results.eyebrow')}</span>
         <h3 className="mt-2 font-display text-h2 font-semibold tracking-tight text-warmwhite text-balance">{t('qualitySafetyPage.results.heading')}</h3>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {(['safety', 'quality'] as const).map((key) => {
+        {/* Top-aligned cards: an opened "Read more" grows only its own card; side by side (tablets),
+            the stats areas share one height so the closed cards line up. */}
+        <div ref={resultStats.container} className="mt-6 grid items-start gap-4 md:grid-cols-2">
+          {(['safety', 'quality'] as const).map((key, i) => {
             const g = t(`qualitySafetyPage.results.${key}`, { returnObjects: true }) as ResultGroup;
             const risk = key === 'safety';
             return (
@@ -323,7 +328,12 @@ export default function QualitySafetyPage() {
                   <span aria-hidden="true" className={cn('h-2 w-2 rounded-full', risk ? 'bg-warning' : 'bg-brand-400')} />
                   {g.tag}
                 </span>
-                <dl className={cn('mt-4 grid gap-4', g.stats.length > 1 && 'grid-cols-2')}>
+                <dl
+                  ref={(el) => {
+                    resultStats.items.current[i] = el;
+                  }}
+                  className={cn('mt-4 grid content-start gap-4', g.stats.length > 1 && 'grid-cols-2')}
+                >
                   {g.stats.map((s) => (
                     <div key={s.label}>
                       <dd dir="ltr" className="font-display text-stat font-semibold leading-none text-brand-400 rtl:text-end">
@@ -333,7 +343,10 @@ export default function QualitySafetyPage() {
                     </div>
                   ))}
                 </dl>
-                <p className="mt-5 border-t border-white/10 pt-4 text-small text-gray-300">{g.text}</p>
+                {/* Hidden behind Read more (client request 2026-11-25). */}
+                <div className="mt-4 border-t border-white/10 pt-2">
+                  <ReadMoreText id={`qhse-result-m-${key}`} text={g.text} className="text-small text-gray-300" dark />
+                </div>
               </div>
             );
           })}
@@ -356,8 +369,19 @@ export default function QualitySafetyPage() {
             collapseLabel={t('common:buttons.showLess')}
           />
         </div>
-        {/* The detail behind the overview: six topics as tabs (pills on phones, a list beside the panel on tablets). */}
-        <TopicTabs topics={topics} idPrefix="qhse-topic-m" label={t('qualitySafetyPage.commitment.heading')} className="mt-8 md:col-span-2 md:row-start-2 md:mt-6" />
+        {/* The detail behind the overview: six topics as tabs (pills on phones, a list beside the panel on tablets).
+            Swipe anywhere on the card; dots under it on the left, previous / next arrows on the right
+            except on real phones (client request 2026-11-25). */}
+        <TopicTabs
+          topics={topics}
+          idPrefix="qhse-topic-m"
+          label={t('qualitySafetyPage.commitment.heading')}
+          className="mt-8 md:col-span-2 md:row-start-2 md:mt-6"
+          swipe
+          dots
+          dotsAlways
+          arrows={{ previous: t('common:buttons.previous'), next: t('common:buttons.next') }}
+        />
       </section>
 
       {/* The three ISO certificates as one connected list. */}

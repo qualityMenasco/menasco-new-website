@@ -601,17 +601,13 @@ export default function DataCenterPage() {
           </div>
         </Band>
 
-        {/* 05 Greenfield and brownfield: same pattern as Cooling (eyebrow, heading + intro row,
-            white cards, no text animation). Phones: a swipe rail with dots; side by side from md. The former role
-            line now serves as the intro (role strips were removed from the other sections). */}
+        {/* 05 Greenfield and brownfield: eyebrow, heading, white cards, no text animation. Phones: a swipe
+            rail with dots; side by side from md. Intro line removed (client request 2026-11-25). */}
         <Band id="dc-sites" tone="stone" className="pb-12 pt-12 md:pb-16 md:pt-16">
           <p className="font-display text-caption font-semibold uppercase tracking-widest text-brand-600 rtl:tracking-normal">{c.sites.eyebrow}</p>
-          <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-12 lg:items-center lg:gap-12">
-            <h2 className="font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-ink text-balance lg:col-span-6">
-              {c.sites.heading}
-            </h2>
-            <p className="text-body leading-relaxed text-gray-700 lg:col-span-6">{c.sites.role}</p>
-          </div>
+          <h2 className="mt-3 max-w-2xl font-display text-[clamp(1.625rem,1.2rem+1.5vw,2.375rem)] font-semibold leading-[1.1] tracking-tight text-ink text-balance">
+            {c.sites.heading}
+          </h2>
 
           <div
             ref={(el) => {

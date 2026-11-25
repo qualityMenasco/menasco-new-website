@@ -61,8 +61,6 @@ export const dcTechnical = {
     pathB: 'Path B',
   },
   sites: {
-    // NEW copy
-    role: 'On greenfield campuses, early utility coordination and off-site fabrication helps accelerate construction. For live-facility upgrades, planned cutovers and temporary infrastructure protect operational continuity.',
     eyebrow: 'Greenfield and brownfield',
     heading: 'New campuses and live facilities demand different engineering',
     items: [

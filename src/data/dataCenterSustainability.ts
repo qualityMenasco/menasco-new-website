@@ -22,7 +22,6 @@ export const dcSustainability = {
     items: [
       {
         title: "Advanced Cooling & Water Efficiency",
-        lead: "Cooling efficiency starts with removing heat at the source.",
         body: [
           "Direct-to-chip liquid cooling, warm-water loops, optimized chilled-water plants, and air-side or water-side economizers can reduce the energy required to remove heat from high-density IT equipment. Cooling technologies should be selected according to rack density, ambient conditions, supply temperatures, and heat rejection requirements.",
           "Dry coolers, hybrid systems, reclaimed water, and closed-loop circulation can reduce potable water consumption. The optimal configuration must balance electricity use, water demand, capital expenditure, and annual operating costs rather than minimizing PUE alone.",
@@ -31,7 +30,6 @@ export const dcSustainability = {
       },
       {
         title: "Low-Carbon Electricity Procurement",
-        lead: "The carbon intensity of purchased electricity matters as much as the amount consumed.",
         body: [
           "Data centers can reduce operational emissions by sourcing electricity from solar, wind, nuclear, geothermal, and other low-carbon generation through utility contracts, power purchase agreements, or on-site generation. Procurement strategies should consider hourly carbon intensity, generation availability, transmission constraints, and the actual deliverability of contracted power.",
           "Annual renewable-energy matching does not guarantee carbon-free electricity during every operating hour. Hourly energy matching, supported by storage and flexible demand, provides a more accurate basis for evaluating emissions reductions, although it may involve higher procurement costs.",
@@ -40,7 +38,6 @@ export const dcSustainability = {
       },
       {
         title: "Waste Heat Recovery",
-        lead: "Nearly all electricity consumed by IT equipment eventually becomes heat that must be removed.",
         body: [
           "Instead of rejecting this thermal energy directly to the atmosphere, data centers can recover it through liquid cooling circuits, heat exchangers, and heat pumps. Recovered heat can supply district heating networks, industrial processes, domestic hot water, or nearby facilities with suitable thermal demand.",
           "Financial viability depends on heat temperature, the proximity of consumers, seasonal demand, and the electricity required to upgrade or transport the heat. Higher-temperature liquid cooling can improve recovery economics by reducing the temperature lift required.",
@@ -49,7 +46,6 @@ export const dcSustainability = {
       },
       {
         title: "Low-Carbon Construction & Prefabrication",
-        lead: "The carbon footprint of a data center begins before the first server is installed.",
         body: [
           "Low-clinker concrete, recycled-content steel, optimized structural designs, and lifecycle-based equipment procurement can reduce embodied emissions during construction. Environmental product declarations and whole-life carbon assessments should inform material selection rather than relying exclusively on recycled-content claims.",
           "Off-site fabrication of MEP modules, pipework assemblies, and modular white spaces can reduce material waste, installation rework, and site labor requirements. The financial and environmental benefits should be assessed against factory energy use, transportation distances, lifting requirements, and module utilization.",
@@ -58,7 +54,6 @@ export const dcSustainability = {
       },
       {
         title: "Intelligent Operations & Computing Efficiency",
-        lead: "The most efficient megawatt is the one that does not need to be consumed.",
         body: [
           "DCIM platforms, building management systems, predictive controls, and continuous equipment monitoring can identify inefficient cooling operation, excessive redundancy losses, and unnecessary equipment runtime. Server consolidation, power management, and improved workload utilization reduce electricity demand at the IT level rather than only improving facility overhead.",
           "Flexible workloads, including selected AI training and batch-processing tasks, can be scheduled around electricity prices, available computing capacity, and grid carbon intensity. These changes must respect service-level commitments, thermal limits, and the operational requirements of critical applications.",
@@ -67,7 +62,6 @@ export const dcSustainability = {
       },
       {
         title: "Recovering Surplus Grid Electricity",
-        lead: "Electricity that would otherwise be curtailed is an underused resource.",
         body: [
           "The electricity grid's duck curve [[1]] describes how high solar generation reduces net grid demand around midday, followed by a steep increase in demand for dispatchable generation as solar output declines. In renewable-heavy grids, this can create periods of excess generation, low or negative wholesale prices, and renewable curtailment. These conditions are location and time-dependent; they do not mean that electricity is surplus for most of the day.",
           "Data centers can absorb otherwise curtailed electricity by scheduling flexible computing workloads, charging battery energy storage systems, or operating thermal storage and pre-cooling systems during verified surplus periods. Where tariffs and grid arrangements permit, this can reduce energy procurement costs while increasing renewable-energy utilization without compromising critical computing workloads.",
@@ -76,7 +70,6 @@ export const dcSustainability = {
       },
       {
         title: "Autonomous Vehicles as Distributed Energy Storage",
-        lead: "Autonomous electric vehicles could become mobile batteries serving both transportation and electricity infrastructure.",
         body: [
           "Electric vehicles equipped with bidirectional charging can store electricity during periods of low demand or renewable surplus and discharge it through vehicle-to-grid (V2G) or vehicle-to-building (V2B) infrastructure. Autonomous fleets could extend this model by transporting stored energy between distribution areas, charging where electricity is abundant and discharging near data centers experiencing localized grid constraints.",
           "For data centers, participating vehicles could provide supplementary peak-shaving capacity or short-duration energy support through approved bidirectional charging infrastructure. Viability depends on available fleet capacity, charging power, transport energy losses, battery degradation, electricity price differences, grid permissions, and coordination with facility microgrids. This remains an emerging application, it doesn't replace dedicated UPS systems or guaranteed backup generation.",

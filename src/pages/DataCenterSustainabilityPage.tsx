@@ -25,14 +25,14 @@ import { cn } from '../lib/utils';
 import { SECTION_SCROLL_MARGIN, type JumpSection } from '../components/services/SectionJumpMenu';
 
 
-/** One lever in the Seven opportunities tabs: grey sub-heading, first paragraph, the second
- *  behind Read more (all screen sizes), and the impact points always visible. */
-function LeverBody({ lead, body, impact }: { lead: string; body: string[]; impact: string[] }) {
+/** One lever in the Seven opportunities tabs: first paragraph, the second behind Read more (all
+ *  screen sizes), and the impact points always visible. The grey lead line under the title was
+ *  removed (client request 2026-11-25). */
+function LeverBody({ body, impact }: { body: string[]; impact: string[] }) {
   const [open, setOpen] = useState(false);
   const [first, ...rest] = body;
   return (
     <div className="-mt-2">
-      <p className="text-[0.8125rem] font-semibold leading-snug text-gray-500 lg:text-[0.78rem] lg:tracking-[-0.005em]">{lead}</p>
       <div className="max-w-3xl">
       <p className="mt-2.5 text-small leading-relaxed text-gray-700">
         <RichText text={first} />
@@ -234,7 +234,7 @@ export default function DataCenterSustainabilityPage() {
           topics={c.opportunities.items.map((o) => ({
             title: o.title,
             body: [],
-            extra: <LeverBody lead={o.lead} body={o.body} impact={o.impact} />,
+            extra: <LeverBody body={o.body} impact={o.impact} />,
           }))}
         />
       </Band>

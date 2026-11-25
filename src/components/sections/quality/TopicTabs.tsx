@@ -46,6 +46,9 @@ export interface TopicTabsProps {
   /** With `dots`: previous / next arrows (labels given) instead of the "02 / 07" counter;
    *  hidden on real phones, which keep just the dots (Data Center pages). */
   arrows?: { previous: string; next: string };
+  /** With `dots`: show the dots row (and arrows) at every width, not only on phones; from md it
+   *  sits under the card, beside the topic list (Quality page, client request 2026-11-25). */
+  dotsAlways?: boolean;
 }
 
 const DEFAULT_LAYOUT = 'md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-10 lg:grid-cols-[17rem_minmax(0,1fr)]';
@@ -61,7 +64,7 @@ const DEFAULT_LAYOUT = 'md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-10 lg:
  * the page jump; inactive panels are invisible, inert and hidden from
  * assistive tech. Arrow keys / Home / End move between tabs.
  */
-export function TopicTabs({ topics, idPrefix, label, className, layoutClassName, lead, footer, bare = false, horizontal = false, mobileRail = false, compact = false, dots = false, swipe = false, arrows }: TopicTabsProps) {
+export function TopicTabs({ topics, idPrefix, label, className, layoutClassName, lead, footer, bare = false, horizontal = false, mobileRail = false, compact = false, dots = false, swipe = false, arrows, dotsAlways = false }: TopicTabsProps) {
   const [active, setActive] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const railRef = useRef<HTMLDivElement | null>(null);
@@ -266,7 +269,10 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
           Rail mode (mobileRail + pills don't fit): panels sit side by side in a snapping row.
           Swipe card (`swipe`): one card, its topics side by side as full-width slides in a native
           snapping scroller (stops at every topic; no back/forward swipe navigation at the ends).
-          Flex rows stretch, so the card is still as tall as the longest topic. */}
+          Flex rows stretch, so the card is still as tall as the longest topic.
+          The card and its dots row share one column, so the dots stay under the card when the
+          topic list sits beside it. */}
+      <div className="min-w-0">
       <div
         ref={railRef}
         onScroll={rail || slide ? onRailScroll : undefined}
@@ -320,7 +326,7 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
         })}
       </div>
       {dots && !rail && (
-        <div className={cn('mt-4 flex items-center justify-between', !horizontal && 'md:hidden')}>
+        <div className={cn('mt-4 flex items-center justify-between', !horizontal && !dotsAlways && 'md:hidden')}>
           <div aria-hidden="true" className="flex gap-1.5">
             {topics.map((topic, i) => (
               <span key={topic.title} className={cn('h-1.5 rounded-full transition-all duration-base', i === active ? 'w-5 bg-ink' : 'w-1.5 bg-gray-300')} />
@@ -345,6 +351,7 @@ export function TopicTabs({ topics, idPrefix, label, className, layoutClassName,
           )}
         </div>
       )}
+      </div>
       {rail && (
         <div className="mt-5 flex items-center justify-between">
           <div aria-hidden="true" className="flex gap-1.5">

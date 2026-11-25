@@ -1,6 +1,8 @@
 import { ArrowRight, Download } from 'lucide-react';
 import { HeroH1 } from '../components/typography/HeroH1';
 import { useTranslation } from 'react-i18next';
+import { ReadMoreText } from '../components/common/ReadMoreText';
+import { useEqualHeights } from '../lib/useEqualHeights';
 import { Section } from '../components/layout/Section';
 import { ButtonLink } from '../components/ui/Button';
 import { Eyebrow, Heading, Text } from '../components/typography/Typography';
@@ -165,7 +167,8 @@ function Commitment() {
         </div>
       </div>
       {/* The detail behind the overview: six topics as tabs (titles left, selected topic right). */}
-      <TopicTabs topics={topics} idPrefix="qhse-topic" label={t('qualitySafetyPage.commitment.heading')} className="mt-14" />
+      {/* Swipe anywhere on the card (finger or touchpad), client request 2026-11-25. */}
+      <TopicTabs topics={topics} idPrefix="qhse-topic" label={t('qualitySafetyPage.commitment.heading')} className="mt-14" swipe />
     </Section>
   );
 }
@@ -179,11 +182,14 @@ function Results() {
     { key: 'safety' as const, risk: true, span: 'col-span-7' },
     { key: 'quality' as const, risk: false, span: 'col-span-5' },
   ];
+  // Cards are top-aligned (an opened "Read more" grows only its own card); the stats areas share
+  // one height so the closed cards still line up.
+  const stats = useEqualHeights<HTMLDListElement>();
   return (
     <Section spacing="lg" background="charcoal">
       <SectionHeader eyebrow={t('qualitySafetyPage.results.eyebrow')} heading={t('qualitySafetyPage.results.heading')} headingAs="h2" />
-      <div className="mt-12 grid grid-cols-12 gap-6">
-        {groups.map(({ key, risk, span }) => {
+      <div ref={stats.container} className="mt-12 grid grid-cols-12 items-start gap-6">
+        {groups.map(({ key, risk, span }, i) => {
           const g = t(`qualitySafetyPage.results.${key}`, { returnObjects: true }) as ResultGroup;
           return (
             <div key={key} className={cn('flex flex-col rounded-md border border-white/10 bg-graphite p-8', span)}>
@@ -191,7 +197,12 @@ function Results() {
                 <span aria-hidden="true" className={cn('h-2 w-2 rounded-full', risk ? 'bg-warning' : 'bg-brand-400')} />
                 {g.tag}
               </span>
-              <dl className={cn('mt-6 grid flex-1 content-start gap-8', g.stats.length > 1 ? 'grid-cols-2' : 'grid-cols-1')}>
+              <dl
+                ref={(el) => {
+                  stats.items.current[i] = el;
+                }}
+                className={cn('mt-6 grid flex-1 content-start gap-8', g.stats.length > 1 ? 'grid-cols-2' : 'grid-cols-1')}
+              >
                 {g.stats.map((s) => (
                   <div key={s.label}>
                     <dd dir="ltr" className="font-display text-stat font-semibold leading-none text-brand-400 rtl:text-end">
@@ -201,7 +212,10 @@ function Results() {
                   </div>
                 ))}
               </dl>
-              <p className="mt-8 border-t border-white/10 pt-6 text-body text-gray-300">{g.text}</p>
+              {/* Hidden behind Read more at every size (client request 2026-11-25). */}
+              <div className="mt-6 border-t border-white/10 pt-3">
+                <ReadMoreText id={`qhse-result-${key}`} text={g.text} className="text-body text-gray-300" dark />
+              </div>
             </div>
           );
         })}
